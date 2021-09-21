@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Sirenix.OdinInspector;
 
 public class Tooltip : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Tooltip : MonoBehaviour
     [SerializeField] private float maxSizeOfTooltipX = 1000;
     [SerializeField] private float maxSizeOfTooltipY = 1000;
     [SerializeField] private float extraPreferredTextSize = 20000;
+    [SerializeField] private int tooltipTitleFontSize;
+    [SerializeField] private int tooltipTextFontSize;
 
 
 
@@ -32,6 +35,7 @@ public class Tooltip : MonoBehaviour
         newToolTipFrame.transform.SetParent(gameObject.transform);
 
         TextMeshProUGUI tooltipText = newToolTipFrame.transform.Find("TooltipText").gameObject.GetComponent<TextMeshProUGUI>();
+        if(tooltipTextFontSize != 0) tooltipText.fontSize = tooltipTextFontSize;
 
         tooltipText.text = tooltipString;
         SetRawTooltipSize(newToolTipFrame, title);
@@ -44,6 +48,7 @@ public class Tooltip : MonoBehaviour
         if (title != null)
         {
             TextMeshProUGUI titleText = newToolTipFrame.transform.Find("Frame").Find("Title").GetComponent<TextMeshProUGUI>();
+            if(tooltipTitleFontSize != 0) titleText.fontSize = tooltipTitleFontSize;
             tooltipText.rectTransform.localPosition -= new Vector3(0, titleText.fontSize, 0);
             titleText.text = title;
         }
