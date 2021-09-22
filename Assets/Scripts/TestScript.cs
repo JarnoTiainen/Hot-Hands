@@ -11,7 +11,7 @@ public class TestScript : MonoBehaviour
     void Start()
     {
         GameEventManager.CallintThisMethod();
-        Tooltip.ShowTooltip_Static("This is testrun for tooltips.", "It WORKS!");
+        Tooltip.ShowTooltip_Static("This is testrun for tooltips <sdf <dsf ffsdf <sdfeeee refds< d<f<<<<<<<<<< asd asd sdsa asd asd asd  sdsdsds sd sdasd <<<<<<<< dfdsf   asdas asd asd  asdaa dsdsd asd asd asd das asdas asdasda asdas aasdasda  asda asda aasdas  sdfsdfs      sdfsdffefes sdfww.", "now also with Title!");
     }
 
     // Update is called once per frame

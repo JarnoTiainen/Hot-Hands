@@ -9,15 +9,16 @@ public class Tooltip : MonoBehaviour
     [SerializeField] private GameObject toolripFramePrefab;
     private Canvas canvas;
     private List<GameObject> toolTipFrames = new List<GameObject>();
-    [SerializeField] private float textPaddingSize = 4f;
+    [SerializeField] private float textPaddingSize;
     [SerializeField] private float gapSizeBetweenTooltips = 0;
-    [SerializeField] private float minSizeOfTooltipX = 0;
-    [SerializeField] private float minSizeOfTooltipY = 0;
-    [SerializeField] private float maxSizeOfTooltipX = 1000;
-    [SerializeField] private float maxSizeOfTooltipY = 1000;
-    [SerializeField] private float extraPreferredTextSize = 20000;
-    [SerializeField] private int tooltipTitleFontSize;
-    [SerializeField] private int tooltipTextFontSize;
+
+    [FoldoutGroup("Tooltip Size Limits")] [SerializeField] private float minSizeOfTooltipX = 0;
+    [FoldoutGroup("Tooltip Size Limits")] [SerializeField] private float minSizeOfTooltipY = 0;
+    [FoldoutGroup("Tooltip Size Limits")] [SerializeField] private float maxSizeOfTooltipX = 1000;
+    [FoldoutGroup("Tooltip Size Limits")] [SerializeField] private float maxSizeOfTooltipY = 1000;
+    private float extraPreferredTextSize = 40000;
+    [FoldoutGroup("Tooltip Font")][SerializeField] private int tooltipTitleFontSize;
+    [FoldoutGroup("Tooltip Font")][SerializeField] private int tooltipTextFontSize;
 
 
 
@@ -38,19 +39,21 @@ public class Tooltip : MonoBehaviour
         if(tooltipTextFontSize != 0) tooltipText.fontSize = tooltipTextFontSize;
 
         tooltipText.text = tooltipString;
+        if (title != null) newToolTipFrame.transform.Find("Frame").Find("Title").GetComponent<TextMeshProUGUI>().text = title;
         SetRawTooltipSize(newToolTipFrame, title);
         SetTooltipLocation(newToolTipFrame);
         
         RectTransform backgroundRectTransform = newToolTipFrame.transform.Find("Frame").GetComponent<RectTransform>();
-        tooltipText.rectTransform.localPosition = backgroundRectTransform.localPosition;
-        backgroundRectTransform.localPosition -= (Vector3)new Vector2(textPaddingSize / 2, textPaddingSize / 2);
-
+        tooltipText.rectTransform.SetParent(backgroundRectTransform);
+        tooltipText.rectTransform.localPosition = Vector3.zero;
+        backgroundRectTransform.sizeDelta += new Vector2(textPaddingSize * 2, textPaddingSize * 2);
         if (title != null)
         {
             TextMeshProUGUI titleText = newToolTipFrame.transform.Find("Frame").Find("Title").GetComponent<TextMeshProUGUI>();
             if(tooltipTitleFontSize != 0) titleText.fontSize = tooltipTitleFontSize;
+            
             tooltipText.rectTransform.localPosition -= new Vector3(0, titleText.fontSize, 0);
-            titleText.text = title;
+            
         }
         
 
@@ -60,26 +63,26 @@ public class Tooltip : MonoBehaviour
     private void SetRawTooltipSize(GameObject newToolTipFrame, string title)
     {
         TextMeshProUGUI tooltipText = newToolTipFrame.transform.Find("TooltipText").gameObject.GetComponent<TextMeshProUGUI>();
-        float backgroundSizeX = tooltipText.preferredWidth + textPaddingSize * 2f;
+        float backgroundSizeX = tooltipText.preferredWidth;
         if (backgroundSizeX < minSizeOfTooltipX) backgroundSizeX = minSizeOfTooltipX;
         if (backgroundSizeX > maxSizeOfTooltipX) backgroundSizeX = maxSizeOfTooltipX;
-        float backgroundSizeY = tooltipText.preferredHeight + textPaddingSize * 2f;
+        float backgroundSizeY = tooltipText.preferredHeight;
         if (backgroundSizeY < minSizeOfTooltipY) backgroundSizeY = minSizeOfTooltipY;
         if (backgroundSizeY > maxSizeOfTooltipY) backgroundSizeY = maxSizeOfTooltipY;
 
         Vector2 backgroundSize = new Vector2(backgroundSizeX, backgroundSizeY);
-        if (tooltipText.preferredWidth * tooltipText.preferredHeight > backgroundSize.x * backgroundSize.y)
+        if ((tooltipText.preferredWidth) * (tooltipText.preferredHeight)  > backgroundSize.x * backgroundSize.y)
         {
-            float newSizeY = (tooltipText.preferredWidth * tooltipText.preferredHeight + extraPreferredTextSize) / backgroundSize.x;
+            float newSizeY = ((tooltipText.preferredWidth) * (tooltipText.preferredHeight) + extraPreferredTextSize) / backgroundSize.x;
             backgroundSize = new Vector2(backgroundSize.x, newSizeY);
         }
         if(title != null)
         {
             TextMeshProUGUI titleText = newToolTipFrame.transform.Find("Frame").Find("Title").GetComponent<TextMeshProUGUI>();
-            backgroundSize = new Vector2(backgroundSize.x, backgroundSize.y + titleText.fontSize);
+            backgroundSize = new Vector2(backgroundSize.x, backgroundSize.y + titleText.preferredHeight);
         }
         RectTransform backgroundRectTransform = newToolTipFrame.transform.Find("Frame").GetComponent<RectTransform>();
-        backgroundRectTransform.sizeDelta = backgroundSize + new Vector2(textPaddingSize, textPaddingSize);
+        backgroundRectTransform.sizeDelta = backgroundSize;
         tooltipText.rectTransform.sizeDelta = backgroundSize;
     }
 
