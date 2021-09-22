@@ -192,7 +192,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3491539293014643225, guid: aae1e9d9a69688a489598e0cf6f4f7e3, type: 3}
       propertyPath: maxSizeOfTooltipX
-      value: 100
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491539293014643225, guid: aae1e9d9a69688a489598e0cf6f4f7e3, type: 3}
+      propertyPath: tooltipTextFontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491539293014643225, guid: aae1e9d9a69688a489598e0cf6f4f7e3, type: 3}
+      propertyPath: tooltipTitleFontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491539293014643225, guid: aae1e9d9a69688a489598e0cf6f4f7e3, type: 3}
+      propertyPath: gapSizeBetweenTooltips
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3491539293014643226, guid: aae1e9d9a69688a489598e0cf6f4f7e3, type: 3}
       propertyPath: m_RootOrder
