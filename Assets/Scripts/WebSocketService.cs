@@ -11,6 +11,7 @@ public class WebSocketService : MonoBehaviour
     WebSocket websocket;
 
     public const string ThrowOp = "5";
+    public const string SummonMonsterOp = "PlayCard";
 
     // Start is called before the first frame update
     async void Start()
@@ -61,10 +62,6 @@ public class WebSocketService : MonoBehaviour
     {
         if (websocket.State == WebSocketState.Open)
         {
-            // Sending bytes
-            //await websocket.Send(new byte[] { 10, 20, 30 });
-
-            // Sending plain text
             await websocket.SendText(message);
         }
     }
@@ -77,6 +74,12 @@ public class WebSocketService : MonoBehaviour
     [Button] public void Throw()
     {
         GameMessage throwMessage = new GameMessage("OnMessage", ThrowOp);
+
+        SendWebSocketMessage(JsonUtility.ToJson(throwMessage));
+    }
+    [Button] public void PlayCard(int cardIndexInHand)
+    {
+        GameMessagePlayCard throwMessage = new GameMessagePlayCard("OnMessage", SummonMonsterOp, cardIndexInHand);
 
         SendWebSocketMessage(JsonUtility.ToJson(throwMessage));
     }

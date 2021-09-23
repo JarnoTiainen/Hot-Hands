@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
   m_Name: Test Card
   m_EditorClassIdentifier: 
+  cardSprite: {fileID: 0}
   cardName: 
   cost: 0
   value: 0
-  cardType: 0
+  cardType: 1
   spellTags: 
   monsterTags: 
   rightPower: 0
