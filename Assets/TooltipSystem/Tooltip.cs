@@ -16,7 +16,7 @@ public class Tooltip : MonoBehaviour
     [FoldoutGroup("Tooltip Size Limits")] [SerializeField] private float minSizeOfTooltipY = 0;
     [FoldoutGroup("Tooltip Size Limits")] [SerializeField] private float maxSizeOfTooltipX = 1000;
     [FoldoutGroup("Tooltip Size Limits")] [SerializeField] private float maxSizeOfTooltipY = 1000;
-    private float extraPreferredTextSize = 40000;
+    private float extraPreferredTextSize = 1000;
     [FoldoutGroup("Tooltip Font")][SerializeField] private int tooltipTitleFontSize;
     [FoldoutGroup("Tooltip Font")][SerializeField] private int tooltipTextFontSize;
 
@@ -63,6 +63,7 @@ public class Tooltip : MonoBehaviour
     private void SetRawTooltipSize(GameObject newToolTipFrame, string title)
     {
         TextMeshProUGUI tooltipText = newToolTipFrame.transform.Find("TooltipText").gameObject.GetComponent<TextMeshProUGUI>();
+        //making sure text size parameters are within required values
         float backgroundSizeX = tooltipText.preferredWidth;
         if (backgroundSizeX < minSizeOfTooltipX) backgroundSizeX = minSizeOfTooltipX;
         if (backgroundSizeX > maxSizeOfTooltipX) backgroundSizeX = maxSizeOfTooltipX;
@@ -71,9 +72,11 @@ public class Tooltip : MonoBehaviour
         if (backgroundSizeY > maxSizeOfTooltipY) backgroundSizeY = maxSizeOfTooltipY;
 
         Vector2 backgroundSize = new Vector2(backgroundSizeX, backgroundSizeY);
+
+        //if text preferred square size is smaller than the new tooltip box size, calculate new box hight.
         if ((tooltipText.preferredWidth) * (tooltipText.preferredHeight)  > backgroundSize.x * backgroundSize.y)
         {
-            float newSizeY = ((tooltipText.preferredWidth) * (tooltipText.preferredHeight) + extraPreferredTextSize) / backgroundSize.x;
+            float newSizeY = ((tooltipText.preferredWidth) * (tooltipText.preferredHeight) + extraPreferredTextSize * tooltipText.fontSize) / backgroundSize.x;
             backgroundSize = new Vector2(backgroundSize.x, newSizeY);
         }
         if(title != null)
