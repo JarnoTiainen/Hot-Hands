@@ -2,16 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using NativeWebSocket;
 using Sirenix.OdinInspector;
-
+using SimpleJSON;
 public class WebSocketService : MonoBehaviour
 {
     WebSocket websocket;
 
     public const string ThrowOp = "5";
     public const string SummonMonsterOp = "PlayCard";
+
 
     // Start is called before the first frame update
     async void Start()
@@ -36,8 +36,12 @@ public class WebSocketService : MonoBehaviour
         websocket.OnMessage += (bytes) =>
         {
             Debug.Log("OnMessage!");
+
             string message = System.Text.Encoding.UTF8.GetString(bytes);
-            Debug.Log(JsonUtility.FromJson<GameMessage>(message).opcode);
+            Debug.Log(message);
+            
+            GameMessage newMessage = JsonUtility.FromJson<GameMessage>(message);
+            Debug.Log(newMessage);
 
             // getting the message as a string
             // var message = System.Text.Encoding.UTF8.GetString(bytes);
@@ -53,9 +57,11 @@ public class WebSocketService : MonoBehaviour
 
     void Update()
     {
-        #if !UNITY_WEBGL || UNITY_EDITOR
-            websocket.DispatchMessageQueue();
-        #endif
+    #if !UNITY_WEBGL || UNITY_EDITOR
+        websocket.DispatchMessageQueue();
+#endif
+
+        if (Input.GetKeyDown(KeyCode.A)) Throw();
     }
 
     async void SendWebSocketMessage(string message)
@@ -71,15 +77,10 @@ public class WebSocketService : MonoBehaviour
         await websocket.Close();
     }
 
-    [Button] public void Throw()
+    [Button]
+    public void Throw()
     {
         GameMessage throwMessage = new GameMessage("OnMessage", ThrowOp);
-
-        SendWebSocketMessage(JsonUtility.ToJson(throwMessage));
-    }
-    [Button] public void PlayCard(int cardIndexInHand)
-    {
-        GameMessagePlayCard throwMessage = new GameMessagePlayCard("OnMessage", SummonMonsterOp, cardIndexInHand);
 
         SendWebSocketMessage(JsonUtility.ToJson(throwMessage));
     }
