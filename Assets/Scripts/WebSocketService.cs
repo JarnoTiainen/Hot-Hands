@@ -59,7 +59,7 @@ public class WebSocketService : MonoBehaviour
     {
     #if !UNITY_WEBGL || UNITY_EDITOR
         websocket.DispatchMessageQueue();
-#endif
+    #endif
 
         if (Input.GetKeyDown(KeyCode.A)) Throw();
     }
