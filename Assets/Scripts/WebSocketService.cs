@@ -40,8 +40,8 @@ public class WebSocketService : MonoBehaviour
             string message = System.Text.Encoding.UTF8.GetString(bytes);
             Debug.Log(message);
             
-            GameMessage newMessage = JsonUtility.FromJson<GameMessage>(message);
-            Debug.Log(newMessage);
+            //GameMessage newMessage = JsonUtility.FromJson<GameMessage>(message);
+            //Debug.Log(newMessage);
 
             // getting the message as a string
             // var message = System.Text.Encoding.UTF8.GetString(bytes);
@@ -83,5 +83,13 @@ public class WebSocketService : MonoBehaviour
         GameMessage throwMessage = new GameMessage("OnMessage", ThrowOp);
 
         SendWebSocketMessage(JsonUtility.ToJson(throwMessage));
+    }
+
+    [Button]
+    public void PlayCardMessage(int cardIndex)
+    {
+        PlayCard playCard = new PlayCard("OnPlayCard", PlayCard.CardSource.Hand, 3);
+
+        SendWebSocketMessage(JsonUtility.ToJson(playCard));
     }
 }
