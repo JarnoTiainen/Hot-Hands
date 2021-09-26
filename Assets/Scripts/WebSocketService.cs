@@ -16,7 +16,7 @@ public class WebSocketService : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
-        websocket = new WebSocket("wss://1ucdg7a5e9.execute-api.us-east-2.amazonaws.com/demo");
+        websocket = new WebSocket("wss://ay9x6yqaea.execute-api.eu-north-1.amazonaws.com/dev");
 
         websocket.OnOpen += () =>
         {
