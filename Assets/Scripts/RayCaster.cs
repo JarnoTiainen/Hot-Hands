@@ -42,7 +42,6 @@ public class RayCaster : MonoBehaviour
         {
             if (!previousTarget && target)
             {
-                Debug.Log("set previous");
                 previousTarget = target;
                 target = null;
             }

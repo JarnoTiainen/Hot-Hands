@@ -20,7 +20,7 @@ public class WebSocketService : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
-        websocket = new WebSocket("wss://ay9x6yqaea.execute-api.eu-north-1.amazonaws.com/dev");
+        websocket = new WebSocket("wss://n14bom45md.execute-api.eu-north-1.amazonaws.com/production");
 
         websocket.OnOpen += () =>
         {
@@ -39,20 +39,23 @@ public class WebSocketService : MonoBehaviour
 
         websocket.OnMessage += (bytes) =>
         {
-            Debug.Log("Gained Server message!");
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
             Debug.Log(data);
             switch((string)data[0])
             {
-                case "GETYOURPLAYERNUMBER":
+                case "GETSIDE":
                     playerNumber = int.Parse(data[1]);
                     break;
                 case "PLAYCARD":
                     Debug.Log("Message type was PLAYCARD");
                     PlayCardMessage playCard = new PlayCardMessage((int)data[1][0], data[1][1], data[1][2]);
+                    Debug.Log(playCard.cardSource);
                     break;
                 case "DRAWCARD":
                     Debug.Log("Message type was DRAWCARD");
+                    DrawCardMessage drawCardMessage = new DrawCardMessage((int)data[1][0], data[1][1]);
+                    if (drawCardMessage.player == playerNumber) Debug.Log("You draw " + drawCardMessage.card);
+                    else Debug.Log("Opponent draws a card");
                     break;
                 case "ATTACK":
                     Debug.Log("Message type was ATTACK");
@@ -71,7 +74,6 @@ public class WebSocketService : MonoBehaviour
         websocket.DispatchMessageQueue();
     #endif
 
-        if (Input.GetKeyDown(KeyCode.A)) Throw();
     }
 
     async void SendWebSocketMessage(string message)
@@ -88,25 +90,26 @@ public class WebSocketService : MonoBehaviour
     }
 
     [Button]
-    public void Throw()
-    {
-        GameMessage throwMessage = new GameMessage("OnMessage", ThrowOp);
-
-        SendWebSocketMessage(JsonUtility.ToJson(throwMessage));
-    }
-
-    [Button]
     public void PlayCardMessage(int cardIndex)
     {
-        PlayCardMessage playCard = new PlayCardMessage("OnMessage", 1, cardIndex);
+        PlayCardMessage playCardMessage = new PlayCardMessage(1, 3);
+        string playCardMessageJSON = JsonUtility.ToJson(playCardMessage);
 
-        SendWebSocketMessage(JsonUtility.ToJson(playCard));
+        GameMessage message = new GameMessage("OnMessage", "PLAYCARD", playCardMessageJSON);
+
+        SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 
     [Button] public void GetPlayerNumber()
     {
-        GameMessage gameMessage = new GameMessage("OnGetSide", "message body");
+        GameMessage playCard = new GameMessage("OnMessage", "GETSIDE", "");
+        SendWebSocketMessage(JsonUtility.ToJson(playCard));
+    }
 
-        SendWebSocketMessage(JsonUtility.ToJson(gameMessage));
+    [Button]
+    public void DrawCard()
+    {
+        GameMessage message = new GameMessage("OnMessage", "DRAWCARD", "");
+        SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 }

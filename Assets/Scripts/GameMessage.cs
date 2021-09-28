@@ -1,12 +1,14 @@
-[System.Serializable]
 public class GameMessage
 {
-    public string messageType;
+    
+    public string action;
+    public string type;
     public string obj;
-
-    public GameMessage(string messageTypeIn, string objIn)
+    
+    public GameMessage(string actionIn, string typeIn, string objIn)
     {
-        messageType = messageTypeIn;
+        action = actionIn;
+        type = typeIn;
         obj = objIn;
     }
 }

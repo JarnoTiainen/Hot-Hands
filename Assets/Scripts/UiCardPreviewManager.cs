@@ -17,7 +17,6 @@ public class UiCardPreviewManager : MonoBehaviour
 
     [Button] public GameObject ShowCardPreview(Vector3 pos, Vector3 targetPos = default(Vector3), bool setTargetPosAsStartPos = true)
     {
-        Debug.Log(pos);
         GameObject newCardPreview = Instantiate(cardPreviewGameObject, pos, Quaternion.identity);
         
         RectTransform rectTransform = newCardPreview.GetComponent<RectTransform>();
@@ -31,28 +30,20 @@ public class UiCardPreviewManager : MonoBehaviour
 
         if (pos.x > uiCanvasDimensions.x / 2 - cardPreviewDimensions.x / 2)
         {
-            Debug.Log("1");
             pos.x = uiCanvasDimensions.x / 2 - cardPreviewDimensions.x / 2;
         }
         if (pos.x < -uiCanvasDimensions.x / 2 + cardPreviewDimensions.x / 2)
         {
-            Debug.Log("2");
             pos.x = -uiCanvasDimensions.x / 2 + cardPreviewDimensions.x / 2;
         }
         if (pos.y > uiCanvasDimensions.y / 2 - cardPreviewDimensions.y / 2)
         {
-            Debug.Log("3");
             pos.y = uiCanvasDimensions.y / 2 - cardPreviewDimensions.y / 2;
         }
         if (pos.y < -uiCanvasDimensions.y / 2 + cardPreviewDimensions.y / 2)
         {
-            Debug.Log(pos);
-            Debug.Log("4");
             pos.y = -uiCanvasDimensions.y / 2 + cardPreviewDimensions.y/2;
         }
-
-        Debug.Log("dim " + cardPreviewDimensions + " " + uiCanvasDimensions + " " + pos);
-
         rectTransform.localPosition = pos;
         newCardPreview.GetComponent<UiCardPreview>().startPos = pos;
         if (setTargetPosAsStartPos) newCardPreview.GetComponent<UiCardPreview>().targetPos = pos;
