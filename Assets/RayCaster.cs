@@ -7,11 +7,10 @@ using System;
 
 public class RayCaster : MonoBehaviour
 {
-    public static RayCaster Instance { get; private set; }
-
     [SerializeField] private Camera rayCamera;
-    public static GameObject target;
-    private GameObject previousTarget;
+    public GameObject target;
+    public GameObject newTarget;
+    public GameObject previousTarget;
     public bool firstTimeCall = true;
 
     private void Update()
@@ -23,7 +22,12 @@ public class RayCaster : MonoBehaviour
         {
             if(target)
             {
-                if (target != hit.transform.gameObject) NewTarget(target, hit.transform.gameObject);
+                
+                newTarget = hit.transform.gameObject;
+                if (target != hit.transform.gameObject)
+                {
+                    NewTarget(target, hit.transform.gameObject);
+                }
             }
             target = hit.transform.gameObject;
 
@@ -52,8 +56,12 @@ public class RayCaster : MonoBehaviour
 
     private void NewTarget(GameObject oldTarget, GameObject newTarget)
     {
-        if (newTarget.GetComponent<IOnHoverEnterElement>() != null) newTarget.GetComponent<IOnHoverEnterElement>().OnHoverEnter();
-        if(oldTarget)
+        if (newTarget.GetComponent<IOnHoverEnterElement>() != null)
+        {
+            newTarget.GetComponent<IOnHoverEnterElement>().OnHoverEnter();
+        }
+        Debug.Log("target 2 " + target);
+        if (oldTarget)
         {
             if (oldTarget.GetComponent<IOnHoverExitElement>() != null) oldTarget.GetComponent<IOnHoverExitElement>().OnHoverExit();
         }

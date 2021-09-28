@@ -98,7 +98,7 @@ public class WebSocketService : MonoBehaviour
     [Button]
     public void PlayCardMessage(int cardIndex)
     {
-        PlayCardMessage playCard = new PlayCardMessage("OnPlayCard", 1, cardIndex);
+        PlayCardMessage playCard = new PlayCardMessage("OnMessage", 1, cardIndex);
 
         SendWebSocketMessage(JsonUtility.ToJson(playCard));
     }
