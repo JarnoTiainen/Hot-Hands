@@ -7,11 +7,15 @@ using Sirenix.OdinInspector;
 using SimpleJSON;
 public class WebSocketService : MonoBehaviour
 {
+    public int playerNumber;
+
+    public static WebSocketService Instance { get; private set; }
+
     WebSocket websocket;
 
     public const string ThrowOp = "5";
     public const string SummonMonsterOp = "PlayCard";
-
+    string playCard = "PLAYCARD";
 
     // Start is called before the first frame update
     async void Start()
@@ -35,23 +39,29 @@ public class WebSocketService : MonoBehaviour
 
         websocket.OnMessage += (bytes) =>
         {
-            Debug.Log("OnMessage!");
-
-            string message = System.Text.Encoding.UTF8.GetString(bytes);
-            Debug.Log(message);
-            
-            //GameMessage newMessage = JsonUtility.FromJson<GameMessage>(message);
-            //Debug.Log(newMessage);
-
-            // getting the message as a string
-            // var message = System.Text.Encoding.UTF8.GetString(bytes);
-            // Debug.Log("OnMessage! " + message);
+            Debug.Log("Gained Server message!");
+            JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
+            Debug.Log(data);
+            switch((string)data[0])
+            {
+                case "GETYOURPLAYERNUMBER":
+                    playerNumber = int.Parse(data[1]);
+                    break;
+                case "PLAYCARD":
+                    Debug.Log("Message type was PLAYCARD");
+                    PlayCardMessage playCard = new PlayCardMessage((int)data[1][0], data[1][1], data[1][2]);
+                    break;
+                case "DRAWCARD":
+                    Debug.Log("Message type was DRAWCARD");
+                    break;
+                case "ATTACK":
+                    Debug.Log("Message type was ATTACK");
+                    break;
+                default:
+                    Debug.Log("Message type was UNKOWN");
+                    break;
+            }
         };
-
-        // Keep sending messages at every 0.3s
-        //InvokeRepeating("SendWebSocketMessage", 0.0f, 0.3f);
-
-        // waiting for messages
         await websocket.Connect();
     }
 
@@ -88,8 +98,15 @@ public class WebSocketService : MonoBehaviour
     [Button]
     public void PlayCardMessage(int cardIndex)
     {
-        PlayCard playCard = new PlayCard("OnPlayCard", PlayCard.CardSource.Hand, 3);
+        PlayCardMessage playCard = new PlayCardMessage("OnPlayCard", 1, cardIndex);
 
         SendWebSocketMessage(JsonUtility.ToJson(playCard));
+    }
+
+    [Button] public void GetPlayerNumber()
+    {
+        GameMessage gameMessage = new GameMessage("OnGetSide", "message body");
+
+        SendWebSocketMessage(JsonUtility.ToJson(gameMessage));
     }
 }

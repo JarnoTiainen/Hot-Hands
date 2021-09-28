@@ -6,7 +6,7 @@ public class References
 {
     public static References Instance { get; private set; }
 
-
+    public GameObject cardPreviewGameObject;
     //EnchantmentIcons
     public Sprite lastBreathIcon;
     public Sprite openerIcon;

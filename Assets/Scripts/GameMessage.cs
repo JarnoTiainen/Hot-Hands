@@ -1,22 +1,12 @@
 [System.Serializable]
 public class GameMessage
 {
-    public string uuid;
-    public string opcode;
-    public string message;
-    public string gameStatus;
-    public string action;
+    public string messageType;
+    public string obj;
 
-    public GameMessage(string actionIn, string opcodeIn)
+    public GameMessage(string messageTypeIn, string objIn)
     {
-        action = actionIn;
-        opcode = opcodeIn;
-    }
-
-    public GameMessage(string actionIn, string opcodeIn, string messageIn)
-    {
-        action = actionIn;
-        opcode = opcodeIn;
-        message = messageIn;
+        messageType = messageTypeIn;
+        obj = objIn;
     }
 }
