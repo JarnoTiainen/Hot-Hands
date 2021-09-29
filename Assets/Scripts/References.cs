@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class References
+public class References: MonoBehaviour
 {
     public static References Instance { get; private set; }
 
     public GameObject cardPreviewGameObject;
     //EnchantmentIcons
+    public CardList cardList;
     public Sprite lastBreathIcon;
     public Sprite openerIcon;
     public Sprite battlecryIcon;

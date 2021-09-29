@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using SimpleJSON;
+using System;
 
-[CreateAssetMenu(fileName = "New Card", menuName = "Card/Empty Card")]
+[Serializable][CreateAssetMenu(fileName = "New Card", menuName = "Card/Empty Card")]
 public class Card : ScriptableObject
 {
+
     public enum CardType {
         Spell, Monster
     }
@@ -15,7 +18,7 @@ public class Card : ScriptableObject
     }
     public enum MonsterTag
     {
-        Warrior
+        Warrior, Dragon
     }
 
     public bool IsTypeOfCard(CardType type)
@@ -45,6 +48,20 @@ public class Card : ScriptableObject
 
     //info that only monsters share
     [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] [ShowIf("cardType", CardType.Monster)] public List<MonsterTag> monsterTags;
-    [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] [ShowIf("cardType", CardType.Monster)] public int rightPower;
-    [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] [ShowIf("cardType", CardType.Monster)] public int leftPower;
+    [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] [ShowIf("cardType", CardType.Monster)] public int rp;
+    [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] [ShowIf("cardType", CardType.Monster)] public int lp;
+
+
+    [Button] public string CreateCardJSON()
+    {
+        CardJSON cardJSON = new CardJSON(name, cost, value, cardType, spellTags, monsterTags, rp, lp);
+        string cardJSONstring = JsonUtility.ToJson(cardJSON);
+        return cardJSONstring;
+    }
+
+    [Button] public void SaveCardToCardList()
+    {
+        CardList cardList = Resources.Load<CardList>("Card List");
+        cardList.AddAddCardToList(this);
+    }
 }

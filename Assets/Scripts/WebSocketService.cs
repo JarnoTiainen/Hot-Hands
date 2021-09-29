@@ -112,4 +112,11 @@ public class WebSocketService : MonoBehaviour
         GameMessage message = new GameMessage("OnMessage", "DRAWCARD", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
+
+    public void SaveCardToDataBase(Card card)
+    {
+        GameMessage message = new GameMessage("OnMessage", "SAVECARD", card.CreateCardJSON());
+        card.SaveCardToCardList();
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
 }

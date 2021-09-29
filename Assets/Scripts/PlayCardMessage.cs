@@ -1,5 +1,3 @@
-
-
 public class PlayCardMessage
 {
     public enum CardSource

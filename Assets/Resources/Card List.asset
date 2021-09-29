@@ -9,15 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
-  m_Name: Test Card
+  m_Script: {fileID: 11500000, guid: 26c81aa177f938946ba01e2b77faf805, type: 3}
+  m_Name: Card List
   m_EditorClassIdentifier: 
-  cardSprite: {fileID: 0}
-  cardName: Dragon Warrior of Warrior
-  cost: 1
-  value: 3
-  cardType: 1
-  spellTags: 
-  monsterTags: 000000000000000001000000
-  rp: 3
-  lp: 5
+  allCards:
+  - name: Test Card
+    card: {fileID: 11400000, guid: 2f484580e74bdd44b90e49ca65469a84, type: 2}
+  cardList: []
