@@ -40,7 +40,6 @@ public class WebSocketService : MonoBehaviour
         websocket.OnMessage += (bytes) =>
         {
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
-            Debug.Log(data);
             switch((string)data[0])
             {
                 case "GETSIDE":
@@ -59,6 +58,9 @@ public class WebSocketService : MonoBehaviour
                     break;
                 case "ATTACK":
                     Debug.Log("Message type was ATTACK");
+                    break;
+                case "SAVECARD":
+                    Debug.Log("Saved card " + data[1][0] + " succesfully");
                     break;
                 default:
                     Debug.Log("Message type was UNKOWN");

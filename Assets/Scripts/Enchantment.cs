@@ -1,14 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+using System;
+[Serializable]
 public class Enchantment
 {
     public string name;
-    public string description;
+    public EnchantmentEffect enchantmentEffect;
     public Trigger trigger;
-    public IEnchantmentEffect enchantmentEffect;
+    public int weight;
 
+
+
+    public enum EnchantmentEffect
+    {
+        TestEffect
+    }
     public enum Trigger
     {
         LastBreath,

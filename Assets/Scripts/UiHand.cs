@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 public class UiHand : MonoBehaviour
 {
     [SerializeField] private List<GameObject> handCards = new List<GameObject>();
+    [SerializeField] private List<GameObject> visibleHandCards = new List<GameObject>();
     [SerializeField] private GameObject cardBase;
     [SerializeField] private float gapBetweenCards;
     [SerializeField] private float cardScaleInHand = 1;
@@ -18,6 +19,7 @@ public class UiHand : MonoBehaviour
     [Button] public void AddNewCard()
     {
         GameObject newCard = InstantiateNewCard();
+        visibleHandCards.Add(newCard);
         handCards.Add(newCard);
         SetNewCardPositions();
     }
@@ -25,6 +27,7 @@ public class UiHand : MonoBehaviour
     {
         GameObject removedCard = handCards[CardIndex];
         handCards.Remove(removedCard);
+        visibleHandCards.Remove(removedCard);
         Destroy(removedCard);
         SetNewCardPositions();
     }
@@ -40,25 +43,26 @@ public class UiHand : MonoBehaviour
 
     private void SetNewCardPositions()
     {
-        for(int i = 0; i < handCards.Count; i++)
+
+        for(int i = 0; i < visibleHandCards.Count; i++)
         {
             if(i == 0)
             {
-                float inGameWidth = cardBase.transform.GetChild(0).transform.localScale.x * handCards[i].transform.localScale.x;
+                float inGameWidth = cardBase.transform.GetChild(0).transform.localScale.x * visibleHandCards[i].transform.localScale.x;
                 float totalCardsWidth = TotalCardsWidth();
                 float cardPosX = -totalCardsWidth / 2 + inGameWidth / 2;
-                handCards[i].transform.localPosition = new Vector3(cardPosX, handCards[i].transform.localPosition.y, handCards[i].transform.localPosition.z);
+                visibleHandCards[i].transform.localPosition = new Vector3(cardPosX, visibleHandCards[i].transform.localPosition.y, visibleHandCards[i].transform.localPosition.z);
             }
             else
             {
                 float newPosX;
-                float previousCardPosX = handCards[i - 1].transform.localPosition.x;
+                float previousCardPosX = visibleHandCards[i - 1].transform.localPosition.x;
                 newPosX = previousCardPosX;
-                newPosX += cardBase.transform.GetChild(0).transform.localScale.x * handCards[i - 1].transform.localScale.x / 2;
-                newPosX += cardBase.transform.GetChild(0).transform.localScale.x * handCards[i].transform.localScale.x / 2;
+                newPosX += cardBase.transform.GetChild(0).transform.localScale.x * visibleHandCards[i - 1].transform.localScale.x / 2;
+                newPosX += cardBase.transform.GetChild(0).transform.localScale.x * visibleHandCards[i].transform.localScale.x / 2;
                 newPosX += gapBetweenCards;
 
-                handCards[i].transform.localPosition = new Vector3(newPosX, handCards[i].transform.localPosition.y, handCards[i].transform.localPosition.z);
+                visibleHandCards[i].transform.localPosition = new Vector3(newPosX, visibleHandCards[i].transform.localPosition.y, visibleHandCards[i].transform.localPosition.z);
             }
         }
     }
@@ -66,10 +70,10 @@ public class UiHand : MonoBehaviour
     private float TotalCardsWidth()
     {
         float totalCardWidth = 0;
-        foreach(GameObject card in handCards)
+        foreach(GameObject card in visibleHandCards)
         {
             totalCardWidth += cardBase.transform.GetChild(0).transform.localScale.x * card.transform.localScale.x;
-            if (card != handCards[0]) totalCardWidth += gapBetweenCards;
+            if (card != visibleHandCards[0]) totalCardWidth += gapBetweenCards;
         }
         return totalCardWidth;
     }
@@ -90,6 +94,20 @@ public class UiHand : MonoBehaviour
     {
         card.transform.localPosition -= new Vector3(0, hoveredCardLiftAmountY, hoveredCardLiftAmountZ);
         card.transform.localScale = new Vector3(cardScaleInHand, cardScaleInHand, cardScaleInHand);
+        SetNewCardPositions();
+    }
+
+    public void RemoveVisibleCard(GameObject card)
+    {
+        visibleHandCards.Remove(card);
+        SetNewCardPositions();
+    }
+    public void ReturnVisibleCard(GameObject card)
+    {
+        card.transform.GetChild(0).GetComponent<BoxCollider>().enabled = true;
+        card.transform.SetParent(transform);
+        card.transform.localPosition = Vector3.zero;
+        visibleHandCards.Add(card);
         SetNewCardPositions();
     }
 

@@ -2,19 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UiCardInHand : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitElement
+public class UiCardInHand : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitElement, IOnClickDownUIElement, IOnClickUpElement
 {
     public bool mouseOverElement = false;
     private UiCardPreviewManager uiCardPreviewManager;
     private Canvas uiCanvas;
     private Canvas canvas;
     private GameObject cardPreview;
+    public Mouse mouse;
 
     private void Awake()
     {
         uiCardPreviewManager = GameObject.Find("CardHighlighter").GetComponent<UiCardPreviewManager>();
         uiCanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        mouse = GameObject.Find("Mouse").GetComponent<Mouse>();
     }
 
     public void OnMouseDown()
@@ -29,8 +31,6 @@ public class UiCardInHand : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitEle
 
     public void ScaleCardUp()
     {
-        transform.parent.parent.GetComponent<UiHand>().IncreaseCardSize(transform.parent.gameObject);
-
         Vector2 uiCanvasDimensions = uiCanvas.GetComponent<RectTransform>().sizeDelta;
 
         Vector2 pos = (Vector2)Camera.main.WorldToScreenPoint(GetComponent<Transform>().position);
@@ -44,13 +44,11 @@ public class UiCardInHand : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitEle
     }
     public void ScaleCardDown()
     {
-        transform.parent.parent.GetComponent<UiHand>().DecreaseCardSize(transform.parent.gameObject);
         uiCardPreviewManager.HideCardPreview(cardPreview);
     }
 
     public void OnHoverEnter()
     {
-        Debug.Log("Mouse over");
         if (!mouseOverElement)
         {
             ScaleCardUp();
@@ -65,5 +63,18 @@ public class UiCardInHand : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitEle
             ScaleCardDown();
             mouseOverElement = false;
         }
+    }
+
+    public void OnClickElement()
+    {
+        transform.parent.parent.GetComponent<UiHand>().RemoveVisibleCard(transform.parent.gameObject);
+        mouse.SetNewHeldCard(transform.parent.gameObject);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        Debug.Log("Clicked element");
+    }
+
+    public void OnClickUpElement()
+    {
+        Debug.Log("OnClick up");
     }
 }

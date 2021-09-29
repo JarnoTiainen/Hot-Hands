@@ -36,6 +36,16 @@ public class RayCaster : MonoBehaviour
             {
                 if (target.GetComponent<IOnClickDownUIElement>() != null) target.GetComponent<IOnClickDownUIElement>().OnClickElement();
             }
+
+            if (Input.GetMouseButton(0))
+            {
+                if (target.GetComponent<IOnHoldDownElement>() != null) target.GetComponent<IOnHoldDownElement>().OnHoldDownElement();
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (target.GetComponent<IOnClickUpElement>() != null) target.GetComponent<IOnClickUpElement>().OnClickUpElement();
+            }
+
             if (target.GetComponent<IOnHoverUIElement>() != null) target.GetComponent<IOnHoverUIElement>().OnHoverElement();
         }
         else
@@ -59,7 +69,6 @@ public class RayCaster : MonoBehaviour
         {
             newTarget.GetComponent<IOnHoverEnterElement>().OnHoverEnter();
         }
-        Debug.Log("target 2 " + target);
         if (oldTarget)
         {
             if (oldTarget.GetComponent<IOnHoverExitElement>() != null) oldTarget.GetComponent<IOnHoverExitElement>().OnHoverExit();

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Card List
   m_EditorClassIdentifier: 
   allCards:
-  - name: Test Card
+  - name: Dragon Horn
+    card: {fileID: 11400000, guid: 86a5f5bfb7642a1449ee5502ad41019e, type: 2}
+  - name: Dragon Warrior of Warrior
     card: {fileID: 11400000, guid: 2f484580e74bdd44b90e49ca65469a84, type: 2}
   cardList: []

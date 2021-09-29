@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 53244504703472613}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 0.1, z: 4}
+  m_LocalScale: {x: 3, y: 4, z: 0.1}
   m_Children: []
   m_Father: {fileID: 53244505413014505}
   m_RootOrder: 1
@@ -124,7 +124,7 @@ Transform:
   m_GameObject: {fileID: 53244505253485484}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 0.1, z: 4}
+  m_LocalScale: {x: 3, y: 4, z: 0.1}
   m_Children: []
   m_Father: {fileID: 53244505413014505}
   m_RootOrder: 0
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseOverElement: 0
+  mouse: {fileID: 0}
 --- !u!1 &53244505413014504
 GameObject:
   m_ObjectHideFlags: 0

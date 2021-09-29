@@ -51,11 +51,14 @@ public class Card : ScriptableObject
     [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] [ShowIf("cardType", CardType.Monster)] public int rp;
     [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] [ShowIf("cardType", CardType.Monster)] public int lp;
 
+    [SerializeField] public List<Enchantment> enchantments = new List<Enchantment>();
+
 
     [Button] public string CreateCardJSON()
     {
-        CardJSON cardJSON = new CardJSON(name, cost, value, cardType, spellTags, monsterTags, rp, lp);
+        CardJSON cardJSON = new CardJSON(cardName, cost, value, cardType, spellTags, monsterTags, rp, lp, enchantments);
         string cardJSONstring = JsonUtility.ToJson(cardJSON);
+        Debug.Log(cardJSONstring);
         return cardJSONstring;
     }
 
