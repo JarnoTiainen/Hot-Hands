@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 public class UiCardPreviewManager : MonoBehaviour
 {
     [SerializeField] private GameObject cardPreviewGameObject;
+    [SerializeField] private float scaleOfPreview;
     Canvas uiCanvas;
 
     private static List<GameObject> cardPreviews = new List<GameObject>();
@@ -20,12 +21,15 @@ public class UiCardPreviewManager : MonoBehaviour
         GameObject newCardPreview = Instantiate(cardPreviewGameObject, pos, Quaternion.identity);
         
         RectTransform rectTransform = newCardPreview.GetComponent<RectTransform>();
-        rectTransform.SetParent(gameObject.transform);
+        Debug.Log(rectTransform.localScale + " " + gameObject.GetComponent<RectTransform>().localScale);
+        rectTransform.SetParent(gameObject.GetComponent<RectTransform>());
+        rectTransform.localScale = new Vector3(scaleOfPreview, scaleOfPreview, scaleOfPreview);
 
 
-        Vector3 cardModelScale = newCardPreview.transform.GetChild(0).gameObject.GetComponent<Transform>().localScale;
+        Vector3 cardModelSize = newCardPreview.transform.GetChild(0).gameObject.GetComponent<BoxCollider>().size;
         Vector2 cardPreviewDimensions = newCardPreview.GetComponent<RectTransform>().localScale;
-        cardPreviewDimensions = new Vector2(cardModelScale.x * cardPreviewDimensions.x, cardModelScale.z * cardPreviewDimensions.y);
+        cardPreviewDimensions = new Vector2(cardModelSize.x * cardPreviewDimensions.x, cardModelSize.z * cardPreviewDimensions.y);
+        Debug.Log(cardPreviewDimensions);
         Vector2 uiCanvasDimensions = uiCanvas.GetComponent<RectTransform>().sizeDelta;
 
         if (pos.x > uiCanvasDimensions.x / 2 - cardPreviewDimensions.x / 2)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using TMPro;
 
 public class UiHand : MonoBehaviour
 {
@@ -18,9 +19,12 @@ public class UiHand : MonoBehaviour
     [SerializeField] private float hoveredCardLiftAmountZ;
     [SerializeField] float scaleTransitionTime;
 
+    private static List<GameObject> unhandledCards = new List<GameObject>();
+
 
     public void Awake()
     {
+
         Instance = gameObject.GetComponent<UiHand>();
         container = gameObject;
     }
@@ -28,9 +32,17 @@ public class UiHand : MonoBehaviour
     [Button] public static void AddNewCard()
     {
         GameObject newCard = InstantiateNewCard();
+        unhandledCards.Add(newCard);
         visibleHandCards.Add(newCard);
         handCards.Add(newCard);
         SetNewCardPositions();
+    }
+
+    [Button]public static void RevealNewCard(string cardName)
+    {
+        unhandledCards[0].transform.rotation = Quaternion.Euler(0, 0, 0);
+        unhandledCards[0].transform.GetChild(0).GetChild(0).GetComponent<TextMeshPro>().text = cardName;
+        unhandledCards.Remove(unhandledCards[0]);
     }
     [Button] public void RemoveCard(int CardIndex = 0)
     {
@@ -47,6 +59,7 @@ public class UiHand : MonoBehaviour
         newCard.transform.SetParent(Instance.container.transform);
         newCard.transform.localPosition = new Vector3(0,0,0);
         newCard.transform.localScale = new Vector3(Instance.cardScaleInHand, Instance.cardScaleInHand, Instance.cardScaleInHand);
+        newCard.transform.rotation = Quaternion.Euler(0, 180, 0);
         return newCard;
     }
 
@@ -67,8 +80,8 @@ public class UiHand : MonoBehaviour
                 float newPosX;
                 float previousCardPosX = visibleHandCards[i - 1].transform.localPosition.x;
                 newPosX = previousCardPosX;
-                newPosX += Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x / 2 * visibleHandCards[i - 1].transform.localScale.x / 2;
-                newPosX += Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x / 2 * visibleHandCards[i].transform.localScale.x / 2;
+                newPosX += Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x * visibleHandCards[i - 1].transform.localScale.x / 2;
+                newPosX += Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x * visibleHandCards[i].transform.localScale.x / 2;
                 newPosX += Instance.gapBetweenCards;
 
                 visibleHandCards[i].transform.localPosition = new Vector3(newPosX, visibleHandCards[i].transform.localPosition.y, visibleHandCards[i].transform.localPosition.z);
