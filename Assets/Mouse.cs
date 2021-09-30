@@ -5,8 +5,10 @@ using Sirenix.OdinInspector;
 
 public class Mouse : MonoBehaviour
 {
-    private Canvas UiCanvas;
-    private GameObject heldCard;
+    public static Mouse Instance { get; private set; }
+
+
+    public GameObject heldCard;
     public Camera thisCamera;
     [SerializeField] private Vector2 monsterHitBox;
     public Vector2 mousePosInWorld;
@@ -16,7 +18,7 @@ public class Mouse : MonoBehaviour
 
     private void Awake()
     {
-        UiCanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
+        Instance = gameObject.GetComponent<Mouse>();
         uiHand = GameObject.Find("Hand").GetComponent<UiHand>();
     }
 
@@ -54,7 +56,6 @@ public class Mouse : MonoBehaviour
 
     public void ValuatePlaceCard()
     {
-        Debug.Log("valuate");
         if (Mathf.Abs(mousePosInWorld.x) < monsterHitBox.x && Mathf.Abs(mousePosInWorld.y) < monsterHitBox.y)
         {
             //card is in monster box
@@ -62,7 +63,6 @@ public class Mouse : MonoBehaviour
         }
         else
         {
-            Debug.Log("Return card");
             uiHand.ReturnVisibleCard(heldCard);
             heldCard = null;
         }

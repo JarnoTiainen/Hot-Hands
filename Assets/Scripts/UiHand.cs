@@ -7,7 +7,7 @@ using TMPro;
 public class UiHand : MonoBehaviour
 {
     public static UiHand Instance { get; private set; }
-
+    private Dictionary<GameObject, GameObject> visibleHandCardPreviews = new Dictionary<GameObject, GameObject>();
     [SerializeField] private static List<GameObject> handCards = new List<GameObject>();
     [SerializeField] private static List<GameObject> visibleHandCards = new List<GameObject>();
     [SerializeField] private GameObject cardBase;
@@ -18,6 +18,8 @@ public class UiHand : MonoBehaviour
     [SerializeField] private float hoveredCardLiftAmountY;
     [SerializeField] private float hoveredCardLiftAmountZ;
     [SerializeField] float scaleTransitionTime;
+    private Canvas uiCanvas;
+    private Canvas canvas;
 
     private static List<GameObject> unhandledCards = new List<GameObject>();
 
@@ -27,6 +29,8 @@ public class UiHand : MonoBehaviour
 
         Instance = gameObject.GetComponent<UiHand>();
         container = gameObject;
+        uiCanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
+        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
     }
 
     [Button] public static void AddNewCard()
@@ -127,6 +131,35 @@ public class UiHand : MonoBehaviour
         card.transform.localPosition = Vector3.zero;
         visibleHandCards.Add(card);
         SetNewCardPositions();
+        
     }
 
+    public void ShowCardTooltip(GameObject card)
+    {
+        if(!unhandledCards.Contains(card))
+        {
+            Debug.Log("Showing tooltip");
+            Vector2 uiCanvasDimensions = uiCanvas.GetComponent<RectTransform>().sizeDelta;
+
+            Vector2 pos = (Vector2)Camera.main.WorldToScreenPoint(card.GetComponent<Transform>().position);
+
+            Vector2 canvasDimensions = canvas.GetComponent<RectTransform>().sizeDelta;
+
+            Vector2 rel = new Vector2(pos.x / canvasDimensions.x, pos.y / canvasDimensions.y);
+            Vector2 posInUiCanvas = new Vector2(rel.x * uiCanvasDimensions.x, rel.y * uiCanvasDimensions.y) - uiCanvasDimensions / 2;
+
+            visibleHandCardPreviews.Add(card, UiCardPreviewManager.Instance.ShowCardPreview(posInUiCanvas));
+        }
+        
+    }
+    public void HideCardTooltip(GameObject hoveredCard)
+    {
+        if(visibleHandCardPreviews.ContainsKey(hoveredCard))
+        {
+            Debug.Log("Hiding tooltip");
+            GameObject preview = visibleHandCardPreviews[hoveredCard];
+            UiCardPreviewManager.Instance.HideCardPreview(preview);
+            visibleHandCardPreviews.Remove(hoveredCard);
+        }
+    }
 }

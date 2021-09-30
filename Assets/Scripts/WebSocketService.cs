@@ -58,9 +58,13 @@ public class WebSocketService : MonoBehaviour
                     if (drawCardMessage.player == playerNumber)
                     {
                         UiHand.RevealNewCard(drawCardMessage.cardName);
-                         Debug.Log("You draw " + drawCardMessage.cardName);
+                        Debug.Log("You draw " + drawCardMessage.cardName);
                     }
-                    else Debug.Log("Opponent draws a card");
+                    else
+                    {
+                        EnemyHand.AddNewCard();
+                        Debug.Log("Opponent draws a card");
+                    }
                     break;
                 case "ATTACK":
                     Debug.Log("Message type was ATTACK");
@@ -105,7 +109,6 @@ public class WebSocketService : MonoBehaviour
 
         if (websocket.State == WebSocketState.Open)
         {
-            Debug.Log("sent");
             await websocket.SendText(message);
         }
     }

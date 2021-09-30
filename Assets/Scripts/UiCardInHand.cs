@@ -51,16 +51,17 @@ public class UiCardInHand : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitEle
     {
         if (!mouseOverElement)
         {
-            ScaleCardUp();
+            UiHand.Instance.ShowCardTooltip(transform.parent.gameObject);
             mouseOverElement = true;
         }
     }
 
     public void OnHoverExit()
     {
+        Debug.Log("Hover exit");
         if (mouseOverElement)
         {
-            ScaleCardDown();
+            UiHand.Instance.HideCardTooltip(transform.parent.gameObject);
             mouseOverElement = false;
         }
     }
