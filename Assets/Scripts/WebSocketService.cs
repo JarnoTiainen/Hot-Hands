@@ -10,13 +10,7 @@ public class WebSocketService : MonoBehaviour
     public int playerNumber;
 
     public static WebSocketService Instance { get; private set; }
-
     static WebSocket websocket;
-
-    public const string ThrowOp = "5";
-    public const string SummonMonsterOp = "PlayCard";
-    string playCard = "PLAYCARD";
-
 
     private void Awake()
     {
@@ -24,9 +18,10 @@ public class WebSocketService : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    async void Start()
+    void Start()
     {
         websocket = new WebSocket("wss://n14bom45md.execute-api.eu-north-1.amazonaws.com/production");
+        OpenNewConnection();
 
         websocket.OnOpen += () =>
         {
@@ -59,11 +54,11 @@ public class WebSocketService : MonoBehaviour
                     break;
                 case "DRAWCARD":
                     Debug.Log("Message type was DRAWCARD");
-                    DrawCardMessage drawCardMessage = new DrawCardMessage((int)data[1][0], data[1][1]);
+                    DrawCardMessage drawCardMessage = new DrawCardMessage((int)data[1][0], data[1][1], (int)data[1][2], (int)data[1][3], (int)data[1][4], data[1][5], data[1][6], data[1][7], data[1][7]);
                     if (drawCardMessage.player == playerNumber)
                     {
-                        UiHand.RevealNewCard(drawCardMessage.card);
-                        Debug.Log("You draw " + drawCardMessage.card);
+                        UiHand.RevealNewCard(drawCardMessage.cardName);
+                         Debug.Log("You draw " + drawCardMessage.cardName);
                     }
                     else Debug.Log("Opponent draws a card");
                     break;
@@ -89,6 +84,11 @@ public class WebSocketService : MonoBehaviour
             }
         };
         Debug.Log("opening");
+    }
+
+    [Button] public async void OpenNewConnection()
+    {
+        
         await websocket.Connect();
     }
 
@@ -110,7 +110,12 @@ public class WebSocketService : MonoBehaviour
         }
     }
 
-    private async void OnApplicationQuit()
+    private void OnApplicationQuit()
+    {
+        CloseConnection();
+    }
+
+    [Button] public async void CloseConnection()
     {
         await websocket.Close();
     }
