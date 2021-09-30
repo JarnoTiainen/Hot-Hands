@@ -60,7 +60,11 @@ public class WebSocketService : MonoBehaviour
                 case "DRAWCARD":
                     Debug.Log("Message type was DRAWCARD");
                     DrawCardMessage drawCardMessage = new DrawCardMessage((int)data[1][0], data[1][1]);
-                    if (drawCardMessage.player == playerNumber) Debug.Log("You draw " + drawCardMessage.card);
+                    if (drawCardMessage.player == playerNumber)
+                    {
+                        UiHand.RevealNewCard(drawCardMessage.card);
+                        Debug.Log("You draw " + drawCardMessage.card);
+                    }
                     else Debug.Log("Opponent draws a card");
                     break;
                 case "ATTACK":

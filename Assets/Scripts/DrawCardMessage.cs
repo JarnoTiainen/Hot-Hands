@@ -1,4 +1,5 @@
-
+using System;
+[Serializable]
 public class DrawCardMessage
 {
     public int player;
