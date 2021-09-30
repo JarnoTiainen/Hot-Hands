@@ -4,7 +4,19 @@ using UnityEngine;
 
 public class References: MonoBehaviour
 {
-    public static References Instance { get; private set; }
+    public static References _i;
+
+    public static References i
+    {
+        get
+        {
+            if (_i == null) _i = (Instantiate(Resources.Load("GameAssets")) as GameObject).GetComponent<References>();
+            return _i;
+        }
+    }
+
+    public GameObject cardBase;
+    [SerializeField]public GameObject container;
 
     public GameObject cardPreviewGameObject;
     //EnchantmentIcons

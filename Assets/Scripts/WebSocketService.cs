@@ -11,11 +11,17 @@ public class WebSocketService : MonoBehaviour
 
     public static WebSocketService Instance { get; private set; }
 
-    WebSocket websocket;
+    static WebSocket websocket;
 
     public const string ThrowOp = "5";
     public const string SummonMonsterOp = "PlayCard";
     string playCard = "PLAYCARD";
+
+
+    private void Awake()
+    {
+        Instance = gameObject.GetComponent<WebSocketService>();
+    }
 
     // Start is called before the first frame update
     async void Start()
@@ -40,6 +46,7 @@ public class WebSocketService : MonoBehaviour
         websocket.OnMessage += (bytes) =>
         {
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
+            Debug.Log(data);
             switch((string)data[0])
             {
                 case "GETSIDE":
@@ -62,11 +69,22 @@ public class WebSocketService : MonoBehaviour
                 case "SAVECARD":
                     Debug.Log("Saved card " + data[1][0] + " succesfully");
                     break;
+                case "SETDECK":
+                    if(int.Parse(data[1]) == 0)
+                    {
+                        Debug.Log("Deck save ok");
+                    }
+                    else
+                    {
+                        Debug.Log("Deck save failed, everything is ok");
+                    }
+                    break;
                 default:
                     Debug.Log("Message type was UNKOWN");
                     break;
             }
         };
+        Debug.Log("opening");
         await websocket.Connect();
     }
 
@@ -78,10 +96,12 @@ public class WebSocketService : MonoBehaviour
 
     }
 
-    async void SendWebSocketMessage(string message)
+    async static void SendWebSocketMessage(string message)
     {
+
         if (websocket.State == WebSocketState.Open)
         {
+            Debug.Log("sent");
             await websocket.SendText(message);
         }
     }
@@ -92,7 +112,7 @@ public class WebSocketService : MonoBehaviour
     }
 
     [Button]
-    public void PlayCardMessage(int cardIndex)
+    public static void PlayCardMessage(int cardIndex)
     {
         PlayCardMessage playCardMessage = new PlayCardMessage(1, 3);
         string playCardMessageJSON = JsonUtility.ToJson(playCardMessage);
@@ -102,23 +122,30 @@ public class WebSocketService : MonoBehaviour
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 
-    [Button] public void GetPlayerNumber()
+    [Button] public static void GetPlayerNumber()
     {
         GameMessage playCard = new GameMessage("OnMessage", "GETSIDE", "");
         SendWebSocketMessage(JsonUtility.ToJson(playCard));
     }
 
     [Button]
-    public void DrawCard()
+    public static void DrawCard()
     {
         GameMessage message = new GameMessage("OnMessage", "DRAWCARD", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 
-    public void SaveCardToDataBase(Card card)
+    public static void SaveCardToDataBase(Card card)
     {
         GameMessage message = new GameMessage("OnMessage", "SAVECARD", card.CreateCardJSON());
         card.SaveCardToCardList();
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
+    public static void SetDeck(string deckJson)
+    {
+        Debug.Log("Send deck data");
+
+        GameMessage message = new GameMessage("OnMessage", "SETDECK", deckJson);
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 }
