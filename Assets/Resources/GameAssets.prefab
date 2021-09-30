@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8977137809310826891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3247317268387327003}
+  - component: {fileID: -2720577381874846951}
+  m_Layer: 0
+  m_Name: GameAssets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3247317268387327003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8977137809310826891}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.30163, y: 5.5036135, z: -0.630647}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2720577381874846951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8977137809310826891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efdb789266698d447a2308b9815ff516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardBase: {fileID: 53244505413014504, guid: 0fa9aaa0a137f9541825a074788ab77e, type: 3}
+  container: {fileID: 53244505413014504, guid: 0fa9aaa0a137f9541825a074788ab77e, type: 3}
+  cardPreviewGameObject: {fileID: 0}
+  cardList: {fileID: 0}
+  lastBreathIcon: {fileID: 0}
+  openerIcon: {fileID: 0}
+  battlecryIcon: {fileID: 0}
+  drawtivationIcon: {fileID: 0}
+  sacrifice: {fileID: 0}
+  retaliate: {fileID: 0}
+  brutalityIcon: {fileID: 0}

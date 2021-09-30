@@ -32,8 +32,7 @@ public class CardList : ScriptableObject
         {
             if (listCard.card) 
             {
-                if (!WebSocketService.Instance) GameObject.Find("GameEventManager").GetComponent<WebSocketService>().SaveCardToDataBase(listCard.card);
-                else WebSocketService.Instance.SaveCardToDataBase(listCard.card);
+                WebSocketService.SaveCardToDataBase(listCard.card);
             }
             else deletableCards.Add(listCard);
 
