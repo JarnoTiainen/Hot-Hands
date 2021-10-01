@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class ButtonSounds : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public SFX buttonHover;
+    public SFX buttonClick;
+
+    public void OnHover()
     {
-        
+        buttonHover.PlaySFX();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnClick()
     {
-        
+        buttonClick.PlaySFX();
     }
 }

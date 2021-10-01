@@ -32,7 +32,7 @@ public class SoundtrackManager : MonoBehaviour
     [AssetList(Path = "/Audio/Music/ResultScreen", AutoPopulate = true)]
     public List<SoundtrackClip> resultScreenSoundtrack;
 
-    public static void PlaySoundtrack(SoundtrackClip soundtrack, bool waitToFinish = true, AudioSource audioSource = null)
+    public static void PlaySoundtrack(SoundtrackClip soundtrack, bool waitToFinish = true, bool loop = true, AudioSource audioSource = null)
     {
         if (audioSource == null)
             audioSource = SoundtrackManager.instance.defaultAudioSource;
@@ -48,6 +48,7 @@ public class SoundtrackManager : MonoBehaviour
             audioSource.clip = soundtrack.clip;
             audioSource.volume = soundtrack.volume;
             audioSource.pitch = soundtrack.pitch;
+            audioSource.loop = loop;
             audioSource.Play();
         }
     }

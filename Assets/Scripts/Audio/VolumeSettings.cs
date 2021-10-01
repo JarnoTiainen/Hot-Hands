@@ -15,7 +15,6 @@ public class VolumeSettings : MonoBehaviour
     [SerializeField] private float masterDefaultVolume;
     [SerializeField] private float musicDefaultVolume;
     [SerializeField] private float sfxDefaultVolume;
-    private bool inCombat = false;
 
     void Start()
     {
@@ -31,15 +30,7 @@ public class VolumeSettings : MonoBehaviour
     }
     public void SetMusicVolume(float sliderValue)
     {
-        if (inCombat)
-        {
-            masterMixer.SetFloat("combatMusicVol", Mathf.Log10(sliderValue) * 20);
-        }
-        else
-        {
-            masterMixer.SetFloat("musicVol", Mathf.Log10(sliderValue) * 20);
-            masterMixer.SetFloat("combatMusicVol", Mathf.Log10(0.0001f) * 20);
-        }
+        masterMixer.SetFloat("musicVol", Mathf.Log10(sliderValue) * 20);
         PlayerPrefs.SetFloat("MusicVolume", sliderValue);
     }
     public void SetSFXVolume(float sliderValue)

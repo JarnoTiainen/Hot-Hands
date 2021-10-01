@@ -42,6 +42,11 @@ public class Soundtrack
     [ShowIf("showSettings")]
     [EnableIf("editSettings")]
     [SerializeField]
+    private bool loop = true;
+
+    [ShowIf("showSettings")]
+    [EnableIf("editSettings")]
+    [SerializeField]
     private bool useDefault = true;
 
     [DisableIf("useDefault")]
@@ -60,9 +65,10 @@ public class Soundtrack
     }
 
 
-    private void SelectMusic()
+    private void SelectSoundtrack()
     {
-        UnityEditor.Selection.activeObject = soundtrackToPlay;
+        // Comment out when building the game
+        //UnityEditor.Selection.activeObject = soundtrackToPlay;
     }
 
     //Get's list of Soundtracks from manager, used in the inspector
@@ -92,8 +98,8 @@ public class Soundtrack
     public void PlaySoundtrack()
     {
         if (useDefault || audiosource == null)
-            SoundtrackManager.PlaySoundtrack(soundtrackToPlay, waitToPlay, null);
+            SoundtrackManager.PlaySoundtrack(soundtrackToPlay, waitToPlay, loop, null);
         else
-            SoundtrackManager.PlaySoundtrack(soundtrackToPlay, waitToPlay, audiosource);
+            SoundtrackManager.PlaySoundtrack(soundtrackToPlay, waitToPlay, loop, audiosource);
     }
 }
