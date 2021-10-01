@@ -1,60 +1,77 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using TMPro;
 
-public class UiHand : MonoBehaviour
+public class Hand : MonoBehaviour
 {
     public CardList cardList;
 
-    public static UiHand Instance { get; private set; }
+    public static Hand Instance { get; private set; }
+
+
+
     private Dictionary<GameObject, GameObject> visibleHandCardPreviews = new Dictionary<GameObject, GameObject>();
-    [SerializeField] private static List<GameObject> handCards = new List<GameObject>();
-    [SerializeField] private static List<GameObject> visibleHandCards = new List<GameObject>();
+
+    private static List<GameObject> handCards = new List<GameObject>();
+    private static List<GameObject> visibleHandCards = new List<GameObject>();
+    private static List<GameObject> unhandledCards = new List<GameObject>();
+
+
     [SerializeField] private GameObject cardBase;
-    private GameObject container;
     [SerializeField] private float gapBetweenCards;
-    [SerializeField] private float cardScaleInHand = 1;
-    [SerializeField] private float hoveredCardScaleMultiplier;
-    [SerializeField] private float hoveredCardLiftAmountY;
-    [SerializeField] private float hoveredCardLiftAmountZ;
-    [SerializeField] float scaleTransitionTime;
+
     private Canvas uiCanvas;
     private Canvas canvas;
 
-    private static List<GameObject> unhandledCards = new List<GameObject>();
+    
 
 
     public void Awake()
     {
-
-        Instance = gameObject.GetComponent<UiHand>();
-        container = gameObject;
+        Instance = gameObject.GetComponent<Hand>();
         uiCanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
     }
 
-    [Button] public static void AddNewCard()
+    //Adds new facedown card to hand (ADD DRAW ANIMATION HERE)
+    public static void AddNewCard()
     {
         GameObject newCard = InstantiateNewCard();
+
+        //adds the card to list of cards that have not been 
         unhandledCards.Add(newCard);
+
+        //adds to list which manages card positions in hand
         visibleHandCards.Add(newCard);
+
+        //adds the card to total cards in hand
         handCards.Add(newCard);
         SetNewCardPositions();
     }
 
-    [Button]public static void RevealNewCard(DrawCardMessage drawCardMessage)
+
+    //instanciate and rotate card facedown
+    private static GameObject InstantiateNewCard()
+    {
+        GameObject newCard = Instantiate(Instance.cardBase);
+        newCard.transform.SetParent(Instance.gameObject.transform);
+        newCard.transform.localPosition = new Vector3(0, 0, 0);
+        newCard.transform.rotation = Quaternion.Euler(0, 180, 0);
+        return newCard;
+    }
+
+    [Button] public static void RevealNewCard(DrawCardMessage drawCardMessage)
     {
         Card card = null;
-        foreach(CardList.ListCard listCard in Instance.cardList.allCards)
+        foreach (CardList.ListCard listCard in Instance.cardList.allCards)
         {
-            if(listCard.name == drawCardMessage.cardName)
+            if (listCard.name == drawCardMessage.cardName)
             {
                 card = listCard.card;
             }
         }
-        if(card != null)
+        if (card != null)
         {
             CardData cardData = new CardData(card.cardSprite, drawCardMessage.cardName, drawCardMessage.cardCost, drawCardMessage.cardValue, (Card.CardType)drawCardMessage.cardType, drawCardMessage.rp, drawCardMessage.lp);
             unhandledCards[0].transform.GetChild(0).GetComponent<UiCardInHand>().cardData = cardData;
@@ -67,8 +84,15 @@ public class UiHand : MonoBehaviour
         else
         {
             Debug.LogError("Card with name: " + drawCardMessage.cardName + " was not found from Unity side databse");
+
+            //REMOVE THESE WHEN SERVER CARD NAME THING IS FIXED
+            unhandledCards[0].transform.rotation = Quaternion.Euler(0, 0, 0);
+            unhandledCards[0].transform.GetChild(0).GetChild(0).GetComponent<TextMeshPro>().text = drawCardMessage.cardName;
+            unhandledCards.Remove(unhandledCards[0]);
         }
     }
+
+    //Removes one card from hand and if there is no parameter remove card with last index
     [Button] public void RemoveCard(int CardIndex = 0)
     {
         GameObject removedCard = handCards[CardIndex];
@@ -78,73 +102,36 @@ public class UiHand : MonoBehaviour
         SetNewCardPositions();
     }
 
-    private static GameObject InstantiateNewCard()
-    {
-        GameObject newCard = Instantiate(Instance.cardBase);
-        newCard.transform.SetParent(Instance.container.transform);
-        newCard.transform.localPosition = new Vector3(0,0,0);
-        newCard.transform.localScale = new Vector3(Instance.cardScaleInHand, Instance.cardScaleInHand, Instance.cardScaleInHand);
-        newCard.transform.rotation = Quaternion.Euler(0, 180, 0);
-        return newCard;
-    }
-
+    //sets new card positions in hand
     private static void SetNewCardPositions()
     {
+        float inGameWidth = Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x;
+        float totalCardsWidth = inGameWidth * visibleHandCards.Count + Instance.gapBetweenCards * (visibleHandCards.Count - 1);
+        float newPosX;
+        float firstCardOffsetX = (-totalCardsWidth + inGameWidth) / 2;
+        float gapBetweenCardCenters = inGameWidth + Instance.gapBetweenCards;
 
-        for(int i = 0; i < visibleHandCards.Count; i++)
+        if (visibleHandCards.Count == 1) visibleHandCards[0].GetComponent<Transform>().localPosition = Vector3.zero;
+        else
         {
-            if(i == 0)
+            for (int i = 0; i < visibleHandCards.Count; i++)
             {
-                float inGameWidth = Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x;
-                float totalCardsWidth = TotalCardsWidth();
-                float cardPosX = -totalCardsWidth / 2 + inGameWidth / 2;
-                visibleHandCards[i].transform.localPosition = new Vector3(cardPosX, visibleHandCards[i].transform.localPosition.y, visibleHandCards[i].transform.localPosition.z);
-            }
-            else
-            {
-                float newPosX;
-                float previousCardPosX = visibleHandCards[i - 1].transform.localPosition.x;
-                newPosX = previousCardPosX;
-                newPosX += Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x * visibleHandCards[i - 1].transform.localScale.x / 2;
-                newPosX += Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x * visibleHandCards[i].transform.localScale.x / 2;
-                newPosX += Instance.gapBetweenCards;
-
-                visibleHandCards[i].transform.localPosition = new Vector3(newPosX, visibleHandCards[i].transform.localPosition.y, visibleHandCards[i].transform.localPosition.z);
+                newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
+                Vector2 newPos = new Vector2(newPosX, 0);
+                visibleHandCards[i].GetComponent<Transform>().localPosition = newPos;
             }
         }
+
     }
 
-    private static float TotalCardsWidth()
-    {
-        float totalCardWidth = 0;
-        foreach(GameObject card in visibleHandCards)
-        {
-            totalCardWidth += Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x;
-            if (card != visibleHandCards[0]) totalCardWidth += Instance.gapBetweenCards;
-        }
-        
-        return totalCardWidth;
-    }
-
-    public void IncreaseCardSize(GameObject card)
-    {
-        card.transform.localPosition += new Vector3(0, hoveredCardLiftAmountY, hoveredCardLiftAmountZ);
-        card.transform.localScale = new Vector3(hoveredCardScaleMultiplier, hoveredCardScaleMultiplier, hoveredCardScaleMultiplier);
-        SetNewCardPositions();
-    }
-
-    public void DecreaseCardSize(GameObject card)
-    {
-        card.transform.localPosition -= new Vector3(0, hoveredCardLiftAmountY, hoveredCardLiftAmountZ);
-        card.transform.localScale = new Vector3(cardScaleInHand, cardScaleInHand, cardScaleInHand);
-        SetNewCardPositions();
-    }
-
+    //this function removes visible cards but leaves the card in hand cards list in case the cards need to be returned to hand
     public void RemoveVisibleCard(GameObject card)
     {
         visibleHandCards.Remove(card);
         SetNewCardPositions();
     }
+
+    //returns card back to hand
     public void ReturnVisibleCard(GameObject card)
     {
         card.transform.GetChild(0).GetComponent<BoxCollider>().enabled = true;
@@ -155,34 +142,32 @@ public class UiHand : MonoBehaviour
         
     }
 
+    //shows card tooltip
     public void ShowCardTooltip(GameObject card)
     {
         if(!unhandledCards.Contains(card))
         {
-            Debug.Log("Showing tooltip");
             Vector2 uiCanvasDimensions = uiCanvas.GetComponent<RectTransform>().sizeDelta;
-
             Vector2 pos = (Vector2)Camera.main.WorldToScreenPoint(card.GetComponent<Transform>().position);
-
             Vector2 canvasDimensions = canvas.GetComponent<RectTransform>().sizeDelta;
-
             Vector2 rel = new Vector2(pos.x / canvasDimensions.x, pos.y / canvasDimensions.y);
             Vector2 posInUiCanvas = new Vector2(rel.x * uiCanvasDimensions.x, rel.y * uiCanvasDimensions.y) - uiCanvasDimensions / 2;
-
             visibleHandCardPreviews.Add(card, UiCardPreviewManager.Instance.ShowCardPreview(posInUiCanvas));
         }
         
     }
+
+    //hides card tooltip
     public void HideCardTooltip(GameObject hoveredCard)
     {
         if(visibleHandCardPreviews.ContainsKey(hoveredCard))
         {
-            Debug.Log("Hiding tooltip");
             GameObject preview = visibleHandCardPreviews[hoveredCard];
             UiCardPreviewManager.Instance.HideCardPreview(preview);
             visibleHandCardPreviews.Remove(hoveredCard);
         }
     }
+
     public int GetCardIndex(GameObject card)
     {
         for(int i = 0; i < handCards.Count; i++)

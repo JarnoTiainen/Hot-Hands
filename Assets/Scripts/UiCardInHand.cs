@@ -7,17 +7,10 @@ public class UiCardInHand : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitEle
     public CardData cardData;
 
     public bool mouseOverElement = false;
-    private UiCardPreviewManager uiCardPreviewManager;
-    private Canvas uiCanvas;
-    private Canvas canvas;
-    private GameObject cardPreview;
     public Mouse mouse;
 
     private void Awake()
     {
-        uiCardPreviewManager = GameObject.Find("CardHighlighter").GetComponent<UiCardPreviewManager>();
-        uiCanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
-        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         mouse = GameObject.Find("Mouse").GetComponent<Mouse>();
     }
 
@@ -31,29 +24,11 @@ public class UiCardInHand : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitEle
 
     }
 
-    public void ScaleCardUp()
-    {
-        Vector2 uiCanvasDimensions = uiCanvas.GetComponent<RectTransform>().sizeDelta;
-
-        Vector2 pos = (Vector2)Camera.main.WorldToScreenPoint(GetComponent<Transform>().position);
-
-        Vector2 canvasDimensions = canvas.GetComponent<RectTransform>().sizeDelta;
-
-        Vector2 rel = new Vector2(pos.x / canvasDimensions.x, pos.y/ canvasDimensions.y);
-        Vector2 posInUiCanvas = new Vector2(rel.x * uiCanvasDimensions.x, rel.y * uiCanvasDimensions.y) - uiCanvasDimensions/2;
-
-        cardPreview = uiCardPreviewManager.ShowCardPreview(posInUiCanvas);
-    }
-    public void ScaleCardDown()
-    {
-        uiCardPreviewManager.HideCardPreview(cardPreview);
-    }
-
     public void OnHoverEnter()
     {
         if (!mouseOverElement)
         {
-            UiHand.Instance.ShowCardTooltip(transform.parent.gameObject);
+            Hand.Instance.ShowCardTooltip(transform.parent.gameObject);
             mouseOverElement = true;
         }
     }
@@ -63,15 +38,15 @@ public class UiCardInHand : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitEle
         Debug.Log("Hover exit");
         if (mouseOverElement)
         {
-            UiHand.Instance.HideCardTooltip(transform.parent.gameObject);
+            Hand.Instance.HideCardTooltip(transform.parent.gameObject);
             mouseOverElement = false;
         }
     }
 
     public void OnClickElement()
     {
-        transform.parent.parent.GetComponent<UiHand>().RemoveVisibleCard(transform.parent.gameObject);
-        mouse.SetNewHeldCard(transform.parent.gameObject, UiHand.Instance.GetCardIndex(transform.parent.gameObject));
+        transform.parent.parent.GetComponent<Hand>().RemoveVisibleCard(transform.parent.gameObject);
+        mouse.SetNewHeldCard(transform.parent.gameObject, Hand.Instance.GetCardIndex(transform.parent.gameObject));
         gameObject.GetComponent<BoxCollider>().enabled = false;
         Debug.Log("Clicked element");
     }
