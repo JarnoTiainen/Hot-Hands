@@ -104,6 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 53244505413014505}
+  - component: {fileID: 2005484790519446136}
   m_Layer: 0
   m_Name: CardContainer
   m_TagString: Untagged
@@ -127,6 +128,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2005484790519446136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53244505413014504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163e5cf7116441d4f990864fde283b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 2
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!65 &7681343739218424657
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -152,7 +172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a17b8afeade60a46b77dd8a023f42ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseOverElement: 0
   mouse: {fileID: 0}
 --- !u!1 &7329410945329703522
 GameObject:

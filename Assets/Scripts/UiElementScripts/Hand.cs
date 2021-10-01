@@ -8,8 +8,7 @@ public class Hand : MonoBehaviour
     public CardList cardList;
 
     public static Hand Instance { get; private set; }
-
-
+    public GameObject deckObj;
 
     private Dictionary<GameObject, GameObject> visibleHandCardPreviews = new Dictionary<GameObject, GameObject>();
 
@@ -54,9 +53,9 @@ public class Hand : MonoBehaviour
     //instanciate and rotate card facedown
     private static GameObject InstantiateNewCard()
     {
-        GameObject newCard = Instantiate(Instance.cardBase);
-        newCard.transform.SetParent(Instance.gameObject.transform);
-        newCard.transform.localPosition = new Vector3(0, 0, 0);
+        GameObject newCard = Instantiate(Instance.cardBase, Instance.gameObject.transform);
+        //newCard.transform.SetParent(Instance.gameObject.transform);
+        //newCard.transform.localPosition = new Vector3(0, 0, 0);
         newCard.transform.rotation = Quaternion.Euler(0, 180, 0);
         return newCard;
     }
@@ -116,8 +115,14 @@ public class Hand : MonoBehaviour
         {
             for (int i = 0; i < visibleHandCards.Count; i++)
             {
+                
                 newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
                 Vector2 newPos = new Vector2(newPosX, 0);
+
+                //newPos = new Vector3(13, 1, 0);
+
+                //visibleHandCards[i].GetComponent<CardMovement>().OnCardMove(newPos, 3f);
+
                 visibleHandCards[i].GetComponent<Transform>().localPosition = newPos;
             }
         }
