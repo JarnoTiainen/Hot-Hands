@@ -104,7 +104,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 53244505413014505}
+<<<<<<< Updated upstream
   - component: {fileID: 2005484790519446136}
+=======
+  - component: {fileID: 3122231093077858774}
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: CardContainer
   m_TagString: Untagged
@@ -128,7 +132,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!114 &2005484790519446136
+=======
+--- !u!114 &3122231093077858774
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,6 +145,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 53244505413014504}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: 163e5cf7116441d4f990864fde283b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -147,6 +156,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+=======
+  m_Script: {fileID: 11500000, guid: 7065f788c22573043b34906796617971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+>>>>>>> Stashed changes
 --- !u!65 &7681343739218424657
 BoxCollider:
   m_ObjectHideFlags: 0
