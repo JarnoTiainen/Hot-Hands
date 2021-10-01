@@ -140,7 +140,7 @@ public class WebSocketService : MonoBehaviour
     }
 
     [Button]
-    public static void PlayCardMessage(int cardIndex)
+    public static void PlayCard(int cardIndex)
     {
         PlayCardMessage playCardMessage = new PlayCardMessage(1, cardIndex, 0);
         string playCardMessageJSON = JsonUtility.ToJson(playCardMessage);

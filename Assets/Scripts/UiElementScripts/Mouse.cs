@@ -65,6 +65,7 @@ public class Mouse : MonoBehaviour
         {
             //card is in monster box
             Debug.Log("place card");
+            WebSocketService.PlayCard(handIndex);
             yourMonsterZone.AddNewMonsterCard(heldCard.GetComponent<InGameCard>().GetCardData());
             Debug.Log("Removing card with i " + handIndex);
             Hand.Instance.RemoveCard(handIndex);
