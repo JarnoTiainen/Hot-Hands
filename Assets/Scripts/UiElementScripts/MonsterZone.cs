@@ -34,7 +34,6 @@ public class MonsterZone : MonoBehaviour
 
     public void RepositionMonsterCards()
     {
-        Debug.Log("repos");
         Vector2 cardDim = (Vector2)refCard.GetComponent<BoxCollider>().size;
         float cardRowWidth = monsterCards.Count * cardDim.x + (monsterCards.Count - 1) * gapBetweenCards;
         float firstCardOffsetX = (-cardRowWidth + cardDim.x) / 2;

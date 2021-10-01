@@ -9,7 +9,7 @@ public class WebSocketService : MonoBehaviour
 {
     public int playerNumber;
 
-
+    [SerializeField]private Deck deck;
     public static WebSocketService Instance { get; private set; }
     static WebSocket websocket;
 
@@ -27,6 +27,8 @@ public class WebSocketService : MonoBehaviour
         websocket.OnOpen += () =>
         {
             Debug.Log("Connection open!");
+            deck.SendDeckData();
+            GetPlayerNumber();
         };
 
         websocket.OnError += (e) =>
