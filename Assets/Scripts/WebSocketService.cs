@@ -9,6 +9,7 @@ public class WebSocketService : MonoBehaviour
 {
     public int playerNumber;
 
+
     public static WebSocketService Instance { get; private set; }
     static WebSocket websocket;
 
@@ -57,7 +58,7 @@ public class WebSocketService : MonoBehaviour
                     DrawCardMessage drawCardMessage = new DrawCardMessage((int)data[1][0], data[1][1], (int)data[1][2], (int)data[1][3], (int)data[1][4], data[1][5], data[1][6], data[1][7], data[1][7]);
                     if (drawCardMessage.player == playerNumber)
                     {
-                        UiHand.RevealNewCard(drawCardMessage.cardName);
+                        UiHand.RevealNewCard(drawCardMessage);
                         Debug.Log("You draw " + drawCardMessage.cardName);
                     }
                     else
@@ -126,7 +127,7 @@ public class WebSocketService : MonoBehaviour
     [Button]
     public static void PlayCardMessage(int cardIndex)
     {
-        PlayCardMessage playCardMessage = new PlayCardMessage(1, 3);
+        PlayCardMessage playCardMessage = new PlayCardMessage(1, cardIndex, 0);
         string playCardMessageJSON = JsonUtility.ToJson(playCardMessage);
 
         GameMessage message = new GameMessage("OnMessage", "PLAYCARD", playCardMessageJSON);

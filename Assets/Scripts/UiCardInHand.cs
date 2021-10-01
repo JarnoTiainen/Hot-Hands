@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UiCardInHand : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitElement, IOnClickDownUIElement, IOnClickUpElement
 {
+    public CardData cardData;
+
     public bool mouseOverElement = false;
     private UiCardPreviewManager uiCardPreviewManager;
     private Canvas uiCanvas;
@@ -69,7 +71,7 @@ public class UiCardInHand : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitEle
     public void OnClickElement()
     {
         transform.parent.parent.GetComponent<UiHand>().RemoveVisibleCard(transform.parent.gameObject);
-        mouse.SetNewHeldCard(transform.parent.gameObject);
+        mouse.SetNewHeldCard(transform.parent.gameObject, UiHand.Instance.GetCardIndex(transform.parent.gameObject));
         gameObject.GetComponent<BoxCollider>().enabled = false;
         Debug.Log("Clicked element");
     }
