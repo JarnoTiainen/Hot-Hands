@@ -54,10 +54,10 @@ public class WebSocketService : MonoBehaviour
                     break;
                 case "PLAYCARD":
                     Debug.Log("Message type was PLAYCARD");
-                    PlayCardMessage playCardMessage = JsonUtility.FromJson<PlayCardMessage>(data[1]);
-                    Debug.Log(playCardMessage.cardSource);
+                    DrawCardMessage playCardMessage = JsonUtility.FromJson<DrawCardMessage>(data[1]);
+                    Debug.Log(playCardMessage.player);
 
-                    if(playCardMessage.sender == playerNumber)
+                    if(playCardMessage.player == playerNumber)
                     {
                         Debug.LogWarning("You should add update card stats here :_3");
                     }
