@@ -168,6 +168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 3
   deck: {fileID: 915886160}
+  yourMonsterZone: {fileID: 572842664}
+  enemyMonsterZone: {fileID: 1645449387}
 --- !u!1 &7522968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,6 +1666,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1645449386}
+  - component: {fileID: 1645449387}
   m_Layer: 0
   m_Name: EnemyMonsterZone
   m_TagString: Untagged
@@ -1685,6 +1688,24 @@ Transform:
   m_Father: {fileID: 1956450040}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1645449387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645449385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ede5b71bbe61b4aba372f1480b00d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterCards: []
+  mouse: {fileID: 0}
+  refCard: {fileID: 0}
+  testCard: {fileID: 0}
+  makeRoomEffectDistance: 0
+  gapBetweenCards: 0
 --- !u!1 &1819180710
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,8 @@ public class WebSocketService : MonoBehaviour
     public int playerNumber;
 
     [SerializeField]private Deck deck;
+    [SerializeField] private MonsterZone yourMonsterZone;
+    [SerializeField] private MonsterZone enemyMonsterZone;
     public static WebSocketService Instance { get; private set; }
     static WebSocket websocket;
 
@@ -52,8 +54,18 @@ public class WebSocketService : MonoBehaviour
                     break;
                 case "PLAYCARD":
                     Debug.Log("Message type was PLAYCARD");
-                    PlayCardMessage playCard = new PlayCardMessage((int)data[1][0], data[1][1], data[1][2]);
-                    Debug.Log(playCard.cardSource);
+                    PlayCardMessage playCardMessage = JsonUtility.FromJson<PlayCardMessage>(data[1]);
+                    Debug.Log(playCardMessage.cardSource);
+
+                    if(playCardMessage.sender == playerNumber)
+                    {
+                        Debug.LogWarning("You should add update card stats here :_3");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("You should add update card stats here for enemy :_3");
+                        enemyMonsterZone.AddNewMonsterCard(null);
+                    }
                     break;
                 case "DRAWCARD":
                     Debug.Log("Message type was DRAWCARD");

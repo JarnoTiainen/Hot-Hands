@@ -22,7 +22,7 @@ public class MonsterZone : MonoBehaviour
     {
         GameObject newMonster = Instantiate(testCard);
         newMonster.transform.SetParent(transform);
-        newMonster.GetComponent<InGameCard>().SetNewCardData(cardData);
+        //newMonster.GetComponent<InGameCard>().SetNewCardData(cardData);
         monsterCards.Add(newMonster);
         RepositionMonsterCards();
     }
