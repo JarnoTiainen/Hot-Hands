@@ -8,14 +8,16 @@ public class PlayCardMessage
         DiscardPile, //3
     }
     public CardSource cardSource;
-    public int index;
+    public int handIndex;
     public int sender;
+    public int boardIndex;
 
 
-    public PlayCardMessage(int cardSourceIn = 0, int indexIn = 0, int senderIn = 0)
+    public PlayCardMessage(int cardSource = 0, int handIndex = 0, int boardIndex = 0, int sender = 0)
     {
-        cardSource = (CardSource)cardSourceIn;
-        index = indexIn;
-        sender = senderIn;
+        this.cardSource = (CardSource)cardSource;
+        this.handIndex = handIndex;
+        this.sender = sender;
+        this.boardIndex = boardIndex;
     }
 }

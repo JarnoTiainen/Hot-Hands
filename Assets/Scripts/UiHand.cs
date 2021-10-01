@@ -6,6 +6,8 @@ using TMPro;
 
 public class UiHand : MonoBehaviour
 {
+    public CardList cardList;
+
     public static UiHand Instance { get; private set; }
     private Dictionary<GameObject, GameObject> visibleHandCardPreviews = new Dictionary<GameObject, GameObject>();
     [SerializeField] private static List<GameObject> handCards = new List<GameObject>();
@@ -42,11 +44,30 @@ public class UiHand : MonoBehaviour
         SetNewCardPositions();
     }
 
-    [Button]public static void RevealNewCard(string cardName)
+    [Button]public static void RevealNewCard(DrawCardMessage drawCardMessage)
     {
-        unhandledCards[0].transform.rotation = Quaternion.Euler(0, 0, 0);
-        unhandledCards[0].transform.GetChild(0).GetChild(0).GetComponent<TextMeshPro>().text = cardName;
-        unhandledCards.Remove(unhandledCards[0]);
+        Card card = null;
+        foreach(CardList.ListCard listCard in Instance.cardList.allCards)
+        {
+            if(listCard.name == drawCardMessage.cardName)
+            {
+                card = listCard.card;
+            }
+        }
+        if(card != null)
+        {
+            CardData cardData = new CardData(card.cardSprite, drawCardMessage.cardName, drawCardMessage.cardCost, drawCardMessage.cardValue, (Card.CardType)drawCardMessage.cardType, drawCardMessage.rp, drawCardMessage.lp);
+            unhandledCards[0].transform.GetChild(0).GetComponent<UiCardInHand>().cardData = cardData;
+            unhandledCards[0].transform.rotation = Quaternion.Euler(0, 0, 0);
+            unhandledCards[0].transform.GetChild(0).GetChild(0).GetComponent<TextMeshPro>().text = drawCardMessage.cardName;
+            unhandledCards.Remove(unhandledCards[0]);
+            Debug.Log("cost " + cardData.cost);
+            Debug.Log("value " + cardData.value);
+        }
+        else
+        {
+            Debug.LogError("Card with name: " + drawCardMessage.cardName + " was not found from Unity side databse");
+        }
     }
     [Button] public void RemoveCard(int CardIndex = 0)
     {
@@ -161,5 +182,14 @@ public class UiHand : MonoBehaviour
             UiCardPreviewManager.Instance.HideCardPreview(preview);
             visibleHandCardPreviews.Remove(hoveredCard);
         }
+    }
+    public int GetCardIndex(GameObject card)
+    {
+        for(int i = 0; i < handCards.Count; i++)
+        {
+            if (handCards[i] == card) return i;
+        }
+        Debug.LogError("Picked up card was not found from hand card list");
+        return -1;
     }
 }

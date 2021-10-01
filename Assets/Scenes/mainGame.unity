@@ -650,6 +650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4462ac4a804639646ac0d3efbe042676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yourMonsterZone: {fileID: 572842664}
   heldCard: {fileID: 0}
   thisCamera: {fileID: 2091759307}
   monsterHitBox: {x: 0.24, y: 0.1}
@@ -1153,6 +1154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b51445216262c4aaaf0a758cbf3875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
   cardBase: {fileID: 53244505413014504, guid: 0fa9aaa0a137f9541825a074788ab77e, type: 3}
   gapBetweenCards: 0
   cardScaleInHand: 1

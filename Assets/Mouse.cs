@@ -7,8 +7,9 @@ public class Mouse : MonoBehaviour
 {
     public static Mouse Instance { get; private set; }
 
-
+    public MonsterZone yourMonsterZone;
     public GameObject heldCard;
+    private int handIndex;
     public Camera thisCamera;
     [SerializeField] private Vector2 monsterHitBox;
     public Vector2 mousePosInWorld;
@@ -47,8 +48,9 @@ public class Mouse : MonoBehaviour
         }
     }
 
-    [Button] public void SetNewHeldCard(GameObject newCard)
+    [Button] public void SetNewHeldCard(GameObject newCard, int handIndex)
     {
+        this.handIndex = handIndex;
         heldCard = newCard;
         newCard.transform.SetParent(gameObject.transform);
         newCard.transform.localPosition = Vector3.zero;
@@ -60,6 +62,9 @@ public class Mouse : MonoBehaviour
         {
             //card is in monster box
             Debug.Log("place card");
+            yourMonsterZone.AddNewMonsterCard();
+            Debug.Log("Removing card with i " + handIndex);
+            UiHand.Instance.RemoveCard(handIndex);
         }
         else
         {
