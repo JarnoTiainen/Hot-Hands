@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7355202}
   - component: {fileID: 7355201}
-  - component: {fileID: 7355200}
   - component: {fileID: 7355203}
   m_Layer: 0
   m_Name: GameEventManager
@@ -142,18 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7355200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7355199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72386069893cb964994216ad2bedfa3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7355201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1157,11 +1144,6 @@ MonoBehaviour:
   cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
   cardBase: {fileID: 53244505413014504, guid: 0fa9aaa0a137f9541825a074788ab77e, type: 3}
   gapBetweenCards: 0
-  cardScaleInHand: 1
-  hoveredCardScaleMultiplier: 1
-  hoveredCardLiftAmountY: 0
-  hoveredCardLiftAmountZ: 0.01
-  scaleTransitionTime: 0
 --- !u!1 &1449722949
 GameObject:
   m_ObjectHideFlags: 0

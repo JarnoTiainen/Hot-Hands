@@ -28,7 +28,7 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
     public void OnClickElement()
     {
         WebSocketService.DrawCard();
-        UiHand.AddNewCard();
+        Hand.AddNewCard();
     }
 
 

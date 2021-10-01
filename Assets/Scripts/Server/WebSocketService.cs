@@ -58,7 +58,7 @@ public class WebSocketService : MonoBehaviour
                     DrawCardMessage drawCardMessage = new DrawCardMessage((int)data[1][0], data[1][1], (int)data[1][2], (int)data[1][3], (int)data[1][4], data[1][5], data[1][6], data[1][7], data[1][7]);
                     if (drawCardMessage.player == playerNumber)
                     {
-                        UiHand.RevealNewCard(drawCardMessage);
+                        Hand.RevealNewCard(drawCardMessage);
                         Debug.Log("You draw " + drawCardMessage.cardName);
                     }
                     else

@@ -14,13 +14,13 @@ public class Mouse : MonoBehaviour
     [SerializeField] private Vector2 monsterHitBox;
     public Vector2 mousePosInWorld;
     public GameObject markerPrefab;
-    private UiHand uiHand;
+    private Hand uiHand;
     [SerializeField] private bool debuggingOn = false;
 
     private void Awake()
     {
         Instance = gameObject.GetComponent<Mouse>();
-        uiHand = GameObject.Find("Hand").GetComponent<UiHand>();
+        uiHand = GameObject.Find("Hand").GetComponent<Hand>();
     }
 
     private void Start()
@@ -64,7 +64,7 @@ public class Mouse : MonoBehaviour
             Debug.Log("place card");
             yourMonsterZone.AddNewMonsterCard();
             Debug.Log("Removing card with i " + handIndex);
-            UiHand.Instance.RemoveCard(handIndex);
+            Hand.Instance.RemoveCard(handIndex);
         }
         else
         {
