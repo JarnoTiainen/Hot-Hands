@@ -74,7 +74,7 @@ public class Hand : MonoBehaviour
         if (card != null)
         {
             CardData cardData = new CardData(card.cardSprite, drawCardMessage.cardName, drawCardMessage.cardCost, drawCardMessage.cardValue, (Card.CardType)drawCardMessage.cardType, drawCardMessage.rp, drawCardMessage.lp);
-            unhandledCards[0].transform.GetChild(0).GetComponent<UiCardInHand>().cardData = cardData;
+            unhandledCards[0].transform.GetChild(0).GetComponent<HandCard>().cardData = cardData;
             unhandledCards[0].transform.rotation = Quaternion.Euler(0, 0, 0);
             unhandledCards[0].transform.GetChild(0).GetChild(0).GetComponent<TextMeshPro>().text = drawCardMessage.cardName;
             unhandledCards.Remove(unhandledCards[0]);
