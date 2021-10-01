@@ -44,6 +44,7 @@ public class Mouse : MonoBehaviour
         }
         if(Input.GetMouseButtonUp(0) && heldCard)
         {
+            Debug.Log("placing down");
             ValuatePlaceCard();
         }
     }
@@ -58,6 +59,8 @@ public class Mouse : MonoBehaviour
 
     public void ValuatePlaceCard()
     {
+        Debug.Log("valuating");
+
         if (Mathf.Abs(mousePosInWorld.x) < monsterHitBox.x && Mathf.Abs(mousePosInWorld.y) < monsterHitBox.y)
         {
             //card is in monster box
