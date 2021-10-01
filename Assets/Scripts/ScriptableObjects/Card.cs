@@ -16,6 +16,11 @@ public class Card : ScriptableObject
     {
         Trap, Aura, Counter, Quick
     }
+    public enum AttackDirection
+    {
+        Default, Left, Right
+    }
+
     public enum MonsterTag
     {
         Warrior, Dragon
@@ -50,13 +55,14 @@ public class Card : ScriptableObject
     [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] [ShowIf("cardType", CardType.Monster)] public List<MonsterTag> monsterTags;
     [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] [ShowIf("cardType", CardType.Monster)] public int rp;
     [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] [ShowIf("cardType", CardType.Monster)] public int lp;
+    [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] [ShowIf("cardType", CardType.Monster)] public AttackDirection attackDirection;
 
     [SerializeField] public List<Enchantment> enchantments = new List<Enchantment>();
 
 
     [Button] public string CreateCardJSON()
     {
-        CardJSON cardJSON = new CardJSON(cardName, cost, value, cardType, spellTags, monsterTags, rp, lp, enchantments);
+        CardJSON cardJSON = new CardJSON(cardName, cost, value, cardType, spellTags, monsterTags, rp, lp, attackDirection, enchantments);
         string cardJSONstring = JsonUtility.ToJson(cardJSON);
         Debug.Log(cardJSONstring);
         return cardJSONstring;

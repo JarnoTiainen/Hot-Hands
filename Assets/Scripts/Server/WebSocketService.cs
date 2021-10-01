@@ -162,4 +162,12 @@ public class WebSocketService : MonoBehaviour
         GameMessage message = new GameMessage("OnMessage", "SETDECK", deckJson);
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
+
+    [Button]public static void Attack(int fieldIndex)
+    {
+        Debug.Log("Send deck data");
+
+        GameMessage message = new GameMessage("OnMessage", "ATTACK", fieldIndex.ToString());
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
 }

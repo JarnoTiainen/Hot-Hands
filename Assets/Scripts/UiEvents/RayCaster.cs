@@ -22,10 +22,10 @@ public class RayCaster : MonoBehaviour
         {
             if(target)
             {
-                
                 newTarget = hit.transform.gameObject;
                 if (target != hit.transform.gameObject)
                 {
+                    Debug.Log("New Target");
                     NewTarget(target, hit.transform.gameObject);
                 }
             }
@@ -65,13 +65,15 @@ public class RayCaster : MonoBehaviour
 
     private void NewTarget(GameObject oldTarget, GameObject newTarget)
     {
-        if (newTarget.GetComponent<IOnHoverEnterElement>() != null)
-        {
-            newTarget.GetComponent<IOnHoverEnterElement>().OnHoverEnter();
-        }
         if (oldTarget)
         {
             if (oldTarget.GetComponent<IOnHoverExitElement>() != null) oldTarget.GetComponent<IOnHoverExitElement>().OnHoverExit();
         }
+
+        if (newTarget.GetComponent<IOnHoverEnterElement>() != null)
+        {
+            newTarget.GetComponent<IOnHoverEnterElement>().OnHoverEnter();
+        }
+        
     }
 }

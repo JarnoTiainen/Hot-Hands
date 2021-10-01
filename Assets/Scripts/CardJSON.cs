@@ -10,9 +10,10 @@ public class CardJSON
     public List<Card.MonsterTag> monsterTags;
     public int rp;
     public int lp;
+    public Card.AttackDirection attackDirection;
     public List<Enchantment> enchantments;
 
-    public CardJSON(string name, int cost, int value, Card.CardType cardType, List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags, int rp, int lp, List<Enchantment> enchantments)
+    public CardJSON(string name, int cost, int value, Card.CardType cardType, List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags, int rp, int lp, Card.AttackDirection attackDirection, List<Enchantment> enchantments)
     {
         this.name = name;
         this.cost = cost;
@@ -22,6 +23,7 @@ public class CardJSON
         this.monsterTags = monsterTags;
         this.rp = rp;
         this.lp = lp;
+        this.attackDirection = attackDirection;
         this.enchantments = enchantments;
     }
 
