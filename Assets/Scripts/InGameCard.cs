@@ -4,9 +4,9 @@ using TMPro;
 public class InGameCard : MonoBehaviour
 {
     [SerializeField] private CardData cardData;
-    [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI cost;
-    [SerializeField] private TextMeshProUGUI value;
+    [SerializeField] private TextMeshPro nameText;
+    [SerializeField] private TextMeshPro cost;
+    [SerializeField] private TextMeshPro value;
 
 
     public void SetNewCardData(CardData cardData)

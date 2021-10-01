@@ -15,7 +15,7 @@ public class MonsterZone : MonoBehaviour
 
     private void Awake()
     {
-        refCard = refCard.transform.GetChild(0).gameObject;
+
     }
 
     [Button]public void AddNewMonsterCard(CardData cardData)

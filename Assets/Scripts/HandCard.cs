@@ -11,18 +11,18 @@ public class HandCard : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitElement
 
     public void OnHoverEnter()
     {
-        Hand.Instance.ShowCardTooltip(transform.parent.gameObject);
+        Hand.Instance.ShowCardTooltip(gameObject);
     }
 
     public void OnHoverExit()
     {
-        Hand.Instance.HideCardTooltip(transform.parent.gameObject);
+        Hand.Instance.HideCardTooltip(gameObject);
     }
 
     public void OnClickElement()
     {
-        transform.parent.parent.GetComponent<Hand>().RemoveVisibleCard(transform.parent.gameObject);
-        mouse.SetNewHeldCard(transform.parent.gameObject, Hand.Instance.GetCardIndex(transform.parent.gameObject));
+        transform.parent.GetComponent<Hand>().RemoveVisibleCard(gameObject);
+        mouse.SetNewHeldCard(gameObject, Hand.Instance.GetCardIndex(gameObject));
         gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 }

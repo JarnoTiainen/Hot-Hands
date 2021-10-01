@@ -17,7 +17,7 @@ public class Hand : MonoBehaviour
     private static List<GameObject> unhandledCards = new List<GameObject>();
 
 
-    [SerializeField] private GameObject cardBase;
+    [SerializeField] private GameObject handCard;
     [SerializeField] private float gapBetweenCards;
 
     private Canvas uiCanvas;
@@ -53,7 +53,7 @@ public class Hand : MonoBehaviour
     //instanciate and rotate card facedown
     private static GameObject InstantiateNewCard()
     {
-        GameObject newCard = Instantiate(Instance.cardBase, Instance.gameObject.transform);
+        GameObject newCard = Instantiate(Instance.handCard, Instance.gameObject.transform);
         //newCard.transform.SetParent(Instance.gameObject.transform);
         //newCard.transform.localPosition = new Vector3(0, 0, 0);
         newCard.transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -75,7 +75,7 @@ public class Hand : MonoBehaviour
             CardData cardData = new CardData(card.cardSprite, drawCardMessage.cardName, drawCardMessage.cardCost, drawCardMessage.cardValue, (Card.CardType)drawCardMessage.cardType, drawCardMessage.rp, drawCardMessage.lp);
             unhandledCards[0].GetComponent<InGameCard>().SetNewCardData(cardData);
             unhandledCards[0].transform.rotation = Quaternion.Euler(0, 0, 0);
-            unhandledCards[0].transform.GetChild(0).GetChild(0).GetComponent<TextMeshPro>().text = drawCardMessage.cardName;
+            unhandledCards[0].transform.GetChild(1).GetComponent<TextMeshPro>().text = drawCardMessage.cardName;
             unhandledCards.Remove(unhandledCards[0]);
         }
         else
@@ -97,7 +97,7 @@ public class Hand : MonoBehaviour
     //sets new card positions in hand
     private static void SetNewCardPositions()
     {
-        float inGameWidth = Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x;
+        float inGameWidth = Instance.handCard.GetComponent<BoxCollider>().size.x;
         float totalCardsWidth = inGameWidth * visibleHandCards.Count + Instance.gapBetweenCards * (visibleHandCards.Count - 1);
         float newPosX;
         float firstCardOffsetX = (-totalCardsWidth + inGameWidth) / 2;
@@ -168,6 +168,7 @@ public class Hand : MonoBehaviour
 
     public int GetCardIndex(GameObject card)
     {
+        Debug.Log("count " + handCards.Count);
         for(int i = 0; i < handCards.Count; i++)
         {
             if (handCards[i] == card) return i;

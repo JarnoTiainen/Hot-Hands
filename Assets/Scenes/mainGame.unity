@@ -1129,7 +1129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
-  cardBase: {fileID: 53244505413014504, guid: 0fa9aaa0a137f9541825a074788ab77e, type: 3}
+  deckObj: {fileID: 0}
+  handCard: {fileID: 7611825709596717884, guid: 9f8e5799bc8e632418cb743be7732cc0, type: 3}
   gapBetweenCards: 0
 --- !u!1 &1449722949
 GameObject:
