@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+
+[Serializable]
 public class CardData
 {
     //This class is for moving data with cards from hand to field.

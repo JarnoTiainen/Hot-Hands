@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class HandCard : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitElement, IOnClickDownUIElement
 {
-    public CardData cardData;
     public Mouse mouse;
 
     private void Awake()

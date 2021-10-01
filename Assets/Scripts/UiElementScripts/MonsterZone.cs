@@ -18,10 +18,11 @@ public class MonsterZone : MonoBehaviour
         refCard = refCard.transform.GetChild(0).gameObject;
     }
 
-    [Button]public void AddNewMonsterCard()
+    [Button]public void AddNewMonsterCard(CardData cardData)
     {
         GameObject newMonster = Instantiate(testCard);
         newMonster.transform.SetParent(transform);
+        newMonster.GetComponent<InGameCard>().SetNewCardData(cardData);
         monsterCards.Add(newMonster);
         RepositionMonsterCards();
     }
