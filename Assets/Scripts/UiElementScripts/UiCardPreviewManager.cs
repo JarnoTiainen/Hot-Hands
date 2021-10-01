@@ -33,21 +33,21 @@ public class UiCardPreviewManager : MonoBehaviour
         cardPreviewDimensions = new Vector2(cardModelSize.x * cardPreviewDimensions.x, cardModelSize.z * cardPreviewDimensions.y);
         Vector2 uiCanvasDimensions = uiCanvas.GetComponent<RectTransform>().sizeDelta;
 
-        if (pos.x > uiCanvasDimensions.x / 2 - cardPreviewDimensions.x / 2)
+        if (pos.x > (uiCanvasDimensions.x - cardPreviewDimensions.x) / 2)
         {
-            pos.x = uiCanvasDimensions.x / 2 - cardPreviewDimensions.x / 2;
+            pos.x = (uiCanvasDimensions.x - cardPreviewDimensions.x) / 2;
         }
-        if (pos.x < -uiCanvasDimensions.x / 2 + cardPreviewDimensions.x / 2)
+        if (pos.x < (-uiCanvasDimensions.x + cardPreviewDimensions.x) / 2)
         {
-            pos.x = -uiCanvasDimensions.x / 2 + cardPreviewDimensions.x / 2;
+            pos.x = (-uiCanvasDimensions.x + cardPreviewDimensions.x) / 2;
         }
-        if (pos.y > uiCanvasDimensions.y / 2 - cardPreviewDimensions.y / 2)
+        if (pos.y > (uiCanvasDimensions.y - cardPreviewDimensions.y) / 2)
         {
-            pos.y = uiCanvasDimensions.y / 2 - cardPreviewDimensions.y / 2;
+            pos.y = (uiCanvasDimensions.y - cardPreviewDimensions.y) / 2;
         }
-        if (pos.y < -uiCanvasDimensions.y / 2 + cardPreviewDimensions.y / 2)
+        if (pos.y < (-uiCanvasDimensions.y + cardPreviewDimensions.y) / 2)
         {
-            pos.y = -uiCanvasDimensions.y / 2 + cardPreviewDimensions.y/2;
+            pos.y = (-uiCanvasDimensions.y + cardPreviewDimensions.y) / 2;
         }
         rectTransform.localPosition = pos;
         newCardPreview.GetComponent<UiCardPreview>().startPos = pos;
