@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 
 public class MonsterZone : MonoBehaviour
 {
+    [SerializeField] private CardList cardList;
     public List<GameObject> monsterCards = new List<GameObject>();
     [SerializeField] private Mouse mouse;
     [SerializeField] private GameObject refCard;
@@ -85,6 +86,12 @@ public class MonsterZone : MonoBehaviour
         {
             Debug.Log("cannot attack with opponents card");
         }
+    }
+
+    public void UpdateCardData(DrawCardMessage drawCardMessage)
+    {
+        //for now updates the card data of last played card
+        monsterCards[monsterCards.Count-1].GetComponent<InGameCard>().SetNewCardData(cardList.GetCardData(drawCardMessage));
     }
 
 

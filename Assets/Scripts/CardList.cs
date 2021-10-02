@@ -49,6 +49,35 @@ public class CardList : ScriptableObject
         }
     }
 
+    public Card GetCardData(string cardName)
+    {
+        Card card = null;
+        foreach (CardList.ListCard listCard in allCards)
+        {
+            if (listCard.name == cardName)
+            {
+                card = listCard.card;
+            }
+        }
+        if (card != null)
+        {
+            return card;
+        }
+        else
+        {
+            Debug.LogError("Card with name: " + cardName + " was not found from Unity side databse");
+            return null;
+        }
+    }
+
+    public CardData GetCardData(DrawCardMessage drawCardMessage)
+    {
+        Card card = GetCardData(drawCardMessage.cardName);
+        CardData cardData = new CardData(card.cardSprite, drawCardMessage.cardName, drawCardMessage.cardCost, drawCardMessage.cardValue, card.cardType, drawCardMessage.rp, drawCardMessage.lp);
+
+        return cardData;
+    }
+
 
     [Serializable]
     public class ListCard

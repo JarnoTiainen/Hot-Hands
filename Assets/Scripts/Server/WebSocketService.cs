@@ -60,11 +60,13 @@ public class WebSocketService : MonoBehaviour
                     if(playCardMessage.player == playerNumber)
                     {
                         Debug.LogWarning("You should add update card stats here :_3");
+                        yourMonsterZone.UpdateCardData(playCardMessage);
                     }
                     else
                     {
                         Debug.LogWarning("You should add update card stats here for enemy :_3");
                         enemyMonsterZone.AddNewMonsterCard(null);
+                        enemyMonsterZone.UpdateCardData(playCardMessage);
                     }
                     break;
                 case "DRAWCARD":
