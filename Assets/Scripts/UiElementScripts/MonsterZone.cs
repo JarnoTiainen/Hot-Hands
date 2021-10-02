@@ -33,6 +33,7 @@ public class MonsterZone : MonoBehaviour
         GameObject deadMonster = monsterCards[index];
         monsterCards.Remove(deadMonster);
         GameObject.Destroy(deadMonster);
+        RepositionMonsterCards();
     }
 
     public void RepositionMonsterCards()
