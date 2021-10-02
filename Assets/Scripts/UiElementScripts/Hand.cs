@@ -62,25 +62,13 @@ public class Hand : MonoBehaviour
 
     [Button] public static void RevealNewCard(DrawCardMessage drawCardMessage)
     {
-        Card card = null;
-        foreach (CardList.ListCard listCard in Instance.cardList.allCards)
+        CardData cardData = Instance.cardList.GetCardData(drawCardMessage);
+        if(cardData != null)
         {
-            if (listCard.name == drawCardMessage.cardName)
-            {
-                card = listCard.card;
-            }
-        }
-        if (card != null)
-        {
-            CardData cardData = new CardData(card.cardSprite, drawCardMessage.cardName, drawCardMessage.cardCost, drawCardMessage.cardValue, (Card.CardType)drawCardMessage.cardType, drawCardMessage.rp, drawCardMessage.lp);
             unhandledCards[0].GetComponent<InGameCard>().SetNewCardData(cardData);
             unhandledCards[0].transform.rotation = Quaternion.Euler(0, 0, 0);
             unhandledCards[0].transform.GetChild(1).GetComponent<TextMeshPro>().text = drawCardMessage.cardName;
             unhandledCards.Remove(unhandledCards[0]);
-        }
-        else
-        {
-            Debug.LogError("Card with name: " + drawCardMessage.cardName + " was not found from Unity side databse");
         }
     }
 
@@ -168,7 +156,6 @@ public class Hand : MonoBehaviour
 
     public int GetCardIndex(GameObject card)
     {
-        Debug.Log("count " + handCards.Count);
         for(int i = 0; i < handCards.Count; i++)
         {
             if (handCards[i] == card) return i;

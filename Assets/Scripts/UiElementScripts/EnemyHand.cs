@@ -39,9 +39,7 @@ public class EnemyHand : MonoBehaviour
             {
                 float inGameWidth = Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x;
                 float totalCardsWidth = TotalCardsWidth();
-                Debug.Log(totalCardsWidth);
                 float cardPosX = -totalCardsWidth / 2 + inGameWidth / 2;
-                Debug.Log(cardPosX);
                 unhandledCards[i].transform.localPosition = new Vector3(cardPosX, unhandledCards[i].transform.localPosition.y, unhandledCards[i].transform.localPosition.z);
             }
             else

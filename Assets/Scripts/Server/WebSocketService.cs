@@ -14,6 +14,7 @@ public class WebSocketService : MonoBehaviour
     [SerializeField] private MonsterZone enemyMonsterZone;
     public static WebSocketService Instance { get; private set; }
     static WebSocket websocket;
+    [SerializeField] private bool debuggerModeOn = false;
 
     private void Awake()
     {
@@ -46,16 +47,15 @@ public class WebSocketService : MonoBehaviour
         websocket.OnMessage += (bytes) =>
         {
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
-            Debug.Log(data);
+            Debug.Log("server message: " + data);
             switch((string)data[0])
             {
                 case "GETSIDE":
                     playerNumber = int.Parse(data[1]);
                     break;
                 case "PLAYCARD":
-                    Debug.Log("Message type was PLAYCARD");
+                    if(debuggerModeOn) Debug.Log("Message type was PLAYCARD");
                     DrawCardMessage playCardMessage = JsonUtility.FromJson<DrawCardMessage>(data[1]);
-                    Debug.Log(playCardMessage.player);
 
                     if(playCardMessage.player == playerNumber)
                     {
@@ -70,26 +70,24 @@ public class WebSocketService : MonoBehaviour
                     }
                     break;
                 case "DRAWCARD":
-                    Debug.Log("Message type was DRAWCARD");
+                    if (debuggerModeOn) Debug.Log("Message type was DRAWCARD");
 
                     DrawCardMessage drawCardMessage = JsonUtility.FromJson<DrawCardMessage>(data[1]);
                     if (drawCardMessage.player == playerNumber)
                     {
                         Hand.RevealNewCard(drawCardMessage);
-                        Debug.Log("You draw " + drawCardMessage.cardName);
                     }
                     else
                     {
                         EnemyHand.AddNewCard();
-                        Debug.Log("Opponent draws a card");
                     }
                     break;
                 case "ATTACK":
-                    Debug.Log("Message type was ATTACK");
+                    if (debuggerModeOn) Debug.Log("Message type was ATTACK");
                     AttackEventMessage attackEventMessage = JsonUtility.FromJson<AttackEventMessage>(data[1]);
                     attackEventMessage.attackerValues = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.attacker);
                     attackEventMessage.targetValues = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.target);
-                    Debug.Log("attacker lp: " + attackEventMessage.attackerValues.lp + " rp: " + attackEventMessage.attackerValues.rp + " target lp: " + attackEventMessage.targetValues.lp + " rp: " + attackEventMessage.targetValues.rp);
+                    if(debuggerModeOn) Debug.Log("attacker lp: " + attackEventMessage.attackerValues.lp + " rp: " + attackEventMessage.attackerValues.rp + " target lp: " + attackEventMessage.targetValues.lp + " rp: " + attackEventMessage.targetValues.rp);
 
 
                     if (attackEventMessage.player == playerNumber)

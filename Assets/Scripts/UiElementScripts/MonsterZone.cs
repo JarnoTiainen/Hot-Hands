@@ -30,7 +30,6 @@ public class MonsterZone : MonoBehaviour
 
     public void RemoveMonsterCard(int index)
     {
-        Debug.Log("monster " + index + " died");
         GameObject deadMonster = monsterCards[index];
         monsterCards.Remove(deadMonster);
         GameObject.Destroy(deadMonster);
