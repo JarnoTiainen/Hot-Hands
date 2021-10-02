@@ -179,7 +179,7 @@ public class WebSocketService : MonoBehaviour
 
     [Button]public static void Attack(int fieldIndex)
     {
-        Debug.Log("Send deck data " + fieldIndex);
+        Debug.Log("Attacked with id " + fieldIndex);
 
         GameMessage message = new GameMessage("OnMessage", "ATTACK", fieldIndex.ToString());
         SendWebSocketMessage(JsonUtility.ToJson(message));
