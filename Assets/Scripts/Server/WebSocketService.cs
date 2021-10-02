@@ -84,6 +84,23 @@ public class WebSocketService : MonoBehaviour
                     break;
                 case "ATTACK":
                     Debug.Log("Message type was ATTACK");
+                    AttackEventMessage attackEventMessage = JsonUtility.FromJson<AttackEventMessage>(data[1]);
+                    attackEventMessage.attackerValues = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.attacker);
+                    attackEventMessage.targetValues = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.target);
+                    Debug.Log("attacker lp: " + attackEventMessage.attackerValues.lp + " rp: " + attackEventMessage.attackerValues.rp + " target lp: " + attackEventMessage.targetValues.lp + " rp: " + attackEventMessage.targetValues.rp);
+
+
+                    if (attackEventMessage.player == playerNumber)
+                    {
+                        if (attackEventMessage.attackerValues.lp <= 0 || attackEventMessage.attackerValues.rp <= 0) yourMonsterZone.RemoveMonsterCard(attackEventMessage.attackerValues.index);
+                        if (attackEventMessage.targetValues.lp <= 0 || attackEventMessage.targetValues.rp <= 0) enemyMonsterZone.RemoveMonsterCard(attackEventMessage.targetValues.index);
+                    }
+                    else
+                    {
+                        if (attackEventMessage.attackerValues.lp <= 0 || attackEventMessage.attackerValues.rp <= 0) enemyMonsterZone.RemoveMonsterCard(attackEventMessage.attackerValues.index);
+                        if (attackEventMessage.targetValues.lp <= 0 || attackEventMessage.targetValues.rp <= 0) yourMonsterZone.RemoveMonsterCard(attackEventMessage.targetValues.index);
+                    }
+
                     break;
                 case "SAVECARD":
                     Debug.Log("Saved card " + data[1][0] + " succesfully");
