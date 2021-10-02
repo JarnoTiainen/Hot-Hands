@@ -130,12 +130,12 @@ public class Hand : MonoBehaviour
     }
 
     //returns card back to hand
-    public void ReturnVisibleCard(GameObject card)
+    public void ReturnVisibleCard(GameObject card, int handIndex)
     {
         card.GetComponent<BoxCollider>().enabled = true;
         card.transform.SetParent(transform);
         card.transform.localPosition = Vector3.zero;
-        visibleHandCards.Add(card);
+        visibleHandCards.Insert(handIndex, card);
         SetNewCardPositions();
         
     }

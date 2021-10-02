@@ -72,7 +72,7 @@ public class Mouse : MonoBehaviour
         }
         else
         {
-            uiHand.ReturnVisibleCard(heldCard);
+            uiHand.ReturnVisibleCard(heldCard, handIndex);
             heldCard = null;
         }
     }

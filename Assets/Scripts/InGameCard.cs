@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class InGameCard : MonoBehaviour
+public class InGameCard : MonoBehaviour, IOnClickDownUIElement
 {
     [SerializeField] private CardData cardData;
     [SerializeField] private TextMeshPro nameText;
@@ -20,5 +20,10 @@ public class InGameCard : MonoBehaviour
     public CardData GetCardData()
     {
         return cardData;
+    }
+
+    public void OnClickElement()
+    {
+        transform.parent.GetComponent<MonsterZone>().AttackWithCard(gameObject);
     }
 }

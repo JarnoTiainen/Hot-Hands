@@ -63,6 +63,19 @@ public class MonsterZone : MonoBehaviour
         }
     }
 
+    public void AttackWithCard(GameObject card)
+    {
+        for(int i = 0; i < monsterCards.Count; i++)
+        {
+            if(card == monsterCards[i])
+            {
+                WebSocketService.Attack(i);
+                return;
+            }
+        }
+        Debug.LogError("No card with this index on field!");
+    }
+
 
     //Give this animation later
     public void MakeRoom()
