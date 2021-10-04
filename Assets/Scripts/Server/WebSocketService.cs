@@ -60,13 +60,13 @@ public class WebSocketService : MonoBehaviour
                     if(playCardMessage.player == playerNumber)
                     {
                         Debug.LogWarning("You should add update card stats here :_3");
-                        yourMonsterZone.UpdateCardData(playCardMessage);
+                        yourMonsterZone.UpdateCardData(true, playCardMessage);
                     }
                     else
                     {
                         Debug.LogWarning("You should add update card stats here for enemy :_3");
                         enemyMonsterZone.AddNewMonsterCard(null);
-                        enemyMonsterZone.UpdateCardData(playCardMessage);
+                        enemyMonsterZone.UpdateCardData(false, playCardMessage);
                     }
                     break;
                 case "DRAWCARD":
@@ -92,16 +92,16 @@ public class WebSocketService : MonoBehaviour
 
                     if (attackEventMessage.player == playerNumber)
                     {
-                        yourMonsterZone.UpdateCardData(attackEventMessage.attackerValues.index, attackEventMessage.attackerValues.lp, attackEventMessage.attackerValues.rp);
-                        enemyMonsterZone.UpdateEnemyCardData(attackEventMessage.targetValues.index, attackEventMessage.targetValues.lp, attackEventMessage.targetValues.rp);
+                        yourMonsterZone.UpdateCardData(true, attackEventMessage.attackerValues.index, attackEventMessage.attackerValues.lp, attackEventMessage.attackerValues.rp);
+                        enemyMonsterZone.UpdateCardData(false, attackEventMessage.targetValues.index, attackEventMessage.targetValues.lp, attackEventMessage.targetValues.rp);
                         if (attackEventMessage.attackerValues.lp <= 0 || attackEventMessage.attackerValues.rp <= 0) yourMonsterZone.RemoveMonsterCard(attackEventMessage.attackerValues.index);
                         if (attackEventMessage.targetValues.lp <= 0 || attackEventMessage.targetValues.rp <= 0) enemyMonsterZone.RemoveEnemyMonsterCard(attackEventMessage.targetValues.index);
                         
                     }
                     else
                     {
-                        enemyMonsterZone.UpdateEnemyCardData(attackEventMessage.attackerValues.index, attackEventMessage.attackerValues.lp, attackEventMessage.attackerValues.rp);
-                        yourMonsterZone.UpdateCardData(attackEventMessage.targetValues.index, attackEventMessage.targetValues.lp, attackEventMessage.targetValues.rp);
+                        enemyMonsterZone.UpdateCardData(false, attackEventMessage.attackerValues.index, attackEventMessage.attackerValues.lp, attackEventMessage.attackerValues.rp);
+                        yourMonsterZone.UpdateCardData(true, attackEventMessage.targetValues.index, attackEventMessage.targetValues.lp, attackEventMessage.targetValues.rp);
                         if (attackEventMessage.attackerValues.lp <= 0 || attackEventMessage.attackerValues.rp <= 0) enemyMonsterZone.RemoveEnemyMonsterCard(attackEventMessage.attackerValues.index);
                         if (attackEventMessage.targetValues.lp <= 0 || attackEventMessage.targetValues.rp <= 0) yourMonsterZone.RemoveMonsterCard(attackEventMessage.targetValues.index);
                     }

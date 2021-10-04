@@ -102,21 +102,23 @@ public class MonsterZone : MonoBehaviour
         }
     }
 
-    public void UpdateCardData(DrawCardMessage drawCardMessage)
+    public void UpdateCardData(bool isYourCard, DrawCardMessage drawCardMessage)
     {
         //for now updates the card data of last played card
-        monsterCards[monsterCards.Count-1].GetComponent<InGameCard>().SetNewCardData(cardList.GetCardData(drawCardMessage));
+        monsterCards[monsterCards.Count-1].GetComponent<InGameCard>().SetNewCardData(isYourCard, cardList.GetCardData(drawCardMessage));
     }
-    public void UpdateCardData(int index, int lp, int rp)
+    public void UpdateCardData(bool isYourCard, int index, int lp, int rp)
     {
-        monsterCards[index].GetComponent<InGameCard>().SetStatLp(lp);
-        monsterCards[index].GetComponent<InGameCard>().SetStatRp(rp);
-    }
-
-    public void UpdateEnemyCardData(int index, int lp, int rp)
-    {
-        monsterCards[monsterCards.Count - 1 - index].GetComponent<InGameCard>().SetStatLp(lp);
-        monsterCards[monsterCards.Count - 1 - index].GetComponent<InGameCard>().SetStatRp(rp);
+        if(isYourCard)
+        {
+            monsterCards[index].GetComponent<InGameCard>().SetStatLp(lp);
+            monsterCards[index].GetComponent<InGameCard>().SetStatRp(rp);
+        }
+        else
+        {
+            monsterCards[monsterCards.Count - 1 - index].GetComponent<InGameCard>().SetStatLp(rp);
+            monsterCards[monsterCards.Count - 1 - index].GetComponent<InGameCard>().SetStatRp(lp);
+        }
     }
 
 
