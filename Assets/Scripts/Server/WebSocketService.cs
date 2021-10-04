@@ -47,7 +47,7 @@ public class WebSocketService : MonoBehaviour
         websocket.OnMessage += (bytes) =>
         {
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
-            Debug.Log("server message: " + data);
+            Debug.Log("server message: " + data[1]);
             switch((string)data[0])
             {
                 case "GETSIDE":
@@ -166,7 +166,7 @@ public class WebSocketService : MonoBehaviour
     {
         Debug.Log("Playing card to index " + boardIndex + " from " + cardIndex);
 
-        PlayCardMessage playCardMessage = new PlayCardMessage(1, cardIndex, Instance.yourMonsterZone.monsterCards.Count);
+        PlayCardMessage playCardMessage = new PlayCardMessage(1, cardIndex, boardIndex);
         string playCardMessageJSON = JsonUtility.ToJson(playCardMessage);
 
         GameMessage message = new GameMessage("OnMessage", "PLAYCARD", playCardMessageJSON);
