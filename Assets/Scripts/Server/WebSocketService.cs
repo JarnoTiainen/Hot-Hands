@@ -47,7 +47,7 @@ public class WebSocketService : MonoBehaviour
         websocket.OnMessage += (bytes) =>
         {
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
-            Debug.Log("server message: " + data[1]);
+            Debug.Log("server message: " + data[0] + " " + data[1]);
             switch((string)data[0])
             {
                 case "GETSIDE":
