@@ -162,7 +162,7 @@ public class WebSocketService : MonoBehaviour
     }
 
     [Button]
-    public static void PlayCard(int cardIndex)
+    public static void PlayCard(int cardIndex, int boardIndex)
     {
         Debug.Log("Playing card to index " + cardIndex);
 

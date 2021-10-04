@@ -62,7 +62,8 @@ public class Mouse : MonoBehaviour
         if (Mathf.Abs(mousePosInWorld.x) < monsterHitBox.x && Mathf.Abs(mousePosInWorld.y) < monsterHitBox.y)
         {
             //card is in monster box
-            WebSocketService.PlayCard(handIndex);
+            //FOR NOW PLACES CARD TO LEFT!!
+            WebSocketService.PlayCard(handIndex, 0);
 
             //FOR NOW PLACES CARD TO LEFT!!
             yourMonsterZone.AddNewMonsterCard(true, 0);
