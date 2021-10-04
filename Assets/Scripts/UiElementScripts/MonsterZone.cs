@@ -34,6 +34,8 @@ public class MonsterZone : MonoBehaviour
         }
         else
         {
+            Debug.Log("(MonsterZone) enemy monsterCount: " + monsterCards.Count);
+
             int index;
             if (monsterCards.Count == 0) index = 0;
             else index = monsterCards.Count - 1 - boardIndex;
