@@ -164,6 +164,8 @@ public class WebSocketService : MonoBehaviour
     [Button]
     public static void PlayCard(int cardIndex)
     {
+        Debug.Log("Playing card to index " + cardIndex);
+
         PlayCardMessage playCardMessage = new PlayCardMessage(1, cardIndex, Instance.yourMonsterZone.monsterCards.Count);
         string playCardMessageJSON = JsonUtility.ToJson(playCardMessage);
 
