@@ -23,7 +23,9 @@ public class MonsterZone : MonoBehaviour
 
     [Button]public void AddNewMonsterCard(bool isYourCard, int boardIndex)
     {
-        Debug.Log("(MonsterZone) board Index: " + boardIndex);
+        if (isYourCard) Debug.Log("(MonsterZone) board Index: " + boardIndex);
+        else Debug.Log("(MonsterZone) board Index: " + (monsterCards.Count - 1 - boardIndex));
+        Debug.Log("INDEX " + boardIndex);
 
         GameObject newMonster = Instantiate(testCard);
         newMonster.transform.SetParent(transform);
@@ -34,11 +36,10 @@ public class MonsterZone : MonoBehaviour
         }
         else
         {
-            Debug.Log("(MonsterZone) enemy monsterCount: " + monsterCards.Count);
 
             int index;
             if (monsterCards.Count == 0) index = 0;
-            else index = monsterCards.Count - 1 - boardIndex;
+            else index = monsterCards.Count - boardIndex;
             monsterCards.Insert(index, newMonster);
             RepositionMonsterCards();
         }
