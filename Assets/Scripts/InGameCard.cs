@@ -3,11 +3,12 @@ using TMPro;
 
 public class InGameCard : MonoBehaviour, IOnClickDownUIElement
 {
-    [SerializeField] private CardData cardData;
+    [SerializeField] public CardData cardData;
     [SerializeField] private TextMeshPro nameText;
     [SerializeField] private TextMeshPro cost;
     [SerializeField] private TextMeshPro value;
-
+    [SerializeField] private TextMeshPro lp;
+    [SerializeField] private TextMeshPro rp;
 
     public void SetNewCardData(CardData cardData)
     {
@@ -15,6 +16,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
         if (name != null) nameText.text = cardData.cardName;
         if (cost != null) cost.text = cardData.cost.ToString();
         if (value != null) value.text = cardData.value.ToString();
+        if (value != null) lp.text = cardData.lp.ToString();
+        if (value != null) rp.text = cardData.rp.ToString();
     }
 
     public CardData GetCardData()
@@ -25,5 +28,14 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
     public void OnClickElement()
     {
         transform.parent.GetComponent<MonsterZone>().AttackWithCard(gameObject);
+    }
+
+    public void SetStatLp(int lp)
+    {
+        this.lp.text = lp.ToString();
+    }
+    public void SetStatRp(int rp)
+    {
+        this.rp.text = rp.ToString();
     }
 }

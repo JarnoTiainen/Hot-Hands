@@ -170,6 +170,7 @@ MonoBehaviour:
   deck: {fileID: 915886160}
   yourMonsterZone: {fileID: 572842664}
   enemyMonsterZone: {fileID: 1645449387}
+  debuggerModeOn: 1
 --- !u!1 &7522968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,7 +1210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1680268750875424695, guid: 1e6f323761a37574897860c107df63b5, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1680268750875424695, guid: 1e6f323761a37574897860c107df63b5, type: 3}
       propertyPath: m_LocalPosition.x

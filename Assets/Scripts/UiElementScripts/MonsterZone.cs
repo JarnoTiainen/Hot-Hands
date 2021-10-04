@@ -24,6 +24,9 @@ public class MonsterZone : MonoBehaviour
         GameObject newMonster = Instantiate(testCard);
         newMonster.transform.SetParent(transform);
         //newMonster.GetComponent<InGameCard>().SetNewCardData(cardData);
+
+
+        //FIX THIS ASAP
         monsterCards.Add(newMonster);
         RepositionMonsterCards();
     }
@@ -31,6 +34,14 @@ public class MonsterZone : MonoBehaviour
     public void RemoveMonsterCard(int index)
     {
         GameObject deadMonster = monsterCards[index];
+        monsterCards.Remove(deadMonster);
+        GameObject.Destroy(deadMonster);
+        RepositionMonsterCards();
+    }
+
+    public void RemoveEnemyMonsterCard(int index)
+    {
+        GameObject deadMonster = monsterCards[monsterCards.Count - 1 - index];
         monsterCards.Remove(deadMonster);
         GameObject.Destroy(deadMonster);
         RepositionMonsterCards();
@@ -75,6 +86,7 @@ public class MonsterZone : MonoBehaviour
             {
                 if (card == monsterCards[i])
                 {
+                    Debug.Log("found match for attacker: " + monsterCards[i].GetComponent<InGameCard>().cardData.cardName);
                     WebSocketService.Attack(i);
                     return;
                 }
@@ -91,6 +103,17 @@ public class MonsterZone : MonoBehaviour
     {
         //for now updates the card data of last played card
         monsterCards[monsterCards.Count-1].GetComponent<InGameCard>().SetNewCardData(cardList.GetCardData(drawCardMessage));
+    }
+    public void UpdateCardData(int index, int lp, int rp)
+    {
+        monsterCards[index].GetComponent<InGameCard>().SetStatLp(lp);
+        monsterCards[index].GetComponent<InGameCard>().SetStatRp(rp);
+    }
+
+    public void UpdateEnemyCardData(int index, int lp, int rp)
+    {
+        monsterCards[monsterCards.Count - 1 - index].GetComponent<InGameCard>().SetStatLp(lp);
+        monsterCards[monsterCards.Count - 1 - index].GetComponent<InGameCard>().SetStatRp(rp);
     }
 
 
