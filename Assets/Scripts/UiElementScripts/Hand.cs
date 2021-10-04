@@ -74,6 +74,8 @@ public class Hand : MonoBehaviour
         }
     }
 
+
+
     //Removes one card from hand and if there is no parameter remove card with last index
     [Button] public void RemoveCard(int CardIndex = 0)
     {

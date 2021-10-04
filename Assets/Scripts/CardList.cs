@@ -70,6 +70,14 @@ public class CardList : ScriptableObject
         }
     }
 
+    public CardData GetCardData(PlayCardMessage playCardMessage)
+    {
+        Card card = GetCardData(playCardMessage.cardName);
+        CardData cardData = new CardData(card.cardSprite, playCardMessage.cardName, playCardMessage.cardCost, playCardMessage.cardValue, card.cardType, playCardMessage.rp, playCardMessage.lp);
+
+        return cardData;
+    }
+
     public CardData GetCardData(DrawCardMessage drawCardMessage)
     {
         Card card = GetCardData(drawCardMessage.cardName);

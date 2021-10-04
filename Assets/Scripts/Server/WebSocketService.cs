@@ -55,7 +55,7 @@ public class WebSocketService : MonoBehaviour
                     break;
                 case "PLAYCARD":
                     if(debuggerModeOn) Debug.Log("Message type was PLAYCARD");
-                    DrawCardMessage playCardMessage = JsonUtility.FromJson<DrawCardMessage>(data[1]);
+                    PlayCardMessage playCardMessage = JsonUtility.FromJson<PlayCardMessage>(data[1]);
 
                     if(playCardMessage.player == playerNumber)
                     {
@@ -64,8 +64,8 @@ public class WebSocketService : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogWarning("You should add update card stats here for enemy :_3");
-                        enemyMonsterZone.AddNewMonsterCard(null);
+                        Debug.LogWarning(playCardMessage.cardName + " Enemy card index: " + playCardMessage.boardIndex);
+                        enemyMonsterZone.AddNewMonsterCard(false, playCardMessage.boardIndex);
                         enemyMonsterZone.UpdateCardData(false, playCardMessage);
                     }
                     break;

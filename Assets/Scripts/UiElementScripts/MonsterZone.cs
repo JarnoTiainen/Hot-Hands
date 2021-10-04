@@ -21,16 +21,26 @@ public class MonsterZone : MonoBehaviour
 
     }
 
-    [Button]public void AddNewMonsterCard(CardData cardData)
+    [Button]public void AddNewMonsterCard(bool isYourCard, int boardIndex)
     {
+        Debug.Log("(MonsterZone) board Index: " + boardIndex);
+
         GameObject newMonster = Instantiate(testCard);
         newMonster.transform.SetParent(transform);
-        //newMonster.GetComponent<InGameCard>().SetNewCardData(cardData);
-
-
-        //FIX THIS ASAP
-        monsterCards.Add(newMonster);
-        RepositionMonsterCards();
+        if(isYourCard)
+        {
+            monsterCards.Insert(boardIndex, newMonster);
+            RepositionMonsterCards();
+        }
+        else
+        {
+            int index;
+            if (monsterCards.Count == 0) index = 0;
+            else index = monsterCards.Count - 1 - boardIndex;
+            monsterCards.Insert(index, newMonster);
+            RepositionMonsterCards();
+        }
+        
     }
 
     public void RemoveMonsterCard(int index)
@@ -102,10 +112,23 @@ public class MonsterZone : MonoBehaviour
         }
     }
 
-    public void UpdateCardData(bool isYourCard, DrawCardMessage drawCardMessage)
+    public void UpdateCardData(bool isYourCard, PlayCardMessage playCardMessage)
     {
         //for now updates the card data of last played card
-        monsterCards[monsterCards.Count-1].GetComponent<InGameCard>().SetNewCardData(isYourCard, cardList.GetCardData(drawCardMessage));
+
+        if (isYourCard) Debug.Log("(MonsterZone) card index: " + playCardMessage.boardIndex);
+        else Debug.Log("(MonsterZone) card index: " + (monsterCards.Count - 1 - playCardMessage.boardIndex));
+
+        if(isYourCard)
+        {
+            monsterCards[playCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, cardList.GetCardData(playCardMessage));
+        }
+        else
+        {
+            monsterCards[monsterCards.Count - 1 - playCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, cardList.GetCardData(playCardMessage));
+        }
+
+        
     }
     public void UpdateCardData(bool isYourCard, int index, int lp, int rp)
     {
