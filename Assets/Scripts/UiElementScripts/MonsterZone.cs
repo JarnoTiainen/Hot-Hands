@@ -13,6 +13,8 @@ public class MonsterZone : MonoBehaviour
     
     [SerializeField] private float makeRoomEffectDistance;
     [SerializeField] private float gapBetweenCards;
+    [SerializeField] private float moveSpeed;
+
 
     private void Awake()
     {
@@ -60,7 +62,8 @@ public class MonsterZone : MonoBehaviour
             for (int i = 0; i < monsterCards.Count; i++)
             {
                 newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
-                Vector2 newPos = new Vector2(newPosX, 0);
+                Vector3 newPos = new Vector3(newPosX, 0, 0);
+                //monsterCards[i].GetComponent<CardMovement>().OnCardMove(newPos, moveSpeed);
                 monsterCards[i].GetComponent<Transform>().localPosition = newPos;
             }
 

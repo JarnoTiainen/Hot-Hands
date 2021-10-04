@@ -692,6 +692,7 @@ GameObject:
   - component: {fileID: 6827097350241609712}
   - component: {fileID: 9060123631021853949}
   - component: {fileID: -2521324483513445347}
+  - component: {fileID: -2468924434937626165}
   m_Layer: 0
   m_Name: FieldCard
   m_TagString: Untagged
@@ -772,6 +773,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0007e2c8f9529ea45a2a7e8cd9085739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2468924434937626165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5484217012206740924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163e5cf7116441d4f990864fde283b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 2
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8257299369631439664
 GameObject:
   m_ObjectHideFlags: 0

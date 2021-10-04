@@ -31,7 +31,7 @@ public class CardMovement : MonoBehaviour
         } else if (doMove && transform.localPosition == endPoint) {  //if the card has moved to the destination, reset variables
             doMove = false;
             curve = defaultCurve;
-            elapsedTime = 0;
+            
         }
     }
     ///uses the default animation curve of card, startpoint specifiable
@@ -41,6 +41,7 @@ public class CardMovement : MonoBehaviour
         endPoint = endP;
         duration = dur;
         doMove = true;
+        elapsedTime = 0;
     }
 
     ///uses a specified animation curve
@@ -51,6 +52,7 @@ public class CardMovement : MonoBehaviour
         duration = dur;
         curve = curv;
         doMove = true;
+        elapsedTime = 0;
     }
 
     ///uses the default animation curve of card
@@ -60,6 +62,7 @@ public class CardMovement : MonoBehaviour
         endPoint = endP;
         duration = dur;
         doMove = true;
+        elapsedTime = 0;
     }
 
     public void OnCardRotate()

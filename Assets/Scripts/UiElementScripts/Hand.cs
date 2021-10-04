@@ -8,7 +8,6 @@ public class Hand : MonoBehaviour
     public CardList cardList;
 
     public static Hand Instance { get; private set; }
-    
 
     private Dictionary<GameObject, GameObject> visibleHandCardPreviews = new Dictionary<GameObject, GameObject>();
 
@@ -19,6 +18,7 @@ public class Hand : MonoBehaviour
 
     [SerializeField] private GameObject handCard;
     [SerializeField] private float gapBetweenCards;
+    [SerializeField] public float moveSpeed = 0.5f;
 
     private Canvas uiCanvas;
     private Canvas canvas;
@@ -56,7 +56,6 @@ public class Hand : MonoBehaviour
     private static GameObject InstantiateNewCard()
     {
         GameObject newCard = Instantiate(Instance.handCard, deckObj.transform.position, Quaternion.Euler(0, 180, 0));
-        newCard.transform.position = deckObj.transform.position;
         newCard.transform.SetParent(Instance.gameObject.transform, true);
         
         return newCard;
@@ -98,7 +97,7 @@ public class Hand : MonoBehaviour
         {   
             newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
             Vector3 newPos = new Vector3(newPosX, 0, 0);
-            visibleHandCards[i].GetComponent<CardMovement>().OnCardMove(newPos, 1);
+            visibleHandCards[i].GetComponent<CardMovement>().OnCardMove(newPos, Instance.moveSpeed);
         }
     }
 
