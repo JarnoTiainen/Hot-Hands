@@ -8,7 +8,7 @@ public class Hand : MonoBehaviour
     public CardList cardList;
 
     public static Hand Instance { get; private set; }
-    public GameObject deckObj;
+    
 
     private Dictionary<GameObject, GameObject> visibleHandCardPreviews = new Dictionary<GameObject, GameObject>();
 
@@ -22,6 +22,7 @@ public class Hand : MonoBehaviour
 
     private Canvas uiCanvas;
     private Canvas canvas;
+    private static GameObject deckObj;
 
     
 
@@ -31,6 +32,7 @@ public class Hand : MonoBehaviour
         Instance = gameObject.GetComponent<Hand>();
         uiCanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        deckObj = GameObject.FindGameObjectWithTag("Deck");
     }
 
     //Adds new facedown card to hand (ADD DRAW ANIMATION HERE)
@@ -53,10 +55,10 @@ public class Hand : MonoBehaviour
     //instanciate and rotate card facedown
     private static GameObject InstantiateNewCard()
     {
-        GameObject newCard = Instantiate(Instance.handCard, Instance.gameObject.transform);
-        //newCard.transform.SetParent(Instance.gameObject.transform);
-        //newCard.transform.localPosition = new Vector3(0, 0, 0);
-        newCard.transform.rotation = Quaternion.Euler(0, 180, 0);
+        GameObject newCard = Instantiate(Instance.handCard, deckObj.transform.position, Quaternion.Euler(0, 180, 0));
+        newCard.transform.position = deckObj.transform.position;
+        newCard.transform.SetParent(Instance.gameObject.transform, true);
+        
         return newCard;
     }
 
@@ -66,6 +68,7 @@ public class Hand : MonoBehaviour
         if(cardData != null)
         {
             unhandledCards[0].GetComponent<InGameCard>().SetNewCardData(cardData);
+            unhandledCards[0].GetComponent<CardMovement>().OnCardRotate();
             unhandledCards[0].transform.rotation = Quaternion.Euler(0, 0, 0);
             unhandledCards[0].transform.GetChild(1).GetComponent<TextMeshPro>().text = drawCardMessage.cardName;
             unhandledCards.Remove(unhandledCards[0]);
@@ -90,24 +93,13 @@ public class Hand : MonoBehaviour
         float newPosX;
         float firstCardOffsetX = (-totalCardsWidth + inGameWidth) / 2;
         float gapBetweenCardCenters = inGameWidth + Instance.gapBetweenCards;
-
-        if (visibleHandCards.Count == 1) visibleHandCards[0].GetComponent<Transform>().localPosition = Vector3.zero;
-        else
-        {
-            for (int i = 0; i < visibleHandCards.Count; i++)
-            {
-                
-                newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
-                Vector2 newPos = new Vector2(newPosX, 0);
-
-                //newPos = new Vector3(13, 1, 0);
-
-                //visibleHandCards[i].GetComponent<CardMovement>().OnCardMove(newPos, 3f);
-
-                visibleHandCards[i].GetComponent<Transform>().localPosition = newPos;
-            }
+        
+        for (int i = 0; i < visibleHandCards.Count; i++)
+        {   
+            newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
+            Vector3 newPos = new Vector3(newPosX, 0, 0);
+            visibleHandCards[i].GetComponent<CardMovement>().OnCardMove(newPos, 1);
         }
-
     }
 
     //this function removes visible cards but leaves the card in hand cards list in case the cards need to be returned to hand

@@ -20,31 +20,32 @@ public class CardMovement : MonoBehaviour
     {  
         //this is so that we can set the used curve back to the default, if the curve value has been changed
         defaultCurve = curve;
-        
-        startPoint = transform.position;
-        endPoint = transform.position;
     }
 
     void Update()
     {
         if(doMove && transform.localPosition != endPoint) {
-            Debug.Log("In move yea");
             elapsedTime += Time.deltaTime;
             //smoothly moves towards the endpoint. should this be in the fixedUpdate?
-
-            transform.localPosition = endPoint;
-            //transform.localPosition = Vector3.Lerp(startPoint, endPoint, curve.Evaluate(elapsedTime / duration));
+            transform.localPosition = Vector3.Lerp(startPoint, endPoint, curve.Evaluate(elapsedTime / duration));
         } else if (doMove && transform.localPosition == endPoint) {  //if the card has moved to the destination, reset variables
             doMove = false;
             curve = defaultCurve;
             elapsedTime = 0;
         }
     }
-
-    //uses a specified animation curve
-    public void OnCardMove(Vector2 endP, float dur, AnimationCurve curv)
+    ///uses the default animation curve of card, startpoint specifiable
+    public void OnCardMove(Vector3 startP, Vector3 endP, float dur)
     {
-        Debug.Log("onCardmove default startpoint and specified curve");
+        startPoint = startP;
+        endPoint = endP;
+        duration = dur;
+        doMove = true;
+    }
+
+    ///uses a specified animation curve
+    public void OnCardMove(Vector3 endP, float dur, AnimationCurve curv)
+    {
         startPoint = transform.localPosition;
         endPoint = endP;
         duration = dur;
@@ -52,23 +53,19 @@ public class CardMovement : MonoBehaviour
         doMove = true;
     }
 
-    //uses the default animation curve of card
-    public void OnCardMove(Vector2 endP, float dur)
+    ///uses the default animation curve of card
+    public void OnCardMove(Vector3 endP, float dur)
     {
-        Debug.Log("onCardmove default startpoint and curve");
         startPoint = transform.localPosition;
         endPoint = endP;
         duration = dur;
         doMove = true;
     }
 
-    //uses the default animation curve of card, startpoint specifiable
-    public void OnCardMove(Vector2 startP, Vector2 endP, float dur)
+    public void OnCardRotate()
     {
-        Debug.Log("onCardmove specified startpoint and curve");
-        startPoint = startP;
-        endPoint = endP;
-        duration = dur;
-        doMove = true;
+        //to be continued
     }
+
+
 }

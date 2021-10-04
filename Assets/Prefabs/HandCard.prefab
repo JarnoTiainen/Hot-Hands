@@ -692,6 +692,7 @@ GameObject:
   - component: {fileID: 6394178471183698953}
   - component: {fileID: 424058452700800159}
   - component: {fileID: 6490331289218157256}
+  - component: {fileID: 5773110476351464011}
   m_Layer: 0
   m_Name: HandCard
   m_TagString: Untagged
@@ -773,6 +774,43 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.064126, y: 0.08893682, z: 0.004450273}
   m_Center: {x: 0, y: 0.0000028833747, z: -0.0002111718}
+--- !u!114 &5773110476351464011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611825709596717884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163e5cf7116441d4f990864fde283b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 2
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8555806761587004890
 GameObject:
   m_ObjectHideFlags: 0
