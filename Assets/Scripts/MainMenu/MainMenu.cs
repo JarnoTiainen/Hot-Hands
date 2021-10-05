@@ -7,7 +7,7 @@ using UnityEngine.Audio;
 public class MainMenu : MonoBehaviour
 {
     public GameObject mainMenuButtons;
-    public GameObject optionsMenu;
+    public GameObject settingsMenu;
     public GameObject profileMenu;
     public GameObject quitConfirmation;
     public GameObject loadingScreen;
@@ -22,9 +22,9 @@ public class MainMenu : MonoBehaviour
         profileMenu.SetActive(value);
     }
 
-    public void OptionsMenuSetActive(bool value)
+    public void SettingsMenuSetActive(bool value)
     {
-        optionsMenu.SetActive(value);
+        settingsMenu.SetActive(value);
     }
 
     public void QuitConfirmationSetActive(bool value)
