@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class CardMovement : MonoBehaviour
 {
-    public float duration = 2;
+    public float duration = 0.5f;
+    public float rotationSpeed = 0.5f;
 
     //specifies the movement curve of the card
     [SerializeField]
     private AnimationCurve curve;
     private AnimationCurve defaultCurve;
+
+    private Quaternion startRotation;
+    private Quaternion endRotation;
+
     private Vector3 startPoint;
     private Vector3 endPoint;
+
+    private float elapsedRotationTime;
     private float elapsedTime;
+
     private bool doMove = false;
+    private bool doRotate = false;
 
 
     void Start()
@@ -31,7 +40,14 @@ public class CardMovement : MonoBehaviour
         } else if (doMove && transform.localPosition == endPoint) {  //if the card has moved to the destination, reset variables
             doMove = false;
             curve = defaultCurve;
-            
+        }
+
+        if(doRotate && transform.localRotation != endRotation) {
+            Debug.Log("rotating object");
+            elapsedRotationTime += Time.deltaTime;
+            transform.localRotation = Quaternion.Slerp(startRotation, endRotation, curve.Evaluate(elapsedRotationTime / rotationSpeed));
+        } else if (doRotate && transform.localRotation == endRotation) {
+            doRotate = false;
         }
     }
     ///uses the default animation curve of card, startpoint specifiable
@@ -65,9 +81,15 @@ public class CardMovement : MonoBehaviour
         elapsedTime = 0;
     }
 
-    public void OnCardRotate()
+    //rotates card the amount of "rotation" parameter
+    public void OnCardRotate(Quaternion rotation, float rotSpeed)
     {
-        //to be continued
+        Debug.Log("rotating object");
+        startRotation = transform.localRotation;
+        endRotation = rotation;
+        rotationSpeed = rotSpeed;
+        doRotate = true;
+        elapsedRotationTime = 0;
     }
 
 
