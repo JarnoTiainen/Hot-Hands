@@ -13,7 +13,7 @@ public class MonsterZone : MonoBehaviour
     
     [SerializeField] private float makeRoomEffectDistance;
     [SerializeField] private float gapBetweenCards;
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveSpeed = 1;
 
 
     private void Awake()
@@ -23,8 +23,7 @@ public class MonsterZone : MonoBehaviour
 
     [Button]public void AddNewMonsterCard(CardData cardData)
     {
-        GameObject newMonster = Instantiate(testCard);
-        newMonster.transform.SetParent(transform);
+        GameObject newMonster = Instantiate(testCard, transform);
         //newMonster.GetComponent<InGameCard>().SetNewCardData(cardData);
 
 
@@ -120,7 +119,7 @@ public class MonsterZone : MonoBehaviour
     }
 
 
-    //Give this animation later
+    //Give this animation later //???
     public void MakeRoom()
     {
 
