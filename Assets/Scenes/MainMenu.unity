@@ -3993,7 +3993,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1281100697}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: LaunchScene
+        m_MethodName: Play
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4208,6 +4208,7 @@ MonoBehaviour:
   profileMenu: {fileID: 1539517179}
   quitConfirmation: {fileID: 703834072}
   loadingScreen: {fileID: 1230363093}
+  musicFadeTime: 1
 --- !u!114 &1281100698
 MonoBehaviour:
   m_ObjectHideFlags: 0

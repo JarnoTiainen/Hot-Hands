@@ -6,7 +6,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Music
+  m_Name: MainMenuMusic
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: f5548c48ed2d8194ea1b8cce591581ac
   m_Children: []
@@ -25,7 +25,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MusicFadeIn
+  m_Name: InGameMusic
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: ec9c7b92af4d0934fa2290e898ed4066
   m_Children: []
@@ -76,9 +76,9 @@ AudioMixerController:
   - guid: 6303c956e023b1449a1cb05b2233d80f
     name: masterVol
   - guid: 205ce90744d960f44a9fd6cfae3a2ed5
-    name: musicVol
+    name: mainMenuMusicVol
   - guid: 295956c18ba949b4394449702a7ddbff
-    name: musicFadeInVol
+    name: inGameMusicVol
   - guid: ed26b98bfa2718e4c9366a9e8487517a
     name: sfxVol
   m_AudioMixerGroupViews:

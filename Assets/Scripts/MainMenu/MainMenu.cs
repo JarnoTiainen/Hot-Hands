@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class MainMenu : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MainMenu : MonoBehaviour
     public GameObject profileMenu;
     public GameObject quitConfirmation;
     public GameObject loadingScreen;
+    [SerializeField] private float musicFadeTime = 1f;
 
     public void MenuButtonsSetActive(bool value)
     {
@@ -30,8 +32,9 @@ public class MainMenu : MonoBehaviour
         quitConfirmation.SetActive(value);
     }
 
-    public void LaunchScene(int scene)
+    public void Play(int scene)
     {
+        StartCoroutine(FadeMixerGroup.StartFade(Resources.Load("MasterMixer") as AudioMixer, "mainMenuMusicVol", musicFadeTime, 0.0001f));
         StartCoroutine(LoadingScreen(scene));
     }
 
