@@ -17,12 +17,12 @@ public class Hand : MonoBehaviour
 
 
     [SerializeField] private GameObject handCard;
-    [SerializeField] private float gapBetweenCards;
+    [SerializeField] private float gapBetweenCards = 0;
     [SerializeField] public float moveSpeed = 0.5f;
 
     private Canvas uiCanvas;
     private Canvas canvas;
-    private static GameObject deckObj;
+    private GameObject deckObj;
 
     
 
@@ -55,7 +55,7 @@ public class Hand : MonoBehaviour
     //instanciate and rotate card facedown
     private static GameObject InstantiateNewCard()
     {
-        GameObject newCard = Instantiate(Instance.handCard, deckObj.transform.position, Quaternion.Euler(0, 180, 0));
+        GameObject newCard = Instantiate(Instance.handCard, Instance.deckObj.transform.position, Quaternion.Euler(0, 180, 0));
         newCard.transform.SetParent(Instance.gameObject.transform, true);
         
         return newCard;
@@ -114,11 +114,9 @@ public class Hand : MonoBehaviour
     public void ReturnVisibleCard(GameObject card, int handIndex)
     {
         card.GetComponent<BoxCollider>().enabled = true;
-        card.transform.SetParent(transform);
-        card.transform.localPosition = Vector3.zero;
+        card.transform.SetParent(transform, true);
         visibleHandCards.Insert(handIndex, card);
         SetNewCardPositions();
-        
     }
 
     //shows card tooltip

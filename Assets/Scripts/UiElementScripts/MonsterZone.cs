@@ -77,8 +77,7 @@ public class MonsterZone : MonoBehaviour
             {
                 newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
                 Vector3 newPos = new Vector3(newPosX, 0, 0);
-                //monsterCards[i].GetComponent<CardMovement>().OnCardMove(newPos, moveSpeed);
-                monsterCards[i].GetComponent<Transform>().localPosition = newPos;
+                monsterCards[i].GetComponent<CardMovement>().OnCardMove(newPos, moveSpeed);
             }
 
         }

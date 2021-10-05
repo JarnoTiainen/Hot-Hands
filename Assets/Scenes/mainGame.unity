@@ -209,6 +209,101 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &64249375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 64249379}
+  - component: {fileID: 64249378}
+  - component: {fileID: 64249377}
+  - component: {fileID: 64249376}
+  m_Layer: 0
+  m_Name: EnemyDeck
+  m_TagString: EnemyDeck
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &64249376
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64249375}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &64249377
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64249375}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &64249378
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64249375}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &64249379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64249375}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.37674, y: 0.05566, z: 0.00235274}
+  m_LocalScale: {x: 0.0265204, y: 0.08467359, z: 0.01}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &144250893 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8141048939576357604, guid: 8b1a487aaa1462a488db9de8d5328341, type: 3}
@@ -556,6 +651,7 @@ MonoBehaviour:
   testCard: {fileID: 5484217012206740924, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
   makeRoomEffectDistance: 0
   gapBetweenCards: 0
+  moveSpeed: 1
 --- !u!4 &584923535 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3491539293014643226, guid: aae1e9d9a69688a489598e0cf6f4f7e3, type: 3}
@@ -1196,7 +1292,7 @@ MonoBehaviour:
   cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
   handCard: {fileID: 7611825709596717884, guid: 9f8e5799bc8e632418cb743be7732cc0, type: 3}
   gapBetweenCards: 0
-  movespeed: 0.25
+  moveSpeed: 0.5
 --- !u!1001 &1414538604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1714,6 +1810,7 @@ MonoBehaviour:
   testCard: {fileID: 5484217012206740924, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
   makeRoomEffectDistance: 0
   gapBetweenCards: 0
+  moveSpeed: 1
 --- !u!1 &1819180710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,6 +1857,7 @@ MonoBehaviour:
   cardBase: {fileID: 5756585871724058351, guid: 973d0d87be2e39146bfd09cf9d340f5a, type: 3}
   gapBetweenCards: 0
   cardScaleInHand: 1
+  moveSpeed: 0.5
 --- !u!1 &1926157294
 GameObject:
   m_ObjectHideFlags: 0
