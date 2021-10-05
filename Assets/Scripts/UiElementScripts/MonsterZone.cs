@@ -10,6 +10,7 @@ public class MonsterZone : MonoBehaviour
     [SerializeField] private Mouse mouse;
     [SerializeField] private GameObject refCard;
     [SerializeField] private GameObject testCard;
+    [SerializeField] private GameObject enemyHand;
     
     [SerializeField] private float makeRoomEffectDistance;
     [SerializeField] private float gapBetweenCards;
@@ -18,7 +19,7 @@ public class MonsterZone : MonoBehaviour
 
     private void Awake()
     {
-
+        enemyHand = GameObject.FindGameObjectWithTag("EnemyHand");
     }
 
     [Button]public void AddNewMonsterCard(bool isYourCard, int boardIndex)
@@ -34,15 +35,18 @@ public class MonsterZone : MonoBehaviour
         {
             monsterCards.Insert(boardIndex, newMonster);
             RepositionMonsterCards();
-        }
-        else
-        {
-
+        } else {
+            //enemycard
             int index;
-            if (monsterCards.Count == 0) index = 0;
-            else index = monsterCards.Count - boardIndex;
+            if (monsterCards.Count == 0) {
+                index = 0;
+            } else {
+                index = monsterCards.Count - boardIndex;
+            }
+            enemyHand.GetComponent<EnemyHand>().RemoveCard(0);
             monsterCards.Insert(index, newMonster);
             RepositionMonsterCards();
+
         }
         
     }
@@ -148,7 +152,7 @@ public class MonsterZone : MonoBehaviour
     }
 
 
-    //Give this animation later //???
+    //Give this animation later
     public void MakeRoom()
     {
 

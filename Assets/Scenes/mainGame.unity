@@ -649,6 +649,7 @@ MonoBehaviour:
   mouse: {fileID: 780386860}
   refCard: {fileID: 5484217012206740924, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
   testCard: {fileID: 5484217012206740924, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
+  enemyHand: {fileID: 0}
   makeRoomEffectDistance: 0
   gapBetweenCards: 0
   moveSpeed: 1
@@ -1258,7 +1259,7 @@ GameObject:
   - component: {fileID: 1360794738}
   m_Layer: 0
   m_Name: Hand
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1808,6 +1809,7 @@ MonoBehaviour:
   mouse: {fileID: 780386860}
   refCard: {fileID: 5484217012206740924, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
   testCard: {fileID: 5484217012206740924, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
+  enemyHand: {fileID: 0}
   makeRoomEffectDistance: 0
   gapBetweenCards: 0
   moveSpeed: 1
@@ -1823,7 +1825,7 @@ GameObject:
   - component: {fileID: 1819180712}
   m_Layer: 0
   m_Name: Opponents Hand
-  m_TagString: Untagged
+  m_TagString: EnemyHand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1855,6 +1857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardBase: {fileID: 5756585871724058351, guid: 973d0d87be2e39146bfd09cf9d340f5a, type: 3}
+  enemyDeckObj: {fileID: 0}
   gapBetweenCards: 0
   cardScaleInHand: 1
   moveSpeed: 0.5

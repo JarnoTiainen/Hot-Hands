@@ -27,11 +27,8 @@ public class EnemyHand : MonoBehaviour
     private static GameObject InstantiateNewCard()
     {
         GameObject newCard = Instantiate(Instance.cardBase, Instance.enemyDeckObj.transform.position, Quaternion.Euler(0, 180, 0));
-        //newCard.transform.position = Instance.enemyDeckObj.transform.position;
         newCard.transform.SetParent(Instance.container.transform, true);
-        
         newCard.transform.localScale = new Vector3(Instance.cardScaleInHand, Instance.cardScaleInHand, Instance.cardScaleInHand);
-        //newCard.transform.rotation = Quaternion.Euler(0, 180, 0);
         return newCard;
     }
 
@@ -39,6 +36,7 @@ public class EnemyHand : MonoBehaviour
     {
         for (int i = 0; i < unhandledCards.Count; i++)
         {
+            //could this be done same way that it's done in the Hand script?
             if (i == 0)
             {
                 float inGameWidth = Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x;
@@ -47,7 +45,6 @@ public class EnemyHand : MonoBehaviour
 
                 Vector3 newPos = new Vector3(cardPosX, 0, 0);
                 unhandledCards[i].GetComponent<CardMovement>().OnCardMove(newPos, Instance.moveSpeed);
-                //unhandledCards[i].transform.localPosition = new Vector3(cardPosX, unhandledCards[i].transform.localPosition.y, unhandledCards[i].transform.localPosition.z);
             }
             else
             {
@@ -58,11 +55,8 @@ public class EnemyHand : MonoBehaviour
                 newPosX += Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x * unhandledCards[i].transform.localScale.x / 2;
                 newPosX += Instance.gapBetweenCards;
 
-                //Vector3 newPos = new Vector3(newPosX, unhandledCards[i].transform.localPosition.y, unhandledCards[i].transform.localPosition.z);
                 Vector3 newPos = new Vector3(newPosX, 0, 0);
                 unhandledCards[i].GetComponent<CardMovement>().OnCardMove(newPos, Instance.moveSpeed);
-
-                //unhandledCards[i].transform.localPosition = new Vector3(newPosX, unhandledCards[i].transform.localPosition.y, unhandledCards[i].transform.localPosition.z);
             }
         }
     }
@@ -79,10 +73,20 @@ public class EnemyHand : MonoBehaviour
         return totalCardWidth;
     }
 
+    //add a new card to enemy hand
     [Button] public static void AddNewCard()
     {
         GameObject newCard = InstantiateNewCard();
         unhandledCards.Add(newCard);
+        SetNewCardPositions();
+    }
+
+    //Removes one card from enemy hand and if there is no parameter remove card with last index
+    [Button] public void RemoveCard(int CardIndex = 0)
+    {
+        GameObject removedCard = unhandledCards[CardIndex];
+        unhandledCards.Remove(removedCard);
+        Destroy(removedCard);
         SetNewCardPositions();
     }
 }
