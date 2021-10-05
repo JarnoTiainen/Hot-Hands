@@ -25,9 +25,6 @@ public class Hand : MonoBehaviour
     private Canvas canvas;
     private GameObject deckObj;
 
-    
-
-
     public void Awake()
     {
         Instance = gameObject.GetComponent<Hand>();
@@ -68,7 +65,7 @@ public class Hand : MonoBehaviour
         if(cardData != null)
         {
             unhandledCards[0].GetComponent<InGameCard>().SetNewCardData(true, cardData);
-            unhandledCards[0].GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0, 0, 0), Instance.rotationSpeed);
+            unhandledCards[0].GetComponent<CardMovement>().OnCardRotate(Quaternion.identity, Instance.rotationSpeed);
             //unhandledCards[0].transform.rotation = Quaternion.Euler(0, 0, 0);
             unhandledCards[0].transform.GetChild(1).GetComponent<TextMeshPro>().text = drawCardMessage.cardName;
             unhandledCards.Remove(unhandledCards[0]);

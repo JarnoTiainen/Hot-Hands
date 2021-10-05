@@ -42,11 +42,11 @@ public class CardMovement : MonoBehaviour
             curve = defaultCurve;
         }
 
-        if(doRotate && transform.localRotation != endRotation) {
-            Debug.Log("rotating object");
+        //using euler angles here because quaternions would be different, but the euler angles are same
+        if(doRotate && transform.rotation.eulerAngles != endRotation.eulerAngles) {
             elapsedRotationTime += Time.deltaTime;
             transform.localRotation = Quaternion.Slerp(startRotation, endRotation, curve.Evaluate(elapsedRotationTime / rotationSpeed));
-        } else if (doRotate && transform.localRotation == endRotation) {
+        } else if (doRotate && transform.rotation.eulerAngles == endRotation.eulerAngles) {
             doRotate = false;
         }
     }
@@ -81,11 +81,10 @@ public class CardMovement : MonoBehaviour
         elapsedTime = 0;
     }
 
-    //rotates card the amount of "rotation" parameter
+    ///rotates card the amount of "rotation" parameter
     public void OnCardRotate(Quaternion rotation, float rotSpeed)
     {
-        Debug.Log("rotating object");
-        startRotation = transform.localRotation;
+        startRotation = transform.rotation;
         endRotation = rotation;
         rotationSpeed = rotSpeed;
         doRotate = true;
