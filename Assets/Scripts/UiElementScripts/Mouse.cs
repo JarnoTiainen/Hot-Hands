@@ -71,7 +71,9 @@ public class Mouse : MonoBehaviour
         }
         else if(RayCaster.Instance.target == GameObject.Find("DiscardPile"))
         {
-            Debug.Log("Card discarded");
+            Debug.Log("Card discarded from slot " + handIndex);
+            WebSocketService.Burn(handIndex);
+            heldCard = null;
         }
         else
         {
