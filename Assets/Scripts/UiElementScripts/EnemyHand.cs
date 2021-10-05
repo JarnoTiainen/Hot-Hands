@@ -32,32 +32,20 @@ public class EnemyHand : MonoBehaviour
         return newCard;
     }
 
+    //sets new card positions in hand
     private static void SetNewCardPositions()
     {
+        float inGameWidth = Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x;
+        float totalCardsWidth = inGameWidth * unhandledCards.Count + Instance.gapBetweenCards * (unhandledCards.Count - 1);
+        float newPosX;
+        float firstCardOffsetX = (-totalCardsWidth + inGameWidth) / 2;
+        float gapBetweenCardCenters = inGameWidth + Instance.gapBetweenCards;
+        
         for (int i = 0; i < unhandledCards.Count; i++)
-        {
-            //could this be done same way that it's done in the Hand script?
-            if (i == 0)
-            {
-                float inGameWidth = Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x;
-                float totalCardsWidth = TotalCardsWidth();
-                float cardPosX = -totalCardsWidth / 2 + inGameWidth / 2;
-
-                Vector3 newPos = new Vector3(cardPosX, 0, 0);
-                unhandledCards[i].GetComponent<CardMovement>().OnCardMove(newPos, Instance.moveSpeed);
-            }
-            else
-            {
-                float newPosX;
-                float previousCardPosX = unhandledCards[i - 1].transform.localPosition.x;
-                newPosX = previousCardPosX;
-                newPosX += Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x * unhandledCards[i - 1].transform.localScale.x / 2;
-                newPosX += Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x * unhandledCards[i].transform.localScale.x / 2;
-                newPosX += Instance.gapBetweenCards;
-
-                Vector3 newPos = new Vector3(newPosX, 0, 0);
-                unhandledCards[i].GetComponent<CardMovement>().OnCardMove(newPos, Instance.moveSpeed);
-            }
+        {   
+            newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
+            Vector3 newPos = new Vector3(newPosX, 0, 0);
+            unhandledCards[i].GetComponent<CardMovement>().OnCardMove(newPos, Instance.moveSpeed);
         }
     }
 

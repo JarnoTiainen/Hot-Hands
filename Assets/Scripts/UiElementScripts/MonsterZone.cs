@@ -29,13 +29,15 @@ public class MonsterZone : MonoBehaviour
         else Debug.Log("(MonsterZone) board Index: " + (monsterCards.Count - 1 - boardIndex));
         Debug.Log("INDEX " + boardIndex);
 
-        GameObject newMonster = Instantiate(testCard);
-        newMonster.transform.SetParent(transform);
+        
         if(isYourCard)
         {
+            GameObject newMonster = Instantiate(testCard, mouse.mousePosInWorld, Quaternion.identity);
+            newMonster.transform.SetParent(transform, true);
             monsterCards.Insert(boardIndex, newMonster);
             RepositionMonsterCards();
         } else {
+            
             //enemycard
             int index;
             if (monsterCards.Count == 0) {
@@ -43,11 +45,36 @@ public class MonsterZone : MonoBehaviour
             } else {
                 index = monsterCards.Count - boardIndex;
             }
-            enemyHand.GetComponent<EnemyHand>().RemoveCard(0);
+            
+            GameObject newMonster = Instantiate(testCard);
+            //Vector3 playedCardPos = 
+            newMonster.transform.SetParent(transform);
             monsterCards.Insert(index, newMonster);
+            enemyHand.GetComponent<EnemyHand>().RemoveCard(0);
             RepositionMonsterCards();
 
         }
+
+        //old code
+        //GameObject newMonster = Instantiate(testCard);
+        //newMonster.transform.SetParent(transform);
+        //if(isYourCard)
+        //{
+        //    monsterCards.Insert(boardIndex, newMonster);
+        //    RepositionMonsterCards();
+        //} else {
+        //    //enemycard
+        //    int index;
+        //    if (monsterCards.Count == 0) {
+        //        index = 0;
+        //    } else {
+        //        index = monsterCards.Count - boardIndex;
+        //    }
+        //    enemyHand.GetComponent<EnemyHand>().RemoveCard(0);
+        //    monsterCards.Insert(index, newMonster);
+        //    RepositionMonsterCards();
+
+        //}
         
     }
 
