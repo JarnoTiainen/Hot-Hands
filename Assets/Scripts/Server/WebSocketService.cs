@@ -8,7 +8,8 @@ using SimpleJSON;
 public class WebSocketService : MonoBehaviour
 {
     public int playerNumber;
-
+    public PlayerStats playerStats;
+    public PlayerStats enemyPlayerStats;
     [SerializeField]private Deck deck;
     [SerializeField] private MonsterZone yourMonsterZone;
     [SerializeField] private MonsterZone enemyMonsterZone;
@@ -24,6 +25,8 @@ public class WebSocketService : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerStats = new PlayerStats();
+        enemyPlayerStats = new PlayerStats();
         websocket = new WebSocket("wss://n14bom45md.execute-api.eu-north-1.amazonaws.com/production");
         OpenNewConnection();
 
@@ -120,6 +123,25 @@ public class WebSocketService : MonoBehaviour
                         Debug.Log("Deck save failed, everything is ok");
                     }
                     break;
+                case "BURNCARD":
+                    Debug.Log("BurnCardMessage: " + data[1]);
+                    BurnCardMessage burnCardMessage = JsonUtility.FromJson<BurnCardMessage>(data[1]);
+                    burnCardMessage.burnedCardDone = JsonUtility.FromJson<DrawCardMessage>(burnCardMessage.burnedCard);
+
+                    if(burnCardMessage.burnedCardDone.player == playerNumber)
+                    {
+                        playerStats.playerBurnValue = burnCardMessage.newBurnValue;
+                        Debug.Log("new burn value is " + playerStats.playerBurnValue);
+                        Hand.Instance.RemoveCard(burnCardMessage.handIndex);
+                    }
+                    else
+                    {
+                        enemyPlayerStats.playerBurnValue = burnCardMessage.newBurnValue;
+                        Debug.Log("Enemy new burn value is " + playerStats.playerBurnValue);
+                        EnemyHand.Instance.RemoveCard(burnCardMessage.handIndex);
+                    }
+                    
+                    break;
                 default:
                     Debug.Log("Message type was UNKOWN");
                     break;
@@ -206,6 +228,15 @@ public class WebSocketService : MonoBehaviour
         Debug.Log("Attacked with id " + fieldIndex);
 
         GameMessage message = new GameMessage("OnMessage", "ATTACK", fieldIndex.ToString());
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
+
+    [Button]
+    public static void Burn(int handIndex)
+    {
+        Debug.Log("Burned card hand index " + handIndex);
+
+        GameMessage message = new GameMessage("OnMessage", "BURNCARD", handIndex.ToString());
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 }
