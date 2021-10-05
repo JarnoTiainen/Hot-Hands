@@ -7,11 +7,20 @@ using System;
 
 public class RayCaster : MonoBehaviour
 {
+    public static RayCaster Instance { get; private set; }
+
+
     [SerializeField] private Camera rayCamera;
     public GameObject target;
     public GameObject newTarget;
     public GameObject previousTarget;
     public bool firstTimeCall = true;
+
+    private void Awake()
+    {
+        Instance = gameObject.GetComponent<RayCaster>();
+    }
+
 
     private void Update()
     {

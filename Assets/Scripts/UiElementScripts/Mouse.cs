@@ -69,6 +69,10 @@ public class Mouse : MonoBehaviour
             yourMonsterZone.AddNewMonsterCard(true, 0);
             Hand.Instance.RemoveCard(handIndex);
         }
+        else if(RayCaster.Instance.target == GameObject.Find("DiscardPile"))
+        {
+            Debug.Log("Card discarded");
+        }
         else
         {
             uiHand.ReturnVisibleCard(heldCard, handIndex);
