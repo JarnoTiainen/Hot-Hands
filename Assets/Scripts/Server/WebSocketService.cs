@@ -17,6 +17,8 @@ public class WebSocketService : MonoBehaviour
     static WebSocket websocket;
     [SerializeField] private bool debuggerModeOn = false;
 
+    [SerializeField] private int playerStartHealth = 100;
+
     private void Awake()
     {
         Instance = gameObject.GetComponent<WebSocketService>();
@@ -25,8 +27,8 @@ public class WebSocketService : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerStats = new PlayerStats();
-        enemyPlayerStats = new PlayerStats();
+        playerStats = new PlayerStats(playerStartHealth);
+        enemyPlayerStats = new PlayerStats(playerStartHealth);
         websocket = new WebSocket("wss://n14bom45md.execute-api.eu-north-1.amazonaws.com/production");
         OpenNewConnection();
 

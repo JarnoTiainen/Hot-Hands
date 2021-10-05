@@ -5,11 +5,11 @@ public class PlayerStats
     public int playerBurnValue;
     public int playerHealth;
 
-    public PlayerStats()
+    public PlayerStats(int playerStartHealth)
     {
         deckCardCount = 0;
         discardpileCardCount = 0;
         playerBurnValue = 0;
-        playerHealth = 0;
+        playerHealth = playerStartHealth;
     }
 }
