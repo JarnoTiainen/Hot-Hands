@@ -47,7 +47,7 @@ public class WebSocketService : MonoBehaviour
         websocket.OnMessage += (bytes) =>
         {
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
-            Debug.Log("server message: " + data);
+            Debug.Log("server message: " + data[0] + " " + data[1]);
             switch((string)data[0])
             {
                 case "GETSIDE":
@@ -55,18 +55,18 @@ public class WebSocketService : MonoBehaviour
                     break;
                 case "PLAYCARD":
                     if(debuggerModeOn) Debug.Log("Message type was PLAYCARD");
-                    DrawCardMessage playCardMessage = JsonUtility.FromJson<DrawCardMessage>(data[1]);
+                    PlayCardMessage playCardMessage = JsonUtility.FromJson<PlayCardMessage>(data[1]);
 
                     if(playCardMessage.player == playerNumber)
                     {
                         Debug.LogWarning("You should add update card stats here :_3");
-                        yourMonsterZone.UpdateCardData(playCardMessage);
+                        yourMonsterZone.UpdateCardData(true, playCardMessage);
                     }
                     else
                     {
-                        Debug.LogWarning("You should add update card stats here for enemy :_3");
-                        enemyMonsterZone.AddNewMonsterCard(null);
-                        enemyMonsterZone.UpdateCardData(playCardMessage);
+                        Debug.LogWarning(playCardMessage.cardName + " Enemy card index: " + playCardMessage.boardIndex);
+                        enemyMonsterZone.AddNewMonsterCard(false, playCardMessage.boardIndex);
+                        enemyMonsterZone.UpdateCardData(false, playCardMessage);
                     }
                     break;
                 case "DRAWCARD":
@@ -92,16 +92,16 @@ public class WebSocketService : MonoBehaviour
 
                     if (attackEventMessage.player == playerNumber)
                     {
-                        yourMonsterZone.UpdateCardData(attackEventMessage.attackerValues.index, attackEventMessage.attackerValues.lp, attackEventMessage.attackerValues.rp);
-                        enemyMonsterZone.UpdateEnemyCardData(attackEventMessage.targetValues.index, attackEventMessage.targetValues.lp, attackEventMessage.targetValues.rp);
+                        yourMonsterZone.UpdateCardData(true, attackEventMessage.attackerValues.index, attackEventMessage.attackerValues.lp, attackEventMessage.attackerValues.rp);
+                        enemyMonsterZone.UpdateCardData(false, attackEventMessage.targetValues.index, attackEventMessage.targetValues.lp, attackEventMessage.targetValues.rp);
                         if (attackEventMessage.attackerValues.lp <= 0 || attackEventMessage.attackerValues.rp <= 0) yourMonsterZone.RemoveMonsterCard(attackEventMessage.attackerValues.index);
                         if (attackEventMessage.targetValues.lp <= 0 || attackEventMessage.targetValues.rp <= 0) enemyMonsterZone.RemoveEnemyMonsterCard(attackEventMessage.targetValues.index);
                         
                     }
                     else
                     {
-                        enemyMonsterZone.UpdateEnemyCardData(attackEventMessage.attackerValues.index, attackEventMessage.attackerValues.lp, attackEventMessage.attackerValues.rp);
-                        yourMonsterZone.UpdateCardData(attackEventMessage.targetValues.index, attackEventMessage.targetValues.lp, attackEventMessage.targetValues.rp);
+                        enemyMonsterZone.UpdateCardData(false, attackEventMessage.attackerValues.index, attackEventMessage.attackerValues.lp, attackEventMessage.attackerValues.rp);
+                        yourMonsterZone.UpdateCardData(true, attackEventMessage.targetValues.index, attackEventMessage.targetValues.lp, attackEventMessage.targetValues.rp);
                         if (attackEventMessage.attackerValues.lp <= 0 || attackEventMessage.attackerValues.rp <= 0) enemyMonsterZone.RemoveEnemyMonsterCard(attackEventMessage.attackerValues.index);
                         if (attackEventMessage.targetValues.lp <= 0 || attackEventMessage.targetValues.rp <= 0) yourMonsterZone.RemoveMonsterCard(attackEventMessage.targetValues.index);
                     }
@@ -162,9 +162,11 @@ public class WebSocketService : MonoBehaviour
     }
 
     [Button]
-    public static void PlayCard(int cardIndex)
+    public static void PlayCard(int cardIndex, int boardIndex)
     {
-        PlayCardMessage playCardMessage = new PlayCardMessage(1, cardIndex, Instance.yourMonsterZone.monsterCards.Count);
+        Debug.Log("Playing card to index " + boardIndex + " from " + cardIndex);
+
+        PlayCardMessage playCardMessage = new PlayCardMessage(1, cardIndex, boardIndex);
         string playCardMessageJSON = JsonUtility.ToJson(playCardMessage);
 
         GameMessage message = new GameMessage("OnMessage", "PLAYCARD", playCardMessageJSON);

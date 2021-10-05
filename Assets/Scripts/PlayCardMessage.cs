@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+
 public class PlayCardMessage
 {
     public enum CardSource
@@ -9,15 +12,24 @@ public class PlayCardMessage
     }
     public CardSource cardSource;
     public int handIndex;
-    public int sender;
     public int boardIndex;
+
+    public int player;
+    public string cardName;
+    public int cardCost;
+    public int cardValue;
+    public int cardType;
+    public List<Card.MonsterTag> mtag;
+    public List<Card.SpellTag> stag;
+    public int rp;
+    public int lp;
 
 
     public PlayCardMessage(int cardSource = 0, int handIndex = 0, int boardIndex = 0, int sender = 0)
     {
         this.cardSource = (CardSource)cardSource;
         this.handIndex = handIndex;
-        this.sender = sender;
+        this.player = sender;
         this.boardIndex = boardIndex;
     }
 }

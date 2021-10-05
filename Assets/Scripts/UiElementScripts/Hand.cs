@@ -66,13 +66,15 @@ public class Hand : MonoBehaviour
         CardData cardData = Instance.cardList.GetCardData(drawCardMessage);
         if(cardData != null)
         {
-            unhandledCards[0].GetComponent<InGameCard>().SetNewCardData(cardData);
+            unhandledCards[0].GetComponent<InGameCard>().SetNewCardData(true, cardData);
             unhandledCards[0].GetComponent<CardMovement>().OnCardRotate();
             unhandledCards[0].transform.rotation = Quaternion.Euler(0, 0, 0);
             unhandledCards[0].transform.GetChild(1).GetComponent<TextMeshPro>().text = drawCardMessage.cardName;
             unhandledCards.Remove(unhandledCards[0]);
         }
     }
+
+
 
     //Removes one card from hand and if there is no parameter remove card with last index
     [Button] public void RemoveCard(int CardIndex = 0)
