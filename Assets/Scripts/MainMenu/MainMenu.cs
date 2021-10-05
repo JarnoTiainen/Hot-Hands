@@ -7,12 +7,17 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject mainMenuButtons;
     public GameObject optionsMenu;
+    public GameObject profileMenu;
     public GameObject quitConfirmation;
     public GameObject loadingScreen;
 
     public void MenuButtonsSetActive(bool value)
     {
         mainMenuButtons.SetActive(value);
+    }
+    public void ProfileMenuSetActive(bool value)
+    {
+        profileMenu.SetActive(value);
     }
 
     public void OptionsMenuSetActive(bool value)
