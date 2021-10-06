@@ -10,9 +10,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] private TextMeshPro lp;
     [SerializeField] private TextMeshPro rp;
 
-
-    MaterialPropertyBlock materialPropertyBlock =
-
     public void SetNewCardData(bool isYourCard, CardData cardData)
     {
         this.cardData = cardData;
