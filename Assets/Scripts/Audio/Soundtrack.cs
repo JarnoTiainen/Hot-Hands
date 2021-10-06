@@ -67,8 +67,11 @@ public class Soundtrack
 
     private void SelectSoundtrack()
     {
-        // Comment out when building the game
-        //UnityEditor.Selection.activeObject = soundtrackToPlay;
+        // Platform #define directives for UnityEditor
+        #if UNITY_EDITOR
+        UnityEditor.Selection.activeObject = soundtrackToPlay;
+        #endif
+
     }
 
     //Get's list of Soundtracks from manager, used in the inspector
