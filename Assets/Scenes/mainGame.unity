@@ -1479,6 +1479,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 873259515}
     m_Modifications:
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: uiSFX.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: uiSFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 68214db23f3606d498d196d7b4b21465, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: uiSFX.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4472400b4dcdb8245831e872f4f62042, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: ambientSFX.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: ambientSFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: ae5969a47a21fbe45993c5929bf0a22a, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: ambientSFX.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 70c15c7b631093043b1b114ea1df3135, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: ambientSFX.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ba9b286ddfee9645af2d38ab84105b6, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: ambientSFX.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 771280f6af8128a4d82fe6c88bdf5c0a, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: ambientSFX.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 670c48ac42a7a584db8a71a15af0cdd2, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: ambientSFX.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: eef228277f60ed049af3849825ee6123, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: ambientSFX.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 670c48ac42a7a584db8a71a15af0cdd2, type: 2}
     - target: {fileID: 6413452686842694931, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1526,6 +1570,22 @@ PrefabInstance:
     - target: {fileID: 6413452686842694932, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: m_Name
       value: SFXManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413452686842694933, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413452686842694933, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413452686842694933, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ac85c5f69ef57d640bbf3763374ccf01, type: 3}
+    - target: {fileID: 6413452686842694933, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
@@ -2317,6 +2377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 780386861}
   - component: {fileID: 780386860}
+  - component: {fileID: 780386862}
   m_Layer: 0
   m_Name: Mouse
   m_TagString: Untagged
@@ -2357,6 +2418,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &780386862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780386859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c9cbb19bc1a8de4d82d5670d090936f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPlay1:
+    sfxType: 1
+    sfxToPlay: {fileID: 11400000, guid: 771280f6af8128a4d82fe6c88bdf5c0a, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 771280f6af8128a4d82fe6c88bdf5c0a, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
+  cardPlay2:
+    sfxType: 1
+    sfxToPlay: {fileID: 11400000, guid: eef228277f60ed049af3849825ee6123, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: eef228277f60ed049af3849825ee6123, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
+  cardPlay3:
+    sfxType: 1
+    sfxToPlay: {fileID: 11400000, guid: 670c48ac42a7a584db8a71a15af0cdd2, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 670c48ac42a7a584db8a71a15af0cdd2, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
 --- !u!1 &782970624
 GameObject:
   m_ObjectHideFlags: 0
@@ -3108,6 +3208,7 @@ GameObject:
   - component: {fileID: 915886162}
   - component: {fileID: 915886161}
   - component: {fileID: 915886160}
+  - component: {fileID: 915886165}
   m_Layer: 0
   m_Name: Deck
   m_TagString: Deck
@@ -3215,6 +3316,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &915886165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915886159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f9bd74f3f3cb4e4f9d995ce408740d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardDraw1:
+    sfxType: 1
+    sfxToPlay: {fileID: 11400000, guid: 70c15c7b631093043b1b114ea1df3135, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 70c15c7b631093043b1b114ea1df3135, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
+  cardDraw2:
+    sfxType: 1
+    sfxToPlay: {fileID: 11400000, guid: 4ba9b286ddfee9645af2d38ab84105b6, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 4ba9b286ddfee9645af2d38ab84105b6, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
+  cardDraw3:
+    sfxType: 1
+    sfxToPlay: {fileID: 11400000, guid: ae5969a47a21fbe45993c5929bf0a22a, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: ae5969a47a21fbe45993c5929bf0a22a, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
 --- !u!1001 &950750715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4503,6 +4643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1360794737}
   - component: {fileID: 1360794738}
+  - component: {fileID: 1360794739}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Hand
@@ -4541,6 +4682,18 @@ MonoBehaviour:
   gapBetweenCards: 0
   moveSpeed: 0.5
   rotationSpeed: 0.2
+--- !u!114 &1360794739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360794736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d7257c868abcf4f879fe74281368e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1412929014
 GameObject:
   m_ObjectHideFlags: 0

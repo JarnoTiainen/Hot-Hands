@@ -67,6 +67,7 @@ public class Mouse : MonoBehaviour
                 //card is in monster box
                 //FOR NOW PLACES CARD TO LEFT!!
                 WebSocketService.PlayCard(handIndex, 0);
+                gameObject.GetComponent<PlayCardSounds>().Play();
 
                 //FOR NOW PLACES CARD TO LEFT!!
                 yourMonsterZone.AddNewMonsterCard(true, 0);
