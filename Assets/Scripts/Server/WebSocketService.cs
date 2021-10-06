@@ -66,12 +66,15 @@ public class WebSocketService : MonoBehaviour
                     {
                         Debug.LogWarning("You should add update card stats here :_3");
                         yourMonsterZone.UpdateCardData(true, playCardMessage);
+                        GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = playerStats.playerBurnValue.ToString();
                     }
                     else
                     {
                         Debug.LogWarning(playCardMessage.cardName + " Enemy card index: " + playCardMessage.boardIndex);
                         enemyMonsterZone.AddNewMonsterCard(false, playCardMessage.boardIndex);
                         enemyMonsterZone.UpdateCardData(false, playCardMessage);
+                        enemyPlayerStats.playerBurnValue -= playCardMessage.cardCost;
+                        GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
                     }
                     break;
                 case "DRAWCARD":
@@ -154,12 +157,14 @@ public class WebSocketService : MonoBehaviour
                         playerStats.playerBurnValue = burnCardMessage.newBurnValue;
                         Debug.Log("new burn value is " + playerStats.playerBurnValue);
                         Hand.Instance.RemoveCard(burnCardMessage.handIndex);
+                        GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = playerStats.playerBurnValue.ToString();
                     }
                     else
                     {
                         enemyPlayerStats.playerBurnValue = burnCardMessage.newBurnValue;
                         Debug.Log("Enemy new burn value is " + playerStats.playerBurnValue);
                         EnemyHand.Instance.RemoveCard(burnCardMessage.handIndex);
+                        GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
                     }
                     
                     break;

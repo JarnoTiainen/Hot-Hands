@@ -78,7 +78,7 @@ public class Mouse : MonoBehaviour
                 heldCard = null;
             }
         }
-        else if(RayCaster.Instance.target == GameObject.Find("DiscardPile"))
+        else if(RayCaster.Instance.target == GameObject.Find("Bonfire"))
         {
             Debug.Log("Card discarded from slot " + handIndex);
             WebSocketService.Burn(handIndex);
