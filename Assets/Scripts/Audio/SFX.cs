@@ -42,7 +42,7 @@ public class SFX
     [ShowIf("showSettings")]
     [EnableIf("editSettings")]
     [SerializeField]
-    private bool useDefault = true;
+    private bool useDefault = false;
 
     [DisableIf("useDefault")]
     [ShowIf("showSettings")]
@@ -95,8 +95,8 @@ public class SFX
     public void PlaySFX()
     {
         if (useDefault || audiosource == null)
-            SFXManager.PlaySFX(sfxToPlay, waitToPlay, null);
+            SFXManager.PlaySFX(sfxToPlay, waitToPlay, useDefault, null);
         else
-            SFXManager.PlaySFX(sfxToPlay, waitToPlay, audiosource);
+            SFXManager.PlaySFX(sfxToPlay, waitToPlay, useDefault, audiosource);
     }
 }

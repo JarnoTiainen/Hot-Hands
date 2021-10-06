@@ -53,7 +53,7 @@ MonoBehaviour:
     editSettings: 0
     _sfxBase: {fileID: 11400000, guid: 4472400b4dcdb8245831e872f4f62042, type: 2}
     waitToPlay: 0
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}
   buttonClick:
     sfxType: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
     editSettings: 0
     _sfxBase: {fileID: 11400000, guid: 8ed319f2c003c2c46a4986d19b277f41, type: 2}
     waitToPlay: 0
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}
   playClick:
     sfxType: 1
@@ -71,7 +71,7 @@ MonoBehaviour:
     editSettings: 0
     _sfxBase: {fileID: 11400000, guid: 218abad15bb0dc24086a6440844b2113, type: 2}
     waitToPlay: 0
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}
 --- !u!114 &4268212973007929900
 MonoBehaviour:
@@ -92,7 +92,7 @@ MonoBehaviour:
     editSettings: 0
     _sfxBase: {fileID: 11400000, guid: af90e02691e21704a9a8c121692732fc, type: 2}
     waitToPlay: 0
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}
 --- !u!114 &4268212973007929903
 MonoBehaviour:
@@ -113,7 +113,7 @@ MonoBehaviour:
     editSettings: 0
     _sfxBase: {fileID: 11400000, guid: 70c15c7b631093043b1b114ea1df3135, type: 2}
     waitToPlay: 0
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}
   cardDraw2:
     sfxType: 1
@@ -122,7 +122,7 @@ MonoBehaviour:
     editSettings: 0
     _sfxBase: {fileID: 11400000, guid: 4ba9b286ddfee9645af2d38ab84105b6, type: 2}
     waitToPlay: 0
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}
   cardDraw3:
     sfxType: 1
@@ -131,7 +131,7 @@ MonoBehaviour:
     editSettings: 0
     _sfxBase: {fileID: 11400000, guid: ae5969a47a21fbe45993c5929bf0a22a, type: 2}
     waitToPlay: 0
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}
 --- !u!114 &4268212973007929902
 MonoBehaviour:
@@ -152,7 +152,7 @@ MonoBehaviour:
     editSettings: 0
     _sfxBase: {fileID: 11400000, guid: 771280f6af8128a4d82fe6c88bdf5c0a, type: 2}
     waitToPlay: 0
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}
   cardPlay2:
     sfxType: 1
@@ -161,7 +161,7 @@ MonoBehaviour:
     editSettings: 0
     _sfxBase: {fileID: 11400000, guid: eef228277f60ed049af3849825ee6123, type: 2}
     waitToPlay: 0
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}
   cardPlay3:
     sfxType: 1
@@ -170,5 +170,5 @@ MonoBehaviour:
     editSettings: 0
     _sfxBase: {fileID: 11400000, guid: 670c48ac42a7a584db8a71a15af0cdd2, type: 2}
     waitToPlay: 0
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}
