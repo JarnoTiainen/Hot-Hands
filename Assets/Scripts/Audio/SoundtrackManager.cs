@@ -16,6 +16,7 @@ public class SoundtrackManager : MonoBehaviour
     [SerializeField] private float musicDefaultVolume = 0.5f;
     [SerializeField] private float musicSceneFade = 3f;
 
+
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -32,6 +33,30 @@ public class SoundtrackManager : MonoBehaviour
         inGameMusicGroup = masterMixer.FindMatchingGroups("InGameMusic")[0];
 
         StartMusic();
+    }
+
+    private void StartMusic()
+    {
+        switch (SceneManager.GetActiveScene().buildIndex)
+        {
+            case 0:
+                masterMixer.SetFloat("masterVol", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", masterDefaultVolume)) * 20);
+                masterMixer.SetFloat("mainMenuMusicVol", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume", musicDefaultVolume)) * 20);
+                masterMixer.SetFloat("inGameMusicVol", Mathf.Log10(0.0001f) * 20);
+                gameObject.GetComponent<SoundtrackLibrary>().mainMenu.PlaySoundtrack();
+                break;
+
+            case 1:
+                masterMixer.SetFloat("masterVol", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", masterDefaultVolume)) * 20);
+                masterMixer.SetFloat("inGameMusicVol", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume", musicDefaultVolume)) * 20);
+                masterMixer.SetFloat("mainMenuMusicVol", Mathf.Log10(0.0001f) * 20);
+                gameObject.GetComponent<SoundtrackLibrary>().inGame.PlaySoundtrack();
+                break;
+
+            default:
+                gameObject.GetComponent<SoundtrackLibrary>().defaultSoundtrack.PlaySoundtrack();
+                break;
+        }
     }
 
     public static SoundtrackManager instance
@@ -162,50 +187,21 @@ public class SoundtrackManager : MonoBehaviour
     }
     private void SceneChange(Scene scene, LoadSceneMode loadSceneMode)
     {
-        Debug.Log("SceneChange" + scene);
         switch (SceneManager.GetActiveScene().buildIndex)
         {
             case 0:
-                Debug.Log("SceneChange 0");
-
                 gameObject.GetComponent<SoundtrackLibrary>().mainMenu.PlaySoundtrack();
-                CallStartFade(masterMixer, "mainMenuMusicVol", musicSceneFade, PlayerPrefs.GetFloat("MusicVolume"));
+                StartCoroutine(FadeMixerGroup.StartFade(masterMixer, "mainMenuMusicVol", musicSceneFade, PlayerPrefs.GetFloat("MusicVolume")));
                 break;
 
             case 1:
-                Debug.Log("SceneChange 1");
-
                 gameObject.GetComponent<SoundtrackLibrary>().inGame.PlaySoundtrack();
-                CallStartFade(masterMixer, "inGameMusicVol", musicSceneFade, PlayerPrefs.GetFloat("MusicVolume"));
+                StartCoroutine(FadeMixerGroup.StartFade(masterMixer, "inGameMusicVol", musicSceneFade, PlayerPrefs.GetFloat("MusicVolume")));
                 break;
 
             default:
                 gameObject.GetComponent<SoundtrackLibrary>().defaultSoundtrack.PlaySoundtrack();
-                CallStartFade(masterMixer, "mainMenuMusicVol", musicSceneFade, PlayerPrefs.GetFloat("MusicVolume"));
-                break;
-        }
-    }
-
-    private void StartMusic()
-    {
-        switch (SceneManager.GetActiveScene().buildIndex)
-        {
-            case 0:
-                masterMixer.SetFloat("masterVol", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", masterDefaultVolume)) * 20);
-                masterMixer.SetFloat("mainMenuMusicVol", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume", musicDefaultVolume)) * 20);
-                masterMixer.SetFloat("inGameMusicVol", Mathf.Log10(0.0001f) * 20);
-                gameObject.GetComponent<SoundtrackLibrary>().mainMenu.PlaySoundtrack();
-                break;
-
-            case 1:
-                masterMixer.SetFloat("masterVol", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", masterDefaultVolume)) * 20);
-                masterMixer.SetFloat("inGameMusicVol", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume", musicDefaultVolume)) * 20);
-                masterMixer.SetFloat("mainMenuMusicVol", Mathf.Log10(0.0001f) * 20);
-                gameObject.GetComponent<SoundtrackLibrary>().inGame.PlaySoundtrack();
-                break;
-
-            default:
-                gameObject.GetComponent<SoundtrackLibrary>().defaultSoundtrack.PlaySoundtrack();
+                StartCoroutine(FadeMixerGroup.StartFade(masterMixer, "mainMenuMusicVol", musicSceneFade, PlayerPrefs.GetFloat("MusicVolume")));
                 break;
         }
     }
@@ -229,8 +225,6 @@ public class SoundtrackManager : MonoBehaviour
         InGame,
         ResultScreen
     }
-
-
 }
 
 
