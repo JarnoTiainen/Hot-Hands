@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class References: MonoBehaviour
 {
-    public static References _i;
+    public static References i { get; private set; }
 
-    public static References i
+    private void Awake()
     {
-        get
-        {
-            if (_i == null) _i = (Instantiate(Resources.Load("GameAssets")) as GameObject).GetComponent<References>();
-            return _i;
-        }
+        i = gameObject.GetComponent<References>();
     }
 
     public GameObject cardBase;
@@ -28,5 +24,10 @@ public class References: MonoBehaviour
     public Sprite sacrifice;
     public Sprite retaliate;
     public Sprite brutalityIcon;
+    public GameObject handCard;
+    public GameObject opponentDeckObj;
+    public GameObject yourDeckObj;
+    public GameObject opponentBonfire;
+    public GameObject yourBonfire;
 
 }

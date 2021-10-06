@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7355202}
   - component: {fileID: 7355203}
+  - component: {fileID: 7355200}
   m_Layer: 0
   m_Name: GameEventManager
   m_TagString: Untagged
@@ -140,6 +141,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7355200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f03169546557a468a731a748eab172, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNumber: 0
+  yourMonsterZone: {fileID: 572842664}
+  enemyMonsterZone: {fileID: 1645449387}
+  playerStartHealth: 100
 --- !u!4 &7355202
 Transform:
   m_ObjectHideFlags: 0
@@ -150,7 +167,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 701632847}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -166,12 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3688cc3b420dfe459cf844ad916c6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 3
   deck: {fileID: 915886160}
-  yourMonsterZone: {fileID: 572842664}
-  enemyMonsterZone: {fileID: 1645449387}
   debuggerModeOn: 1
-  playerStartHealth: 100
 --- !u!1 &7522968
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +742,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145481118}
   m_CullTransparentMesh: 1
+--- !u!1 &149145599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 149145601}
+  - component: {fileID: 149145600}
+  m_Layer: 0
+  m_Name: References
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &149145600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149145599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efdb789266698d447a2308b9815ff516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardBase: {fileID: 0}
+  container: {fileID: 0}
+  cardPreviewGameObject: {fileID: 0}
+  cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
+  lastBreathIcon: {fileID: 0}
+  openerIcon: {fileID: 0}
+  battlecryIcon: {fileID: 0}
+  drawtivationIcon: {fileID: 0}
+  sacrifice: {fileID: 0}
+  retaliate: {fileID: 0}
+  brutalityIcon: {fileID: 0}
+  handCard: {fileID: 7611825709596717884, guid: 9f8e5799bc8e632418cb743be7732cc0, type: 3}
+  opponentDeckObj: {fileID: 64249375}
+  yourDeckObj: {fileID: 915886159}
+  opponentBonfire: {fileID: 1245193536}
+  yourBonfire: {fileID: 1982223652}
+--- !u!4 &149145601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149145599}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &154725802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2474,6 +2547,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597429817}
   m_CullTransparentMesh: 1
+--- !u!1 &701632846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 701632847}
+  - component: {fileID: 701632848}
+  m_Layer: 0
+  m_Name: AfterEffects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &701632847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701632846}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7355202}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &701632848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701632846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 0
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 6566120cd48966e44b97b1e2937cdc1e, type: 2}
 --- !u!1 &774565296
 GameObject:
   m_ObjectHideFlags: 0
@@ -2548,6 +2669,7 @@ MonoBehaviour:
   mousePosInWorld: {x: 0, y: 0}
   markerPrefab: {fileID: 2524955863308533454, guid: e6f1d251d51a4754fb3fb54fd5cb9ff2, type: 3}
   debuggingOn: 1
+  mouseHightFromTableTop: -0.03
 --- !u!4 &780386861
 Transform:
   m_ObjectHideFlags: 0
@@ -4814,7 +4936,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1360794737}
   - component: {fileID: 1360794738}
-  - component: {fileID: 1360794739}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Hand
@@ -4853,18 +4974,6 @@ MonoBehaviour:
   gapBetweenCards: 0
   moveSpeed: 0.5
   rotationSpeed: 0.2
---- !u!114 &1360794739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360794736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32d7257c868abcf4f879fe74281368e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1412929014
 GameObject:
   m_ObjectHideFlags: 0

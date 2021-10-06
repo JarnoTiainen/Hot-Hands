@@ -84,6 +84,17 @@ public class Hand : MonoBehaviour
         SetNewCardPositions();
     }
 
+    [Button]
+    public void RemoveCardNoDestroy(int CardIndex = 0)
+    {
+        GameObject removedCard = handCards[CardIndex];
+        handCards.Remove(removedCard);
+        visibleHandCards.Remove(removedCard);
+        SetNewCardPositions();
+    }
+
+
+
     //sets new card positions in hand
     private static void SetNewCardPositions()
     {

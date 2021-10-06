@@ -10,6 +10,9 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] private TextMeshPro lp;
     [SerializeField] private TextMeshPro rp;
 
+
+    MaterialPropertyBlock materialPropertyBlock =
+
     public void SetNewCardData(bool isYourCard, CardData cardData)
     {
         this.cardData = cardData;
@@ -47,5 +50,15 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
     public void SetStatRp(int rp)
     {
         this.rp.text = rp.ToString();
+    }
+
+    public void Burn()
+    {
+        Debug.Log(cardData.cardName + " was burned");
+    }
+
+    public void Kill()
+    {
+        Debug.Log(cardData.cardName + " was killed");
     }
 }

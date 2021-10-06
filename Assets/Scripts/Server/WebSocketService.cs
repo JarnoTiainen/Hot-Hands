@@ -7,31 +7,27 @@ using Sirenix.OdinInspector;
 using SimpleJSON;
 public class WebSocketService : MonoBehaviour
 {
-    public int playerNumber;
-    public PlayerStats playerStats;
-    public PlayerStats enemyPlayerStats;
+    private GameManager gameManager;
+
     [SerializeField]private Deck deck;
-    [SerializeField] private MonsterZone yourMonsterZone;
-    [SerializeField] private MonsterZone enemyMonsterZone;
+    
     public static WebSocketService Instance { get; private set; }
     static WebSocket websocket;
     [SerializeField] private bool debuggerModeOn = false;
 
-    [SerializeField] private int playerStartHealth = 100;
-
-    private static GameObject sfxLibrary;
+    
 
     private void Awake()
     {
         Instance = gameObject.GetComponent<WebSocketService>();
+        gameManager = GameManager.Instance;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        playerStats = new PlayerStats(playerStartHealth);
-        enemyPlayerStats = new PlayerStats(playerStartHealth);
-        sfxLibrary = GameObject.Find("SFXLibrary");
+        
+       
         websocket = new WebSocket("wss://n14bom45md.execute-api.eu-north-1.amazonaws.com/production");
         OpenNewConnection();
 
@@ -59,40 +55,40 @@ public class WebSocketService : MonoBehaviour
             switch((string)data[0])
             {
                 case "GETSIDE":
-                    playerNumber = int.Parse(data[1]);
+                    gameManager.playerNumber = int.Parse(data[1]);
                     break;
                 case "PLAYCARD":
                     if(debuggerModeOn) Debug.Log("Message type was PLAYCARD");
                     PlayCardMessage playCardMessage = JsonUtility.FromJson<PlayCardMessage>(data[1]);
 
-                    if(playCardMessage.player == playerNumber)
+                    if(playCardMessage.player == gameManager.playerNumber)
                     {
                         Debug.LogWarning("You should add update card stats here :_3");
-                        yourMonsterZone.UpdateCardData(true, playCardMessage);
-                        GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = playerStats.playerBurnValue.ToString();
+                        gameManager.yourMonsterZone.UpdateCardData(true, playCardMessage);
+                        GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = gameManager.playerStats.playerBurnValue.ToString();
                     }
                     else
                     {
                         Debug.LogWarning(playCardMessage.cardName + " Enemy card index: " + playCardMessage.boardIndex);
-                        enemyMonsterZone.AddNewMonsterCard(false, playCardMessage.boardIndex);
-                        enemyMonsterZone.UpdateCardData(false, playCardMessage);
-                        enemyPlayerStats.playerBurnValue -= playCardMessage.cardCost;
-                        GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
-                        sfxLibrary.GetComponent<PlayCardSFX>().Play();
+                        gameManager.enemyMonsterZone.AddNewMonsterCard(false, playCardMessage.boardIndex);
+                        gameManager.enemyMonsterZone.UpdateCardData(false, playCardMessage);
+                        gameManager.enemyPlayerStats.playerBurnValue -= playCardMessage.cardCost;
+                        GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = gameManager.enemyPlayerStats.playerBurnValue.ToString();
+                        //sfxLibrary.GetComponent<PlayCardSFX>().Play();
                     }
                     break;
                 case "DRAWCARD":
                     if (debuggerModeOn) Debug.Log("Message type was DRAWCARD");
 
                     DrawCardMessage drawCardMessage = JsonUtility.FromJson<DrawCardMessage>(data[1]);
-                    if (drawCardMessage.player == playerNumber)
+                    if (drawCardMessage.player == gameManager.playerNumber)
                     {
                         Hand.RevealNewCard(drawCardMessage);
                     }
                     else
                     {
                         EnemyHand.AddNewCard();
-                        sfxLibrary.GetComponent<DrawCardSFX>().Play();
+                        //sfxLibrary.GetComponent<DrawCardSFX>().Play();
                     }
                     break;
                 case "ATTACK":
@@ -102,15 +98,15 @@ public class WebSocketService : MonoBehaviour
                     attackEventMessage.attackerValues = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.attacker);
                     if (attackEventMessage.directHit)
                     {
-                        if (attackEventMessage.player == playerNumber)
+                        if (attackEventMessage.player == gameManager.playerNumber)
                         {
-                            enemyPlayerStats.playerHealth -= attackEventMessage.playerTakenDamage;
-                            Debug.Log("Enemy lost " + attackEventMessage.playerTakenDamage + " health. New health is: " + enemyPlayerStats.playerHealth);
+                            gameManager.enemyPlayerStats.playerHealth -= attackEventMessage.playerTakenDamage;
+                            Debug.Log("Enemy lost " + attackEventMessage.playerTakenDamage + " health. New health is: " + gameManager.enemyPlayerStats.playerHealth);
                         }
                         else
                         {
-                            playerStats.playerHealth -= attackEventMessage.playerTakenDamage;
-                            Debug.Log("You lost " + attackEventMessage.playerTakenDamage + " health. New health is: " + playerStats.playerHealth);
+                            gameManager.playerStats.playerHealth -= attackEventMessage.playerTakenDamage;
+                            Debug.Log("You lost " + attackEventMessage.playerTakenDamage + " health. New health is: " + gameManager.playerStats.playerHealth);
                         }
                     }
                     else
@@ -119,20 +115,20 @@ public class WebSocketService : MonoBehaviour
                         if (debuggerModeOn) Debug.Log("attacked index: " + attackEventMessage.attackerValues.index + " target index: " + attackEventMessage.targetValues.index + "attacker lp: " + attackEventMessage.attackerValues.lp + " rp: " + attackEventMessage.attackerValues.rp + " target lp: " + attackEventMessage.targetValues.lp + " rp: " + attackEventMessage.targetValues.rp);
 
 
-                        if (attackEventMessage.player == playerNumber)
+                        if (attackEventMessage.player == gameManager.playerNumber)
                         {
-                            yourMonsterZone.UpdateCardData(true, attackEventMessage.attackerValues.index, attackEventMessage.attackerValues.lp, attackEventMessage.attackerValues.rp);
-                            enemyMonsterZone.UpdateCardData(false, attackEventMessage.targetValues.index, attackEventMessage.targetValues.lp, attackEventMessage.targetValues.rp);
-                            if (attackEventMessage.attackerValues.lp <= 0 || attackEventMessage.attackerValues.rp <= 0) yourMonsterZone.RemoveMonsterCard(attackEventMessage.attackerValues.index);
-                            if (attackEventMessage.targetValues.lp <= 0 || attackEventMessage.targetValues.rp <= 0) enemyMonsterZone.RemoveEnemyMonsterCard(attackEventMessage.targetValues.index);
+                            gameManager.yourMonsterZone.UpdateCardData(true, attackEventMessage.attackerValues.index, attackEventMessage.attackerValues.lp, attackEventMessage.attackerValues.rp);
+                            gameManager.enemyMonsterZone.UpdateCardData(false, attackEventMessage.targetValues.index, attackEventMessage.targetValues.lp, attackEventMessage.targetValues.rp);
+                            if (attackEventMessage.attackerValues.lp <= 0 || attackEventMessage.attackerValues.rp <= 0) gameManager.yourMonsterZone.RemoveMonsterCard(attackEventMessage.attackerValues.index);
+                            if (attackEventMessage.targetValues.lp <= 0 || attackEventMessage.targetValues.rp <= 0) gameManager.enemyMonsterZone.RemoveEnemyMonsterCard(attackEventMessage.targetValues.index);
 
                         }
                         else
                         {
-                            enemyMonsterZone.UpdateCardData(false, attackEventMessage.attackerValues.index, attackEventMessage.attackerValues.lp, attackEventMessage.attackerValues.rp);
-                            yourMonsterZone.UpdateCardData(true, attackEventMessage.targetValues.index, attackEventMessage.targetValues.lp, attackEventMessage.targetValues.rp);
-                            if (attackEventMessage.attackerValues.lp <= 0 || attackEventMessage.attackerValues.rp <= 0) enemyMonsterZone.RemoveEnemyMonsterCard(attackEventMessage.attackerValues.index);
-                            if (attackEventMessage.targetValues.lp <= 0 || attackEventMessage.targetValues.rp <= 0) yourMonsterZone.RemoveMonsterCard(attackEventMessage.targetValues.index);
+                            gameManager.enemyMonsterZone.UpdateCardData(false, attackEventMessage.attackerValues.index, attackEventMessage.attackerValues.lp, attackEventMessage.attackerValues.rp);
+                            gameManager.yourMonsterZone.UpdateCardData(true, attackEventMessage.targetValues.index, attackEventMessage.targetValues.lp, attackEventMessage.targetValues.rp);
+                            if (attackEventMessage.attackerValues.lp <= 0 || attackEventMessage.attackerValues.rp <= 0) gameManager.enemyMonsterZone.RemoveEnemyMonsterCard(attackEventMessage.attackerValues.index);
+                            if (attackEventMessage.targetValues.lp <= 0 || attackEventMessage.targetValues.rp <= 0) gameManager.yourMonsterZone.RemoveMonsterCard(attackEventMessage.targetValues.index);
                         }
                     }
                     
@@ -155,24 +151,7 @@ public class WebSocketService : MonoBehaviour
                 case "BURNCARD":
                     Debug.Log("BurnCardMessage: " + data[1]);
                     BurnCardMessage burnCardMessage = JsonUtility.FromJson<BurnCardMessage>(data[1]);
-                    burnCardMessage.burnedCardDone = JsonUtility.FromJson<DrawCardMessage>(burnCardMessage.burnedCard);
-
-                    if(burnCardMessage.burnedCardDone.player == playerNumber)
-                    {
-                        playerStats.playerBurnValue = burnCardMessage.newBurnValue;
-                        Debug.Log("new burn value is " + playerStats.playerBurnValue);
-                        Hand.Instance.RemoveCard(burnCardMessage.handIndex);
-                        GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = playerStats.playerBurnValue.ToString();
-                    }
-                    else
-                    {
-                        enemyPlayerStats.playerBurnValue = burnCardMessage.newBurnValue;
-                        Debug.Log("Enemy new burn value is " + playerStats.playerBurnValue);
-                        EnemyHand.Instance.RemoveCard(burnCardMessage.handIndex);
-                        GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
-                        sfxLibrary.GetComponent<BurnSFX>().Play();
-                    }
-
+                    gameManager.PlayerBurnCard(burnCardMessage);
                     break;
                 default:
                     Debug.Log("Message type was UNKOWN");
@@ -226,7 +205,7 @@ public class WebSocketService : MonoBehaviour
         GameMessage message = new GameMessage("OnMessage", "PLAYCARD", playCardMessageJSON);
 
         SendWebSocketMessage(JsonUtility.ToJson(message));
-        sfxLibrary.GetComponent<PlayCardSFX>().Play();
+        //sfxLibrary.GetComponent<PlayCardSFX>().Play();
     }
 
     [Button] public static void GetPlayerNumber()
@@ -240,7 +219,7 @@ public class WebSocketService : MonoBehaviour
     {
         GameMessage message = new GameMessage("OnMessage", "DRAWCARD", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
-        sfxLibrary.GetComponent<DrawCardSFX>().Play();
+        //sfxLibrary.GetComponent<DrawCardSFX>().Play();
     }
 
     public static void SaveCardToDataBase(Card card)
@@ -272,6 +251,6 @@ public class WebSocketService : MonoBehaviour
 
         GameMessage message = new GameMessage("OnMessage", "BURNCARD", handIndex.ToString());
         SendWebSocketMessage(JsonUtility.ToJson(message));
-        sfxLibrary.GetComponent<BurnSFX>().Play();
+        //sfxLibrary.GetComponent<BurnSFX>().Play();
     }
 }

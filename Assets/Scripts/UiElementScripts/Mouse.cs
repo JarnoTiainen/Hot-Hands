@@ -16,6 +16,7 @@ public class Mouse : MonoBehaviour
     public GameObject markerPrefab;
     private Hand uiHand;
     [SerializeField] private bool debuggingOn = false;
+    [SerializeField] private float mouseHightFromTableTop;
 
     private void Awake()
     {
@@ -40,7 +41,7 @@ public class Mouse : MonoBehaviour
         if(Physics.Raycast(ray, out RaycastHit raycastHit))
         {
             mousePosInWorld = raycastHit.point;
-            transform.position = new Vector3(raycastHit.point.x, raycastHit.point.y, 0);
+            transform.position = new Vector3(raycastHit.point.x, raycastHit.point.y, mouseHightFromTableTop);
         }
         if(Input.GetMouseButtonUp(0) && heldCard)
         {
@@ -61,9 +62,9 @@ public class Mouse : MonoBehaviour
     {
         if (Mathf.Abs(mousePosInWorld.x) < monsterHitBox.x && Mathf.Abs(mousePosInWorld.y) < monsterHitBox.y)
         {
-            if(WebSocketService.Instance.playerStats.playerBurnValue >= Hand.Instance.GetCardData(handIndex).cost)
+            if(GameManager.Instance.playerStats.playerBurnValue >= Hand.Instance.GetCardData(handIndex).cost)
             {
-                WebSocketService.Instance.playerStats.playerBurnValue -= Hand.Instance.GetCardData(handIndex).cost;
+                GameManager.Instance.playerStats.playerBurnValue -= Hand.Instance.GetCardData(handIndex).cost;
                 //card is in monster box
                 //FOR NOW PLACES CARD TO LEFT!!
                 WebSocketService.PlayCard(handIndex, 0);
@@ -82,6 +83,8 @@ public class Mouse : MonoBehaviour
         {
             Debug.Log("Card discarded from slot " + handIndex);
             WebSocketService.Burn(handIndex);
+            GameManager.Instance.PlayerBurnCard(GameManager.Instance.playerNumber, heldCard);
+            Hand.Instance.RemoveCardNoDestroy(handIndex);
             heldCard = null;
         }
         else
