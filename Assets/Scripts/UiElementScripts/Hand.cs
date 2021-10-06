@@ -152,4 +152,9 @@ public class Hand : MonoBehaviour
         Debug.LogError("Picked up card was not found from hand card list");
         return -1;
     }
+
+    public CardData GetCardData(int handIndex)
+    {
+        return handCards[handIndex].GetComponent<InGameCard>().cardData;
+    }
 }

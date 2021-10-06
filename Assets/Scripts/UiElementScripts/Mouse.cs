@@ -61,13 +61,22 @@ public class Mouse : MonoBehaviour
     {
         if (Mathf.Abs(mousePosInWorld.x) < monsterHitBox.x && Mathf.Abs(mousePosInWorld.y) < monsterHitBox.y)
         {
-            //card is in monster box
-            //FOR NOW PLACES CARD TO LEFT!!
-            WebSocketService.PlayCard(handIndex, 0);
+            if(WebSocketService.Instance.playerStats.playerBurnValue >= Hand.Instance.GetCardData(handIndex).cost)
+            {
+                WebSocketService.Instance.playerStats.playerBurnValue -= Hand.Instance.GetCardData(handIndex).cost;
+                //card is in monster box
+                //FOR NOW PLACES CARD TO LEFT!!
+                WebSocketService.PlayCard(handIndex, 0);
 
-            //FOR NOW PLACES CARD TO LEFT!!
-            yourMonsterZone.AddNewMonsterCard(true, 0);
-            Hand.Instance.RemoveCard(handIndex);
+                //FOR NOW PLACES CARD TO LEFT!!
+                yourMonsterZone.AddNewMonsterCard(true, 0);
+                Hand.Instance.RemoveCard(handIndex);
+            }
+            else
+            {
+                uiHand.ReturnVisibleCard(heldCard, handIndex);
+                heldCard = null;
+            }
         }
         else if(RayCaster.Instance.target == GameObject.Find("DiscardPile"))
         {
