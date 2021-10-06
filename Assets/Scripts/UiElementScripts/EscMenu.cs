@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class EscMenu : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class EscMenu : MonoBehaviour
     public GameObject settingsMenu;
     public GameObject disconnectConfirmation;
     public GameObject quitConfirmation;
+    [SerializeField] private float musicFadeTime = 3f;
 
     private void OnEnable()
     {
@@ -44,7 +46,10 @@ public class EscMenu : MonoBehaviour
 
     public void ReturnToMenu()
     {
-        Debug.Log("Returning to menu.");
+        AudioMixer masterMixer = Resources.Load("MasterMixer") as AudioMixer;
+        GameObject soundtrackManager = GameObject.FindGameObjectWithTag("SoundtrackManager");
+        soundtrackManager.GetComponent<SoundtrackManager>().CallStartFade(masterMixer, "inGameMusicVol", musicFadeTime, 0.0001f);
+        soundtrackManager.GetComponent<SoundtrackManager>().CallDestroySoundtrack(GameObject.Find("InGameSoundtrackPlayer"), musicFadeTime);
         SceneManager.LoadScene(0);
     }
 

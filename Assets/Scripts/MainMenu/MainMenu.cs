@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
     public GameObject profileMenu;
     public GameObject quitConfirmation;
     public GameObject loadingScreen;
-    [SerializeField] private float musicFadeTime = 1f;
+    [SerializeField] private float musicFadeTime = 3f;
 
     public void MenuButtonsSetActive(bool value)
     {
@@ -34,7 +34,10 @@ public class MainMenu : MonoBehaviour
 
     public void Play(int scene)
     {
-        StartCoroutine(FadeMixerGroup.StartFade(Resources.Load("MasterMixer") as AudioMixer, "mainMenuMusicVol", musicFadeTime, 0.0001f));
+        AudioMixer masterMixer = Resources.Load("MasterMixer") as AudioMixer;
+        GameObject soundtrackManager = GameObject.FindGameObjectWithTag("SoundtrackManager");
+        soundtrackManager.GetComponent<SoundtrackManager>().CallStartFade(masterMixer, "mainMenuMusicVol", musicFadeTime, 0.0001f);
+        soundtrackManager.GetComponent<SoundtrackManager>().CallDestroySoundtrack(GameObject.Find("MainMenuSoundtrackPlayer"), musicFadeTime);
         StartCoroutine(LoadingScreen(scene));
     }
 

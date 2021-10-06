@@ -64,7 +64,7 @@ public class SFX
     {
         // Platform #define directives for UnityEditor
         #if UNITY_EDITOR
-        UnityEditor.Selection.activeObject = sfxToPlay;
+            UnityEditor.Selection.activeObject = sfxToPlay;
         #endif
     }
 

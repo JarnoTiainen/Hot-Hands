@@ -13,6 +13,15 @@ public class SFXManager : MonoBehaviour
 
     private void Start()
     {
+        /*
+        DontDestroyOnLoad(gameObject);
+
+        if (FindObjectsOfType<SoundtrackManager>().Length > 1)
+        {
+            Object.Destroy(gameObject);
+        }
+        */
+
         masterMixer = Resources.Load("MasterMixer") as AudioMixer;
         sfxGroup = masterMixer.FindMatchingGroups("SFX")[0];
     }

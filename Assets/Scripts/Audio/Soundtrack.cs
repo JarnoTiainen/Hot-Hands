@@ -69,7 +69,7 @@ public class Soundtrack
     {
         // Platform #define directives for UnityEditor
         #if UNITY_EDITOR
-        UnityEditor.Selection.activeObject = soundtrackToPlay;
+            UnityEditor.Selection.activeObject = soundtrackToPlay;
         #endif
 
     }
@@ -101,8 +101,8 @@ public class Soundtrack
     public void PlaySoundtrack()
     {
         if (useDefault || audiosource == null)
-            SoundtrackManager.PlaySoundtrack(soundtrackToPlay, waitToPlay, loop, null);
+            SoundtrackManager.PlaySoundtrack(soundtrackToPlay, waitToPlay, loop, useDefault, null);
         else
-            SoundtrackManager.PlaySoundtrack(soundtrackToPlay, waitToPlay, loop, audiosource);
+            SoundtrackManager.PlaySoundtrack(soundtrackToPlay, waitToPlay, loop, useDefault, audiosource);
     }
 }

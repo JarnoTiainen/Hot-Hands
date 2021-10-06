@@ -24,9 +24,15 @@ public static class FadeMixerGroup
         yield break;
     }
 
-    public static IEnumerator StopMusic(GameObject musicPlayer, float fade)
+    public static IEnumerator StopMusic(GameObject musicPlayer, float time)
     {
-        yield return new WaitForSeconds(fade);
+        yield return new WaitForSeconds(time);
         musicPlayer.GetComponent<AudioSource>().Stop();
+    }
+
+    public static IEnumerator DestroySoundtrack(GameObject soundtrack, float time)
+    {
+        yield return new WaitForSeconds(time);
+        Object.Destroy(soundtrack);
     }
 }

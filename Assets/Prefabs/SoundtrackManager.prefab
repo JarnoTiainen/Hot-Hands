@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3082705246300206721}
   m_Layer: 0
   m_Name: SoundtrackManager
-  m_TagString: Untagged
+  m_TagString: SoundtrackManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf5167f675aa304d8519c65a1620d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterDefaultVolume: 0.5
+  musicDefaultVolume: 0.5
+  musicSceneFade: 5
   defaultAudioSource: {fileID: 8141048939576357606}
   menuSoundtrack:
   - {fileID: 11400000, guid: 7b7062388f3e2714c9e032dcc9c8a98c, type: 2}
@@ -167,19 +170,19 @@ MonoBehaviour:
     showSettings: 0
     editSettings: 0
     _soundtrackBase: {fileID: 11400000, guid: 7b7062388f3e2714c9e032dcc9c8a98c, type: 2}
-    waitToPlay: 1
+    waitToPlay: 0
     loop: 1
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}
   inGame:
     soundtrackType: 1
     soundtrackToPlay: {fileID: 11400000, guid: 0ded0eba931060f43a5004e52ad42488, type: 2}
-    showSettings: 1
-    editSettings: 1
+    showSettings: 0
+    editSettings: 0
     _soundtrackBase: {fileID: 11400000, guid: 0ded0eba931060f43a5004e52ad42488, type: 2}
-    waitToPlay: 1
+    waitToPlay: 0
     loop: 1
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}
   defaultSoundtrack:
     soundtrackType: 2
@@ -187,7 +190,7 @@ MonoBehaviour:
     showSettings: 0
     editSettings: 0
     _soundtrackBase: {fileID: 11400000, guid: 899ce18cf9df6af4a837e1da92b967fb, type: 2}
-    waitToPlay: 1
+    waitToPlay: 0
     loop: 1
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}
