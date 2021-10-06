@@ -1581,16 +1581,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694933, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: m_Pitch
-      value: 1.0087733
+      value: 0.9548881
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694933, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: m_Volume
-      value: 0.9996144
+      value: 0.98973
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694933, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 8cf8fa152482bb44b9d60506a12772e1, type: 3}
+      objectReference: {fileID: 8300000, guid: fd2a663a45dbebb429fbb88a4b206ca5, type: 3}
     - target: {fileID: 6413452686842694933, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
@@ -2385,8 +2385,6 @@ GameObject:
   m_Component:
   - component: {fileID: 780386861}
   - component: {fileID: 780386860}
-  - component: {fileID: 780386862}
-  - component: {fileID: 780386863}
   m_Layer: 0
   m_Name: Mouse
   m_TagString: Untagged
@@ -2427,66 +2425,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &780386862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 780386859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c9cbb19bc1a8de4d82d5670d090936f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardPlay1:
-    sfxType: 1
-    sfxToPlay: {fileID: 11400000, guid: 771280f6af8128a4d82fe6c88bdf5c0a, type: 2}
-    showSettings: 0
-    editSettings: 0
-    _sfxBase: {fileID: 11400000, guid: 771280f6af8128a4d82fe6c88bdf5c0a, type: 2}
-    waitToPlay: 0
-    useDefault: 1
-    audiosource: {fileID: 0}
-  cardPlay2:
-    sfxType: 1
-    sfxToPlay: {fileID: 11400000, guid: eef228277f60ed049af3849825ee6123, type: 2}
-    showSettings: 0
-    editSettings: 0
-    _sfxBase: {fileID: 11400000, guid: eef228277f60ed049af3849825ee6123, type: 2}
-    waitToPlay: 0
-    useDefault: 1
-    audiosource: {fileID: 0}
-  cardPlay3:
-    sfxType: 1
-    sfxToPlay: {fileID: 11400000, guid: 670c48ac42a7a584db8a71a15af0cdd2, type: 2}
-    showSettings: 0
-    editSettings: 0
-    _sfxBase: {fileID: 11400000, guid: 670c48ac42a7a584db8a71a15af0cdd2, type: 2}
-    waitToPlay: 0
-    useDefault: 1
-    audiosource: {fileID: 0}
---- !u!114 &780386863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 780386859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76f45f330cc780d43a11d01b806a6bda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  burnSFX:
-    sfxType: 2
-    sfxToPlay: {fileID: 11400000, guid: af90e02691e21704a9a8c121692732fc, type: 2}
-    showSettings: 0
-    editSettings: 0
-    _sfxBase: {fileID: 11400000, guid: af90e02691e21704a9a8c121692732fc, type: 2}
-    waitToPlay: 0
-    useDefault: 1
-    audiosource: {fileID: 0}
 --- !u!1 &782970624
 GameObject:
   m_ObjectHideFlags: 0
@@ -2705,6 +2643,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782970624}
   m_CullTransparentMesh: 1
+--- !u!4 &819660535 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+  m_PrefabInstance: {fileID: 4268212973799015636}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &842673499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2906,6 +2849,7 @@ Transform:
   m_Children:
   - {fileID: 1479696460}
   - {fileID: 144250893}
+  - {fileID: 819660535}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3238,7 +3182,6 @@ GameObject:
   - component: {fileID: 915886162}
   - component: {fileID: 915886161}
   - component: {fileID: 915886160}
-  - component: {fileID: 915886165}
   m_Layer: 0
   m_Name: Deck
   m_TagString: Deck
@@ -3346,45 +3289,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &915886165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 915886159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f9bd74f3f3cb4e4f9d995ce408740d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardDraw1:
-    sfxType: 1
-    sfxToPlay: {fileID: 11400000, guid: 70c15c7b631093043b1b114ea1df3135, type: 2}
-    showSettings: 0
-    editSettings: 0
-    _sfxBase: {fileID: 11400000, guid: 70c15c7b631093043b1b114ea1df3135, type: 2}
-    waitToPlay: 0
-    useDefault: 1
-    audiosource: {fileID: 0}
-  cardDraw2:
-    sfxType: 1
-    sfxToPlay: {fileID: 11400000, guid: 4ba9b286ddfee9645af2d38ab84105b6, type: 2}
-    showSettings: 0
-    editSettings: 0
-    _sfxBase: {fileID: 11400000, guid: 4ba9b286ddfee9645af2d38ab84105b6, type: 2}
-    waitToPlay: 0
-    useDefault: 1
-    audiosource: {fileID: 0}
-  cardDraw3:
-    sfxType: 1
-    sfxToPlay: {fileID: 11400000, guid: ae5969a47a21fbe45993c5929bf0a22a, type: 2}
-    showSettings: 0
-    editSettings: 0
-    _sfxBase: {fileID: 11400000, guid: ae5969a47a21fbe45993c5929bf0a22a, type: 2}
-    waitToPlay: 0
-    useDefault: 1
-    audiosource: {fileID: 0}
 --- !u!1001 &950750715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8037,3 +7941,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120060497}
   m_CullTransparentMesh: 1
+--- !u!1001 &4268212973799015636
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 873259515}
+    m_Modifications:
+    - target: {fileID: 4268212973007929890, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+      propertyPath: m_Name
+      value: SFXLibrary
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}

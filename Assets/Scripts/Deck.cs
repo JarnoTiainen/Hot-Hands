@@ -29,7 +29,6 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
     {
         WebSocketService.DrawCard();
         Hand.AddNewCard();
-        gameObject.GetComponent<DrawCardSounds>().Draw();
     }
 
 

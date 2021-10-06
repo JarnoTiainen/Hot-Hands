@@ -75,6 +75,7 @@ public class WebSocketService : MonoBehaviour
                         enemyMonsterZone.UpdateCardData(false, playCardMessage);
                         enemyPlayerStats.playerBurnValue -= playCardMessage.cardCost;
                         GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
+                        SFXLibrary.Instance.GetComponent<PlayCardSounds>().Play();
                     }
                     break;
                 case "DRAWCARD":
@@ -88,6 +89,7 @@ public class WebSocketService : MonoBehaviour
                     else
                     {
                         EnemyHand.AddNewCard();
+                        SFXLibrary.Instance.GetComponent<DrawCardSounds>().Play();
                     }
                     break;
                 case "ATTACK":
@@ -165,6 +167,7 @@ public class WebSocketService : MonoBehaviour
                         Debug.Log("Enemy new burn value is " + playerStats.playerBurnValue);
                         EnemyHand.Instance.RemoveCard(burnCardMessage.handIndex);
                         GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
+                        SFXLibrary.Instance.GetComponent<BurnSound>().Play();
                     }
                     
                     break;
@@ -220,6 +223,7 @@ public class WebSocketService : MonoBehaviour
         GameMessage message = new GameMessage("OnMessage", "PLAYCARD", playCardMessageJSON);
 
         SendWebSocketMessage(JsonUtility.ToJson(message));
+        SFXLibrary.Instance.GetComponent<PlayCardSounds>().Play();
     }
 
     [Button] public static void GetPlayerNumber()
@@ -233,6 +237,7 @@ public class WebSocketService : MonoBehaviour
     {
         GameMessage message = new GameMessage("OnMessage", "DRAWCARD", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
+        SFXLibrary.Instance.GetComponent<DrawCardSounds>().Play();
     }
 
     public static void SaveCardToDataBase(Card card)
@@ -264,5 +269,6 @@ public class WebSocketService : MonoBehaviour
 
         GameMessage message = new GameMessage("OnMessage", "BURNCARD", handIndex.ToString());
         SendWebSocketMessage(JsonUtility.ToJson(message));
+        SFXLibrary.Instance.GetComponent<BurnSound>().Play();
     }
 }

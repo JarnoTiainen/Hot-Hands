@@ -6,7 +6,7 @@ public class BurnSound : MonoBehaviour
 {
     public SFX burnSFX;
 
-    public void Burn()
+    public void Play()
     {
         burnSFX.PlaySFX();
     }

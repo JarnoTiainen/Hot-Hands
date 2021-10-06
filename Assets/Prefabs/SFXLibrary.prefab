@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4268212973007929890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4268212973007929891}
+  - component: {fileID: 4268212973007929901}
+  - component: {fileID: 4268212973007929900}
+  - component: {fileID: 4268212973007929903}
+  - component: {fileID: 4268212973007929902}
+  m_Layer: 0
+  m_Name: SFXLibrary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4268212973007929891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4268212973007929890}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4268212973007929901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4268212973007929890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f70aadb93a8b2c64a816a96d427f5ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4268212973007929900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4268212973007929890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f45f330cc780d43a11d01b806a6bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  burnSFX:
+    sfxType: 2
+    sfxToPlay: {fileID: 11400000, guid: af90e02691e21704a9a8c121692732fc, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: af90e02691e21704a9a8c121692732fc, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
+--- !u!114 &4268212973007929903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4268212973007929890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f9bd74f3f3cb4e4f9d995ce408740d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardDraw1:
+    sfxType: 1
+    sfxToPlay: {fileID: 11400000, guid: 70c15c7b631093043b1b114ea1df3135, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 70c15c7b631093043b1b114ea1df3135, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
+  cardDraw2:
+    sfxType: 1
+    sfxToPlay: {fileID: 11400000, guid: 4ba9b286ddfee9645af2d38ab84105b6, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 4ba9b286ddfee9645af2d38ab84105b6, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
+  cardDraw3:
+    sfxType: 1
+    sfxToPlay: {fileID: 11400000, guid: ae5969a47a21fbe45993c5929bf0a22a, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: ae5969a47a21fbe45993c5929bf0a22a, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
+--- !u!114 &4268212973007929902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4268212973007929890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c9cbb19bc1a8de4d82d5670d090936f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPlay1:
+    sfxType: 1
+    sfxToPlay: {fileID: 11400000, guid: 771280f6af8128a4d82fe6c88bdf5c0a, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 771280f6af8128a4d82fe6c88bdf5c0a, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
+  cardPlay2:
+    sfxType: 1
+    sfxToPlay: {fileID: 11400000, guid: eef228277f60ed049af3849825ee6123, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: eef228277f60ed049af3849825ee6123, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
+  cardPlay3:
+    sfxType: 1
+    sfxToPlay: {fileID: 11400000, guid: 670c48ac42a7a584db8a71a15af0cdd2, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 670c48ac42a7a584db8a71a15af0cdd2, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}

@@ -67,7 +67,6 @@ public class Mouse : MonoBehaviour
                 //card is in monster box
                 //FOR NOW PLACES CARD TO LEFT!!
                 WebSocketService.PlayCard(handIndex, 0);
-                gameObject.GetComponent<PlayCardSounds>().Play();
 
                 //FOR NOW PLACES CARD TO LEFT!!
                 yourMonsterZone.AddNewMonsterCard(true, 0);
@@ -84,7 +83,6 @@ public class Mouse : MonoBehaviour
             Debug.Log("Card discarded from slot " + handIndex);
             WebSocketService.Burn(handIndex);
             heldCard = null;
-            gameObject.GetComponent<BurnSound>().Burn();
         }
         else
         {

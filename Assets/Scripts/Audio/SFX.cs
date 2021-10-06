@@ -37,7 +37,7 @@ public class SFX
     [ShowIf("showSettings")]
     [EnableIf("editSettings")]
     [SerializeField]
-    private bool waitToPlay = true;
+    private bool waitToPlay = false;
 
     [ShowIf("showSettings")]
     [EnableIf("editSettings")]

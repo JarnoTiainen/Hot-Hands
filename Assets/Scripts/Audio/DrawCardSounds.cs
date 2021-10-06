@@ -8,7 +8,7 @@ public class DrawCardSounds : MonoBehaviour
     public SFX cardDraw2;
     public SFX cardDraw3;
 
-    public void Draw()
+    public void Play()
     {
         Debug.Log("Draw sound");
         int x = Random.Range(1, 4);
