@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
 
 
         sfxLibrary.GetComponent<BurnSFX>().Play();
+        card.GetComponent<InGameCard>().Burn();
         int value = card.GetComponent<InGameCard>().cardData.value;
         if (player == playerNumber)
         {

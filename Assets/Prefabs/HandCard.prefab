@@ -523,6 +523,7 @@ GameObject:
   - component: {fileID: 424058452700800159}
   - component: {fileID: 6490331289218157256}
   - component: {fileID: 5773110476351464011}
+  - component: {fileID: 2157171559758549780}
   m_Layer: 0
   m_Name: HandCard
   m_TagString: Untagged
@@ -639,6 +640,20 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2157171559758549780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611825709596717884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31046ae84f05f1547b86c4ca08ea92d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 0}
+  isDissolving: 0
 --- !u!1 &9020729396848444570
 GameObject:
   m_ObjectHideFlags: 0

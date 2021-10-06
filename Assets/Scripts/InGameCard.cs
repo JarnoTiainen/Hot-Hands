@@ -11,13 +11,13 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] public TextMeshProUGUI rp;
 
     [SerializeField] private Shader cardMainBodyMaterial;
-    
+    private Material mat;
+
 
     private void Awake()
     {
-        Debug.Log(transform.GetChild(0).GetComponent<MeshRenderer>().material.shader);
+        mat = transform.GetChild(0).GetComponent<MeshRenderer>().material;
         transform.GetChild(0).GetComponent<MeshRenderer>().material.shader = cardMainBodyMaterial;
-        Debug.Log(transform.GetChild(0).GetComponent<MeshRenderer>().material.shader);
     }
 
 
@@ -63,6 +63,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
     public void Burn()
     {
         Debug.Log(cardData.cardName + " was burned");
+        GetComponent<DissolveEffect>().StartDissolving(mat);
     }
 
     public void Kill()
