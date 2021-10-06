@@ -84,6 +84,7 @@ public class Mouse : MonoBehaviour
             Debug.Log("Card discarded from slot " + handIndex);
             WebSocketService.Burn(handIndex);
             heldCard = null;
+            gameObject.GetComponent<BurnSound>().Burn();
         }
         else
         {
