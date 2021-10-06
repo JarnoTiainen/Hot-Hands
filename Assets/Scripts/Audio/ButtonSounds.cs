@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class ButtonSounds : MonoBehaviour
 {
-    public SFX buttonHover;
-    public SFX buttonClick;
+    private static GameObject sfxLibrary;
+
+    private void Start()
+    {
+        sfxLibrary = GameObject.Find("SFXLibrary");
+    }
 
     public void OnHover()
     {
-        buttonHover.PlaySFX();
+        sfxLibrary.GetComponent<ButtonSFX>().buttonHover.PlaySFX();
     }
 
     public void OnClick()
     {
-        buttonClick.PlaySFX();
+        sfxLibrary.GetComponent<ButtonSFX>().buttonClick.PlaySFX();
     }
 }

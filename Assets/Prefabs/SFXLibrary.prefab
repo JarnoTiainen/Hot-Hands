@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4268212973007929891}
-  - component: {fileID: 4268212973007929901}
+  - component: {fileID: 8911773430897866057}
   - component: {fileID: 4268212973007929900}
   - component: {fileID: 4268212973007929903}
   - component: {fileID: 4268212973007929902}
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4268212973007929901
+--- !u!114 &8911773430897866057
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,9 +43,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 4268212973007929890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f70aadb93a8b2c64a816a96d427f5ebd, type: 3}
+  m_Script: {fileID: 11500000, guid: 339efcbd834654a40862c02bccbad736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonHover:
+    sfxType: 0
+    sfxToPlay: {fileID: 11400000, guid: 4472400b4dcdb8245831e872f4f62042, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 4472400b4dcdb8245831e872f4f62042, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
+  buttonClick:
+    sfxType: 0
+    sfxToPlay: {fileID: 11400000, guid: 8ed319f2c003c2c46a4986d19b277f41, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 8ed319f2c003c2c46a4986d19b277f41, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
+  playClick:
+    sfxType: 1
+    sfxToPlay: {fileID: 11400000, guid: 218abad15bb0dc24086a6440844b2113, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 218abad15bb0dc24086a6440844b2113, type: 2}
+    waitToPlay: 0
+    useDefault: 1
+    audiosource: {fileID: 0}
 --- !u!114 &4268212973007929900
 MonoBehaviour:
   m_ObjectHideFlags: 0

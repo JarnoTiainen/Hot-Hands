@@ -19,6 +19,8 @@ public class WebSocketService : MonoBehaviour
 
     [SerializeField] private int playerStartHealth = 100;
 
+    private static GameObject sfxLibrary;
+
     private void Awake()
     {
         Instance = gameObject.GetComponent<WebSocketService>();
@@ -29,6 +31,7 @@ public class WebSocketService : MonoBehaviour
     {
         playerStats = new PlayerStats(playerStartHealth);
         enemyPlayerStats = new PlayerStats(playerStartHealth);
+        sfxLibrary = GameObject.Find("SFXLibrary");
         websocket = new WebSocket("wss://n14bom45md.execute-api.eu-north-1.amazonaws.com/production");
         OpenNewConnection();
 
@@ -75,7 +78,7 @@ public class WebSocketService : MonoBehaviour
                         enemyMonsterZone.UpdateCardData(false, playCardMessage);
                         enemyPlayerStats.playerBurnValue -= playCardMessage.cardCost;
                         GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
-                        SFXLibrary.Instance.GetComponent<PlayCardSounds>().Play();
+                        sfxLibrary.GetComponent<PlayCardSFX>().Play();
                     }
                     break;
                 case "DRAWCARD":
@@ -89,7 +92,7 @@ public class WebSocketService : MonoBehaviour
                     else
                     {
                         EnemyHand.AddNewCard();
-                        SFXLibrary.Instance.GetComponent<DrawCardSounds>().Play();
+                        sfxLibrary.GetComponent<DrawCardSFX>().Play();
                     }
                     break;
                 case "ATTACK":
@@ -167,9 +170,9 @@ public class WebSocketService : MonoBehaviour
                         Debug.Log("Enemy new burn value is " + playerStats.playerBurnValue);
                         EnemyHand.Instance.RemoveCard(burnCardMessage.handIndex);
                         GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
-                        SFXLibrary.Instance.GetComponent<BurnSound>().Play();
+                        sfxLibrary.GetComponent<BurnSFX>().Play();
                     }
-                    
+
                     break;
                 default:
                     Debug.Log("Message type was UNKOWN");
@@ -223,7 +226,7 @@ public class WebSocketService : MonoBehaviour
         GameMessage message = new GameMessage("OnMessage", "PLAYCARD", playCardMessageJSON);
 
         SendWebSocketMessage(JsonUtility.ToJson(message));
-        SFXLibrary.Instance.GetComponent<PlayCardSounds>().Play();
+        sfxLibrary.GetComponent<PlayCardSFX>().Play();
     }
 
     [Button] public static void GetPlayerNumber()
@@ -237,7 +240,7 @@ public class WebSocketService : MonoBehaviour
     {
         GameMessage message = new GameMessage("OnMessage", "DRAWCARD", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
-        SFXLibrary.Instance.GetComponent<DrawCardSounds>().Play();
+        sfxLibrary.GetComponent<DrawCardSFX>().Play();
     }
 
     public static void SaveCardToDataBase(Card card)
@@ -269,6 +272,6 @@ public class WebSocketService : MonoBehaviour
 
         GameMessage message = new GameMessage("OnMessage", "BURNCARD", handIndex.ToString());
         SendWebSocketMessage(JsonUtility.ToJson(message));
-        SFXLibrary.Instance.GetComponent<BurnSound>().Play();
+        sfxLibrary.GetComponent<BurnSFX>().Play();
     }
 }

@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Sirenix.OdinInspector;
+using UnityEngine.SceneManagement;
 
 public class SoundtrackManager : MonoBehaviour
 {
     private static SoundtrackManager _instance;
+
+
     public static SoundtrackManager instance
     {
         get
@@ -70,6 +73,24 @@ public class SoundtrackManager : MonoBehaviour
         Menu,
         InGame,
         ResultScreen
+    }
+
+    private void Start()
+    {
+        switch (SceneManager.GetActiveScene().buildIndex)
+        {
+            case 0:
+                gameObject.GetComponent<SoundtrackLibrary>().mainMenu.PlaySoundtrack();
+                break;
+
+            case 1:
+                gameObject.GetComponent<SoundtrackLibrary>().inGame.PlaySoundtrack();
+                break;
+
+            default:
+                gameObject.GetComponent<SoundtrackLibrary>().defaultSoundtrack.PlaySoundtrack();
+                break;
+        }
     }
 }
 

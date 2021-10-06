@@ -18,6 +18,11 @@ public class EscMenu : MonoBehaviour
         quitConfirmation.SetActive(false);
     }
 
+    public void Return()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void EscMenuButtonsSetActive(bool value)
     {
         escMenuButtons.SetActive(value);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawCardSounds : MonoBehaviour
+public class DrawCardSFX : MonoBehaviour
 {
     public SFX cardDraw1;
     public SFX cardDraw2;
