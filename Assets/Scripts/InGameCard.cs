@@ -4,11 +4,22 @@ using TMPro;
 public class InGameCard : MonoBehaviour, IOnClickDownUIElement
 {
     [SerializeField] public CardData cardData;
-    [SerializeField] private TextMeshPro nameText;
-    [SerializeField] private TextMeshPro cost;
-    [SerializeField] private TextMeshPro value;
-    [SerializeField] private TextMeshPro lp;
-    [SerializeField] private TextMeshPro rp;
+    [SerializeField] public TextMeshProUGUI nameText;
+    [SerializeField] public TextMeshProUGUI cost;
+    [SerializeField] public TextMeshProUGUI value;
+    [SerializeField] public TextMeshProUGUI lp;
+    [SerializeField] public TextMeshProUGUI rp;
+
+    [SerializeField] private Shader cardMainBodyMaterial;
+    
+
+    private void Awake()
+    {
+        Debug.Log(transform.GetChild(0).GetComponent<MeshRenderer>().material.shader);
+        transform.GetChild(0).GetComponent<MeshRenderer>().material.shader = cardMainBodyMaterial;
+        Debug.Log(transform.GetChild(0).GetComponent<MeshRenderer>().material.shader);
+    }
+
 
     public void SetNewCardData(bool isYourCard, CardData cardData)
     {

@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 7355202}
   - component: {fileID: 7355203}
   - component: {fileID: 7355200}
+  - component: {fileID: 7355201}
   m_Layer: 0
   m_Name: GameEventManager
   m_TagString: Untagged
@@ -157,6 +158,23 @@ MonoBehaviour:
   yourMonsterZone: {fileID: 572842664}
   enemyMonsterZone: {fileID: 1645449387}
   playerStartHealth: 100
+--- !u!114 &7355201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 6566120cd48966e44b97b1e2937cdc1e, type: 2}
 --- !u!4 &7355202
 Transform:
   m_ObjectHideFlags: 0
