@@ -6,7 +6,7 @@ public class DissolveEffect : MonoBehaviour
 {
     private Material material;
 
-    private float dissolveAmount = 1;
+    private float dissolveAmount = 0.65f;
     [SerializeField] private bool isDissolving;
 
 
@@ -14,8 +14,6 @@ public class DissolveEffect : MonoBehaviour
     {
         if(isDissolving)
         {
-            Debug.Log("loop");
-
             dissolveAmount = Mathf.Clamp01(dissolveAmount - Time.deltaTime);
             material.SetFloat("_DissolveAmount", dissolveAmount);
         }
