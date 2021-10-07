@@ -47,7 +47,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterDefaultVolume: 0.5
   musicDefaultVolume: 0.5
-  musicSceneFade: 5
+  mainMenuFadeIn: 4
+  mainMenuFadeOut: 3
+  inGameFadeIn: 4
+  inGameFadeOut: 3
+  resultScreenFadeIn: 4
+  resultScreenFadeOut: 2
   defaultAudioSource: {fileID: 8141048939576357606}
   menuSoundtrack:
   - {fileID: 11400000, guid: 7b7062388f3e2714c9e032dcc9c8a98c, type: 2}
@@ -180,6 +185,16 @@ MonoBehaviour:
     showSettings: 0
     editSettings: 0
     _soundtrackBase: {fileID: 11400000, guid: 0ded0eba931060f43a5004e52ad42488, type: 2}
+    waitToPlay: 0
+    loop: 1
+    useDefault: 0
+    audiosource: {fileID: 0}
+  resultScreen:
+    soundtrackType: 1
+    soundtrackToPlay: {fileID: 11400000, guid: 161733ab3e8d307498d69bb35604183d, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _soundtrackBase: {fileID: 11400000, guid: 161733ab3e8d307498d69bb35604183d, type: 2}
     waitToPlay: 0
     loop: 1
     useDefault: 0

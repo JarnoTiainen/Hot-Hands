@@ -5,42 +5,30 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 
-public class EscMenu : MonoBehaviour
+public class ResultMenu : MonoBehaviour
 {
-    public GameObject escMenuButtons;
+    public GameObject resultMenuButtons;
     public GameObject settingsMenu;
     public GameObject disconnectConfirmation;
     public GameObject quitConfirmation;
     [SerializeField] private float musicFadeTime = 3f;
 
-    private void OnEnable()
-    {
-        escMenuButtons.SetActive(true);
-        settingsMenu.SetActive(false);
-        disconnectConfirmation.SetActive(false);
-        quitConfirmation.SetActive(false);
-    }
-
-    private void OnDisable()
-    {
-        EventSystem.current.SetSelectedGameObject(null);
-    }
 
     public void Return()
     {
         gameObject.SetActive(false);
     }
 
-    public void EscMenuButtonsSetActive(bool value)
+    public void ResultMenuButtonsSetActive(bool value)
     {
-        escMenuButtons.SetActive(value);
+        resultMenuButtons.SetActive(value);
     }
 
     public void SettingsMenuSetActive(bool value)
     {
         settingsMenu.SetActive(value);
     }
-    public void DisconnectConfirmationSetActive(bool value)
+    public void ReturnConfirmationSetActive(bool value)
     {
         disconnectConfirmation.SetActive(value);
     }

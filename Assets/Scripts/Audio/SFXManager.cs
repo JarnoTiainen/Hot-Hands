@@ -10,6 +10,8 @@ public class SFXManager : MonoBehaviour
     private static SFXManager _instance;
     private static AudioMixer masterMixer;
     private static AudioMixerGroup sfxGroup;
+    [SerializeField] private float sfxDefaultVolume = 0.5f;
+
 
     private void Start()
     {
@@ -24,6 +26,8 @@ public class SFXManager : MonoBehaviour
 
         masterMixer = Resources.Load("MasterMixer") as AudioMixer;
         sfxGroup = masterMixer.FindMatchingGroups("SFX")[0];
+        masterMixer.SetFloat("sfxVol", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume", sfxDefaultVolume)) * 20);
+
     }
 
     public static SFXManager instance

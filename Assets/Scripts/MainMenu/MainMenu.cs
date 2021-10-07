@@ -34,17 +34,12 @@ public class MainMenu : MonoBehaviour
 
     public void Play(int scene)
     {
-        AudioMixer masterMixer = Resources.Load("MasterMixer") as AudioMixer;
-        GameObject soundtrackManager = GameObject.FindGameObjectWithTag("SoundtrackManager");
-        soundtrackManager.GetComponent<SoundtrackManager>().CallStartFade(masterMixer, "mainMenuMusicVol", musicFadeTime, 0.0001f);
-        soundtrackManager.GetComponent<SoundtrackManager>().CallDestroySoundtrack(GameObject.Find("MainMenuSoundtrackPlayer"), musicFadeTime);
         StartCoroutine(LoadingScreen(scene));
     }
 
     IEnumerator LoadingScreen(int scene)
     {
         loadingScreen.SetActive(true);
-        Debug.Log("Launching scene " + scene);
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(scene);
     }

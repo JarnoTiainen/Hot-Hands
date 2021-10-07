@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!243 &-9034782715215948977
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ResultScreenMusic
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 780ce7937274abc4e8993fd33982507f
+  m_Children: []
+  m_Volume: 332d9001bf2ba244a8a81cd66a3dadba
+  m_Pitch: 2fa328e976353c04d9f1c0523a9f17c6
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -2806335133895605302}
+  m_UserColorIndex: 1
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &-8258279292857253488
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -38,6 +57,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-2806335133895605302
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 084844cae7d7a514f9a60c6a08f38b8c
+  m_EffectName: Attenuation
+  m_MixLevel: 9c750434e30517744b97cc21b2ab55e1
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-1933748668745750315
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -73,12 +106,14 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
-  - guid: 6303c956e023b1449a1cb05b2233d80f
-    name: masterVol
-  - guid: 205ce90744d960f44a9fd6cfae3a2ed5
-    name: mainMenuMusicVol
   - guid: 295956c18ba949b4394449702a7ddbff
     name: inGameMusicVol
+  - guid: 205ce90744d960f44a9fd6cfae3a2ed5
+    name: mainMenuMusicVol
+  - guid: 6303c956e023b1449a1cb05b2233d80f
+    name: masterVol
+  - guid: 332d9001bf2ba244a8a81cd66a3dadba
+    name: resultScreenMusicVol
   - guid: ed26b98bfa2718e4c9366a9e8487517a
     name: sfxVol
   m_AudioMixerGroupViews:
@@ -87,11 +122,13 @@ AudioMixerController:
     - f5548c48ed2d8194ea1b8cce591581ac
     - 85402bcc4cefbda45aaa4dc018c1605d
     - ec9c7b92af4d0934fa2290e898ed4066
+    - 780ce7937274abc4e8993fd33982507f
     name: Everything
   - guids:
     - ff09b7991cd0f7a41b5c7786faad15fd
     - f5548c48ed2d8194ea1b8cce591581ac
     - ec9c7b92af4d0934fa2290e898ed4066
+    - 780ce7937274abc4e8993fd33982507f
     name: Music
   - guids:
     - ff09b7991cd0f7a41b5c7786faad15fd
@@ -111,6 +148,7 @@ AudioMixerGroupController:
   m_Children:
   - {fileID: -8258279292857253488}
   - {fileID: -6182434912256894675}
+  - {fileID: -9034782715215948977}
   - {fileID: -1933748668745750315}
   m_Volume: 6303c956e023b1449a1cb05b2233d80f
   m_Pitch: a8b37271fb88f5044a862f112164c684
