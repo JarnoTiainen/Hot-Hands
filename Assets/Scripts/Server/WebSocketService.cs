@@ -60,38 +60,15 @@ public class WebSocketService : MonoBehaviour
                 case "PLAYCARD":
                     if(debuggerModeOn) Debug.Log("Message type was PLAYCARD");
                     PlayCardMessage playCardMessage = JsonUtility.FromJson<PlayCardMessage>(data[1]);
-
-                    if(playCardMessage.player == gameManager.playerNumber)
-                    {
-                        Debug.LogWarning("You should add update card stats here :_3");
-                        gameManager.yourMonsterZone.UpdateCardData(true, playCardMessage);
-                        GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = gameManager.playerStats.playerBurnValue.ToString();
-                    }
-                    else
-                    {
-                        Debug.LogWarning(playCardMessage.cardName + " Enemy card index: " + playCardMessage.boardIndex);
-                        gameManager.enemyMonsterZone.AddNewMonsterCard(false, playCardMessage.boardIndex);
-                        gameManager.enemyMonsterZone.UpdateCardData(false, playCardMessage);
-                        gameManager.enemyPlayerStats.playerBurnValue -= playCardMessage.cardCost;
-                        GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = gameManager.enemyPlayerStats.playerBurnValue.ToString();
-                        //sfxLibrary.GetComponent<PlayCardSFX>().Play();
-                    }
+                    gameManager.PlayerPlayCard(playCardMessage);
                     break;
                 case "DRAWCARD":
                     if (debuggerModeOn) Debug.Log("Message type was DRAWCARD");
-
                     DrawCardMessage drawCardMessage = JsonUtility.FromJson<DrawCardMessage>(data[1]);
-                    if (drawCardMessage.player == gameManager.playerNumber)
-                    {
-                        Hand.RevealNewCard(drawCardMessage);
-                    }
-                    else
-                    {
-                        EnemyHand.AddNewCard();
-                        //sfxLibrary.GetComponent<DrawCardSFX>().Play();
-                    }
+                    gameManager.PlayerDrawCard(drawCardMessage);
                     break;
                 case "ATTACK":
+                    //TODO add this to GameManager
                     if (debuggerModeOn) Debug.Log("Message type was ATTACK");
                     AttackEventMessage attackEventMessage = JsonUtility.FromJson<AttackEventMessage>(data[1]);
 
@@ -219,7 +196,6 @@ public class WebSocketService : MonoBehaviour
     {
         GameMessage message = new GameMessage("OnMessage", "DRAWCARD", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
-        //sfxLibrary.GetComponent<DrawCardSFX>().Play();
     }
 
     public static void SaveCardToDataBase(Card card)
@@ -251,6 +227,5 @@ public class WebSocketService : MonoBehaviour
 
         GameMessage message = new GameMessage("OnMessage", "BURNCARD", handIndex.ToString());
         SendWebSocketMessage(JsonUtility.ToJson(message));
-        //sfxLibrary.GetComponent<BurnSFX>().Play();
     }
 }

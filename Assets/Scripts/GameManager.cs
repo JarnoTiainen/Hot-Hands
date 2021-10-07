@@ -50,17 +50,12 @@ public class GameManager : MonoBehaviour
         }
         
     }
-
-
     //Trigger sound effect and all that stuff
     //Called from server for enemy player and from Mouse script for client owener
     public void PlayerBurnCard(int player, GameObject card)
     {
-        
-
-
         sfxLibrary.GetComponent<BurnSFX>().Play();
-        card.GetComponent<InGameCard>().Burn();
+        
         int value = card.GetComponent<InGameCard>().cardData.value;
         if (player == playerNumber)
         {
@@ -76,8 +71,8 @@ public class GameManager : MonoBehaviour
             UpdatePlayerBurnValue(player, enemyPlayerStats.playerBurnValue + value);
             GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
         }
+        card.GetComponent<InGameCard>().Burn();
     }
-
     public void UpdatePlayerBurnValue(int player, int newValue)
     {
         if(player ==playerNumber)
@@ -88,5 +83,52 @@ public class GameManager : MonoBehaviour
         {
             enemyPlayerStats.playerBurnValue = newValue;
         }
+    }
+
+
+    public void PlayerDrawCard(DrawCardMessage drawCardMessage)
+    {
+        if (drawCardMessage.player == playerNumber)
+        {
+            Hand.RevealNewCard(drawCardMessage);
+        }
+        else
+        {
+            EnemyHand.AddNewCard();
+            PlayerDrawCard();
+        }
+    }
+    public void PlayerDrawCard()
+    {
+        sfxLibrary.GetComponent<DrawCardSFX>().Play();
+    }
+
+
+    public void PlayerPlayCard(PlayCardMessage playCardMessage)
+    {
+        if (playCardMessage.player == playerNumber)
+        {
+            yourMonsterZone.UpdateCardData(true, playCardMessage);
+        }
+        else
+        {
+            enemyMonsterZone.AddNewMonsterCard(false, playCardMessage.boardIndex);
+            enemyMonsterZone.UpdateCardData(false, playCardMessage);
+            enemyPlayerStats.playerBurnValue -= playCardMessage.cardCost;
+            PlayerPlayCard(playCardMessage.player);
+        }
+    }
+    public void PlayerPlayCard(int player = -1)
+    {
+        if (player == -1) player = playerNumber;
+        if(player == playerNumber)
+        {
+            GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = playerStats.playerBurnValue.ToString();
+        }
+        else
+        {
+            GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
+        }
+        sfxLibrary.GetComponent<PlayCardSFX>().Play();
     }
 }

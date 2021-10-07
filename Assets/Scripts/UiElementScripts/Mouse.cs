@@ -67,6 +67,7 @@ public class Mouse : MonoBehaviour
                 GameManager.Instance.playerStats.playerBurnValue -= Hand.Instance.GetCardData(handIndex).cost;
                 //card is in monster box
                 //FOR NOW PLACES CARD TO LEFT!!
+                GameManager.Instance.PlayerPlayCard();
                 WebSocketService.PlayCard(handIndex, 0);
 
                 //FOR NOW PLACES CARD TO LEFT!!

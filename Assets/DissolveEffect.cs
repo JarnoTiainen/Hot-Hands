@@ -6,7 +6,7 @@ public class DissolveEffect : MonoBehaviour
 {
     private Material material;
 
-    private float dissolveAmount = 0.65f;
+    private float dissolveAmount = 1f;
     [SerializeField] private bool isDissolving;
 
 

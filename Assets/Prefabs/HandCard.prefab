@@ -525,6 +525,7 @@ GameObject:
   - component: {fileID: 5773110476351464011}
   - component: {fileID: 2157171559758549780}
   - component: {fileID: 458329472671377931}
+  - component: {fileID: 5350308814348078741}
   m_Layer: 0
   m_Name: HandCard
   m_TagString: Untagged
@@ -669,6 +670,121 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowCaster: {fileID: 5901037119065855960}
   dissolveSpeed: 2
+  isDissolving: 0
+--- !u!114 &5350308814348078741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611825709596717884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3fae322ccaf2994ebfe923dbb25f77a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.26485646
+      outSlope: -0.26485646
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5811434
+      value: 0.8460804
+      inSlope: -0.64947057
+      outSlope: -0.64947057
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7807619
+      value: 0.2317856
+      inSlope: -3.7659075
+      outSlope: -3.7659075
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.040962785
+      outWeight: 0.0510548
+    - serializedVersion: 3
+      time: 0.9987793
+      value: -0.006248474
+      inSlope: 0.000047160698
+      outSlope: 0.000047160698
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.032396406
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spinCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.8151008
+      value: 0.4295057
+      inSlope: 1.289127
+      outSlope: 1.289127
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.039048575
+      outWeight: 0.16464394
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  movementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  velocityM: 0
+  rotationCount: 1
+  lerpTime: 1
   isDissolving: 0
 --- !u!1 &9020729396848444570
 GameObject:
@@ -998,7 +1114,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 614e4675e217b2f4b8eabb57492f2567, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 195fc998ab594ff44ace65ceff7196fc, type: 2}
+      objectReference: {fileID: 2100000, guid: 97defba0c4b8f7442ae678bb7423dd50, type: 2}
     - target: {fileID: 919132149155446097, guid: 614e4675e217b2f4b8eabb57492f2567, type: 3}
       propertyPath: m_Name
       value: card
