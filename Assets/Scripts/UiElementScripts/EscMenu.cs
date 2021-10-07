@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 
 public class EscMenu : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class EscMenu : MonoBehaviour
         settingsMenu.SetActive(false);
         disconnectConfirmation.SetActive(false);
         quitConfirmation.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void Return()
