@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class dissolveMover : MonoBehaviour
+public class DissolveMover : MonoBehaviour
 {
     public AnimationCurve scaleCurve;
     public AnimationCurve spinCurve;
@@ -24,6 +24,7 @@ public class dissolveMover : MonoBehaviour
             float lerpRatio = timer / lerpTime;
 
             float scale = scaleCurve.Evaluate(lerpRatio);
+            if (scale < 0) scale = 0;
             float rotationScale = spinCurve.Evaluate(lerpRatio);
 
             GetComponent<Transform>().localPosition = Vector3.Lerp(startPos, Vector3.zero, lerpRatio);

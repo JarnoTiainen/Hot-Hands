@@ -69,9 +69,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
         Debug.Log(cardData.cardName + " was burned");
         GetComponent<DissolveEffect>().StartDissolving(mat);
         GetComponent<DissolveShadow>().StartDissolving();
-        GetComponent<dissolveMover>().StartDissolving();
+        GetComponent<DissolveMover>().StartDissolving();
         transform.GetChild(1).gameObject.SetActive(false);
-        //transform.GetChild(0).GetComponent<MeshRenderer>().shadowCastingMode = 0;
     }
 
     public void Kill()

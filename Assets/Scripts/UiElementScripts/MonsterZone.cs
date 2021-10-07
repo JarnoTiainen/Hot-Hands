@@ -5,29 +5,20 @@ using Sirenix.OdinInspector;
 
 public class MonsterZone : MonoBehaviour
 {
-    [SerializeField] private CardList cardList;
     public List<GameObject> monsterCards = new List<GameObject>();
     Dictionary<GameObject, float> cardXposDictionary = new Dictionary<GameObject, float>();
-    [SerializeField] private Mouse mouse;
-    [SerializeField] private GameObject refCard;
-    [SerializeField] private GameObject testCard;
-    [SerializeField] private GameObject enemyHand;
     
-    [SerializeField] private float makeRoomEffectDistance;
     [SerializeField] private float gapBetweenCards;
     [SerializeField] private float moveSpeed = 1;
 
-    [SerializeField] public GameObject ghostCard;
+    [SerializeField] private bool debugModeOn = false;
     public bool isYourMonsterZone;
+    [SerializeField] [ShowIf("debugModeOn", true)]public GameObject ghostCard;
 
-    private void Awake()
-    {
-        enemyHand = GameObject.FindGameObjectWithTag("EnemyHand");
-    }
 
     private void Update()
     {
-        if (mouse.heldCard != null && isYourMonsterZone)
+        if (Mouse.Instance.heldCard != null && isYourMonsterZone)
         {
             MakeRoom();
         }
@@ -35,9 +26,12 @@ public class MonsterZone : MonoBehaviour
 
     [Button]public void AddNewMonsterCard(bool isYourCard, int boardIndex, CardData data)
     {
-
-        if (isYourCard) Debug.Log("(MonsterZone) board Index: " + ghostCard.GetComponent<InGameCard>().indexOnField);
-        else Debug.Log("(MonsterZone) board Index: " + (monsterCards.Count - 1 - boardIndex));
+        if(debugModeOn)
+        {
+            if (isYourCard) Debug.Log("(MonsterZone) board Index: " + ghostCard.GetComponent<InGameCard>().indexOnField);
+            else Debug.Log("(MonsterZone) board Index: " + (monsterCards.Count - 1 - boardIndex));
+        }
+        
 
         
         if(isYourCard)
@@ -56,10 +50,10 @@ public class MonsterZone : MonoBehaviour
                 index = monsterCards.Count - boardIndex;
             }
             
-            GameObject newMonster = Instantiate(testCard);
+            GameObject newMonster = Instantiate(References.i.fieldCard);
             newMonster.transform.SetParent(transform);
             monsterCards.Insert(index, newMonster);
-            enemyHand.GetComponent<EnemyHand>().RemoveCard(0);
+            EnemyHand.Instance.RemoveCard(0);
             RepositionMonsterCards();
             newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
         }
@@ -119,7 +113,7 @@ public class MonsterZone : MonoBehaviour
     {
         cardXposDictionary = new Dictionary<GameObject, float>();
 
-        Vector2 cardDim = (Vector2)refCard.GetComponent<BoxCollider>().size;
+        Vector2 cardDim = (Vector2)References.i.fieldCard.GetComponent<BoxCollider>().size;
         float cardRowWidth = monsterCards.Count * cardDim.x + (monsterCards.Count - 1) * gapBetweenCards;
         float firstCardOffsetX = (-cardRowWidth + cardDim.x) / 2;
         float gapBetweenCardCenters = cardDim.x + gapBetweenCards;
@@ -171,16 +165,19 @@ public class MonsterZone : MonoBehaviour
     {
         //for now updates the card data of last played card
 
-        if (isYourCard) Debug.Log("(MonsterZone) card index: " + playCardMessage.boardIndex);
-        else Debug.Log("(MonsterZone) card index: " + (monsterCards.Count - 1 - playCardMessage.boardIndex));
+        if(debugModeOn)
+        {
+            if (isYourCard) Debug.Log("(MonsterZone) card index: " + playCardMessage.boardIndex);
+            else Debug.Log("(MonsterZone) card index: " + (monsterCards.Count - 1 - playCardMessage.boardIndex));
+        }
 
         if(isYourCard)
         {
-            monsterCards[playCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, cardList.GetCardData(playCardMessage));
+            monsterCards[playCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(playCardMessage));
         }
         else
         {
-            monsterCards[monsterCards.Count - 1 - playCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, cardList.GetCardData(playCardMessage));
+            monsterCards[monsterCards.Count - 1 - playCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(playCardMessage));
         }
 
         
@@ -232,7 +229,7 @@ public class MonsterZone : MonoBehaviour
         int index = GetNewGhostCardIndex();
         if (!ghostCard)
         {
-            GameObject newGhostCard = Instantiate(testCard, mouse.mousePosInWorld, Quaternion.identity);
+            GameObject newGhostCard = Instantiate(References.i.fieldCard, Mouse.Instance.mousePosInWorld, Quaternion.identity);
             newGhostCard.GetComponent<InGameCard>().ToggleGhostCard();
             newGhostCard.GetComponent<InGameCard>().indexOnField = index;
             newGhostCard.transform.SetParent(transform, true);

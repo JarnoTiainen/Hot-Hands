@@ -17,6 +17,7 @@ public class Mouse : MonoBehaviour
     private Hand uiHand;
     [SerializeField] private bool debuggingOn = false;
     [SerializeField] private float mouseHightFromTableTop;
+    [SerializeField] private bool debuggerMode = false;
 
     private void Awake()
     {
@@ -45,7 +46,7 @@ public class Mouse : MonoBehaviour
         }
         if(Input.GetMouseButtonUp(0) && heldCard)
         {
-            Debug.Log("placing down");
+            if(debuggerMode) Debug.Log("placing down");
             ValuatePlaceCard();
         }
     }
@@ -90,7 +91,7 @@ public class Mouse : MonoBehaviour
         else if(RayCaster.Instance.target == GameObject.Find("Bonfire"))
         {
             yourMonsterZone.RemoveGhostCard();
-            Debug.Log("Card discarded from slot " + handIndex);
+            if(debuggerMode) Debug.Log("Card discarded from slot " + handIndex);
             WebSocketService.Burn(handIndex);
             GameManager.Instance.PlayerBurnCard(heldCard);
             Hand.Instance.RemoveCardNoDestroy(handIndex);

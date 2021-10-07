@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deck: {fileID: 915886160}
-  debuggerModeOn: 1
+  debuggerModeOn: 0
 --- !u!1 &7522968
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +808,7 @@ MonoBehaviour:
   sacrifice: {fileID: 0}
   retaliate: {fileID: 0}
   brutalityIcon: {fileID: 0}
+  fieldCard: {fileID: 5484217012206740924, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
   handCard: {fileID: 7611825709596717884, guid: 9f8e5799bc8e632418cb743be7732cc0, type: 3}
   opponentDeckObj: {fileID: 64249375}
   yourDeckObj: {fileID: 915886159}
@@ -2427,17 +2428,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ede5b71bbe61b4aba372f1480b00d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
   monsterCards: []
-  mouse: {fileID: 780386860}
-  refCard: {fileID: 5484217012206740924, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
-  testCard: {fileID: 5484217012206740924, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
-  enemyHand: {fileID: 0}
-  makeRoomEffectDistance: 1
   gapBetweenCards: 0
   moveSpeed: 1
-  ghostCard: {fileID: 0}
+  debugModeOn: 0
   isYourMonsterZone: 1
+  ghostCard: {fileID: 0}
 --- !u!4 &584923535 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3491539293014643226, guid: aae1e9d9a69688a489598e0cf6f4f7e3, type: 3}
@@ -2700,6 +2696,7 @@ MonoBehaviour:
   markerPrefab: {fileID: 2524955863308533454, guid: e6f1d251d51a4754fb3fb54fd5cb9ff2, type: 3}
   debuggingOn: 1
   mouseHightFromTableTop: -0.03
+  debuggerMode: 0
 --- !u!4 &780386861
 Transform:
   m_ObjectHideFlags: 0
@@ -6761,17 +6758,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ede5b71bbe61b4aba372f1480b00d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
   monsterCards: []
-  mouse: {fileID: 780386860}
-  refCard: {fileID: 5484217012206740924, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
-  testCard: {fileID: 5484217012206740924, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
-  enemyHand: {fileID: 0}
-  makeRoomEffectDistance: 0
   gapBetweenCards: 0
   moveSpeed: 1
-  ghostCard: {fileID: 0}
+  debugModeOn: 0
   isYourMonsterZone: 0
+  ghostCard: {fileID: 0}
 --- !u!1 &1680061487
 GameObject:
   m_ObjectHideFlags: 0

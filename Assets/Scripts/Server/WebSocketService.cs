@@ -51,13 +51,15 @@ public class WebSocketService : MonoBehaviour
         websocket.OnMessage += (bytes) =>
         {
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
-            Debug.Log("server message: " + data[0] + " " + data[1]);
+            if (debuggerModeOn) Debug.Log("server message: " + data[0] + " " + data[1]);
             switch((string)data[0])
             {
                 case "GETSIDE":
+                    if (debuggerModeOn) Debug.Log("Message type was GETSIDE");
                     gameManager.SetPlayerNumber(int.Parse(data[1]));
                     break;
                 case "PLAYCARD":
+                    if (debuggerModeOn) Debug.Log("Message type was PLAYCARD");
                     PlayCardMessage playCardMessage = JsonUtility.FromJson<PlayCardMessage>(data[1]);
                     gameManager.PlayerPlayCard(playCardMessage);
                     break;
@@ -67,23 +69,26 @@ public class WebSocketService : MonoBehaviour
                     gameManager.PlayerDrawCard(drawCardMessage);
                     break;
                 case "ATTACK":
+                    if (debuggerModeOn) Debug.Log("Message type was ATTACK");
                     AttackEventMessage attackEventMessage = JsonUtility.FromJson<AttackEventMessage>(data[1]);
                     gameManager.PlayerAttack(attackEventMessage);
                     break;
                 case "SAVECARD":
+                    if (debuggerModeOn) Debug.Log("Message type was SAVECARD");
                     Debug.Log("Saved card " + data[1][0] + " succesfully");
                     break;
                 case "SETDECK":
-                    if(int.Parse(data[1]) == 0) Debug.Log("Deck save ok");
+                    if (debuggerModeOn) Debug.Log("Message type was SETDECK");
+                    if (int.Parse(data[1]) == 0) Debug.Log("Deck save ok");
                     else Debug.Log("Deck save failed, everything is ok");
                     break;
                 case "BURNCARD":
-                    Debug.Log("BurnCardMessage: " + data[1]);
+                    if (debuggerModeOn) Debug.Log("Message type was BURNCARD");
                     BurnCardMessage burnCardMessage = JsonUtility.FromJson<BurnCardMessage>(data[1]);
                     gameManager.PlayerBurnCard(burnCardMessage);
                     break;
                 default:
-                    Debug.Log("Message type was UNKOWN");
+                    if (debuggerModeOn) Debug.Log("Message type was UNKOWN");
                     break;
             }
         };
@@ -125,7 +130,7 @@ public class WebSocketService : MonoBehaviour
 
     public static void PlayCard(int cardIndex, int boardIndex)
     {
-        Debug.LogWarning("PLAYING CARD TO INDEX " + boardIndex);
+        if (Instance.debuggerModeOn) Debug.LogWarning("PLAYING CARD TO INDEX " + boardIndex);
         PlayCardMessage playCardMessage = new PlayCardMessage(1, cardIndex, boardIndex);
         string playCardMessageJSON = JsonUtility.ToJson(playCardMessage);
 
@@ -156,7 +161,7 @@ public class WebSocketService : MonoBehaviour
     }
     public static void SetDeck(string deckJson)
     {
-        Debug.Log("Send deck data");
+        if(Instance.debuggerModeOn) Debug.Log("Send deck data");
 
         GameMessage message = new GameMessage("OnMessage", "SETDECK", deckJson);
         SendWebSocketMessage(JsonUtility.ToJson(message));
@@ -164,7 +169,7 @@ public class WebSocketService : MonoBehaviour
 
     public static void Attack(int fieldIndex)
     {
-        Debug.Log("Attacked with id " + fieldIndex);
+        if (Instance.debuggerModeOn) Debug.Log("Attacked with id " + fieldIndex);
 
         GameMessage message = new GameMessage("OnMessage", "ATTACK", fieldIndex.ToString());
         SendWebSocketMessage(JsonUtility.ToJson(message));
@@ -172,7 +177,7 @@ public class WebSocketService : MonoBehaviour
 
     public static void Burn(int handIndex)
     {
-        Debug.Log("Burned card hand index " + handIndex);
+        if (Instance.debuggerModeOn) Debug.Log("Burned card hand index " + handIndex);
 
         GameMessage message = new GameMessage("OnMessage", "BURNCARD", handIndex.ToString());
         SendWebSocketMessage(JsonUtility.ToJson(message));

@@ -24,6 +24,8 @@ public class References: MonoBehaviour
     public Sprite sacrifice;
     public Sprite retaliate;
     public Sprite brutalityIcon;
+
+    public GameObject fieldCard;
     public GameObject handCard;
     public GameObject opponentDeckObj;
     public GameObject yourDeckObj;

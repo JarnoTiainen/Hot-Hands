@@ -10,7 +10,7 @@ public class PlayCardSFX : MonoBehaviour
 
     public void Play()
     {
-        Debug.Log("Play sound");
+        //Debug.Log("Play sound");
         int x = Random.Range(1, 4);
 
         switch (x)

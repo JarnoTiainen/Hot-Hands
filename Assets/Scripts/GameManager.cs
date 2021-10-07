@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject newCard;
             newCard = Instantiate(References.i.handCard, References.i.opponentBonfire.transform.position, Quaternion.Euler(0, 180, 0));
-            Hand.Instance.RemoveCard(burnCardMessage.handIndex);
+            EnemyHand.Instance.RemoveCard(burnCardMessage.handIndex);
             CardData cardData = References.i.cardList.GetCardData(cardMessage);
             newCard.GetComponent<InGameCard>().cardData = cardData;
             PlayerBurnCard(newCard, cardMessage.player);
@@ -72,14 +72,12 @@ public class GameManager : MonoBehaviour
         int value = card.GetComponent<InGameCard>().cardData.value;
         if (player == playerNumber)
         {
-            Debug.LogWarning("START YOUR BURN EFFECT HERE FOR THE CARD");
             card.transform.SetParent(References.i.yourBonfire.transform);
             UpdatePlayerBurnValue(player, playerStats.playerBurnValue + value);
             GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = playerStats.playerBurnValue.ToString();
         }
         else
         {
-            Debug.LogWarning("START YOUR BURN EFFECT HERE FOR THE CARD");
             card.transform.SetParent(References.i.opponentBonfire.transform);
             UpdatePlayerBurnValue(player, enemyPlayerStats.playerBurnValue + value);
             GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();

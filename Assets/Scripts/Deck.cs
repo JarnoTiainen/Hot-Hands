@@ -36,7 +36,6 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
     public string GetDeckJSON()
     {
         DeckObject deck = new DeckObject(playerDeck);
-        Debug.Log(JsonUtility.ToJson(deck));
         return JsonUtility.ToJson(deck);
     }
 }
