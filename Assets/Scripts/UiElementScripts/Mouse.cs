@@ -58,17 +58,23 @@ public class Mouse : MonoBehaviour
         newCard.transform.localPosition = Vector3.zero;
     }
 
+
+
+    //This function should trigger them not execute TODO: move stuff to somewhere else
+
     public void ValuatePlaceCard()
     {
+
         if (Mathf.Abs(mousePosInWorld.x) < monsterHitBox.x && Mathf.Abs(mousePosInWorld.y) < monsterHitBox.y)
         {
-            if(GameManager.Instance.playerStats.playerBurnValue >= Hand.Instance.GetCardData(handIndex).cost)
+
+            if (GameManager.Instance.playerStats.playerBurnValue >= Hand.Instance.GetCardData(handIndex).cost)
             {
                 GameManager.Instance.playerStats.playerBurnValue -= Hand.Instance.GetCardData(handIndex).cost;
                 //card is in monster box
                 //FOR NOW PLACES CARD TO LEFT!!
                 GameManager.Instance.PlayerPlayCard();
-                WebSocketService.PlayCard(handIndex, 0);
+                WebSocketService.PlayCard(handIndex, yourMonsterZone.ghostCard.GetComponent<InGameCard>().indexOnField);
 
                 //FOR NOW PLACES CARD TO LEFT!!
                 yourMonsterZone.AddNewMonsterCard(true, 0, heldCard.GetComponent<InGameCard>().cardData);
@@ -76,12 +82,14 @@ public class Mouse : MonoBehaviour
             }
             else
             {
+                yourMonsterZone.RemoveGhostCard();
                 uiHand.ReturnVisibleCard(heldCard, handIndex);
                 heldCard = null;
             }
         }
         else if(RayCaster.Instance.target == GameObject.Find("Bonfire"))
         {
+            yourMonsterZone.RemoveGhostCard();
             Debug.Log("Card discarded from slot " + handIndex);
             WebSocketService.Burn(handIndex);
             GameManager.Instance.PlayerBurnCard(heldCard);
@@ -90,6 +98,7 @@ public class Mouse : MonoBehaviour
         }
         else
         {
+            yourMonsterZone.RemoveGhostCard();
             uiHand.ReturnVisibleCard(heldCard, handIndex);
             heldCard = null;
         }

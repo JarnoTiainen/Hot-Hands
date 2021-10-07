@@ -578,6 +578,9 @@ MonoBehaviour:
   rp: {fileID: 8444400555959281729}
   cardMainBodyMaterial: {fileID: -6465566751694194690, guid: b5904bc55cd6fec4f82d888ba1f15e7e, type: 3}
   meshRenderer: {fileID: 7185273887884801207}
+  textCanvas: {fileID: 344395278571197130}
+  indexOnField: 0
+  isGhostCard: 0
 --- !u!65 &9060123631021853949
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -630,7 +633,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
+      time: 0.1977539
       value: 1
       inSlope: 0
       outSlope: 0

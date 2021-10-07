@@ -13,6 +13,10 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] private Shader cardMainBodyMaterial;
     private Material mat;
     [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private Canvas textCanvas;
+    [SerializeField] public int indexOnField;
+
+    [SerializeField] private bool isGhostCard;
 
     private void Awake()
     {
@@ -73,5 +77,21 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
     public void Kill()
     {
         Debug.Log(cardData.cardName + " was killed");
+    }
+
+    public void ToggleGhostCard()
+    {
+        if(!isGhostCard)
+        {
+            isGhostCard = true;
+            meshRenderer.enabled = false;
+            textCanvas.enabled = false;
+        }
+        else
+        {
+            isGhostCard = false;
+            meshRenderer.enabled = true;
+            textCanvas.enabled = true;
+        }
     }
 }
