@@ -12,12 +12,12 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
 
     [SerializeField] private Shader cardMainBodyMaterial;
     private Material mat;
-
+    [SerializeField] private MeshRenderer meshRenderer;
 
     private void Awake()
     {
-        mat = transform.GetChild(0).GetComponent<MeshRenderer>().material;
-        transform.GetChild(0).GetComponent<MeshRenderer>().material.shader = cardMainBodyMaterial;
+        mat = meshRenderer.material;
+        meshRenderer.material.shader = cardMainBodyMaterial;
     }
 
 

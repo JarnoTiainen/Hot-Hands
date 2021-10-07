@@ -1,20 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class GameManager : MonoBehaviour
 {
-    public int playerNumber;
+    
     public static GameManager Instance { get; private set; }
+    [SerializeField] private bool debuggerModeOn;
+    [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerBurnCard;
+    [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerDrawCard;
+    [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerPlayCard;
+    [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerAttack;
 
-    [SerializeField] public MonsterZone yourMonsterZone;
-    [SerializeField] public MonsterZone enemyMonsterZone;
+    private int playerNumber;
     public PlayerStats playerStats;
     public PlayerStats enemyPlayerStats;
+    [SerializeField] private CardList cardList;
+
 
     [SerializeField] private int playerStartHealth = 100;
 
-    private static GameObject sfxLibrary;
+    private GameObject sfxLibrary;
 
     private void Awake()
     {
@@ -28,6 +35,11 @@ public class GameManager : MonoBehaviour
         enemyPlayerStats = new PlayerStats(playerStartHealth);
     }
 
+
+    public void SetPlayerNumber(int playerNumber)
+    {
+        this.playerNumber = playerNumber;
+    }
 
     //Message from server is directed trough this code before  the actual function
     public void PlayerBurnCard(BurnCardMessage burnCardMessage)
@@ -46,14 +58,15 @@ public class GameManager : MonoBehaviour
             Hand.Instance.RemoveCard(burnCardMessage.handIndex);
             CardData cardData = References.i.cardList.GetCardData(cardMessage);
             newCard.GetComponent<InGameCard>().cardData = cardData;
-            PlayerBurnCard(cardMessage.player, newCard);
+            PlayerBurnCard(newCard, cardMessage.player);
         }
         
     }
     //Trigger sound effect and all that stuff
     //Called from server for enemy player and from Mouse script for client owener
-    public void PlayerBurnCard(int player, GameObject card)
+    public void PlayerBurnCard(GameObject card, int player = -1)
     {
+        if (player == -1) player = playerNumber;
         sfxLibrary.GetComponent<BurnSFX>().Play();
         
         int value = card.GetComponent<InGameCard>().cardData.value;
@@ -108,12 +121,11 @@ public class GameManager : MonoBehaviour
     {
         if (playCardMessage.player == playerNumber)
         {
-            yourMonsterZone.UpdateCardData(true, playCardMessage);
+            References.i.yourMonsterZone.UpdateCardData(true, playCardMessage);
         }
         else
         {
-            enemyMonsterZone.AddNewMonsterCard(false, playCardMessage.boardIndex);
-            enemyMonsterZone.UpdateCardData(false, playCardMessage);
+            References.i.opponentMonsterZone.AddNewMonsterCard(false, playCardMessage.boardIndex, cardList.GetCardData(playCardMessage));
             enemyPlayerStats.playerBurnValue -= playCardMessage.cardCost;
             PlayerPlayCard(playCardMessage.player);
         }
@@ -130,5 +142,37 @@ public class GameManager : MonoBehaviour
             GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
         }
         sfxLibrary.GetComponent<PlayCardSFX>().Play();
+    }
+
+    public void PlayerAttack(AttackEventMessage attackEventMessage)
+    {
+        attackEventMessage.attackerValues = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.attacker);
+        if (attackEventMessage.directHit)
+        {
+            if (attackEventMessage.player == playerNumber)
+            {
+                enemyPlayerStats.playerHealth -= attackEventMessage.playerTakenDamage;
+                if(debugPlayerAttack) Debug.Log("Enemy lost " + attackEventMessage.playerTakenDamage + " health. New health is: " + enemyPlayerStats.playerHealth);
+            }
+            else
+            {
+                playerStats.playerHealth -= attackEventMessage.playerTakenDamage;
+                if (debugPlayerAttack) Debug.Log("You lost " + attackEventMessage.playerTakenDamage + " health. New health is: " + playerStats.playerHealth);
+            }
+        }
+        else
+        {
+            CardPowersMessage attacker = attackEventMessage.attackerValues;
+            CardPowersMessage target = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.target);
+            attackEventMessage.targetValues = target;
+
+            if (debugPlayerAttack) Debug.Log("attacked index: " + attackEventMessage.attackerValues.index + " target index: " + attackEventMessage.targetValues.index + "attacker lp: " + attackEventMessage.attackerValues.lp + " rp: " + attackEventMessage.attackerValues.rp + " target lp: " + attackEventMessage.targetValues.lp + " rp: " + attackEventMessage.targetValues.rp);
+            bool wasYourAttack = false;
+            if (attackEventMessage.player == playerNumber) wasYourAttack = true;
+            References.i.yourMonsterZone.UpdateCardData(wasYourAttack, attacker);
+            References.i.opponentMonsterZone.UpdateCardData(!wasYourAttack, attacker);
+            if (attacker.lp <= 0 || attacker.rp <= 0) References.i.yourMonsterZone.RemoveMonsterCard(attacker.index);
+            if (target.lp <= 0 || target.rp <= 0) References.i.opponentMonsterZone.RemoveEnemyMonsterCard(target.index);
+        }
     }
 }

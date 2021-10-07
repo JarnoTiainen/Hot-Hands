@@ -29,5 +29,7 @@ public class References: MonoBehaviour
     public GameObject yourDeckObj;
     public GameObject opponentBonfire;
     public GameObject yourBonfire;
+    public MonsterZone yourMonsterZone;
+    public MonsterZone opponentMonsterZone;
 
 }

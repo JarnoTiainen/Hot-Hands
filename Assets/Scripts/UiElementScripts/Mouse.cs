@@ -71,7 +71,7 @@ public class Mouse : MonoBehaviour
                 WebSocketService.PlayCard(handIndex, 0);
 
                 //FOR NOW PLACES CARD TO LEFT!!
-                yourMonsterZone.AddNewMonsterCard(true, 0);
+                yourMonsterZone.AddNewMonsterCard(true, 0, heldCard.GetComponent<InGameCard>().cardData);
                 Hand.Instance.RemoveCard(handIndex);
             }
             else
@@ -84,7 +84,7 @@ public class Mouse : MonoBehaviour
         {
             Debug.Log("Card discarded from slot " + handIndex);
             WebSocketService.Burn(handIndex);
-            GameManager.Instance.PlayerBurnCard(GameManager.Instance.playerNumber, heldCard);
+            GameManager.Instance.PlayerBurnCard(heldCard);
             Hand.Instance.RemoveCardNoDestroy(handIndex);
             heldCard = null;
         }

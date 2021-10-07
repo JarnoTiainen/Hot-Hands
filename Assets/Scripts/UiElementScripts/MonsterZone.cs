@@ -22,7 +22,7 @@ public class MonsterZone : MonoBehaviour
         enemyHand = GameObject.FindGameObjectWithTag("EnemyHand");
     }
 
-    [Button]public void AddNewMonsterCard(bool isYourCard, int boardIndex)
+    [Button]public void AddNewMonsterCard(bool isYourCard, int boardIndex, CardData data)
     {
 
         if (isYourCard) Debug.Log("(MonsterZone) board Index: " + boardIndex);
@@ -36,6 +36,7 @@ public class MonsterZone : MonoBehaviour
             newMonster.transform.SetParent(transform, true);
             monsterCards.Insert(boardIndex, newMonster);
             RepositionMonsterCards();
+            newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
         } else {
             
             //enemycard
@@ -52,8 +53,9 @@ public class MonsterZone : MonoBehaviour
             monsterCards.Insert(index, newMonster);
             enemyHand.GetComponent<EnemyHand>().RemoveCard(0);
             RepositionMonsterCards();
-
+            newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
         }
+        
 
         //old code
         //GameObject newMonster = Instantiate(testCard);
@@ -146,6 +148,7 @@ public class MonsterZone : MonoBehaviour
         }
     }
 
+
     public void UpdateCardData(bool isYourCard, PlayCardMessage playCardMessage)
     {
         //for now updates the card data of last played card
@@ -164,17 +167,17 @@ public class MonsterZone : MonoBehaviour
 
         
     }
-    public void UpdateCardData(bool isYourCard, int index, int lp, int rp)
+    public void UpdateCardData(bool isYourCard, CardPowersMessage cardPower)
     {
         if(isYourCard)
         {
-            monsterCards[index].GetComponent<InGameCard>().SetStatLp(lp);
-            monsterCards[index].GetComponent<InGameCard>().SetStatRp(rp);
+            monsterCards[cardPower.index].GetComponent<InGameCard>().SetStatLp(cardPower.lp);
+            monsterCards[cardPower.index].GetComponent<InGameCard>().SetStatRp(cardPower.rp);
         }
         else
         {
-            monsterCards[monsterCards.Count - 1 - index].GetComponent<InGameCard>().SetStatLp(rp);
-            monsterCards[monsterCards.Count - 1 - index].GetComponent<InGameCard>().SetStatRp(lp);
+            monsterCards[monsterCards.Count - 1 - cardPower.index].GetComponent<InGameCard>().SetStatLp(cardPower.rp);
+            monsterCards[monsterCards.Count - 1 - cardPower.index].GetComponent<InGameCard>().SetStatRp(cardPower.lp);
         }
     }
 

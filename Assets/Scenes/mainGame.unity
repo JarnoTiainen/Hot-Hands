@@ -154,9 +154,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f03169546557a468a731a748eab172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 0
-  yourMonsterZone: {fileID: 572842664}
-  enemyMonsterZone: {fileID: 1645449387}
+  debuggerModeOn: 0
+  debugPlayerBurnCard: 0
+  debugPlayerDrawCard: 0
+  debugPlayerPlayCard: 0
+  debugPlayerAttack: 0
+  playerStats:
+    deckCardCount: 0
+    discardpileCardCount: 0
+    playerBurnValue: 0
+    playerHealth: 0
+  enemyPlayerStats:
+    deckCardCount: 0
+    discardpileCardCount: 0
+    playerBurnValue: 0
+    playerHealth: 0
+  cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
   playerStartHealth: 100
 --- !u!114 &7355201
 MonoBehaviour:
@@ -800,6 +813,8 @@ MonoBehaviour:
   yourDeckObj: {fileID: 915886159}
   opponentBonfire: {fileID: 1245193536}
   yourBonfire: {fileID: 1982223652}
+  yourMonsterZone: {fileID: 572842664}
+  opponentMonsterZone: {fileID: 1645449387}
 --- !u!4 &149145601
 Transform:
   m_ObjectHideFlags: 0
