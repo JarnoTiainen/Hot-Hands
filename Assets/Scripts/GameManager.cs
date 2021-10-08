@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public PlayerStats enemyPlayerStats;
     [SerializeField] private int playerStartHealth = 100;
 
-    [SerializeField] private readonly CardList cardList;
+    [SerializeField] private CardList cardList;
     private GameObject sfxLibrary;
 
     private void Awake()
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            PlayerPlayCard(cardList.GetCardData(playCardMessage), playCardMessage.handIndex, playCardMessage.boardIndex, playCardMessage.player);
+            PlayerPlayCard(cardList.GetCardData(playCardMessage), 0, playCardMessage.boardIndex, playCardMessage.player);
         }
     }
     public void PlayerPlayCard(CardData data, int handIndex = -1, int boardIndex = 0, int player = -1)
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
         {
             playerStats.playerBurnValue -= data.cost;
             References.i.yourMonsterZone.AddNewMonsterCard(true, boardIndex, data);
-            Hand.Instance.RemoveCard(handIndex);
+            Hand.Instance.RemoveCard(0);
             GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = playerStats.playerBurnValue.ToString();
         }
         else
