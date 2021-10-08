@@ -17,6 +17,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] public int indexOnField;
 
     [SerializeField] private bool isGhostCard;
+    [SerializeField] public bool cardHidden;
 
     private void Awake()
     {

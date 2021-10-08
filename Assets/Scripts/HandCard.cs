@@ -21,8 +21,11 @@ public class HandCard : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitElement
 
     public void OnClickElement()
     {
-        transform.parent.GetComponent<Hand>().RemoveVisibleCard(gameObject);
-        mouse.SetNewHeldCard(gameObject, Hand.Instance.GetCardIndex(gameObject));
-        gameObject.GetComponent<BoxCollider>().enabled = false;
+        if(!GetComponent<InGameCard>().cardHidden)
+        {
+            transform.parent.GetComponent<Hand>().RemoveVisibleCard(gameObject);
+            mouse.SetNewHeldCard(gameObject, Hand.Instance.GetCardIndex(gameObject));
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
     }
 }

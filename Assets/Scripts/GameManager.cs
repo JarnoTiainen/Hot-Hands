@@ -47,7 +47,9 @@ public class GameManager : MonoBehaviour
         else
         {
             GameObject newCard;
-            newCard = Instantiate(References.i.handCard, References.i.opponentBonfire.transform.position, Quaternion.Euler(0, 180, 0));
+            Vector3 cardPos = References.i.opponentBonfire.transform.position;
+            cardPos.z = Hand.Instance.gameObject.transform.position.z;
+            newCard = Instantiate(References.i.handCard, cardPos, Quaternion.Euler(0, 180, 0));
             EnemyHand.Instance.RemoveCard(burnCardMessage.handIndex);
             CardData cardData = References.i.cardList.GetCardData(cardMessage);
             newCard.GetComponent<InGameCard>().cardData = cardData;

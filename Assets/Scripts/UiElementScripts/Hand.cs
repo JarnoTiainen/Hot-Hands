@@ -37,7 +37,7 @@ public class Hand : MonoBehaviour
     public static void AddNewCard()
     {
         GameObject newCard = InstantiateNewCard();
-
+        newCard.GetComponent<InGameCard>().cardHidden = true;
         //adds the card to list of cards that have not been 
         unhandledCards.Add(newCard);
 
@@ -64,11 +64,13 @@ public class Hand : MonoBehaviour
         CardData cardData = Instance.cardList.GetCardData(drawCardMessage);
         if(cardData != null)
         {
+            unhandledCards[0].GetComponent<InGameCard>().cardHidden = false;
             unhandledCards[0].GetComponent<InGameCard>().SetNewCardData(true, cardData);
             unhandledCards[0].GetComponent<CardMovement>().OnCardRotate(Quaternion.identity, Instance.rotationSpeed);
             //unhandledCards[0].transform.rotation = Quaternion.Euler(0, 0, 0);
             unhandledCards[0].GetComponent<InGameCard>().nameText.text = drawCardMessage.cardName;
             unhandledCards.Remove(unhandledCards[0]);
+
         }
     }
 
