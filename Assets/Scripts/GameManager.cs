@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     public PlayerStats playerStats;
     public PlayerStats enemyPlayerStats;
     [SerializeField] private int playerStartHealth = 100;
-
+    public int maxHandSize = 5;
+    public int maxFieldCardCount = 5;
     [SerializeField] private CardList cardList;
     private GameObject sfxLibrary;
 
@@ -99,13 +100,25 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            EnemyHand.AddNewCard();
             PlayerDrawCard();
         }
     }
-    public void PlayerDrawCard()
+    public void PlayerDrawCard(int player = -1)
     {
+        if(player == -1)
+        {
+            player = playerNumber;
+        }
+        if(player == playerNumber)
+        {
+            Hand.AddNewCard();
+        }
+        else
+        {
+            EnemyHand.AddNewCard();
+        }
         sfxLibrary.GetComponent<DrawCardSFX>().Play();
+        
     }
 
 
@@ -171,14 +184,22 @@ public class GameManager : MonoBehaviour
             {
                 References.i.yourMonsterZone.UpdateCardData(wasYourAttack, attacker);
                 References.i.opponentMonsterZone.UpdateCardData(!wasYourAttack, target);
-                if (attacker.lp <= 0 || attacker.rp <= 0) References.i.yourMonsterZone.RemoveMonsterCard(attacker.index);
+                if (attacker.lp <= 0 || attacker.rp <= 0)
+                {
+                    playerStats.playerFieldCards--;
+                    References.i.yourMonsterZone.RemoveMonsterCard(attacker.index);
+                }
                 if (target.lp <= 0 || target.rp <= 0) References.i.opponentMonsterZone.RemoveEnemyMonsterCard(target.index);
             }
             else
             {
                 References.i.yourMonsterZone.UpdateCardData(!wasYourAttack, target);
                 References.i.opponentMonsterZone.UpdateCardData(wasYourAttack, attacker);
-                if (attacker.lp <= 0 || attacker.rp <= 0) References.i.yourMonsterZone.RemoveMonsterCard(target.index);
+                if (attacker.lp <= 0 || attacker.rp <= 0)
+                {
+                    playerStats.playerFieldCards--;
+                    References.i.yourMonsterZone.RemoveMonsterCard(target.index);
+                }
                 if (target.lp <= 0 || target.rp <= 0) References.i.opponentMonsterZone.RemoveEnemyMonsterCard(attacker.index);
             }
             

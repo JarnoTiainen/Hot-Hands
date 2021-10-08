@@ -6,6 +6,8 @@ public class PlayerStats
     public int discardpileCardCount;
     public int playerBurnValue;
     public int playerHealth;
+    public int playerHandCards;
+    public int playerFieldCards;
 
     public PlayerStats(int playerStartHealth)
     {

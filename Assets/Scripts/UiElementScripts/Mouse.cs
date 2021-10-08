@@ -69,8 +69,9 @@ public class Mouse : MonoBehaviour
         if (Mathf.Abs(mousePosInWorld.x) < monsterHitBox.x && Mathf.Abs(mousePosInWorld.y) < monsterHitBox.y)
         {
 
-            if (GameManager.Instance.playerStats.playerBurnValue >= Hand.Instance.GetCardData(handIndex).cost)
+            if (GameManager.Instance.playerStats.playerBurnValue >= Hand.Instance.GetCardData(handIndex).cost && GameManager.Instance.playerStats.playerFieldCards < GameManager.Instance.maxFieldCardCount)
             {
+                GameManager.Instance.playerStats.playerFieldCards++;
                 WebSocketService.PlayCard(handIndex, yourMonsterZone.ghostCard.GetComponent<InGameCard>().indexOnField);
                 GameManager.Instance.PlayerPlayCard(heldCard.GetComponent<InGameCard>().cardData, handIndex);
                 heldCard = null;

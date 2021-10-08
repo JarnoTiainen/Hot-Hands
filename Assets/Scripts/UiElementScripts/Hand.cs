@@ -79,6 +79,7 @@ public class Hand : MonoBehaviour
     //Removes one card from hand and if there is no parameter remove card with last index
     [Button] public void RemoveCard(int CardIndex = 0)
     {
+        GameManager.Instance.playerStats.playerHandCards--;
         GameObject removedCard = handCards[CardIndex];
         handCards.Remove(removedCard);
         visibleHandCards.Remove(removedCard);
@@ -89,6 +90,7 @@ public class Hand : MonoBehaviour
     [Button]
     public void RemoveCardNoDestroy(int CardIndex = 0)
     {
+        GameManager.Instance.playerStats.playerHandCards--;
         GameObject removedCard = handCards[CardIndex];
         handCards.Remove(removedCard);
         visibleHandCards.Remove(removedCard);

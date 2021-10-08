@@ -18,7 +18,7 @@ public class MonsterZone : MonoBehaviour
 
     private void Update()
     {
-        if (Mouse.Instance.heldCard != null && isYourMonsterZone)
+        if (Mouse.Instance.heldCard != null && isYourMonsterZone && GameManager.Instance.playerStats.playerFieldCards < GameManager.Instance.maxFieldCardCount)
         {
             MakeRoom();
         }

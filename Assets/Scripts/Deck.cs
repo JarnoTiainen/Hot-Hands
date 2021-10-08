@@ -27,9 +27,17 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
 
     public void OnClickElement()
     {
-        WebSocketService.DrawCard();
-        GameManager.Instance.PlayerDrawCard();
-        Hand.AddNewCard();
+        if(GameManager.Instance.playerStats.playerHandCards < GameManager.Instance.maxHandSize)
+        {
+            WebSocketService.DrawCard();
+            GameManager.Instance.playerStats.playerHandCards++;
+            GameManager.Instance.PlayerDrawCard();
+        }
+        else
+        {
+            Debug.LogWarning("Hand full display error effect here");
+        }
+        
     }
 
 
