@@ -71,15 +71,8 @@ public class Mouse : MonoBehaviour
 
             if (GameManager.Instance.playerStats.playerBurnValue >= Hand.Instance.GetCardData(handIndex).cost)
             {
-                GameManager.Instance.playerStats.playerBurnValue -= Hand.Instance.GetCardData(handIndex).cost;
-                //card is in monster box
-                //FOR NOW PLACES CARD TO LEFT!!
-                GameManager.Instance.PlayerPlayCard();
                 WebSocketService.PlayCard(handIndex, yourMonsterZone.ghostCard.GetComponent<InGameCard>().indexOnField);
-
-                //FOR NOW PLACES CARD TO LEFT!!
-                yourMonsterZone.AddNewMonsterCard(true, 0, heldCard.GetComponent<InGameCard>().cardData);
-                Hand.Instance.RemoveCard(handIndex);
+                GameManager.Instance.PlayerPlayCard(heldCard.GetComponent<InGameCard>().cardData, handIndex);
             }
             else
             {

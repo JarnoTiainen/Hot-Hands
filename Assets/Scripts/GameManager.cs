@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     
     public static GameManager Instance { get; private set; }
+
     [SerializeField] private bool debuggerModeOn;
     [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerBurnCard;
     [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerDrawCard;
@@ -16,32 +17,24 @@ public class GameManager : MonoBehaviour
     private int playerNumber;
     public PlayerStats playerStats;
     public PlayerStats enemyPlayerStats;
-    [SerializeField] private CardList cardList;
-
-
     [SerializeField] private int playerStartHealth = 100;
 
+    [SerializeField] private readonly CardList cardList;
     private GameObject sfxLibrary;
 
     private void Awake()
     {
         Instance = gameObject.GetComponent<GameManager>();
         sfxLibrary = GameObject.Find("SFXLibrary");
-    }
-
-    private void Start()
-    {
         playerStats = new PlayerStats(playerStartHealth);
         enemyPlayerStats = new PlayerStats(playerStartHealth);
     }
-
 
     public void SetPlayerNumber(int playerNumber)
     {
         this.playerNumber = playerNumber;
     }
 
-    //Message from server is directed trough this code before  the actual function
     public void PlayerBurnCard(BurnCardMessage burnCardMessage)
     {
 
@@ -62,8 +55,7 @@ public class GameManager : MonoBehaviour
         }
         
     }
-    //Trigger sound effect and all that stuff
-    //Called from server for enemy player and from Mouse script for client owener
+
     public void PlayerBurnCard(GameObject card, int player = -1)
     {
         if (player == -1) player = playerNumber;
@@ -86,7 +78,7 @@ public class GameManager : MonoBehaviour
     }
     public void UpdatePlayerBurnValue(int player, int newValue)
     {
-        if(player ==playerNumber)
+        if(player == playerNumber)
         {
             playerStats.playerBurnValue = newValue;
         }
@@ -123,20 +115,24 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            References.i.opponentMonsterZone.AddNewMonsterCard(false, playCardMessage.boardIndex, cardList.GetCardData(playCardMessage));
-            enemyPlayerStats.playerBurnValue -= playCardMessage.cardCost;
-            PlayerPlayCard(playCardMessage.player);
+            PlayerPlayCard(cardList.GetCardData(playCardMessage), playCardMessage.handIndex, playCardMessage.boardIndex, playCardMessage.player);
         }
     }
-    public void PlayerPlayCard(int player = -1)
+    public void PlayerPlayCard(CardData data, int handIndex = -1, int boardIndex = 0, int player = -1)
     {
         if (player == -1) player = playerNumber;
         if(player == playerNumber)
         {
+            playerStats.playerBurnValue -= data.cost;
+            References.i.yourMonsterZone.AddNewMonsterCard(true, boardIndex, data);
+            Hand.Instance.RemoveCard(handIndex);
             GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = playerStats.playerBurnValue.ToString();
         }
         else
         {
+            enemyPlayerStats.playerBurnValue -= data.cost;
+            References.i.opponentMonsterZone.AddNewMonsterCard(false, boardIndex, data);
+            EnemyHand.Instance.RemoveCard(handIndex);
             GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
         }
         sfxLibrary.GetComponent<PlayCardSFX>().Play();

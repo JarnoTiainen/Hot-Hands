@@ -32,8 +32,6 @@ public class MonsterZone : MonoBehaviour
             else Debug.Log("(MonsterZone) board Index: " + (monsterCards.Count - 1 - boardIndex));
         }
         
-
-        
         if(isYourCard)
         {
             ghostCard.GetComponent<InGameCard>().ToggleGhostCard();
