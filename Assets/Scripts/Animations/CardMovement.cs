@@ -11,6 +11,7 @@ public class CardMovement : MonoBehaviour
     [SerializeField]
     private AnimationCurve curve;
     private AnimationCurve defaultCurve;
+    private AnimationCurve smoothAngleTransition;
 
     private Quaternion startRotation;
     private Quaternion endRotation;
@@ -22,7 +23,11 @@ public class CardMovement : MonoBehaviour
     private float elapsedTime;
 
     private bool doMove = false;
-    private bool doRotate = false;
+   [SerializeField] private bool doRotate = false;
+
+    [SerializeField] private float maxMovementRotateAngle;
+    private Vector3 previousPos;
+
 
 
     void Start()
@@ -33,7 +38,11 @@ public class CardMovement : MonoBehaviour
 
     void Update()
     {
-        if(doMove && transform.localPosition != endPoint) {
+        //Vector3 normalizedDirection = (transform.position - previousPos).normalized;
+        //Vector3 goalRotation = normalizedDirection * maxMovementRotateAngle;
+
+
+        if (doMove && transform.localPosition != endPoint) {
             elapsedTime += Time.deltaTime;
             //smoothly moves towards the endpoint. should this be in the fixedUpdate?
             transform.localPosition = Vector3.Lerp(startPoint, endPoint, curve.Evaluate(elapsedTime / duration));
@@ -43,12 +52,17 @@ public class CardMovement : MonoBehaviour
         }
 
         //using euler angles here because quaternions would be different, but the euler angles are same
-        if(doRotate && transform.rotation.eulerAngles != endRotation.eulerAngles) {
+
+        //Koodi ei toiminu kuten ajattelit(vaikka se toimi) dpRotatea ei ikinä laitettu pois päältä koska if == ei ikinä päässyt täsmälleen oikeaan arvoon.
+        //Muutin koodin niin, että se lopettaa pyörimisen, kun
+        if (doRotate) {
             elapsedRotationTime += Time.deltaTime;
             transform.localRotation = Quaternion.Slerp(startRotation, endRotation, curve.Evaluate(elapsedRotationTime / rotationSpeed));
-        } else if (doRotate && transform.rotation.eulerAngles == endRotation.eulerAngles) {
-            doRotate = false;
-        }
+            if (elapsedRotationTime >= rotationSpeed)
+            {
+                doRotate = false;
+            }
+        } 
     }
     ///uses the default animation curve of card, startpoint specifiable
     public void OnCardMove(Vector3 startP, Vector3 endP, float dur)

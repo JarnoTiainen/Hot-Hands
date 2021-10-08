@@ -581,6 +581,7 @@ MonoBehaviour:
     cost: 0
     value: 0
     cardType: 0
+    attackDirection: 0
     spellTags: 
     monsterTags: 
     rp: 0
@@ -596,6 +597,7 @@ MonoBehaviour:
   textCanvas: {fileID: 0}
   indexOnField: 0
   isGhostCard: 0
+  cardHidden: 0
 --- !u!65 &6490331289218157256
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -647,6 +649,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  maxMovementRotateAngle: 45
 --- !u!114 &2172893466288287300
 MonoBehaviour:
   m_ObjectHideFlags: 0
