@@ -51,7 +51,6 @@ public class MonsterZone : MonoBehaviour
             GameObject newMonster = Instantiate(References.i.fieldCard);
             newMonster.transform.SetParent(transform);
             monsterCards.Insert(index, newMonster);
-            EnemyHand.Instance.RemoveCard(0);
             RepositionMonsterCards();
             newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
         }

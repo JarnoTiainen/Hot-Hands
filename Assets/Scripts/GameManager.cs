@@ -134,7 +134,9 @@ public class GameManager : MonoBehaviour
         {
             enemyPlayerStats.playerBurnValue -= data.cost;
             References.i.opponentMonsterZone.AddNewMonsterCard(false, boardIndex, data);
-            EnemyHand.Instance.RemoveCard(handIndex);
+            //for now removes card with index 0
+            Debug.Log("Removing card from hand");
+            EnemyHand.Instance.RemoveCard(0);
             GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
         }
         sfxLibrary.GetComponent<PlayCardSFX>().Play();
