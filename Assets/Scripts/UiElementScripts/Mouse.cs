@@ -73,6 +73,7 @@ public class Mouse : MonoBehaviour
             {
                 WebSocketService.PlayCard(handIndex, yourMonsterZone.ghostCard.GetComponent<InGameCard>().indexOnField);
                 GameManager.Instance.PlayerPlayCard(heldCard.GetComponent<InGameCard>().cardData, handIndex);
+                heldCard = null;
             }
             else
             {
