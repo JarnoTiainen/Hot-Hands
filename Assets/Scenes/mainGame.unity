@@ -169,8 +169,8 @@ MonoBehaviour:
     discardpileCardCount: 0
     playerBurnValue: 0
     playerHealth: 0
-  cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
   playerStartHealth: 100
+  cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
 --- !u!114 &7355201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deck: {fileID: 915886160}
-  debuggerModeOn: 0
+  debuggerModeOn: 1
 --- !u!1 &7522968
 GameObject:
   m_ObjectHideFlags: 0
