@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         DrawCardMessage cardMessage = burnCardMessage.burnedCardDone;
         if (cardMessage.player == playerNumber)
         {
-            
+            playerStats.playerHandCards--;
         }
         else
         {
@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviour
         if (playCardMessage.player == playerNumber)
         {
             References.i.yourMonsterZone.UpdateCardData(true, playCardMessage);
+            playerStats.playerHandCards--;
         }
         else
         {
@@ -138,6 +139,7 @@ public class GameManager : MonoBehaviour
         if (player == -1) player = playerNumber;
         if(player == playerNumber)
         {
+            
             playerStats.playerBurnValue -= data.cost;
             References.i.yourMonsterZone.AddNewMonsterCard(true, boardIndex, data);
             Hand.Instance.RemoveCard(handIndex);
@@ -153,6 +155,10 @@ public class GameManager : MonoBehaviour
             GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
         }
         sfxLibrary.GetComponent<PlayCardSFX>().Play();
+    }
+
+    public void PlayerRecallCard() { 
+
     }
 
     public void PlayerAttack(AttackEventMessage attackEventMessage)
