@@ -15,6 +15,7 @@ public class CardData
     public int cost;
     public int value;
     public Card.CardType cardType;
+    public Card.AttackDirection attackDirection;
 
     //info that only spells share
     public List<Card.SpellTag> spellTags;
@@ -27,13 +28,14 @@ public class CardData
     [SerializeField] public List<Enchantment> enchantments = new List<Enchantment>();
 
     //add missing ones later
-    public CardData(Sprite cardSprite, string cardName, int cost, int value, Card.CardType cardType, int rp, int lp) //List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags)
+    public CardData(Sprite cardSprite, string cardName, int cost, int value, Card.CardType cardType, Card.AttackDirection attackDirection, int rp, int lp) //List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags)
     {
         this.cardSprite = cardSprite;
         this.cardName = cardName;
         this.cost = cost;
         this.value = value;
         this.cardType = cardType;
+        this.attackDirection = attackDirection;
         //this.spellTags = spellTags;
         //this.monsterTags = monsterTags;
         this.rp = rp;
