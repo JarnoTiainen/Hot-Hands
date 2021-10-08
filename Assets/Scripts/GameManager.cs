@@ -167,10 +167,21 @@ public class GameManager : MonoBehaviour
             if (debugPlayerAttack) Debug.Log("attacked index: " + attackEventMessage.attackerValues.index + " target index: " + attackEventMessage.targetValues.index + "attacker lp: " + attackEventMessage.attackerValues.lp + " rp: " + attackEventMessage.attackerValues.rp + " target lp: " + attackEventMessage.targetValues.lp + " rp: " + attackEventMessage.targetValues.rp);
             bool wasYourAttack = false;
             if (attackEventMessage.player == playerNumber) wasYourAttack = true;
-            References.i.yourMonsterZone.UpdateCardData(wasYourAttack, attacker);
-            References.i.opponentMonsterZone.UpdateCardData(!wasYourAttack, attacker);
-            if (attacker.lp <= 0 || attacker.rp <= 0) References.i.yourMonsterZone.RemoveMonsterCard(attacker.index);
-            if (target.lp <= 0 || target.rp <= 0) References.i.opponentMonsterZone.RemoveEnemyMonsterCard(target.index);
+            if (wasYourAttack)
+            {
+                References.i.yourMonsterZone.UpdateCardData(wasYourAttack, attacker);
+                References.i.opponentMonsterZone.UpdateCardData(!wasYourAttack, target);
+                if (attacker.lp <= 0 || attacker.rp <= 0) References.i.yourMonsterZone.RemoveMonsterCard(attacker.index);
+                if (target.lp <= 0 || target.rp <= 0) References.i.opponentMonsterZone.RemoveEnemyMonsterCard(target.index);
+            }
+            else
+            {
+                References.i.yourMonsterZone.UpdateCardData(!wasYourAttack, target);
+                References.i.opponentMonsterZone.UpdateCardData(wasYourAttack, attacker);
+                if (attacker.lp <= 0 || attacker.rp <= 0) References.i.yourMonsterZone.RemoveMonsterCard(target.index);
+                if (target.lp <= 0 || target.rp <= 0) References.i.opponentMonsterZone.RemoveEnemyMonsterCard(attacker.index);
+            }
+            
         }
     }
 }
