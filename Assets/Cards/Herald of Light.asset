@@ -10,24 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
-  m_Name: Test Card
+  m_Name: Herald of Light
   m_EditorClassIdentifier: 
   cardSprite: {fileID: 0}
-  cardName: Dragon Warrior of Warrior
-  cost: 1
+  cardName: Herald of Light
+  cost: 10
   value: 3
   cardType: 1
   spellTags: 
-  monsterTags: 000000000000000001000000
-  rp: 3
-  lp: 5
+  monsterTags: 
+  rp: 10
+  lp: 10
   attackDirection: 1
-  enchantments:
-  - name: 
-    enchantmentEffect: 0
-    trigger: 0
-    weight: 0
-  - name: 
-    enchantmentEffect: 0
-    trigger: 0
-    weight: 0
+  enchantments: []

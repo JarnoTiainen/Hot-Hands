@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
-  m_Name: Dragon Horn
+  m_Name: Brother Felt
   m_EditorClassIdentifier: 
   cardSprite: {fileID: 0}
-  cardName: Dragon Horn
-  cost: 3
-  value: 3
-  cardType: 0
-  spellTags: 0300000001000000
+  cardName: Brother Felt
+  cost: 6
+  value: 2
+  cardType: 1
+  spellTags: 
   monsterTags: 
-  rp: 0
-  lp: 0
+  rp: 11
+  lp: 2
+  attackDirection: 1
   enchantments: []

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
-  m_Name: Dragon Buster
+  m_Name: Arogyl the Son of Mor'goth
   m_EditorClassIdentifier: 
   cardSprite: {fileID: 0}
-  cardName: Dragon Buster
-  cost: 6
-  value: 6
+  cardName: Arogyl the Son of Mor'goth
+  cost: 15
+  value: 0
   cardType: 1
   spellTags: 
-  monsterTags: 00000000
-  rp: 6
-  lp: 6
-  attackDirection: 1
+  monsterTags: 
+  rp: 20
+  lp: 20
+  attackDirection: 2
   enchantments: []

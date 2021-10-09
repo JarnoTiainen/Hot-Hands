@@ -150,6 +150,7 @@ public class WebSocketService : MonoBehaviour
 
     public static void SaveCardToDataBase(Card card)
     {
+        Debug.Log("sending new cards");
         GameMessage message = new GameMessage("OnMessage", "SAVECARD", card.CreateCardJSON());
         card.SaveCardToCardList();
         SendWebSocketMessage(JsonUtility.ToJson(message));
