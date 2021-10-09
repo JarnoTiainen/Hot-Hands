@@ -578,12 +578,15 @@ MonoBehaviour:
   value: {fileID: 3055479451659487593}
   lp: {fileID: 6469195302025323115}
   rp: {fileID: 8444400555959281729}
+  debuggerModeOn: 0
   cardMainBodyMaterial: {fileID: -6465566751694194690, guid: b5904bc55cd6fec4f82d888ba1f15e7e, type: 3}
   meshRenderer: {fileID: 7185273887884801207}
   textCanvas: {fileID: 344395278571197130}
   indexOnField: 0
   isGhostCard: 0
   cardHidden: 0
+  currentAttackCoolDown: 0
+  attackOnCD: 0
 --- !u!65 &9060123631021853949
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -647,6 +650,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  doRotate: 0
   maxMovementRotateAngle: 45
 --- !u!54 &3517024197415932619
 Rigidbody:

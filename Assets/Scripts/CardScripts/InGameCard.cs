@@ -21,10 +21,31 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] [ShowIf("debuggerModeOn", true)] public bool isGhostCard;
     [ShowIf("debuggerModeOn", true)] public bool cardHidden;
 
+    [SerializeField] private float currentAttackCoolDown;
+    [SerializeField] private bool attackOnCD;
+
+
     private void Awake()
     {
         mat = meshRenderer.material;
         meshRenderer.material.shader = cardMainBodyMaterial;
+    }
+
+    [Button] public void StartAttackCooldown(float duration)
+    {
+        Debug.Log("started attack dc");
+        attackOnCD = true;
+        currentAttackCoolDown = duration;
+    }
+
+    private void Update()
+    {
+        if (currentAttackCoolDown > 0) currentAttackCoolDown -= Time.deltaTime;
+        else if(currentAttackCoolDown <= 0 && attackOnCD)
+        {
+            attackOnCD = false;
+            currentAttackCoolDown = 0;
+        }
     }
 
 
@@ -68,7 +89,11 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void OnClickElement()
     {
-        transform.parent.GetComponent<MonsterZone>().AttackWithCard(gameObject);
+        if(!attackOnCD)
+        {
+            attackOnCD = true;
+            transform.parent.GetComponent<MonsterZone>().AttackWithCard(gameObject);
+        }
     }
 
     public void SetStatLp(int lp)

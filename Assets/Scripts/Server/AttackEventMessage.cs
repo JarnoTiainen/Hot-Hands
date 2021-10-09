@@ -3,6 +3,7 @@ using System;
 [Serializable]
 public class AttackEventMessage
 {
+    public float attackCooldown;
     public bool directHit;
     public int playerTakenDamage;
     public int player;

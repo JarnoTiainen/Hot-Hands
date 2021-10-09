@@ -46,43 +46,43 @@ public class WebSocketService : MonoBehaviour
         websocket.OnMessage += (bytes) =>
         {
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
-            //if (debuggerModeOn) Debug.Log("server message: " + data[0] + " " + data[1]);
+            if (debuggerModeOn) Debug.Log("server message: " + data[0] + " " + data[1]);
             switch ((string)data[0])
             {
                 case "OPPONENTJOIN":
-                    //if (debuggerModeOn) Debug.Log("Message type was OPPONENTJOINED");
+                    if (debuggerModeOn) Debug.Log("Message type was OPPONENTJOINED");
                     Debug.Log("Opponent joined!");
                     break;
                 case "GETSIDE":
-                    //if (debuggerModeOn) Debug.Log("Message type was GETSIDE");
+                    if (debuggerModeOn) Debug.Log("Message type was GETSIDE");
                     gameManager.SetPlayerNumber(int.Parse(data[1]));
                     break;
                 case "PLAYCARD":
-                    //if (debuggerModeOn) Debug.Log("Message type was PLAYCARD");
+                    if (debuggerModeOn) Debug.Log("Message type was PLAYCARD");
                     PlayCardMessage playCardMessage = JsonUtility.FromJson<PlayCardMessage>(data[1]);
                     gameManager.PlayerPlayCard(playCardMessage);
                     break;
                 case "DRAWCARD":
-                    //if (debuggerModeOn) Debug.Log("Message type was DRAWCARD");
+                    if (debuggerModeOn) Debug.Log("Message type was DRAWCARD");
                     DrawCardMessage drawCardMessage = JsonUtility.FromJson<DrawCardMessage>(data[1]);
                     gameManager.PlayerDrawCard(drawCardMessage);
                     break;
                 case "ATTACK":
-                    //if (debuggerModeOn) Debug.Log("Message type was ATTACK");
+                    if (debuggerModeOn) Debug.Log("Message type was ATTACK");
                     AttackEventMessage attackEventMessage = JsonUtility.FromJson<AttackEventMessage>(data[1]);
                     gameManager.PlayerAttack(attackEventMessage);
                     break;
                 case "SAVECARD":
-                    //if (debuggerModeOn) Debug.Log("Message type was SAVECARD");
+                    if (debuggerModeOn) Debug.Log("Message type was SAVECARD");
                     Debug.Log("Saved card " + data[1][0] + " succesfully");
                     break;
                 case "SETDECK":
-                    //if (debuggerModeOn) Debug.Log("Message type was SETDECK");
+                    if (debuggerModeOn) Debug.Log("Message type was SETDECK");
                     if (int.Parse(data[1]) == 0) Debug.Log("Deck save ok");
                     else Debug.Log("Deck save failed, everything is ok");
                     break;
                 case "BURNCARD":
-                    //if (debuggerModeOn) Debug.Log("Message type was BURNCARD");
+                    if (debuggerModeOn) Debug.Log("Message type was BURNCARD");
                     BurnCardMessage burnCardMessage = JsonUtility.FromJson<BurnCardMessage>(data[1]);
                     gameManager.PlayerBurnCard(burnCardMessage);
                     break;
@@ -169,7 +169,7 @@ public class WebSocketService : MonoBehaviour
 
     public static void Attack(int fieldIndex)
     {
-        //if (Instance.debuggerModeOn) Debug.Log("Attacked with id " + fieldIndex);
+        if (Instance.debuggerModeOn) Debug.Log("Attacked with id " + fieldIndex);
 
         GameMessage message = new GameMessage("OnMessage", "ATTACK", fieldIndex.ToString());
         SendWebSocketMessage(JsonUtility.ToJson(message));

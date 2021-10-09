@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviour
     {
         if (playCardMessage.player == playerNumber)
         {
+            References.i.yourMonsterZone.GetCardWithIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(playCardMessage.attackCooldown);
             References.i.yourMonsterZone.UpdateCardData(true, playCardMessage);
             playerStats.playerHandCards--;
         }
@@ -161,23 +162,26 @@ public class GameManager : MonoBehaviour
     public void PlayerAttack(AttackEventMessage attackEventMessage)
     {
         attackEventMessage.attackerValues = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.attacker);
+        CardPowersMessage attacker = attackEventMessage.attackerValues;
+        CardPowersMessage target = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.target);
         if (attackEventMessage.directHit)
         {
             if (attackEventMessage.player == playerNumber)
             {
+                References.i.yourMonsterZone.GetCardWithIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
                 enemyPlayerStats.playerHealth -= attackEventMessage.playerTakenDamage;
                 if(debugPlayerAttack) Debug.Log("Enemy lost " + attackEventMessage.playerTakenDamage + " health. New health is: " + enemyPlayerStats.playerHealth);
             }
             else
             {
+                References.i.opponentMonsterZone.GetCardWithIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
                 playerStats.playerHealth -= attackEventMessage.playerTakenDamage;
                 if (debugPlayerAttack) Debug.Log("You lost " + attackEventMessage.playerTakenDamage + " health. New health is: " + playerStats.playerHealth);
             }
         }
         else
         {
-            CardPowersMessage attacker = attackEventMessage.attackerValues;
-            CardPowersMessage target = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.target);
+            
             attackEventMessage.targetValues = target;
 
             if (debugPlayerAttack) Debug.Log("attacked index: " + attackEventMessage.attackerValues.index + " target index: " + attackEventMessage.targetValues.index + "attacker lp: " + attackEventMessage.attackerValues.lp + " rp: " + attackEventMessage.attackerValues.rp + " target lp: " + attackEventMessage.targetValues.lp + " rp: " + attackEventMessage.targetValues.rp);
@@ -187,6 +191,7 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("was your attack " + wasYourAttack);
             if (wasYourAttack)
             {
+                References.i.yourMonsterZone.GetCardWithIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
                 References.i.yourMonsterZone.UpdateCardData(wasYourAttack, attacker);
                 References.i.opponentMonsterZone.UpdateCardData(!wasYourAttack, target);
                 if (attacker.lp <= 0 || attacker.rp <= 0)
@@ -198,6 +203,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                References.i.opponentMonsterZone.GetCardWithIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
                 References.i.yourMonsterZone.UpdateCardData(!wasYourAttack, target);
                 References.i.opponentMonsterZone.UpdateCardData(wasYourAttack, attacker);
                 if (attacker.lp <= 0 || attacker.rp <= 0)

@@ -15,6 +15,7 @@ public class PlayCardMessage
     public int boardIndex;
 
     public int player;
+    public float attackCooldown;
     public string cardName;
     public int cardCost;
     public int cardValue;

@@ -592,12 +592,15 @@ MonoBehaviour:
   value: {fileID: 8902743543681902155}
   lp: {fileID: 7848432294895779082}
   rp: {fileID: 5759760883158312004}
+  debuggerModeOn: 0
   cardMainBodyMaterial: {fileID: -6465566751694194690, guid: b5904bc55cd6fec4f82d888ba1f15e7e, type: 3}
   meshRenderer: {fileID: 6448218995620765098}
   textCanvas: {fileID: 4525997025527728775}
   indexOnField: 0
   isGhostCard: 0
   cardHidden: 0
+  currentAttackCoolDown: 0
+  attackOnCD: 0
 --- !u!65 &6490331289218157256
 BoxCollider:
   m_ObjectHideFlags: 0
