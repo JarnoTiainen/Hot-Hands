@@ -201,10 +201,13 @@ public class GameManager : MonoBehaviour
                 References.i.opponentMonsterZone.UpdateCardData(wasYourAttack, attacker);
                 if (attacker.lp <= 0 || attacker.rp <= 0)
                 {
-                    playerStats.playerFieldCards--;
-                    References.i.opponentMonsterZone.RemoveMonsterCard(target.index);
+                    References.i.opponentMonsterZone.RemoveEnemyMonsterCard(attacker.index);
                 }
-                if (target.lp <= 0 || target.rp <= 0) References.i.opponentMonsterZone.RemoveEnemyMonsterCard(attacker.index);
+                if (target.lp <= 0 || target.rp <= 0)
+                {
+                    playerStats.playerFieldCards--;
+                    References.i.yourMonsterZone.RemoveMonsterCard(target.index);
+                }
             }
             
         }

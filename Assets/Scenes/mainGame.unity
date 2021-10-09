@@ -176,7 +176,6 @@ MonoBehaviour:
   playerStartHealth: 100
   maxHandSize: 5
   maxFieldCardCount: 5
-  cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
 --- !u!114 &7355201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3644,15 +3643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDeck:
   - {fileID: 11400000, guid: 2f484580e74bdd44b90e49ca65469a84, type: 2}
-  - {fileID: 11400000, guid: 2f484580e74bdd44b90e49ca65469a84, type: 2}
-  - {fileID: 11400000, guid: 2f484580e74bdd44b90e49ca65469a84, type: 2}
   - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
-  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
-  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
-  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
-  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
-  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
-  - {fileID: 11400000, guid: 2d4dcf24f0a0d4f46a8cc00683dc357d, type: 2}
   - {fileID: 11400000, guid: 2d4dcf24f0a0d4f46a8cc00683dc357d, type: 2}
 --- !u!65 &915886161
 BoxCollider:
@@ -7604,7 +7595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63e5ac6014a93f24aaa28a26157621fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardBase: {fileID: 7611825709596717884, guid: 9f8e5799bc8e632418cb743be7732cc0, type: 3}
   gapBetweenCards: 0
   cardScaleInHand: 1
   moveSpeed: 0.5
