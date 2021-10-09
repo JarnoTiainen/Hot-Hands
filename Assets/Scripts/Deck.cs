@@ -23,7 +23,7 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
         }
         else
         {
-            Debug.LogWarning("Hand full display error effect here");
+            //Debug.LogWarning("Hand full display error effect here");
         }
         
     }

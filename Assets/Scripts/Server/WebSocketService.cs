@@ -129,7 +129,7 @@ public class WebSocketService : MonoBehaviour
 
     public static void PlayCard(int cardIndex, int boardIndex)
     {
-        if (Instance.debuggerModeOn) Debug.LogWarning("PLAYING CARD TO INDEX " + boardIndex);
+        //if (Instance.debuggerModeOn) Debug.LogWarning("PLAYING CARD TO INDEX " + boardIndex);
         PlayCardMessage playCardMessage = new PlayCardMessage(1, cardIndex, boardIndex);
         string playCardMessageJSON = JsonUtility.ToJson(playCardMessage);
 
