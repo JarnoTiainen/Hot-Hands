@@ -49,6 +49,10 @@ public class WebSocketService : MonoBehaviour
             if (debuggerModeOn) Debug.Log("server message: " + data[0] + " " + data[1]);
             switch((string)data[0])
             {
+                case "OPPONENTJOIN":
+                    if (debuggerModeOn) Debug.Log("Message type was OPPONENTJOINED");
+                    Debug.Log("Opponent joined!");
+                    break;
                 case "GETSIDE":
                     if (debuggerModeOn) Debug.Log("Message type was GETSIDE");
                     gameManager.SetPlayerNumber(int.Parse(data[1]));
