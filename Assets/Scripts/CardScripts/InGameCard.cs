@@ -18,7 +18,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] public Canvas textCanvas;
     [ShowIf("debuggerModeOn", true)] public int indexOnField;
 
-    [SerializeField] [ShowIf("debuggerModeOn", true)] private bool isGhostCard;
+    [SerializeField] [ShowIf("debuggerModeOn", true)] public bool isGhostCard;
     [ShowIf("debuggerModeOn", true)] public bool cardHidden;
 
     private void Awake()
@@ -81,7 +81,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     }
 
     public void Burn()
-    {
+    { 
         GetComponent<DissolveEffect>().StartDissolving(mat);
         GetComponent<DissolveShadow>().StartDissolving();
         GetComponent<DissolveMove>().StartDissolving();

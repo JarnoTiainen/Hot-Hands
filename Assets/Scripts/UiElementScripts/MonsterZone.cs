@@ -55,6 +55,7 @@ public class MonsterZone : MonoBehaviour
 
     public void RemoveMonsterCard(int index)
     {
+        Debug.Log("Removing monster " + index);
         GameObject deadMonster = GetCardWithIndex(index);
         monsterCards.Remove(deadMonster);
         GameObject.Destroy(deadMonster);
@@ -88,7 +89,7 @@ public class MonsterZone : MonoBehaviour
     {
         foreach(GameObject card in monsterCards)
         {
-            if (card.GetComponent<InGameCard>().indexOnField == index) return card;
+            if (card.GetComponent<InGameCard>().indexOnField == index && !card.GetComponent<InGameCard>().isGhostCard) return card;
         }
 
         Debug.LogError("Card was not found");
