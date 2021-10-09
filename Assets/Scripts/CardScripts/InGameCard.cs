@@ -61,7 +61,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         UiCardPreviewManager.Instance.HideCardTooltip(gameObject);
     }
 
-
     public CardData GetCardData()
     {
         return cardData;
