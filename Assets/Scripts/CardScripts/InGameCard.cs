@@ -82,7 +82,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void Burn()
     {
-        Debug.Log(cardData.cardName + " was burned");
         GetComponent<DissolveEffect>().StartDissolving(mat);
         GetComponent<DissolveShadow>().StartDissolving();
         GetComponent<DissolveMove>().StartDissolving();

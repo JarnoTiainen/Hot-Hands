@@ -56,7 +56,6 @@ public class EnemyHand : MonoBehaviour
     //Removes one card from enemy hand and if there is no parameter remove card with last index
     [Button] public void RemoveCard(int CardIndex = 0)
     {
-        Debug.LogWarning("REMOVAL!");
         GameObject removedCard = unhandledCards[CardIndex];
         unhandledCards.Remove(removedCard);
         Destroy(removedCard);
