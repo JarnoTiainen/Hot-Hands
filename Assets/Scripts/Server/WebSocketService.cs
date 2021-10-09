@@ -83,7 +83,7 @@ public class WebSocketService : MonoBehaviour
                     gameManager.PlayerBurnCard(burnCardMessage);
                     break;
                 default:
-                    if (debuggerModeOn) Debug.Log("Message type was UNKOWN");
+                    if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN");
                     break;
             }
         };
