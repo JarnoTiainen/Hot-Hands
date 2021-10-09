@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
@@ -7,10 +6,8 @@ public class MonsterZone : MonoBehaviour
 {
     public List<GameObject> monsterCards = new List<GameObject>();
     Dictionary<GameObject, float> cardXposDictionary = new Dictionary<GameObject, float>();
-    
     [SerializeField] private float gapBetweenCards;
     [SerializeField] private float moveSpeed = 1;
-
     [SerializeField] private bool debugModeOn = false;
     public bool isYourMonsterZone;
     [SerializeField] [ShowIf("debugModeOn", true)]public GameObject ghostCard;

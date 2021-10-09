@@ -7,9 +7,6 @@ public class EnemyHand : MonoBehaviour
 {
     public static EnemyHand Instance { get; private set; }
     private static List<GameObject> unhandledCards = new List<GameObject>();
-    [SerializeField] private GameObject cardBase;
-    private GameObject container;
-    [SerializeField] private GameObject enemyDeckObj;
     [SerializeField] private float gapBetweenCards = 0;
     [SerializeField] private float cardScaleInHand = 1;
     [SerializeField] private float moveSpeed = 0.5f;
@@ -19,15 +16,14 @@ public class EnemyHand : MonoBehaviour
     public void Awake()
     {
         Instance = gameObject.GetComponent<EnemyHand>();
-        container = gameObject;
-        enemyDeckObj = GameObject.FindGameObjectWithTag("EnemyDeck");
         Debug.Log(gameObject.name);
     }
 
     private static GameObject InstantiateNewCard()
     {
-        GameObject newCard = Instantiate(Instance.cardBase, Instance.enemyDeckObj.transform.position, Quaternion.Euler(0, 180, 0));
-        newCard.transform.SetParent(Instance.container.transform, true);
+        GameObject newCard = Instantiate(References.i.handCard, References.i.opponentDeckObj.transform.position, Quaternion.Euler(0, 180, 0));
+        newCard.GetComponent<InGameCard>().cardHidden = true;
+        newCard.transform.SetParent(Instance.gameObject.transform, true);
         newCard.transform.localScale = new Vector3(Instance.cardScaleInHand, Instance.cardScaleInHand, Instance.cardScaleInHand);
         return newCard;
     }
@@ -35,7 +31,7 @@ public class EnemyHand : MonoBehaviour
     //sets new card positions in hand
     private static void SetNewCardPositions()
     {
-        float inGameWidth = Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x;
+        float inGameWidth = References.i.handCard.GetComponent<BoxCollider>().size.x;
         float totalCardsWidth = inGameWidth * unhandledCards.Count + Instance.gapBetweenCards * (unhandledCards.Count - 1);
         float newPosX;
         float firstCardOffsetX = (-totalCardsWidth + inGameWidth) / 2;
@@ -47,18 +43,6 @@ public class EnemyHand : MonoBehaviour
             Vector3 newPos = new Vector3(newPosX, 0, 0);
             unhandledCards[i].GetComponent<CardMovement>().OnCardMove(newPos, Instance.moveSpeed);
         }
-    }
-
-    private static float TotalCardsWidth()
-    {
-        float totalCardWidth = 0;
-        foreach (GameObject card in unhandledCards)
-        {
-            totalCardWidth += Instance.cardBase.transform.GetChild(0).GetComponent<BoxCollider>().size.x;
-            if (card != unhandledCards[0]) totalCardWidth += Instance.gapBetweenCards;
-        }
-
-        return totalCardWidth;
     }
 
     //add a new card to enemy hand

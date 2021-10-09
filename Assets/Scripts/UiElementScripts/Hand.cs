@@ -9,28 +9,17 @@ public class Hand : MonoBehaviour
 
     public static Hand Instance { get; private set; }
 
-    private Dictionary<GameObject, GameObject> visibleHandCardPreviews = new Dictionary<GameObject, GameObject>();
-
     private static List<GameObject> handCards = new List<GameObject>();
     private static List<GameObject> visibleHandCards = new List<GameObject>();
     private static List<GameObject> unhandledCards = new List<GameObject>();
 
-
-    [SerializeField] private GameObject handCard;
     [SerializeField] private float gapBetweenCards = 0;
     [SerializeField] private float moveSpeed = 0.5f;
     [SerializeField] private float rotationSpeed = 0.1f;
 
-    private Canvas uiCanvas;
-    private Canvas canvas;
-    private GameObject deckObj;
-
     public void Awake()
     {
         Instance = gameObject.GetComponent<Hand>();
-        uiCanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
-        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        deckObj = GameObject.FindGameObjectWithTag("Deck");
     }
 
     //Adds new facedown card to hand (ADD DRAW ANIMATION HERE)
@@ -53,7 +42,7 @@ public class Hand : MonoBehaviour
     //instanciate and rotate card facedown
     private static GameObject InstantiateNewCard()
     {
-        GameObject newCard = Instantiate(Instance.handCard, Instance.deckObj.transform.position, Quaternion.Euler(0, 180, 0));
+        GameObject newCard = Instantiate(References.i.handCard, References.i.yourDeckObj.transform.position, Quaternion.Euler(0, 180, 0));
         newCard.transform.SetParent(Instance.gameObject.transform, true);
         
         return newCard;
@@ -72,8 +61,6 @@ public class Hand : MonoBehaviour
 
         }
     }
-
-
 
     //Removes one card from hand and if there is no parameter remove card with last index
     [Button] public void RemoveCard(int CardIndex = 0)
@@ -99,7 +86,7 @@ public class Hand : MonoBehaviour
     //sets new card positions in hand
     private static void SetNewCardPositions()
     {
-        float inGameWidth = Instance.handCard.GetComponent<BoxCollider>().size.x;
+        float inGameWidth = References.i.handCard.GetComponent<BoxCollider>().size.x;
         float totalCardsWidth = inGameWidth * visibleHandCards.Count + Instance.gapBetweenCards * (visibleHandCards.Count - 1);
         float newPosX;
         float firstCardOffsetX = (-totalCardsWidth + inGameWidth) / 2;
@@ -129,26 +116,7 @@ public class Hand : MonoBehaviour
         SetNewCardPositions();
     }
 
-    //shows card tooltip
-    public void ShowCardTooltip(GameObject card)
-    {
-        if(!unhandledCards.Contains(card))
-        {
-            visibleHandCardPreviews.Add(card, UiCardPreviewManager.Instance.ShowCardPreview(card));
-        }
-        
-    }
 
-    //hides card tooltip
-    public void HideCardTooltip(GameObject hoveredCard)
-    {
-        if(visibleHandCardPreviews.ContainsKey(hoveredCard))
-        {
-            GameObject preview = visibleHandCardPreviews[hoveredCard];
-            UiCardPreviewManager.Instance.HideCardPreview(preview);
-            visibleHandCardPreviews.Remove(hoveredCard);
-        }
-    }
 
     public int GetCardIndex(GameObject card)
     {

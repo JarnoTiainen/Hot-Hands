@@ -7,27 +7,22 @@ public class Mouse : MonoBehaviour
 {
     public static Mouse Instance { get; private set; }
 
-    public MonsterZone yourMonsterZone;
     public GameObject heldCard;
     private int handIndex;
-    public Camera thisCamera;
     [SerializeField] private Vector2 monsterHitBox;
     public Vector2 mousePosInWorld;
     public GameObject markerPrefab;
-    private Hand uiHand;
-    [SerializeField] private bool debuggingOn = false;
+    [SerializeField] private bool debuggingModeOn = false;
     [SerializeField] private float mouseHightFromTableTop;
-    [SerializeField] private bool debuggerMode = false;
 
     private void Awake()
     {
         Instance = gameObject.GetComponent<Mouse>();
-        uiHand = GameObject.Find("Hand").GetComponent<Hand>();
     }
 
     private void Start()
     {
-        if(debuggingOn)
+        if(debuggingModeOn)
         {
             Instantiate(markerPrefab, new Vector3(monsterHitBox.x, monsterHitBox.y, 0), Quaternion.identity);
             Instantiate(markerPrefab, new Vector3(-monsterHitBox.x, monsterHitBox.y, 0), Quaternion.identity);
@@ -38,7 +33,7 @@ public class Mouse : MonoBehaviour
 
     private void Update()
     {
-        Ray ray = thisCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(ray, out RaycastHit raycastHit))
         {
             mousePosInWorld = raycastHit.point;
@@ -46,7 +41,7 @@ public class Mouse : MonoBehaviour
         }
         if(Input.GetMouseButtonUp(0) && heldCard)
         {
-            if(debuggerMode) Debug.Log("placing down");
+            if(debuggingModeOn) Debug.Log("placing down");
             ValuatePlaceCard();
         }
     }
@@ -72,21 +67,21 @@ public class Mouse : MonoBehaviour
             if (GameManager.Instance.playerStats.playerBurnValue >= Hand.Instance.GetCardData(handIndex).cost && GameManager.Instance.playerStats.playerFieldCards < GameManager.Instance.maxFieldCardCount)
             {
                 GameManager.Instance.playerStats.playerFieldCards++;
-                WebSocketService.PlayCard(handIndex, yourMonsterZone.ghostCard.GetComponent<InGameCard>().indexOnField);
+                WebSocketService.PlayCard(handIndex, References.i.yourMonsterZone.ghostCard.GetComponent<InGameCard>().indexOnField);
                 GameManager.Instance.PlayerPlayCard(heldCard.GetComponent<InGameCard>().cardData, handIndex);
                 heldCard = null;
             }
             else
             {
-                yourMonsterZone.RemoveGhostCard();
-                uiHand.ReturnVisibleCard(heldCard, handIndex);
+                References.i.yourMonsterZone.RemoveGhostCard();
+                Hand.Instance.ReturnVisibleCard(heldCard, handIndex);
                 heldCard = null;
             }
         }
         else if(RayCaster.Instance.target == GameObject.Find("Bonfire"))
         {
-            yourMonsterZone.RemoveGhostCard();
-            if(debuggerMode) Debug.Log("Card discarded from slot " + handIndex);
+            References.i.yourMonsterZone.RemoveGhostCard();
+            if(debuggingModeOn) Debug.Log("Card discarded from slot " + handIndex);
             WebSocketService.Burn(handIndex);
             GameManager.Instance.PlayerBurnCard(heldCard);
             Hand.Instance.RemoveCardNoDestroy(handIndex);
@@ -94,8 +89,8 @@ public class Mouse : MonoBehaviour
         }
         else
         {
-            yourMonsterZone.RemoveGhostCard();
-            uiHand.ReturnVisibleCard(heldCard, handIndex);
+            References.i.yourMonsterZone.RemoveGhostCard();
+            Hand.Instance.ReturnVisibleCard(heldCard, handIndex);
             heldCard = null;
         }
     }

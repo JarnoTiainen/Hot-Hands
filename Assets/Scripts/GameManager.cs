@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class GameManager : MonoBehaviour
 {
-    
     public static GameManager Instance { get; private set; }
 
     [SerializeField] private bool debuggerModeOn;
@@ -20,7 +17,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int playerStartHealth = 100;
     public int maxHandSize = 5;
     public int maxFieldCardCount = 5;
-    [SerializeField] private CardList cardList;
     private GameObject sfxLibrary;
 
     private void Awake()
@@ -100,7 +96,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            PlayerDrawCard();
+            PlayerDrawCard(drawCardMessage.player);
         }
     }
     public void PlayerDrawCard(int player = -1)
@@ -131,7 +127,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            PlayerPlayCard(cardList.GetCardData(playCardMessage), playCardMessage.handIndex, playCardMessage.boardIndex, playCardMessage.player);
+            PlayerPlayCard(References.i.cardList.GetCardData(playCardMessage), playCardMessage.handIndex, playCardMessage.boardIndex, playCardMessage.player);
         }
     }
     public void PlayerPlayCard(CardData data, int handIndex = -1, int boardIndex = 0, int player = -1)

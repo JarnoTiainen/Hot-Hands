@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using NativeWebSocket;
 using Sirenix.OdinInspector;
@@ -8,8 +5,6 @@ using SimpleJSON;
 public class WebSocketService : MonoBehaviour
 {
     private GameManager gameManager;
-
-    [SerializeField]private Deck deck;
     
     public static WebSocketService Instance { get; private set; }
     static WebSocket websocket;
@@ -34,7 +29,7 @@ public class WebSocketService : MonoBehaviour
         websocket.OnOpen += () =>
         {
             Debug.Log("Connection open!");
-            deck.SendDeckData();
+            References.i.yourDeckObj.GetComponent<Deck>().SendDeckData();
             GetPlayerNumber();
         };
 

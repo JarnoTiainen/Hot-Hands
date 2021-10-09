@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using Sirenix.OdinInspector;
 
 public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterElement, IOnHoverExitElement
 {
@@ -10,14 +11,15 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] public TextMeshProUGUI lp;
     [SerializeField] public TextMeshProUGUI rp;
 
+    [SerializeField] private bool debuggerModeOn = false;
     [SerializeField] private Shader cardMainBodyMaterial;
     private Material mat;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] public Canvas textCanvas;
-    [SerializeField] public int indexOnField;
+    [ShowIf("debuggerModeOn", true)] public int indexOnField;
 
-    [SerializeField] private bool isGhostCard;
-    [SerializeField] public bool cardHidden;
+    [SerializeField] [ShowIf("debuggerModeOn", true)] private bool isGhostCard;
+    [ShowIf("debuggerModeOn", true)] public bool cardHidden;
 
     private void Awake()
     {
@@ -48,15 +50,15 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void OnHoverEnter()
     {
-        if(!isGhostCard)
+        if(!cardHidden)
         {
-            Hand.Instance.ShowCardTooltip(gameObject);
+            UiCardPreviewManager.Instance.ShowCardTooltip(gameObject);
         }
     }
 
     public void OnHoverExit()
     {
-        Hand.Instance.HideCardTooltip(gameObject);
+        UiCardPreviewManager.Instance.HideCardTooltip(gameObject);
     }
 
 
@@ -88,11 +90,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         transform.GetChild(1).gameObject.SetActive(false);
     }
 
-    public void Kill()
-    {
-        Debug.Log(cardData.cardName + " was killed");
-    }
-
     public void ToggleGhostCard()
     {
         if(!isGhostCard)
@@ -100,12 +97,14 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
             isGhostCard = true;
             meshRenderer.enabled = false;
             textCanvas.enabled = false;
+            cardHidden = true;
         }
         else
         {
             isGhostCard = false;
             meshRenderer.enabled = true;
             textCanvas.enabled = true;
+            cardHidden = false;
         }
     }
 }
