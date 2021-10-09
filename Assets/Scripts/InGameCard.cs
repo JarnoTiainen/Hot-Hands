@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class InGameCard : MonoBehaviour, IOnClickDownUIElement
+public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterElement, IOnHoverExitElement
 {
     [SerializeField] public CardData cardData;
     [SerializeField] public TextMeshProUGUI nameText;
@@ -13,7 +13,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] private Shader cardMainBodyMaterial;
     private Material mat;
     [SerializeField] private MeshRenderer meshRenderer;
-    [SerializeField] private Canvas textCanvas;
+    [SerializeField] public Canvas textCanvas;
     [SerializeField] public int indexOnField;
 
     [SerializeField] private bool isGhostCard;
@@ -45,6 +45,20 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
         }
         
     }
+
+    public void OnHoverEnter()
+    {
+        if(!isGhostCard)
+        {
+            Hand.Instance.ShowCardTooltip(gameObject);
+        }
+    }
+
+    public void OnHoverExit()
+    {
+        Hand.Instance.HideCardTooltip(gameObject);
+    }
+
 
     public CardData GetCardData()
     {

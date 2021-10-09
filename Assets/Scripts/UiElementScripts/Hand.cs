@@ -134,12 +134,7 @@ public class Hand : MonoBehaviour
     {
         if(!unhandledCards.Contains(card))
         {
-            Vector2 uiCanvasDimensions = uiCanvas.GetComponent<RectTransform>().sizeDelta;
-            Vector2 pos = (Vector2)Camera.main.WorldToScreenPoint(card.GetComponent<Transform>().position);
-            Vector2 canvasDimensions = canvas.GetComponent<RectTransform>().sizeDelta;
-            Vector2 rel = new Vector2(pos.x / canvasDimensions.x, pos.y / canvasDimensions.y);
-            Vector2 posInUiCanvas = new Vector2(rel.x * uiCanvasDimensions.x, rel.y * uiCanvasDimensions.y) - uiCanvasDimensions / 2;
-            visibleHandCardPreviews.Add(card, UiCardPreviewManager.Instance.ShowCardPreview(posInUiCanvas));
+            visibleHandCardPreviews.Add(card, UiCardPreviewManager.Instance.ShowCardPreview(card));
         }
         
     }

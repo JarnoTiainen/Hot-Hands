@@ -1,22 +1,12 @@
 using UnityEngine;
 
-public class HandCard : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitElement, IOnClickDownUIElement
+public class HandCard : MonoBehaviour, IOnClickDownUIElement
 {
     public Mouse mouse;
 
     private void Awake()
     {
         mouse = GameObject.Find("Mouse").GetComponent<Mouse>();
-    }
-
-    public void OnHoverEnter()
-    {
-        Hand.Instance.ShowCardTooltip(gameObject);
-    }
-
-    public void OnHoverExit()
-    {
-        Hand.Instance.HideCardTooltip(gameObject);
     }
 
     public void OnClickElement()

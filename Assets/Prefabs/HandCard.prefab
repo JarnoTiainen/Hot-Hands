@@ -594,7 +594,7 @@ MonoBehaviour:
   rp: {fileID: 5759760883158312004}
   cardMainBodyMaterial: {fileID: -6465566751694194690, guid: b5904bc55cd6fec4f82d888ba1f15e7e, type: 3}
   meshRenderer: {fileID: 6448218995620765098}
-  textCanvas: {fileID: 0}
+  textCanvas: {fileID: 4525997025527728775}
   indexOnField: 0
   isGhostCard: 0
   cardHidden: 0
@@ -649,6 +649,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  doRotate: 0
   maxMovementRotateAngle: 45
 --- !u!114 &2172893466288287300
 MonoBehaviour:
