@@ -182,6 +182,8 @@ public class GameManager : MonoBehaviour
             if (debugPlayerAttack) Debug.Log("attacked index: " + attackEventMessage.attackerValues.index + " target index: " + attackEventMessage.targetValues.index + "attacker lp: " + attackEventMessage.attackerValues.lp + " rp: " + attackEventMessage.attackerValues.rp + " target lp: " + attackEventMessage.targetValues.lp + " rp: " + attackEventMessage.targetValues.rp);
             bool wasYourAttack = false;
             if (attackEventMessage.player == playerNumber) wasYourAttack = true;
+
+            Debug.LogWarning("was your attack " + wasYourAttack);
             if (wasYourAttack)
             {
                 References.i.yourMonsterZone.UpdateCardData(wasYourAttack, attacker);
@@ -200,7 +202,7 @@ public class GameManager : MonoBehaviour
                 if (attacker.lp <= 0 || attacker.rp <= 0)
                 {
                     playerStats.playerFieldCards--;
-                    References.i.yourMonsterZone.RemoveMonsterCard(target.index);
+                    References.i.opponentMonsterZone.RemoveMonsterCard(target.index);
                 }
                 if (target.lp <= 0 || target.rp <= 0) References.i.opponentMonsterZone.RemoveEnemyMonsterCard(attacker.index);
             }
