@@ -2435,7 +2435,7 @@ MonoBehaviour:
   monsterCards: []
   gapBetweenCards: 0.005
   moveSpeed: 1
-  debugModeOn: 0
+  debugModeOn: 1
   isYourMonsterZone: 1
   ghostCard: {fileID: 0}
 --- !u!4 &584923535 stripped
@@ -3662,6 +3662,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cf72206ba0ac5ad44893fc845e1e6a38, type: 2}
   - {fileID: 11400000, guid: cf72206ba0ac5ad44893fc845e1e6a38, type: 2}
   - {fileID: 11400000, guid: cf72206ba0ac5ad44893fc845e1e6a38, type: 2}
+  cardCooldown: 0
+  OnPreDrawCD: 0
+  cardDrawReady: 1
 --- !u!65 &915886161
 BoxCollider:
   m_ObjectHideFlags: 0

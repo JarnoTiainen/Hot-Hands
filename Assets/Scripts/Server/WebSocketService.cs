@@ -47,7 +47,7 @@ public class WebSocketService : MonoBehaviour
         {
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
             //if (debuggerModeOn) Debug.Log("server message: " + data[0] + " " + data[1]);
-            switch((string)data[0])
+            switch ((string)data[0])
             {
                 case "OPPONENTJOIN":
                     //if (debuggerModeOn) Debug.Log("Message type was OPPONENTJOINED");
@@ -87,7 +87,7 @@ public class WebSocketService : MonoBehaviour
                     gameManager.PlayerBurnCard(burnCardMessage);
                     break;
                 default:
-                    if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data);
+                    if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                     break;
             }
         };

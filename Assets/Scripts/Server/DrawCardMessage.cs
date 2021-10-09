@@ -4,6 +4,7 @@ using System;
 public class DrawCardMessage
 {
     public int player;
+    public float drawCooldown;
     public string cardName;
     public int cardCost;
     public int cardValue;

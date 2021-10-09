@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
         if (drawCardMessage.player == playerNumber)
         {
             Hand.RevealNewCard(drawCardMessage);
+            References.i.yourDeckObj.GetComponent<Deck>().StartDrawCooldown(drawCardMessage.drawCooldown);
         }
         else
         {
