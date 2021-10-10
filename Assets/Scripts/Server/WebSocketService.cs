@@ -81,6 +81,8 @@ public class WebSocketService : MonoBehaviour
                     if (debuggerModeOn) Debug.Log("Message type was ATTACK");
                     AttackEventMessage attackEventMessage = JsonUtility.FromJson<AttackEventMessage>(data[1]);
                     gameManager.PlayerAttack(attackEventMessage);
+
+
                     break;
                 case "SAVECARD":
                     if (debuggerModeOn) Debug.Log("Message type was SAVECARD");

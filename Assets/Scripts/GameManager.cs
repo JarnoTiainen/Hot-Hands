@@ -201,6 +201,13 @@ public class GameManager : MonoBehaviour
     {
         attackEventMessage.attackerValues = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.attacker);
         CardPowersMessage attacker = attackEventMessage.attackerValues;
+        if (attackEventMessage.attackDenied)
+        {
+            AttackDenied(attacker);
+            return;
+        }
+
+        
         CardPowersMessage target = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.target);
         if (attackEventMessage.directHit)
         {
@@ -256,5 +263,10 @@ public class GameManager : MonoBehaviour
             }
             
         }
+    }
+    public void AttackDenied(CardPowersMessage attacker)
+    {
+        Debug.LogError("ATTACK DENIED");
+        References.i.yourMonsterZone.GetCardWithIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(0);
     }
 }
