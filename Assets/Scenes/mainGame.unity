@@ -154,11 +154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f03169546557a468a731a748eab172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debuggerModeOn: 1
-  debugPlayerBurnCard: 1
-  debugPlayerDrawCard: 1
-  debugPlayerPlayCard: 1
-  debugPlayerAttack: 1
+  debuggerModeOn: 0
+  debugPlayerBurnCard: 0
+  debugPlayerDrawCard: 0
+  debugPlayerPlayCard: 0
+  debugPlayerAttack: 0
   playerStats:
     deckCardCount: 0
     discardpileCardCount: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3688cc3b420dfe459cf844ad916c6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debuggerModeOn: 1
+  debuggerModeOn: 0
 --- !u!1 &7522968
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,7 +2438,7 @@ MonoBehaviour:
   monsterCards: []
   gapBetweenCards: 0.005
   moveSpeed: 1
-  debugModeOn: 1
+  debugModeOn: 0
   isYourMonsterZone: 1
   ghostCard: {fileID: 0}
 --- !u!4 &584923535 stripped
@@ -3561,6 +3561,7 @@ MonoBehaviour:
   cardCooldown: 0
   OnPreDrawCD: 0
   cardDrawReady: 1
+  debuggerModeOn: 0
 --- !u!65 &915886161
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -78,6 +78,8 @@ public class WebSocketService : MonoBehaviour
                     }
                     break;
                 case "ATTACK":
+
+                    //Add attack denied by server
                     if (debuggerModeOn) Debug.Log("Message type was ATTACK");
                     AttackEventMessage attackEventMessage = JsonUtility.FromJson<AttackEventMessage>(data[1]);
                     gameManager.PlayerAttack(attackEventMessage);

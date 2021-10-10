@@ -582,6 +582,7 @@ MonoBehaviour:
   cardMainBodyMaterial: {fileID: -6465566751694194690, guid: b5904bc55cd6fec4f82d888ba1f15e7e, type: 3}
   meshRenderer: {fileID: 534711901922110408}
   textCanvas: {fileID: 344395278571197130}
+  cardBurn: {fileID: 143564926150220506}
   indexOnField: 0
   serverConfirmedIndex: 0
   confirmedByServer: 0
@@ -1005,3 +1006,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5498164340434577439, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
   m_PrefabInstance: {fileID: 5189263780609533525}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &143564926150220506 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5331695023264873615, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+  m_PrefabInstance: {fileID: 5189263780609533525}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146fbe7cf5dcdae4dac45332e5799d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7927376245727027148}
   - component: {fileID: 7872722725919902754}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: CardPreviewCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 4294480023261508403}
   - component: {fileID: 2703216294097809138}
   - component: {fileID: 4873741011158562828}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 761689944123441713}
   - component: {fileID: 5344692236905617679}
   - component: {fileID: 4360522936359668650}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: RP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 4377692884536543317}
   - component: {fileID: 8937342426929662904}
   - component: {fileID: 7552961747274539806}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: LP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 2893711911803874577}
   - component: {fileID: 7736994964526398155}
   - component: {fileID: 7308579033414445617}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: CardName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -666,7 +666,7 @@ GameObject:
   - component: {fileID: 1492783291809421116}
   - component: {fileID: 2510787321838134608}
   - component: {fileID: 1719311446581302486}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -769,7 +769,7 @@ GameObject:
   - component: {fileID: 4034011993275597882}
   - component: {fileID: 4230148013336939294}
   - component: {fileID: 6363676634797631306}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -956,6 +956,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 614e4675e217b2f4b8eabb57492f2567, type: 3}
       propertyPath: m_Name
       value: card
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 614e4675e217b2f4b8eabb57492f2567, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 614e4675e217b2f4b8eabb57492f2567, type: 3}

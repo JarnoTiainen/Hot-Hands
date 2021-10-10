@@ -16,6 +16,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     private Material mat;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] public Canvas textCanvas;
+    [SerializeField] private CardBurn cardBurn;
+    [SerializeField] private bool attackReady;
 
     [ShowIf("debuggerModeOn", true)] public int indexOnField;
     [ShowIf("debuggerModeOn", true)] public int serverConfirmedIndex;
@@ -26,6 +28,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     [SerializeField] private float currentAttackCoolDown;
     [SerializeField] private bool attackOnCD;
+    [SerializeField] private bool preAttackOnCD;
 
 
     private void Awake()
@@ -34,9 +37,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         meshRenderer.material.shader = cardMainBodyMaterial;
     }
 
-    [Button] public void StartAttackCooldown(float duration)
+    [Button] public void StartAttackCooldown(float duration, bool isSummonCall = false)
     {
-        Debug.Log("started attack dc");
         attackOnCD = true;
         currentAttackCoolDown = duration;
     }
@@ -46,7 +48,9 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         if (currentAttackCoolDown > 0) currentAttackCoolDown -= Time.deltaTime;
         else if(currentAttackCoolDown <= 0 && attackOnCD)
         {
+            ToggleAttackBurnEffect(true);
             attackOnCD = false;
+            preAttackOnCD = false;
             currentAttackCoolDown = 0;
         }
     }
@@ -92,9 +96,10 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void OnClickElement()
     {
-        if(!attackOnCD)
+        if(!attackOnCD && !preAttackOnCD)
         {
-            attackOnCD = true;
+            preAttackOnCD = true;
+            ToggleAttackBurnEffect(false);
             transform.parent.GetComponent<MonsterZone>().AttackWithCard(gameObject);
         }
     }
@@ -131,6 +136,18 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
             meshRenderer.enabled = true;
             textCanvas.enabled = true;
             cardHidden = false;
+        }
+    }
+
+    public void ToggleAttackBurnEffect(bool attackReady)
+    {
+        if(attackReady)
+        {
+            cardBurn.StartBurning();
+        }
+        else
+        {
+            cardBurn.EndBurning();
         }
     }
 }

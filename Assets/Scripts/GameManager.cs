@@ -149,10 +149,9 @@ public class GameManager : MonoBehaviour
         {
             
             References.i.yourMonsterZone.UpdateCardData(true, playCardMessage);
-            References.i.yourMonsterZone.GetCardWithServerIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(playCardMessage.attackCooldown);
+            References.i.yourMonsterZone.GetCardWithServerIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(playCardMessage.attackCooldown, true);
             if ((PlayCardMessage.CardSource)playCardMessage.cardSource == PlayCardMessage.CardSource.Hand)
             {
-                Debug.Log("from hand");
                 //display summon animation here
                 playerStats.playerHandCards--;
             }
@@ -220,7 +219,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                References.i.opponentMonsterZone.GetCardWithIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
+                References.i.opponentMonsterZone.GetCardWithIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index)).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
                 playerStats.playerHealth -= attackEventMessage.playerTakenDamage;
                 if (debugPlayerAttack) Debug.Log("You lost " + attackEventMessage.playerTakenDamage + " health. New health is: " + playerStats.playerHealth);
             }

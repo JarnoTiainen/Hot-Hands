@@ -9,6 +9,7 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] private float cardCooldown;
     [SerializeField] private bool OnPreDrawCD = false;
     [SerializeField] private bool cardDrawReady = true;
+    [SerializeField] private bool debuggerModeOn = false;
     [Button] public void SendDeckData()
     {
         WebSocketService.SetDeck(GetDeckJSON());
@@ -28,7 +29,7 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
             }
             else
             {
-                Debug.Log("Draw on cd");
+                if(debuggerModeOn) Debug.Log("Draw on cd");
             }
         }
         else
@@ -48,7 +49,7 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
     {
         OnPreDrawCD = false;
         cardDrawReady = false;
-        Debug.Log("Draw cooldown started: " + duration);
+        if (debuggerModeOn) Debug.Log("Draw cooldown started: " + duration);
         cardCooldown = duration;
     }
     public void FinisheDrawCooldown()

@@ -92,7 +92,6 @@ public class MonsterZone : MonoBehaviour
     }
     public void ReCalculateServerCardIndexes()
     {
-        Debug.Log("recalculatin server card indexes");
         int currentIndex = 0;
         foreach (GameObject card in monsterCards)
         {
@@ -178,7 +177,6 @@ public class MonsterZone : MonoBehaviour
             {
                 if (card == monsterCards[i])
                 {
-                    Debug.Log("found match for attacker: " + monsterCards[i].GetComponent<InGameCard>().cardData.cardName);
                     WebSocketService.Attack(i);
                     return;
                 }
