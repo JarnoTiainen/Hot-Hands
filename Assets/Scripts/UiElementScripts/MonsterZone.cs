@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 public class MonsterZone : MonoBehaviour
 {
     public List<GameObject> serverConfirmedCards = new List<GameObject>();
+    public List<GameObject> unhandledCards = new List<GameObject>();
     public List<GameObject> monsterCards = new List<GameObject>();
     Dictionary<GameObject, float> cardXposDictionary = new Dictionary<GameObject, float>();
     [SerializeField] private float gapBetweenCards;
@@ -34,6 +35,7 @@ public class MonsterZone : MonoBehaviour
         {
             ghostCard.GetComponent<InGameCard>().ToggleGhostCard();
             ghostCard.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
+            unhandledCards.Add(ghostCard);
             ghostCard = null;
             ReCalculateCardIndexes();
         } else {
@@ -51,16 +53,19 @@ public class MonsterZone : MonoBehaviour
             monsterCards.Insert(index, newMonster);
             RepositionMonsterCards();
             newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
+            ReCalculateCardIndexes();
         }
     }
 
     public void RemoveMonsterCard(int index)
     {
         Debug.Log("Removing monster " + index);
-        GameObject deadMonster = GetCardWithIndex(index);
+        GameObject deadMonster = GetCardWithServerIndex(index);
         monsterCards.Remove(deadMonster);
+        serverConfirmedCards.Remove(deadMonster);
         GameObject.Destroy(deadMonster);
         ReCalculateCardIndexes();
+        ReCalculateServerCardIndexes();
         RepositionMonsterCards();
 
     }
@@ -85,12 +90,42 @@ public class MonsterZone : MonoBehaviour
             }
         }
     }
+    public void ReCalculateServerCardIndexes()
+    {
+        Debug.Log("recalculatin server card indexes");
+        int currentIndex = 0;
+        foreach (GameObject card in monsterCards)
+        {
+            if(serverConfirmedCards.Contains(card))
+            {
+                card.GetComponent<InGameCard>().serverConfirmedIndex = currentIndex;
+                currentIndex++;
+            }
+        }
+    }
 
     public GameObject GetCardWithIndex(int index)
     {
         foreach(GameObject card in monsterCards)
         {
             if (card.GetComponent<InGameCard>().indexOnField == index && !card.GetComponent<InGameCard>().isGhostCard) return card;
+        }
+
+        Debug.LogError("Card was not found");
+        return null;
+    }
+
+    public int RevertIndex(int index)
+    {
+        if (monsterCards.Count == 0) return 0;
+        return monsterCards.Count - 1 - index;
+    }
+
+    public GameObject GetCardWithServerIndex(int index)
+    {
+        foreach (GameObject card in monsterCards)
+        {
+            if (card.GetComponent<InGameCard>().serverConfirmedIndex == index) return card;
         }
 
         Debug.LogError("Card was not found");
@@ -169,6 +204,10 @@ public class MonsterZone : MonoBehaviour
 
         if(isYourCard)
         {
+            GameObject handledCard = unhandledCards[0];
+            unhandledCards.Remove(handledCard);
+            serverConfirmedCards.Add(handledCard);
+            ReCalculateServerCardIndexes();
             monsterCards[playCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(playCardMessage));
         }
         else

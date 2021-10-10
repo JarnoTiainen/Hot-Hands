@@ -147,9 +147,10 @@ public class GameManager : MonoBehaviour
     {
         if (playCardMessage.player == playerNumber)
         {
-            References.i.yourMonsterZone.GetCardWithIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(playCardMessage.attackCooldown);
+            
             References.i.yourMonsterZone.UpdateCardData(true, playCardMessage);
-            if((PlayCardMessage.CardSource)playCardMessage.cardSource == PlayCardMessage.CardSource.Hand)
+            References.i.yourMonsterZone.GetCardWithServerIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(playCardMessage.attackCooldown);
+            if ((PlayCardMessage.CardSource)playCardMessage.cardSource == PlayCardMessage.CardSource.Hand)
             {
                 Debug.Log("from hand");
                 //display summon animation here
@@ -213,7 +214,7 @@ public class GameManager : MonoBehaviour
         {
             if (attackEventMessage.player == playerNumber)
             {
-                References.i.yourMonsterZone.GetCardWithIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
+                References.i.yourMonsterZone.GetCardWithServerIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
                 enemyPlayerStats.playerHealth -= attackEventMessage.playerTakenDamage;
                 if(debugPlayerAttack) Debug.Log("Enemy lost " + attackEventMessage.playerTakenDamage + " health. New health is: " + enemyPlayerStats.playerHealth);
             }
@@ -236,7 +237,7 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("was your attack " + wasYourAttack);
             if (wasYourAttack)
             {
-                References.i.yourMonsterZone.GetCardWithIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
+                References.i.yourMonsterZone.GetCardWithServerIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
                 References.i.yourMonsterZone.UpdateCardData(wasYourAttack, attacker);
                 References.i.opponentMonsterZone.UpdateCardData(!wasYourAttack, target);
                 if (attacker.lp <= 0 || attacker.rp <= 0)
@@ -248,7 +249,8 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                References.i.opponentMonsterZone.GetCardWithIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
+                Debug.Log("index: " + References.i.opponentMonsterZone.RevertIndex(attacker.index));
+                References.i.opponentMonsterZone.GetCardWithIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index)).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
                 References.i.yourMonsterZone.UpdateCardData(!wasYourAttack, target);
                 References.i.opponentMonsterZone.UpdateCardData(wasYourAttack, attacker);
                 if (attacker.lp <= 0 || attacker.rp <= 0)
@@ -267,6 +269,6 @@ public class GameManager : MonoBehaviour
     public void AttackDenied(CardPowersMessage attacker)
     {
         Debug.LogError("ATTACK DENIED");
-        References.i.yourMonsterZone.GetCardWithIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(0);
+        References.i.yourMonsterZone.GetCardWithServerIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(0);
     }
 }
