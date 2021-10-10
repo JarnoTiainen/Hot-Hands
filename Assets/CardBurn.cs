@@ -27,6 +27,10 @@ public class CardBurn : MonoBehaviour
         mat2 = meshRendererBurnRight.material;
         mat3 = meshRendererBurnLeft.material;
         mat4 = meshRendererBurnBottom.material;
+        mat1.SetVector("_TextureOffset", new Vector2(Random.Range(0,3), Random.Range(0,3)));
+        mat2.SetVector("_TextureOffset", new Vector2(Random.Range(0, 3), Random.Range(0, 3)));
+        mat3.SetVector("_TextureOffset", new Vector2(Random.Range(0, 3), Random.Range(0, 3)));
+        mat4.SetVector("_TextureOffset", new Vector2(Random.Range(0, 3), Random.Range(0, 3)));
         meshRendererBurnTop.material.shader = burnShader;
         meshRendererBurnRight.material.shader = burnShader;
         meshRendererBurnLeft.material.shader = burnShader;
@@ -64,6 +68,10 @@ public class CardBurn : MonoBehaviour
 
     [Button]public void StartBurning()
     {
+        mat1.SetInt("_BurnOrAfford", 1);
+        mat2.SetInt("_BurnOrAfford", 1);
+        mat3.SetInt("_BurnOrAfford", 1);
+        mat4.SetInt("_BurnOrAfford", 1);
         timer = burnStartDuration;
         startingBurning = true;
     }
@@ -71,7 +79,24 @@ public class CardBurn : MonoBehaviour
     [Button]
     public void EndBurning()
     {
+        
         timer = burnEndDuration;
         endingBurning = true;
     }
+
+    [Button]public void StartCanAfford()
+    {
+        mat1.SetInt("_BurnOrAfford", 0);
+        mat2.SetInt("_BurnOrAfford", 0);
+        mat3.SetInt("_BurnOrAfford", 0);
+        mat4.SetInt("_BurnOrAfford", 0);
+        timer = burnStartDuration;
+        startingBurning = true;
+    }
+    [Button]public void EndCanAfford()
+    {
+        timer = burnEndDuration;
+        endingBurning = true;
+    }
+
 }

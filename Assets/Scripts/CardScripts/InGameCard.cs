@@ -17,7 +17,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] public Canvas textCanvas;
     [SerializeField] private CardBurn cardBurn;
-    [SerializeField] private bool attackReady;
+    [SerializeField] private bool canAffordBool;
 
     [ShowIf("debuggerModeOn", true)] public int indexOnField;
     [ShowIf("debuggerModeOn", true)] public int serverConfirmedIndex;
@@ -148,6 +148,21 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         else
         {
             cardBurn.EndBurning();
+        }
+    }
+
+    public void ToggleCanAffordEffect(bool canAfford)
+    {
+        Debug.Log(canAfford + " " + cardData.cardName);
+        if (canAfford && !canAffordBool)
+        {
+            canAffordBool = true;
+            cardBurn.StartCanAfford();
+        }
+        else if(canAffordBool && !canAfford)
+        {
+            canAffordBool = false;
+            cardBurn.EndCanAfford();
         }
     }
 }

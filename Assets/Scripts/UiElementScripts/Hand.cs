@@ -36,6 +36,19 @@ public class Hand : MonoBehaviour
         //adds the card to total cards in hand
         handCards.Add(newCard);
         SetNewCardPositions();
+        
+    }
+
+    public void UpdateCanAffortCards()
+    {
+        foreach(GameObject card in handCards)
+        {
+            if(GameManager.Instance.playerStats.playerBurnValue >= card.GetComponent<InGameCard>().cardData.cost)
+            {
+                card.GetComponent<InGameCard>().ToggleCanAffordEffect(true);
+            }
+            else card.GetComponent<InGameCard>().ToggleCanAffordEffect(false);
+        }
     }
 
 
@@ -58,6 +71,7 @@ public class Hand : MonoBehaviour
             unhandledCards[0].GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0,0,0), Instance.rotationSpeed);
             unhandledCards[0].GetComponent<InGameCard>().nameText.text = drawCardMessage.cardName;
             unhandledCards.Remove(unhandledCards[0]);
+            Instance.UpdateCanAffortCards();
 
         }
     }
@@ -80,6 +94,7 @@ public class Hand : MonoBehaviour
         visibleHandCards.Remove(removedCard);
         Destroy(removedCard);
         SetNewCardPositions();
+        Instance.UpdateCanAffortCards();
     }
 
     [Button]
@@ -89,6 +104,7 @@ public class Hand : MonoBehaviour
         handCards.Remove(removedCard);
         visibleHandCards.Remove(removedCard);
         SetNewCardPositions();
+        Instance.UpdateCanAffortCards();
     }
 
 
