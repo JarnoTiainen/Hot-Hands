@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 
 public class MonsterZone : MonoBehaviour
 {
+    public List<GameObject> serverConfirmedCards = new List<GameObject>();
     public List<GameObject> monsterCards = new List<GameObject>();
     Dictionary<GameObject, float> cardXposDictionary = new Dictionary<GameObject, float>();
     [SerializeField] private float gapBetweenCards;

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int playerStartHealth = 100;
     public int maxHandSize = 5;
     public int maxFieldCardCount = 5;
+    public int maxDeckSize = 20;
     private GameObject sfxLibrary;
 
     private void Awake()
@@ -125,7 +126,22 @@ public class GameManager : MonoBehaviour
         {
             References.i.yourMonsterZone.GetCardWithIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(playCardMessage.attackCooldown);
             References.i.yourMonsterZone.UpdateCardData(true, playCardMessage);
-            playerStats.playerHandCards--;
+            if((PlayCardMessage.CardSource)playCardMessage.cardSource == PlayCardMessage.CardSource.Hand)
+            {
+                Debug.Log("from hand");
+                //display summon animation here
+                playerStats.playerHandCards--;
+            }
+            else if((PlayCardMessage.CardSource)playCardMessage.cardSource == PlayCardMessage.CardSource.Deck)
+            {
+                //display summon animation here
+                playerStats.deckCardCount--;
+            }
+            else if ((PlayCardMessage.CardSource)playCardMessage.cardSource == PlayCardMessage.CardSource.DiscardPile)
+            {
+                //display summon animation here
+                playerStats.discardpileCardCount--;
+            }
         }
         else
         {
@@ -137,7 +153,6 @@ public class GameManager : MonoBehaviour
         if (player == -1) player = playerNumber;
         if(player == playerNumber)
         {
-            
             playerStats.playerBurnValue -= data.cost;
             References.i.yourMonsterZone.AddNewMonsterCard(true, boardIndex, data);
             Hand.Instance.RemoveCard(handIndex);

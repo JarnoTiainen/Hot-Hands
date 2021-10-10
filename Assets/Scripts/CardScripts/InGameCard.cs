@@ -16,7 +16,10 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     private Material mat;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] public Canvas textCanvas;
+
     [ShowIf("debuggerModeOn", true)] public int indexOnField;
+    [ShowIf("debuggerModeOn", true)] public int serverConfirmedIndex;
+    public bool confirmedByServer;
 
     [SerializeField] [ShowIf("debuggerModeOn", true)] public bool isGhostCard;
     [ShowIf("debuggerModeOn", true)] public bool cardHidden;

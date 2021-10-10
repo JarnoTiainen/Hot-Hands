@@ -78,7 +78,7 @@ public class WebSocketService : MonoBehaviour
                     break;
                 case "SETDECK":
                     if (debuggerModeOn) Debug.Log("Message type was SETDECK");
-                    if (int.Parse(data[1]) == 0) Debug.Log("Deck save ok");
+                    if (int.Parse(data[1]) == 20) Debug.Log("Deck save ok");
                     else Debug.Log("Deck save failed, everything is ok");
                     break;
                 case "BURNCARD":
@@ -130,7 +130,7 @@ public class WebSocketService : MonoBehaviour
     public static void PlayCard(int cardIndex, int boardIndex)
     {
         //if (Instance.debuggerModeOn) Debug.LogWarning("PLAYING CARD TO INDEX " + boardIndex);
-        PlayCardMessage playCardMessage = new PlayCardMessage(1, cardIndex, boardIndex);
+        PlayCardMessage playCardMessage = new PlayCardMessage(2, cardIndex, boardIndex);
         string playCardMessageJSON = JsonUtility.ToJson(playCardMessage);
 
         GameMessage message = new GameMessage("OnMessage", "PLAYCARD", playCardMessageJSON);
