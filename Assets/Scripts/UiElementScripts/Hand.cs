@@ -61,6 +61,16 @@ public class Hand : MonoBehaviour
 
         }
     }
+    public static void RemoveHiddenCard()
+    {
+        GameObject removedCard = unhandledCards[0];
+        handCards.Remove(removedCard);
+        visibleHandCards.Remove(removedCard);
+        unhandledCards.Remove(removedCard);
+        //Display effect here
+        Destroy(removedCard);
+        SetNewCardPositions();
+    }
 
     //Removes one card from hand and if there is no parameter remove card with last index
     [Button] public void RemoveCard(int CardIndex = 0)

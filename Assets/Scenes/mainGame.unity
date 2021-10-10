@@ -154,11 +154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f03169546557a468a731a748eab172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debuggerModeOn: 0
-  debugPlayerBurnCard: 0
-  debugPlayerDrawCard: 0
-  debugPlayerPlayCard: 0
-  debugPlayerAttack: 0
+  debuggerModeOn: 1
+  debugPlayerBurnCard: 1
+  debugPlayerDrawCard: 1
+  debugPlayerPlayCard: 1
+  debugPlayerAttack: 1
   playerStats:
     deckCardCount: 0
     discardpileCardCount: 0
@@ -176,6 +176,7 @@ MonoBehaviour:
   playerStartHealth: 100
   maxHandSize: 5
   maxFieldCardCount: 5
+  maxDeckSize: 20
 --- !u!114 &7355201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2432,6 +2433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ede5b71bbe61b4aba372f1480b00d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serverConfirmedCards: []
   monsterCards: []
   gapBetweenCards: 0.005
   moveSpeed: 1
@@ -6928,6 +6930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ede5b71bbe61b4aba372f1480b00d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serverConfirmedCards: []
   monsterCards: []
   gapBetweenCards: 0.005
   moveSpeed: 1

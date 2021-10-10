@@ -45,7 +45,9 @@ public class WebSocketService : MonoBehaviour
 
         websocket.OnMessage += (bytes) =>
         {
+            
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
+            if (debuggerModeOn) Debug.Log("server message: " + data.Count);
             if (debuggerModeOn) Debug.Log("server message: " + data[0] + " " + data[1]);
             switch ((string)data[0])
             {
@@ -64,8 +66,16 @@ public class WebSocketService : MonoBehaviour
                     break;
                 case "DRAWCARD":
                     if (debuggerModeOn) Debug.Log("Message type was DRAWCARD");
-                    DrawCardMessage drawCardMessage = JsonUtility.FromJson<DrawCardMessage>(data[1]);
-                    gameManager.PlayerDrawCard(drawCardMessage);
+                    if(data[1] != "DENIED")
+                    {
+                        DrawCardMessage drawCardMessage = JsonUtility.FromJson<DrawCardMessage>(data[1]);
+                        gameManager.PlayerDrawCard(drawCardMessage);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("CARD DRAW FAILED DESTROYING HIDDEN CARD");
+                        gameManager.PlayerReturnDrawCard();
+                    }
                     break;
                 case "ATTACK":
                     if (debuggerModeOn) Debug.Log("Message type was ATTACK");
@@ -78,8 +88,8 @@ public class WebSocketService : MonoBehaviour
                     break;
                 case "SETDECK":
                     if (debuggerModeOn) Debug.Log("Message type was SETDECK");
-                    if (int.Parse(data[1]) == 20) Debug.Log("Deck save ok");
-                    else Debug.Log("Deck save failed, everything is ok");
+                    SetDeckMessage setDeckMessage = JsonUtility.FromJson<SetDeckMessage>(data[1]);
+                    GameManager.Instance.SetDeck(setDeckMessage);
                     break;
                 case "BURNCARD":
                     if (debuggerModeOn) Debug.Log("Message type was BURNCARD");

@@ -109,16 +109,39 @@ public class GameManager : MonoBehaviour
         }
         if(player == playerNumber)
         {
+            playerStats.deckCardCount--;
             Hand.AddNewCard();
         }
         else
         {
+            enemyPlayerStats.deckCardCount--;
             EnemyHand.AddNewCard();
         }
         sfxLibrary.GetComponent<DrawCardSFX>().Play();
         
     }
 
+    [Button]public void PlayerReturnDrawCard()
+    {
+        Hand.RemoveHiddenCard();
+        References.i.yourDeckObj.GetComponent<Deck>().StartDrawCooldown(0);
+        playerStats.deckCardCount++;
+        playerStats.playerHandCards--;
+    }
+
+    public void SetDeck(SetDeckMessage setDeckMessage)
+    {
+        if(setDeckMessage.player == playerNumber)
+        {
+            Debug.Log("Setting your deck");
+            playerStats.deckCardCount = setDeckMessage.deckCards;
+        }
+        else
+        {
+            Debug.Log("Setting opponent's deck");
+            enemyPlayerStats.deckCardCount = setDeckMessage.deckCards;
+        }
+    }
 
     public void PlayerPlayCard(PlayCardMessage playCardMessage)
     {
