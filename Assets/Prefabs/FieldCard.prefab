@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2301409737730284922}
   - component: {fileID: 5715942085780116637}
   - component: {fileID: 8444400555959281729}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: RP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 2093963718152987160}
   - component: {fileID: 5143038542997896966}
   - component: {fileID: 3055479451659487593}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 344395278571197130}
   - component: {fileID: 5886216126913197742}
   - component: {fileID: 4315668364810504375}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 6935911426508929184}
   - component: {fileID: 1172471354060370509}
   - component: {fileID: 7117940552052851705}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -544,7 +544,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6958630490326978869}
+  - {fileID: 310344563298045514}
   - {fileID: 6259117554449996411}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -580,9 +580,11 @@ MonoBehaviour:
   rp: {fileID: 8444400555959281729}
   debuggerModeOn: 0
   cardMainBodyMaterial: {fileID: -6465566751694194690, guid: b5904bc55cd6fec4f82d888ba1f15e7e, type: 3}
-  meshRenderer: {fileID: 7185273887884801207}
+  meshRenderer: {fileID: 534711901922110408}
   textCanvas: {fileID: 344395278571197130}
   indexOnField: 0
+  serverConfirmedIndex: 0
+  confirmedByServer: 0
   isGhostCard: 0
   cardHidden: 0
   currentAttackCoolDown: 0
@@ -679,7 +681,7 @@ GameObject:
   - component: {fileID: 8261623060390543891}
   - component: {fileID: 4863763932882991865}
   - component: {fileID: 6469195302025323115}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: LP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -813,7 +815,7 @@ GameObject:
   - component: {fileID: 6258044313989926457}
   - component: {fileID: 1191771185130367321}
   - component: {fileID: 120260980706194099}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: CardName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -936,7 +938,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1001 &3233411661351549226
+--- !u!1001 &5189263780609533525
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -969,7 +971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5498164340434577439, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5498164340434577439, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_LocalRotation.y
@@ -985,25 +987,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5498164340434577439, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5498164340434577439, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
-    - target: {fileID: 5721922619410058653, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 97defba0c4b8f7442ae678bb7423dd50, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
---- !u!23 &7185273887884801207 stripped
+--- !u!23 &534711901922110408 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 5721922619410058653, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
-  m_PrefabInstance: {fileID: 3233411661351549226}
+  m_PrefabInstance: {fileID: 5189263780609533525}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6958630490326978869 stripped
+--- !u!4 &310344563298045514 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5498164340434577439, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
-  m_PrefabInstance: {fileID: 3233411661351549226}
+  m_PrefabInstance: {fileID: 5189263780609533525}
   m_PrefabAsset: {fileID: 0}

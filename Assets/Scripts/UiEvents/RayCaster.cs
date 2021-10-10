@@ -34,6 +34,7 @@ public class RayCaster : MonoBehaviour
                 newTarget = hit.transform.gameObject;
                 if (target != hit.transform.gameObject)
                 {
+                    Debug.Log(hit.transform.gameObject.name);
                     NewTarget(target, hit.transform.gameObject);
                 }
             }
