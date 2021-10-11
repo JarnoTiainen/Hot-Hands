@@ -142,6 +142,7 @@ public class MonsterZone : MonoBehaviour
         GameObject deadMonster = monsterCards[monsterCards.Count - 1 - index];
         monsterCards.Remove(deadMonster);
         GameObject.Destroy(deadMonster);
+        ReCalculateServerCardIndexes();
         RepositionMonsterCards();
     }
 
@@ -245,8 +246,8 @@ public class MonsterZone : MonoBehaviour
     {
         if(isYourCard)
         {
-            monsterCards[cardPower.index].GetComponent<InGameCard>().SetStatLp(cardPower.lp);
-            monsterCards[cardPower.index].GetComponent<InGameCard>().SetStatRp(cardPower.rp);
+            GetCardWithIndex(cardPower.index).GetComponent<InGameCard>().SetStatLp(cardPower.lp);
+            GetCardWithIndex(cardPower.index).GetComponent<InGameCard>().SetStatRp(cardPower.rp);
         }
         else
         {
