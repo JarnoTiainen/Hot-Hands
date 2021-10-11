@@ -55,14 +55,22 @@ public class CardMovement : MonoBehaviour
 
         //Koodi ei toiminu kuten ajattelit(vaikka se toimi) dpRotatea ei ikinä laitettu pois päältä koska if == ei ikinä päässyt täsmälleen oikeaan arvoon.
         //Muutin koodin niin, että se lopettaa pyörimisen, kun
-        if (doRotate) {
+        //if (doRotate) {
+        //    elapsedRotationTime += Time.deltaTime;
+        //    transform.localRotation = Quaternion.Slerp(startRotation, endRotation, curve.Evaluate(elapsedRotationTime / rotationSpeed));
+        //    if (elapsedRotationTime >= rotationSpeed)
+        //    {
+        //        doRotate = false;
+        //    }
+        //} 
+
+        if(doRotate && transform.rotation.eulerAngles != endRotation.eulerAngles) {
             elapsedRotationTime += Time.deltaTime;
+            Debug.Log("tranforms " + transform.rotation.eulerAngles + " end " + endRotation.eulerAngles);
             transform.localRotation = Quaternion.Slerp(startRotation, endRotation, curve.Evaluate(elapsedRotationTime / rotationSpeed));
-            if (elapsedRotationTime >= rotationSpeed)
-            {
-                doRotate = false;
-            }
-        } 
+        } else if (doRotate && transform.rotation.eulerAngles == endRotation.eulerAngles) {
+            doRotate = false;
+        }
     }
     ///uses the default animation curve of card, startpoint specifiable
     public void OnCardMove(Vector3 startP, Vector3 endP, float dur)
