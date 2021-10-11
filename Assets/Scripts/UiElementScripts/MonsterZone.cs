@@ -205,7 +205,7 @@ public class MonsterZone : MonoBehaviour
             {
                 if (card == monsterCards[i])
                 {
-                    WebSocketService.Attack(i);
+                    WebSocketService.Attack(card.GetComponent<InGameCard>().serverConfirmedIndex);
                     return;
                 }
             }

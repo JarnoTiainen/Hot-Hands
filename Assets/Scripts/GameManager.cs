@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
         DrawCardMessage cardMessage = burnCardMessage.burnedCardDone;
         if (cardMessage.player == playerNumber)
         {
+            Debug.Log("removing ");
             unHandledBurnedCards.Remove(unHandledBurnedCards[0]);
             playerStats.playerHandCards--;
         }
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour
     }
     public void ReturnBurnedCardToHand()
     {
+        Debug.Log("Ret removing ");
         Hand.AddNewCardToHand(unHandledBurnedCards[0]);
         unHandledBurnedCards.Remove(unHandledBurnedCards[0]);
     }
@@ -80,6 +82,7 @@ public class GameManager : MonoBehaviour
         int value = card.GetComponent<InGameCard>().cardData.value;
         if (player == playerNumber)
         {
+            Debug.Log("adding ");
             unHandledBurnedCards.Add(card);
             card.transform.SetParent(References.i.yourBonfire.transform);
             UpdatePlayerBurnValue(player, playerStats.playerBurnValue + value);
