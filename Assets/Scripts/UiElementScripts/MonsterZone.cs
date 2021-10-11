@@ -220,7 +220,6 @@ public class MonsterZone : MonoBehaviour
         //calculate right index for card
         GameObject previousCard = null;
         Vector3 mousePos = Mouse.Instance.transform.position;
-        Debug.Log("keys: " + cardXposDictionary.Keys.Count);
         foreach (GameObject card in cardXposDictionary.Keys)
         {
             if(cardXposDictionary[card] < mousePos.x)
@@ -249,7 +248,6 @@ public class MonsterZone : MonoBehaviour
     public void MakeRoom()
     {
         int index = GetNewGhostCardIndex();
-        Debug.Log("new ghost card index " + index);
         if (!ghostCard)
         {
             GameObject newGhostCard = Instantiate(References.i.fieldCard, Mouse.Instance.mousePosInWorld, Quaternion.identity);

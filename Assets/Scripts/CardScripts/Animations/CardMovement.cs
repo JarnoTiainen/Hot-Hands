@@ -66,7 +66,7 @@ public class CardMovement : MonoBehaviour
 
         if(doRotate && transform.rotation.eulerAngles != endRotation.eulerAngles) {
             elapsedRotationTime += Time.deltaTime;
-            Debug.Log("tranforms " + transform.rotation.eulerAngles + " end " + endRotation.eulerAngles);
+            //Debug.Log("tranforms " + transform.rotation.eulerAngles + " end " + endRotation.eulerAngles);
             transform.localRotation = Quaternion.Slerp(startRotation, endRotation, curve.Evaluate(elapsedRotationTime / rotationSpeed));
         } else if (doRotate && transform.rotation.eulerAngles == endRotation.eulerAngles) {
             doRotate = false;
