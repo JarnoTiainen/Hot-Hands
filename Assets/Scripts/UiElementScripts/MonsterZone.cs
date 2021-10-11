@@ -169,6 +169,26 @@ public class MonsterZone : MonoBehaviour
         }
     }
 
+    public void RecallCard(int player, GameObject card)
+    {
+        if(monsterCards.Contains(card))
+        {
+            if(player == GameManager.Instance.playerNumber)
+            {
+                Hand.AddNewCardToHand(card);
+                unhandledCards.Remove(card);
+                Destroy(card);
+            }
+            else
+            {
+                Debug.LogError("NOT IMPLEMENTED! DO IT!");
+            }
+            monsterCards.Remove(card);
+        }
+        
+    }
+
+
     public void AttackWithCard(GameObject card)
     {
         if(gameObject.name == "YourMonsterZone")

@@ -39,6 +39,18 @@ public class Hand : MonoBehaviour
         
     }
 
+    public static void AddNewCardToHand(GameObject card)
+    {
+        GameObject newCard = InstantiateNewCard();
+        visibleHandCards.Add(newCard);
+        handCards.Add(newCard);
+        
+        newCard.GetComponent<InGameCard>().SetNewCardData(true, card.GetComponent<InGameCard>().cardData);
+        newCard.GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0, 0, 0), Instance.rotationSpeed);
+        SetNewCardPositions();
+        Instance.UpdateCanAffortCards();
+    }
+
     public void UpdateCanAffortCards()
     {
         foreach(GameObject card in handCards)

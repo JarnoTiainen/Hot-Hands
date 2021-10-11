@@ -1,6 +1,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
-
+using System.Collections;
+using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerPlayCard;
     [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerAttack;
 
-    private int playerNumber;
+    public int playerNumber;
     public PlayerStats playerStats;
     public PlayerStats enemyPlayerStats;
     [SerializeField] private int playerStartHealth = 100;
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
     public int maxFieldCardCount = 5;
     public int maxDeckSize = 20;
     private GameObject sfxLibrary;
+
+    private List<GameObject> unHandledBurnedCards = new List<GameObject>();
 
     private void Awake()
     {
@@ -35,11 +38,19 @@ public class GameManager : MonoBehaviour
 
     public void PlayerBurnCard(BurnCardMessage burnCardMessage)
     {
+        if(burnCardMessage.denied)
+        {
+            UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue - unHandledBurnedCards[0].GetComponent<InGameCard>().cardData.value);
+            ReturnBurnedCardToHand();
+            return;
+        }
+
 
         burnCardMessage.burnedCardDone = JsonUtility.FromJson<DrawCardMessage>(burnCardMessage.burnedCard);
         DrawCardMessage cardMessage = burnCardMessage.burnedCardDone;
         if (cardMessage.player == playerNumber)
         {
+            unHandledBurnedCards.Remove(unHandledBurnedCards[0]);
             playerStats.playerHandCards--;
         }
         else
@@ -55,6 +66,11 @@ public class GameManager : MonoBehaviour
         }
         
     }
+    public void ReturnBurnedCardToHand()
+    {
+        Hand.AddNewCardToHand(unHandledBurnedCards[0]);
+        unHandledBurnedCards.Remove(unHandledBurnedCards[0]);
+    }
 
     public void PlayerBurnCard(GameObject card, int player = -1)
     {
@@ -64,6 +80,7 @@ public class GameManager : MonoBehaviour
         int value = card.GetComponent<InGameCard>().cardData.value;
         if (player == playerNumber)
         {
+            unHandledBurnedCards.Add(card);
             card.transform.SetParent(References.i.yourBonfire.transform);
             UpdatePlayerBurnValue(player, playerStats.playerBurnValue + value);
             GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = playerStats.playerBurnValue.ToString();
@@ -79,12 +96,14 @@ public class GameManager : MonoBehaviour
     public void UpdatePlayerBurnValue(int player, int newValue)
     {
         if(player == playerNumber)
-        {
+        {   
             playerStats.playerBurnValue = newValue;
+            GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = playerStats.playerBurnValue.ToString();
         }
         else
         {
             enemyPlayerStats.playerBurnValue = newValue;
+            GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
         }
     }
 
@@ -145,6 +164,14 @@ public class GameManager : MonoBehaviour
 
     public void PlayerPlayCard(PlayCardMessage playCardMessage)
     {
+        if(playCardMessage.denied)
+        {
+            playerStats.playerFieldCards--;
+            UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue + References.i.yourMonsterZone.unhandledCards[0].GetComponent<InGameCard>().cardData.cost);
+            References.i.yourMonsterZone.RecallCard(playerNumber, References.i.yourMonsterZone.unhandledCards[0]);
+            return;
+        }
+
         if (playCardMessage.player == playerNumber)
         {
             
@@ -194,7 +221,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void PlayerRecallCard() { 
-
+        
     }
 
     public void PlayerAttack(AttackEventMessage attackEventMessage)

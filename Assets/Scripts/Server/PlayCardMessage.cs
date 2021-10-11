@@ -10,6 +10,7 @@ public class PlayCardMessage
         Hand,        //2
         DiscardPile, //3
     }
+    public bool denied;
     public int cardSource;
     public int handIndex;
     public int boardIndex;
