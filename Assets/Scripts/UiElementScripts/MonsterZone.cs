@@ -74,6 +74,7 @@ public class MonsterZone : MonoBehaviour
 
     public void ReCalculateCardIndexes()
     {
+        Debug.Log("ReCalculateCardIndexes");
         int currentIndex = 0;
         foreach(GameObject card in monsterCards)
         {
@@ -144,7 +145,7 @@ public class MonsterZone : MonoBehaviour
         GameObject deadMonster = monsterCards[monsterCards.Count - 1 - index];
         monsterCards.Remove(deadMonster);
         GameObject.Destroy(deadMonster);
-        ReCalculateServerCardIndexes();
+        ReCalculateCardIndexes();
         RepositionMonsterCards();
     }
 
