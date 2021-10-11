@@ -100,6 +100,9 @@ public class WebSocketService : MonoBehaviour
                     BurnCardMessage burnCardMessage = JsonUtility.FromJson<BurnCardMessage>(data[1]);
                     gameManager.PlayerBurnCard(burnCardMessage);
                     break;
+                case "SERVERCLIENTMISSMATCH":
+                    Debug.LogError("MISS MATCH BETWEEN SERVER AND CLIENT! " + data[1]);
+                    break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                     break;
