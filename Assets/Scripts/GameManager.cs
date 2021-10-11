@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
             EnemyHand.Instance.RemoveCard(burnCardMessage.handIndex);
             CardData cardData = References.i.cardList.GetCardData(cardMessage);
             newCard.GetComponent<InGameCard>().cardData = cardData;
+            enemyPlayerStats.playerBurnValue = burnCardMessage.newBurnValue;
             PlayerBurnCard(newCard, cardMessage.player);
         }
         
@@ -91,7 +92,6 @@ public class GameManager : MonoBehaviour
         else
         {
             card.transform.SetParent(References.i.opponentBonfire.transform);
-            UpdatePlayerBurnValue(player, enemyPlayerStats.playerBurnValue + value);
             GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
         }
         card.GetComponent<InGameCard>().Burn();
