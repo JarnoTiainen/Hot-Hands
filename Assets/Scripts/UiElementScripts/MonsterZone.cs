@@ -50,6 +50,7 @@ public class MonsterZone : MonoBehaviour
             
             GameObject newMonster = Instantiate(References.i.fieldCard);
             newMonster.transform.SetParent(transform);
+            Debug.Log("index: " + index);
             monsterCards.Insert(index, newMonster);
             RepositionMonsterCards();
             newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
@@ -244,6 +245,7 @@ public class MonsterZone : MonoBehaviour
     }
     public void UpdateCardData(bool isYourCard, CardPowersMessage cardPower)
     {
+        Debug.Log("index " + cardPower.index);
         if(isYourCard)
         {
             GetCardWithIndex(cardPower.index).GetComponent<InGameCard>().SetStatLp(cardPower.lp);

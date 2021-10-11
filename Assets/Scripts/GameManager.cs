@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public int maxDeckSize = 20;
     private GameObject sfxLibrary;
 
-    private List<GameObject> unHandledBurnedCards = new List<GameObject>();
+    [SerializeField] private List<GameObject> unHandledBurnedCards = new List<GameObject>();
 
     private void Awake()
     {
