@@ -36,6 +36,7 @@ public class MonsterZone : MonoBehaviour
             ghostCard.GetComponent<InGameCard>().ToggleGhostCard();
             ghostCard.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
             unhandledCards.Add(ghostCard);
+            Debug.Log("Added unhandled");
             ghostCard = null;
             ReCalculateCardIndexes();
         } else {
@@ -185,6 +186,7 @@ public class MonsterZone : MonoBehaviour
             {
                 Hand.AddNewCardToHand(card);
                 unhandledCards.Remove(card);
+                Debug.Log("Removed unhandled");
                 Destroy(card);
             }
             else
@@ -232,6 +234,7 @@ public class MonsterZone : MonoBehaviour
         {
             GameObject handledCard = unhandledCards[0];
             unhandledCards.Remove(handledCard);
+            Debug.Log("Removed unhandled");
             serverConfirmedCards.Add(handledCard);
             ReCalculateServerCardIndexes();
             monsterCards[playCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(playCardMessage));
