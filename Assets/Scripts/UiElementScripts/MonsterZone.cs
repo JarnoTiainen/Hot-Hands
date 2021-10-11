@@ -126,7 +126,11 @@ public class MonsterZone : MonoBehaviour
     {
         foreach (GameObject card in monsterCards)
         {
-            if (card.GetComponent<InGameCard>().serverConfirmedIndex == index) return card;
+            if(card != ghostCard)
+            {
+                if (card.GetComponent<InGameCard>().serverConfirmedIndex == index) return card;
+            }
+            
         }
 
         Debug.LogError("Card was not found");
