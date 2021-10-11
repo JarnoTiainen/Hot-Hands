@@ -19,7 +19,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private CardBurn cardBurn;
     [SerializeField] private bool canAffordBool;
 
-    [ShowIf("debuggerModeOn", true)] public int indexOnField;
     [ShowIf("debuggerModeOn", true)] public int serverConfirmedIndex;
     public bool confirmedByServer;
 

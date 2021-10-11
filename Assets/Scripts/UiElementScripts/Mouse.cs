@@ -67,7 +67,7 @@ public class Mouse : MonoBehaviour
             if (GameManager.Instance.playerStats.playerBurnValue >= Hand.Instance.GetCardData(handIndex).cost && GameManager.Instance.playerStats.playerFieldCards < GameManager.Instance.maxFieldCardCount)
             {
                 GameManager.Instance.playerStats.playerFieldCards++;
-                WebSocketService.PlayCard(handIndex, References.i.yourMonsterZone.ghostCard.GetComponent<InGameCard>().indexOnField);
+                WebSocketService.PlayCard(handIndex, References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.ghostCard));
                 GameManager.Instance.PlayerPlayCard(heldCard.GetComponent<InGameCard>().cardData, handIndex);
                 heldCard = null;
             }

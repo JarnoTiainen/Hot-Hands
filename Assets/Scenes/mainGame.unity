@@ -178,6 +178,7 @@ MonoBehaviour:
   maxHandSize: 5
   maxFieldCardCount: 5
   maxDeckSize: 20
+  unHandledBurnedCards: []
 --- !u!114 &7355201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5110,7 +5111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
-  gapBetweenCards: 0
+  gapBetweenCards: 0.01
   moveSpeed: 0.5
   rotationSpeed: 0.2
 --- !u!1 &1412929014

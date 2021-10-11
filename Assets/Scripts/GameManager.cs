@@ -249,7 +249,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                References.i.opponentMonsterZone.GetCardWithIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index)).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
+                References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index)).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
                 playerStats.playerHealth -= attackEventMessage.playerTakenDamage;
                 if (debugPlayerAttack) Debug.Log("You lost " + attackEventMessage.playerTakenDamage + " health. New health is: " + playerStats.playerHealth);
             }
@@ -279,7 +279,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 Debug.Log("index: " + References.i.opponentMonsterZone.RevertIndex(attacker.index));
-                References.i.opponentMonsterZone.GetCardWithIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index)).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
+                References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index)).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
                 References.i.yourMonsterZone.UpdateCardData(!wasYourAttack, target);
                 References.i.opponentMonsterZone.UpdateCardData(wasYourAttack, attacker);
                 if (attacker.lp <= 0 || attacker.rp <= 0)
