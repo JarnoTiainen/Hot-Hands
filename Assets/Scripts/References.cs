@@ -34,5 +34,6 @@ public class References: MonoBehaviour
     public MonsterZone yourMonsterZone;
     public MonsterZone opponentMonsterZone;
     public AttackEventHandler attackEventHandler;
+    public GameObject testCube;
 
 }

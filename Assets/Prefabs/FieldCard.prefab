@@ -591,6 +591,8 @@ MonoBehaviour:
   currentAttackCoolDown: 0
   attackOnCD: 0
   preAttackOnCD: 0
+  shotTooltips: 1
+  owner: 0
 --- !u!65 &9060123631021853949
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -689,6 +691,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  endPoint: {x: 0, y: 0, z: 0}
   maxMovementRotateAngle: 45
 --- !u!54 &3517024197415932619
 Rigidbody:

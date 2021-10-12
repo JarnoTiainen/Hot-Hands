@@ -9,7 +9,7 @@ public class MonsterZone : MonoBehaviour
     public List<GameObject> monsterCards = new List<GameObject>();
     Dictionary<GameObject, float> cardXposDictionary = new Dictionary<GameObject, float>();
     [SerializeField] private float gapBetweenCards;
-    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float moveDuration = 1f;
     [SerializeField] private float attackSpeed = 1f;
     [SerializeField] private bool debugModeOn = false;
     public bool isYourMonsterZone;
@@ -149,7 +149,7 @@ public class MonsterZone : MonoBehaviour
                     }
                 }
                 else cardXposDictionary.Add(monsterCards[i], newPosX);
-                monsterCards[i].GetComponent<CardMovement>().OnCardMove(newPos, moveSpeed);
+                monsterCards[i].GetComponent<CardMovement>().OnCardMove(newPos, moveDuration);
             }
 
         }

@@ -28,6 +28,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private float currentAttackCoolDown;
     [SerializeField] private bool attackOnCD;
     [SerializeField] private bool preAttackOnCD;
+    public bool showTooltips;
     public int owner;
 
 
@@ -78,7 +79,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void OnHoverEnter()
     {
-        if(!cardHidden)
+        if(!cardHidden && showTooltips)
         {
             UiCardPreviewManager.Instance.ShowCardTooltip(gameObject);
         }
@@ -100,7 +101,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         {
             preAttackOnCD = true;
             ToggleAttackBurnEffect(false);
-            References.i.yourMonsterZone.AttackWithCard(gameObject);
+            if(GameManager.Instance.IsYou(owner)) WebSocketService.Attack(serverConfirmedIndex);
+
         }
     }
 

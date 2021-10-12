@@ -21,7 +21,7 @@ public class CardMovement : MonoBehaviour
     private Quaternion endRotation;
 
     private Vector3 startPoint;
-    private Vector3 endPoint;
+    [SerializeField] private Vector3 endPoint;
 
     private float elapsedRotationTime;
     private float elapsedTime;
@@ -68,17 +68,20 @@ public class CardMovement : MonoBehaviour
             doRotate = false;
         }
 
-        if (doAttack && transform.localPosition != endPoint) {
+        if (doAttack && transform.position != endPoint) {
             elapsedAttackTime += Time.deltaTime;
 
-            Vector3 addToX = new Vector3(attackCurve.Evaluate(elapsedAttackTime / attackDur) * curveMultiplier, 0, 0);
+            int dirMultiplier = 1;
+            if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Left) dirMultiplier = -1;
+
+            Vector3 addToX = new Vector3(attackCurve.Evaluate(elapsedAttackTime / attackDur) * curveMultiplier * dirMultiplier, 0, 0);
             //Debug.Log("Added x " + addToX.x + " curve " + attackCurve.Evaluate(elapsedAttackTime / attackDur) + " multiplier " + curveMultiplier + " elapsed time" + elapsedAttackTime + " duration " + attackDur);
 
 
-            transform.localPosition = Vector3.Lerp(startPoint, endPoint, curve.Evaluate(elapsedAttackTime / attackDur));
-            transform.localPosition = new Vector3(transform.localPosition.x * 1 + addToX.x, transform.localPosition.y, transform.localPosition.z);
+            transform.position = Vector3.Lerp(startPoint, endPoint, curve.Evaluate(elapsedAttackTime / attackDur));
+            transform.position = new Vector3(transform.position.x * 1 + addToX.x, transform.position.y, transform.position.z);
 
-        } else if (doAttack && transform.localPosition == endPoint) {  //if the card has moved to the destination, reset variables
+        } else if (doAttack && transform.position == endPoint) {  //if the card has moved to the destination, reset variables
 
             References.i.attackEventHandler.StartDamageEvent(GetComponent<InGameCard>().owner, gameObject, targetCard);
 
@@ -129,9 +132,21 @@ public class CardMovement : MonoBehaviour
 
     public void OnCardAttack(GameObject target, float dur)
     {
+        Instantiate(References.i.testCube, target.transform.position, Quaternion.identity);
+        Instantiate(References.i.testCube, transform.position, Quaternion.identity);
+
         targetCard = target;
-        startPoint = transform.localPosition;
+        startPoint = transform.position;
         endPoint = target.transform.position;
+        if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Left)
+        {
+            endPoint.x -= References.i.fieldCard.GetComponent<BoxCollider>().size.x;
+        }
+        if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Right)
+        {
+            endPoint.x += References.i.fieldCard.GetComponent<BoxCollider>().size.x;
+        }
+        
         attackDur = dur;
         elapsedAttackTime = 0;
         doAttack = true;
