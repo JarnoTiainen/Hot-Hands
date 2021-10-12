@@ -28,6 +28,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private float currentAttackCoolDown;
     [SerializeField] private bool attackOnCD;
     [SerializeField] private bool preAttackOnCD;
+    public int owner;
 
 
     private void Awake()
@@ -99,17 +100,22 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         {
             preAttackOnCD = true;
             ToggleAttackBurnEffect(false);
-            transform.parent.GetComponent<MonsterZone>().AttackWithCard(gameObject);
+            References.i.yourMonsterZone.AttackWithCard(gameObject);
         }
     }
 
     public void SetStatLp(int lp)
     {
-        this.lp.text = lp.ToString();
+        cardData.lp = lp;
     }
     public void SetStatRp(int rp)
     {
-        this.rp.text = rp.ToString();
+        cardData.rp = rp;
+    }
+    public void UpdateCardTexts()
+    {
+        this.lp.text = cardData.lp.ToString();
+        this.rp.text = cardData.rp.ToString();
     }
 
     public void Burn()

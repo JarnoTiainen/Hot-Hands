@@ -179,12 +179,13 @@ public class GameManager : MonoBehaviour
             References.i.yourMonsterZone.RecallCard(playerNumber, References.i.yourMonsterZone.unhandledCards[0]);
             return;
         }
-
+        
         if (playCardMessage.player == playerNumber)
         {
             
             References.i.yourMonsterZone.UpdateCardData(true, playCardMessage);
             References.i.yourMonsterZone.GetCardWithServerIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(playCardMessage.attackCooldown, true);
+            
             if ((PlayCardMessage.CardSource)playCardMessage.cardSource == PlayCardMessage.CardSource.Hand)
             {
                 //display summon animation here
@@ -200,10 +201,12 @@ public class GameManager : MonoBehaviour
                 //display summon animation here
                 playerStats.discardpileCardCount--;
             }
+            References.i.yourMonsterZone.GetCardWithServerIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().owner = playCardMessage.player;
         }
         else
         {
             PlayerPlayCard(References.i.cardList.GetCardData(playCardMessage), playCardMessage.handIndex, playCardMessage.boardIndex, playCardMessage.player);
+            References.i.opponentMonsterZone.GetCardWithServerIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().owner = playCardMessage.player;
         }
     }
     public void PlayerPlayCard(CardData data, int handIndex = -1, int boardIndex = 0, int player = -1)
@@ -269,36 +272,19 @@ public class GameManager : MonoBehaviour
             if (attackEventMessage.player == playerNumber) wasYourAttack = true;
 
             Debug.LogWarning("was your attack " + wasYourAttack);
-            if (wasYourAttack)
-            {
-                References.i.yourMonsterZone.GetCardWithServerIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
-                References.i.yourMonsterZone.UpdateCardData(wasYourAttack, attacker);
-                References.i.opponentMonsterZone.UpdateCardData(!wasYourAttack, target);
-                if (attacker.lp <= 0 || attacker.rp <= 0)
-                {
-                    playerStats.playerFieldCards--;
-                    References.i.yourMonsterZone.RemoveMonsterCard(attacker.index);
-                }
-                if (target.lp <= 0 || target.rp <= 0) References.i.opponentMonsterZone.RemoveEnemyMonsterCard(target.index);
-            }
-            else
-            {
-                Debug.Log("index: " + References.i.opponentMonsterZone.RevertIndex(attacker.index));
-                References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index)).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
-                References.i.yourMonsterZone.UpdateCardData(!wasYourAttack, target);
-                References.i.opponentMonsterZone.UpdateCardData(wasYourAttack, attacker);
-                if (attacker.lp <= 0 || attacker.rp <= 0)
-                {
-                    References.i.opponentMonsterZone.RemoveEnemyMonsterCard(attacker.index);
-                }
-                if (target.lp <= 0 || target.rp <= 0)
-                {
-                    playerStats.playerFieldCards--;
-                    References.i.yourMonsterZone.RemoveMonsterCard(target.index);
-                }
-            }
             
+
+
+            References.i.attackEventHandler.StartAttackEvent(wasYourAttack, attacker, target, attackEventMessage.attackCooldown);
+
+
         }
+    }
+
+    public bool IsYou(int player)
+    {
+        if (player == playerNumber) return true;
+        else return false;
     }
     public void AttackDenied(CardPowersMessage attacker)
     {

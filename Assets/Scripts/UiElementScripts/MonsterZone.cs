@@ -125,15 +125,6 @@ public class MonsterZone : MonoBehaviour
         return null;
     }
 
-    public void RemoveEnemyMonsterCard(int index)
-    {
-        GameObject deadMonster = GetCardWithServerIndex(RevertIndex(index));
-        monsterCards.Remove(deadMonster);
-        GameObject.Destroy(deadMonster);
-        ReCalculateServerCardIndexes();
-        RepositionMonsterCards();
-    }
-
     public void RepositionMonsterCards()
     {
         cardXposDictionary = new Dictionary<GameObject, float>();
@@ -212,8 +203,6 @@ public class MonsterZone : MonoBehaviour
 
                     Debug.Log("HOW MANY MONSTERCARDS " + monsterCards.Count + " defending card x position " + defensiveCard.x);
                     
-                    card.GetComponent<CardMovement>().OnCardAttack(defensiveCard, attackSpeed);
-                    //add waiting here so that card movement is done
                     WebSocketService.Attack(card.GetComponent<InGameCard>().serverConfirmedIndex);
                     Debug.Log("found match for attacker: " + monsterCards[i].GetComponent<InGameCard>().cardData.cardName);
                     return;
@@ -259,6 +248,7 @@ public class MonsterZone : MonoBehaviour
             GetCardWithServerIndex(RevertIndex(cardPower.index)).GetComponent<InGameCard>().SetStatLp(cardPower.rp);
             GetCardWithServerIndex(RevertIndex(cardPower.index)).GetComponent<InGameCard>().SetStatRp(cardPower.lp);
         }
+        GetCardWithServerIndex(cardPower.index).GetComponent<InGameCard>().UpdateCardTexts();
     }
 
     public int GetNewGhostCardIndex()

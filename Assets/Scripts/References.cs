@@ -33,5 +33,6 @@ public class References: MonoBehaviour
     public GameObject yourBonfire;
     public MonsterZone yourMonsterZone;
     public MonsterZone opponentMonsterZone;
+    public AttackEventHandler attackEventHandler;
 
 }

@@ -35,6 +35,7 @@ public class CardMovement : MonoBehaviour
     private Vector3 previousPos;
 
 
+    private GameObject targetCard;
 
 
     void Start()
@@ -78,6 +79,9 @@ public class CardMovement : MonoBehaviour
             transform.localPosition = new Vector3(transform.localPosition.x * 1 + addToX.x, transform.localPosition.y, transform.localPosition.z);
 
         } else if (doAttack && transform.localPosition == endPoint) {  //if the card has moved to the destination, reset variables
+
+            References.i.attackEventHandler.StartDamageEvent(GetComponent<InGameCard>().owner, gameObject, targetCard);
+
             doAttack = false;
             OnCardMove(startPoint, 0.6f);
         }
@@ -123,10 +127,11 @@ public class CardMovement : MonoBehaviour
         doRotate = true;
     }
 
-    public void OnCardAttack(Vector3 endP, float dur)
+    public void OnCardAttack(GameObject target, float dur)
     {
+        targetCard = target;
         startPoint = transform.localPosition;
-        endPoint = endP;
+        endPoint = target.transform.position;
         attackDur = dur;
         elapsedAttackTime = 0;
         doAttack = true;
