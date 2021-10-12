@@ -193,23 +193,24 @@ public class MonsterZone : MonoBehaviour
             {
                 if (card == monsterCards[i])
                 {
-
-                    //WebSocketService.Attack(i);
                     //animation here
                     Vector3 defensiveCard;
                     //check if there is a monstercard
                     if (References.i.opponentMonsterZone.monsterCards.Count > 0) {
-                        //if(card.GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Left) {
-                        //    defensiveCard = References.i.opponentMonsterZone.monsterCards[0].transform.position;
-                        //} else {
-                        //to be continued
-                        //} 
-                        defensiveCard = References.i.opponentMonsterZone.monsterCards[0].transform.position;
+                        if (card.GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Left) {
+                            defensiveCard = References.i.opponentMonsterZone.monsterCards[monsterCards.Count - 1].transform.position;
+                            Debug.Log("Attack to Left");
+                        } else {
+                            defensiveCard = References.i.opponentMonsterZone.monsterCards[0].transform.position;
+                            Debug.Log("Attack to Right");
+                        }
+                        
                     } else {
                         defensiveCard = GameObject.FindGameObjectWithTag("EnemyHand").transform.position;
                     }
 
-                    Debug.Log("HOW MANY MONSTERCARDS " + monsterCards.Count);
+
+                    Debug.Log("HOW MANY MONSTERCARDS " + monsterCards.Count + " defending card x position " + defensiveCard.x);
                     
                     card.GetComponent<CardMovement>().OnCardAttack(defensiveCard, attackSpeed);
                     //add waiting here so that card movement is done

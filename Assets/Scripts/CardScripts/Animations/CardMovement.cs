@@ -61,7 +61,7 @@ public class CardMovement : MonoBehaviour
         //using euler angles here because quaternions would be different, but the euler angles are same
         if(doRotate && transform.rotation.eulerAngles != endRotation.eulerAngles) {
             elapsedRotationTime += Time.deltaTime;
-            //Debug.Log("tranforms " + transform.rotation.eulerAngles + " end " + endRotation.eulerAngles);
+            
             transform.localRotation = Quaternion.Slerp(startRotation, endRotation, curve.Evaluate(elapsedRotationTime / rotationSpeed));
         } else if (doRotate && transform.rotation.eulerAngles == endRotation.eulerAngles) {
             doRotate = false;
@@ -71,17 +71,15 @@ public class CardMovement : MonoBehaviour
             elapsedAttackTime += Time.deltaTime;
 
             Vector3 addToX = new Vector3(attackCurve.Evaluate(elapsedAttackTime / attackDur) * curveMultiplier, 0, 0);
-            Debug.Log("Added x " + addToX.x + " curve " + attackCurve.Evaluate(elapsedAttackTime / attackDur) + " multiplier " + curveMultiplier + " elapsed time" + elapsedAttackTime + " duration " + attackDur);
+            //Debug.Log("Added x " + addToX.x + " curve " + attackCurve.Evaluate(elapsedAttackTime / attackDur) + " multiplier " + curveMultiplier + " elapsed time" + elapsedAttackTime + " duration " + attackDur);
 
-            //transform.localPosition = Vector3.Lerp(startPoint, endPoint, 1);
 
             transform.localPosition = Vector3.Lerp(startPoint, endPoint, curve.Evaluate(elapsedAttackTime / attackDur));
             transform.localPosition = new Vector3(transform.localPosition.x * 1 + addToX.x, transform.localPosition.y, transform.localPosition.z);
 
         } else if (doAttack && transform.localPosition == endPoint) {  //if the card has moved to the destination, reset variables
             doAttack = false;
-            OnCardMove(startPoint, 1f);
-            //curve = defaultCurve;
+            OnCardMove(startPoint, 0.6f);
         }
     }
     ///uses the default animation curve of card, startpoint specifiable
