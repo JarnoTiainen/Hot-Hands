@@ -5,11 +5,15 @@ using UnityEngine;
 public class CardMovement : MonoBehaviour
 {
     public float duration = 0.5f;
+    public float attackDur;
     public float rotationSpeed = 0.5f;
+    public float curveMultiplier = 0.1f;
 
     //specifies the movement curve of the card
     [SerializeField]
     private AnimationCurve curve;
+    [SerializeField]
+    private AnimationCurve attackCurve;
     private AnimationCurve defaultCurve;
     private AnimationCurve smoothAngleTransition;
 
@@ -21,12 +25,15 @@ public class CardMovement : MonoBehaviour
 
     private float elapsedRotationTime;
     private float elapsedTime;
+    private float elapsedAttackTime;
 
     private bool doMove = false;
-   [SerializeField] private bool doRotate = false;
+    private bool doRotate = false;
+    private bool doAttack = false;
 
     [SerializeField] private float maxMovementRotateAngle;
     private Vector3 previousPos;
+
 
 
 
@@ -52,24 +59,29 @@ public class CardMovement : MonoBehaviour
         }
 
         //using euler angles here because quaternions would be different, but the euler angles are same
-
-        //Koodi ei toiminu kuten ajattelit(vaikka se toimi) dpRotatea ei ikinä laitettu pois päältä koska if == ei ikinä päässyt täsmälleen oikeaan arvoon.
-        //Muutin koodin niin, että se lopettaa pyörimisen, kun
-        //if (doRotate) {
-        //    elapsedRotationTime += Time.deltaTime;
-        //    transform.localRotation = Quaternion.Slerp(startRotation, endRotation, curve.Evaluate(elapsedRotationTime / rotationSpeed));
-        //    if (elapsedRotationTime >= rotationSpeed)
-        //    {
-        //        doRotate = false;
-        //    }
-        //} 
-
         if(doRotate && transform.rotation.eulerAngles != endRotation.eulerAngles) {
             elapsedRotationTime += Time.deltaTime;
             //Debug.Log("tranforms " + transform.rotation.eulerAngles + " end " + endRotation.eulerAngles);
             transform.localRotation = Quaternion.Slerp(startRotation, endRotation, curve.Evaluate(elapsedRotationTime / rotationSpeed));
         } else if (doRotate && transform.rotation.eulerAngles == endRotation.eulerAngles) {
             doRotate = false;
+        }
+
+        if (doAttack && transform.localPosition != endPoint) {
+            elapsedAttackTime += Time.deltaTime;
+
+            Vector3 addToX = new Vector3(attackCurve.Evaluate(elapsedAttackTime / attackDur) * curveMultiplier, 0, 0);
+            Debug.Log("Added x " + addToX.x + " curve " + attackCurve.Evaluate(elapsedAttackTime / attackDur) + " multiplier " + curveMultiplier + " elapsed time" + elapsedAttackTime + " duration " + attackDur);
+
+            //transform.localPosition = Vector3.Lerp(startPoint, endPoint, 1);
+
+            transform.localPosition = Vector3.Lerp(startPoint, endPoint, curve.Evaluate(elapsedAttackTime / attackDur));
+            transform.localPosition = new Vector3(transform.localPosition.x * 1 + addToX.x, transform.localPosition.y, transform.localPosition.z);
+
+        } else if (doAttack && transform.localPosition == endPoint) {  //if the card has moved to the destination, reset variables
+            doAttack = false;
+            OnCardMove(startPoint, 1f);
+            //curve = defaultCurve;
         }
     }
     ///uses the default animation curve of card, startpoint specifiable
@@ -78,8 +90,8 @@ public class CardMovement : MonoBehaviour
         startPoint = startP;
         endPoint = endP;
         duration = dur;
-        doMove = true;
         elapsedTime = 0;
+        doMove = true;
     }
 
     ///uses a specified animation curve
@@ -89,8 +101,8 @@ public class CardMovement : MonoBehaviour
         endPoint = endP;
         duration = dur;
         curve = curv;
-        doMove = true;
         elapsedTime = 0;
+        doMove = true;
     }
 
     ///uses the default animation curve of card
@@ -99,8 +111,8 @@ public class CardMovement : MonoBehaviour
         startPoint = transform.localPosition;
         endPoint = endP;
         duration = dur;
-        doMove = true;
         elapsedTime = 0;
+        doMove = true;
     }
 
     ///rotates card the amount of "rotation" parameter
@@ -109,9 +121,17 @@ public class CardMovement : MonoBehaviour
         startRotation = transform.rotation;
         endRotation = rotation;
         rotationSpeed = rotSpeed;
-        doRotate = true;
         elapsedRotationTime = 0;
+        doRotate = true;
     }
 
+    public void OnCardAttack(Vector3 endP, float dur)
+    {
+        startPoint = transform.localPosition;
+        endPoint = endP;
+        attackDur = dur;
+        elapsedAttackTime = 0;
+        doAttack = true;
+    }
 
 }

@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public int maxHandSize = 5;
     public int maxFieldCardCount = 5;
     public int maxDeckSize = 20;
+    public bool deckSet = false;
+
     private GameObject sfxLibrary;
 
     [SerializeField] private List<GameObject> unHandledBurnedCards = new List<GameObject>();
@@ -159,6 +161,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Setting your deck");
             playerStats.deckCardCount = setDeckMessage.deckCards;
+            deckSet = true;
         }
         else
         {

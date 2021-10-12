@@ -597,6 +597,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 6032247785604177976}
   textCanvas: {fileID: 4525997025527728775}
   cardBurn: {fileID: 6134887068788904234}
+  canAffordBool: 0
   indexOnField: 0
   serverConfirmedIndex: 0
   confirmedByServer: 0
@@ -604,6 +605,7 @@ MonoBehaviour:
   cardHidden: 0
   currentAttackCoolDown: 0
   attackOnCD: 0
+  preAttackOnCD: 0
 --- !u!65 &6490331289218157256
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -631,6 +633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 2
   rotationSpeed: 0.5
+  curveMultiplier: 4
   curve:
     serializedVersion: 2
     m_Curve:
@@ -655,7 +658,39 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  doRotate: 0
+  attackCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 4.1109157
+      outSlope: 4.1109157
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.052781742
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: -0.09342149
+      outSlope: -0.09342149
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -3.306604
+      outSlope: -3.306604
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.051355243
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   maxMovementRotateAngle: 45
 --- !u!114 &2172893466288287300
 MonoBehaviour:

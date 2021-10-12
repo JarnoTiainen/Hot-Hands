@@ -10,31 +10,41 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] private bool OnPreDrawCD = false;
     [SerializeField] private bool cardDrawReady = true;
     [SerializeField] private bool debuggerModeOn = false;
+
+    private GameObject gameManager;
+
     [Button] public void SendDeckData()
     {
         WebSocketService.SetDeck(GetDeckJSON());
     }
 
+    private void Awake()
+    {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+    }
 
     public void OnClickElement()
     {
-        if(GameManager.Instance.playerStats.playerHandCards < GameManager.Instance.maxHandSize)
-        {
-            if(cardDrawReady && !OnPreDrawCD)
+        //let the player pick a card if the deck is set
+        if(gameManager.GetComponent<GameManager>().deckSet) {
+            if(GameManager.Instance.playerStats.playerHandCards < GameManager.Instance.maxHandSize)
             {
-                OnPreDrawCD = true;
-                WebSocketService.DrawCard();
-                GameManager.Instance.playerStats.playerHandCards++;
-                GameManager.Instance.PlayerDrawCard();
+                if(cardDrawReady && !OnPreDrawCD)
+                {
+                    OnPreDrawCD = true;
+                    WebSocketService.DrawCard();
+                    GameManager.Instance.playerStats.playerHandCards++;
+                    GameManager.Instance.PlayerDrawCard();
+                }
+                else
+                {
+                    if(debuggerModeOn) Debug.Log("Draw on cd");
+                }
             }
             else
             {
-                if(debuggerModeOn) Debug.Log("Draw on cd");
+                //Debug.LogWarning("Hand full display error effect here");
             }
-        }
-        else
-        {
-            //Debug.LogWarning("Hand full display error effect here");
         }
         
     }

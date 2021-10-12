@@ -9,7 +9,8 @@ public class MonsterZone : MonoBehaviour
     public List<GameObject> monsterCards = new List<GameObject>();
     Dictionary<GameObject, float> cardXposDictionary = new Dictionary<GameObject, float>();
     [SerializeField] private float gapBetweenCards;
-    [SerializeField] private float moveSpeed = 1;
+    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float attackSpeed = 1f;
     [SerializeField] private bool debugModeOn = false;
     public bool isYourMonsterZone;
     [SerializeField] [ShowIf("debugModeOn", true)]public GameObject ghostCard;
@@ -42,7 +43,7 @@ public class MonsterZone : MonoBehaviour
             } else {
                 index = monsterCards.Count - boardIndex;
             }
-            
+
             GameObject newMonster = Instantiate(References.i.fieldCard);
             serverConfirmedCards.Add(newMonster);
             newMonster.transform.SetParent(transform);
@@ -65,6 +66,29 @@ public class MonsterZone : MonoBehaviour
         RepositionMonsterCards();
 
     }
+
+    //public void ReCalculateCardIndexes()
+    //{
+    //    Debug.Log("ReCalculateCardIndexes");
+    //    int currentIndex = 0;
+    //    foreach(GameObject card in monsterCards)
+    //    {
+    //        if(ghostCard)
+    //        {
+    //            if(card != ghostCard)
+    //            {
+    //                card.GetComponent<InGameCard>().indexOnField = currentIndex;
+    //                currentIndex++;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            card.GetComponent<InGameCard>().indexOnField = currentIndex;
+    //            currentIndex++;
+    //        }
+    //    }
+    //}
+
     public void ReCalculateServerCardIndexes()
     {
         int currentIndex = 0;
@@ -169,7 +193,28 @@ public class MonsterZone : MonoBehaviour
             {
                 if (card == monsterCards[i])
                 {
+
+                    //WebSocketService.Attack(i);
+                    //animation here
+                    Vector3 defensiveCard;
+                    //check if there is a monstercard
+                    if (References.i.opponentMonsterZone.monsterCards.Count > 0) {
+                        //if(card.GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Left) {
+                        //    defensiveCard = References.i.opponentMonsterZone.monsterCards[0].transform.position;
+                        //} else {
+                        //to be continued
+                        //} 
+                        defensiveCard = References.i.opponentMonsterZone.monsterCards[0].transform.position;
+                    } else {
+                        defensiveCard = GameObject.FindGameObjectWithTag("EnemyHand").transform.position;
+                    }
+
+                    Debug.Log("HOW MANY MONSTERCARDS " + monsterCards.Count);
+                    
+                    card.GetComponent<CardMovement>().OnCardAttack(defensiveCard, attackSpeed);
+                    //add waiting here so that card movement is done
                     WebSocketService.Attack(card.GetComponent<InGameCard>().serverConfirmedIndex);
+                    Debug.Log("found match for attacker: " + monsterCards[i].GetComponent<InGameCard>().cardData.cardName);
                     return;
                 }
             }

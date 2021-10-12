@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 7355201}
   m_Layer: 0
   m_Name: GameEventManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,6 +178,7 @@ MonoBehaviour:
   maxHandSize: 5
   maxFieldCardCount: 5
   maxDeckSize: 20
+  deckSet: 0
   unHandledBurnedCards: []
 --- !u!114 &7355201
 MonoBehaviour:
@@ -2440,6 +2441,7 @@ MonoBehaviour:
   monsterCards: []
   gapBetweenCards: 0.005
   moveSpeed: 1
+  attackSpeed: 0.4
   debugModeOn: 0
   isYourMonsterZone: 1
   ghostCard: {fileID: 0}
@@ -6940,6 +6942,7 @@ MonoBehaviour:
   monsterCards: []
   gapBetweenCards: 0.005
   moveSpeed: 1
+  attackSpeed: 0.4
   debugModeOn: 0
   isYourMonsterZone: 0
   ghostCard: {fileID: 0}
