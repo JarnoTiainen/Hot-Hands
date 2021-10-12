@@ -136,7 +136,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            
             enemyPlayerStats.deckCardCount--;
+            Debug.Log("Remaining cards " + enemyPlayerStats.deckCardCount);
             EnemyHand.AddNewCard();
         }
         sfxLibrary.GetComponent<DrawCardSFX>().Play();
