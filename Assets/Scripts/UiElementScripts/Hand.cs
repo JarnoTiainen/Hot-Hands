@@ -14,7 +14,6 @@ public class Hand : MonoBehaviour
     private static List<GameObject> unhandledCards = new List<GameObject>();
 
     [SerializeField] private float gapBetweenCards = 0;
-    [SerializeField] private float moveSpeed = 0.5f;
     [SerializeField] private float rotationSpeed = 0.1f;
 
     public void Awake()
@@ -134,7 +133,7 @@ public class Hand : MonoBehaviour
         {   
             newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
             Vector3 newPos = new Vector3(newPosX, 0, 0);
-            visibleHandCards[i].GetComponent<CardMovement>().OnCardMove(newPos, Instance.moveSpeed);
+            visibleHandCards[i].GetComponent<CardMovement>().OnCardMove(newPos, GameManager.Instance.rearrangeDuration);
         }
     }
 

@@ -9,8 +9,6 @@ public class EnemyHand : MonoBehaviour
     private static List<GameObject> unhandledCards = new List<GameObject>();
     [SerializeField] private float gapBetweenCards = 0;
     [SerializeField] private float cardScaleInHand = 1;
-    [SerializeField] private float moveDuration = 0.5f;
-
 
 
     public void Awake()
@@ -41,7 +39,7 @@ public class EnemyHand : MonoBehaviour
         {   
             newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
             Vector3 newPos = new Vector3(newPosX, 0, 0);
-            unhandledCards[i].GetComponent<CardMovement>().OnCardMove(newPos, Instance.moveDuration);
+            unhandledCards[i].GetComponent<CardMovement>().OnCardMove(newPos, GameManager.Instance.moveDuration);
         }
     }
 

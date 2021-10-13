@@ -5,25 +5,28 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
+    public PlayerStats playerStats;
+    public PlayerStats enemyPlayerStats;
+    public float attackDuration = 0.3f;
+    public float moveDuration = 0.4f;
+    public float rearrangeDuration = 0.4f;
+    public int playerNumber;
+    public int maxHandSize = 5;
+    public int maxFieldCardCount = 5;
+    public int maxDeckSize = 20;
+    public bool deckSet = false;
+    
+    [SerializeField] private List<GameObject> unHandledBurnedCards = new List<GameObject>();
+    [SerializeField] private int playerStartHealth = 100;
     [SerializeField] private bool debuggerModeOn;
     [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerBurnCard;
     [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerDrawCard;
     [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerPlayCard;
     [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerAttack;
 
-    public int playerNumber;
-    public PlayerStats playerStats;
-    public PlayerStats enemyPlayerStats;
-    [SerializeField] private int playerStartHealth = 100;
-    public int maxHandSize = 5;
-    public int maxFieldCardCount = 5;
-    public int maxDeckSize = 20;
-    public bool deckSet = false;
-
     private GameObject sfxLibrary;
 
-    [SerializeField] private List<GameObject> unHandledBurnedCards = new List<GameObject>();
+    
 
     private void Awake()
     {
@@ -70,6 +73,8 @@ public class GameManager : MonoBehaviour
         }
         
     }
+
+
     public void ReturnBurnedCardToHand()
     {
         Debug.Log("Ret removing ");

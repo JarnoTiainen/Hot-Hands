@@ -15,13 +15,17 @@ public class CardMovement : MonoBehaviour
     [SerializeField]
     private AnimationCurve attackCurve;
     private AnimationCurve defaultCurve;
+
     private AnimationCurve smoothAngleTransition;
 
     private Quaternion startRotation;
     private Quaternion endRotation;
 
     private Vector3 startPoint;
-    [SerializeField] private Vector3 endPoint;
+    private Vector3 startAttackPoint;
+    private Vector3 endPoint;
+    private Vector3 endAttackPoint;
+
 
     private float elapsedRotationTime;
     private float elapsedTime;
@@ -48,18 +52,18 @@ public class CardMovement : MonoBehaviour
 
     void Update()
     {
-        //Vector3 normalizedDirection = (transform.position - previousPos).normalized;
-        //Vector3 goalRotation = normalizedDirection * maxMovementRotateAngle;
-
-
-        if (doMove && transform.localPosition != endPoint) {
-            elapsedTime += Time.deltaTime;
-            //smoothly moves towards the endpoint. should this be in the fixedUpdate?
-            transform.localPosition = Vector3.Lerp(startPoint, endPoint, curve.Evaluate(elapsedTime / duration));
-        } else if (doMove && transform.localPosition == endPoint) {  //if the card has moved to the destination, reset variables
-            doMove = false;
-            curve = defaultCurve;
+        //priotize attacking over normal movement
+        if (!doAttack) {
+            if (doMove && transform.localPosition != endPoint) {
+                elapsedTime += Time.deltaTime;
+                //smoothly moves towards the endpoint. should this be in the fixedUpdate?
+                transform.localPosition = Vector3.Lerp(startPoint, endPoint, curve.Evaluate(elapsedTime / duration));
+            } else if (doMove && transform.localPosition == endPoint) {  //if the card has moved to the destination, reset variables
+                doMove = false;
+                curve = defaultCurve;
+            }
         }
+        
 
         //using euler angles here because quaternions would be different, but the euler angles are same
         if(doRotate && transform.rotation.eulerAngles != endRotation.eulerAngles) {
@@ -70,23 +74,30 @@ public class CardMovement : MonoBehaviour
             doRotate = false;
         }
 
-        if (doAttack && transform.position != endPoint) {
-            elapsedAttackTime += Time.deltaTime;
 
+        if (doAttack && transform.position != endAttackPoint) {
+            elapsedAttackTime += Time.deltaTime;
+            //the amount of curve added to the path in x axis
             Vector3 addToX = new Vector3(attackCurve.Evaluate(elapsedAttackTime / attackDur) * curveMultiplier * dirMultiplier, 0, 0);
 
-            transform.position = Vector3.Lerp(startPoint, endPoint, curve.Evaluate(elapsedAttackTime / attackDur));
+            transform.position = Vector3.Lerp(startAttackPoint, endAttackPoint, curve.Evaluate(elapsedAttackTime / attackDur));
             transform.position = new Vector3(transform.position.x * 1 + addToX.x, transform.position.y, transform.position.z);
 
-        } else if (doAttack && transform.position == endPoint) {  //if the card has moved to the destination, reset variables
+        } else if (doAttack && transform.position == endAttackPoint) {  //if the card has moved to the destination, reset variables
             AttackEventHandler ah = References.i.attackEventHandler;
             int owner = GetComponent<InGameCard>().owner;
             Debug.Log((owner) + " " + (gameObject==null) + " " + (targetCard==null));
             ah.StartDamageEvent(owner, gameObject, targetCard);
 
             doAttack = false;
-            if(GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) OnCardMove(References.i.yourMonsterZone.transform.InverseTransformPoint(startPoint), 0.6f);
-            else OnCardMove(References.i.opponentMonsterZone.transform.InverseTransformPoint(startPoint), 0.6f);
+            //if another script is trying to move this, let it do so
+            if (doMove) {
+                startPoint = transform.position;
+            } else { 
+                if(GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) OnCardMove(References.i.yourMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
+                else OnCardMove(References.i.opponentMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
+            }
+            
         }
     }
 
@@ -134,8 +145,8 @@ public class CardMovement : MonoBehaviour
     public void OnCardAttack(GameObject target, float dur)
     {
         targetCard = target;
-        startPoint = transform.position;
-        endPoint = target.transform.position;
+        startAttackPoint = transform.position;
+        endAttackPoint = target.transform.position;
         attackDur = dur;
         elapsedAttackTime = 0;
 
@@ -157,16 +168,16 @@ public class CardMovement : MonoBehaviour
 
             //set the attack point offset and direction for the attackcurve
             if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Left) {
-                endPoint.x -= References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
+                endAttackPoint.x -= References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
                 Debug.Log("Attack to LEFT");
                 dirMultiplier *= -1;
             } else if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Right) {
-                endPoint.x += References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
+                endAttackPoint.x += References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
                 Debug.Log("Attack to RIGHT");
             }
 
         } else {
-           //it's a direct attack
+           //direct attack
             dirMultiplier = 0;
         }
 
