@@ -243,6 +243,8 @@ public class GameManager : MonoBehaviour
 
     public void PlayerAttack(AttackEventMessage attackEventMessage)
     {
+        
+
         attackEventMessage.attackerValues = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.attacker);
         CardPowersMessage attacker = attackEventMessage.attackerValues;
         if (attackEventMessage.attackDenied)

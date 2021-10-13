@@ -10,6 +10,8 @@ public class AttackEventHandler : MonoBehaviour
 
     public void StartAttackEvent(bool wasYourAttack, CardPowersMessage attacker, CardPowersMessage target, float attackCD)
     {
+        Debug.Log("starting attack event");
+
         //maybe put these ifs to start/awake?
         if (yourMonsterZone == null) yourMonsterZone = References.i.yourMonsterZone;
         if (opponentMonsterZone == null) opponentMonsterZone = References.i.opponentMonsterZone;
@@ -19,6 +21,8 @@ public class AttackEventHandler : MonoBehaviour
         {
             GameObject attackingCard = yourMonsterZone.GetCardWithServerIndex(attacker.index);
             GameObject targetCard = opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(target.index));
+
+            Debug.LogWarning("Attack: attacker: " + attackingCard.GetComponent<InGameCard>().cardData.cardName + " rp: " + attackingCard.GetComponent<InGameCard>().cardData.rp + " lp: " + attackingCard.GetComponent<InGameCard>().cardData.lp + " target: " + targetCard.GetComponent<InGameCard>().cardData.cardName + " rp: " + targetCard.GetComponent<InGameCard>().cardData.rp + " lp: " + targetCard.GetComponent<InGameCard>().cardData.lp);
 
 
             attackingCard.GetComponent<InGameCard>().StartAttackCooldown(attackCD);
@@ -32,6 +36,7 @@ public class AttackEventHandler : MonoBehaviour
             GameObject attackingCard = opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index));
             GameObject targetCard = yourMonsterZone.GetCardWithServerIndex(target.index);
 
+            Debug.Log(" 2 Attack: attacker: " + attackingCard.GetComponent<InGameCard>().cardData.cardName + " rp: " + attackingCard.GetComponent<InGameCard>().cardData.rp + " lp: " + attackingCard.GetComponent<InGameCard>().cardData.lp + " target: " + targetCard.GetComponent<InGameCard>().cardData.cardName + " rp: " + targetCard.GetComponent<InGameCard>().cardData.rp + " lp: " + targetCard.GetComponent<InGameCard>().cardData.lp);
 
             attackingCard.GetComponent<InGameCard>().StartAttackCooldown(attackCD);
             References.i.yourMonsterZone.UpdateCardData(!wasYourAttack, target);
@@ -46,10 +51,15 @@ public class AttackEventHandler : MonoBehaviour
     {
         if (wasYourAttack)
         {
+
+
+
             GameObject attackingCard = References.i.yourMonsterZone.GetCardWithServerIndex(attacker.index);
             attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.enemyPlayerTarget, attackAnimationSpeed);
             References.i.yourMonsterZone.GetCardWithServerIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
             GameManager.Instance.enemyPlayerStats.playerHealth -= playerTakenDamage;
+
+
         }
         else
         {

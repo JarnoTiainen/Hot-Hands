@@ -65,6 +65,18 @@ public class MonsterZone : MonoBehaviour
 
     }
 
+    public void RemoveMonsterCardNoDestroy(int index)
+    {
+        Debug.Log("Removing monster " + index);
+        GameObject deadMonster = GetCardWithServerIndex(index);
+        monsterCards.Remove(deadMonster);
+        serverConfirmedCards.Remove(deadMonster);
+        ReCalculateServerCardIndexes();
+        RepositionMonsterCards();
+
+    }
+
+
     //public void ReCalculateCardIndexes()
     //{
     //    Debug.Log("ReCalculateCardIndexes");
@@ -241,11 +253,13 @@ public class MonsterZone : MonoBehaviour
         {
             GetCardWithServerIndex(cardPower.index).GetComponent<InGameCard>().SetStatLp(cardPower.lp);
             GetCardWithServerIndex(cardPower.index).GetComponent<InGameCard>().SetStatRp(cardPower.rp);
+            if (cardPower.lp < 0 || cardPower.rp < 0) RemoveMonsterCardNoDestroy(cardPower.index);
         }
         else
         {
             GetCardWithServerIndex(RevertIndex(cardPower.index)).GetComponent<InGameCard>().SetStatLp(cardPower.rp);
             GetCardWithServerIndex(RevertIndex(cardPower.index)).GetComponent<InGameCard>().SetStatRp(cardPower.lp);
+            if (cardPower.lp < 0 || cardPower.rp < 0) RemoveMonsterCardNoDestroy(RevertIndex(cardPower.index));
         }
         GetCardWithServerIndex(cardPower.index).GetComponent<InGameCard>().UpdateCardTexts();
     }
