@@ -2488,7 +2488,7 @@ MonoBehaviour:
   unhandledCards: []
   monsterCards: []
   gapBetweenCards: 0.005
-  moveDuration: 1
+  moveDuration: 0.1
   attackSpeed: 0.2
   debugModeOn: 0
   isYourMonsterZone: 1
@@ -5192,7 +5192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
   gapBetweenCards: 0.01
-  moveSpeed: 0.5
+  moveSpeed: 0.1
   rotationSpeed: 0.2
 --- !u!1 &1412929014
 GameObject:
@@ -7019,7 +7019,7 @@ MonoBehaviour:
   unhandledCards: []
   monsterCards: []
   gapBetweenCards: 0.005
-  moveDuration: 1
+  moveDuration: 0.1
   attackSpeed: 0.2
   debugModeOn: 0
   isYourMonsterZone: 0
@@ -7706,7 +7706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gapBetweenCards: 0
-  cardScaleInHand: 1
+  cardScaleInHand: 0.1
   moveDuration: 0.5
 --- !u!1 &1861727104
 GameObject:
