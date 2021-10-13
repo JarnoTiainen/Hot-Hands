@@ -222,8 +222,8 @@ public class GameManager : MonoBehaviour
         {
             enemyPlayerStats.playerBurnValue -= data.cost;
             References.i.opponentMonsterZone.AddNewMonsterCard(false, boardIndex, data);
-            References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.yourMonsterZone.RevertIndex(boardIndex)).GetComponent<InGameCard>().StartAttackCooldown(attackCD, true);
-            References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.yourMonsterZone.RevertIndex(boardIndex)).GetComponent<InGameCard>().owner = player;
+            References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(boardIndex)).GetComponent<InGameCard>().StartAttackCooldown(attackCD, true);
+            References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(boardIndex)).GetComponent<InGameCard>().owner = player;
             //for now removes card with index 0
             Debug.Log("Removing card from hand");
             EnemyHand.Instance.RemoveCard(0);

@@ -104,9 +104,11 @@ public class MonsterZone : MonoBehaviour
 
     public int RevertIndex(int index)
     {
+        Debug.Log("Reverting index: " + index);
         if (monsterCards.Count == 0) return 0;
         int ghostCardInt = 0;
         if (ghostCard != null) ghostCardInt = 1;
+        Debug.Log("GhostCard value: " + ghostCardInt + ", MonsterCards: " + monsterCards.Count + ", GameObjectName: " + gameObject.name);
         return monsterCards.Count - ghostCardInt - 1 - index;
     }
 
