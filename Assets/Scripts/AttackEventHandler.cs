@@ -79,9 +79,6 @@ public class AttackEventHandler : MonoBehaviour
         }
         else
         {
-            Debug.Log(player + " " + attacker.GetComponent<InGameCard>().cardData.cardName + " " + target.GetComponent<InGameCard>().cardData.cardName);
-
-
             CardData attackerCard = attacker.GetComponent<InGameCard>().cardData;
             CardData targetCard = target.GetComponent<InGameCard>().cardData;
 
@@ -91,7 +88,6 @@ public class AttackEventHandler : MonoBehaviour
             bool wasYourAttack = GameManager.Instance.IsYou(player);
 
 
-            Debug.Log("attacker: " + attackerCard.rp + " " + attackerCard.lp + " target: " + targetCard.rp + " " + targetCard.lp);
             if (wasYourAttack)
             {
                 if (attackerCard.lp <= 0 || attackerCard.rp <= 0)

@@ -86,7 +86,6 @@ public class CardMovement : MonoBehaviour
         } else if (doAttack && transform.position == endAttackPoint) {  //if the card has moved to the destination, reset variables
             AttackEventHandler ah = References.i.attackEventHandler;
             int owner = GetComponent<InGameCard>().owner;
-            Debug.Log((owner) + " " + (gameObject==null) + " " + (targetCard==null));
             ah.StartDamageEvent(owner, gameObject, targetCard);
 
             doAttack = false;
@@ -169,11 +168,9 @@ public class CardMovement : MonoBehaviour
             //set the attack point offset and direction for the attackcurve
             if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Left) {
                 endAttackPoint.x -= References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
-                Debug.Log("Attack to LEFT");
                 dirMultiplier *= -1;
             } else if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Right) {
                 endAttackPoint.x += References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
-                Debug.Log("Attack to RIGHT");
             }
 
         } else {

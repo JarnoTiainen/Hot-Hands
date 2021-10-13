@@ -144,7 +144,6 @@ public class MonsterZone : MonoBehaviour
 
     public GameObject GetCardWithServerIndex(int index)
     {
-        Debug.Log("Getting card with index: " + index);
         foreach (GameObject card in monsterCards)
         {
             if(card != ghostCard)
@@ -284,9 +283,9 @@ public class MonsterZone : MonoBehaviour
         GetCardWithServerIndex(cardPower.index).GetComponent<InGameCard>().UpdateCardTexts();
         if(isYourCard)
         {
-            if (cardPower.lp < 0 || cardPower.rp < 0) RemoveMonsterCardNoDestroy(cardPower.index);
+            if (cardPower.lp <= 0 || cardPower.rp <= 0) RemoveMonsterCardNoDestroy(cardPower.index);
         }
-        else if (cardPower.lp < 0 || cardPower.rp < 0) RemoveMonsterCardNoDestroy(RevertIndex(cardPower.index));
+        else if (cardPower.lp <= 0 || cardPower.rp <= 0) RemoveMonsterCardNoDestroy(RevertIndex(cardPower.index));
     }
 
     public int GetNewGhostCardIndex()
