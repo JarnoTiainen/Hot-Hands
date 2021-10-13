@@ -7705,8 +7705,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63e5ac6014a93f24aaa28a26157621fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gapBetweenCards: 0
-  cardScaleInHand: 0.1
+  gapBetweenCards: 0.01
+  cardScaleInHand: 1
   moveDuration: 0.5
 --- !u!1 &1861727104
 GameObject:
