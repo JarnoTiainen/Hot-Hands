@@ -14,7 +14,10 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private bool debuggerModeOn = false;
     [SerializeField] private Shader cardMainBodyMaterial;
     private Material mat;
-    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private MeshRenderer meshRendererBorderLow;
+    [SerializeField] private MeshRenderer meshRenderercardBackLow;
+    [SerializeField] private MeshRenderer meshRendererIconZoneLow;
+    [SerializeField] private MeshRenderer meshRendererNameZoneLow;
     [SerializeField] public Canvas textCanvas;
     [SerializeField] private CardBurn cardBurn;
     [SerializeField] private bool canAffordBool;
@@ -34,8 +37,11 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     private void Awake()
     {
-        mat = meshRenderer.material;
-        meshRenderer.material.shader = cardMainBodyMaterial;
+        mat = meshRendererBorderLow.material;
+        meshRendererBorderLow.material.shader = cardMainBodyMaterial;
+        meshRenderercardBackLow.material.shader = meshRendererBorderLow.material.shader;
+        meshRendererIconZoneLow.material.shader = meshRendererBorderLow.material.shader;
+        meshRendererNameZoneLow.material.shader = meshRendererBorderLow.material.shader;
     }
 
     [Button] public void StartAttackCooldown(float duration, bool isSummonCall = false)
@@ -97,7 +103,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void OnClickElement()
     {
-        if(!attackOnCD && !preAttackOnCD)
+        if(!attackOnCD && !preAttackOnCD && GameManager.Instance.IsYou(owner))
         {
             preAttackOnCD = true;
             ToggleAttackBurnEffect(false);
@@ -133,14 +139,20 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         if(!isGhostCard)
         {
             isGhostCard = true;
-            meshRenderer.enabled = false;
+            meshRendererBorderLow.enabled = false;
+            meshRenderercardBackLow.enabled = false;
+            meshRendererIconZoneLow.enabled = false;
+            meshRendererNameZoneLow.enabled = false;
             textCanvas.enabled = false;
             cardHidden = true;
         }
         else
         {
             isGhostCard = false;
-            meshRenderer.enabled = true;
+            meshRendererBorderLow.enabled = true;
+            meshRenderercardBackLow.enabled = true;
+            meshRendererIconZoneLow.enabled = true;
+            meshRendererNameZoneLow.enabled = true;
             textCanvas.enabled = true;
             cardHidden = false;
         }

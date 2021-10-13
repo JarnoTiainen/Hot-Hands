@@ -594,11 +594,13 @@ MonoBehaviour:
   rp: {fileID: 5759760883158312004}
   debuggerModeOn: 0
   cardMainBodyMaterial: {fileID: -6465566751694194690, guid: b5904bc55cd6fec4f82d888ba1f15e7e, type: 3}
-  meshRenderer: {fileID: 6032247785604177976}
+  meshRendererBorderLow: {fileID: 7229942028669228398}
+  meshRenderercardBackLow: {fileID: 896343340172149531}
+  meshRendererIconZoneLow: {fileID: 6226455728977144148}
+  meshRendererNameZoneLow: {fileID: 7871933326835751741}
   textCanvas: {fileID: 4525997025527728775}
   cardBurn: {fileID: 6134887068788904234}
   canAffordBool: 0
-  indexOnField: 0
   serverConfirmedIndex: 0
   confirmedByServer: 0
   isGhostCard: 0
@@ -606,6 +608,8 @@ MonoBehaviour:
   currentAttackCoolDown: 0
   attackOnCD: 0
   preAttackOnCD: 0
+  showTooltips: 0
+  owner: 0
 --- !u!65 &6490331289218157256
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -632,6 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 2
+  attackDur: 0
   rotationSpeed: 0.5
   curveMultiplier: 4
   curve:
@@ -691,7 +696,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  endPoint: {x: 0, y: 0, z: 0}
   maxMovementRotateAngle: 45
+  targetCard: {fileID: 0}
 --- !u!114 &2172893466288287300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1173,9 +1180,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146fbe7cf5dcdae4dac45332e5799d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!23 &6032247785604177976 stripped
+--- !u!23 &7871933326835751741 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5721922619410058653, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8205622910040012440, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+  m_PrefabInstance: {fileID: 2080244289742794149}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6226455728977144148 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5383582041978143985, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+  m_PrefabInstance: {fileID: 2080244289742794149}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &896343340172149531 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1202162772676767422, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+  m_PrefabInstance: {fileID: 2080244289742794149}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7229942028669228398 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8686153751881873611, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
   m_PrefabInstance: {fileID: 2080244289742794149}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5806235577589548474 stripped

@@ -205,11 +205,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            PlayerPlayCard(References.i.cardList.GetCardData(playCardMessage), playCardMessage.handIndex, playCardMessage.boardIndex, playCardMessage.player);
-            References.i.opponentMonsterZone.GetCardWithServerIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().owner = playCardMessage.player;
+            PlayerPlayCard(References.i.cardList.GetCardData(playCardMessage), playCardMessage.handIndex, playCardMessage.boardIndex, playCardMessage.player, playCardMessage.attackCooldown);
         }
     }
-    public void PlayerPlayCard(CardData data, int handIndex = -1, int boardIndex = 0, int player = -1)
+    public void PlayerPlayCard(CardData data, int handIndex = -1, int boardIndex = 0, int player = -1, float attackCD = 0)
     {
         if (player == -1) player = playerNumber;
         if(player == playerNumber)
@@ -223,6 +222,8 @@ public class GameManager : MonoBehaviour
         {
             enemyPlayerStats.playerBurnValue -= data.cost;
             References.i.opponentMonsterZone.AddNewMonsterCard(false, boardIndex, data);
+            References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.yourMonsterZone.RevertIndex(boardIndex)).GetComponent<InGameCard>().StartAttackCooldown(attackCD, true);
+            References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.yourMonsterZone.RevertIndex(boardIndex)).GetComponent<InGameCard>().owner = player;
             //for now removes card with index 0
             Debug.Log("Removing card from hand");
             EnemyHand.Instance.RemoveCard(0);
@@ -251,21 +252,13 @@ public class GameManager : MonoBehaviour
         {
             if (attackEventMessage.player == playerNumber)
             {
-                References.i.yourMonsterZone.GetCardWithServerIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
-                enemyPlayerStats.playerHealth -= attackEventMessage.playerTakenDamage;
-                if(debugPlayerAttack) Debug.Log("Enemy lost " + attackEventMessage.playerTakenDamage + " health. New health is: " + enemyPlayerStats.playerHealth);
+                References.i.attackEventHandler.StartAttackEvent(true, attacker, attackEventMessage.playerTakenDamage, attackEventMessage.attackCooldown);
             }
             else
             {
-                References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index)).GetComponent<InGameCard>().StartAttackCooldown(attackEventMessage.attackCooldown);
-                playerStats.playerHealth -= attackEventMessage.playerTakenDamage;
-                if (debugPlayerAttack) Debug.Log("You lost " + attackEventMessage.playerTakenDamage + " health. New health is: " + playerStats.playerHealth);
+                 
+                References.i.attackEventHandler.StartAttackEvent(false, attacker, attackEventMessage.playerTakenDamage, attackEventMessage.attackCooldown);
             }
-            if (attackEventMessage.player == playerNumber)
-            {
-                References.i.attackEventHandler.StartAttackEvent(true, attacker, attackEventMessage.playerTakenDamage, attackEventMessage.attackCooldown);
-            }
-            else References.i.attackEventHandler.StartAttackEvent(false, attacker, attackEventMessage.playerTakenDamage, attackEventMessage.attackCooldown);
 
         }
         else

@@ -37,7 +37,7 @@ public class AttackEventHandler : MonoBehaviour
             References.i.opponentMonsterZone.UpdateCardData(wasYourAttack, attacker);
 
             attackingCard.GetComponent<CardMovement>().OnCardAttack(targetCard, attackAnimationSpeed);
-
+            attackingCard.GetComponent<InGameCard>().ToggleAttackBurnEffect(false);
         }
     }
 
@@ -53,16 +53,13 @@ public class AttackEventHandler : MonoBehaviour
         else
         {
             GameObject attackingCard = References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index));
+            attackingCard.GetComponent<InGameCard>().ToggleAttackBurnEffect(false);
             attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.yourPlayerTarget, attackAnimationSpeed);
             References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index)).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
             GameManager.Instance.playerStats.playerHealth -= playerTakenDamage;
         }
     }
 
-    public void StartDamageEvent(int player, GameObject attacker)
-    {
-
-    }
     public void StartDamageEvent(int player, GameObject attacker, GameObject target)
     {
         if(target == References.i.yourPlayerTarget || target == References.i.enemyPlayerTarget)
