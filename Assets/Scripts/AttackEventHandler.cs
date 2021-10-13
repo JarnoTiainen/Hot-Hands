@@ -40,46 +40,77 @@ public class AttackEventHandler : MonoBehaviour
 
         }
     }
-    public void StartDamageEvent(int player, GameObject attacker, GameObject target)
+
+    public void StartAttackEvent(bool wasYourAttack, CardPowersMessage attacker, int playerTakenDamage, float attackCD)
     {
-        Debug.Log(player + " " + attacker.GetComponent<InGameCard>().cardData.cardName + " " + target.GetComponent<InGameCard>().cardData.cardName);
-
-
-        CardData attackerCard = attacker.GetComponent<InGameCard>().cardData;
-        CardData targetCard = target.GetComponent<InGameCard>().cardData;
-
-        attacker.GetComponent<InGameCard>().UpdateCardTexts();
-        target.GetComponent<InGameCard>().UpdateCardTexts();
-
-        bool wasYourAttack = GameManager.Instance.IsYou(player);
-
-
-        Debug.Log("attacker: " + attackerCard.rp + " " + attackerCard.lp + " target: " + targetCard.rp + " " + targetCard.lp);
         if (wasYourAttack)
         {
-            if (attackerCard.lp <= 0 || attackerCard.rp <= 0)
-            {
-                GameManager.Instance.playerStats.playerFieldCards--;
-                References.i.yourMonsterZone.RemoveMonsterCard(attacker.GetComponent<InGameCard>().serverConfirmedIndex);
-            }
-            if (targetCard.lp <= 0 || targetCard.rp <= 0)
-            {
-                GameManager.Instance.enemyPlayerStats.playerFieldCards--;
-                References.i.opponentMonsterZone.RemoveMonsterCard(target.GetComponent<InGameCard>().serverConfirmedIndex);
-            }
+            GameObject attackingCard = References.i.yourMonsterZone.GetCardWithServerIndex(attacker.index);
+            attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.enemyPlayerTarget, attackAnimationSpeed);
+            References.i.yourMonsterZone.GetCardWithServerIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
+            GameManager.Instance.enemyPlayerStats.playerHealth -= playerTakenDamage;
         }
         else
         {
-            if (attackerCard.lp <= 0 || attackerCard.rp <= 0)
+            GameObject attackingCard = References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index));
+            attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.yourPlayerTarget, attackAnimationSpeed);
+            References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index)).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
+            GameManager.Instance.playerStats.playerHealth -= playerTakenDamage;
+        }
+    }
+
+    public void StartDamageEvent(int player, GameObject attacker)
+    {
+
+    }
+    public void StartDamageEvent(int player, GameObject attacker, GameObject target)
+    {
+        if(target == References.i.yourPlayerTarget || target == References.i.enemyPlayerTarget)
+        {
+            //Update player hp heal/trigger lose game event
+        }
+        else
+        {
+            Debug.Log(player + " " + attacker.GetComponent<InGameCard>().cardData.cardName + " " + target.GetComponent<InGameCard>().cardData.cardName);
+
+
+            CardData attackerCard = attacker.GetComponent<InGameCard>().cardData;
+            CardData targetCard = target.GetComponent<InGameCard>().cardData;
+
+            attacker.GetComponent<InGameCard>().UpdateCardTexts();
+            target.GetComponent<InGameCard>().UpdateCardTexts();
+
+            bool wasYourAttack = GameManager.Instance.IsYou(player);
+
+
+            Debug.Log("attacker: " + attackerCard.rp + " " + attackerCard.lp + " target: " + targetCard.rp + " " + targetCard.lp);
+            if (wasYourAttack)
             {
-                GameManager.Instance.enemyPlayerStats.playerFieldCards--;
-                References.i.opponentMonsterZone.RemoveMonsterCard(attacker.GetComponent<InGameCard>().serverConfirmedIndex);
+                if (attackerCard.lp <= 0 || attackerCard.rp <= 0)
+                {
+                    GameManager.Instance.playerStats.playerFieldCards--;
+                    References.i.yourMonsterZone.RemoveMonsterCard(attacker.GetComponent<InGameCard>().serverConfirmedIndex);
+                }
+                if (targetCard.lp <= 0 || targetCard.rp <= 0)
+                {
+                    GameManager.Instance.enemyPlayerStats.playerFieldCards--;
+                    References.i.opponentMonsterZone.RemoveMonsterCard(target.GetComponent<InGameCard>().serverConfirmedIndex);
+                }
             }
-            if (targetCard.lp <= 0 || targetCard.rp <= 0)
+            else
             {
-                GameManager.Instance.playerStats.playerFieldCards--;
-                References.i.yourMonsterZone.RemoveMonsterCard(target.GetComponent<InGameCard>().serverConfirmedIndex);
+                if (attackerCard.lp <= 0 || attackerCard.rp <= 0)
+                {
+                    GameManager.Instance.enemyPlayerStats.playerFieldCards--;
+                    References.i.opponentMonsterZone.RemoveMonsterCard(attacker.GetComponent<InGameCard>().serverConfirmedIndex);
+                }
+                if (targetCard.lp <= 0 || targetCard.rp <= 0)
+                {
+                    GameManager.Instance.playerStats.playerFieldCards--;
+                    References.i.yourMonsterZone.RemoveMonsterCard(target.GetComponent<InGameCard>().serverConfirmedIndex);
+                }
             }
         }
+        
     }
 }

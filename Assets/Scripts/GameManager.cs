@@ -261,6 +261,12 @@ public class GameManager : MonoBehaviour
                 playerStats.playerHealth -= attackEventMessage.playerTakenDamage;
                 if (debugPlayerAttack) Debug.Log("You lost " + attackEventMessage.playerTakenDamage + " health. New health is: " + playerStats.playerHealth);
             }
+            if (attackEventMessage.player == playerNumber)
+            {
+                References.i.attackEventHandler.StartAttackEvent(true, attacker, attackEventMessage.playerTakenDamage, attackEventMessage.attackCooldown);
+            }
+            else References.i.attackEventHandler.StartAttackEvent(false, attacker, attackEventMessage.playerTakenDamage, attackEventMessage.attackCooldown);
+
         }
         else
         {

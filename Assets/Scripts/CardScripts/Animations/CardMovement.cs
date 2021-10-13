@@ -35,7 +35,7 @@ public class CardMovement : MonoBehaviour
     private Vector3 previousPos;
 
 
-    private GameObject targetCard;
+    [SerializeField] private GameObject targetCard;
 
 
     void Start()
@@ -72,7 +72,11 @@ public class CardMovement : MonoBehaviour
             elapsedAttackTime += Time.deltaTime;
 
             int dirMultiplier = 1;
+            Debug.Log(targetCard.name);
             if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Left) dirMultiplier = -1;
+            if (targetCard == References.i.yourPlayerTarget || targetCard == References.i.enemyPlayerTarget) dirMultiplier = 0;
+
+            if (!GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) dirMultiplier *= -1;
 
             Vector3 addToX = new Vector3(attackCurve.Evaluate(elapsedAttackTime / attackDur) * curveMultiplier * dirMultiplier, 0, 0);
             //Debug.Log("Added x " + addToX.x + " curve " + attackCurve.Evaluate(elapsedAttackTime / attackDur) + " multiplier " + curveMultiplier + " elapsed time" + elapsedAttackTime + " duration " + attackDur);
@@ -83,10 +87,16 @@ public class CardMovement : MonoBehaviour
 
         } else if (doAttack && transform.position == endPoint) {  //if the card has moved to the destination, reset variables
 
-            References.i.attackEventHandler.StartDamageEvent(GetComponent<InGameCard>().owner, gameObject, targetCard);
+
+            AttackEventHandler ah = References.i.attackEventHandler;
+            int owner = GetComponent<InGameCard>().owner;
+            Debug.Log((owner) + " " + (gameObject==null) + " " + (targetCard==null));
+            ah.StartDamageEvent(owner, gameObject, targetCard);
 
             doAttack = false;
-            OnCardMove(startPoint, 0.6f);
+            if(GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) OnCardMove(References.i.yourMonsterZone.transform.InverseTransformPoint(startPoint), 0.6f);
+            else OnCardMove(References.i.opponentMonsterZone.transform.InverseTransformPoint(startPoint), 0.6f);
+
         }
     }
     ///uses the default animation curve of card, startpoint specifiable
@@ -132,21 +142,25 @@ public class CardMovement : MonoBehaviour
 
     public void OnCardAttack(GameObject target, float dur)
     {
-        Instantiate(References.i.testCube, target.transform.position, Quaternion.identity);
-        Instantiate(References.i.testCube, transform.position, Quaternion.identity);
-
         targetCard = target;
         startPoint = transform.position;
         endPoint = target.transform.position;
-        if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Left)
-        {
-            endPoint.x -= References.i.fieldCard.GetComponent<BoxCollider>().size.x;
-        }
-        if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Right)
-        {
-            endPoint.x += References.i.fieldCard.GetComponent<BoxCollider>().size.x;
-        }
+
         
+        if (!(targetCard == References.i.yourPlayerTarget || targetCard == References.i.enemyPlayerTarget))
+        {
+            int multiplier = 1;
+            if(!GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) multiplier = -1;
+            if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Left)
+            {
+                endPoint.x -= References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
+            }
+            if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Right)
+            {
+                endPoint.x += References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
+            }
+        }
+
         attackDur = dur;
         elapsedAttackTime = 0;
         doAttack = true;
