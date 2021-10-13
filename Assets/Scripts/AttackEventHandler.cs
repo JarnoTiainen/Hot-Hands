@@ -10,6 +10,7 @@ public class AttackEventHandler : MonoBehaviour
 
     public void StartAttackEvent(bool wasYourAttack, CardPowersMessage attacker, CardPowersMessage target, float attackCD)
     {
+        //maybe put these ifs to start/awake?
         if (yourMonsterZone == null) yourMonsterZone = References.i.yourMonsterZone;
         if (opponentMonsterZone == null) opponentMonsterZone = References.i.opponentMonsterZone;
 

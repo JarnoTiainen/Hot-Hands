@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418c2037e8d28174da4b29a405192992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackAnimationSpeed: 0.4
+  attackAnimationSpeed: 0.3
 --- !u!1 &7522968
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,7 +2489,7 @@ MonoBehaviour:
   monsterCards: []
   gapBetweenCards: 0.005
   moveDuration: 1
-  attackSpeed: 0.4
+  attackSpeed: 0.2
   debugModeOn: 0
   isYourMonsterZone: 1
   ghostCard: {fileID: 0}
@@ -7020,7 +7020,7 @@ MonoBehaviour:
   monsterCards: []
   gapBetweenCards: 0.005
   moveDuration: 1
-  attackSpeed: 0.4
+  attackSpeed: 0.2
   debugModeOn: 0
   isYourMonsterZone: 0
   ghostCard: {fileID: 0}

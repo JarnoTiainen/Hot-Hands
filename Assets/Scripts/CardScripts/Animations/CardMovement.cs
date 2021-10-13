@@ -27,6 +27,8 @@ public class CardMovement : MonoBehaviour
     private float elapsedTime;
     private float elapsedAttackTime;
 
+    private int dirMultiplier = 1;
+
     private bool doMove = false;
     private bool doRotate = false;
     private bool doAttack = false;
@@ -71,23 +73,12 @@ public class CardMovement : MonoBehaviour
         if (doAttack && transform.position != endPoint) {
             elapsedAttackTime += Time.deltaTime;
 
-            int dirMultiplier = 1;
-            Debug.Log(targetCard.name);
-            if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Left) dirMultiplier = -1;
-            if (targetCard == References.i.yourPlayerTarget || targetCard == References.i.enemyPlayerTarget) dirMultiplier = 0;
-
-            if (!GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) dirMultiplier *= -1;
-
             Vector3 addToX = new Vector3(attackCurve.Evaluate(elapsedAttackTime / attackDur) * curveMultiplier * dirMultiplier, 0, 0);
-            //Debug.Log("Added x " + addToX.x + " curve " + attackCurve.Evaluate(elapsedAttackTime / attackDur) + " multiplier " + curveMultiplier + " elapsed time" + elapsedAttackTime + " duration " + attackDur);
-
 
             transform.position = Vector3.Lerp(startPoint, endPoint, curve.Evaluate(elapsedAttackTime / attackDur));
             transform.position = new Vector3(transform.position.x * 1 + addToX.x, transform.position.y, transform.position.z);
 
         } else if (doAttack && transform.position == endPoint) {  //if the card has moved to the destination, reset variables
-
-
             AttackEventHandler ah = References.i.attackEventHandler;
             int owner = GetComponent<InGameCard>().owner;
             Debug.Log((owner) + " " + (gameObject==null) + " " + (targetCard==null));
@@ -96,9 +87,9 @@ public class CardMovement : MonoBehaviour
             doAttack = false;
             if(GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) OnCardMove(References.i.yourMonsterZone.transform.InverseTransformPoint(startPoint), 0.6f);
             else OnCardMove(References.i.opponentMonsterZone.transform.InverseTransformPoint(startPoint), 0.6f);
-
         }
     }
+
     ///uses the default animation curve of card, startpoint specifiable
     public void OnCardMove(Vector3 startP, Vector3 endP, float dur)
     {
@@ -145,24 +136,41 @@ public class CardMovement : MonoBehaviour
         targetCard = target;
         startPoint = transform.position;
         endPoint = target.transform.position;
-
-        
-        if (!(targetCard == References.i.yourPlayerTarget || targetCard == References.i.enemyPlayerTarget))
-        {
-            int multiplier = 1;
-            if(!GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) multiplier = -1;
-            if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Left)
-            {
-                endPoint.x -= References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
-            }
-            if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Right)
-            {
-                endPoint.x += References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
-            }
-        }
-
         attackDur = dur;
         elapsedAttackTime = 0;
+
+        //if the card isn't attacking directly at you
+        if (!(targetCard == References.i.yourPlayerTarget || targetCard == References.i.enemyPlayerTarget))
+        {
+            int multiplier;
+            //if the attacking card is the opponents, reverse the multiplier
+
+            if (GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) {
+                //the card is yours
+                multiplier = 1;
+                dirMultiplier = 1;
+            } else {
+                //if the card is not yours
+                multiplier = -1;
+                dirMultiplier = -1;
+            }
+
+            //set the attack point offset and direction for the attackcurve
+            if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Left) {
+                endPoint.x -= References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
+                Debug.Log("Attack to LEFT");
+                dirMultiplier *= -1;
+            } else if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Right) {
+                endPoint.x += References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
+                Debug.Log("Attack to RIGHT");
+            }
+
+        } else {
+           //it's a direct attack
+            dirMultiplier = 0;
+        }
+
+        
         doAttack = true;
     }
 
