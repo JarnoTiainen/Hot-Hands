@@ -112,6 +112,7 @@ public class MonsterZone : MonoBehaviour
 
     public GameObject GetCardWithServerIndex(int index)
     {
+        Debug.Log("Getting card with index: " + index);
         foreach (GameObject card in monsterCards)
         {
             if(card != ghostCard)
