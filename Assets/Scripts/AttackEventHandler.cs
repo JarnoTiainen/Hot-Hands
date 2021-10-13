@@ -97,12 +97,14 @@ public class AttackEventHandler : MonoBehaviour
                 if (attackerCard.lp <= 0 || attackerCard.rp <= 0)
                 {
                     GameManager.Instance.playerStats.playerFieldCards--;
-                    References.i.yourMonsterZone.RemoveMonsterCard(attacker.GetComponent<InGameCard>().serverConfirmedIndex);
+                    References.i.yourMonsterZone.limboCards.Remove(attacker);
+                    Destroy(attacker);
                 }
                 if (targetCard.lp <= 0 || targetCard.rp <= 0)
                 {
                     GameManager.Instance.enemyPlayerStats.playerFieldCards--;
-                    References.i.opponentMonsterZone.RemoveMonsterCard(target.GetComponent<InGameCard>().serverConfirmedIndex);
+                    References.i.yourMonsterZone.limboCards.Remove(target);
+                    Destroy(target);
                 }
             }
             else
@@ -110,12 +112,14 @@ public class AttackEventHandler : MonoBehaviour
                 if (attackerCard.lp <= 0 || attackerCard.rp <= 0)
                 {
                     GameManager.Instance.enemyPlayerStats.playerFieldCards--;
-                    References.i.opponentMonsterZone.RemoveMonsterCard(attacker.GetComponent<InGameCard>().serverConfirmedIndex);
+                    References.i.yourMonsterZone.limboCards.Remove(attacker);
+                    Destroy(attacker);
                 }
                 if (targetCard.lp <= 0 || targetCard.rp <= 0)
                 {
                     GameManager.Instance.playerStats.playerFieldCards--;
-                    References.i.yourMonsterZone.RemoveMonsterCard(target.GetComponent<InGameCard>().serverConfirmedIndex);
+                    References.i.yourMonsterZone.limboCards.Remove(target);
+                    Destroy(target);
                 }
             }
         }

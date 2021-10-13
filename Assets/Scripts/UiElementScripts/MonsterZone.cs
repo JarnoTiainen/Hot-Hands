@@ -12,6 +12,7 @@ public class MonsterZone : MonoBehaviour
     [SerializeField] private bool debugModeOn = false;
     public bool isYourMonsterZone;
     [SerializeField] [ShowIf("debugModeOn", true)]public GameObject ghostCard;
+    public List<GameObject> limboCards = new List<GameObject>();
 
 
     private void Update()
@@ -67,13 +68,32 @@ public class MonsterZone : MonoBehaviour
 
     public void RemoveMonsterCardNoDestroy(int index)
     {
+        
         Debug.Log("Removing monster " + index);
         GameObject deadMonster = GetCardWithServerIndex(index);
+        limboCards.Add(deadMonster);
         monsterCards.Remove(deadMonster);
         serverConfirmedCards.Remove(deadMonster);
         ReCalculateServerCardIndexes();
         RepositionMonsterCards();
 
+    }
+    public GameObject FindLimboCardWithIndex(bool isYourCard, int index)
+    {
+        foreach(GameObject card in limboCards)
+        {
+            if(GameManager.Instance.IsYou(card.GetComponent<InGameCard>().owner) && isYourCard && card.GetComponent<InGameCard>().serverConfirmedIndex == index)
+            {
+                return card;
+            }
+            else if(!GameManager.Instance.IsYou(card.GetComponent<InGameCard>().owner) && isYourCard && card.GetComponent<InGameCard>().serverConfirmedIndex == index)
+            {
+                return card;
+            }
+        }
+
+        Debug.LogError("LIMBO CARD WAS NOT FOUND WITH INDEX: " + index);
+        return null;
     }
 
 
@@ -253,15 +273,20 @@ public class MonsterZone : MonoBehaviour
         {
             GetCardWithServerIndex(cardPower.index).GetComponent<InGameCard>().SetStatLp(cardPower.lp);
             GetCardWithServerIndex(cardPower.index).GetComponent<InGameCard>().SetStatRp(cardPower.rp);
-            if (cardPower.lp < 0 || cardPower.rp < 0) RemoveMonsterCardNoDestroy(cardPower.index);
+            
         }
         else
         {
             GetCardWithServerIndex(RevertIndex(cardPower.index)).GetComponent<InGameCard>().SetStatLp(cardPower.rp);
             GetCardWithServerIndex(RevertIndex(cardPower.index)).GetComponent<InGameCard>().SetStatRp(cardPower.lp);
-            if (cardPower.lp < 0 || cardPower.rp < 0) RemoveMonsterCardNoDestroy(RevertIndex(cardPower.index));
+            
         }
         GetCardWithServerIndex(cardPower.index).GetComponent<InGameCard>().UpdateCardTexts();
+        if(isYourCard)
+        {
+            if (cardPower.lp < 0 || cardPower.rp < 0) RemoveMonsterCardNoDestroy(cardPower.index);
+        }
+        else if (cardPower.lp < 0 || cardPower.rp < 0) RemoveMonsterCardNoDestroy(RevertIndex(cardPower.index));
     }
 
     public int GetNewGhostCardIndex()
