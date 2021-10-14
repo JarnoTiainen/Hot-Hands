@@ -658,6 +658,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3811812880520641188, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4737921843284741471, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_Name
       value: GaOb_card
@@ -676,7 +680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5498164340434577439, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.0042
       objectReference: {fileID: 0}
     - target: {fileID: 5498164340434577439, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -709,6 +713,14 @@ PrefabInstance:
     - target: {fileID: 5498164340434577439, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8643981370949601523, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9010021273788168694, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
