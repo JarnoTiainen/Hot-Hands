@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
         DrawCardMessage cardMessage = burnCardMessage.burnedCardDone;
         if (cardMessage.player == playerNumber)
         {
-            Debug.Log("removing ");
             unHandledBurnedCards.Remove(unHandledBurnedCards[0]);
             playerStats.playerHandCards--;
         }
@@ -77,7 +76,7 @@ public class GameManager : MonoBehaviour
 
     public void ReturnBurnedCardToHand()
     {
-        Debug.Log("Ret removing ");
+        if (debugPlayerBurnCard) Debug.Log("Ret removing ");
         Hand.AddNewCardToHand(unHandledBurnedCards[0]);
         unHandledBurnedCards.Remove(unHandledBurnedCards[0]);
     }
@@ -90,7 +89,7 @@ public class GameManager : MonoBehaviour
         int value = card.GetComponent<InGameCard>().cardData.value;
         if (player == playerNumber)
         {
-            Debug.Log("adding ");
+            if(debugPlayerBurnCard) Debug.Log("adding ");
             unHandledBurnedCards.Add(card);
             card.transform.SetParent(References.i.yourBonfire.transform);
             UpdatePlayerBurnValue(player, playerStats.playerBurnValue + value);
@@ -145,7 +144,7 @@ public class GameManager : MonoBehaviour
         {
             
             enemyPlayerStats.deckCardCount--;
-            Debug.Log("Remaining cards " + enemyPlayerStats.deckCardCount);
+            if(debugPlayerDrawCard) Debug.Log("Remaining cards " + enemyPlayerStats.deckCardCount);
             EnemyHand.AddNewCard();
         }
         sfxLibrary.GetComponent<DrawCardSFX>().Play();
@@ -164,13 +163,11 @@ public class GameManager : MonoBehaviour
     {
         if(setDeckMessage.player == playerNumber)
         {
-            Debug.Log("Setting your deck");
             playerStats.deckCardCount = setDeckMessage.deckCards;
             deckSet = true;
         }
         else
         {
-            Debug.Log("Setting opponent's deck");
             enemyPlayerStats.deckCardCount = setDeckMessage.deckCards;
         }
     }
@@ -181,6 +178,7 @@ public class GameManager : MonoBehaviour
         {
             playerStats.playerFieldCards--;
             UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue + References.i.yourMonsterZone.unhandledCards[0].GetComponent<InGameCard>().cardData.cost);
+            if (playCardMessage.serverBurnValue != playerStats.playerBurnValue) UpdatePlayerBurnValue(playerNumber, playCardMessage.serverBurnValue);
             References.i.yourMonsterZone.RecallCard(playerNumber, References.i.yourMonsterZone.unhandledCards[0]);
             return;
         }
@@ -230,15 +228,11 @@ public class GameManager : MonoBehaviour
             References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(boardIndex)).GetComponent<InGameCard>().StartAttackCooldown(attackCD, true);
             References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(boardIndex)).GetComponent<InGameCard>().owner = player;
             //for now removes card with index 0
-            Debug.Log("Removing card from hand");
+            if(debugPlayerPlayCard) Debug.Log("Removing card from hand");
             EnemyHand.Instance.RemoveCard(0);
             GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
         }
         sfxLibrary.GetComponent<PlayCardSFX>().Play();
-    }
-
-    public void PlayerRecallCard() { 
-        
     }
 
     public void PlayerAttack(AttackEventMessage attackEventMessage)
@@ -249,7 +243,7 @@ public class GameManager : MonoBehaviour
         CardPowersMessage attacker = attackEventMessage.attackerValues;
         if (attackEventMessage.denied)
         {
-            Debug.LogError("ATTACK DENIED");
+            if(debugPlayerAttack) Debug.LogError("ATTACK DENIED");
             AttackDenied(attacker);
             return;
         }
@@ -263,28 +257,18 @@ public class GameManager : MonoBehaviour
                 References.i.attackEventHandler.StartAttackEvent(true, attacker, attackEventMessage.playerTakenDamage, attackEventMessage.attackCooldown);
             }
             else
-            {
-                 
+            {    
                 References.i.attackEventHandler.StartAttackEvent(false, attacker, attackEventMessage.playerTakenDamage, attackEventMessage.attackCooldown);
             }
-
         }
         else
         {
-            
             attackEventMessage.targetValues = target;
-
             if (debugPlayerAttack) Debug.Log("attacked index: " + attackEventMessage.attackerValues.index + " target index: " + attackEventMessage.targetValues.index + "attacker lp: " + attackEventMessage.attackerValues.lp + " rp: " + attackEventMessage.attackerValues.rp + " target lp: " + attackEventMessage.targetValues.lp + " rp: " + attackEventMessage.targetValues.rp);
             bool wasYourAttack = false;
             if (attackEventMessage.player == playerNumber) wasYourAttack = true;
-
-            Debug.LogWarning("was your attack " + wasYourAttack);
-            
-
-
+            if (debugPlayerAttack) Debug.LogWarning("was your attack " + wasYourAttack);
             References.i.attackEventHandler.StartAttackEvent(wasYourAttack, attacker, target, attackEventMessage.attackCooldown);
-
-
         }
     }
 

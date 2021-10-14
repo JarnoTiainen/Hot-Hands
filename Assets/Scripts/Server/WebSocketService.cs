@@ -9,8 +9,9 @@ public class WebSocketService : MonoBehaviour
     public static WebSocketService Instance { get; private set; }
     static WebSocket websocket;
     [SerializeField] private bool debuggerModeOn = false;
+    [SerializeField] private bool showServerMessage = false;
 
-    
+
 
     private void Awake()
     {
@@ -29,8 +30,9 @@ public class WebSocketService : MonoBehaviour
         websocket.OnOpen += () =>
         {
             Debug.Log("Connection open!");
-            References.i.yourDeckObj.GetComponent<Deck>().SendDeckData();
             GetPlayerNumber();
+            References.i.yourDeckObj.GetComponent<Deck>().SendDeckData();
+            
         };
 
         websocket.OnError += (e) =>
@@ -47,8 +49,7 @@ public class WebSocketService : MonoBehaviour
         {
             
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
-            if (debuggerModeOn) Debug.Log("server message: " + data.Count);
-            if (debuggerModeOn) Debug.Log("server message: " + data[0] + " " + data[1]);
+            if (showServerMessage) Debug.Log("server message: " + data[0] + " " + data[1]);
             switch ((string)data[0])
             {
                 case "OPPONENTJOIN":

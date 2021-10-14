@@ -155,12 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f03169546557a468a731a748eab172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debuggerModeOn: 0
-  debugPlayerBurnCard: 0
-  debugPlayerDrawCard: 0
-  debugPlayerPlayCard: 0
-  debugPlayerAttack: 0
-  playerNumber: 0
   playerStats:
     deckCardCount: 0
     discardpileCardCount: 0
@@ -175,12 +169,21 @@ MonoBehaviour:
     playerHealth: 0
     playerHandCards: 0
     playerFieldCards: 0
-  playerStartHealth: 100
+  attackDuration: 0.3
+  moveDuration: 0.4
+  rearrangeDuration: 0.4
+  playerNumber: 0
   maxHandSize: 5
   maxFieldCardCount: 5
   maxDeckSize: 20
   deckSet: 0
   unHandledBurnedCards: []
+  playerStartHealth: 100
+  debuggerModeOn: 0
+  debugPlayerBurnCard: 0
+  debugPlayerDrawCard: 0
+  debugPlayerPlayCard: 0
+  debugPlayerAttack: 0
 --- !u!114 &7355201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3688cc3b420dfe459cf844ad916c6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debuggerModeOn: 1
+  debuggerModeOn: 0
+  showServerMessage: 1
 --- !u!114 &7355204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2488,11 +2492,10 @@ MonoBehaviour:
   unhandledCards: []
   monsterCards: []
   gapBetweenCards: 0.005
-  moveDuration: 0.1
-  attackSpeed: 0.2
   debugModeOn: 0
   isYourMonsterZone: 1
   ghostCard: {fileID: 0}
+  limboCards: []
 --- !u!4 &584923535 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3491539293014643226, guid: aae1e9d9a69688a489598e0cf6f4f7e3, type: 3}
@@ -5192,7 +5195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
   gapBetweenCards: 0.01
-  moveSpeed: 0.1
   rotationSpeed: 0.2
 --- !u!1 &1412929014
 GameObject:
@@ -7019,11 +7021,10 @@ MonoBehaviour:
   unhandledCards: []
   monsterCards: []
   gapBetweenCards: 0.005
-  moveDuration: 0.1
-  attackSpeed: 0.2
   debugModeOn: 0
   isYourMonsterZone: 0
   ghostCard: {fileID: 0}
+  limboCards: []
 --- !u!1 &1680061487
 GameObject:
   m_ObjectHideFlags: 0
@@ -7707,7 +7708,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gapBetweenCards: 0.01
   cardScaleInHand: 1
-  moveDuration: 0.5
 --- !u!1 &1861727104
 GameObject:
   m_ObjectHideFlags: 0

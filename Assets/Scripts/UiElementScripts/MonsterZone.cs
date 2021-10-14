@@ -30,7 +30,7 @@ public class MonsterZone : MonoBehaviour
             ghostCard.GetComponent<InGameCard>().ToggleGhostCard();
             ghostCard.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
             unhandledCards.Add(ghostCard);
-            Debug.Log("Added unhandled");
+            if(debugModeOn) Debug.Log("Added unhandled");
             ghostCard = null;
             //ReCalculateCardIndexes();
         } else {
@@ -46,7 +46,7 @@ public class MonsterZone : MonoBehaviour
             GameObject newMonster = Instantiate(References.i.fieldCard);
             serverConfirmedCards.Add(newMonster);
             newMonster.transform.SetParent(transform);
-            Debug.Log("index: " + index);
+            if (debugModeOn) Debug.Log("index: " + index);
             monsterCards.Insert(index, newMonster);
             newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
             ReCalculateServerCardIndexes();
@@ -56,7 +56,7 @@ public class MonsterZone : MonoBehaviour
 
     public void RemoveMonsterCard(int index)
     {
-        Debug.Log("Removing monster " + index);
+        if (debugModeOn) Debug.Log("Removing monster " + index);
         GameObject deadMonster = GetCardWithServerIndex(index);
         monsterCards.Remove(deadMonster);
         serverConfirmedCards.Remove(deadMonster);
@@ -68,8 +68,8 @@ public class MonsterZone : MonoBehaviour
 
     public void RemoveMonsterCardNoDestroy(int index)
     {
-        
-        Debug.Log("Removing monster " + index);
+
+        if (debugModeOn) Debug.Log("Removing monster " + index);
         GameObject deadMonster = GetCardWithServerIndex(index);
         limboCards.Add(deadMonster);
         monsterCards.Remove(deadMonster);
@@ -134,11 +134,11 @@ public class MonsterZone : MonoBehaviour
 
     public int RevertIndex(int index)
     {
-        Debug.Log("Reverting index: " + index);
+        if (debugModeOn) Debug.Log("Reverting index: " + index);
         if (monsterCards.Count == 0) return 0;
         int ghostCardInt = 0;
         if (ghostCard != null) ghostCardInt = 1;
-        Debug.Log("GhostCard value: " + ghostCardInt + ", MonsterCards: " + monsterCards.Count + ", GameObjectName: " + gameObject.name);
+        if (debugModeOn) Debug.Log("GhostCard value: " + ghostCardInt + ", MonsterCards: " + monsterCards.Count + ", GameObjectName: " + gameObject.name);
         return monsterCards.Count - ghostCardInt - 1 - index;
     }
 
@@ -195,7 +195,7 @@ public class MonsterZone : MonoBehaviour
             {
                 Hand.AddNewCardToHand(card);
                 unhandledCards.Remove(card);
-                Debug.Log("Removed unhandled");
+                if (debugModeOn) Debug.Log("Removed unhandled");
                 Destroy(card);
             }
             else
@@ -234,7 +234,7 @@ public class MonsterZone : MonoBehaviour
 
                     
                     WebSocketService.Attack(card.GetComponent<InGameCard>().serverConfirmedIndex);
-                    Debug.Log("found match for attacker: " + monsterCards[i].GetComponent<InGameCard>().cardData.cardName);
+                    if (debugModeOn) Debug.Log("found match for attacker: " + monsterCards[i].GetComponent<InGameCard>().cardData.cardName);
                     return;
                 }
             }
@@ -242,7 +242,7 @@ public class MonsterZone : MonoBehaviour
         }
         else
         {
-            Debug.Log("cannot attack with opponents card");
+            if (debugModeOn) Debug.Log("cannot attack with opponents card");
         }
     }
 
@@ -253,7 +253,7 @@ public class MonsterZone : MonoBehaviour
         {
             GameObject handledCard = unhandledCards[0];
             unhandledCards.Remove(handledCard);
-            Debug.Log("Removed unhandled " + unhandledCards.Count);
+            if (debugModeOn) Debug.Log("Removed unhandled " + unhandledCards.Count);
             serverConfirmedCards.Add(handledCard);
             ReCalculateServerCardIndexes();
             monsterCards[playCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(playCardMessage));
@@ -267,7 +267,7 @@ public class MonsterZone : MonoBehaviour
     }
     public void UpdateCardData(bool isYourCard, CardPowersMessage cardPower)
     {
-        Debug.Log("index " + cardPower.index);
+        if (debugModeOn) Debug.Log("index " + cardPower.index);
         if(isYourCard)
         {
             GetCardWithServerIndex(cardPower.index).GetComponent<InGameCard>().SetStatLp(cardPower.lp);
