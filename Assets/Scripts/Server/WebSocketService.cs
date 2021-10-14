@@ -105,7 +105,6 @@ public class WebSocketService : MonoBehaviour
                     break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
-                    UnlockDatabaseSOS();
                     break;
             }
         };
@@ -116,12 +115,6 @@ public class WebSocketService : MonoBehaviour
     {
         
         await websocket.Connect();
-    }
-
-    public void UnlockDatabaseSOS()
-    {
-        GameMessage message = new GameMessage("OnMessage", "UNLOCKDATABASE", "");
-        SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 
     void Update()

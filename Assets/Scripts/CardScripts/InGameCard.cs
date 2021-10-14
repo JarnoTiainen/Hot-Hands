@@ -39,9 +39,13 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     {
         mat = meshRendererBorderLow.material;
         meshRendererBorderLow.material.shader = cardMainBodyMaterial;
-        meshRenderercardBackLow.material.shader = meshRendererBorderLow.material.shader;
-        meshRendererIconZoneLow.material.shader = meshRendererBorderLow.material.shader;
-        meshRendererNameZoneLow.material.shader = meshRendererBorderLow.material.shader;
+        meshRenderercardBackLow.material.shader = cardMainBodyMaterial;
+        meshRendererIconZoneLow.material.shader = cardMainBodyMaterial;
+        meshRendererNameZoneLow.material.shader = cardMainBodyMaterial;
+        meshRendererBorderLow.material.renderQueue = 3000;
+        meshRenderercardBackLow.material.renderQueue = 3000;
+        meshRendererIconZoneLow.material.renderQueue = 2900;
+        meshRendererNameZoneLow.material.renderQueue = 2900;
     }
 
     [Button] public void StartAttackCooldown(float duration, bool isSummonCall = false)

@@ -249,6 +249,7 @@ public class GameManager : MonoBehaviour
         CardPowersMessage attacker = attackEventMessage.attackerValues;
         if (attackEventMessage.attackDenied)
         {
+            Debug.LogError("ATTACK DENIED");
             AttackDenied(attacker);
             return;
         }
