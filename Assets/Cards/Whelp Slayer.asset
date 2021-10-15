@@ -22,4 +22,8 @@ MonoBehaviour:
   rp: 5
   lp: 2
   attackDirection: 2
-  enchantments: []
+  enchantments:
+  - name: 
+    enchantmentEffect: 0
+    trigger: 1
+    weight: 1

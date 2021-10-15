@@ -11,7 +11,7 @@ public class MonsterZone : MonoBehaviour
     [SerializeField] private float gapBetweenCards;
     [SerializeField] private bool debugModeOn = false;
     public bool isYourMonsterZone;
-    [SerializeField] [ShowIf("debugModeOn", true)]public GameObject ghostCard;
+    [SerializeField] [ShowIf("debugModeOn", true)]public GameObject ghostCard = null;
     public List<GameObject> limboCards = new List<GameObject>();
 
 
@@ -336,7 +336,6 @@ public class MonsterZone : MonoBehaviour
             monsterCards.Insert(index, ghostCard);
             RepositionMonsterCards();
         }
-        
     }
 
     public void RemoveGhostCard()

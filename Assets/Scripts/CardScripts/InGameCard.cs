@@ -85,9 +85,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
             //if the card isn't attacking, update the cooldownbar
             if (!(GetComponent<CardMovement>().doAttack) && (GetComponent<CardMovement>().endPoint.y == transform.localPosition.y)) {
-                Debug.Log("moving bar");
                 if (doOnce) {
-                    Debug.Log("moving bar ye");
                     maxAttackCoolDown = currentAttackCoolDown;
                     coolDownSlider.gameObject.SetActive(true);
                     coolDownSlider.value = 1;
