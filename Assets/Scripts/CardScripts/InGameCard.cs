@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using Sirenix.OdinInspector;
 
@@ -10,6 +11,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] public TextMeshProUGUI value;
     [SerializeField] public TextMeshProUGUI lp;
     [SerializeField] public TextMeshProUGUI rp;
+    public Slider coolDownSlider;
 
     [SerializeField] private bool debuggerModeOn = false;
     [SerializeField] private Shader cardMainBodyMaterial;
@@ -28,6 +30,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] [ShowIf("debuggerModeOn", true)] public bool isGhostCard;
     [ShowIf("debuggerModeOn", true)] public bool cardHidden;
 
+    private float maxAttackCoolDown;
     [SerializeField] private float currentAttackCoolDown;
     [SerializeField] private bool attackOnCD;
     [SerializeField] private bool preAttackOnCD;
@@ -38,27 +41,35 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     private void Awake()
     {
         mat = meshRendererBorderLow.material;
-        meshRendererBorderLow.material.shader = cardMainBodyMaterial;
-        meshRenderercardBackLow.material.shader = cardMainBodyMaterial;
-        meshRendererIconZoneLow.material.shader = cardMainBodyMaterial;
-        meshRendererNameZoneLow.material.shader = cardMainBodyMaterial;
-        meshRendererBorderLow.material.renderQueue = 3000;
-        meshRenderercardBackLow.material.renderQueue = 3000;
-        meshRendererIconZoneLow.material.renderQueue = 2900;
-        meshRendererNameZoneLow.material.renderQueue = 2900;
+        //meshRendererBorderLow.material.shader = cardMainBodyMaterial;
+        //meshRenderercardBackLow.material.shader = cardMainBodyMaterial;
+        //meshRendererIconZoneLow.material.shader = cardMainBodyMaterial;
+        //meshRendererNameZoneLow.material.shader = cardMainBodyMaterial;
+        //meshRendererBorderLow.material.renderQueue = 3000;
+        //meshRenderercardBackLow.material.renderQueue = 3000;
+        //meshRendererIconZoneLow.material.renderQueue = 2900;
+        //meshRendererNameZoneLow.material.renderQueue = 2900;
+        coolDownSlider.gameObject.SetActive(false);
     }
 
     [Button] public void StartAttackCooldown(float duration, bool isSummonCall = false)
     {
+        coolDownSlider.gameObject.SetActive(true);
+        coolDownSlider.value = 1;
         attackOnCD = true;
         currentAttackCoolDown = duration;
+        maxAttackCoolDown = duration;
     }
 
     private void Update()
     {
-        if (currentAttackCoolDown > 0) currentAttackCoolDown -= Time.deltaTime;
+        if (currentAttackCoolDown > 0) {
+            currentAttackCoolDown -= Time.deltaTime;
+            coolDownSlider.value = currentAttackCoolDown / maxAttackCoolDown;
+        }
         else if(currentAttackCoolDown <= 0 && attackOnCD)
         {
+            coolDownSlider.gameObject.SetActive(false);
             ToggleAttackBurnEffect(true);
             attackOnCD = false;
             preAttackOnCD = false;
@@ -143,6 +154,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         if(!isGhostCard)
         {
             isGhostCard = true;
+            //you can use just this to hide the whole gameobject
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
             meshRendererBorderLow.enabled = false;
             meshRenderercardBackLow.enabled = false;
             meshRendererIconZoneLow.enabled = false;
@@ -153,6 +166,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         else
         {
             isGhostCard = false;
+            
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
             meshRendererBorderLow.enabled = true;
             meshRenderercardBackLow.enabled = true;
             meshRendererIconZoneLow.enabled = true;
