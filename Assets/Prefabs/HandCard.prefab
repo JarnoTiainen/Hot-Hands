@@ -909,11 +909,18 @@ MonoBehaviour:
   debuggerModeOn: 0
   cardMainBodyMaterial: {fileID: -6465566751694194690, guid: b5904bc55cd6fec4f82d888ba1f15e7e, type: 3}
   cardImage: {fileID: 2800000, guid: ab6eb980e32067e4fb1a4dc467dadc54, type: 3}
+  lpImage: {fileID: 2800000, guid: 4e971e766a1d91244b70910f646c762a, type: 3}
+  rpImage: {fileID: 2800000, guid: 221e861a04ef37f44a79068788933e2d, type: 3}
+  valueImage: {fileID: 2800000, guid: 3e57ce50e2e854741bcb61fd60ab0b06, type: 3}
   meshRendererBorderLow: {fileID: 8591065684707367096}
   meshRenderercardBackLow: {fileID: 2241669762973650637}
   meshRendererIconZoneLow: {fileID: 4973277176604927106}
   meshRendererNameZoneLow: {fileID: 9102558688645895915}
   meshRendererImage: {fileID: 8475603855198865334}
+  meshRendererImageLow: {fileID: 221078980820256407}
+  meshRendererLP: {fileID: 4110403385677785824}
+  meshRendererRP: {fileID: 7289167848965999503}
+  meshRendererValue: {fileID: 5543915910983276936}
   textCanvas: {fileID: 4525997025527728775}
   cardBurn: {fileID: 6134887068788904234}
   canAffordBool: 0
@@ -1583,6 +1590,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+--- !u!23 &7289167848965999503 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8788441112935556650, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+  m_PrefabInstance: {fileID: 2080244289742794149}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4110403385677785824 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2726249187242166085, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+  m_PrefabInstance: {fileID: 2080244289742794149}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5543915910983276936 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5778524097993258029, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+  m_PrefabInstance: {fileID: 2080244289742794149}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6134887068788904234 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5331695023264873615, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
@@ -1602,6 +1624,11 @@ MeshRenderer:
 --- !u!23 &9102558688645895915 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7101134063540714318, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+  m_PrefabInstance: {fileID: 2080244289742794149}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &221078980820256407 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2292311326443154226, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
   m_PrefabInstance: {fileID: 2080244289742794149}
   m_PrefabAsset: {fileID: 0}
 --- !u!23 &4973277176604927106 stripped
@@ -1713,13 +1740,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 614e4675e217b2f4b8eabb57492f2567, type: 3}
---- !u!1 &5901037119065855960 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 614e4675e217b2f4b8eabb57492f2567, type: 3}
-  m_PrefabInstance: {fileID: 6712008517321861769}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6534548590006685026 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 614e4675e217b2f4b8eabb57492f2567, type: 3}
+  m_PrefabInstance: {fileID: 6712008517321861769}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5901037119065855960 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 614e4675e217b2f4b8eabb57492f2567, type: 3}
   m_PrefabInstance: {fileID: 6712008517321861769}
   m_PrefabAsset: {fileID: 0}
