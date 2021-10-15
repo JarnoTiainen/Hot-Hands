@@ -22,6 +22,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private MeshRenderer meshRendererIconZoneLow;
     [SerializeField] private MeshRenderer meshRendererNameZoneLow;
     [SerializeField] private MeshRenderer meshRendererImage;
+    [SerializeField] private MeshRenderer meshRendererImageLow;
     [SerializeField] public Canvas textCanvas;
     [SerializeField] private CardBurn cardBurn;
     [SerializeField] private bool canAffordBool;
@@ -45,10 +46,12 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         meshRendererImage.material.shader = cardMainBodyMaterial;
         meshRendererImage.material.SetTexture("_sprite", cardImage);
         mat = meshRendererBorderLow.material;
+        meshRendererImageLow.material.shader = cardMainBodyMaterial;
         meshRendererBorderLow.material.shader = cardMainBodyMaterial;
         meshRenderercardBackLow.material.shader = cardMainBodyMaterial;
         meshRendererIconZoneLow.material.shader = cardMainBodyMaterial;
         meshRendererNameZoneLow.material.shader = cardMainBodyMaterial;
+        meshRendererImageLow.material.renderQueue = 3000;
         meshRendererBorderLow.material.renderQueue = 3000;
         meshRenderercardBackLow.material.renderQueue = 3000;
         meshRendererIconZoneLow.material.renderQueue = 2900;
