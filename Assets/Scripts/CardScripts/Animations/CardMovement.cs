@@ -23,7 +23,7 @@ public class CardMovement : MonoBehaviour
 
     private Vector3 startPoint;
     private Vector3 startAttackPoint;
-    private Vector3 endPoint;
+    public Vector3 endPoint;
     private Vector3 endAttackPoint;
 
 
@@ -33,9 +33,9 @@ public class CardMovement : MonoBehaviour
 
     private int dirMultiplier = 1;
 
-    private bool doMove = false;
+    public bool doMove = false;
     private bool doRotate = false;
-    private bool doAttack = false;
+    public bool doAttack = false;
 
     [SerializeField] private float maxMovementRotateAngle;
     private Vector3 previousPos;

@@ -370,7 +370,7 @@ RectTransform:
   m_GameObject: {fileID: 3395899584677541429}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0004224683, y: 0.00044188026, z: 1}
+  m_LocalScale: {x: 0.00040134488, y: 0.00044188026, z: 1}
   m_Children:
   - {fileID: 1908967480750368162}
   - {fileID: 2997528232319976061}
@@ -1004,6 +1004,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  endPoint: {x: 0, y: 0, z: 0}
+  doMove: 0
+  doAttack: 0
   maxMovementRotateAngle: 45
   targetCard: {fileID: 0}
 --- !u!114 &8021123931307860835

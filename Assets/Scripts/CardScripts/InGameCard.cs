@@ -42,6 +42,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private bool preAttackOnCD;
     public bool showTooltips;
     public int owner;
+    private bool doOnce;
 
 
     private void Awake()
@@ -69,9 +70,10 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     [Button] public void StartAttackCooldown(float duration, bool isSummonCall = false)
     {
-        coolDownSlider.gameObject.SetActive(true);
-        coolDownSlider.value = 1;
+        //coolDownSlider.gameObject.SetActive(true);
+        //coolDownSlider.value = 1;
         attackOnCD = true;
+        doOnce = true;
         currentAttackCoolDown = duration;
         maxAttackCoolDown = duration;
     }
@@ -80,7 +82,19 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     {
         if (currentAttackCoolDown > 0) {
             currentAttackCoolDown -= Time.deltaTime;
-            coolDownSlider.value = currentAttackCoolDown / maxAttackCoolDown;
+
+            //if the card isn't attacking, update the cooldownbar
+            if (!(GetComponent<CardMovement>().doAttack) && (GetComponent<CardMovement>().endPoint.y == transform.localPosition.y)) {
+                Debug.Log("moving bar");
+                if (doOnce) {
+                    Debug.Log("moving bar ye");
+                    maxAttackCoolDown = currentAttackCoolDown;
+                    coolDownSlider.gameObject.SetActive(true);
+                    coolDownSlider.value = 1;
+                    doOnce = false;
+                }
+                coolDownSlider.value = currentAttackCoolDown / maxAttackCoolDown;
+            }
         }
         else if(currentAttackCoolDown <= 0 && attackOnCD)
         {
@@ -90,6 +104,23 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
             preAttackOnCD = false;
             currentAttackCoolDown = 0;
         }
+
+
+
+
+
+        //if (currentAttackCoolDown > 0) {
+        //    currentAttackCoolDown -= Time.deltaTime;
+        //    coolDownSlider.value = currentAttackCoolDown / maxAttackCoolDown;
+        //}
+        //else if(currentAttackCoolDown <= 0 && attackOnCD)
+        //{
+        //    coolDownSlider.gameObject.SetActive(false);
+        //    ToggleAttackBurnEffect(true);
+        //    attackOnCD = false;
+        //    preAttackOnCD = false;
+        //    currentAttackCoolDown = 0;
+        //}
         meshRendererImage.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
         meshRendererImageLow.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
         meshRendererBorderLow.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
