@@ -16,10 +16,12 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private bool debuggerModeOn = false;
     [SerializeField] private Shader cardMainBodyMaterial;
     private Material mat;
+    [SerializeField] private Texture2D cardImage;
     [SerializeField] private MeshRenderer meshRendererBorderLow;
     [SerializeField] private MeshRenderer meshRenderercardBackLow;
     [SerializeField] private MeshRenderer meshRendererIconZoneLow;
     [SerializeField] private MeshRenderer meshRendererNameZoneLow;
+    [SerializeField] private MeshRenderer meshRendererImage;
     [SerializeField] public Canvas textCanvas;
     [SerializeField] private CardBurn cardBurn;
     [SerializeField] private bool canAffordBool;
@@ -40,15 +42,17 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     private void Awake()
     {
+        meshRendererImage.material.shader = cardMainBodyMaterial;
+        meshRendererImage.material.SetTexture("_sprite", cardImage);
         mat = meshRendererBorderLow.material;
-        //meshRendererBorderLow.material.shader = cardMainBodyMaterial;
-        //meshRenderercardBackLow.material.shader = cardMainBodyMaterial;
-        //meshRendererIconZoneLow.material.shader = cardMainBodyMaterial;
-        //meshRendererNameZoneLow.material.shader = cardMainBodyMaterial;
-        //meshRendererBorderLow.material.renderQueue = 3000;
-        //meshRenderercardBackLow.material.renderQueue = 3000;
-        //meshRendererIconZoneLow.material.renderQueue = 2900;
-        //meshRendererNameZoneLow.material.renderQueue = 2900;
+        meshRendererBorderLow.material.shader = cardMainBodyMaterial;
+        meshRenderercardBackLow.material.shader = cardMainBodyMaterial;
+        meshRendererIconZoneLow.material.shader = cardMainBodyMaterial;
+        meshRendererNameZoneLow.material.shader = cardMainBodyMaterial;
+        meshRendererBorderLow.material.renderQueue = 3000;
+        meshRenderercardBackLow.material.renderQueue = 3000;
+        meshRendererIconZoneLow.material.renderQueue = 2900;
+        meshRendererNameZoneLow.material.renderQueue = 2900;
         coolDownSlider.gameObject.SetActive(false);
     }
 
@@ -75,6 +79,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
             preAttackOnCD = false;
             currentAttackCoolDown = 0;
         }
+        meshRendererImage.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
+
     }
 
 

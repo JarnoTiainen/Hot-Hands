@@ -894,10 +894,12 @@ MonoBehaviour:
   coolDownSlider: {fileID: 4745231975343201543}
   debuggerModeOn: 0
   cardMainBodyMaterial: {fileID: -6465566751694194690, guid: b5904bc55cd6fec4f82d888ba1f15e7e, type: 3}
+  cardImage: {fileID: 2800000, guid: ab6eb980e32067e4fb1a4dc467dadc54, type: 3}
   meshRendererBorderLow: {fileID: 2586452102702732104}
   meshRenderercardBackLow: {fileID: 5458773996137350461}
   meshRendererIconZoneLow: {fileID: 1286294450258538354}
   meshRendererNameZoneLow: {fileID: 3066876736463248667}
+  meshRendererImage: {fileID: 2396495604686523462}
   textCanvas: {fileID: 344395278571197130}
   cardBurn: {fileID: 143564926150220506}
   canAffordBool: 0
@@ -1442,6 +1444,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146fbe7cf5dcdae4dac45332e5799d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!23 &2396495604686523462 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7584598214010481171, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+  m_PrefabInstance: {fileID: 5189263780609533525}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &3066876736463248667 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7101134063540714318, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
