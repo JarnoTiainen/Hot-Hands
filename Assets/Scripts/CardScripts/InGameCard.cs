@@ -72,6 +72,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         meshRenderercardBackLow.material.renderQueue = 3000;
         meshRendererIconZoneLow.material.renderQueue = 2900;
         meshRendererNameZoneLow.material.renderQueue = 2900;
+        meshRendererImage.material.renderQueue = 3100;
         coolDownSlider.gameObject.SetActive(false);
     }
 
