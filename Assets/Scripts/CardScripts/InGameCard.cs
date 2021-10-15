@@ -15,7 +15,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     [SerializeField] private bool debuggerModeOn = false;
     [SerializeField] private Shader cardMainBodyMaterial;
-    private Material mat;
+    [SerializeField] private Material mat;
     [SerializeField] private Texture2D cardImage;
     [SerializeField] private Texture2D lpImage;
     [SerializeField] private Texture2D rpImage;
@@ -26,9 +26,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private MeshRenderer meshRendererNameZoneLow;
     [SerializeField] private MeshRenderer meshRendererImage;
     [SerializeField] private MeshRenderer meshRendererImageLow;
-    [SerializeField] private MeshRenderer meshRendererLP;
-    [SerializeField] private MeshRenderer meshRendererRP;
-    [SerializeField] private MeshRenderer meshRendererValue;
     [SerializeField] public Canvas textCanvas;
     [SerializeField] private CardBurn cardBurn;
     [SerializeField] private bool canAffordBool;
@@ -57,14 +54,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         meshRenderercardBackLow.material.shader = cardMainBodyMaterial;
         meshRendererIconZoneLow.material.shader = cardMainBodyMaterial;
         meshRendererNameZoneLow.material.shader = cardMainBodyMaterial;
-        meshRendererValue.material.shader = cardMainBodyMaterial;
-        meshRendererLP.material.shader = cardMainBodyMaterial;
-        meshRendererRP.material.shader = cardMainBodyMaterial;
-        meshRendererValue.material.SetTexture("_sprite", lpImage);
-        meshRendererLP.material.SetTexture("_sprite", rpImage);
-        meshRendererRP.material.SetTexture("_sprite", valueImage);
 
-        meshRendererValue.material.renderQueue = 3100;
+        /* meshRendererValue.material.renderQueue = 3100;
         meshRendererLP.material.renderQueue = 3100;
         meshRendererRP.material.renderQueue = 3100;
         meshRendererImageLow.material.renderQueue = 3000;
@@ -72,7 +63,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         meshRenderercardBackLow.material.renderQueue = 3000;
         meshRendererIconZoneLow.material.renderQueue = 2900;
         meshRendererNameZoneLow.material.renderQueue = 2900;
-        meshRendererImage.material.renderQueue = 3100;
+        meshRendererImage.material.renderQueue = 3100; */
         coolDownSlider.gameObject.SetActive(false);
     }
 
@@ -105,9 +96,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         meshRenderercardBackLow.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
         meshRendererNameZoneLow.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
         meshRendererIconZoneLow.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
-        meshRendererValue.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
-        meshRendererLP.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
-        meshRendererRP.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
     }
 
 
