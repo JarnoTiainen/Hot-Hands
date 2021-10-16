@@ -1,8 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Sirenix.OdinInspector;
+using SimpleJSON;
 using System;
+
+
+
 [Serializable]
 public class Enchantment
 {
-    public string name;
+    public string enchantmentName;
     public EnchantmentEffect enchantmentEffect;
     public Trigger trigger;
     public int weight;
@@ -11,7 +19,7 @@ public class Enchantment
 
     public enum EnchantmentEffect
     {
-        TestEffect
+        Default, DrawCard
     }
     public enum Trigger
     {

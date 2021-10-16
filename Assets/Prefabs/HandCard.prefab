@@ -839,6 +839,7 @@ GameObject:
   - component: {fileID: 2172893466288287300}
   - component: {fileID: 2157171559758549780}
   - component: {fileID: 458329472671377931}
+  - component: {fileID: 4816693737202141553}
   m_Layer: 0
   m_Name: HandCard
   m_TagString: Untagged
@@ -1017,6 +1018,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  endPoint: {x: 0, y: 0, z: 0}
+  doMove: 0
+  doAttack: 0
   maxMovementRotateAngle: 45
   targetCard: {fileID: 0}
 --- !u!114 &2172893466288287300
@@ -1162,6 +1166,20 @@ MonoBehaviour:
   shadowCaster: {fileID: 5901037119065855960}
   dissolveSpeed: 2
   isDissolving: 0
+--- !u!114 &4816693737202141553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611825709596717884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31de2ddb8d5504d4bafd6b7c944999b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enchantmentEffect: {fileID: 5772156425248452924, guid: d63f52d65939d1b42b92ac332f26ecbd, type: 3}
+  hightFromCard: 0
 --- !u!1 &9020729396848444570
 GameObject:
   m_ObjectHideFlags: 0

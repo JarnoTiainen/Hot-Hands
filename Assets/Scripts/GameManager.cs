@@ -121,8 +121,17 @@ public class GameManager : MonoBehaviour
     {
         if (drawCardMessage.player == playerNumber)
         {
+            if(drawCardMessage.drawCooldown == -1)
+            {
+                PlayerDrawCard();
+                GameManager.Instance.playerStats.playerHandCards++;
+            }
+            else
+            {
+                References.i.yourDeckObj.GetComponent<Deck>().StartDrawCooldown(drawCardMessage.drawCooldown);
+            }
             Hand.RevealNewCard(drawCardMessage);
-            References.i.yourDeckObj.GetComponent<Deck>().StartDrawCooldown(drawCardMessage.drawCooldown);
+
         }
         else
         {
