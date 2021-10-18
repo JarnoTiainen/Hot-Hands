@@ -81,6 +81,7 @@ public class Hand : MonoBehaviour
             unhandledCards[0].GetComponent<InGameCard>().SetNewCardData(true, cardData);
             unhandledCards[0].GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0,0,0), Instance.rotationSpeed);
             unhandledCards[0].GetComponent<InGameCard>().nameText.text = drawCardMessage.cardName;
+            
             unhandledCards.Remove(unhandledCards[0]);
             Instance.UpdateCanAffortCards();
 

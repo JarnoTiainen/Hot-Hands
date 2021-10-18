@@ -138,6 +138,18 @@ public class GameManager : MonoBehaviour
             PlayerDrawCard(drawCardMessage.player);
         }
     }
+
+    public void EnchantmentEffectActive(EnchantmentEffectMesage enchantmentEffect)
+    {
+        Debug.Log("Display effect here");
+        enchantmentEffect.cardInfo = JsonUtility.FromJson<DrawCardMessage>(enchantmentEffect.card);
+        Debug.Log(enchantmentEffect.cardInfo.cardName + " " + enchantmentEffect.trigger);
+
+
+         References.i.cardEnchantmentEffectManager.DisplayCardEffectSource(References.i.cardList.GetCardData(enchantmentEffect.cardInfo));
+    }
+
+
     public void PlayerDrawCard(int player = -1)
     {
         if(player == -1)

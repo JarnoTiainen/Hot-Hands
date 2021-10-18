@@ -22,4 +22,8 @@ MonoBehaviour:
   rp: 2
   lp: 2
   attackDirection: 1
-  enchantments: []
+  enchantments:
+  - enchantmentName: Dead man's hand
+    enchantmentEffect: 1
+    trigger: 3
+    weight: 2

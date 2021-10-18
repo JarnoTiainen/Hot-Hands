@@ -28,7 +28,7 @@ public class CardData
     [SerializeField] public List<Enchantment> enchantments = new List<Enchantment>();
 
     //add missing ones later
-    public CardData(Sprite cardSprite, string cardName, int cost, int value, Card.CardType cardType, Card.AttackDirection attackDirection, int rp, int lp) //List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags)
+    public CardData(Sprite cardSprite, string cardName, int cost, int value, Card.CardType cardType, Card.AttackDirection attackDirection, int rp, int lp, List<Enchantment> enchantments) //List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags)
     {
         this.cardSprite = cardSprite;
         this.cardName = cardName;
@@ -40,5 +40,6 @@ public class CardData
         //this.monsterTags = monsterTags;
         this.rp = rp;
         this.lp = lp;
+        this.enchantments = enchantments;
     }
 }

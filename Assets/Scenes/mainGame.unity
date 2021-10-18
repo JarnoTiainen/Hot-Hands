@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 7355200}
   - component: {fileID: 7355201}
   - component: {fileID: 7355204}
+  - component: {fileID: 7355205}
   m_Layer: 0
   m_Name: GameEventManager
   m_TagString: GameManager
@@ -243,6 +244,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackAnimationSpeed: 0.3
+--- !u!114 &7355205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31de2ddb8d5504d4bafd6b7c944999b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardEnchantmentEffectPositor: {fileID: 47051111}
+  currentActivePreview: {fileID: 0}
+  enchantmentEffect: {fileID: 0}
+  cardPreview: {fileID: 5290018701074026762, guid: 5d56b0ae937e36d4594a4b2de2ab29a1, type: 3}
+  hightFromCard: 0
+  battlecrySprite: {fileID: 0}
+  brutalitySprite: {fileID: 0}
+  wildSprite: {fileID: 0}
+  lastBreathSprite: {fileID: 0}
+  openerSprite: {fileID: 0}
+  retaliateSprite: {fileID: 0}
+  sacrificeSprite: {fileID: 0}
 --- !u!1 &7522968
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +305,36 @@ Transform:
   - {fileID: 1512904903}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &47051111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 47051112}
+  m_Layer: 0
+  m_Name: CardEnchantmentPreviewLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &47051112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47051111}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.379, y: 0, z: -0.014}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &64249375
 GameObject:
@@ -1008,6 +1063,7 @@ MonoBehaviour:
   testCube: {fileID: 0}
   yourPlayerTarget: {fileID: 1208857866}
   enemyPlayerTarget: {fileID: 220206239}
+  cardEnchantmentEffectManager: {fileID: 7355205}
 --- !u!4 &149145601
 Transform:
   m_ObjectHideFlags: 0
@@ -9881,7 +9937,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956450039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1645449386}

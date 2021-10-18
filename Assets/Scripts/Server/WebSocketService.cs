@@ -104,6 +104,11 @@ public class WebSocketService : MonoBehaviour
                 case "SERVERCLIENTMISSMATCH":
                     Debug.LogError("MISS MATCH BETWEEN SERVER AND CLIENT! " + data[1]);
                     break;
+                case "ENCHANTMENTACTIVE":
+                    if (debuggerModeOn) Debug.Log("Message type was ENCHANTMENTACTIVE");
+                    EnchantmentEffectMesage enchantmentEffect = JsonUtility.FromJson<EnchantmentEffectMesage>(data[1]);
+                    gameManager.EnchantmentEffectActive(enchantmentEffect);
+                    break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                     break;

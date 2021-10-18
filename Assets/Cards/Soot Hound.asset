@@ -22,4 +22,8 @@ MonoBehaviour:
   rp: 4
   lp: 3
   attackDirection: 2
-  enchantments: []
+  enchantments:
+  - enchantmentName: Ember Charge
+    enchantmentEffect: 1
+    trigger: 4
+    weight: 1

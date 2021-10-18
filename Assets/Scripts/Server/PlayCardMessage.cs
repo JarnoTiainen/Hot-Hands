@@ -24,8 +24,9 @@ public class PlayCardMessage
     public int cardType;
     public List<Card.MonsterTag> mtag;
     public List<Card.SpellTag> stag;
-    public int rp;
+    public int rp;  
     public int lp;
+    public List<Enchantment> enchantments;
 
 
     public PlayCardMessage(int cardSource = 0, int handIndex = 0, int boardIndex = 0, int sender = 0)

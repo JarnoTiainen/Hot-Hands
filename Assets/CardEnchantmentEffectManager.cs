@@ -4,7 +4,18 @@ using UnityEngine;
 
 public class CardEnchantmentEffectManager : MonoBehaviour
 {
+    private CardEnchantmentEffectManager gameManager;
+    [SerializeField] private GameObject cardEnchantmentEffectPositor;
+    public static CardEnchantmentEffectManager Instance { get; private set; }
+
+    public GameObject currentActivePreview;
+
+
+
+
     [SerializeField] private GameObject enchantmentEffect;
+    [SerializeField] private GameObject cardPreview;
+
     [SerializeField] private float hightFromCard;
 
     [SerializeField] private Sprite battlecrySprite;
@@ -53,4 +64,13 @@ public class CardEnchantmentEffectManager : MonoBehaviour
                 break;
         }
     }
+    public void DisplayCardEffectSource(CardData data)
+    {
+        if (currentActivePreview != null) Destroy(currentActivePreview);
+
+        GameObject newCardEffectPreview = Instantiate(cardPreview, cardEnchantmentEffectPositor.transform.position, Quaternion.identity);
+        newCardEffectPreview.GetComponent<CardEffectPreview>().SetNewPreviewData(data);
+        currentActivePreview = newCardEffectPreview;
+    }
+
 }

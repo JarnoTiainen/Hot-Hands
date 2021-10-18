@@ -22,4 +22,8 @@ MonoBehaviour:
   rp: 1
   lp: 1
   attackDirection: 2
-  enchantments: []
+  enchantments:
+  - enchantmentName: Dirty Money
+    enchantmentEffect: 1
+    trigger: 0
+    weight: 1

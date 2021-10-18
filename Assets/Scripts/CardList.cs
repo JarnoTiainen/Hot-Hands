@@ -73,7 +73,7 @@ public class CardList : ScriptableObject
     public CardData GetCardData(PlayCardMessage playCardMessage)
     {
         Card card = GetCardData(playCardMessage.cardName);
-        CardData cardData = new CardData(card.cardSprite, playCardMessage.cardName, playCardMessage.cardCost, playCardMessage.cardValue, card.cardType, card.attackDirection, playCardMessage.rp, playCardMessage.lp);
+        CardData cardData = new CardData(card.cardSprite, playCardMessage.cardName, playCardMessage.cardCost, playCardMessage.cardValue, card.cardType, card.attackDirection, playCardMessage.rp, playCardMessage.lp, playCardMessage.enchantments);
 
         return cardData;
     }
@@ -81,7 +81,7 @@ public class CardList : ScriptableObject
     public CardData GetCardData(DrawCardMessage drawCardMessage)
     {
         Card card = GetCardData(drawCardMessage.cardName);
-        CardData cardData = new CardData(card.cardSprite, drawCardMessage.cardName, drawCardMessage.cardCost, drawCardMessage.cardValue, card.cardType, (Card.AttackDirection)drawCardMessage.attackDirection, drawCardMessage.rp, drawCardMessage.lp);
+        CardData cardData = new CardData(card.cardSprite, drawCardMessage.cardName, drawCardMessage.cardCost, drawCardMessage.cardValue, card.cardType, (Card.AttackDirection)drawCardMessage.attackDirection, drawCardMessage.rp, drawCardMessage.lp, drawCardMessage.enchantments);
 
         return cardData;
     }

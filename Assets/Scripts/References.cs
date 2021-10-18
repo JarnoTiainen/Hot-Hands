@@ -37,6 +37,7 @@ public class References: MonoBehaviour
     public GameObject testCube;
     public GameObject yourPlayerTarget;
     public GameObject enemyPlayerTarget;
+    public CardEnchantmentEffectManager cardEnchantmentEffectManager;
 
    
 }

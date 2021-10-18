@@ -14,6 +14,7 @@ public class DrawCardMessage
     public List<Card.SpellTag> stag;
     public int rp;
     public int lp;
+    public List<Enchantment> enchantments;
 
 
     public DrawCardMessage(int playerIn)
