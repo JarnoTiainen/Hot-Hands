@@ -239,21 +239,25 @@ public class SoundtrackManager : MonoBehaviour
         switch (currentSceneIndex)
         {
             case 0:
+                masterMixer.SetFloat("mainMenuMusicVol", Mathf.Log10(0.0001f) * 20);
                 gameObject.GetComponent<SoundtrackLibrary>().mainMenu.PlaySoundtrack();
                 StartCoroutine(FadeMixerGroup.StartFade(masterMixer, "mainMenuMusicVol", mainMenuFadeIn, PlayerPrefs.GetFloat("MusicVolume")));
                 break;
 
             case 1:
+                masterMixer.SetFloat("inGameMusicVol", Mathf.Log10(0.0001f) * 20);
                 gameObject.GetComponent<SoundtrackLibrary>().inGame.PlaySoundtrack();
                 StartCoroutine(FadeMixerGroup.StartFade(masterMixer, "inGameMusicVol", inGameFadeIn, PlayerPrefs.GetFloat("MusicVolume")));
                 break;
 
             case 2:
+                masterMixer.SetFloat("resultScreenMusicVol", Mathf.Log10(0.0001f) * 20);
                 gameObject.GetComponent<SoundtrackLibrary>().resultScreen.PlaySoundtrack();
                 StartCoroutine(FadeMixerGroup.StartFade(masterMixer, "resultScreenMusicVol", resultScreenFadeIn, PlayerPrefs.GetFloat("MusicVolume")));
                 break;
 
             default:
+                masterMixer.SetFloat("mainMenuMusicVol", Mathf.Log10(0.0001f) * 20);
                 gameObject.GetComponent<SoundtrackLibrary>().defaultSoundtrack.PlaySoundtrack();
                 StartCoroutine(FadeMixerGroup.StartFade(masterMixer, "mainMenuMusicVol", mainMenuFadeIn, PlayerPrefs.GetFloat("MusicVolume")));
                 break;
