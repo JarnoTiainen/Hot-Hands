@@ -9644,6 +9644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2080187385}
   - component: {fileID: 2080187384}
+  - component: {fileID: 2080187386}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -9663,6 +9664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3688cc3b420dfe459cf844ad916c6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 2080187386}
   debuggerModeOn: 1
   showServerMessage: 1
 --- !u!4 &2080187385
@@ -9679,6 +9681,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2080187386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080187383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f03169546557a468a731a748eab172, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats:
+    deckCardCount: 20
+    discardpileCardCount: 0
+    playerBurnValue: 0
+    playerHealth: 0
+    playerHandCards: 0
+    playerFieldCards: 0
+  enemyPlayerStats:
+    deckCardCount: 20
+    discardpileCardCount: 0
+    playerBurnValue: 0
+    playerHealth: 0
+    playerHandCards: 0
+    playerFieldCards: 0
+  attackDuration: 0.3
+  moveDuration: 0.4
+  rearrangeDuration: 0.4
+  playerNumber: 0
+  maxHandSize: 5
+  maxFieldCardCount: 5
+  maxDeckSize: 20
+  deckSet: 1
+  unHandledBurnedCards: []
+  playerStartHealth: 100
+  debuggerModeOn: 0
+  debugPlayerBurnCard: 0
+  debugPlayerDrawCard: 0
+  debugPlayerPlayCard: 0
+  debugPlayerAttack: 0
 --- !u!1 &2088757919
 GameObject:
   m_ObjectHideFlags: 0

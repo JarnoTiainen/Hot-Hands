@@ -11,22 +11,17 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] private bool cardDrawReady = true;
     [SerializeField] private bool debuggerModeOn = false;
 
-    private GameObject gameManager;
-
     [Button] public void SendDeckData()
     {
         WebSocketService.SetDeck(GetDeckJSON());
     }
 
-    private void Awake()
-    {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager");
-    }
-
     public void OnClickElement()
     {
+
+        Debug.Log("Clicked element");
         //let the player pick a card if the deck is set
-        if(gameManager.GetComponent<GameManager>().deckSet) {
+        if(GameManager.Instance.deckSet) {
             if(GameManager.Instance.playerStats.playerHandCards < GameManager.Instance.maxHandSize)
             {
                 if(cardDrawReady && !OnPreDrawCD)

@@ -14,7 +14,6 @@ public class EnemyHand : MonoBehaviour
     public void Awake()
     {
         Instance = gameObject.GetComponent<EnemyHand>();
-        Debug.Log(gameObject.name);
     }
 
     private static GameObject InstantiateNewCard()

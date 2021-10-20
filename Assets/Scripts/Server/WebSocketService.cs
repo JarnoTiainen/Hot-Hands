@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using SimpleJSON;
 public class WebSocketService : MonoBehaviour
 {
-    private GameManager gameManager;
+    [SerializeField] private GameManager gameManager;
 
     
     public static WebSocketService Instance { get; private set; }
@@ -17,7 +17,6 @@ public class WebSocketService : MonoBehaviour
     private void Awake()
     {
         Instance = gameObject.GetComponent<WebSocketService>();
-        gameManager = GameManager.Instance;
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -137,7 +136,7 @@ public class WebSocketService : MonoBehaviour
                     {
                         Debug.Log("MATCH FOUND!");
                         GameObject.Find("Canvas").GetComponent<MainMenu>().GameFound(1);
-                        //GetPlayerNumber();
+                        GetPlayerNumber();
                         //References.i.yourDeckObj.GetComponent<Deck>().SendDeckData();
                     }
                     break;

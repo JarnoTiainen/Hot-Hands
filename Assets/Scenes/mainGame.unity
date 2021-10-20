@@ -132,7 +132,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7355202}
-  - component: {fileID: 7355200}
   - component: {fileID: 7355201}
   - component: {fileID: 7355204}
   - component: {fileID: 7355205}
@@ -143,47 +142,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7355200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7355199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1f03169546557a468a731a748eab172, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStats:
-    deckCardCount: 0
-    discardpileCardCount: 0
-    playerBurnValue: 0
-    playerHealth: 0
-    playerHandCards: 0
-    playerFieldCards: 0
-  enemyPlayerStats:
-    deckCardCount: 0
-    discardpileCardCount: 0
-    playerBurnValue: 0
-    playerHealth: 0
-    playerHandCards: 0
-    playerFieldCards: 0
-  attackDuration: 0.3
-  moveDuration: 0.4
-  rearrangeDuration: 0.4
-  playerNumber: 0
-  maxHandSize: 5
-  maxFieldCardCount: 5
-  maxDeckSize: 20
-  deckSet: 0
-  unHandledBurnedCards: []
-  playerStartHealth: 100
-  debuggerModeOn: 0
-  debugPlayerBurnCard: 0
-  debugPlayerDrawCard: 0
-  debugPlayerPlayCard: 0
-  debugPlayerAttack: 0
 --- !u!114 &7355201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10636,3 +10594,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+--- !u!1 &4268212973799015637 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4268212973007929890, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
+  m_PrefabInstance: {fileID: 4268212973799015636}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4268212973799015638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4268212973799015637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6520a695de130145b26ace28e5436a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

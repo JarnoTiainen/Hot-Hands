@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public int maxHandSize = 5;
     public int maxFieldCardCount = 5;
     public int maxDeckSize = 20;
-    public bool deckSet = false;
+    public bool deckSet = true;
     
     [SerializeField] private List<GameObject> unHandledBurnedCards = new List<GameObject>();
     [SerializeField] private int playerStartHealth = 100;
@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = gameObject.GetComponent<GameManager>();
-        sfxLibrary = GameObject.Find("SFXLibrary");
         playerStats = new PlayerStats(playerStartHealth);
         enemyPlayerStats = new PlayerStats(playerStartHealth);
     }
@@ -39,6 +38,11 @@ public class GameManager : MonoBehaviour
     public void SetPlayerNumber(int playerNumber)
     {
         this.playerNumber = playerNumber;
+    }
+
+    public void SetNewSFXLibrary(GameObject SFXLibrary)
+    {
+        sfxLibrary = SFXLibrary;
     }
 
     public void PlayerBurnCard(BurnCardMessage burnCardMessage)
