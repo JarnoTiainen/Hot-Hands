@@ -5,17 +5,20 @@ using SimpleJSON;
 public class WebSocketService : MonoBehaviour
 {
     private GameManager gameManager;
+
+    
     public static WebSocketService Instance { get; private set; }
     static WebSocket websocket;
     [SerializeField] private bool debuggerModeOn = false;
     [SerializeField] private bool showServerMessage = false;
 
-
+    
 
     private void Awake()
     {
         Instance = gameObject.GetComponent<WebSocketService>();
         gameManager = GameManager.Instance;
+        DontDestroyOnLoad(this.gameObject);
     }
 
     // Start is called before the first frame update
