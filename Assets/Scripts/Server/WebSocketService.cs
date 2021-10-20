@@ -5,7 +5,6 @@ using SimpleJSON;
 public class WebSocketService : MonoBehaviour
 {
     private GameManager gameManager;
-    
     public static WebSocketService Instance { get; private set; }
     static WebSocket websocket;
     [SerializeField] private bool debuggerModeOn = false;
@@ -30,8 +29,7 @@ public class WebSocketService : MonoBehaviour
         websocket.OnOpen += () =>
         {
             Debug.Log("Connection open!");
-            GetPlayerNumber();
-            References.i.yourDeckObj.GetComponent<Deck>().SendDeckData();
+            
             
         };
 
@@ -109,6 +107,37 @@ public class WebSocketService : MonoBehaviour
                     EnchantmentEffectMesage enchantmentEffect = JsonUtility.FromJson<EnchantmentEffectMesage>(data[1]);
                     gameManager.EnchantmentEffectActive(enchantmentEffect);
                     break;
+                case "SAVEUSER":
+                    if(data[1] == "ok")
+                    {
+                        Debug.Log("Created new account");
+                    }
+                    else
+                    {
+                        Debug.Log("Created new account Failed!");
+                    }
+                    break;
+                case "LOGIN":
+                    if (data[1] == "ok")
+                    {
+                        GameObject.Find("LoginPanel").GetComponent<LoginManager>().CloseLoginScreen();
+                        Debug.Log("Login ok");
+                        
+                    }
+                    else
+                    {
+                        Debug.Log("Login Failed!");
+                    }
+                    break;
+                case "JOINGAME":
+                    if (data[1] == "ok")
+                    {
+                        Debug.Log("MATCH FOUND!");
+                        GameObject.Find("Canvas").GetComponent<MainMenu>().GameFound(1);
+                        //GetPlayerNumber();
+                        //References.i.yourDeckObj.GetComponent<Deck>().SendDeckData();
+                    }
+                    break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                     break;
@@ -119,9 +148,15 @@ public class WebSocketService : MonoBehaviour
 
     [Button] public async void OpenNewConnection()
     {
-        
         await websocket.Connect();
     }
+
+    [Button] public static void JoinGame()
+    {
+        GameMessage message = new GameMessage("OnMessage", "JOINGAME", "");
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
+
 
     void Update()
     {
@@ -143,6 +178,7 @@ public class WebSocketService : MonoBehaviour
     private void OnApplicationQuit()
     {
         CloseConnection();
+
     }
 
     public async void CloseConnection()
@@ -161,6 +197,26 @@ public class WebSocketService : MonoBehaviour
         SendWebSocketMessage(JsonUtility.ToJson(message));
         //sfxLibrary.GetComponent<PlayCardSFX>().Play();
     }
+
+
+    [Button]
+    public static void CreateNewAccount(string name, string password, string email)
+    {
+        CreateUsersMessage createUserMessage = new CreateUsersMessage(name, password, email);
+        GameMessage message = new GameMessage("OnMessage", "SAVEUSER", JsonUtility.ToJson(createUserMessage));
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+        
+    }
+    [Button]
+    public static void Login(string name, string password)
+    {
+        CreateUsersMessage createUserMessage = new CreateUsersMessage(name, password);
+        GameMessage message = new GameMessage("OnMessage", "LOGIN", JsonUtility.ToJson(createUserMessage));
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+
+    }
+
+
 
     public static void GetPlayerNumber()
     {

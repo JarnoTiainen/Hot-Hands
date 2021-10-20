@@ -32,9 +32,15 @@ public class MainMenu : MonoBehaviour
         quitConfirmation.SetActive(value);
     }
 
-    public void Play(int scene)
+    public void Play()
+    {
+        WebSocketService.JoinGame();
+        Debug.Log("play");
+    }
+    public void GameFound(int scene)
     {
         StartCoroutine(LoadingScreen(scene));
+        Debug.Log("gameFound");
     }
 
     IEnumerator LoadingScreen(int scene)
