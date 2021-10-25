@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     public GameObject profileMenu;
     public GameObject quitConfirmation;
     public GameObject loadingScreen;
+    public bool soloPlayEnabled;
     [SerializeField] private float musicFadeTime = 3f;
 
     public void MenuButtonsSetActive(bool value)
@@ -36,6 +37,10 @@ public class MainMenu : MonoBehaviour
     {
         WebSocketService.JoinGame();
         Debug.Log("play");
+        if(soloPlayEnabled)
+        {
+            StartCoroutine(LoadingScreen(1));
+        }
     }
     public void GameFound(int scene)
     {

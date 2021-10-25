@@ -135,7 +135,11 @@ public class WebSocketService : MonoBehaviour
                     if (data[1] == "ok")
                     {
                         Debug.Log("MATCH FOUND!");
-                        GameObject.Find("Canvas").GetComponent<MainMenu>().GameFound(1);
+                        if(GameObject.Find("Canvas").GetComponent<MainMenu>())
+                        {
+                            GameObject.Find("Canvas").GetComponent<MainMenu>().GameFound(1);
+                        }
+                        
                         GetPlayerNumber();
                         //References.i.yourDeckObj.GetComponent<Deck>().SendDeckData();
                     }
