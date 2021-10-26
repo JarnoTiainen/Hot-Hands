@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class AttackEventHandler : MonoBehaviour
 {
     MonsterZone yourMonsterZone;
     MonsterZone opponentMonsterZone;
     public float attackAnimationSpeed = 0.4f;
+    public float shakeMagnitude = 1f;
+    public float shakeRoughness = 4f;
+    public float fadeInTime = .1f;
+    public float fadeOutTime = 1f;
 
     public void StartAttackEvent(bool wasYourAttack, CardPowersMessage attacker, CardPowersMessage target, float attackCD)
     {
@@ -73,6 +78,8 @@ public class AttackEventHandler : MonoBehaviour
 
     public void StartDamageEvent(int player, GameObject attacker, GameObject target)
     {
+        CameraShaker.Instance.ShakeOnce(shakeMagnitude, shakeRoughness, fadeInTime, fadeOutTime);
+
         if(target == References.i.yourPlayerTarget || target == References.i.enemyPlayerTarget)
         {
             //Update player hp heal/trigger lose game event
@@ -119,6 +126,10 @@ public class AttackEventHandler : MonoBehaviour
                 }
             }
         }
+
+        
+        //StartCoroutine(CameraShake());
         
     }
+
 }

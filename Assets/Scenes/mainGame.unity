@@ -186,7 +186,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418c2037e8d28174da4b29a405192992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackAnimationSpeed: 0.3
+  attackAnimationSpeed: 0.1
+  shakeMagnitude: 0.5
+  shakeRoughness: 7
+  fadeInTime: 0.1
+  fadeOutTime: 1
 --- !u!114 &7355205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10006,6 +10010,7 @@ GameObject:
   - component: {fileID: 2091759307}
   - component: {fileID: 2091759306}
   - component: {fileID: 2091759309}
+  - component: {fileID: 2091759310}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -10111,6 +10116,22 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &2091759310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091759305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab8353b5ebd32545867da143199a814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultPosInfluence: {x: 0.15, y: 0.15, z: 0}
+  DefaultRotInfluence: {x: 1, y: 1, z: 1}
+  RestPositionOffset: {x: 0, y: -0.0844, z: -0.467}
+  RestRotationOffset: {x: -7.787, y: 0, z: 0}
 --- !u!1 &2093189387
 GameObject:
   m_ObjectHideFlags: 0
