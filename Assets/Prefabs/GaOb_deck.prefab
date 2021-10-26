@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1302925009845773302}
+  - component: {fileID: 4581945175434320848}
+  - component: {fileID: 7655745182377546289}
   m_Layer: 0
   m_Name: GaOb_deck
   m_TagString: Untagged
@@ -31,6 +33,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &4581945175434320848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236107244064376304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f0f50d5ed9a0cd42be84c4242172acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDeck:
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: ffce4c5f022b5f248a7fa1b313cd3351, type: 2}
+  - {fileID: 11400000, guid: 482f37e5f307701439730da2bfb9b384, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: 26eee90c558004d4e94b3416033d7ef2, type: 2}
+  - {fileID: 11400000, guid: 26eee90c558004d4e94b3416033d7ef2, type: 2}
+  - {fileID: 11400000, guid: 341a6e4bdaffe3d4cbbbb8ffe438bbca, type: 2}
+  - {fileID: 11400000, guid: 341a6e4bdaffe3d4cbbbb8ffe438bbca, type: 2}
+  - {fileID: 11400000, guid: 840992e74c22e334fbbe4f73d5cac532, type: 2}
+  - {fileID: 11400000, guid: 840992e74c22e334fbbe4f73d5cac532, type: 2}
+  - {fileID: 11400000, guid: cf72206ba0ac5ad44893fc845e1e6a38, type: 2}
+  - {fileID: 11400000, guid: cf72206ba0ac5ad44893fc845e1e6a38, type: 2}
+  - {fileID: 11400000, guid: 39be313319a28b649bc4b8ab748e5263, type: 2}
+  - {fileID: 11400000, guid: 39be313319a28b649bc4b8ab748e5263, type: 2}
+  - {fileID: 11400000, guid: 482f37e5f307701439730da2bfb9b384, type: 2}
+  - {fileID: 11400000, guid: 482f37e5f307701439730da2bfb9b384, type: 2}
+  - {fileID: 11400000, guid: a39e18548f706e84dba0f87ec7017baa, type: 2}
+  - {fileID: 11400000, guid: ffce4c5f022b5f248a7fa1b313cd3351, type: 2}
+  - {fileID: 11400000, guid: ffce4c5f022b5f248a7fa1b313cd3351, type: 2}
+  - {fileID: 11400000, guid: ffce4c5f022b5f248a7fa1b313cd3351, type: 2}
+  cardCooldown: 0
+  OnPreDrawCD: 0
+  cardDrawReady: 1
+  debuggerModeOn: 0
+--- !u!65 &7655745182377546289
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236107244064376304}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.064850464, y: 0.044560555, z: 0.08959045}
+  m_Center: {x: 0.0000134930015, y: 0.02236472, z: 0.000026226044}
 --- !u!1001 &3989315020144755892
 PrefabInstance:
   m_ObjectHideFlags: 0

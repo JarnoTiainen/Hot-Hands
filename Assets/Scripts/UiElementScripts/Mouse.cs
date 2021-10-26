@@ -78,7 +78,7 @@ public class Mouse : MonoBehaviour
                 heldCard = null;
             }
         }
-        else if(RayCaster.Instance.target == GameObject.Find("Bonfire"))
+        else if(RayCaster.Instance.target == References.i.yourBonfire)
         {
             References.i.yourMonsterZone.RemoveGhostCard();
             if(debuggingModeOn) Debug.Log("Card discarded from slot " + handIndex);

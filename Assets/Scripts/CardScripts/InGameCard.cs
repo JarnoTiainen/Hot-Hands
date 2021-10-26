@@ -195,7 +195,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     {
         ToggleCanAffordEffect(false);
         GetComponent<DissolveEffect>().StartDissolving(mat);
-        GetComponent<DissolveShadow>().StartDissolving();
         GetComponent<DissolveMove>().StartDissolving();
         transform.GetChild(1).gameObject.SetActive(false);
     }

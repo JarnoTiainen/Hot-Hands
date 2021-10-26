@@ -97,12 +97,12 @@ public class GameManager : MonoBehaviour
             unHandledBurnedCards.Add(card);
             card.transform.SetParent(References.i.yourBonfire.transform);
             UpdatePlayerBurnValue(player, playerStats.playerBurnValue + value);
-            GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = playerStats.playerBurnValue.ToString();
+            References.i.yourBonfire.transform.GetChild(1).GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = playerStats.playerBurnValue.ToString();
         }
         else
         {
             card.transform.SetParent(References.i.opponentBonfire.transform);
-            GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
+            References.i.opponentBonfire.transform.GetChild(1).GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = enemyPlayerStats.playerBurnValue.ToString();
         }
         card.GetComponent<InGameCard>().Burn();
     }
@@ -111,12 +111,12 @@ public class GameManager : MonoBehaviour
         if(player == playerNumber)
         {   
             playerStats.playerBurnValue = newValue;
-            GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = playerStats.playerBurnValue.ToString();
+            References.i.yourBonfire.transform.GetChild(1).GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = playerStats.playerBurnValue.ToString();
         }
         else
         {
             enemyPlayerStats.playerBurnValue = newValue;
-            GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
+            References.i.opponentBonfire.transform.GetChild(1).GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = enemyPlayerStats.playerBurnValue.ToString();
         }
     }
 
@@ -253,7 +253,7 @@ public class GameManager : MonoBehaviour
             playerStats.playerBurnValue -= data.cost;
             References.i.yourMonsterZone.AddNewMonsterCard(true, boardIndex, data);
             Hand.Instance.RemoveCard(handIndex);
-            GameObject.Find("Bonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = playerStats.playerBurnValue.ToString();
+            References.i.yourBonfire.transform.GetChild(1).GetChild(0).GetComponent<TMPro.TextMeshProUGUI > ().text = playerStats.playerBurnValue.ToString();
         }
         else
         {
@@ -264,7 +264,7 @@ public class GameManager : MonoBehaviour
             //for now removes card with index 0
             if(debugPlayerPlayCard) Debug.Log("Removing card from hand");
             EnemyHand.Instance.RemoveCard(0);
-            GameObject.Find("OpponentBonfire").transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = enemyPlayerStats.playerBurnValue.ToString();
+            References.i.opponentBonfire.transform.GetChild(1).GetChild(0).GetComponent<TMPro.TextMeshProUGUI > ().text = enemyPlayerStats.playerBurnValue.ToString();
         }
         sfxLibrary.GetComponent<PlayCardSFX>().Play();
     }
