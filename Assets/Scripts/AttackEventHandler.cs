@@ -56,15 +56,10 @@ public class AttackEventHandler : MonoBehaviour
     {
         if (wasYourAttack)
         {
-
-
-
             GameObject attackingCard = References.i.yourMonsterZone.GetCardWithServerIndex(attacker.index);
             attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.enemyPlayerTarget, attackAnimationSpeed);
             References.i.yourMonsterZone.GetCardWithServerIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
             GameManager.Instance.enemyPlayerStats.playerHealth -= playerTakenDamage;
-
-
         }
         else
         {

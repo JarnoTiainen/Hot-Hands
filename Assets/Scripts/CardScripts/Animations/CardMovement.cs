@@ -145,7 +145,7 @@ public class CardMovement : MonoBehaviour
     {
         targetCard = target;
         startAttackPoint = transform.position;
-        endAttackPoint = target.transform.position;
+        endAttackPoint = target.transform.position + new Vector3(0, 0, -.1f);
         attackDur = dur;
         elapsedAttackTime = 0;
 
@@ -172,6 +172,8 @@ public class CardMovement : MonoBehaviour
             } else if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Right) {
                 endAttackPoint.x += References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
             }
+
+            targetCard.GetComponent<CardMovement>().OnCardMove(targetCard.transform.position + new Vector3(0, 0, -.1f), 0.1f);
 
         } else {
            //direct attack
