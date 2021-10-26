@@ -10,9 +10,22 @@ public class MainMenu : MonoBehaviour
     public GameObject settingsMenu;
     public GameObject profileMenu;
     public GameObject quitConfirmation;
-    public GameObject loadingScreen;
+    public GameObject loginScreen;
     public bool soloPlayEnabled;
     [SerializeField] private float musicFadeTime = 3f;
+
+
+    private void Start()
+    {
+        if (WebSocketService.Instance.isLoggedIn == false)
+        {
+            loginScreen.SetActive(true);
+        }
+        else
+        {
+            loginScreen.SetActive(false);
+        }
+    }
 
     public void MenuButtonsSetActive(bool value)
     {
@@ -39,20 +52,13 @@ public class MainMenu : MonoBehaviour
         Debug.Log("play");
         if(soloPlayEnabled)
         {
-            StartCoroutine(LoadingScreen(1));
+            SceneManager.LoadScene(1);
         }
     }
     public void GameFound(int scene)
     {
-        StartCoroutine(LoadingScreen(scene));
+        SceneManager.LoadScene(1);
         Debug.Log("gameFound");
-    }
-
-    IEnumerator LoadingScreen(int scene)
-    {
-        loadingScreen.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(scene);
     }
 
     public void QuitGame()

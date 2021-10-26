@@ -12,6 +12,7 @@ public class WebSocketService : MonoBehaviour
     [SerializeField] private bool debuggerModeOn = false;
     [SerializeField] private bool showServerMessage = false;
 
+    public bool isLoggedIn = false;
     
 
     private void Awake()
@@ -112,6 +113,7 @@ public class WebSocketService : MonoBehaviour
                 case "SAVEUSER":
                     if(data[1] == "ok")
                     {
+                        isLoggedIn = true;
                         Debug.Log("Created new account");
                     }
                     else
@@ -122,6 +124,7 @@ public class WebSocketService : MonoBehaviour
                 case "LOGIN":
                     if (data[1] == "ok")
                     {
+                        isLoggedIn = true;
                         GameObject.Find("LoginPanel").GetComponent<LoginManager>().CloseLoginScreen();
                         Debug.Log("Login ok");
                         

@@ -25,6 +25,7 @@ public class LoginManager : MonoBehaviour
     [Button]
     public void CloseLoginScreen()
     {
+        GameObject.Find("Canvas").GetComponent<MainMenu>().MenuButtonsSetActive(true);
         gameObject.SetActive(false);
     }
 }
