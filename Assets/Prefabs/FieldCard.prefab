@@ -888,8 +888,8 @@ MonoBehaviour:
   rp: {fileID: 8444400555959281729}
   coolDownSlider: {fileID: 4745231975343201543}
   debuggerModeOn: 0
-  cardMainBodyMaterial: {fileID: -6465566751694194690, guid: b5904bc55cd6fec4f82d888ba1f15e7e, type: 3}
-  mat: {fileID: 0}
+  cardMainBodyMaterial: {fileID: -6465566751694194690, guid: 0a9d315ef8089e247a582c0c35f2f748, type: 3}
+  mat: {fileID: 2100000, guid: cd2ab7db35791bb48b3b26daf7fad7c3, type: 2}
   cardImage: {fileID: 2800000, guid: ab6eb980e32067e4fb1a4dc467dadc54, type: 3}
   lpImage: {fileID: 2800000, guid: 4e971e766a1d91244b70910f646c762a, type: 3}
   rpImage: {fileID: 2800000, guid: 221e861a04ef37f44a79068788933e2d, type: 3}
@@ -1366,7 +1366,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9068328020213241370}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0008}
   m_LocalScale: {x: 0.0005, y: 0.0005, z: 1}
   m_Children: []
   m_Father: {fileID: 6259117554449996411}

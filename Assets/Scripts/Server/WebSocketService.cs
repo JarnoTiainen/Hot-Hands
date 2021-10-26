@@ -147,6 +147,9 @@ public class WebSocketService : MonoBehaviour
                         //References.i.yourDeckObj.GetComponent<Deck>().SendDeckData();
                     }
                     break;
+                case "GAINBURN":
+                    gameManager.PlayerGainBurnValue(JsonUtility.FromJson<GainBurnValueMessage>(data[1]));
+                    break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                     break;

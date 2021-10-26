@@ -120,6 +120,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PlayerGainBurnValue(GainBurnValueMessage gainBurnValueMessage)
+    {
+        if(IsYou(gainBurnValueMessage.player))
+        {
+            UpdatePlayerBurnValue(gainBurnValueMessage.player, playerStats.playerBurnValue + gainBurnValueMessage.gainedBurnValue);
+        }
+        else UpdatePlayerBurnValue(gainBurnValueMessage.player, enemyPlayerStats.playerBurnValue + gainBurnValueMessage.gainedBurnValue);
+    }
+
 
     public void PlayerDrawCard(DrawCardMessage drawCardMessage)
     {

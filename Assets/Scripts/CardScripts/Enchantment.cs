@@ -19,7 +19,7 @@ public class Enchantment
 
     public enum EnchantmentEffect
     {
-        Default, DrawCard
+        Default, DrawCard, GainBurn
     }
     public enum Trigger
     {
