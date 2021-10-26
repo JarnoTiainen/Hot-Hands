@@ -6123,7 +6123,7 @@ MonoBehaviour:
   profileMenu: {fileID: 1539517179}
   quitConfirmation: {fileID: 703834072}
   loginScreen: {fileID: 1971603280}
-  soloPlayEnabled: 0
+  soloPlayEnabled: 1
   musicFadeTime: 3
 --- !u!114 &1281100698
 MonoBehaviour:
@@ -9915,7 +9915,7 @@ MonoBehaviour:
   maxDeckSize: 20
   deckSet: 1
   unHandledBurnedCards: []
-  playerStartHealth: 100
+  playerStartHealth: 99
   debuggerModeOn: 0
   debugPlayerBurnCard: 0
   debugPlayerDrawCard: 0

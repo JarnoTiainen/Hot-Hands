@@ -36,7 +36,4 @@ public class CollectionManager : MonoBehaviour
             newContainer.transform.SetParent(cardListGameObject.transform, false);
         }
     }
-
-
-
 }

@@ -23,6 +23,19 @@ public class MonsterZone : MonoBehaviour
         }
     }
 
+    public void AutoAddNewMonsterCard(bool isYourCard, int boardIndex, CardData data)
+    {
+        GameObject newMonster = Instantiate(References.i.fieldCard);
+        serverConfirmedCards.Add(newMonster);
+        newMonster.transform.SetParent(transform);
+        if (debugModeOn) Debug.Log("index: " + boardIndex);
+        monsterCards.Insert(boardIndex, newMonster);
+        newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
+        ReCalculateServerCardIndexes();
+        RepositionMonsterCards();
+    }
+
+
     [Button]public void AddNewMonsterCard(bool isYourCard, int boardIndex, CardData data)
     {
         if(isYourCard)

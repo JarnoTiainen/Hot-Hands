@@ -152,6 +152,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AddNewCard(AddNewCardMessage addNewCardMessage)
+    {
+        Debug.Log("Player " + addNewCardMessage.player + " added new card to somewhere");
+    }
+
     public void EnchantmentEffectActive(EnchantmentEffectMesage enchantmentEffect)
     {
         Debug.Log("Display effect here");
@@ -219,7 +224,15 @@ public class GameManager : MonoBehaviour
         
         if (playCardMessage.player == playerNumber)
         {
-            
+         
+            if(playCardMessage.auto)
+            {
+                References.i.yourMonsterZone.AutoAddNewMonsterCard(true, playCardMessage.boardIndex, References.i.cardList.GetCardData(playCardMessage));
+                Hand.Instance.RemoveCard(playCardMessage.handIndex);
+                References.i.yourMonsterZone.GetCardWithServerIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(playCardMessage.attackCooldown, true);
+                return;
+            }
+
             References.i.yourMonsterZone.UpdateCardData(true, playCardMessage);
             References.i.yourMonsterZone.GetCardWithServerIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(playCardMessage.attackCooldown, true);
             

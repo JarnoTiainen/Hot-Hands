@@ -38,6 +38,8 @@ public class References: MonoBehaviour
     public GameObject yourPlayerTarget;
     public GameObject enemyPlayerTarget;
     public CardEnchantmentEffectManager cardEnchantmentEffectManager;
+    public LifeCounterManager yourLifeCounter;
+    public LifeCounterManager opponentLifeCounter;
 
    
 }

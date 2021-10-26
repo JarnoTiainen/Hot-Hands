@@ -150,6 +150,10 @@ public class WebSocketService : MonoBehaviour
                 case "GAINBURN":
                     gameManager.PlayerGainBurnValue(JsonUtility.FromJson<GainBurnValueMessage>(data[1]));
                     break;
+
+                case "ADDNEWCARD":
+                    gameManager.AddNewCard(JsonUtility.FromJson<AddNewCardMessage>(data[1]));
+                    break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                     break;

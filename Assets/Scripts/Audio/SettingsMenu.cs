@@ -29,7 +29,7 @@ public class SettingsMenu : MonoBehaviour
         sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", sfxDefaultVolume);
 
         activeScreenResIndex = PlayerPrefs.GetInt("ScreenResIndex", defaultScreenResIndex);
-        Debug.Log(PlayerPrefs.GetInt("ScreenResIndex"));
+        //Debug.Log(PlayerPrefs.GetInt("ScreenResIndex"));
         bool isFullscreen = (PlayerPrefs.GetInt("Fullscreen") == 1) ? true : false;
 
         for (int i = 0; i < resolutionToggles.Length; i++)
