@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
@@ -18,8 +17,7 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
 
     public void OnClickElement()
     {
-
-        Debug.Log("Clicked element");
+        if (debuggerModeOn) Debug.Log("Clicked element");
         //let the player pick a card if the deck is set
         if(GameManager.Instance.deckSet) {
             if(GameManager.Instance.playerStats.playerHandCards < GameManager.Instance.maxHandSize)
@@ -38,7 +36,7 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
             }
             else
             {
-                //Debug.LogWarning("Hand full display error effect here");
+                if (debuggerModeOn) Debug.LogWarning("Hand full display error effect here");
             }
         }
         

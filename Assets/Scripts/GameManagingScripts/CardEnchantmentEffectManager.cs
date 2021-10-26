@@ -10,9 +10,6 @@ public class CardEnchantmentEffectManager : MonoBehaviour
 
     public GameObject currentActivePreview;
 
-
-
-
     [SerializeField] private GameObject enchantmentEffect;
     [SerializeField] private GameObject cardPreview;
 
