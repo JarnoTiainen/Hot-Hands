@@ -168,6 +168,7 @@ public class GameManager : MonoBehaviour
         if (IsYou(enchantmentEffect.cardInfo.player)) isYou = true;
         References.i.cardEnchantmentEffectManager.PlayEnchantmentEffect((Enchantment.Trigger)enchantmentEffect.trigger, index, isYou);
         References.i.cardEnchantmentEffectManager.DisplayCardEffectSource(References.i.cardList.GetCardData(enchantmentEffect.cardInfo));
+		sfxLibrary.transform.GetComponent<EffectActivationSFX>().Play();
     }
 
 
