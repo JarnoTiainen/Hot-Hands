@@ -68,7 +68,14 @@ public class CardEnchantmentEffectManager : MonoBehaviour
                 Debug.Log("Retaliate effect here");
                 break;
             case Enchantment.Trigger.Sacrifice:
-                //newEnchantmentEffect.GetComponent<EnchantmentEffectGameObject>().StartAnimation(sacrificeSprite);
+                if (isYou)
+                {
+                    References.i.yourBonfire.GetComponent<CardEnchantmentEffectScript>().PlayEffectSacrifice();
+                }
+                else
+                {
+                    References.i.opponentBonfire.GetComponent<CardEnchantmentEffectScript>().PlayEffectSacrifice();
+                }
                 Debug.Log("Sacrifice effect here");
                 break;
         }
