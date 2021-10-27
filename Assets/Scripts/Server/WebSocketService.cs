@@ -61,6 +61,18 @@ public class WebSocketService : MonoBehaviour
                     if (debuggerModeOn) Debug.Log("Message type was GETSIDE");
                     gameManager.SetPlayerNumber(int.Parse(data[1]));
                     break;
+                case "SUMMONCARD":
+                    if (debuggerModeOn) Debug.Log("Message type was SUMMONCARD");
+                    SummonCardMessage summonCardMessage = JsonUtility.FromJson<SummonCardMessage>(data[1]);
+                    gameManager.PlayerSummonCard(summonCardMessage);
+                    break;
+                case "SUMMONDENIED":
+                    gameManager.CardSummonDenied();
+                    break;
+                case "REMOVECARD":
+                    RemoveCardMessage removeCardMessage = JsonUtility.FromJson<RemoveCardMessage>(data[1]);
+                    gameManager.RemoveCard(removeCardMessage);
+                    break;
                 case "PLAYCARD":
                     if (debuggerModeOn) Debug.Log("Message type was PLAYCARD");
                     PlayCardMessage playCardMessage = JsonUtility.FromJson<PlayCardMessage>(data[1]);

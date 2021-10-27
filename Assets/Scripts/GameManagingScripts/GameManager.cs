@@ -210,6 +210,82 @@ public class GameManager : MonoBehaviour
             enemyPlayerStats.deckCardCount = setDeckMessage.deckCards;
         }
     }
+    public void PlayerSummonCard(SummonCardMessage summonCardMessage)
+    {
+        if (summonCardMessage.player == playerNumber)
+        {
+            if(summonCardMessage.auto)
+            {
+                References.i.yourMonsterZone.AutoAddNewMonsterCard(false, summonCardMessage.boardIndex, References.i.cardList.GetCardData(summonCardMessage));
+                References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
+                References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().owner = summonCardMessage.player;
+            }
+            else
+            {
+                References.i.yourMonsterZone.UpdateCardData(true, summonCardMessage);
+                References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
+            }
+        }
+        else
+        {
+            if (!summonCardMessage.auto)
+            {
+                enemyPlayerStats.playerBurnValue -= summonCardMessage.cardCost;
+                References.i.opponentBonfire.transform.GetChild(1).GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = enemyPlayerStats.playerBurnValue.ToString();
+            }
+
+            References.i.opponentMonsterZone.AddNewMonsterCard(false, summonCardMessage.boardIndex, References.i.cardList.GetCardData(summonCardMessage));
+            References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(summonCardMessage.boardIndex)).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
+            References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(summonCardMessage.boardIndex)).GetComponent<InGameCard>().owner = summonCardMessage.player;
+        }
+    }
+
+    public void RemoveCard(RemoveCardMessage removeCardMessage)
+    {
+        if (IsYou(removeCardMessage.player))
+        {
+            if ((RemoveCardMessage.CardSource)removeCardMessage.source == RemoveCardMessage.CardSource.Hand)
+            {
+                if(removeCardMessage.removal)
+                {
+                    Hand.Instance.RemoveCard(removeCardMessage.handIndex);
+                }
+                playerStats.playerHandCards--;
+            }
+            else if ((RemoveCardMessage.CardSource)removeCardMessage.source == RemoveCardMessage.CardSource.Deck)
+            {
+                playerStats.deckCardCount--;
+            }
+            else if ((RemoveCardMessage.CardSource)removeCardMessage.source == RemoveCardMessage.CardSource.DiscardPile)
+            {
+                playerStats.discardpileCardCount--;
+            }
+        }
+        else
+        {
+            if ((RemoveCardMessage.CardSource)removeCardMessage.source == RemoveCardMessage.CardSource.Hand)
+            {
+                EnemyHand.Instance.RemoveCard(0);
+                enemyPlayerStats.playerHandCards--;
+            }
+            else if ((RemoveCardMessage.CardSource)removeCardMessage.source == RemoveCardMessage.CardSource.Deck)
+            {
+                enemyPlayerStats.deckCardCount--;
+            }
+            else if ((RemoveCardMessage.CardSource)removeCardMessage.source == RemoveCardMessage.CardSource.DiscardPile)
+            {
+                enemyPlayerStats.discardpileCardCount--;
+            }
+        }
+    }
+
+    public void CardSummonDenied()
+    {
+        playerStats.playerFieldCards--;
+        UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue + References.i.yourMonsterZone.unhandledCards[0].GetComponent<InGameCard>().cardData.cost);
+        References.i.yourMonsterZone.RecallCard(playerNumber, References.i.yourMonsterZone.unhandledCards[0]);
+    }
+
 
     public void PlayerPlayCard(PlayCardMessage playCardMessage)
     {

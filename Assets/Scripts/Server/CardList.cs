@@ -71,6 +71,14 @@ public class CardList : ScriptableObject
         }
     }
 
+    public CardData GetCardData(SummonCardMessage summonCardMessage)
+    {
+        Card card = GetCardData(summonCardMessage.cardName);
+        CardData cardData = new CardData(card.cardSprite, summonCardMessage.cardName, summonCardMessage.cardCost, summonCardMessage.cardValue, card.cardType, card.attackDirection, summonCardMessage.rp, summonCardMessage.lp, summonCardMessage.enchantments);
+
+        return cardData;
+    }
+
     public CardData GetCardData(PlayCardMessage playCardMessage)
     {
         Card card = GetCardData(playCardMessage.cardName);

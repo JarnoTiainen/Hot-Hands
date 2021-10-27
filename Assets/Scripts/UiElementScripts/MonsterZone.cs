@@ -275,9 +275,26 @@ public class MonsterZone : MonoBehaviour
         {
             monsterCards[monsterCards.Count - 1 - playCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(playCardMessage));
         }
-
-        
     }
+    public void UpdateCardData(bool isYourCard, SummonCardMessage summonCardMessage)
+    {
+        if (isYourCard)
+        {
+            GameObject handledCard = unhandledCards[0];
+            unhandledCards.Remove(handledCard);
+            if (debugModeOn) Debug.Log("Removed unhandled " + unhandledCards.Count);
+            serverConfirmedCards.Add(handledCard);
+            ReCalculateServerCardIndexes();
+            monsterCards[summonCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(summonCardMessage));
+        }
+        else
+        {
+            monsterCards[monsterCards.Count - 1 - summonCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(summonCardMessage));
+        }
+    }
+
+
+
     public void UpdateCardData(bool isYourCard, CardPowersMessage cardPower)
     {
         if (debugModeOn) Debug.Log("index " + cardPower.index);
