@@ -37,6 +37,9 @@ namespace EZCameraShake
         {
             Instance = this;
             instanceList.Add(gameObject.name, this);
+            RestPositionOffset = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            RestRotationOffset = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
         }
 
         void Update()
