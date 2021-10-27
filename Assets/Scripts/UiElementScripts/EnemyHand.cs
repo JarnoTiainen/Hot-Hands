@@ -16,6 +16,12 @@ public class EnemyHand : MonoBehaviour
         Instance = gameObject.GetComponent<EnemyHand>();
     }
 
+
+    public GameObject GetCardWithIndex(int index)
+    {
+        return unhandledCards[index];
+    }
+
     private static GameObject InstantiateNewCard()
     {
         GameObject newCard = Instantiate(References.i.handCard, References.i.opponentDeckObj.transform.position, Quaternion.Euler(0, 180, 0));

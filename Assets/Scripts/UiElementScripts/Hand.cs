@@ -38,6 +38,11 @@ public class Hand : MonoBehaviour
         
     }
 
+    public GameObject GetCardWithIndex(int index)
+    {
+        return visibleHandCards[index];
+    }
+
     public static void AddNewCardToHand(GameObject card)
     {
         GameObject newCard = InstantiateNewCard();

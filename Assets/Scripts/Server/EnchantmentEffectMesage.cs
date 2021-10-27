@@ -21,9 +21,10 @@ public class EnchantmentEffectMesage
         Brutality
     }
 
+    public int fieldIndex;
+    public int handIndex;
     public CardSource cardSource;
     public Trigger trigger;
     public DrawCardMessage cardInfo;
     public string card;
-
 }

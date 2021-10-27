@@ -23,40 +23,52 @@ public class CardEnchantmentEffectManager : MonoBehaviour
     [SerializeField] private Sprite retaliateSprite;
     [SerializeField] private Sprite sacrificeSprite;
 
-    public void PlayEnchantmentEffect(Enchantment.Trigger trigger)
+    public void PlayEnchantmentEffect(Enchantment.Trigger trigger, int index, bool isYou)
     {
-        Vector3 newEnchantmentEffectPos = transform.position + new Vector3(0, 0, hightFromCard);
+        Debug.Log("Playe Enchantment Effect");
 
-        GameObject newEnchantmentEffect = Instantiate(enchantmentEffect, newEnchantmentEffectPos, Quaternion.identity);
-
-        switch(trigger)
+        switch (trigger)
         {
             case Enchantment.Trigger.Battlecry:
-                newEnchantmentEffect.GetComponent<EnchantmentEffectGameObject>().StartAnimation(battlecrySprite);
-                Debug.Log("Batllecry effect here");
+                
                 break;
             case Enchantment.Trigger.Brutality:
-                newEnchantmentEffect.GetComponent<EnchantmentEffectGameObject>().StartAnimation(brutalitySprite);
+                //newEnchantmentEffect.GetComponent<EnchantmentEffectGameObject>().StartAnimation(brutalitySprite);
                 Debug.Log("Brutality effect here");
                 break;
             case Enchantment.Trigger.Drawtivation:
-                newEnchantmentEffect.GetComponent<EnchantmentEffectGameObject>().StartAnimation(wildSprite);
+                if (isYou)
+                {
+                    Hand.Instance.GetCardWithIndex(index).GetComponent<CardEnchantmentEffectScript>().PlayEffectWild();
+                }
+                else
+                {
+                    EnemyHand.Instance.GetCardWithIndex(index).GetComponent<CardEnchantmentEffectScript>().PlayEffectWild();
+                }
                 Debug.Log("Drawtivation effect here");
                 break;
             case Enchantment.Trigger.LastBreath:
-                newEnchantmentEffect.GetComponent<EnchantmentEffectGameObject>().StartAnimation(lastBreathSprite);
+                //newEnchantmentEffect.GetComponent<EnchantmentEffectGameObject>().StartAnimation(lastBreathSprite);
                 Debug.Log("LastBreath effect here");
                 break;
             case Enchantment.Trigger.Opener:
-                newEnchantmentEffect.GetComponent<EnchantmentEffectGameObject>().StartAnimation(openerSprite);
+                if (isYou)
+                {
+                    References.i.yourMonsterZone.GetCardWithServerIndex(index).GetComponent<CardEnchantmentEffectScript>().PlayEffectOpener();
+
+                }
+                else
+                {
+                    References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(index)).GetComponent<CardEnchantmentEffectScript>().PlayEffectOpener();
+                }
                 Debug.Log("Opener effect here");
                 break;
             case Enchantment.Trigger.Retaliate:
-                newEnchantmentEffect.GetComponent<EnchantmentEffectGameObject>().StartAnimation(retaliateSprite);
+                //newEnchantmentEffect.GetComponent<EnchantmentEffectGameObject>().StartAnimation(retaliateSprite);
                 Debug.Log("Retaliate effect here");
                 break;
             case Enchantment.Trigger.Sacrifice:
-                newEnchantmentEffect.GetComponent<EnchantmentEffectGameObject>().StartAnimation(sacrificeSprite);
+                //newEnchantmentEffect.GetComponent<EnchantmentEffectGameObject>().StartAnimation(sacrificeSprite);
                 Debug.Log("Sacrifice effect here");
                 break;
         }

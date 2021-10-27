@@ -161,10 +161,13 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Display effect here");
         enchantmentEffect.cardInfo = JsonUtility.FromJson<DrawCardMessage>(enchantmentEffect.card);
-        Debug.Log(enchantmentEffect.cardInfo.cardName + " " + enchantmentEffect.trigger);
-
-
-         References.i.cardEnchantmentEffectManager.DisplayCardEffectSource(References.i.cardList.GetCardData(enchantmentEffect.cardInfo));
+        Debug.Log(enchantmentEffect.cardInfo.cardName + " " + enchantmentEffect.trigger + " " + enchantmentEffect.fieldIndex);
+        int index = -1;
+        if (enchantmentEffect.fieldIndex != -1) index = enchantmentEffect.fieldIndex;
+        bool isYou = false;
+        if (IsYou(enchantmentEffect.cardInfo.player)) isYou = true;
+        References.i.cardEnchantmentEffectManager.PlayEnchantmentEffect((Enchantment.Trigger)enchantmentEffect.trigger, index, isYou);
+        References.i.cardEnchantmentEffectManager.DisplayCardEffectSource(References.i.cardList.GetCardData(enchantmentEffect.cardInfo));
     }
 
 
@@ -246,7 +249,7 @@ public class GameManager : MonoBehaviour
         {
             if ((RemoveCardMessage.CardSource)removeCardMessage.source == RemoveCardMessage.CardSource.Hand)
             {
-                if(removeCardMessage.removal)
+                if (removeCardMessage.removal)
                 {
                     Hand.Instance.RemoveCard(removeCardMessage.handIndex);
                 }
