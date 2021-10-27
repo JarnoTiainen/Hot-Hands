@@ -11,7 +11,6 @@ public class EscMenu : MonoBehaviour
     public GameObject settingsMenu;
     public GameObject disconnectConfirmation;
     public GameObject quitConfirmation;
-    [SerializeField] private float musicFadeTime = 3f;
 
     private void OnEnable()
     {

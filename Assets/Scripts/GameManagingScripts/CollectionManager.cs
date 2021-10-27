@@ -6,34 +6,61 @@ using UnityEngine.UI;
 
 public class CollectionManager : MonoBehaviour
 {
-    private CardList cardList;
+    private CardList resourcesCardList;
 
-    public GameObject cardListGameObject;
-    public GameObject cardContainerPrefab;
+
+    public Toggle[] cardListToggles;
+    public GameObject[] cardLists;
+    public GameObject cardListViewport;
 
 
 
     void Start()
     {
-        cardList = Resources.Load("Card List") as CardList;
+        resourcesCardList = Resources.Load("Card List") as CardList;
 
-
-
-        foreach(CardList.ListCard listCard in cardList.allCards)
+        for (int i = 0; cardLists.Length > i; i++)
         {
-            GameObject newContainer = Instantiate(cardContainerPrefab) as GameObject;
-            newContainer.SetActive(true);
-
-            Transform newCard = newContainer.transform.Find("Card");
-
-            newCard.Find("Name").GetComponent<TextMeshProUGUI>().text = listCard.name;
-            newCard.Find("Cost").GetComponent<TextMeshProUGUI>().text = listCard.card.cost.ToString();
-            newCard.Find("RP").GetComponent<TextMeshProUGUI>().text = listCard.card.rp.ToString();
-            newCard.Find("LP").GetComponent<TextMeshProUGUI>().text = listCard.card.lp.ToString();
-            newCard.Find("Value").GetComponent<TextMeshProUGUI>().text = listCard.card.value.ToString();
-
-
-            newContainer.transform.SetParent(cardListGameObject.transform, false);
+            SetCardLists(i);
         }
     }
+
+    public void SetCardLists(int i)
+    {
+        switch (i)
+        {
+            case 0:
+                foreach(CardList.ListCard listCard in resourcesCardList.allCards)
+                {
+                    cardLists[0].GetComponent<CollectionCardList>().cards.Add(listCard.card);
+                }
+                break;
+
+            case 1:
+                cardLists[1].GetComponent<CollectionCardList>().cards = resourcesCardList.playerDeck;
+                break;
+
+            default:
+                break;
+        }
+
+        cardLists[i].GetComponent<CollectionCardList>().PopulateList();
+    }
+
+
+    public void SelectCardListToShow(int selection)
+    {
+        for(int i = 0; cardLists.Length > i; i++)
+        {
+            cardLists[i].SetActive(false);
+        }
+
+        if (cardListToggles[selection].isOn)
+        {
+            cardLists[selection].SetActive(true);
+            cardListViewport.GetComponent<ScrollRect>().content = cardLists[selection].GetComponent<RectTransform>();
+        }
+    }
+
+
 }

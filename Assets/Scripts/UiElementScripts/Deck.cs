@@ -10,6 +10,13 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] private bool cardDrawReady = true;
     [SerializeField] private bool debuggerModeOn = false;
 
+
+    private void Start()
+    {
+        CardList cardList = Resources.Load("Card List") as CardList;
+        playerDeck = cardList.playerDeck;
+    }
+
     [Button] public void SendDeckData()
     {
         WebSocketService.SetDeck(GetDeckJSON());

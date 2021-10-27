@@ -9,6 +9,7 @@ public class CardList : ScriptableObject
 {
     public List<ListCard> allCards = new List<ListCard>();
     public List<Card> cardList = new List<Card>();
+    public List<Card> playerDeck = new List<Card>();
 
     public void AddAddCardToList(Card card)
     {

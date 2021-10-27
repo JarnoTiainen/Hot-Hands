@@ -12,7 +12,6 @@ public class MainMenu : MonoBehaviour
     public GameObject quitConfirmation;
     public GameObject loginScreen;
     public bool soloPlayEnabled;
-    [SerializeField] private float musicFadeTime = 3f;
 
 
     private void Start()
