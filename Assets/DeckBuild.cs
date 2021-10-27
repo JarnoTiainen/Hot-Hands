@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DeckBuild : MonoBehaviour
 {
@@ -11,10 +12,17 @@ public class DeckBuild : MonoBehaviour
     public List<BuildCard> deck = new List<BuildCard>();
     public int deckSizeLimit = 20;
     public int currentBuildSize = 0;
+    [SerializeField]
+    private GameObject countText;
 
     public GameObject settingsManager;
     public List<Card> playerDeck = new List<Card>();
 
+
+    private void Start()
+    {
+        UpdateBuildSize();
+    }
 
     public void AddCard(Card card)
     {
@@ -105,6 +113,16 @@ public class DeckBuild : MonoBehaviour
         }
 
         currentBuildSize = count;
+
+        if(currentBuildSize < 10)
+        {
+            countText.GetComponent<TextMeshProUGUI>().text = "0" + currentBuildSize + "/" + deckSizeLimit;
+        }
+        else
+        {
+            countText.GetComponent<TextMeshProUGUI>().text = currentBuildSize + "/" + deckSizeLimit;
+        }
+
     }
 
     public void SaveDeck()
