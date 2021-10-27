@@ -9,6 +9,7 @@ public class CollectionCard : MonoBehaviour
 
     private void Start()
     {
+
         gameObject.transform.Find("Name").GetComponent<TextMeshProUGUI>().text = card.cardName;
         gameObject.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text = card.cost.ToString();
         gameObject.transform.Find("RP").GetComponent<TextMeshProUGUI>().text = card.rp.ToString();

@@ -44,7 +44,7 @@ public class CollectionManager : MonoBehaviour
                 break;
         }
 
-        cardLists[i].GetComponent<CollectionCardList>().PopulateList();
+        cardLists[i].GetComponent<CollectionCardList>().PopulateList3DContainer();
     }
 
 
