@@ -25,8 +25,6 @@ public class CardEnchantmentEffectManager : MonoBehaviour
 
     public void PlayEnchantmentEffect(Enchantment.Trigger trigger, int index, bool isYou)
     {
-        Debug.Log("Playe Enchantment Effect");
-
         switch (trigger)
         {
             case Enchantment.Trigger.Battlecry:

@@ -19,7 +19,8 @@ public class EnemyHand : MonoBehaviour
 
     public GameObject GetCardWithIndex(int index)
     {
-        return unhandledCards[index];
+        return unhandledCards[unhandledCards.Count - 1];
+        //return unhandledCards[index];
     }
 
     private static GameObject InstantiateNewCard()
