@@ -11,13 +11,11 @@ public class CollectionCard3D : MonoBehaviour
     private void Start()
     {
         Transform cardCanvas = gameObject.transform.Find("Canvas");
-
         cardCanvas.Find("CardName").GetComponent<TextMeshProUGUI>().text = card.cardName;
         cardCanvas.Find("Cost").GetComponent<TextMeshProUGUI>().text = card.cost.ToString();
         cardCanvas.Find("RP").GetComponent<TextMeshProUGUI>().text = card.rp.ToString();
         cardCanvas.Find("LP").GetComponent<TextMeshProUGUI>().text = card.lp.ToString();
         cardCanvas.Find("Value").GetComponent<TextMeshProUGUI>().text = card.value.ToString();
-
     }
 
     public void AddCard()

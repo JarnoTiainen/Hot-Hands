@@ -11,8 +11,10 @@ public class CollectionManager : MonoBehaviour
 
     public Toggle[] cardListToggles;
     public GameObject[] cardLists;
-    public GameObject cardListViewport;
-
+    [SerializeField]
+    private int activeList = 0;
+    [SerializeField]
+    private GameObject pageText;
 
 
     void Start()
@@ -23,6 +25,7 @@ public class CollectionManager : MonoBehaviour
         {
             SetCardLists(i);
         }
+        UpdatePageText();
     }
 
     public void SetCardLists(int i)
@@ -41,14 +44,14 @@ public class CollectionManager : MonoBehaviour
                 break;
 
             default:
+                Debug.LogError("Collection card list doesn't exist.");
                 break;
         }
-
-        cardLists[i].GetComponent<CollectionCardList>().PopulateList3DContainer();
+        cardLists[i].GetComponent<CollectionCardList>().PopulatePage(1);
     }
 
 
-    public void SelectCardListToShow(int selection)
+    public void ChangeActiveCardList(int selection)
     {
         for(int i = 0; cardLists.Length > i; i++)
         {
@@ -58,9 +61,31 @@ public class CollectionManager : MonoBehaviour
         if (cardListToggles[selection].isOn)
         {
             cardLists[selection].SetActive(true);
-            cardListViewport.GetComponent<ScrollRect>().content = cardLists[selection].GetComponent<RectTransform>();
+            activeList = selection;
         }
+        UpdatePageText();
     }
 
+    public void ChangePage(int i)
+    {
+        CollectionCardList list = cardLists[activeList].GetComponent<CollectionCardList>();
 
+        if(list.currentPage == 1 && i == -1)
+        {
+            return;
+        }
+        if(list.currentPage == list.totalPages && i == 1)
+        {
+            return;
+        }
+        list.PopulatePage(list.currentPage + i);
+        UpdatePageText();
+    }
+
+    private void UpdatePageText()
+    {
+        CollectionCardList list = cardLists[activeList].GetComponent<CollectionCardList>();
+        pageText.GetComponent<TextMeshProUGUI>().text = (list.currentPage) + "/" + list.totalPages;
+
+    }
 }
