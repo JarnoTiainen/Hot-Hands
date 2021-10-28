@@ -14,7 +14,6 @@ public class DeckBuild : MonoBehaviour
     public int currentBuildSize = 0;
     [SerializeField]
     private GameObject countText;
-
     public GameObject settingsManager;
     public List<Card> playerDeck = new List<Card>();
 
@@ -42,8 +41,6 @@ public class DeckBuild : MonoBehaviour
 
             if (deck[i].name == card.name)
             {
-                Debug.Log(deck[i].name);
-
                 deck[i].amount++;
                 gameObject.transform.Find(card.name).GetComponent<BuildCardUI>().amount++;
                 gameObject.transform.Find(card.name).GetComponent<BuildCardUI>().UpdateAmount();
@@ -51,7 +48,6 @@ public class DeckBuild : MonoBehaviour
                 return;
             }
         }
-
         AddNewCard(card);
     }
 
@@ -69,11 +65,9 @@ public class DeckBuild : MonoBehaviour
 
         BuildCard buildCard = new BuildCard(card);
         buildCard.amount = 1;
-
         deck.Add(buildCard);
         UpdateBuildSize();
     }
-
 
     public void DeleteCard(Card card)
     {
@@ -103,7 +97,6 @@ public class DeckBuild : MonoBehaviour
         }
     }
 
-
     private void UpdateBuildSize()
     {
         int count = 0;
@@ -130,7 +123,6 @@ public class DeckBuild : MonoBehaviour
         resourcesCardList = Resources.Load("Card List") as CardList;
 
         playerDeck.Clear();
-
         for (int i = 0; deck.Count > i; i++)
         {
             if (deck[i].amount == 1)
@@ -145,7 +137,6 @@ public class DeckBuild : MonoBehaviour
                 }
             }
         }
-
         resourcesCardList.playerDeck = playerDeck;
         settingsManager.GetComponent<CollectionManager>().SetCardLists(1);
     }
@@ -159,7 +150,6 @@ public class DeckBuild : MonoBehaviour
         }
         UpdateBuildSize();
     }
-
 
     public class BuildCard
     {
