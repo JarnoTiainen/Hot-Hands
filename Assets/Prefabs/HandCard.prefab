@@ -907,6 +907,7 @@ MonoBehaviour:
   coolDownSlider: {fileID: 4354812131388942114}
   debuggerModeOn: 0
   cardMainBodyMaterial: {fileID: -6465566751694194690, guid: 0a9d315ef8089e247a582c0c35f2f748, type: 3}
+  cardImageShader: {fileID: -6465566751694194690, guid: d1c493463931c0a4f979c1a868b36962, type: 3}
   mat: {fileID: 2100000, guid: cd2ab7db35791bb48b3b26daf7fad7c3, type: 2}
   cardImage: {fileID: 2800000, guid: ab6eb980e32067e4fb1a4dc467dadc54, type: 3}
   lpImage: {fileID: 2800000, guid: 4e971e766a1d91244b70910f646c762a, type: 3}
@@ -1870,6 +1871,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: cd2ab7db35791bb48b3b26daf7fad7c3, type: 2}
+    - target: {fileID: 8111392685830429448, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2183c94f58350c34088f665f337358b3, type: 2}
     - target: {fileID: 8438803882079024901, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_IsActive
       value: 1

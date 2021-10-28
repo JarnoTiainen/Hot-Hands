@@ -15,6 +15,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     [SerializeField] private bool debuggerModeOn = false;
     [SerializeField] private Shader cardMainBodyMaterial;
+    [SerializeField] private Shader cardImageShader;
     [SerializeField] private Material mat;
     [SerializeField] private Texture2D cardImage;
     [SerializeField] private Texture2D lpImage;
@@ -48,8 +49,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     private void Awake()
     {
         mat = meshRendererBorderLow.material;
-        meshRendererImage.material.shader = cardMainBodyMaterial;
-        meshRendererImage.material.SetTexture("_sprite", cardImage);
+        meshRendererImage.material.shader = cardImageShader;
+        
         meshRendererImageLow.material.shader = cardMainBodyMaterial;
         meshRendererBorderLow.material.shader = cardMainBodyMaterial;
         meshRenderercardBackLow.material.shader = cardMainBodyMaterial;
@@ -135,7 +136,9 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         if (cost != null) cost.text = cardData.cost.ToString();
         if (value != null) value.text = cardData.value.ToString();
 
-        if(isYourCard)
+        meshRendererImage.material.SetTexture("_CardImage", cardData.cardSprite.texture);
+
+        if (isYourCard)
         {
             if (value != null) lp.text = cardData.lp.ToString();
             if (value != null) rp.text = cardData.rp.ToString();

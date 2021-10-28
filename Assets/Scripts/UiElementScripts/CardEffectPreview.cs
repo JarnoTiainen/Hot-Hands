@@ -10,6 +10,8 @@ public class CardEffectPreview : MonoBehaviour
     [SerializeField] public TextMeshProUGUI value;
     [SerializeField] public TextMeshProUGUI lp;
     [SerializeField] public TextMeshProUGUI rp;
+    [SerializeField] private Shader cardImageShader;
+    [SerializeField] private MeshRenderer meshRendererImage;
 
     [SerializeField] private float lifeTime;
 
@@ -21,8 +23,13 @@ public class CardEffectPreview : MonoBehaviour
         value.text = data.value.ToString();
         lp.text = data.lp.ToString();
         rp.text = data.rp.ToString();
+        meshRendererImage.material.SetTexture("_CardImage", data.cardSprite.texture);
     }
 
+    private void Awake()
+    {
+        meshRendererImage.material.shader = cardImageShader;
+    }
 
     private void Update()
     {

@@ -668,6 +668,8 @@ MonoBehaviour:
   value: {fileID: 7902481812989424987}
   lp: {fileID: 3215632389948017854}
   rp: {fileID: 8716584605014259613}
+  cardImageShader: {fileID: -6465566751694194690, guid: d1c493463931c0a4f979c1a868b36962, type: 3}
+  meshRendererImage: {fileID: 6418147511371424017}
   lifeTime: 5
 --- !u!1 &3074149589044928407
 GameObject:
@@ -1304,6 +1306,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 8111392685830429448, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2183c94f58350c34088f665f337358b3, type: 2}
     - target: {fileID: 8477228164739970812, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -1326,6 +1332,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+--- !u!23 &6418147511371424017 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8111392685830429448, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+  m_PrefabInstance: {fileID: 2990569939297253913}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7335735789706580486 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5498164340434577439, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
