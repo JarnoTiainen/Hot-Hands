@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -0.0024, y: -0.0007}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7174947618919266371
 CanvasRenderer:
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 56.708313, y: -19.227457, z: 57.350323, w: -20.37405}
+  m_margin: {x: 1.3836426, y: -1.1507022, z: -0.7122555, w: 0.9752266}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 7450113518584564989}
   - component: {fileID: 1287032138477184688}
   - component: {fileID: 5623661418907303804}
+  - component: {fileID: 4331047536201552180}
   m_Layer: 0
   m_Name: GaOb_bonfire
   m_TagString: Untagged
@@ -267,6 +268,19 @@ MonoBehaviour:
   wildEffect: {fileID: 3117418127318179876}
   maxEffectVisibilityTime: 1
   currentTimer: 0
+--- !u!114 &4331047536201552180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6168684155693025260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6a5f1c93709d348864ce126fa07384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  burnValue: {fileID: 1921840997793806295}
 --- !u!1 &7198849046047218152
 GameObject:
   m_ObjectHideFlags: 0
