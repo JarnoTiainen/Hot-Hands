@@ -7,6 +7,7 @@ public class CollectionCard3D : MonoBehaviour
 {
     public Card card;
     [SerializeField]
+    private MeshRenderer meshRendererImage;
 
     private void Start()
     {
@@ -16,11 +17,13 @@ public class CollectionCard3D : MonoBehaviour
         cardCanvas.Find("RP").GetComponent<TextMeshProUGUI>().text = card.rp.ToString();
         cardCanvas.Find("LP").GetComponent<TextMeshProUGUI>().text = card.lp.ToString();
         cardCanvas.Find("Value").GetComponent<TextMeshProUGUI>().text = card.value.ToString();
+
+        meshRendererImage.material.SetTexture("_CardImage", card.cardSprite.texture);
     }
 
     public void AddCard()
     {
-        GameObject.FindGameObjectWithTag("DeckBuild").GetComponent<DeckBuild>().AddCard(card);
+        GameObject.FindGameObjectWithTag("DeckBuild").GetComponent<DeckBuilder>().AddCard(card);
     }
 
 

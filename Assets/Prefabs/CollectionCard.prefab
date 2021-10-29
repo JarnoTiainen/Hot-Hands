@@ -448,6 +448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 0}
+  meshRendererImage: {fileID: 6106276145922045615}
 --- !u!65 &1266458158220838671
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1068,6 +1069,11 @@ PrefabInstance:
 --- !u!4 &7521515163796800952 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5498164340434577439, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+  m_PrefabInstance: {fileID: 2606648940531035559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6106276145922045615 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8111392685830429448, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
   m_PrefabInstance: {fileID: 2606648940531035559}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6230820324270566915
