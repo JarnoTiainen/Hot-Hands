@@ -276,7 +276,7 @@ public class WebSocketService : MonoBehaviour
 
     public static void Attack(int fieldIndex)
     {
-        if (Instance.debuggerModeOn) Debug.Log("Attacked with id " + fieldIndex);
+        Debug.Log("Attacked with id " + fieldIndex);
 
         GameMessage message = new GameMessage("OnMessage", "ATTACK", fieldIndex.ToString());
         SendWebSocketMessage(JsonUtility.ToJson(message));

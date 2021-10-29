@@ -60,6 +60,7 @@ public class MonsterZone : MonoBehaviour
             serverConfirmedCards.Add(newMonster);
             newMonster.transform.SetParent(transform);
             if (debugModeOn) Debug.Log("index: " + index);
+            if (index > monsterCards.Count) index = monsterCards.Count;
             monsterCards.Insert(index, newMonster);
             newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
             ReCalculateServerCardIndexes();
@@ -272,7 +273,9 @@ public class MonsterZone : MonoBehaviour
             if (debugModeOn) Debug.Log("Removed unhandled " + unhandledCards.Count);
             serverConfirmedCards.Add(handledCard);
             ReCalculateServerCardIndexes();
+            Debug.Log("card name in slot " + monsterCards[playCardMessage.boardIndex].GetComponent<InGameCard>().cardData.cardName);
             monsterCards[playCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(playCardMessage));
+
         }
         else
         {

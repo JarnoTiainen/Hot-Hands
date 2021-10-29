@@ -222,13 +222,13 @@ public class GameManager : MonoBehaviour
             {
                 References.i.yourMonsterZone.AutoAddNewMonsterCard(false, summonCardMessage.boardIndex, References.i.cardList.GetCardData(summonCardMessage));
                 References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
-                References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().owner = summonCardMessage.player;
             }
             else
             {
                 References.i.yourMonsterZone.UpdateCardData(true, summonCardMessage);
                 References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
             }
+            References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().owner = summonCardMessage.player;
         }
         else
         {
@@ -331,6 +331,8 @@ public class GameManager : MonoBehaviour
                 //display summon animation here
                 playerStats.discardpileCardCount--;
             }
+
+            Debug.Log("player: " + playCardMessage.player);
             References.i.yourMonsterZone.GetCardWithServerIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().owner = playCardMessage.player;
         }
         else

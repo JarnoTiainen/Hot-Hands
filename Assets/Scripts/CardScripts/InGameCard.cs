@@ -171,6 +171,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void OnClickElement()
     {
+        Debug.Log("Clicked elent");
+
         if(!attackOnCD && !preAttackOnCD && GameManager.Instance.IsYou(owner))
         {
             preAttackOnCD = true;
