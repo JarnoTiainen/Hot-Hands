@@ -19,7 +19,7 @@ public class CollectionCard : MonoBehaviour
 
     public void AddCard()
     {
-        GameObject.FindGameObjectWithTag("DeckBuild").GetComponent<DeckBuild>().AddCard(card);
+        GameObject.FindGameObjectWithTag("DeckBuild").GetComponent<DeckBuilder>().AddCard(card);
     }
 
 

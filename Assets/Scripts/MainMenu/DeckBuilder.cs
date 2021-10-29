@@ -2,25 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
-public class DeckBuild : MonoBehaviour
+public class DeckBuilder : MonoBehaviour
 {
-    private CardList resourcesCardList;
-
-    [SerializeField]
-    private GameObject deckBuildCardPrefab;
+    private CollectionManager cm;
+    [SerializeField] private GameObject countText;
+    public GameObject settingsManager;
     public List<BuildCard> deck = new List<BuildCard>();
+    public List<Card> playerDeck = new List<Card>();
+    [SerializeField] private GameObject deckBuildCardPrefab;
     public int deckSizeLimit = 20;
     public int currentBuildSize = 0;
-    [SerializeField]
-    private GameObject countText;
-    public GameObject settingsManager;
-    public List<Card> playerDeck = new List<Card>();
+    [SerializeField] public GameObject saveButton;
+    [SerializeField] public GameObject copyButton;
+    [SerializeField] public GameObject clearButton;
+
 
 
     private void Start()
     {
+        cm = settingsManager.GetComponent<CollectionManager>();
         UpdateBuildSize();
+    }
+
+    private void OnEnable()
+    {
+        saveButton.GetComponent<Button>().onClick.AddListener(() => saveButtonCallback());
+        copyButton.GetComponent<Button>().onClick.AddListener(() => CopyButtonCallback());
+        clearButton.GetComponent<Button>().onClick.AddListener(() => clearButtonCallback());
+
     }
 
     public void AddCard(Card card)
@@ -120,28 +131,54 @@ public class DeckBuild : MonoBehaviour
 
     public void SaveDeck()
     {
-        resourcesCardList = Resources.Load("Card List") as CardList;
-
-        playerDeck.Clear();
+        if (cm.activeList == 0) return;
+        int playerDeckIndex = cm.activeList -1;
+        List<Card> tempDeck = new List<Card>();
         for (int i = 0; deck.Count > i; i++)
         {
             if (deck[i].amount == 1)
             {
-                playerDeck.Add(deck[i].card);
+                tempDeck.Add(deck[i].card);
             }
             else
             {
                 for(int j = 0; deck[i].amount > j; j++)
                 {
-                    playerDeck.Add(deck[i].card);
+                    tempDeck.Add(deck[i].card);
                 }
             }
         }
-        resourcesCardList.playerDeck = playerDeck;
-        settingsManager.GetComponent<CollectionManager>().SetCardLists(1);
+        tempDeck.Sort(delegate(Card card1, Card card2) 
+        {
+            return card1.cardName.CompareTo(card2.cardName);
+        
+        });
+     
+
+        if (cm.playerDecks[playerDeckIndex] == null)
+        {
+            cm.playerDecks.Add(tempDeck);
+        }
+        else
+        {
+            cm.playerDecks[playerDeckIndex] = tempDeck;
+        }
+        cm.SetPlayerDeckList(playerDeckIndex);
+        ClearBuild();
+        cm.UpdatePageText();
     }
 
-    public void ResetDeck()
+    public void CopyDeck()
+    {
+        if (cm.activeList == 0) return;
+        int playerDeckIndex = cm.activeList - 1;
+        foreach(Card card in cm.playerDecks[playerDeckIndex])
+        {
+            AddCard(card);
+        }
+    }
+
+    public void ClearBuild()
     {
         deck.Clear();
         foreach(Transform child in transform)
@@ -149,6 +186,20 @@ public class DeckBuild : MonoBehaviour
             Destroy(child.gameObject);
         }
         UpdateBuildSize();
+    }
+
+    private void CopyButtonCallback()
+    {
+        CopyDeck();
+    }
+
+    private void saveButtonCallback()
+    {
+        SaveDeck();
+    }
+    private void clearButtonCallback()
+    {
+        ClearBuild();
     }
 
     public class BuildCard

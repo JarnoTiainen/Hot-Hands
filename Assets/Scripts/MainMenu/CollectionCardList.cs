@@ -5,8 +5,7 @@ using TMPro;
 
 public class CollectionCardList : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject cardContainerPrefab;
+
     [SerializeField]
     private GameObject container3DPrefab;
     [SerializeField]
@@ -16,25 +15,6 @@ public class CollectionCardList : MonoBehaviour
     public List<Card> cards = new List<Card>();
 
 
-    public void PopulateList()
-    {
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        foreach (Card card in cards)
-        {
-            GameObject newContainer = Instantiate(cardContainerPrefab) as GameObject;
-            newContainer.SetActive(true);
-
-            Transform newCard = newContainer.transform.Find("Card");
-            newCard.GetComponent<CollectionCard>().card = card;
-
-            newContainer.transform.SetParent(gameObject.transform, false);
-        }
-    }
-
     public void PopulatePage(int page)
     {
         foreach (Transform child in transform)
@@ -42,7 +22,7 @@ public class CollectionCardList : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        totalPages = Mathf.CeilToInt(cards.Count / cardsPerPage) + 1;
+        totalPages = Mathf.CeilToInt((cards.Count - 1) / cardsPerPage) + 1;
 
         if(cards.Count <= cardsPerPage)
         {

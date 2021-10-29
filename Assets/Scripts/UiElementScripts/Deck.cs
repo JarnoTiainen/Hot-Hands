@@ -14,7 +14,7 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
     private void Start()
     {
         CardList cardList = Resources.Load("Card List") as CardList;
-        playerDeck = cardList.playerDeck;
+        //playerDeck = cardList.playerDeck;
     }
 
     [Button] public void SendDeckData()

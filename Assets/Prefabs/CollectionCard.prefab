@@ -280,6 +280,7 @@ GameObject:
   - component: {fileID: 5506094280663862026}
   - component: {fileID: 9148719545364527784}
   - component: {fileID: 6617423187260244223}
+  - component: {fileID: 1187799407997637909}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -400,6 +401,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1187799407997637909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915576653892598149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8018cbeb3bcb85547b5aac98f5e500b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2320621391863656014
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,14 +1079,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
---- !u!4 &7521515163796800952 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5498164340434577439, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
-  m_PrefabInstance: {fileID: 2606648940531035559}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &6106276145922045615 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 8111392685830429448, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+  m_PrefabInstance: {fileID: 2606648940531035559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7521515163796800952 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5498164340434577439, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
   m_PrefabInstance: {fileID: 2606648940531035559}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6230820324270566915
