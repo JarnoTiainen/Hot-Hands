@@ -269,12 +269,21 @@ public class MonsterZone : MonoBehaviour
         if(isYourCard)
         {
             GameObject handledCard = unhandledCards[0];
+            if(monsterCards.IndexOf(handledCard) != playCardMessage.boardIndex)
+            {
+                monsterCards.Remove(handledCard);
+                monsterCards.Insert(playCardMessage.boardIndex, handledCard);
+            }
+
+
             unhandledCards.Remove(handledCard);
             if (debugModeOn) Debug.Log("Removed unhandled " + unhandledCards.Count);
             serverConfirmedCards.Add(handledCard);
             ReCalculateServerCardIndexes();
             Debug.Log("card name in slot " + monsterCards[playCardMessage.boardIndex].GetComponent<InGameCard>().cardData.cardName);
             monsterCards[playCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(playCardMessage));
+            
+
 
         }
         else
@@ -287,11 +296,18 @@ public class MonsterZone : MonoBehaviour
         if (isYourCard)
         {
             GameObject handledCard = unhandledCards[0];
+            if (monsterCards.IndexOf(handledCard) != summonCardMessage.boardIndex)
+            {
+                monsterCards.Remove(handledCard);
+                monsterCards.Insert(summonCardMessage.boardIndex, handledCard);
+            }
+            RepositionMonsterCards();
+
             unhandledCards.Remove(handledCard);
             if (debugModeOn) Debug.Log("Removed unhandled " + unhandledCards.Count);
             serverConfirmedCards.Add(handledCard);
             ReCalculateServerCardIndexes();
-            monsterCards[summonCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(summonCardMessage));
+            handledCard.GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(summonCardMessage));
         }
         else
         {
