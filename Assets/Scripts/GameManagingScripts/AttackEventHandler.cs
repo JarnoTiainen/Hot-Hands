@@ -77,10 +77,8 @@ public class AttackEventHandler : MonoBehaviour
         CardData attackerCard = attacker.GetComponent<InGameCard>().cardData;
 
         if (attackerCard.attackDirection == Card.AttackDirection.Right) {
-            Debug.Log("aTTACK SHAKE " + shakeCurve.Evaluate(attackerCard.rp * shakeMagnitude));
             CameraShaker.Instance.ShakeOnce(shakeCurve.Evaluate(attackerCard.rp * shakeMagnitude), shakeRoughness, fadeInTime, fadeOutTime);
         } else {
-            Debug.Log("aTTACK SHAKE " + shakeCurve.Evaluate(attackerCard.lp * shakeMagnitude));
             CameraShaker.Instance.ShakeOnce(shakeCurve.Evaluate(attackerCard.lp * shakeMagnitude), shakeRoughness, fadeInTime, fadeOutTime);
         }
 
