@@ -214,10 +214,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackAnimationSpeed: 0.1
-  shakeMagnitude: 0.5
-  shakeRoughness: 7
+  shakeMagnitude: 1
+  shakeRoughness: 8
   fadeInTime: 0.1
   fadeOutTime: 1
+  shakeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: 0.15
+      outSlope: 0.15
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 10
+      value: 2
+      inSlope: 0.15
+      outSlope: 0.15
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &7355205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,6 +682,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1892589317}
     m_Modifications:
+    - target: {fileID: 1287032138477184688, guid: ab277c4cb529f6d44a97eb5140ba30a3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4378077639147100997, guid: ab277c4cb529f6d44a97eb5140ba30a3, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.45036727

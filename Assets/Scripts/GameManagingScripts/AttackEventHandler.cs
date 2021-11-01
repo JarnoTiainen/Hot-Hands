@@ -12,6 +12,7 @@ public class AttackEventHandler : MonoBehaviour
     public float shakeRoughness = 4f;
     public float fadeInTime = .1f;
     public float fadeOutTime = 1f;
+    public AnimationCurve shakeCurve;
 
     public void StartAttackEvent(bool wasYourAttack, CardPowersMessage attacker, CardPowersMessage target, float attackCD)
     {
@@ -73,22 +74,24 @@ public class AttackEventHandler : MonoBehaviour
 
     public void StartDamageEvent(int player, GameObject attacker, GameObject target)
     {
-        CameraShaker.Instance.ShakeOnce(shakeMagnitude, shakeRoughness, fadeInTime, fadeOutTime);
+        CardData attackerCard = attacker.GetComponent<InGameCard>().cardData;
 
-        if(target == References.i.yourPlayerTarget || target == References.i.enemyPlayerTarget)
+        if (attackerCard.attackDirection == Card.AttackDirection.Right) {
+            CameraShaker.Instance.ShakeOnce(shakeCurve.Evaluate(attackerCard.rp * shakeMagnitude), shakeRoughness, fadeInTime, fadeOutTime);
+        } else {
+            CameraShaker.Instance.ShakeOnce(shakeCurve.Evaluate(attackerCard.lp * shakeMagnitude), shakeRoughness, fadeInTime, fadeOutTime);
+        }
+
+        if (target == References.i.yourPlayerTarget || target == References.i.enemyPlayerTarget)
         {
-            //Update player hp heal/trigger lose game event
+            //Update player hp heal/trigger lose game event??
         }
         else
         {
-            CardData attackerCard = attacker.GetComponent<InGameCard>().cardData;
             CardData targetCard = target.GetComponent<InGameCard>().cardData;
-
             attacker.GetComponent<InGameCard>().UpdateCardTexts();
             target.GetComponent<InGameCard>().UpdateCardTexts();
-
             bool wasYourAttack = GameManager.Instance.IsYou(player);
-
 
             if (wasYourAttack)
             {
@@ -122,8 +125,6 @@ public class AttackEventHandler : MonoBehaviour
             }
         }
 
-        
-        //StartCoroutine(CameraShake());
         
     }
 

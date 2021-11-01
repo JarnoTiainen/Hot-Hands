@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using TMPro;
 using Sirenix.OdinInspector;
 
@@ -11,6 +12,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] public TextMeshProUGUI value;
     [SerializeField] public TextMeshProUGUI lp;
     [SerializeField] public TextMeshProUGUI rp;
+    public float fadeDuration = 0.5f;
     public Slider coolDownSlider;
 
     [SerializeField] private bool debuggerModeOn = false;
@@ -56,6 +58,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         meshRenderercardBackLow.material.shader = cardMainBodyMaterial;
         meshRendererIconZoneLow.material.shader = cardMainBodyMaterial;
         meshRendererNameZoneLow.material.shader = cardMainBodyMaterial;
+        coolDownSlider.gameObject.SetActive(false);
+
 
         /* meshRendererValue.material.renderQueue = 3100;
         meshRendererLP.material.renderQueue = 3100;
@@ -66,13 +70,11 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         meshRendererIconZoneLow.material.renderQueue = 2900;
         meshRendererNameZoneLow.material.renderQueue = 2900;
         meshRendererImage.material.renderQueue = 3100; */
-        coolDownSlider.gameObject.SetActive(false);
+        
     }
 
     [Button] public void StartAttackCooldown(float duration, bool isSummonCall = false)
     {
-        //coolDownSlider.gameObject.SetActive(true);
-        //coolDownSlider.value = 1;
         attackOnCD = true;
         doOnce = true;
         currentAttackCoolDown = duration;
@@ -84,15 +86,23 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         if (currentAttackCoolDown > 0) {
             currentAttackCoolDown -= Time.deltaTime;
 
-            //if the card isn't attacking, update the cooldownbar
+            //if the card stopped attacking, show the cooldownbar
             if (!(GetComponent<CardMovement>().doAttack) && (GetComponent<CardMovement>().endPoint.y == transform.localPosition.y)) {
                 if (doOnce) {
                     maxAttackCoolDown = currentAttackCoolDown;
                     coolDownSlider.gameObject.SetActive(true);
+                    coolDownSlider.GetComponent<CanvasGroup>().alpha = 0;
                     coolDownSlider.value = 1;
+                    StartCoroutine(Fade(fadeDuration, true));                   //fade in
                     doOnce = false;
                 }
                 coolDownSlider.value = currentAttackCoolDown / maxAttackCoolDown;
+
+                //fade out
+                if (currentAttackCoolDown <= fadeDuration) {
+                    StartCoroutine(Fade(fadeDuration, false));
+                }
+
             }
         }
         else if(currentAttackCoolDown <= 0 && attackOnCD)
@@ -104,22 +114,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
             currentAttackCoolDown = 0;
         }
 
-
-
-
-
-        //if (currentAttackCoolDown > 0) {
-        //    currentAttackCoolDown -= Time.deltaTime;
-        //    coolDownSlider.value = currentAttackCoolDown / maxAttackCoolDown;
-        //}
-        //else if(currentAttackCoolDown <= 0 && attackOnCD)
-        //{
-        //    coolDownSlider.gameObject.SetActive(false);
-        //    ToggleAttackBurnEffect(true);
-        //    attackOnCD = false;
-        //    preAttackOnCD = false;
-        //    currentAttackCoolDown = 0;
-        //}
         meshRendererImage.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
         meshRendererImageLow.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
         meshRendererBorderLow.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
@@ -128,6 +122,29 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         meshRendererIconZoneLow.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
     }
 
+    private IEnumerator Fade(float duration, bool isFadeIn)
+    {
+        
+        if(isFadeIn) {
+            //fade in
+            float elapsedTime = Time.deltaTime;
+            while (coolDownSlider.GetComponent<CanvasGroup>().alpha != 1)
+            {
+                coolDownSlider.GetComponent<CanvasGroup>().alpha = Mathf.Clamp(1 - ((duration - elapsedTime) / duration), 0, 1);
+                elapsedTime += Time.deltaTime;
+                yield return 0;
+            }
+        } else {
+            //fade out
+            float elapsedTime = duration;
+            while (coolDownSlider.GetComponent<CanvasGroup>().alpha != 0)
+            {
+                coolDownSlider.GetComponent<CanvasGroup>().alpha = Mathf.Clamp(1 - ((duration - elapsedTime) / duration), 0, 1);
+                elapsedTime -= Time.deltaTime;
+                yield return 0;
+            }
+        }
+    }
 
     public void SetNewCardData(bool isYourCard, CardData cardData)
     {

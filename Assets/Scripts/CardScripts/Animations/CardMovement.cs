@@ -88,6 +88,10 @@ public class CardMovement : MonoBehaviour
             int owner = GetComponent<InGameCard>().owner;
             ah.StartDamageEvent(owner, gameObject, targetCard);
 
+            //if (!(targetCard == References.i.yourPlayerTarget || targetCard == References.i.enemyPlayerTarget)) {
+            //    targetCard.GetComponent<CardMovement>().OnCardMove(targetCard.transform.position + new Vector3(0, 0, -.1f), 0.1f);
+            //}
+
             doAttack = false;
             //if another script is trying to move this, let it do so
             if (doMove) {
@@ -95,8 +99,7 @@ public class CardMovement : MonoBehaviour
             } else { 
                 if(GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) OnCardMove(References.i.yourMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
                 else OnCardMove(References.i.opponentMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
-            }
-            
+            } 
         }
     }
 
@@ -153,6 +156,7 @@ public class CardMovement : MonoBehaviour
         if (!(targetCard == References.i.yourPlayerTarget || targetCard == References.i.enemyPlayerTarget))
         {
             int multiplier;
+            attackDur += 0.1f;
             //if the attacking card is the opponents, reverse the multiplier
 
             if (GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) {
@@ -173,15 +177,20 @@ public class CardMovement : MonoBehaviour
                 endAttackPoint.x += References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
             }
 
-            //targetCard.GetComponent<CardMovement>().OnCardMove(targetCard.transform.position + new Vector3(0, 0, -.1f), 0.1f);
-
         } else {
            //direct attack
             dirMultiplier = 0;
         }
 
-        
         doAttack = true;
     }
+
+    private IEnumerator TargetLift()
+    {
+        //move the target card up
+        targetCard.GetComponent<CardMovement>().OnCardMove(targetCard.transform.position + new Vector3(0, 0, -.1f), 0.1f);
+        yield return 0;
+    }
+
 
 }

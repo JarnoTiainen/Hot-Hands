@@ -384,6 +384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 39074731648209747}
   - component: {fileID: 4745231975343201543}
+  - component: {fileID: 2165142541390487759}
   m_Layer: 8
   m_Name: Cooldown
   m_TagString: Untagged
@@ -464,6 +465,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &2165142541390487759
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3395899584677541429}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3574735241784026833
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,7 +535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.18195976, g: 0.8207547, b: 0.8207547, a: 1}
+  m_Color: {r: 0.019607844, g: 0.7058824, b: 0.73333335, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -921,6 +934,7 @@ MonoBehaviour:
   value: {fileID: 3055479451659487593}
   lp: {fileID: 6469195302025323115}
   rp: {fileID: 8444400555959281729}
+  fadeDuration: 0.3
   coolDownSlider: {fileID: 4745231975343201543}
   debuggerModeOn: 0
   cardMainBodyMaterial: {fileID: -6465566751694194690, guid: 0a9d315ef8089e247a582c0c35f2f748, type: 3}
@@ -1243,7 +1257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.078431375, g: 0.0627451, b: 0.098039225, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
