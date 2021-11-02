@@ -6,8 +6,7 @@ using Sirenix.OdinInspector;
 public class CollectionCard3D : MonoBehaviour
 {
     public Card card;
-    [SerializeField]
-    private MeshRenderer meshRendererImage;
+    [SerializeField] private MeshRenderer meshRendererImage;
 
     private void Start()
     {

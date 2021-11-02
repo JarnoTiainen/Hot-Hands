@@ -112,7 +112,7 @@ public class WebSocketService : MonoBehaviour
                 case "GETDECKS":
                     if (debuggerModeOn) Debug.Log("Message type was GETDECKS");
                     GetDecksMessage  getDecksMessage = JsonUtility.FromJson<GetDecksMessage>(data[1]);
-                    Debug.Log(getDecksMessage.deck0[0]);
+                    CollectionManager.Instance.SetPlayerDecks(getDecksMessage);
                     break;
                 case "BURNCARD":
                     if (debuggerModeOn) Debug.Log("Message type was BURNCARD");

@@ -20,12 +20,14 @@ public class SFX
     public SFXClip sfxToPlay;
     private string sfxLabel = "SFX";
 
+#pragma warning disable 0414
     [SerializeField]
     private bool showSettings = false;
 
     [ShowIf("showSettings")]
     [SerializeField]
     private bool editSettings = false;
+#pragma warning restore 0414
 
     [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
     [ShowIf("showSettings")]

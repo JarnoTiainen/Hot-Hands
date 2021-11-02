@@ -7,21 +7,20 @@ using UnityEngine.UI;
 public class DeckBuilder : MonoBehaviour
 {
     private CollectionManager cm;
+    private List<BuildCard> build = new List<BuildCard>();
     [SerializeField] private GameObject countText;
-    public GameObject settingsManager;
-    public List<BuildCard> build = new List<BuildCard>();
     [SerializeField] private GameObject deckBuildCardPrefab;
-    public int deckSizeLimit = 20;
-    public int currentBuildSize = 0;
-    [SerializeField] public GameObject saveButton;
-    [SerializeField] public GameObject copyButton;
-    [SerializeField] public GameObject clearButton;
+    [SerializeField] private int deckSizeLimit = 20;
+    private int currentBuildSize = 0;
+    [SerializeField] private GameObject saveButton;
+    [SerializeField] private GameObject copyButton;
+    [SerializeField] private GameObject clearButton;
 
 
 
     private void Start()
     {
-        cm = settingsManager.GetComponent<CollectionManager>();
+        cm = CollectionManager.Instance;
         saveButton.GetComponent<Button>().onClick.AddListener(() => saveButtonCallback());
         copyButton.GetComponent<Button>().onClick.AddListener(() => CopyButtonCallback());
         clearButton.GetComponent<Button>().onClick.AddListener(() => clearButtonCallback());
@@ -32,17 +31,20 @@ public class DeckBuilder : MonoBehaviour
     // Adds a card to the builder
     public void AddCard(Card card)
     {
+        // Reached max size
         if(currentBuildSize >= deckSizeLimit)
         {
             return;
         }
 
+        // First card in the build
         if (build.Count == 0)
         {
             AddNewCard(card);
             return;
         }
 
+        // Add duplicate card to build
         for (int i = 0; build.Count > i; i++)
         {
 
@@ -55,6 +57,7 @@ public class DeckBuilder : MonoBehaviour
                 return;
             }
         }
+        // Add non-duplicate card to build
         AddNewCard(card);
     }
 
@@ -62,13 +65,14 @@ public class DeckBuilder : MonoBehaviour
     private void AddNewCard(Card card)
     {
         GameObject buildCardGameObject = Instantiate(deckBuildCardPrefab) as GameObject;
+        BuildCardUI buildCardGameObjectUI = buildCardGameObject.GetComponent<BuildCardUI>();
         buildCardGameObject.SetActive(true);
         buildCardGameObject.name = card.name;
-        buildCardGameObject.GetComponent<BuildCardUI>().cardName = card.name;
-        buildCardGameObject.GetComponent<BuildCardUI>().amount = 1;
+        buildCardGameObjectUI.cardName = card.name;
+        buildCardGameObjectUI.amount = 1;
+        buildCardGameObjectUI.UpdateName();
+        buildCardGameObjectUI.UpdateAmount();
         buildCardGameObject.GetComponent<BuildCardButtons>().card = card;
-        buildCardGameObject.GetComponent<BuildCardUI>().UpdateName();
-        buildCardGameObject.GetComponent<BuildCardUI>().UpdateAmount();
         buildCardGameObject.transform.SetParent(gameObject.transform, false);
 
         BuildCard buildCard = new BuildCard(card);
@@ -80,20 +84,24 @@ public class DeckBuilder : MonoBehaviour
     // Deletes a card from the builder
     public void DeleteCard(Card card)
     {
+        // Build has 0 cards
         if (currentBuildSize <= 0)
         {
             return;
         }
 
+        // Build has > 0 cards
         for (int i = 0; build.Count > i; i++)
         {
             if (build[i].name == card.name)
             {
+                // Card being deleted is the only one of it's type in the build
                 if(build[i].amount == 1)
                 {
                     build.RemoveAt(i);
                     Destroy(GameObject.Find(card.name));
                 }
+                // Card being deleted has duplicates in the build
                 else
                 {
                     build[i].amount--;
@@ -116,7 +124,6 @@ public class DeckBuilder : MonoBehaviour
         }
 
         currentBuildSize = count;
-
         if(currentBuildSize < 10)
         {
             countText.GetComponent<TextMeshProUGUI>().text = "0" + currentBuildSize + "/" + deckSizeLimit;
@@ -132,14 +139,18 @@ public class DeckBuilder : MonoBehaviour
     public void SaveDeck()
     {
         if (cm.activeList == 0) return;
-        int playerDeckIndex = cm.activeList -1;
+
+        int playerDeckIndex = cm.activeList - 1;
         List<Card> tempDeck = new List<Card>();
+
         for (int i = 0; build.Count > i; i++)
         {
+            // Only one card of it's type in the build
             if (build[i].amount == 1)
             {
                 tempDeck.Add(build[i].card);
             }
+            // Build has duplicates of the card
             else
             {
                 for(int j = 0; build[i].amount > j; j++)
@@ -148,13 +159,13 @@ public class DeckBuilder : MonoBehaviour
                 }
             }
         }
+        // Sorts alphabetically
         tempDeck.Sort(delegate(Card card1, Card card2) 
         {
             return card1.cardName.CompareTo(card2.cardName);
         
         });
      
-
         if (cm.playerDecks[playerDeckIndex] == null)
         {
             cm.playerDecks.Add(tempDeck);
@@ -204,7 +215,7 @@ public class DeckBuilder : MonoBehaviour
         ClearBuild();
     }
 
-    public class BuildCard
+    private class BuildCard
     {
         public string name;
         public Card card;

@@ -144,10 +144,6 @@ public class SoundtrackManager : MonoBehaviour
                         break;
                 }
                 soundtrackGameObject.transform.position = new Vector3(0, 0, 0);
-                audioSource.maxDistance = 100f;
-                audioSource.spatialBlend = 1f;
-                audioSource.rolloffMode = AudioRolloffMode.Linear;
-                audioSource.dopplerLevel = 0f;
                 audioSource.clip = soundtrack.clip;
                 audioSource.volume = soundtrack.volume;
                 audioSource.pitch = soundtrack.pitch;
@@ -180,10 +176,6 @@ public class SoundtrackManager : MonoBehaviour
                         audioSource.outputAudioMixerGroup = mainMenuMusicGroup;
                         break;
                 }
-                audioSource.maxDistance = 100f;
-                audioSource.spatialBlend = 1f;
-                audioSource.rolloffMode = AudioRolloffMode.Linear;
-                audioSource.dopplerLevel = 0f;
                 audioSource.clip = soundtrack.clip;
                 audioSource.volume = soundtrack.volume;
                 audioSource.pitch = soundtrack.pitch;

@@ -20,12 +20,14 @@ public class Soundtrack
     public SoundtrackClip soundtrackToPlay;
     private string soundtrackLabel = "Soundtrack";
 
+#pragma warning disable 0414
     [SerializeField]
     private bool showSettings = false;
 
     [ShowIf("showSettings")]
     [SerializeField]
     private bool editSettings = false;
+#pragma warning restore 0414
 
     [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
     [ShowIf("showSettings")]
@@ -69,7 +71,7 @@ public class Soundtrack
     {
         // Platform #define directives for UnityEditor
         #if UNITY_EDITOR
-            UnityEditor.Selection.activeObject = soundtrackToPlay;
+        UnityEditor.Selection.activeObject = soundtrackToPlay;
         #endif
 
     }
