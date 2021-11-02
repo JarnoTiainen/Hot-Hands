@@ -36,6 +36,7 @@ public class AttackEventHandler : MonoBehaviour
             References.i.opponentMonsterZone.UpdateCardData(!wasYourAttack, target);
 
             attackingCard.GetComponent<CardMovement>().OnCardAttack(targetCard, attackAnimationSpeed);
+            
         }
         else
         {

@@ -8,6 +8,7 @@ public class CardMovement : MonoBehaviour
     public float attackDur;
     public float rotationSpeed = 0.5f;
     public float curveMultiplier = 0.1f;
+    public float liftAmount = 0.05f;
 
     //specifies the movement curve of the card
     [SerializeField]
@@ -88,9 +89,7 @@ public class CardMovement : MonoBehaviour
             int owner = GetComponent<InGameCard>().owner;
             ah.StartDamageEvent(owner, gameObject, targetCard);
 
-            //if (!(targetCard == References.i.yourPlayerTarget || targetCard == References.i.enemyPlayerTarget)) {
-            //    targetCard.GetComponent<CardMovement>().OnCardMove(targetCard.transform.position + new Vector3(0, 0, -.1f), 0.1f);
-            //}
+            WaitFor(1f);
 
             doAttack = false;
             //if another script is trying to move this, let it do so
@@ -134,7 +133,11 @@ public class CardMovement : MonoBehaviour
         doMove = true;
     }
 
-    ///rotates card the amount of "rotation" parameter
+    /// <summary>
+    /// Rotates the card the amount of rotation parameter
+    /// </summary>
+    /// <param name="rotation"></param>
+    /// <param name="rotSpeed"></param>
     public void OnCardRotate(Quaternion rotation, float rotSpeed)
     {
         startRotation = transform.rotation;
@@ -144,6 +147,12 @@ public class CardMovement : MonoBehaviour
         doRotate = true;
     }
 
+
+    /// <summary>
+    /// Animates card attack
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="dur"></param>
     public void OnCardAttack(GameObject target, float dur)
     {
         targetCard = target;
@@ -155,6 +164,8 @@ public class CardMovement : MonoBehaviour
         //if the card isn't attacking directly at you
         if (!(targetCard == References.i.yourPlayerTarget || targetCard == References.i.enemyPlayerTarget))
         {
+            endAttackPoint += new Vector3(0, 0, -liftAmount);
+
             int multiplier;
             attackDur += 0.1f;
             //if the attacking card is the opponents, reverse the multiplier
@@ -177,6 +188,9 @@ public class CardMovement : MonoBehaviour
                 endAttackPoint.x += References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
             }
 
+            targetCard.GetComponent<CardMovement>().Lift();
+                
+
         } else {
            //direct attack
             dirMultiplier = 0;
@@ -185,11 +199,30 @@ public class CardMovement : MonoBehaviour
         doAttack = true;
     }
 
-    private IEnumerator TargetLift()
+    public void Lift()
     {
+        StartCoroutine(TargetLift());
+    }
+
+    /// <summary>
+    /// Lifts up the card that is attacked
+    /// </summary>
+    /// <returns>
+    /// IENumerator
+    /// </returns>
+    public IEnumerator TargetLift()
+    {
+        Vector3 originalPos = transform.localPosition;
+
         //move the target card up
-        targetCard.GetComponent<CardMovement>().OnCardMove(targetCard.transform.position + new Vector3(0, 0, -.1f), 0.1f);
-        yield return 0;
+        gameObject.GetComponent<CardMovement>().OnCardMove(originalPos + new Vector3(0, 0, -liftAmount), 0.15f);
+        yield return new WaitForSeconds(1f);
+        gameObject.GetComponent<CardMovement>().OnCardMove(originalPos, 0.15f);
+    }
+
+    private IEnumerator WaitFor(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
     }
 
 
