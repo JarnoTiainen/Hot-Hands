@@ -126,8 +126,8 @@ public class CollectionManager : MonoBehaviour
         if (newName == null || newName == "") newToggle.name = "DECK " + (playerDecks.Count + 1);
         else newToggle.name = newName;
         newToggle.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = newCardList.name;
-        newToggle.transform.SetParent(togglesRow.transform, false);
         newToggle.group = togglesRow.GetComponent<ToggleGroup>();
+        newToggle.transform.SetParent(togglesRow.transform, false);
         cardListToggles.Add(newToggle);
         newToggle.GetComponent<CollectionToggle>().index = cardListToggles.IndexOf(newToggle);
 

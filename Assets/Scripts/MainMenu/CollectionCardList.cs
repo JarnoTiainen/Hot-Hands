@@ -6,10 +6,8 @@ using TMPro;
 public class CollectionCardList : MonoBehaviour
 {
 
-    [SerializeField]
-    private GameObject container3DPrefab;
-    [SerializeField]
-    private int cardsPerPage = 8;
+    [SerializeField] private GameObject container3DPrefab;
+    [SerializeField] private int cardsPerPage = 8;
     public int currentPage;
     public int totalPages;
     public List<Card> cards = new List<Card>();
@@ -50,8 +48,9 @@ public class CollectionCardList : MonoBehaviour
                     container3D.SetActive(true);
                     container3D.transform.SetParent(gameObject.transform, false);
 
-                    container3D.GetComponent<CollectionCardContainer>().card = card;
-                    container3D.GetComponent<CollectionCardContainer>().InstantiateCard();
+                    CollectionCardContainer containerScript = container3D.GetComponent<CollectionCardContainer>();
+                    containerScript.card = card;
+                    containerScript.InstantiateCard();
                 }
             }
             else
@@ -63,14 +62,13 @@ public class CollectionCardList : MonoBehaviour
                     container3D.SetActive(true);
                     container3D.transform.SetParent(gameObject.transform, false);
 
-                    container3D.GetComponent<CollectionCardContainer>().card = card;
-                    container3D.GetComponent<CollectionCardContainer>().InstantiateCard();
+                    CollectionCardContainer containerScript = container3D.GetComponent<CollectionCardContainer>();
+                    containerScript.card = card;
+                    containerScript.InstantiateCard();
                 }
             }
             currentPage = page;
         }
-
-
 
     }
 }

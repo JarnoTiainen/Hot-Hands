@@ -23,7 +23,7 @@ public class CollectionCard3D : MonoBehaviour
 
     public void AddCard()
     {
-        GameObject.FindGameObjectWithTag("DeckBuild").GetComponent<DeckBuilder>().AddCard(card);
+        GameObject.FindGameObjectWithTag("DeckBuilder").GetComponent<DeckBuilder>().AddCard(card);
     }
 
 
