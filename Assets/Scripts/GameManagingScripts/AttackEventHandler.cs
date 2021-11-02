@@ -75,13 +75,6 @@ public class AttackEventHandler : MonoBehaviour
 
     public void StartDamageEvent(int player, GameObject attacker, GameObject target)
     {
-        CardData attackerCard = attacker.GetComponent<InGameCard>().cardData;
-
-        if (attackerCard.attackDirection == Card.AttackDirection.Right) {
-            CameraShaker.Instance.ShakeOnce(shakeCurve.Evaluate(attackerCard.rp * shakeMagnitude), shakeRoughness, fadeInTime, fadeOutTime);
-        } else {
-            CameraShaker.Instance.ShakeOnce(shakeCurve.Evaluate(attackerCard.lp * shakeMagnitude), shakeRoughness, fadeInTime, fadeOutTime);
-        }
 
         if (target == References.i.yourPlayerTarget || target == References.i.enemyPlayerTarget)
         {
@@ -90,6 +83,7 @@ public class AttackEventHandler : MonoBehaviour
         else
         {
             CardData targetCard = target.GetComponent<InGameCard>().cardData;
+            CardData attackerCard = attacker.GetComponent<InGameCard>().cardData;
             attacker.GetComponent<InGameCard>().UpdateCardTexts();
             target.GetComponent<InGameCard>().UpdateCardTexts();
             bool wasYourAttack = GameManager.Instance.IsYou(player);
@@ -125,8 +119,15 @@ public class AttackEventHandler : MonoBehaviour
                 }
             }
         }
+    }
 
-        
+    public void CameraShake(CardData attackerCard)
+    {
+        if (attackerCard.attackDirection == Card.AttackDirection.Right) {
+            CameraShaker.Instance.ShakeOnce(shakeCurve.Evaluate(attackerCard.rp * shakeMagnitude), shakeRoughness, fadeInTime, fadeOutTime);
+        } else {
+            CameraShaker.Instance.ShakeOnce(shakeCurve.Evaluate(attackerCard.lp * shakeMagnitude), shakeRoughness, fadeInTime, fadeOutTime);
+        }
     }
 
 }

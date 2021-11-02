@@ -122,9 +122,14 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         meshRendererIconZoneLow.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
     }
 
+    /// <summary>
+    /// Fades the cooldown bar in or out depending on isFadeIn boolean
+    /// </summary>
+    /// <param name="duration"></param>
+    /// <param name="isFadeIn"></param>
+    /// <returns></returns>
     private IEnumerator Fade(float duration, bool isFadeIn)
     {
-        
         if(isFadeIn) {
             //fade in
             float elapsedTime = Time.deltaTime;

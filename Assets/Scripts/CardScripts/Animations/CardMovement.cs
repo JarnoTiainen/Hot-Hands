@@ -9,6 +9,7 @@ public class CardMovement : MonoBehaviour
     public float rotationSpeed = 0.5f;
     public float curveMultiplier = 0.1f;
     public float liftAmount = 0.05f;
+    public float liftDur = 1f;
 
     //specifies the movement curve of the card
     [SerializeField]
@@ -76,31 +77,31 @@ public class CardMovement : MonoBehaviour
         }
 
 
-        if (doAttack && transform.position != endAttackPoint) {
-            elapsedAttackTime += Time.deltaTime;
-            //the amount of curve added to the path in x axis
-            Vector3 addToX = new Vector3(attackCurve.Evaluate(elapsedAttackTime / attackDur) * curveMultiplier * dirMultiplier, 0, 0);
+        //if (doAttack && transform.position != endAttackPoint) {
+        //    elapsedAttackTime += Time.deltaTime;
+        //    //the amount of curve added to the path in x axis
+        //    Vector3 addToX = new Vector3(attackCurve.Evaluate(elapsedAttackTime / attackDur) * curveMultiplier * dirMultiplier, 0, 0);
 
-            transform.position = Vector3.Lerp(startAttackPoint, endAttackPoint, curve.Evaluate(elapsedAttackTime / attackDur));
-            transform.position = new Vector3(transform.position.x * 1 + addToX.x, transform.position.y, transform.position.z);
+        //    transform.position = Vector3.Lerp(startAttackPoint, endAttackPoint, curve.Evaluate(elapsedAttackTime / attackDur));
+        //    transform.position = new Vector3(transform.position.x * 1 + addToX.x, transform.position.y, transform.position.z);
 
-        } else if (doAttack && transform.position == endAttackPoint) {  //if the card has moved to the destination, reset variables
-            AttackEventHandler ah = References.i.attackEventHandler;
-            int owner = GetComponent<InGameCard>().owner;
-            //damage event
-            ah.StartDamageEvent(owner, gameObject, targetCard);
+        //} else if (doAttack && transform.position == endAttackPoint) {  //if the card has moved to the destination, reset variables
+        //    AttackEventHandler ah = References.i.attackEventHandler;
+        //    int owner = GetComponent<InGameCard>().owner;
+        //    //damage event
+        //    ah.StartDamageEvent(owner, gameObject, targetCard);
 
-            Wait(1f);
+        //    Wait(1f);
 
-            doAttack = false;
-            //if another script is trying to move this, let it do so
-            if (doMove) {
-                startPoint = transform.position;
-            } else { 
-                if(GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) OnCardMove(References.i.yourMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
-                else OnCardMove(References.i.opponentMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
-            } 
-        }
+        //    doAttack = false;
+        //    //if another script is trying to move this, let it do so
+        //    if (doMove) {
+        //        startPoint = transform.position;
+        //    } else {
+        //        if (GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) OnCardMove(References.i.yourMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
+        //        else OnCardMove(References.i.opponentMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
+        //    }
+        //}
     }
 
     ///uses the default animation curve of card, startpoint specifiable
@@ -158,14 +159,13 @@ public class CardMovement : MonoBehaviour
     {
         targetCard = target;
         startAttackPoint = transform.position;
-        endAttackPoint = target.transform.position;
+        endAttackPoint = target.transform.position + new Vector3(0, 0, -liftAmount);
         attackDur = dur;
         elapsedAttackTime = 0;
 
         //if the card isn't attacking directly at you
-        if (!(targetCard == References.i.yourPlayerTarget || targetCard == References.i.enemyPlayerTarget))
-        {
-            endAttackPoint += new Vector3(0, 0, -liftAmount);
+        if (!(targetCard == References.i.yourPlayerTarget || targetCard == References.i.enemyPlayerTarget)) {
+            
 
             int multiplier;
             attackDur += 0.1f;
@@ -189,20 +189,21 @@ public class CardMovement : MonoBehaviour
                 endAttackPoint.x += References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
             }
 
-            targetCard.GetComponent<CardMovement>().Lift();
+            targetCard.GetComponent<CardMovement>().Lift(dur);
                 
-
         } else {
            //direct attack
             dirMultiplier = 0;
         }
 
         doAttack = true;
+
+        StartCoroutine(AttackAnimation());
     }
 
-    public void Lift()
+    public void Lift(float dur)
     {
-        StartCoroutine(TargetLift());
+        StartCoroutine(TargetLift(dur));
     }
 
     /// <summary>
@@ -211,25 +212,50 @@ public class CardMovement : MonoBehaviour
     /// <returns>
     /// IENumerator
     /// </returns>
-    public IEnumerator TargetLift()
+    public IEnumerator TargetLift(float dur)
     {
         Vector3 originalPos = transform.localPosition;
 
         //move the target card up
-        gameObject.GetComponent<CardMovement>().OnCardMove(originalPos + new Vector3(0, 0, -liftAmount), 0.15f);
-        yield return new WaitForSeconds(1f);
-        gameObject.GetComponent<CardMovement>().OnCardMove(originalPos, 0.15f);
+        gameObject.GetComponent<CardMovement>().OnCardMove(originalPos + new Vector3(0, 0, -liftAmount), dur);
+        yield return new WaitForSeconds(liftDur);
+        gameObject.GetComponent<CardMovement>().OnCardMove(originalPos, dur);
     }
 
-    private Coroutine Wait(float seconds)
+    public IEnumerator AttackAnimation()
     {
-        return StartCoroutine(WaitFor(seconds));
-    }
+        while (doAttack) {
+            if (doAttack && transform.position != endAttackPoint) {
+                elapsedAttackTime += Time.deltaTime;
+                //the amount of curve added to the path in x axis
+                Vector3 addToX = new Vector3(attackCurve.Evaluate(elapsedAttackTime / attackDur) * curveMultiplier * dirMultiplier, 0, 0);
 
-    private IEnumerator WaitFor(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        
+                transform.position = Vector3.Lerp(startAttackPoint, endAttackPoint, curve.Evaluate(elapsedAttackTime / attackDur));
+                transform.position = new Vector3(transform.position.x * 1 + addToX.x, transform.position.y, transform.position.z);
+                Debug.Log("elapsed time" + elapsedAttackTime);
+
+                yield return 0;
+
+            } else if (doAttack && transform.position == endAttackPoint) {  //if the card has moved to the destination, reset variables
+                AttackEventHandler ah = References.i.attackEventHandler;
+                int owner = GetComponent<InGameCard>().owner;
+                //shake the camera
+                ah.CameraShake(this.GetComponent<InGameCard>().cardData);
+
+                yield return new WaitForSeconds(liftDur);
+
+                //damage event
+                ah.StartDamageEvent(owner, gameObject, targetCard);
+                doAttack = false;
+                //if another script is trying to move this, let it do so
+                if (doMove) {
+                    startPoint = transform.position;
+                } else {
+                    if (GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) OnCardMove(References.i.yourMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
+                    else OnCardMove(References.i.opponentMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
+                }
+            }
+        }
     }
 
 
