@@ -87,9 +87,10 @@ public class CardMovement : MonoBehaviour
         } else if (doAttack && transform.position == endAttackPoint) {  //if the card has moved to the destination, reset variables
             AttackEventHandler ah = References.i.attackEventHandler;
             int owner = GetComponent<InGameCard>().owner;
+            //damage event
             ah.StartDamageEvent(owner, gameObject, targetCard);
 
-            WaitFor(1f);
+            Wait(1f);
 
             doAttack = false;
             //if another script is trying to move this, let it do so
@@ -220,9 +221,15 @@ public class CardMovement : MonoBehaviour
         gameObject.GetComponent<CardMovement>().OnCardMove(originalPos, 0.15f);
     }
 
+    private Coroutine Wait(float seconds)
+    {
+        return StartCoroutine(WaitFor(seconds));
+    }
+
     private IEnumerator WaitFor(float seconds)
     {
         yield return new WaitForSeconds(seconds);
+        
     }
 
 

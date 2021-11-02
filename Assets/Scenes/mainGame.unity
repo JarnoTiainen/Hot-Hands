@@ -215,7 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackAnimationSpeed: 0.15
   shakeMagnitude: 1
-  shakeRoughness: 10
+  shakeRoughness: 7
   fadeInTime: 0.1
   fadeOutTime: 1
   shakeCurve:
@@ -231,17 +231,17 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.32306287
     - serializedVersion: 3
-      time: 10.2275715
-      value: 0.99604666
-      inSlope: 0.09814908
-      outSlope: 0.09814908
+      time: 11.352419
+      value: 0.9017168
+      inSlope: 0.08865567
+      outSlope: 0.08865567
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.11353675
-      outWeight: 0.33333334
+      outWeight: 0.12327477
     - serializedVersion: 3
       time: 20
-      value: 2
+      value: 1.8
       inSlope: 0.12325195
       outSlope: 0.12325195
       tangentMode: 0
