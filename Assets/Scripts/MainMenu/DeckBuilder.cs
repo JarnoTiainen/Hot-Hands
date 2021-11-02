@@ -9,8 +9,7 @@ public class DeckBuilder : MonoBehaviour
     private CollectionManager cm;
     [SerializeField] private GameObject countText;
     public GameObject settingsManager;
-    public List<BuildCard> deck = new List<BuildCard>();
-    public List<Card> playerDeck = new List<Card>();
+    public List<BuildCard> build = new List<BuildCard>();
     [SerializeField] private GameObject deckBuildCardPrefab;
     public int deckSizeLimit = 20;
     public int currentBuildSize = 0;
@@ -23,17 +22,14 @@ public class DeckBuilder : MonoBehaviour
     private void Start()
     {
         cm = settingsManager.GetComponent<CollectionManager>();
-        UpdateBuildSize();
-    }
-
-    private void OnEnable()
-    {
         saveButton.GetComponent<Button>().onClick.AddListener(() => saveButtonCallback());
         copyButton.GetComponent<Button>().onClick.AddListener(() => CopyButtonCallback());
         clearButton.GetComponent<Button>().onClick.AddListener(() => clearButtonCallback());
-
+        UpdateBuildSize();
     }
 
+
+    // Adds a card to the builder
     public void AddCard(Card card)
     {
         if(currentBuildSize >= deckSizeLimit)
@@ -41,18 +37,18 @@ public class DeckBuilder : MonoBehaviour
             return;
         }
 
-        if (deck.Count == 0)
+        if (build.Count == 0)
         {
             AddNewCard(card);
             return;
         }
 
-        for (int i = 0; deck.Count > i; i++)
+        for (int i = 0; build.Count > i; i++)
         {
 
-            if (deck[i].name == card.name)
+            if (build[i].name == card.name)
             {
-                deck[i].amount++;
+                build[i].amount++;
                 gameObject.transform.Find(card.name).GetComponent<BuildCardUI>().amount++;
                 gameObject.transform.Find(card.name).GetComponent<BuildCardUI>().UpdateAmount();
                 UpdateBuildSize();
@@ -62,6 +58,7 @@ public class DeckBuilder : MonoBehaviour
         AddNewCard(card);
     }
 
+    // Adds a non-duplicate card to the builder
     private void AddNewCard(Card card)
     {
         GameObject buildCardGameObject = Instantiate(deckBuildCardPrefab) as GameObject;
@@ -76,10 +73,11 @@ public class DeckBuilder : MonoBehaviour
 
         BuildCard buildCard = new BuildCard(card);
         buildCard.amount = 1;
-        deck.Add(buildCard);
+        build.Add(buildCard);
         UpdateBuildSize();
     }
 
+    // Deletes a card from the builder
     public void DeleteCard(Card card)
     {
         if (currentBuildSize <= 0)
@@ -87,18 +85,18 @@ public class DeckBuilder : MonoBehaviour
             return;
         }
 
-        for (int i = 0; deck.Count > i; i++)
+        for (int i = 0; build.Count > i; i++)
         {
-            if (deck[i].name == card.name)
+            if (build[i].name == card.name)
             {
-                if(deck[i].amount == 1)
+                if(build[i].amount == 1)
                 {
-                    deck.RemoveAt(i);
+                    build.RemoveAt(i);
                     Destroy(GameObject.Find(card.name));
                 }
                 else
                 {
-                    deck[i].amount--;
+                    build[i].amount--;
                     gameObject.transform.Find(card.name).GetComponent<BuildCardUI>().amount--;
                     gameObject.transform.Find(card.name).GetComponent<BuildCardUI>().UpdateAmount();
                 }
@@ -108,12 +106,13 @@ public class DeckBuilder : MonoBehaviour
         }
     }
 
+    // Updates the builder's card counter text
     private void UpdateBuildSize()
     {
         int count = 0;
-        for(int i = 0; deck.Count > i; i++)
+        for(int i = 0; build.Count > i; i++)
         {
-            count += deck[i].amount;
+            count += build[i].amount;
         }
 
         currentBuildSize = count;
@@ -129,22 +128,23 @@ public class DeckBuilder : MonoBehaviour
 
     }
 
+    // Saves the build on DeckBuilder's list on to the currently open deck and sets it as the player's active deck
     public void SaveDeck()
     {
         if (cm.activeList == 0) return;
         int playerDeckIndex = cm.activeList -1;
         List<Card> tempDeck = new List<Card>();
-        for (int i = 0; deck.Count > i; i++)
+        for (int i = 0; build.Count > i; i++)
         {
-            if (deck[i].amount == 1)
+            if (build[i].amount == 1)
             {
-                tempDeck.Add(deck[i].card);
+                tempDeck.Add(build[i].card);
             }
             else
             {
-                for(int j = 0; deck[i].amount > j; j++)
+                for(int j = 0; build[i].amount > j; j++)
                 {
-                    tempDeck.Add(deck[i].card);
+                    tempDeck.Add(build[i].card);
                 }
             }
         }
@@ -164,10 +164,12 @@ public class DeckBuilder : MonoBehaviour
             cm.playerDecks[playerDeckIndex] = tempDeck;
         }
         cm.SetPlayerDeckList(playerDeckIndex);
-        ClearBuild();
         cm.UpdatePageText();
+        cm.SetActiveDeck();
+        ClearBuild();
     }
 
+    // Copies the cards from the currently open deck to the builder
     public void CopyDeck()
     {
         if (cm.activeList == 0) return;
@@ -178,9 +180,10 @@ public class DeckBuilder : MonoBehaviour
         }
     }
 
+    // Clears all the cards from the builder
     public void ClearBuild()
     {
-        deck.Clear();
+        build.Clear();
         foreach(Transform child in transform)
         {
             Destroy(child.gameObject);
@@ -192,7 +195,6 @@ public class DeckBuilder : MonoBehaviour
     {
         CopyDeck();
     }
-
     private void saveButtonCallback()
     {
         SaveDeck();

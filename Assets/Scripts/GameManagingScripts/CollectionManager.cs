@@ -18,11 +18,14 @@ public class CollectionManager : MonoBehaviour
     [SerializeField] private GameObject togglesRow;
     [SerializeField] private GameObject pageText;
     [SerializeField] private GameObject createButton;
+    [SerializeField] private GameObject setActiveButton;
     [SerializeField] private GameObject cardListPrefab;
     [SerializeField] private Toggle cardListTogglePrefab;
     public int activeList = 0;
-    [SerializeField] private int activePlayerDeck = 0;
+    [SerializeField] private int lastActiveDeck = 0;
     [SerializeField] private int playerDeckLimit = 5;
+    private Color32 defaultDeckBGColor = new Color32(89, 89, 89, 255);
+    private Color32 activeDeckBGColor = new Color32(40, 205, 40 ,255);
 
 
 
@@ -30,8 +33,8 @@ public class CollectionManager : MonoBehaviour
     void Start()
     {
         resourcesCardList = Resources.Load("Card List") as CardList;
-        SetAllCardsList();
 
+        // Test decks for dev purposes
         ////////////////////////////////////////////////////
         testDeck.Sort(delegate (Card card1, Card card2)
         {
@@ -47,34 +50,48 @@ public class CollectionManager : MonoBehaviour
         playerDecks.Add(testDeck);
         playerDecks.Add(testDeck2);
         ////////////////////////////////////////////////////
-
+        
+        // Calling functions that create and populate the ingame lists
+        SetAllCardsList();
         for (int i = 0; playerDecks.Count > i; i++)
         {
             CreateNewDeck("DECK " + (i + 1), true);
             SetPlayerDeckList(i);
         }
         UpdatePageText();
+
+        createButton.GetComponent<Button>().onClick.AddListener(() => CreateButtonCallback("", false));
+        setActiveButton.GetComponent<Button>().onClick.AddListener(() => SetActiveButtonCallback());
     }
 
-    private void OnEnable()
-    {
-        togglesRow.transform.parent.GetComponent<HorizontalLayoutGroup>().enabled = false;
-        togglesRow.transform.parent.GetComponent<HorizontalLayoutGroup>().enabled = true;
-        createButton.GetComponent<Button>().onClick.AddListener(() => createButtonCallback("", false));
-        //Canvas.ForceUpdateCanvases();
-    }
 
     private void SetPlayerDecks(List<List<Card>> decks)
     {
 
     }
 
-    [Button]private void SetActiveDeck()
+    // Sends the players active deck data to the online database and visually shows which deck is active
+    public void SetActiveDeck()
     {
-        DeckObject deckString = new DeckObject(playerDecks[activeList]);
+        if (activeList == 0) return;
+
+        DeckObject deckString = new DeckObject(playerDecks[activeList - 1]);
         WebSocketService.SetDeck(JsonUtility.ToJson(deckString));
+        SetActiveDeckUI();
     }
 
+    // Sets the visuals that show which deck is active
+    public void SetActiveDeckUI()
+    {
+        if (lastActiveDeck != 0)
+        {
+            cardListToggles[lastActiveDeck].transform.Find("Background").GetComponent<Image>().color = defaultDeckBGColor;
+        };
+        cardListToggles[activeList].transform.Find("Background").GetComponent<Image>().color = activeDeckBGColor;
+        lastActiveDeck = activeList;
+    }
+
+    // Gets all game cards and passes them to the 'All Cards List' and calls it's populate function
     private void SetAllCardsList()
     {
         foreach (CardList.ListCard listCard in resourcesCardList.allCards)
@@ -84,6 +101,7 @@ public class CollectionManager : MonoBehaviour
         cardLists[0].GetComponent<CollectionCardList>().PopulatePage(1);
     }
 
+    // Passes a specific player deck's cards to the corresponding ingame list and calls it's populate function
     public void SetPlayerDeckList(int i)
     {
         cardLists[i + 1].GetComponent<CollectionCardList>().cards = playerDecks[i];
@@ -91,6 +109,7 @@ public class CollectionManager : MonoBehaviour
 
     }
 
+    // Creates new empty ingame list and deck when called
     public void CreateNewDeck(string newName = null, bool start = false)
     {
         if (playerDecks.Count >= playerDeckLimit) return;
@@ -113,9 +132,13 @@ public class CollectionManager : MonoBehaviour
         newToggle.GetComponent<CollectionToggle>().index = cardListToggles.IndexOf(newToggle);
 
         if (!start) playerDecks.Add(new List<Card>());
-        
+
+        // Force rebuilds the toggle row so that the content size fitter component behaves properly
+        RectTransform togglesRectTransform = togglesRow.transform.parent.GetComponent<RectTransform>();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(togglesRectTransform);
     }
 
+    // Check's which toggle is checked and sets the corresponding ingame list active
     public void ChangeActiveCardList(int toggle)
     {
         if (!cardListToggles[toggle].isOn) return;
@@ -135,6 +158,7 @@ public class CollectionManager : MonoBehaviour
         UpdatePageText();
     }
 
+    // Changes the page on the active ingame list
     public void ChangePage(int i)
     {
         CollectionCardList list = cardLists[activeList].GetComponent<CollectionCardList>();
@@ -151,14 +175,22 @@ public class CollectionManager : MonoBehaviour
         UpdatePageText();
     }
 
+    // Updates the page counter
     public void UpdatePageText()
     {
         CollectionCardList list = cardLists[activeList].GetComponent<CollectionCardList>();
         pageText.GetComponent<TextMeshProUGUI>().text = (list.currentPage) + "/" + list.totalPages;
     }
 
-    private void createButtonCallback(string name, bool start)
+    // Bound to an onClick event from the "Create Button'. Calls CreateNewDeck function
+    private void CreateButtonCallback(string name, bool start)
     {
         CreateNewDeck(name, start);
+    }
+
+    // Bound to an onClick event from the "Set Active Button'. Calls SetActiveDeck function
+    private void SetActiveButtonCallback()
+    {
+        SetActiveDeck();
     }
 }
