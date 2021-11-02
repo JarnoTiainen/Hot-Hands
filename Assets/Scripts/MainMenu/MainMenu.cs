@@ -60,6 +60,11 @@ public class MainMenu : MonoBehaviour
         Debug.Log("gameFound");
     }
 
+    public void OnTutorialButton()
+    {
+        SceneManager.LoadScene("TutorialScene");
+    }
+
     public void QuitGame()
     {
         Debug.Log("Quit.");
