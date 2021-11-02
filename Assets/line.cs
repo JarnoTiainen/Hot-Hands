@@ -32,13 +32,13 @@ public class line : MonoBehaviour
             lineGameObject.transform.position = lineOBJPos;
             Debug.DrawLine(startPos, endPos);
             lineGameObject.transform.LookAt(endPos, Vector3.up);
-            lineGameObject.transform.GetChild(0).localScale = new Vector3(0.1f, lineLength, 0.1f);
+            lineGameObject.transform.localScale = new Vector3(0.1f, lineLength, 0.1f);
             float rot = Vector3.Angle(Vector3.up, endPos - startPos);
             if ((endPos - startPos).x > 0)
             {
                 rot = Vector3.Angle(Vector3.up, - endPos + startPos);
             }
-            lineMaterial.SetFloat("_Rotation", rot);
+            //lineMaterial.SetFloat("_Rotation", rot);
         }
         
     }
