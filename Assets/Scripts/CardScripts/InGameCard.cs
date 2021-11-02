@@ -189,13 +189,18 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     public void OnClickElement()
     {
         Debug.Log("Clicked elent");
-
-        if(!attackOnCD && !preAttackOnCD && GameManager.Instance.IsYou(owner))
+        if (!Mouse.Instance.targetModeOn)
         {
-            preAttackOnCD = true;
-            ToggleAttackBurnEffect(false);
-            if(GameManager.Instance.IsYou(owner)) WebSocketService.Attack(serverConfirmedIndex);
-
+            if (!attackOnCD && !preAttackOnCD && GameManager.Instance.IsYou(owner))
+            {
+                preAttackOnCD = true;
+                ToggleAttackBurnEffect(false);
+                if (GameManager.Instance.IsYou(owner)) WebSocketService.Attack(serverConfirmedIndex);
+            }
+        }
+        else
+        {
+            Debug.Log("target element " + cardData.cardName);
         }
     }
 

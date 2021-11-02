@@ -74,9 +74,33 @@ public class GameManager : MonoBehaviour
             enemyPlayerStats.playerBurnValue = burnCardMessage.newBurnValue;
             PlayerBurnCard(newCard, cardMessage.player);
         }
-        
     }
-
+    public void PlayerModifyHealth(ModifyHealth modifyHealth)
+    {
+        if (debuggerModeOn) Debug.Log("player modifyHealth " + modifyHealth.amount);
+        if(IsYou(modifyHealth.player))
+        {
+            if(modifyHealth.amount > 0)
+            {
+                playerStats.playerHealth += modifyHealth.amount;
+            }
+            else if(modifyHealth.amount < 0)
+            {
+                playerStats.playerHealth -= modifyHealth.amount;
+            }
+        }
+        else
+        {
+            if (modifyHealth.amount > 0)
+            {
+                enemyPlayerStats.playerHealth += modifyHealth.amount;
+            }
+            else if(modifyHealth.amount < 0)
+            {
+                enemyPlayerStats.playerHealth -= modifyHealth.amount;
+            }
+        }
+    }
 
     public void ReturnBurnedCardToHand()
     {

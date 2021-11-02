@@ -14,6 +14,8 @@ public class Mouse : MonoBehaviour
     public GameObject markerPrefab;
     [SerializeField] private bool debuggingModeOn = false;
     [SerializeField] private float mouseHightFromTableTop;
+    [SerializeField] public bool targetModeOn;
+    [SerializeField] public GameObject targetSource;
 
     private void Awake()
     {

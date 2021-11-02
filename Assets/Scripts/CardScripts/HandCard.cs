@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class HandCard : MonoBehaviour, IOnClickDownUIElement
 {
-    public Mouse mouse;
-
-    private void Awake()
-    {
-        mouse = GameObject.Find("Mouse").GetComponent<Mouse>();
-    }
-
     public void OnClickElement()
     {
-        if(!GetComponent<InGameCard>().cardHidden)
+        if(!Mouse.Instance.targetModeOn)
         {
-            transform.parent.GetComponent<Hand>().RemoveVisibleCard(gameObject);
-            mouse.SetNewHeldCard(gameObject, Hand.Instance.GetCardIndex(gameObject));
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+            if (!GetComponent<InGameCard>().cardHidden)
+            {
+                transform.parent.GetComponent<Hand>().RemoveVisibleCard(gameObject);
+                Mouse.Instance.SetNewHeldCard(gameObject, Hand.Instance.GetCardIndex(gameObject));
+                gameObject.GetComponent<BoxCollider>().enabled = false;
+            }
+        }
+        else
+        {
+            Debug.Log("targeting card " + gameObject.GetComponent<InGameCard>().cardData.cardName);
         }
     }
 }
