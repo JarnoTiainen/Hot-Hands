@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class CollectionManager : MonoBehaviour
 {
@@ -57,7 +58,10 @@ public class CollectionManager : MonoBehaviour
 
     private void OnEnable()
     {
+        togglesRow.transform.parent.GetComponent<HorizontalLayoutGroup>().enabled = false;
+        togglesRow.transform.parent.GetComponent<HorizontalLayoutGroup>().enabled = true;
         createButton.GetComponent<Button>().onClick.AddListener(() => createButtonCallback("", false));
+        //Canvas.ForceUpdateCanvases();
     }
 
     private void SetPlayerDecks(List<List<Card>> decks)
@@ -65,10 +69,10 @@ public class CollectionManager : MonoBehaviour
 
     }
 
-    private void SetActiveDeck()
+    [Button]private void SetActiveDeck()
     {
-        GameMessage message = new GameMessage("OnMessage", "SETDECK", JsonUtility.ToJson(playerDecks[activePlayerDeck]));
-        WebSocketService.SetDeck(JsonUtility.ToJson(message));
+        DeckObject deckString = new DeckObject(playerDecks[activeList]);
+        WebSocketService.SetDeck(JsonUtility.ToJson(deckString));
     }
 
     private void SetAllCardsList()
@@ -109,9 +113,7 @@ public class CollectionManager : MonoBehaviour
         newToggle.GetComponent<CollectionToggle>().index = cardListToggles.IndexOf(newToggle);
 
         if (!start) playerDecks.Add(new List<Card>());
-        Canvas.ForceUpdateCanvases();
-        togglesRow.transform.parent.GetComponent<HorizontalLayoutGroup>().enabled = false;
-        togglesRow.transform.parent.GetComponent<HorizontalLayoutGroup>().enabled = true;
+        
     }
 
     public void ChangeActiveCardList(int toggle)
