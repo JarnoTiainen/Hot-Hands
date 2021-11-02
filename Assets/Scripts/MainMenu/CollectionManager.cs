@@ -75,8 +75,9 @@ public class CollectionManager : MonoBehaviour
     {
         if (activeList == 0) return;
 
-        DeckObject deckString = new DeckObject(playerDecks[activeList - 1]);
+        DeckObject deckString = new DeckObject(playerDecks[activeList - 1], activeList - 1);
         WebSocketService.SaveDeck(JsonUtility.ToJson(deckString));
+        WebSocketService.SetActiveDeck(activeList - 1);
         SetActiveDeckUI();
     }
 

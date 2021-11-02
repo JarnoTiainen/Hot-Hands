@@ -253,6 +253,7 @@ public class GameManager : MonoBehaviour
                 References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
             }
             References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().owner = summonCardMessage.player;
+            playerStats.playerFieldCards++;
         }
         else
         {
@@ -265,6 +266,7 @@ public class GameManager : MonoBehaviour
             References.i.opponentMonsterZone.AddNewMonsterCard(false, summonCardMessage.boardIndex, References.i.cardList.GetCardData(summonCardMessage));
             References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(summonCardMessage.boardIndex)).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
             References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(summonCardMessage.boardIndex)).GetComponent<InGameCard>().owner = summonCardMessage.player;
+            enemyPlayerStats.playerFieldCards++;
         }
     }
 

@@ -17,10 +17,7 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
         //playerDeck = cardList.playerDeck;
     }
 
-    [Button] public void SendDeckData()
-    {
-        WebSocketService.SetDeck(GetDeckJSON());
-    }
+    
 
     public void OnClickElement()
     {
@@ -49,11 +46,7 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
         
     }
 
-    public string GetDeckJSON()
-    {
-        DeckObject deck = new DeckObject(playerDeck);
-        return JsonUtility.ToJson(deck);
-    }
+    
 
     public void StartDrawCooldown(float duration)
     {

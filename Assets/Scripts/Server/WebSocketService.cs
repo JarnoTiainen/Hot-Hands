@@ -270,16 +270,16 @@ public class WebSocketService : MonoBehaviour
         card.SaveCardToCardList();
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
-    public static void SetDeck(string deckJson)
+    public static void SetActiveDeck(int deckIndex)
     {
         if(Instance.debuggerModeOn) Debug.Log("Send deck data");
 
-        GameMessage message = new GameMessage("OnMessage", "SETDECK", deckJson);
+        GameMessage message = new GameMessage("OnMessage", "SETACTIVEDECK", deckIndex.ToString());
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
     public static void SaveDeck(string deckJson)
     {
-        if (Instance.debuggerModeOn) Debug.Log("Send deck data");
+        if (Instance.debuggerModeOn) Debug.Log("Send deck data " + deckJson);
 
         GameMessage message = new GameMessage("OnMessage", "SAVEDECK", deckJson);
         SendWebSocketMessage(JsonUtility.ToJson(message));
