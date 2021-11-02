@@ -51,7 +51,6 @@ public class WebSocketService : MonoBehaviour
             
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
             if (showServerMessage) Debug.Log("server message: " + data[0] + " " + data[1]);
-            if (showServerMessage) Debug.Log("server message: " + data[0] + " " + data[1]);
             switch ((string)data[0])
             {
                 case "OPPONENTJOIN":
@@ -109,6 +108,10 @@ public class WebSocketService : MonoBehaviour
                     if (debuggerModeOn) Debug.Log("Message type was SETDECK");
                     SetDeckMessage setDeckMessage = JsonUtility.FromJson<SetDeckMessage>(data[1]);
                     GameManager.Instance.SetDeck(setDeckMessage);
+                    break;
+                case "GETDECKS":
+                    if (debuggerModeOn) Debug.Log("Message type was GETDECKS");
+                    GetDecksMessage getDecksMessage = JsonUtility.FromJson<GetDecksMessage>(data[1]);
                     break;
                 case "BURNCARD":
                     if (debuggerModeOn) Debug.Log("Message type was BURNCARD");
@@ -298,6 +301,12 @@ public class WebSocketService : MonoBehaviour
         if (Instance.debuggerModeOn) Debug.Log("Burned card hand index " + handIndex);
 
         GameMessage message = new GameMessage("OnMessage", "BURNCARD", handIndex.ToString());
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
+
+    [Button]public static void GetDecks()
+    {
+        GameMessage message = new GameMessage("OnMessage", "GETDECKS", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 }
