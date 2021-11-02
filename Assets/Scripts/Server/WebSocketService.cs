@@ -51,6 +51,7 @@ public class WebSocketService : MonoBehaviour
             
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
             if (showServerMessage) Debug.Log("server message: " + data[0] + " " + data[1]);
+            if (showServerMessage) Debug.Log("server message: " + data[0] + " " + data[1]);
             switch ((string)data[0])
             {
                 case "OPPONENTJOIN":
@@ -274,6 +275,13 @@ public class WebSocketService : MonoBehaviour
         if(Instance.debuggerModeOn) Debug.Log("Send deck data");
 
         GameMessage message = new GameMessage("OnMessage", "SETDECK", deckJson);
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
+    public static void SaveDeck(string deckJson)
+    {
+        if (Instance.debuggerModeOn) Debug.Log("Send deck data");
+
+        GameMessage message = new GameMessage("OnMessage", "SAVEDECK", deckJson);
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 
