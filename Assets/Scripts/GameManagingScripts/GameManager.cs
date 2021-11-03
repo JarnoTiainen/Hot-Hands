@@ -246,6 +246,7 @@ public class GameManager : MonoBehaviour
             {
                 References.i.yourMonsterZone.AutoAddNewMonsterCard(false, summonCardMessage.boardIndex, References.i.cardList.GetCardData(summonCardMessage));
                 References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
+                playerStats.playerFieldCards++;
             }
             else
             {
@@ -253,7 +254,7 @@ public class GameManager : MonoBehaviour
                 References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
             }
             References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().owner = summonCardMessage.player;
-            playerStats.playerFieldCards++;
+            
         }
         else
         {
@@ -266,7 +267,7 @@ public class GameManager : MonoBehaviour
             References.i.opponentMonsterZone.AddNewMonsterCard(false, summonCardMessage.boardIndex, References.i.cardList.GetCardData(summonCardMessage));
             References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(summonCardMessage.boardIndex)).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
             References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(summonCardMessage.boardIndex)).GetComponent<InGameCard>().owner = summonCardMessage.player;
-            enemyPlayerStats.playerFieldCards++;
+            //enemyPlayerStats.playerFieldCards++;
         }
     }
 
@@ -368,6 +369,8 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerPlayCard(CardData data, int handIndex = -1, int boardIndex = 0, int player = -1, float attackCD = 0)
     {
+        
+
         if (player == -1) player = playerNumber;
         if(player == playerNumber)
         {
@@ -425,6 +428,11 @@ public class GameManager : MonoBehaviour
             if (debugPlayerAttack) Debug.LogWarning("was your attack " + wasYourAttack);
             References.i.attackEventHandler.StartAttackEvent(wasYourAttack, attacker, target, attackEventMessage.attackCooldown);
         }
+    }
+
+    public void BuffBoard()
+    {
+
     }
 
     public bool IsYou(int player)

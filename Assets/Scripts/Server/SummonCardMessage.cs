@@ -27,4 +27,5 @@ public class SummonCardMessage
     public int rp;
     public int lp;
     public List<Enchantment> enchantments;
+    public string seed;
 }

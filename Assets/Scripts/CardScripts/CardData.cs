@@ -24,12 +24,13 @@ public class CardData
     public List<Card.MonsterTag> monsterTags;
     public int rp;
     public int lp;
-
+    public string seed;
     [SerializeField] public List<Enchantment> enchantments = new List<Enchantment>();
 
     //add missing ones later
-    public CardData(Sprite cardSprite, string cardName, int cost, int value, Card.CardType cardType, Card.AttackDirection attackDirection, int rp, int lp, List<Enchantment> enchantments) //List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags)
+    public CardData(Sprite cardSprite, string cardName, int cost, int value, Card.CardType cardType, Card.AttackDirection attackDirection, int rp, int lp, List<Enchantment> enchantments, string seed) //List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags)
     {
+        this.seed = seed;
         this.cardSprite = cardSprite;
         this.cardName = cardName;
         this.cost = cost;

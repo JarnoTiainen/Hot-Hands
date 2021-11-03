@@ -19,7 +19,7 @@ public class Enchantment
 
     public enum EnchantmentEffect
     {
-        Default, DrawCard, GainBurn, PlaySelf, DiscardPileDuplication, SummonToEnemy, HealPlayer
+        Default, DrawCard, GainBurn, PlaySelf, DiscardPileDuplication, SummonToEnemy, HealPlayer, BuffBoardAttackDirectionPowers, EssenceSiphon
     }
     public enum Trigger
     {

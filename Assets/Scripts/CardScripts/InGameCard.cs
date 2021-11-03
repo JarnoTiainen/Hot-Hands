@@ -32,6 +32,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] public Canvas textCanvas;
     [SerializeField] private CardBurn cardBurn;
     [SerializeField] private bool canAffordBool;
+    [SerializeField] public int seed;
 
     [ShowIf("debuggerModeOn", true)] public int serverConfirmedIndex;
     public bool confirmedByServer;

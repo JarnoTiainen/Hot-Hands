@@ -174,6 +174,9 @@ public class WebSocketService : MonoBehaviour
                 case "MODIFYHEALTH":
                     gameManager.PlayerModifyHealth(JsonUtility.FromJson<ModifyHealth>(data[1]));
                     break;
+                case "BUFFBOARRD":
+                    gameManager.PlayerModifyHealth(JsonUtility.FromJson<ModifyHealth>(data[1]));
+                    break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                     break;
@@ -222,10 +225,10 @@ public class WebSocketService : MonoBehaviour
         await websocket.Close();
     }
 
-    public static void PlayCard(int cardIndex, int boardIndex)
+    public static void PlayCard(int cardIndex, int boardIndex, string seed)
     {
         if (Instance.debuggerModeOn) Debug.LogWarning("PLAYING CARD TO INDEX " + boardIndex);
-        PlayCardMessage playCardMessage = new PlayCardMessage(2, cardIndex, boardIndex);
+        PlayCardMessage playCardMessage = new PlayCardMessage(seed, 2, cardIndex, boardIndex);
         string playCardMessageJSON = JsonUtility.ToJson(playCardMessage);
 
         GameMessage message = new GameMessage("OnMessage", "PLAYCARD", playCardMessageJSON);

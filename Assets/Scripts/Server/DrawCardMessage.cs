@@ -15,6 +15,7 @@ public class DrawCardMessage
     public int rp;
     public int lp;
     public List<Enchantment> enchantments;
+    public string seed;
 
 
     public DrawCardMessage(int playerIn)
