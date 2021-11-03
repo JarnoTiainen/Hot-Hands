@@ -14,8 +14,6 @@ public class CollectionManager : MonoBehaviour
 
     public List<Toggle> cardListToggles = new List<Toggle>();
     public List<GameObject> cardLists = new List<GameObject>();
-    [SerializeField] private List<Card> testDeck = new List<Card>();
-    [SerializeField] private List<Card> testDeck2 = new List<Card>();
     public List<List<Card>> playerDecks = new List<List<Card>>();
     [SerializeField] private GameObject cardListWindow;
     [SerializeField] private GameObject togglesRow;
@@ -41,7 +39,7 @@ public class CollectionManager : MonoBehaviour
         SetAllCardsList();
         UpdatePageText();
 
-        createButton.GetComponent<Button>().onClick.AddListener(() => CreateButtonCallback("", false));
+        createButton.GetComponent<Button>().onClick.AddListener(() => CreateButtonCallback(""));
         setActiveButton.GetComponent<Button>().onClick.AddListener(() => SetActiveButtonCallback());
     }
 
@@ -69,21 +67,26 @@ public class CollectionManager : MonoBehaviour
                     }
                 }
             }
-            this.playerDecks.Add(tempDeck);
+            if(tempDeck.Count == 0)
+            {
+                this.playerDecks.Add(new List<Card>());
+            }
+            else
+            {
+                this.playerDecks.Add(tempDeck);
+            }
         }
 
         for (int i = 0; playerDecks.Count > i; i++)
         {
-            if (!(playerDecks[i].Count == 0))
-            {
-                CreateNewDeck("DECK " + (i + 1), true, true);
-                SetPlayerDeckList(i);
-            }
+            CreateNewDeck("DECK " + (i + 1), true, true);
+            SetPlayerDeckList(i);
+            
         }
 
         lastActiveDeck = getDecksMessage.activeDeckIndex + 1;
         cardListToggles[getDecksMessage.activeDeckIndex + 1].transform.Find("Background").GetComponent<Image>().color = activeDeckBGColor;
-        if(playerDecks.Count == playerDeckLimit)
+        if (playerDecks.Count == playerDeckLimit)
         {
             createButton.SetActive(false);
         }
@@ -197,9 +200,9 @@ public class CollectionManager : MonoBehaviour
     }
 
     // Bound to an onClick event from the "Create Button'. Calls CreateNewDeck function
-    private void CreateButtonCallback(string name, bool start)
+    private void CreateButtonCallback(string name)
     {
-        CreateNewDeck(name, start);
+        CreateNewDeck(name);
     }
 
     // Bound to an onClick event from the "Set Active Button'. Calls SetActiveDeck function
