@@ -35,14 +35,7 @@ public class CardEnchantmentEffectManager : MonoBehaviour
                 Debug.Log("Brutality effect here");
                 break;
             case Enchantment.Trigger.Drawtivation:
-                if (isYou)
-                {
-                    Hand.Instance.GetVisibleCardWithSeed(seed).GetComponent<CardEnchantmentEffectScript>().PlayEffectWild();
-                }
-                else
-                {
-                    EnemyHand.Instance.GetCardWithSeed(seed).GetComponent<CardEnchantmentEffectScript>().PlayEffectWild();
-                }
+                GameManager.Instance.GetCardFromInGameCards(seed).GetComponent<CardEnchantmentEffectScript>().PlayEffectWild();
                 Debug.Log("Drawtivation effect here");
                 break;
             case Enchantment.Trigger.LastBreath:
@@ -50,15 +43,7 @@ public class CardEnchantmentEffectManager : MonoBehaviour
                 Debug.Log("LastBreath effect here");
                 break;
             case Enchantment.Trigger.Opener:
-                if (isYou)
-                {
-                    References.i.yourMonsterZone.GetCardWithSeed(seed).GetComponent<CardEnchantmentEffectScript>().PlayEffectOpener();
-
-                }
-                else
-                {
-                    References.i.opponentMonsterZone.GetCardWithSeed(seed).GetComponent<CardEnchantmentEffectScript>().PlayEffectOpener();
-                }
+                GameManager.Instance.GetCardFromInGameCards(seed).GetComponent<CardEnchantmentEffectScript>().PlayEffectOpener();
                 Debug.Log("Opener effect here");
                 break;
             case Enchantment.Trigger.Retaliate:

@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour
             inGameCards.Remove(seed);
         }
     }
+    public GameObject GetCardFromInGameCards(string seed)
+    {
+        return inGameCards[seed];
+    }
+
     [Button] public void PrintInGameCards()
     {
         Debug.LogWarning("Cards in inGameCards: " + inGameCards.Count + " cards: ");
