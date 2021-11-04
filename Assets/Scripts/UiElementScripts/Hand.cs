@@ -77,20 +77,23 @@ public class Hand : MonoBehaviour
         return newCard;
     }
 
-    [Button] public static void RevealNewCard(DrawCardMessage drawCardMessage)
+    [Button] public static GameObject RevealNewCard(DrawCardMessage drawCardMessage)
     {
         CardData cardData = Instance.cardList.GetCardData(drawCardMessage);
+        GameObject card = null;
         if(cardData != null)
         {
             unhandledCards[0].GetComponent<InGameCard>().cardHidden = false;
             unhandledCards[0].GetComponent<InGameCard>().SetNewCardData(true, cardData);
             unhandledCards[0].GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0,0,0), Instance.rotationSpeed);
             unhandledCards[0].GetComponent<InGameCard>().nameText.text = drawCardMessage.cardName;
-            
+            card = unhandledCards[0];
             unhandledCards.Remove(unhandledCards[0]);
             Instance.UpdateCanAffortCards();
 
         }
+
+        return card;
     }
     public static void RemoveHiddenCard()
     {
@@ -107,14 +110,26 @@ public class Hand : MonoBehaviour
     }
 
     //Removes one card from hand and if there is no parameter remove card with last index
-    [Button] public void RemoveCard(int CardIndex = 0)
+    [Button] public void RemoveCard(string seed)
     {
-        GameObject removedCard = handCards[CardIndex];
-        handCards.Remove(removedCard);
-        visibleHandCards.Remove(removedCard);
-        Destroy(removedCard);
-        SetNewCardPositions();
-        Instance.UpdateCanAffortCards();
+        GameObject removedCard = null;
+        foreach (GameObject card in handCards)
+        {
+            if (card.GetComponent<InGameCard>().cardData.seed == seed) removedCard = card;
+        }
+        if(removedCard != null)
+        {
+            handCards.Remove(removedCard);
+            visibleHandCards.Remove(removedCard);
+            GameManager.Instance.RemoveCardFromInGameCards(removedCard);
+            Destroy(removedCard);
+            SetNewCardPositions();
+            Instance.UpdateCanAffortCards();
+        }
+        else
+        {
+            Debug.LogError("Card with seed: " + seed + " was not from hand cards!");
+        }
     }
 
     [Button]

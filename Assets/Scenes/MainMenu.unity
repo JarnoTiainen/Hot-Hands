@@ -2487,24 +2487,6 @@ MonoBehaviour:
   - {fileID: 1774043310}
   cardLists:
   - {fileID: 1474118507}
-  testDeck:
-  - {fileID: 11400000, guid: 7709c982bed85fc41975e20d4de4da8d, type: 2}
-  - {fileID: 11400000, guid: 26eee90c558004d4e94b3416033d7ef2, type: 2}
-  - {fileID: 11400000, guid: 2d5fc0897578a0b40b196a69ad0d8e40, type: 2}
-  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
-  - {fileID: 11400000, guid: 2d5fc0897578a0b40b196a69ad0d8e40, type: 2}
-  testDeck2:
-  - {fileID: 11400000, guid: d1e2bbe766bed76469b95bcc6eda80b2, type: 2}
-  - {fileID: 11400000, guid: d1e2bbe766bed76469b95bcc6eda80b2, type: 2}
-  - {fileID: 11400000, guid: 341a6e4bdaffe3d4cbbbb8ffe438bbca, type: 2}
-  - {fileID: 11400000, guid: 7709c982bed85fc41975e20d4de4da8d, type: 2}
-  - {fileID: 11400000, guid: ffce4c5f022b5f248a7fa1b313cd3351, type: 2}
-  - {fileID: 11400000, guid: ffce4c5f022b5f248a7fa1b313cd3351, type: 2}
-  - {fileID: 11400000, guid: ffce4c5f022b5f248a7fa1b313cd3351, type: 2}
-  - {fileID: 11400000, guid: 3b168982305e4f54a8257f979e9b483d, type: 2}
-  - {fileID: 11400000, guid: 39be313319a28b649bc4b8ab748e5263, type: 2}
-  - {fileID: 11400000, guid: 482f37e5f307701439730da2bfb9b384, type: 2}
-  - {fileID: 11400000, guid: 482f37e5f307701439730da2bfb9b384, type: 2}
   cardListWindow: {fileID: 1506495219}
   togglesRow: {fileID: 1715329661}
   pageText: {fileID: 2035491782}
@@ -2513,7 +2495,6 @@ MonoBehaviour:
   cardListPrefab: {fileID: 5615912896467758309, guid: 063a0d915ce38e64fb752acbf25b16da, type: 3}
   cardListTogglePrefab: {fileID: 6601235587835085345, guid: 13fbccb6683337b44971f1c755e3cf7e, type: 3}
   activeList: 0
-  lastActiveDeck: 0
   playerDeckLimit: 5
 --- !u!1 &360289199
 GameObject:
@@ -6228,10 +6209,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countText: {fileID: 1598563733}
-  settingsManager: {fileID: 359209725}
   deckBuildCardPrefab: {fileID: 7760491796736766473, guid: 35a84b717ab300d4db5db1c8abd649fc, type: 3}
   deckSizeLimit: 20
-  currentBuildSize: 0
   saveButton: {fileID: 409405888}
   copyButton: {fileID: 575469747}
   clearButton: {fileID: 12408480}
@@ -14333,7 +14312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 2080187386}
-  debuggerModeOn: 1
+  debuggerModeOn: 0
   showServerMessage: 1
   isLoggedIn: 0
 --- !u!4 &2080187385
@@ -14388,8 +14367,8 @@ MonoBehaviour:
   playerStartHealth: 99
   debuggerModeOn: 0
   debugPlayerBurnCard: 0
-  debugPlayerDrawCard: 0
-  debugPlayerPlayCard: 0
+  debugPlayerDrawCard: 1
+  debugPlayerPlayCard: 1
   debugPlayerAttack: 0
 --- !u!1 &2088757919
 GameObject:

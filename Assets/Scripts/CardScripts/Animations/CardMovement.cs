@@ -232,7 +232,7 @@ public class CardMovement : MonoBehaviour
 
                 transform.position = Vector3.Lerp(startAttackPoint, endAttackPoint, curve.Evaluate(elapsedAttackTime / attackDur));
                 transform.position = new Vector3(transform.position.x * 1 + addToX.x, transform.position.y, transform.position.z);
-                Debug.Log("elapsed time" + elapsedAttackTime);
+                //Debug.Log("elapsed time" + elapsedAttackTime);
 
                 yield return 0;
 

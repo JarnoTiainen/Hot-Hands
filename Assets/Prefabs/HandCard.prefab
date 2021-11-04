@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046820757901187121}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.002}
   m_LocalScale: {x: 0.0005, y: 0.0005, z: 1}
   m_Children: []
   m_Father: {fileID: 4367383529751537849}
@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00008, y: -0.0405}
+  m_AnchoredPosition: {x: -0.00008, y: -0.0412}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5201616450512762558
@@ -874,7 +874,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a17b8afeade60a46b77dd8a023f42ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: {fileID: 0}
 --- !u!114 &424058452700800159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -898,12 +897,14 @@ MonoBehaviour:
     monsterTags: 
     rp: 0
     lp: 0
+    seed: 
     enchantments: []
   nameText: {fileID: 8906596261901186246}
   cost: {fileID: 6910323822229337869}
   value: {fileID: 8902743543681902155}
   lp: {fileID: 7848432294895779082}
   rp: {fileID: 5759760883158312004}
+  fadeDuration: 0.5
   coolDownSlider: {fileID: 4354812131388942114}
   debuggerModeOn: 0
   cardMainBodyMaterial: {fileID: -6465566751694194690, guid: 0a9d315ef8089e247a582c0c35f2f748, type: 3}
@@ -922,6 +923,7 @@ MonoBehaviour:
   textCanvas: {fileID: 4525997025527728775}
   cardBurn: {fileID: 6134887068788904234}
   canAffordBool: 0
+  seed: 0
   serverConfirmedIndex: 0
   confirmedByServer: 0
   isGhostCard: 0
@@ -960,6 +962,8 @@ MonoBehaviour:
   attackDur: 0
   rotationSpeed: 0.5
   curveMultiplier: 4
+  liftAmount: 0.05
+  liftDur: 1
   curve:
     serializedVersion: 2
     m_Curve:
@@ -1252,7 +1256,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9020729396848444570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0025}
   m_LocalScale: {x: 0.0005, y: 0.0005, z: 1}
   m_Children: []
   m_Father: {fileID: 4367383529751537849}
@@ -1260,7 +1264,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0216, y: -0.034}
+  m_AnchoredPosition: {x: 0.0227, y: -0.034}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4154158880852094276
@@ -1461,7 +1465,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9158880970588015799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0025000002}
   m_LocalScale: {x: 0.0005, y: 0.0005, z: 1}
   m_Children: []
   m_Father: {fileID: 4367383529751537849}
@@ -1469,7 +1473,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.022, y: -0.0342}
+  m_AnchoredPosition: {x: -0.0227, y: -0.0342}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5859603805252259444

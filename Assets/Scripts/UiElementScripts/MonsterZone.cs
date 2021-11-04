@@ -23,7 +23,7 @@ public class MonsterZone : MonoBehaviour
         }
     }
 
-    public void AutoAddNewMonsterCard(bool isYourCard, int boardIndex, CardData data)
+    public GameObject AutoAddNewMonsterCard(bool isYourCard, int boardIndex, CardData data)
     {
         GameObject newMonster = Instantiate(References.i.fieldCard);
         serverConfirmedCards.Add(newMonster);
@@ -33,6 +33,7 @@ public class MonsterZone : MonoBehaviour
         newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
         ReCalculateServerCardIndexes();
         RepositionMonsterCards();
+        return newMonster;
     }
 
 
@@ -63,6 +64,7 @@ public class MonsterZone : MonoBehaviour
             if (index > monsterCards.Count) index = monsterCards.Count;
             monsterCards.Insert(index, newMonster);
             newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
+            GameManager.Instance.AddCardToInGameCards(newMonster);
             ReCalculateServerCardIndexes();
             RepositionMonsterCards();
         }
@@ -291,11 +293,13 @@ public class MonsterZone : MonoBehaviour
             monsterCards[monsterCards.Count - 1 - playCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(playCardMessage));
         }
     }
-    public void UpdateCardData(bool isYourCard, SummonCardMessage summonCardMessage)
+    public GameObject UpdateCardData(bool isYourCard, SummonCardMessage summonCardMessage)
     {
+        GameObject handledCard;
+
         if (isYourCard)
         {
-            GameObject handledCard = unhandledCards[0];
+            handledCard = unhandledCards[0];
             if (monsterCards.IndexOf(handledCard) != summonCardMessage.boardIndex)
             {
                 monsterCards.Remove(handledCard);
@@ -312,7 +316,9 @@ public class MonsterZone : MonoBehaviour
         else
         {
             monsterCards[monsterCards.Count - 1 - summonCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(summonCardMessage));
+            handledCard = monsterCards[monsterCards.Count - 1 - summonCardMessage.boardIndex];
         }
+        return handledCard;
     }
 
 

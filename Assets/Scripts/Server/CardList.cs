@@ -93,7 +93,7 @@ public class CardList : ScriptableObject
     {
         Card card = GetCardData(drawCardMessage.cardName);
         CardData cardData = new CardData(card.cardSprite, drawCardMessage.cardName, drawCardMessage.cardCost, drawCardMessage.cardValue, card.cardType, (Card.AttackDirection)drawCardMessage.attackDirection, drawCardMessage.rp, drawCardMessage.lp, drawCardMessage.enchantments, drawCardMessage.seed);
-        Debug.Log("new card seed: " + cardData.seed);
+        //Debug.Log("new card seed: " + cardData.seed);
         return cardData;
     }
 

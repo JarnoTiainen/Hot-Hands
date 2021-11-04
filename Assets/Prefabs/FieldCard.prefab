@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191462631554623677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0018}
   m_LocalScale: {x: 0.0005, y: 0.0005, z: 1}
   m_Children: []
   m_Father: {fileID: 6259117554449996411}
@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0217, y: -0.0344}
+  m_AnchoredPosition: {x: 0.0226, y: -0.0344}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5715942085780116637
@@ -266,7 +266,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2910685044957707367}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0009}
   m_LocalScale: {x: 0.0005, y: 0.0005, z: 1}
   m_Children: []
   m_Father: {fileID: 6259117554449996411}
@@ -274,7 +274,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00008, y: -0.0396}
+  m_AnchoredPosition: {x: -0.00008, y: -0.0411}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5143038542997896966
@@ -928,6 +928,7 @@ MonoBehaviour:
     monsterTags: 
     rp: 0
     lp: 0
+    seed: 
     enchantments: []
   nameText: {fileID: 120260980706194099}
   cost: {fileID: 7117940552052851705}
@@ -953,6 +954,7 @@ MonoBehaviour:
   textCanvas: {fileID: 344395278571197130}
   cardBurn: {fileID: 143564926150220506}
   canAffordBool: 0
+  seed: 0
   serverConfirmedIndex: 0
   confirmedByServer: 0
   isGhostCard: 0
@@ -1302,7 +1304,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6975159800815049626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0018}
   m_LocalScale: {x: 0.0005, y: 0.0005, z: 1}
   m_Children: []
   m_Father: {fileID: 6259117554449996411}
@@ -1310,7 +1312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0219, y: -0.0342}
+  m_AnchoredPosition: {x: -0.0227, y: -0.0342}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4863763932882991865

@@ -225,6 +225,8 @@ public class WebSocketService : MonoBehaviour
         await websocket.Close();
     }
 
+
+    //Change this to use only seed and board index
     public static void PlayCard(int cardIndex, int boardIndex, string seed)
     {
         if (Instance.debuggerModeOn) Debug.LogWarning("PLAYING CARD TO INDEX " + boardIndex);
@@ -236,6 +238,8 @@ public class WebSocketService : MonoBehaviour
         SendWebSocketMessage(JsonUtility.ToJson(message));
         //sfxLibrary.GetComponent<PlayCardSFX>().Play();
     }
+
+
 
 
     [Button]
@@ -254,22 +258,22 @@ public class WebSocketService : MonoBehaviour
         SendWebSocketMessage(JsonUtility.ToJson(message));
 
     }
-
-
-
+    [Button]
+    public static void GetDecks()
+    {
+        GameMessage message = new GameMessage("OnMessage", "GETDECKS", "");
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
     public static void GetPlayerNumber()
     {
         GameMessage playCard = new GameMessage("OnMessage", "GETSIDE", "");
         SendWebSocketMessage(JsonUtility.ToJson(playCard));
     }
-
-
     public static void DrawCard()
     {
         GameMessage message = new GameMessage("OnMessage", "DRAWCARD", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
-
     public static void SaveCardToDataBase(Card card)
     {
         Debug.Log("sending new cards");
@@ -292,6 +296,7 @@ public class WebSocketService : MonoBehaviour
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 
+
     public static void Attack(int fieldIndex)
     {
         Debug.Log("Attacked with id " + fieldIndex);
@@ -299,6 +304,15 @@ public class WebSocketService : MonoBehaviour
         GameMessage message = new GameMessage("OnMessage", "ATTACK", fieldIndex.ToString());
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
+    //Make this main function and delete one above
+    public static void Attack(string seed)
+    {
+        Debug.Log("Attacked with seed " + seed);
+
+        GameMessage message = new GameMessage("OnMessage", "ATTACK", seed);
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
+
 
     public static void Burn(int handIndex)
     {
@@ -307,10 +321,12 @@ public class WebSocketService : MonoBehaviour
         GameMessage message = new GameMessage("OnMessage", "BURNCARD", handIndex.ToString());
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
-
-    [Button]public static void GetDecks()
+    //Make this main function and delete one above
+    public static void Burn(string seed)
     {
-        GameMessage message = new GameMessage("OnMessage", "GETDECKS", "");
+        if (Instance.debuggerModeOn) Debug.Log("Burned card with seed " + seed);
+
+        GameMessage message = new GameMessage("OnMessage", "BURNCARD", seed);
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 }

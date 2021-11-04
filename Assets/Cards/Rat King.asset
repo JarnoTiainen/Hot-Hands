@@ -14,12 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardSprite: {fileID: 21300000, guid: 46e8e5060b771784994a02a0976f0c8c, type: 3}
   cardName: Rat King
-  cost: 0
-  value: 0
-  cardType: 0
+  cost: 5
+  value: 3
+  cardType: 1
   spellTags: 
   monsterTags: 
-  rp: 0
-  lp: 0
-  attackDirection: 0
-  enchantments: []
+  rp: 4
+  lp: 4
+  attackDirection: 2
+  enchantments:
+  - enchantmentName: Royal Orders
+    enchantmentEffect: 7
+    trigger: 1
+    weight: 2

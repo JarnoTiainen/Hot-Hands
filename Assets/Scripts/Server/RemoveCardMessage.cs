@@ -15,4 +15,5 @@ public class RemoveCardMessage
     public int player;
     public int handIndex;
     public int fieldIndex;
+    public string seed;
 }
