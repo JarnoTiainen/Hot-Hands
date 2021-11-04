@@ -31,7 +31,7 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
                     OnPreDrawCD = true;
                     WebSocketService.DrawCard();
                     GameManager.Instance.playerStats.playerHandCards++;
-                    GameManager.Instance.PlayerDrawCard();
+                    GameManager.Instance.PlayerDrawCard(GameManager.Instance.playerNumber);
                 }
                 else
                 {

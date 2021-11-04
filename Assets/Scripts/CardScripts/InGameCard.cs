@@ -201,7 +201,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
             {
                 preAttackOnCD = true;
                 ToggleAttackBurnEffect(false);
-                if (GameManager.Instance.IsYou(owner)) WebSocketService.Attack(serverConfirmedIndex);
+                if (GameManager.Instance.IsYou(owner)) WebSocketService.Attack(cardData.seed);
             }
         }
         else

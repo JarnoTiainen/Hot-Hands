@@ -5,5 +5,6 @@ public class BurnCardMessage
     public int newBurnValue;
     public string burnedCard;
     public DrawCardMessage burnedCardDone;
+    public string seed;
 
 }

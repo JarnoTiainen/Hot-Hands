@@ -31,11 +31,10 @@ public class PlayCardMessage
     public string seed;
 
 
-    public PlayCardMessage(string seed, int cardSource = 0, int handIndex = 0, int boardIndex = 0, int sender = 0)
+    public PlayCardMessage(string seed, int cardSource = 0, int boardIndex = 0, int sender = 0)
     {
         this.seed = seed;
         this.cardSource = cardSource;
-        this.handIndex = handIndex;
         this.player = sender;
         this.boardIndex = boardIndex;
     }

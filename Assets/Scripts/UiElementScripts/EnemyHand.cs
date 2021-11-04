@@ -16,13 +16,6 @@ public class EnemyHand : MonoBehaviour
         Instance = gameObject.GetComponent<EnemyHand>();
     }
 
-
-    public GameObject GetCardWithIndex(int index)
-    {
-        return unhandledCards[unhandledCards.Count - 1];
-        //return unhandledCards[index];
-    }
-
     private static GameObject InstantiateNewCard()
     {
         GameObject newCard = Instantiate(References.i.handCard, References.i.opponentDeckObj.transform.position, Quaternion.Euler(0, 180, 0));
@@ -50,19 +43,41 @@ public class EnemyHand : MonoBehaviour
     }
 
     //add a new card to enemy hand
-    [Button] public static void AddNewCard()
+    [Button] public static void AddNewCard(string seed)
     {
         GameObject newCard = InstantiateNewCard();
         unhandledCards.Add(newCard);
+        newCard.GetComponent<InGameCard>().cardData.seed = seed;
         SetNewCardPositions();
+        GameManager.Instance.AddCardToInGameCards(newCard);
     }
 
-    //Removes one card from enemy hand and if there is no parameter remove card with last index
-    [Button] public void RemoveCard(int CardIndex = 0)
+    public GameObject GetCardWithSeed(string seed)
     {
-        GameObject removedCard = unhandledCards[CardIndex];
-        unhandledCards.Remove(removedCard);
-        Destroy(removedCard);
-        SetNewCardPositions();
+        foreach(GameObject card in unhandledCards)
+        {
+            if(card.GetComponent<InGameCard>().cardData.seed == seed)
+            {
+                return card;
+            }
+        }
+        return null;
+    }
+
+
+    //Removes one card from enemy hand and if there is no parameter remove card with last index
+    [Button] public void RemoveCard(string seed)
+    {
+        GameObject removedCard = GetCardWithSeed(seed);
+        if(removedCard != null)
+        {
+            unhandledCards.Remove(removedCard);
+            Destroy(removedCard);
+            SetNewCardPositions();
+        }
+        else
+        {
+            Debug.LogError("no card with seed found");
+        }
     }
 }

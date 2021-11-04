@@ -38,9 +38,14 @@ public class Hand : MonoBehaviour
         
     }
 
-    public GameObject GetCardWithIndex(int index)
+    public GameObject GetVisibleCardWithSeed(string seed)
     {
-        return visibleHandCards[index];
+        foreach(GameObject card in visibleHandCards)
+        {
+            if (card.GetComponent<InGameCard>().cardData.seed == seed) return card;
+        }
+        Debug.LogError("Card with seed was not found from visible cards");
+        return null;
     }
 
     public static void AddNewCardToHand(GameObject card)
@@ -132,10 +137,22 @@ public class Hand : MonoBehaviour
         }
     }
 
-    [Button]
-    public void RemoveCardNoDestroy(int CardIndex = 0)
+    public GameObject GetHandCardWithSeed(string seed)
     {
-        GameObject removedCard = handCards[CardIndex];
+        foreach(GameObject card in handCards)
+        {
+            if(card.GetComponent<InGameCard>().cardData.seed == seed)
+            {
+                return card;
+            }
+        }
+        return null;
+    }
+
+    [Button]
+    public void RemoveCardNoDestroy(string seed)
+    {
+        GameObject removedCard = GetHandCardWithSeed(seed);
         handCards.Remove(removedCard);
         visibleHandCards.Remove(removedCard);
         SetNewCardPositions();
@@ -169,11 +186,11 @@ public class Hand : MonoBehaviour
     }
 
     //returns card back to hand
-    public void ReturnVisibleCard(GameObject card, int handIndex)
+    public void ReturnVisibleCard(GameObject card)
     {
         card.GetComponent<BoxCollider>().enabled = true;
         card.transform.SetParent(transform, true);
-        visibleHandCards.Insert(handIndex, card);
+        visibleHandCards.Add(card);
         SetNewCardPositions();
     }
 

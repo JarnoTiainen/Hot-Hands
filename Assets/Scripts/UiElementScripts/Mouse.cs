@@ -70,32 +70,30 @@ public class Mouse : MonoBehaviour
             {
                 GameManager.Instance.playerStats.playerFieldCards++;
 
-                WebSocketService.PlayCard(handIndex, References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.ghostCard), heldCard.GetComponent<InGameCard>().cardData.seed);
-
-                
-                GameManager.Instance.PlayerPlayCard(heldCard.GetComponent<InGameCard>().cardData, handIndex);
+                WebSocketService.PlayCard(References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.ghostCard), heldCard.GetComponent<InGameCard>().cardData.seed);
+                GameManager.Instance.PlayerPlayCard(heldCard.GetComponent<InGameCard>().cardData);
                 heldCard = null;
             }
             else
             {
                 References.i.yourMonsterZone.RemoveGhostCard();
-                Hand.Instance.ReturnVisibleCard(heldCard, handIndex);
+                Hand.Instance.ReturnVisibleCard(heldCard);
                 heldCard = null;
             }
         }
         else if(RayCaster.Instance.target == References.i.yourBonfire)
         {
             References.i.yourMonsterZone.RemoveGhostCard();
-            if(debuggingModeOn) Debug.Log("Card discarded from slot " + handIndex);
-            WebSocketService.Burn(handIndex);
+            if(debuggingModeOn) Debug.Log("Card discarded with seed: " + heldCard.GetComponent<InGameCard>().cardData.seed);
+            WebSocketService.Burn(heldCard.GetComponent<InGameCard>().cardData.seed);
             GameManager.Instance.PlayerBurnCard(heldCard);
-            Hand.Instance.RemoveCardNoDestroy(handIndex);
+            Hand.Instance.RemoveCardNoDestroy(heldCard.GetComponent<InGameCard>().cardData.seed);
             heldCard = null;
         }
         else
         {
             References.i.yourMonsterZone.RemoveGhostCard();
-            Hand.Instance.ReturnVisibleCard(heldCard, handIndex);
+            Hand.Instance.ReturnVisibleCard(heldCard);
             heldCard = null;
         }
     }

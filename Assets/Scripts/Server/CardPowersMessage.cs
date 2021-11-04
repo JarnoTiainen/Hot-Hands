@@ -3,13 +3,13 @@ using System;
 [Serializable]
 public class CardPowersMessage
 {
-    public int index;
+    public string seed;
     public int rp;
     public int lp;
 
-    public CardPowersMessage(int index, int rp,int lp)
+    public CardPowersMessage(string seed, int rp,int lp)
     {
-        this.index = index;
+        this.seed = seed;
         this.rp = rp;
         this.lp = lp;
     }

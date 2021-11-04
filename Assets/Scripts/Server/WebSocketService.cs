@@ -225,12 +225,10 @@ public class WebSocketService : MonoBehaviour
         await websocket.Close();
     }
 
-
-    //Change this to use only seed and board index
-    public static void PlayCard(int cardIndex, int boardIndex, string seed)
+    public static void PlayCard(int boardIndex, string seed)
     {
         if (Instance.debuggerModeOn) Debug.LogWarning("PLAYING CARD TO INDEX " + boardIndex);
-        PlayCardMessage playCardMessage = new PlayCardMessage(seed, 2, cardIndex, boardIndex);
+        PlayCardMessage playCardMessage = new PlayCardMessage(seed, 2, boardIndex);
         string playCardMessageJSON = JsonUtility.ToJson(playCardMessage);
 
         GameMessage message = new GameMessage("OnMessage", "PLAYCARD", playCardMessageJSON);
@@ -296,14 +294,6 @@ public class WebSocketService : MonoBehaviour
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 
-
-    public static void Attack(int fieldIndex)
-    {
-        Debug.Log("Attacked with id " + fieldIndex);
-
-        GameMessage message = new GameMessage("OnMessage", "ATTACK", fieldIndex.ToString());
-        SendWebSocketMessage(JsonUtility.ToJson(message));
-    }
     //Make this main function and delete one above
     public static void Attack(string seed)
     {
@@ -313,14 +303,6 @@ public class WebSocketService : MonoBehaviour
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 
-
-    public static void Burn(int handIndex)
-    {
-        if (Instance.debuggerModeOn) Debug.Log("Burned card hand index " + handIndex);
-
-        GameMessage message = new GameMessage("OnMessage", "BURNCARD", handIndex.ToString());
-        SendWebSocketMessage(JsonUtility.ToJson(message));
-    }
     //Make this main function and delete one above
     public static void Burn(string seed)
     {

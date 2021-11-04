@@ -25,8 +25,8 @@ public class AttackEventHandler : MonoBehaviour
 
         if (wasYourAttack)
         {
-            GameObject attackingCard = yourMonsterZone.GetCardWithServerIndex(attacker.index);
-            GameObject targetCard = opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(target.index));
+            GameObject attackingCard = yourMonsterZone.GetCardWithSeed(attacker.seed);
+            GameObject targetCard = opponentMonsterZone.GetCardWithSeed(target.seed);
 
             Debug.LogWarning("Attack: attacker: " + attackingCard.GetComponent<InGameCard>().cardData.cardName + " rp: " + attackingCard.GetComponent<InGameCard>().cardData.rp + " lp: " + attackingCard.GetComponent<InGameCard>().cardData.lp + " target: " + targetCard.GetComponent<InGameCard>().cardData.cardName + " rp: " + targetCard.GetComponent<InGameCard>().cardData.rp + " lp: " + targetCard.GetComponent<InGameCard>().cardData.lp);
 
@@ -40,8 +40,8 @@ public class AttackEventHandler : MonoBehaviour
         }
         else
         {
-            GameObject attackingCard = opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index));
-            GameObject targetCard = yourMonsterZone.GetCardWithServerIndex(target.index);
+            GameObject attackingCard = opponentMonsterZone.GetCardWithSeed(attacker.seed);
+            GameObject targetCard = yourMonsterZone.GetCardWithSeed(target.seed);
 
             Debug.Log(" 2 Attack: attacker: " + attackingCard.GetComponent<InGameCard>().cardData.cardName + " rp: " + attackingCard.GetComponent<InGameCard>().cardData.rp + " lp: " + attackingCard.GetComponent<InGameCard>().cardData.lp + " target: " + targetCard.GetComponent<InGameCard>().cardData.cardName + " rp: " + targetCard.GetComponent<InGameCard>().cardData.rp + " lp: " + targetCard.GetComponent<InGameCard>().cardData.lp);
 
@@ -58,17 +58,17 @@ public class AttackEventHandler : MonoBehaviour
     {
         if (wasYourAttack)
         {
-            GameObject attackingCard = References.i.yourMonsterZone.GetCardWithServerIndex(attacker.index);
+            GameObject attackingCard = References.i.yourMonsterZone.GetCardWithSeed(attacker.seed);
             attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.enemyPlayerTarget, attackAnimationSpeed);
-            References.i.yourMonsterZone.GetCardWithServerIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
+            References.i.yourMonsterZone.GetCardWithSeed(attacker.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
             GameManager.Instance.enemyPlayerStats.playerHealth -= playerTakenDamage;
         }
         else
         {
-            GameObject attackingCard = References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index));
+            GameObject attackingCard = References.i.opponentMonsterZone.GetCardWithSeed(attacker.seed);
             attackingCard.GetComponent<InGameCard>().ToggleAttackBurnEffect(false);
             attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.yourPlayerTarget, attackAnimationSpeed);
-            References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(attacker.index)).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
+            References.i.opponentMonsterZone.GetCardWithSeed(attacker.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
             GameManager.Instance.playerStats.playerHealth -= playerTakenDamage;
         }
     }

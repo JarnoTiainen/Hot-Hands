@@ -70,10 +70,10 @@ public class MonsterZone : MonoBehaviour
         }
     }
 
-    public void RemoveMonsterCard(int index)
+    public void RemoveMonsterCard(string seed)
     {
-        if (debugModeOn) Debug.Log("Removing monster " + index);
-        GameObject deadMonster = GetCardWithServerIndex(index);
+        if (debugModeOn) Debug.Log("Removing monster " + seed);
+        GameObject deadMonster = GetCardWithSeed(seed);
         monsterCards.Remove(deadMonster);
         serverConfirmedCards.Remove(deadMonster);
         GameObject.Destroy(deadMonster);
@@ -82,11 +82,11 @@ public class MonsterZone : MonoBehaviour
 
     }
 
-    public void RemoveMonsterCardNoDestroy(int index)
+    public void RemoveMonsterCardNoDestroy(string seed)
     {
 
-        if (debugModeOn) Debug.Log("Removing monster " + index);
-        GameObject deadMonster = GetCardWithServerIndex(index);
+        if (debugModeOn) Debug.Log("Removing monster " + seed);
+        GameObject deadMonster = GetCardWithSeed(seed);
         limboCards.Add(deadMonster);
         monsterCards.Remove(deadMonster);
         serverConfirmedCards.Remove(deadMonster);
@@ -158,13 +158,13 @@ public class MonsterZone : MonoBehaviour
         return monsterCards.Count - ghostCardInt - 1 - index;
     }
 
-    public GameObject GetCardWithServerIndex(int index)
+    public GameObject GetCardWithSeed(string seed)
     {
         foreach (GameObject card in monsterCards)
         {
             if(card != ghostCard)
             {
-                if (card.GetComponent<InGameCard>().serverConfirmedIndex == index) return card;
+                if (card.GetComponent<InGameCard>().cardData.seed == seed) return card;
             }
             
         }
@@ -252,7 +252,7 @@ public class MonsterZone : MonoBehaviour
                     //}
 
                     
-                    WebSocketService.Attack(card.GetComponent<InGameCard>().serverConfirmedIndex);
+                    WebSocketService.Attack(card.GetComponent<InGameCard>().cardData.seed);
                     if (debugModeOn) Debug.Log("found match for attacker: " + monsterCards[i].GetComponent<InGameCard>().cardData.cardName);
                     return;
                 }
@@ -325,25 +325,25 @@ public class MonsterZone : MonoBehaviour
 
     public void UpdateCardData(bool isYourCard, CardPowersMessage cardPower)
     {
-        if (debugModeOn) Debug.Log("index " + cardPower.index);
+        if (debugModeOn) Debug.Log("seed " + cardPower.seed);
         if(isYourCard)
         {
-            GetCardWithServerIndex(cardPower.index).GetComponent<InGameCard>().SetStatLp(cardPower.lp);
-            GetCardWithServerIndex(cardPower.index).GetComponent<InGameCard>().SetStatRp(cardPower.rp);
+            GetCardWithSeed(cardPower.seed).GetComponent<InGameCard>().SetStatLp(cardPower.lp);
+            GetCardWithSeed(cardPower.seed).GetComponent<InGameCard>().SetStatRp(cardPower.rp);
             
         }
         else
         {
-            GetCardWithServerIndex(RevertIndex(cardPower.index)).GetComponent<InGameCard>().SetStatLp(cardPower.rp);
-            GetCardWithServerIndex(RevertIndex(cardPower.index)).GetComponent<InGameCard>().SetStatRp(cardPower.lp);
+            GetCardWithSeed(cardPower.seed).GetComponent<InGameCard>().SetStatLp(cardPower.rp);
+            GetCardWithSeed(cardPower.seed).GetComponent<InGameCard>().SetStatRp(cardPower.lp);
             
         }
-        GetCardWithServerIndex(cardPower.index).GetComponent<InGameCard>().UpdateCardTexts();
+        GetCardWithSeed(cardPower.seed).GetComponent<InGameCard>().UpdateCardTexts();
         if(isYourCard)
         {
-            if (cardPower.lp <= 0 || cardPower.rp <= 0) RemoveMonsterCardNoDestroy(cardPower.index);
+            if (cardPower.lp <= 0 || cardPower.rp <= 0) RemoveMonsterCardNoDestroy(cardPower.seed);
         }
-        else if (cardPower.lp <= 0 || cardPower.rp <= 0) RemoveMonsterCardNoDestroy(RevertIndex(cardPower.index));
+        else if (cardPower.lp <= 0 || cardPower.rp <= 0) RemoveMonsterCardNoDestroy(cardPower.seed);
     }
 
     public int GetNewGhostCardIndex()

@@ -53,10 +53,13 @@ public class GameManager : MonoBehaviour
     [Button] public void PrintInGameCards()
     {
         Debug.LogWarning("Cards in inGameCards: " + inGameCards.Count + " cards: ");
-        foreach(string seed in inGameCards.Keys)
+
+        foreach (KeyValuePair<string, GameObject> kvp in inGameCards)
         {
-            Debug.Log("seed: " + seed + " card name: " + inGameCards[seed].GetComponent<InGameCard>().cardData.cardName);
+            Debug.Log(kvp.Key + " " + kvp.Value.GetComponent<InGameCard>().cardData.cardName);
         }
+            
+
     }
 
 
@@ -105,7 +108,7 @@ public class GameManager : MonoBehaviour
             Vector3 cardPos = References.i.opponentBonfire.transform.position;
             cardPos.z = Hand.Instance.gameObject.transform.position.z;
             newCard = Instantiate(References.i.handCard, cardPos, Quaternion.Euler(0, 180, 0));
-            EnemyHand.Instance.RemoveCard(burnCardMessage.handIndex);
+            EnemyHand.Instance.RemoveCard(burnCardMessage.seed);
             CardData cardData = References.i.cardList.GetCardData(cardMessage);
             newCard.GetComponent<InGameCard>().cardData = cardData;
             enemyPlayerStats.playerBurnValue = burnCardMessage.newBurnValue;
@@ -198,7 +201,7 @@ public class GameManager : MonoBehaviour
         {
             if(drawCardMessage.drawCooldown == -1)
             {
-                PlayerDrawCard();
+                PlayerDrawCard(drawCardMessage.player, drawCardMessage.seed);
                 GameManager.Instance.playerStats.playerHandCards++;
             }
             else
@@ -210,7 +213,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            PlayerDrawCard(drawCardMessage.player);
+            PlayerDrawCard(drawCardMessage.player, drawCardMessage.seed);
         }
     }
 
@@ -223,23 +226,17 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Display effect here");
         enchantmentEffect.cardInfo = JsonUtility.FromJson<DrawCardMessage>(enchantmentEffect.card);
-        Debug.Log(enchantmentEffect.cardInfo.cardName + " " + enchantmentEffect.trigger + " " + enchantmentEffect.fieldIndex);
-        int index = -1;
-        if (enchantmentEffect.fieldIndex != -1) index = enchantmentEffect.fieldIndex;
+        Debug.Log(enchantmentEffect.cardInfo.cardName + " " + enchantmentEffect.trigger + " " + enchantmentEffect.seed);
         bool isYou = false;
         if (IsYou(enchantmentEffect.cardInfo.player)) isYou = true;
-        References.i.cardEnchantmentEffectManager.PlayEnchantmentEffect((Enchantment.Trigger)enchantmentEffect.trigger, index, isYou);
+        References.i.cardEnchantmentEffectManager.PlayEnchantmentEffect((Enchantment.Trigger)enchantmentEffect.trigger, enchantmentEffect.seed, isYou);
         References.i.cardEnchantmentEffectManager.DisplayCardEffectSource(References.i.cardList.GetCardData(enchantmentEffect.cardInfo));
 		sfxLibrary.transform.GetComponent<EffectActivationSFX>().Play();
     }
 
 
-    public void PlayerDrawCard(int player = -1)
+    public void PlayerDrawCard(int player, string seed = "")
     {
-        if(player == -1)
-        {
-            player = playerNumber;
-        }
         if(player == playerNumber)
         {
             playerStats.deckCardCount--;
@@ -249,10 +246,9 @@ public class GameManager : MonoBehaviour
         {
             enemyPlayerStats.deckCardCount--;
             if(debugPlayerDrawCard) Debug.Log("Remaining cards " + enemyPlayerStats.deckCardCount);
-            EnemyHand.AddNewCard();
+            EnemyHand.AddNewCard(seed);
         }
         sfxLibrary.GetComponent<DrawCardSFX>().Play();
-        
     }
 
     [Button]public void PlayerReturnDrawCard()
@@ -282,15 +278,15 @@ public class GameManager : MonoBehaviour
             if(summonCardMessage.auto)
             {
                 AddCardToInGameCards(References.i.yourMonsterZone.AutoAddNewMonsterCard(false, summonCardMessage.boardIndex, References.i.cardList.GetCardData(summonCardMessage)));
-                References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
+                References.i.yourMonsterZone.GetCardWithSeed(summonCardMessage.seed).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
                 playerStats.playerFieldCards++;
             }
             else
             {
                 AddCardToInGameCards(References.i.yourMonsterZone.UpdateCardData(true, summonCardMessage));
-                References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
+                References.i.yourMonsterZone.GetCardWithSeed(summonCardMessage.seed).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
             }
-            References.i.yourMonsterZone.GetCardWithServerIndex(summonCardMessage.boardIndex).GetComponent<InGameCard>().owner = summonCardMessage.player;
+            References.i.yourMonsterZone.GetCardWithSeed(summonCardMessage.seed).GetComponent<InGameCard>().owner = summonCardMessage.player;
             
         }
         else
@@ -302,8 +298,8 @@ public class GameManager : MonoBehaviour
             }
 
             References.i.opponentMonsterZone.AddNewMonsterCard(false, summonCardMessage.boardIndex, References.i.cardList.GetCardData(summonCardMessage));
-            References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(summonCardMessage.boardIndex)).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
-            References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(summonCardMessage.boardIndex)).GetComponent<InGameCard>().owner = summonCardMessage.player;
+            References.i.opponentMonsterZone.GetCardWithSeed(summonCardMessage.seed).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
+            References.i.opponentMonsterZone.GetCardWithSeed(summonCardMessage.seed).GetComponent<InGameCard>().owner = summonCardMessage.player;
             //enemyPlayerStats.playerFieldCards++;
         }
     }
@@ -335,7 +331,7 @@ public class GameManager : MonoBehaviour
             if ((RemoveCardMessage.CardSource)removeCardMessage.source == RemoveCardMessage.CardSource.Hand)
             {
                 //Add remove card from in game cards here
-                EnemyHand.Instance.RemoveCard(0);
+                EnemyHand.Instance.RemoveCard(removeCardMessage.seed);
                 enemyPlayerStats.playerHandCards--;
             }
             else if ((RemoveCardMessage.CardSource)removeCardMessage.source == RemoveCardMessage.CardSource.Deck)
@@ -375,12 +371,12 @@ public class GameManager : MonoBehaviour
             {
                 References.i.yourMonsterZone.AutoAddNewMonsterCard(true, playCardMessage.boardIndex, References.i.cardList.GetCardData(playCardMessage));
                 Hand.Instance.RemoveCard(playCardMessage.seed);
-                References.i.yourMonsterZone.GetCardWithServerIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(playCardMessage.attackCooldown, true);
+                References.i.yourMonsterZone.GetCardWithSeed(playCardMessage.seed).GetComponent<InGameCard>().StartAttackCooldown(playCardMessage.attackCooldown, true);
                 return;
             }
 
             References.i.yourMonsterZone.UpdateCardData(true, playCardMessage);
-            References.i.yourMonsterZone.GetCardWithServerIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().StartAttackCooldown(playCardMessage.attackCooldown, true);
+            References.i.yourMonsterZone.GetCardWithSeed(playCardMessage.seed).GetComponent<InGameCard>().StartAttackCooldown(playCardMessage.attackCooldown, true);
             
             if ((PlayCardMessage.CardSource)playCardMessage.cardSource == PlayCardMessage.CardSource.Hand)
             {
@@ -399,14 +395,14 @@ public class GameManager : MonoBehaviour
             }
 
             Debug.Log("player: " + playCardMessage.player);
-            References.i.yourMonsterZone.GetCardWithServerIndex(playCardMessage.boardIndex).GetComponent<InGameCard>().owner = playCardMessage.player;
+            References.i.yourMonsterZone.GetCardWithSeed(playCardMessage.seed).GetComponent<InGameCard>().owner = playCardMessage.player;
         }
         else
         {
-            PlayerPlayCard(References.i.cardList.GetCardData(playCardMessage), playCardMessage.handIndex, playCardMessage.boardIndex, playCardMessage.player, playCardMessage.attackCooldown);
+            PlayerPlayCard(References.i.cardList.GetCardData(playCardMessage), playCardMessage.boardIndex, playCardMessage.player, playCardMessage.attackCooldown);
         }
     }
-    public void PlayerPlayCard(CardData data, int handIndex = -1, int boardIndex = 0, int player = -1, float attackCD = 0)
+    public void PlayerPlayCard(CardData data, int boardIndex = 0, int player = -1, float attackCD = 0)
     {
         
 
@@ -422,11 +418,11 @@ public class GameManager : MonoBehaviour
         {
             enemyPlayerStats.playerBurnValue -= data.cost;
             References.i.opponentMonsterZone.AddNewMonsterCard(false, boardIndex, data);
-            References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(boardIndex)).GetComponent<InGameCard>().StartAttackCooldown(attackCD, true);
-            References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(boardIndex)).GetComponent<InGameCard>().owner = player;
+            References.i.opponentMonsterZone.GetCardWithSeed(data.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD, true);
+            References.i.opponentMonsterZone.GetCardWithSeed(data.seed).GetComponent<InGameCard>().owner = player;
             //for now removes card with index 0
             if(debugPlayerPlayCard) Debug.Log("Removing card from hand");
-            EnemyHand.Instance.RemoveCard(0);
+            EnemyHand.Instance.RemoveCard(data.seed);
             References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
         }
         sfxLibrary.GetComponent<PlayCardSFX>().Play();
@@ -461,7 +457,7 @@ public class GameManager : MonoBehaviour
         else
         {
             attackEventMessage.targetValues = target;
-            if (debugPlayerAttack) Debug.Log("attacked index: " + attackEventMessage.attackerValues.index + " target index: " + attackEventMessage.targetValues.index + "attacker lp: " + attackEventMessage.attackerValues.lp + " rp: " + attackEventMessage.attackerValues.rp + " target lp: " + attackEventMessage.targetValues.lp + " rp: " + attackEventMessage.targetValues.rp);
+            if (debugPlayerAttack) Debug.Log("attacked seed: " + attackEventMessage.attackerValues.seed + " target seed: " + attackEventMessage.targetValues.seed + "attacker lp: " + attackEventMessage.attackerValues.lp + " rp: " + attackEventMessage.attackerValues.rp + " target lp: " + attackEventMessage.targetValues.lp + " rp: " + attackEventMessage.targetValues.rp);
             bool wasYourAttack = false;
             if (attackEventMessage.player == playerNumber) wasYourAttack = true;
             if (debugPlayerAttack) Debug.LogWarning("was your attack " + wasYourAttack);
@@ -481,6 +477,6 @@ public class GameManager : MonoBehaviour
     }
     public void AttackDenied(CardPowersMessage attacker)
     {
-        References.i.yourMonsterZone.GetCardWithServerIndex(attacker.index).GetComponent<InGameCard>().StartAttackCooldown(0);
+        References.i.yourMonsterZone.GetCardWithSeed(attacker.seed).GetComponent<InGameCard>().StartAttackCooldown(0);
     }
 }

@@ -23,7 +23,7 @@ public class CardEnchantmentEffectManager : MonoBehaviour
     [SerializeField] private Sprite retaliateSprite;
     [SerializeField] private Sprite sacrificeSprite;
 
-    public void PlayEnchantmentEffect(Enchantment.Trigger trigger, int index, bool isYou)
+    public void PlayEnchantmentEffect(Enchantment.Trigger trigger, string seed, bool isYou)
     {
         switch (trigger)
         {
@@ -37,11 +37,11 @@ public class CardEnchantmentEffectManager : MonoBehaviour
             case Enchantment.Trigger.Drawtivation:
                 if (isYou)
                 {
-                    Hand.Instance.GetCardWithIndex(index).GetComponent<CardEnchantmentEffectScript>().PlayEffectWild();
+                    Hand.Instance.GetVisibleCardWithSeed(seed).GetComponent<CardEnchantmentEffectScript>().PlayEffectWild();
                 }
                 else
                 {
-                    EnemyHand.Instance.GetCardWithIndex(index).GetComponent<CardEnchantmentEffectScript>().PlayEffectWild();
+                    EnemyHand.Instance.GetCardWithSeed(seed).GetComponent<CardEnchantmentEffectScript>().PlayEffectWild();
                 }
                 Debug.Log("Drawtivation effect here");
                 break;
@@ -52,12 +52,12 @@ public class CardEnchantmentEffectManager : MonoBehaviour
             case Enchantment.Trigger.Opener:
                 if (isYou)
                 {
-                    References.i.yourMonsterZone.GetCardWithServerIndex(index).GetComponent<CardEnchantmentEffectScript>().PlayEffectOpener();
+                    References.i.yourMonsterZone.GetCardWithSeed(seed).GetComponent<CardEnchantmentEffectScript>().PlayEffectOpener();
 
                 }
                 else
                 {
-                    References.i.opponentMonsterZone.GetCardWithServerIndex(References.i.opponentMonsterZone.RevertIndex(index)).GetComponent<CardEnchantmentEffectScript>().PlayEffectOpener();
+                    References.i.opponentMonsterZone.GetCardWithSeed(seed).GetComponent<CardEnchantmentEffectScript>().PlayEffectOpener();
                 }
                 Debug.Log("Opener effect here");
                 break;
