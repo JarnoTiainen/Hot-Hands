@@ -50,6 +50,13 @@ public class GameManager : MonoBehaviour
             inGameCards.Remove(newCard.GetComponent<InGameCard>().cardData.seed);
         }
     }
+    public void RemoveCardFromInGameCards(string seed)
+    {
+        if (inGameCards.ContainsKey(seed))
+        {
+            inGameCards.Remove(seed);
+        }
+    }
     [Button] public void PrintInGameCards()
     {
         Debug.LogWarning("Cards in inGameCards: " + inGameCards.Count + " cards: ");
@@ -83,7 +90,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerBurnCard(BurnCardMessage burnCardMessage)
     {
-        if(burnCardMessage.denied)
+        if (burnCardMessage.denied)
         {
             UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue - unHandledBurnedCards[0].GetComponent<InGameCard>().cardData.value);
             ReturnBurnedCardToHand();
@@ -94,9 +101,7 @@ public class GameManager : MonoBehaviour
         burnCardMessage.burnedCardDone = JsonUtility.FromJson<DrawCardMessage>(burnCardMessage.burnedCard);
         DrawCardMessage cardMessage = burnCardMessage.burnedCardDone;
 
-
-        //This is bad fix fix fix. Get rid of using indexes and use seeds instead
-        RemoveCardFromInGameCards(unHandledBurnedCards[0]);
+        RemoveCardFromInGameCards(burnCardMessage.seed);
         if (cardMessage.player == playerNumber)
         {
             unHandledBurnedCards.Remove(unHandledBurnedCards[0]);
