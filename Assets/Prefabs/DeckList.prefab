@@ -72,7 +72,7 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 300, y: 420}
+  m_CellSize: {x: 290, y: 415}
   m_Spacing: {x: 30, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 4
@@ -88,7 +88,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4a9b003b61d6d4dab7a9cd873fc0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardContainerPrefab: {fileID: 5916090668907209107, guid: 30ab724ee4638834ca315a6e2f8d65c2, type: 3}
   container3DPrefab: {fileID: 1501014297592997676, guid: 4756cd0792811004db8f3f57c2361f1c, type: 3}
   cardsPerPage: 8
   currentPage: 0
