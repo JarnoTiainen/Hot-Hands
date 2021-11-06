@@ -10,24 +10,16 @@ public class SFXManager : MonoBehaviour
     private static SFXManager _instance;
     private static AudioMixer masterMixer;
     private static AudioMixerGroup sfxGroup;
+    private static GameObject uiSFXGameObject;
+    private static AudioSource uiSFXAudioSource;
     [SerializeField] private float sfxDefaultVolume = 0.5f;
 
 
     private void Start()
     {
-        /*
-        DontDestroyOnLoad(gameObject);
-
-        if (FindObjectsOfType<SoundtrackManager>().Length > 1)
-        {
-            Object.Destroy(gameObject);
-        }
-        */
-
         masterMixer = Resources.Load("MasterMixer") as AudioMixer;
         sfxGroup = masterMixer.FindMatchingGroups("SFX")[0];
         masterMixer.SetFloat("sfxVol", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume", sfxDefaultVolume)) * 20);
-
     }
 
     public static SFXManager instance
@@ -101,6 +93,21 @@ public class SFXManager : MonoBehaviour
                 audioSource.Play();
             }
         }
+    }
+
+    public static void PlayUISFX(SFXClip sfx)
+    {
+        if (uiSFXGameObject == null)
+        {
+            uiSFXGameObject = new GameObject("UISounds");
+            uiSFXAudioSource = uiSFXGameObject.AddComponent<AudioSource>();
+            uiSFXAudioSource.outputAudioMixerGroup = sfxGroup;
+            Debug.Log("Created new UISounds GameObject");
+        }
+        uiSFXAudioSource.clip = sfx.clip;
+        uiSFXAudioSource.volume = sfx.volume + Random.Range(-sfx.volumeVariation, sfx.volumeVariation);
+        uiSFXAudioSource.pitch = sfx.pitch + Random.Range(-sfx.pitchVariation, sfx.pitchVariation);
+        uiSFXAudioSource.Play();
     }
 
     [HorizontalGroup("AudioSource")]

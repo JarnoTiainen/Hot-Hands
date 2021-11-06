@@ -10,11 +10,11 @@ public class ButtonSFX : MonoBehaviour
 
     public void OnHover()
     {
-        buttonHover.PlaySFX();
+        buttonHover.PlayUISFX();
     }
 
     public void OnClick()
     {
-        buttonClick.PlaySFX();
+        buttonClick.PlayUISFX();
     }
 }

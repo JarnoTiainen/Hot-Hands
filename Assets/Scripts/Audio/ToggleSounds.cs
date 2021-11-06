@@ -16,7 +16,7 @@ public class ToggleSounds : MonoBehaviour
     {
         if (!gameObject.GetComponent<Toggle>().isOn)
         {
-            sfxLibrary.GetComponent<ButtonSFX>().buttonHover.PlaySFX();
+            sfxLibrary.GetComponent<ButtonSFX>().OnHover();
         }
     }
 
@@ -24,7 +24,7 @@ public class ToggleSounds : MonoBehaviour
     {
         if (!gameObject.GetComponent<Toggle>().isOn)
         {
-            sfxLibrary.GetComponent<ButtonSFX>().buttonClick.PlaySFX();
+            sfxLibrary.GetComponent<ButtonSFX>().OnClick();
         }
     }
 }

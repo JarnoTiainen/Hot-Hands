@@ -34,12 +34,12 @@ public class ButtonSounds : MonoBehaviour
 
     public void OnHover()
     {
-        sfxLibrary.GetComponent<ButtonSFX>().buttonHover.PlaySFX();
+        sfxLibrary.GetComponent<ButtonSFX>().OnHover();
     }
 
     public void OnClick()
     {
-        sfxLibrary.GetComponent<ButtonSFX>().buttonClick.PlaySFX();
+        sfxLibrary.GetComponent<ButtonSFX>().OnClick();
     }
 
 

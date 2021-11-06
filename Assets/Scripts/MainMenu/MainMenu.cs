@@ -8,10 +8,16 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject mainMenuButtons;
     public GameObject settingsMenu;
-    public GameObject profileMenu;
+    public GameObject collectionMenu;
     public GameObject quitConfirmation;
     public GameObject loginScreen;
     public bool soloPlayEnabled;
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private Vector3 mainCamMenuPos;
+    [SerializeField] private Vector3 mainCamCollectionPos;
+    [SerializeField] private Quaternion mainCamMenuRotation;
+    [SerializeField] private Quaternion mainCamCollectionRotation;
+
 
 
     private void Start()
@@ -29,10 +35,13 @@ public class MainMenu : MonoBehaviour
     public void MenuButtonsSetActive(bool value)
     {
         mainMenuButtons.SetActive(value);
+        if (value) SetCameraMainMenu();
     }
-    public void ProfileMenuSetActive(bool value)
+
+    public void CollectionMenuSetActive(bool value)
     {
-        profileMenu.SetActive(value);
+        collectionMenu.SetActive(value);
+        if (value) SetCameraCollectionMenu();
     }
 
     public void SettingsMenuSetActive(bool value)
@@ -43,6 +52,18 @@ public class MainMenu : MonoBehaviour
     public void QuitConfirmationSetActive(bool value)
     {
         quitConfirmation.SetActive(value);
+    }
+
+    public void SetCameraMainMenu()
+    {
+        mainCamera.transform.position = mainCamMenuPos;
+        mainCamera.transform.rotation = mainCamMenuRotation;
+    }
+
+    public void SetCameraCollectionMenu()
+    {
+        mainCamera.transform.position = mainCamCollectionPos;
+        mainCamera.transform.rotation = mainCamCollectionRotation;
     }
 
     public void Play()

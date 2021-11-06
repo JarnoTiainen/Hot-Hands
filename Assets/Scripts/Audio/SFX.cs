@@ -66,7 +66,7 @@ public class SFX
     {
         // Platform #define directives for UnityEditor
         #if UNITY_EDITOR
-            UnityEditor.Selection.activeObject = sfxToPlay;
+        UnityEditor.Selection.activeObject = sfxToPlay;
         #endif
     }
 
@@ -100,5 +100,10 @@ public class SFX
             SFXManager.PlaySFX(sfxToPlay, waitToPlay, useDefault, null);
         else
             SFXManager.PlaySFX(sfxToPlay, waitToPlay, useDefault, audiosource);
+    }
+
+    public void PlayUISFX()
+    {
+        SFXManager.PlayUISFX(sfxToPlay);
     }
 }
