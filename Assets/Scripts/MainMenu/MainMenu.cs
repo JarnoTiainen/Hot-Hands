@@ -14,21 +14,24 @@ public class MainMenu : MonoBehaviour
     public bool soloPlayEnabled;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Vector3 mainCamMenuPos;
-    [SerializeField] private Vector3 mainCamCollectionPos;
     [SerializeField] private Quaternion mainCamMenuRotation;
+    [SerializeField] private Vector3 mainCamCollectionPos;
     [SerializeField] private Quaternion mainCamCollectionRotation;
 
 
 
     private void Start()
     {
-        if (WebSocketService.Instance.isLoggedIn == false)
+        if (WebSocketService.Instance.isLoggedIn)
         {
-            loginScreen.SetActive(true);
+            loginScreen.SetActive(false);
+            Debug.Log("Login screen SetActive false");
         }
         else
         {
-            loginScreen.SetActive(false);
+            loginScreen.SetActive(true);
+            Debug.Log("isLoggedIn: " + WebSocketService.Instance.isLoggedIn);
+            Debug.Log("Login screen SetActive true");
         }
     }
 

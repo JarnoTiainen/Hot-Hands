@@ -102,7 +102,6 @@ public class SFXManager : MonoBehaviour
             uiSFXGameObject = new GameObject("UISounds");
             uiSFXAudioSource = uiSFXGameObject.AddComponent<AudioSource>();
             uiSFXAudioSource.outputAudioMixerGroup = sfxGroup;
-            Debug.Log("Created new UISounds GameObject");
         }
         uiSFXAudioSource.clip = sfx.clip;
         uiSFXAudioSource.volume = sfx.volume + Random.Range(-sfx.volumeVariation, sfx.volumeVariation);
