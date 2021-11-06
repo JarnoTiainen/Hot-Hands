@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Audio;
+using UnityEngine.UI;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
@@ -11,6 +11,9 @@ public class MainMenu : MonoBehaviour
     public GameObject collectionMenu;
     public GameObject quitConfirmation;
     public GameObject loginScreen;
+    public GameObject loadingScreen;
+    public Slider progressSlider;
+    public TextMeshProUGUI progressText;
     public bool soloPlayEnabled;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Vector3 mainCamMenuPos;
@@ -75,13 +78,32 @@ public class MainMenu : MonoBehaviour
         Debug.Log("play");
         if(soloPlayEnabled)
         {
-            SceneManager.LoadScene(1);
+            LoadScene(1);
         }
     }
     public void GameFound(int scene)
     {
-        SceneManager.LoadScene(1);
+        LoadScene(scene);
         Debug.Log("gameFound");
+    }
+
+    private void LoadScene(int scene)
+    {
+        StartCoroutine(LoadAsynchronously(scene));
+    }
+
+    IEnumerator LoadAsynchronously(int scene)
+    {
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(scene);
+        loadingScreen.SetActive(true);
+
+        while (!asyncOperation.isDone)
+        {
+            float progress = Mathf.Clamp01(asyncOperation.progress / 0.9f);
+            progressSlider.value = progress;
+            progressText.text = progress * 100f + "%";
+            yield return null;
+        }
     }
 
     public void OnTutorialButton()
