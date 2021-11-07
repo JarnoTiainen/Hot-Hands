@@ -194,6 +194,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void OnClickElement()
     {
+        LineRendererManager.Instance.CreateNewLine(gameObject, Mouse.Instance.gameObject);
+
         Debug.Log("Clicked elent");
         if (!Mouse.Instance.targetModeOn)
         {

@@ -532,6 +532,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bonfire
       objectReference: {fileID: 0}
+    - target: {fileID: 4107249058017664394, guid: 60fa2702f8b8c1f4f9224565a9932d7d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8230570273184807283, guid: 60fa2702f8b8c1f4f9224565a9932d7d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

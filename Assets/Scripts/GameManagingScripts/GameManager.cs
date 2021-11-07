@@ -285,22 +285,34 @@ public class GameManager : MonoBehaviour
     {
         if (summonCardMessage.player == playerNumber)
         {
+            if(Hand.Instance.GetVisibleCardWithSeed(summonCardMessage.seed) != null)
+            {
+                Hand.Instance.RemoveCard(summonCardMessage.seed);
+            }
+
             if(summonCardMessage.auto)
             {
                 AddCardToInGameCards(References.i.yourMonsterZone.AutoAddNewMonsterCard(false, summonCardMessage.boardIndex, References.i.cardList.GetCardData(summonCardMessage)));
                 References.i.yourMonsterZone.GetCardWithSeed(summonCardMessage.seed).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
                 playerStats.playerFieldCards++;
+                playerStats.playerHandCards--;
             }
             else
             {
                 AddCardToInGameCards(References.i.yourMonsterZone.UpdateCardData(true, summonCardMessage));
                 References.i.yourMonsterZone.GetCardWithSeed(summonCardMessage.seed).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
+                playerStats.playerHandCards--;
             }
             References.i.yourMonsterZone.GetCardWithSeed(summonCardMessage.seed).GetComponent<InGameCard>().owner = summonCardMessage.player;
             
         }
         else
         {
+            if (EnemyHand.Instance.GetCardWithSeed(summonCardMessage.seed) != null)
+            {
+                EnemyHand.Instance.RemoveCard(summonCardMessage.seed);
+            }
+
             if (!summonCardMessage.auto)
             {
                 enemyPlayerStats.playerBurnValue -= summonCardMessage.cardCost;
@@ -312,6 +324,7 @@ public class GameManager : MonoBehaviour
             References.i.opponentMonsterZone.GetCardWithSeed(summonCardMessage.seed).GetComponent<InGameCard>().owner = summonCardMessage.player;
             //enemyPlayerStats.playerFieldCards++;
         }
+        
     }
 
     public void RemoveCard(RemoveCardMessage removeCardMessage)
@@ -414,8 +427,6 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerPlayCard(CardData data, int boardIndex = 0, int player = -1, float attackCD = 0)
     {
-        
-
         if (player == -1) player = playerNumber;
         if(player == playerNumber)
         {

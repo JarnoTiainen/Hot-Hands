@@ -44,7 +44,6 @@ public class Hand : MonoBehaviour
         {
             if (card.GetComponent<InGameCard>().cardData.seed == seed) return card;
         }
-        Debug.LogError("Card with seed was not found from visible cards");
         return null;
     }
 

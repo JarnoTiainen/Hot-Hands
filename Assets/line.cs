@@ -3,47 +3,76 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class line : MonoBehaviour
+public class Line : MonoBehaviour
 {
-    [SerializeField] private Vector3 startPos;
-    [SerializeField] private Vector3 endPos;
     [SerializeField] private GameObject source;
     [SerializeField] private GameObject target;
-    [SerializeField] private float lineLength;
-    [SerializeField] private float tileSize;
-    [SerializeField] private GameObject lineGameObject;
-
+    [SerializeField] MeshRenderer textureMesh;
+    [SerializeField] private float scale;
+    private int numberOfVerticies;
+    bool isLineActive;
 
     // Update is called once per frame
-    void Update()
+
+    private void FixedUpdate()
     {
-        if(source && target)
+        if (source && target)
         {
-            startPos = source.transform.position;
-            endPos = target.transform.position;
-            lineLength = Vector3.Distance(startPos, endPos);
-            Vector3 lineOBJPos = (startPos + endPos) / 2;
-            lineGameObject.transform.position = lineOBJPos;
-            Debug.DrawLine(startPos, endPos);
-            lineGameObject.transform.LookAt(endPos, Vector3.left);
-            lineGameObject.transform.GetChild(0).localScale = new Vector3(lineLength, 0.1f , 0.1f);
+            SetLineTransform();
         }
-        
+        else
+        {
+            RemoveLine();
+        }
+    }
+
+    public void SetLineTransform()
+    {
+        Vector3 endPos = source.transform.position;
+        Vector3 startPos = target.transform.position;
+
+        //position
+        transform.GetChild(0).position = (endPos + startPos) / 2;
+
+        //rotation
+        Vector3 targetDir = startPos - endPos;
+        float angleXY = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
+        float hyp = Mathf.Sqrt(Mathf.Pow(targetDir.y, 2) + Mathf.Pow(targetDir.x, 2));
+        float angleZhyp = Mathf.Atan2(targetDir.z, hyp) * Mathf.Rad2Deg;
+        var quatXY = Quaternion.AngleAxis(angleXY, Vector3.forward);
+        var quatZX = Quaternion.AngleAxis(angleZhyp, Vector3.down);
+
+
+        transform.GetChild(0).rotation = quatXY * quatZX;
+        //scale
+        float lineLength = Vector3.Distance(endPos, startPos);
+        transform.GetChild(0).GetChild(0).localScale = new Vector3(lineLength, scale, scale);
+
+        if (isLineActive) SetLineActive();
+        isLineActive = true;
     }
 
 
-    [Button] public void SetNewSource(GameObject newSource)
+
+    public void SetNewTargetAndSource(GameObject target, GameObject source, float scale, Shader newLineShader, Mesh  mesh)
     {
-        source = newSource;
-    }
-    [Button] public void SetNewTarget(GameObject newTarget)
-    {
-        target = newTarget;
+        textureMesh.material.shader = newLineShader;
+        this.scale = scale;
+        textureMesh.material.SetFloat("_TextureScale", this.scale);
+        this.target = target;
+        this.source = source;
+
+        transform.GetChild(0).GetChild(0).GetComponent<MeshFilter>().mesh = mesh;
+        SetLineTransform();
     }
 
-    public void SetNewPosition(Vector2 newStartPos, Vector2 newEndPos)
+    [Button] public void SetLineActive()
     {
-        startPos = newStartPos;
-        endPos = newEndPos;
+        transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+    }
+
+    public void RemoveLine()
+    {
+        Destroy(gameObject);
     }
 }
