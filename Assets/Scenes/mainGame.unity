@@ -3606,31 +3606,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
       propertyPath: lineThickness.m_Curve.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
       propertyPath: lineThickness.m_Curve.Array.data[1].time
+      value: 0.49970466
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
+      propertyPath: lineThickness.m_Curve.Array.data[2].time
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
       propertyPath: lineThickness.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
-      propertyPath: lineThickness.m_Curve.Array.data[1].value
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
+      propertyPath: lineThickness.m_Curve.Array.data[1].value
+      value: 0.5002953
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
       propertyPath: lineThickness.m_Curve.Array.data[0].inSlope
-      value: -1
+      value: 1.001182
       objectReference: {fileID: 0}
     - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
       propertyPath: lineThickness.m_Curve.Array.data[1].inSlope
-      value: -1
+      value: 0.00059103966
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
+      propertyPath: lineThickness.m_Curve.Array.data[2].inSlope
+      value: -0.9999999
       objectReference: {fileID: 0}
     - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
       propertyPath: lineThickness.m_Curve.Array.data[0].outSlope
-      value: -1
+      value: 1.001182
       objectReference: {fileID: 0}
     - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
       propertyPath: lineThickness.m_Curve.Array.data[1].inWeight
@@ -3638,10 +3646,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
       propertyPath: lineThickness.m_Curve.Array.data[1].outSlope
-      value: -1
+      value: 0.00059103966
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
+      propertyPath: lineThickness.m_Curve.Array.data[2].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
+      propertyPath: lineThickness.m_Curve.Array.data[2].outSlope
+      value: -0.9999999
       objectReference: {fileID: 0}
     - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
       propertyPath: lineThickness.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
+      propertyPath: lineThickness.m_Curve.Array.data[1].outWeight
       value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
@@ -3650,6 +3670,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
       propertyPath: lineThickness.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874800851760066627, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
+      propertyPath: lineThickness.m_Curve.Array.data[2].tangentMode
       value: 34
       objectReference: {fileID: 0}
     m_RemovedComponents: []

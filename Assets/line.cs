@@ -54,7 +54,7 @@ public class Line : MonoBehaviour
 
 
 
-    public void SetNewTargetAndSource(GameObject target, GameObject source, float scale, Shader newLineShader, Mesh  mesh)
+    public void SetNewTargetAndSource(GameObject target, GameObject source, float scale, Shader newLineShader, Mesh mesh)
     {
         textureMesh.material.shader = newLineShader;
         this.scale = scale;
@@ -66,7 +66,8 @@ public class Line : MonoBehaviour
         SetLineTransform();
     }
 
-    [Button] public void SetLineActive()
+    [Button]
+    public void SetLineActive()
     {
         transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().enabled = true;
     }
