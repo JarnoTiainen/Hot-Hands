@@ -28,6 +28,7 @@ public class CardMovement : MonoBehaviour
     private Vector3 startAttackPoint;
     public Vector3 endPoint;
     private Vector3 endAttackPoint;
+    private Vector3 originalPos;
 
     private float elapsedRotationTime;
     private float elapsedTime;
@@ -38,6 +39,7 @@ public class CardMovement : MonoBehaviour
     public bool doMove = false;
     private bool doRotate = false;
     public bool doAttack = false;
+    public bool doLift = false;
 
     [SerializeField] private float maxMovementRotateAngle;
     private Vector3 previousPos;
@@ -214,12 +216,19 @@ public class CardMovement : MonoBehaviour
     /// </returns>
     public IEnumerator TargetLift(float dur)
     {
-        Vector3 originalPos = transform.localPosition;
+        
+        //if this card is not already lifted
+        if (!doLift) {
+            Vector3 originalPos = transform.localPosition;
+        }
+
+        doLift = true;
 
         //move the target card up
         gameObject.GetComponent<CardMovement>().OnCardMove(originalPos + new Vector3(0, 0, -liftAmount), dur);
         yield return new WaitForSeconds(liftDur);
         gameObject.GetComponent<CardMovement>().OnCardMove(originalPos, dur);
+        doLift = false;
     }
 
     public IEnumerator AttackAnimation()
