@@ -1,0 +1,78 @@
+name: Windows Build
+
+on: 
+  workflow_dispatch: {}
+
+env:
+  UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+  UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+  UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+
+jobs:
+
+  testRunner:
+    name: Test in ${{ matrix.testMode }} ✨
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        testMode:
+          - EditMode
+          - PlayMode
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Running tests
+        uses: game-ci/unity-test-runner@v2.0-alpha-5
+        id: testRunner
+        with:
+          testMode: ${{ matrix.testMode }}
+          checkName: ${{ matrix.testMode }} test results
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test results (${{ matrix.testMode }})
+          path: ${{ steps.testRunner.outputs.artifactsPath }}
+
+
+  buildWindows:
+    needs: testRunner
+    name: Build for Windows 🖥️
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SSH key
+        uses: webfactory/ssh-agent@v0.5.2
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} 
+
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library-StandaloneWindows64
+          restore-keys: Library-
+
+      - name: Build
+        uses: game-ci/unity-builder@v2
+        with:
+          targetPlatform: StandaloneWindows64
+          unityVersion: auto
+          versioning: Semantic
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-HotHandsWindows64
+          path: build/StandaloneWindows64
+
+
+
+ 

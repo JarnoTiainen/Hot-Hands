@@ -1,4 +1,4 @@
-name: Hot Hands workflow
+name: GitHub Page Build
 
 on: 
   workflow_dispatch: {}
@@ -10,41 +10,7 @@ env:
 
 jobs:
 
-  buildWindows:
-    name: Build for Windows 🖥️
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: SSH key
-        uses: webfactory/ssh-agent@v0.5.2
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} 
-
-      - name: Cache
-        uses: actions/cache@v2
-        with:
-          path: Library
-          key: Library-StandaloneWindows64
-          restore-keys: Library-
-
-      - name: Build
-        uses: game-ci/unity-builder@v2
-        with:
-          targetPlatform: StandaloneWindows64
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-StandaloneWindows64
-          path: build/StandaloneWindows64
-
-
-
-  buildWebGL:
+ buildWebGL:
     name: Build for WebGL 🖥️
     runs-on: ubuntu-latest
     strategy:
@@ -75,9 +41,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: build-WebGL
+          name: build-HotHandsWebGL
           path: build/WebGL
-
 
 
   deployPages:
@@ -88,9 +53,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - uses: actions/download-artifact@v2
+      - name: Download artifact
+        uses: actions/download-artifact@v2
         with:
-          name: build-WebGL
+          name: build-HotHandsWebGL
           path: build
 
       - name: Deploy 🚀
@@ -98,3 +64,6 @@ jobs:
         with:
           branch: gh-pages
           folder: build/WebGL
+
+
+  
