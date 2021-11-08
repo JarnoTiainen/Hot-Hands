@@ -74,7 +74,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        WebSocketService.JoinGame();
+        WebSocketService.JoinGame(soloPlayEnabled);
         Debug.Log("play");
         if(soloPlayEnabled)
         {

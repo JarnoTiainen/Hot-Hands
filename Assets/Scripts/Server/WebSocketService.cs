@@ -177,6 +177,9 @@ public class WebSocketService : MonoBehaviour
                 case "BUFFBOARD":
                     gameManager.CardDataChange(JsonUtility.FromJson<StatChangeMessage>(data[1]));
                     break;
+                case "SEEDMISSMATCH":
+                    Debug.LogError("SEED MISSMATCH! not found");
+                    break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                     break;
@@ -190,9 +193,11 @@ public class WebSocketService : MonoBehaviour
         await websocket.Connect();
     }
 
-    [Button] public static void JoinGame()
+    [Button] public static void JoinGame(bool soloPlayEnabled)
     {
-        GameMessage message = new GameMessage("OnMessage", "JOINGAME", "");
+        string msg = "";
+        if (soloPlayEnabled) msg = "solo";
+        GameMessage message = new GameMessage("OnMessage", "JOINGAME", msg);
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 

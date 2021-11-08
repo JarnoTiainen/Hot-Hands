@@ -62,7 +62,16 @@ public class GameManager : MonoBehaviour
     }
     public GameObject GetCardFromInGameCards(string seed)
     {
-        return inGameCards[seed];
+        if(inGameCards.ContainsKey(seed))
+        {
+            return inGameCards[seed];
+        }
+        else
+        {
+            Debug.LogError("card with seed was not found from list");
+            return null;
+        }
+        
     }
 
     [Button] public void PrintInGameCards()
@@ -453,6 +462,7 @@ public class GameManager : MonoBehaviour
         Mouse.Instance.targetModeOn = false;
         activeTargetLine.RemoveLine();
         WebSocketService.PlayCard(References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.GetCardWithSeed(targettingCardData.seed)), targettingCardData.seed, seed);
+        PlayerPlayCard(targettingCardData);
     }
 
 
