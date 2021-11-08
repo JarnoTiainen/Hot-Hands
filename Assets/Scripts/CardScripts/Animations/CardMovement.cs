@@ -19,8 +19,6 @@ public class CardMovement : MonoBehaviour
     private AnimationCurve attackCurve;
     private AnimationCurve defaultCurve;
 
-    private AnimationCurve smoothAngleTransition;
-
     private Quaternion startRotation;
     private Quaternion endRotation;
 
@@ -37,13 +35,13 @@ public class CardMovement : MonoBehaviour
     private int dirMultiplier = 1;
 
     public bool doMove = false;
-    private bool doRotate = false;
     public bool doAttack = false;
-    public bool doLift = false;
+    private bool doRotate = false;
+    private bool doLift = false;
+    private bool anotherRoutine = false;
 
     [SerializeField] private float maxMovementRotateAngle;
     private Vector3 previousPos;
-
 
     [SerializeField] private GameObject targetCard;
 
@@ -216,19 +214,32 @@ public class CardMovement : MonoBehaviour
     /// </returns>
     public IEnumerator TargetLift(float dur)
     {
-        
-        //if this card is not already lifted
-        if (!doLift) {
-            Vector3 originalPos = transform.localPosition;
+        //if there is another coroutine lifting this
+        if (doLift) {
+            anotherRoutine = true;
+
+            //wait that the card has been lifted
+            yield return new WaitUntil(() => doLift == false);
+            yield return new WaitForSeconds(liftDur);
+            anotherRoutine = false;
+        } else {
+            doLift = true;
+            originalPos = transform.localPosition;
+            //check that the position is in the right height
+            originalPos = new Vector3(originalPos.x, originalPos.y, -0.011f);
+
+            //move the target card up
+            gameObject.GetComponent<CardMovement>().OnCardMove(originalPos + new Vector3(0, 0, -liftAmount), dur);
+            
+            yield return new WaitForSeconds(liftDur);
+            doLift = false;
+
+            if (anotherRoutine) {
+                //wait until previous coroutine is finished
+                yield return new WaitUntil(() => anotherRoutine == false);
+            }
+            gameObject.GetComponent<CardMovement>().OnCardMove(originalPos, dur);
         }
-
-        doLift = true;
-
-        //move the target card up
-        gameObject.GetComponent<CardMovement>().OnCardMove(originalPos + new Vector3(0, 0, -liftAmount), dur);
-        yield return new WaitForSeconds(liftDur);
-        gameObject.GetComponent<CardMovement>().OnCardMove(originalPos, dur);
-        doLift = false;
     }
 
     public IEnumerator AttackAnimation()
