@@ -36,7 +36,6 @@ public class CardEnchantmentEffectManager : MonoBehaviour
                 break;
             case Enchantment.Trigger.Drawtivation:
                 GameManager.Instance.GetCardFromInGameCards(seed).GetComponent<CardEnchantmentEffectScript>().PlayEffectWild();
-                Debug.Log("Drawtivation effect here");
                 break;
             case Enchantment.Trigger.LastBreath:
                 //newEnchantmentEffect.GetComponent<EnchantmentEffectGameObject>().StartAnimation(lastBreathSprite);
@@ -44,7 +43,6 @@ public class CardEnchantmentEffectManager : MonoBehaviour
                 break;
             case Enchantment.Trigger.Opener:
                 GameManager.Instance.GetCardFromInGameCards(seed).GetComponent<CardEnchantmentEffectScript>().PlayEffectOpener();
-                Debug.Log("Opener effect here");
                 break;
             case Enchantment.Trigger.Retaliate:
                 //newEnchantmentEffect.GetComponent<EnchantmentEffectGameObject>().StartAnimation(retaliateSprite);

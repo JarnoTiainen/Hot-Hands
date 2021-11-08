@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerPlayCard;
     [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerAttack;
 
+    private Line activeTargetLine;
+    private CardData targettingCardData;
+
     private GameObject sfxLibrary;
 
     [SerializeField] private Dictionary<string, GameObject> inGameCards = new Dictionary<string, GameObject>();
@@ -234,9 +237,7 @@ public class GameManager : MonoBehaviour
 
     public void EnchantmentEffectActive(EnchantmentEffectMesage enchantmentEffect)
     {
-        Debug.Log("Display effect here");
         enchantmentEffect.cardInfo = JsonUtility.FromJson<DrawCardMessage>(enchantmentEffect.card);
-        Debug.Log(enchantmentEffect.cardInfo.cardName + " " + enchantmentEffect.trigger + " " + enchantmentEffect.seed);
         bool isYou = false;
         if (IsYou(enchantmentEffect.cardInfo.player)) isYou = true;
         References.i.cardEnchantmentEffectManager.PlayEnchantmentEffect((Enchantment.Trigger)enchantmentEffect.trigger, enchantmentEffect.seed, isYou);
@@ -425,20 +426,47 @@ public class GameManager : MonoBehaviour
             PlayerPlayCard(References.i.cardList.GetCardData(playCardMessage), playCardMessage.boardIndex, playCardMessage.player, playCardMessage.attackCooldown);
         }
     }
+    public void PrePlayCard(CardData data, bool hasTargetAbility = false)
+    {
+        GameObject newCard = References.i.yourMonsterZone.AddNewMonsterCard(true, 0, data);
+        Hand.Instance.RemoveCard(data.seed);
+
+        if(!hasTargetAbility)
+        {
+            PlayerPlayCard(data);
+        }
+        else
+        {
+            targettingCardData = data;
+            StartTargetEvent(newCard);
+        }
+    }
+
+    public void StartTargetEvent(GameObject source)
+    {
+        Mouse.Instance.targetModeOn = true;
+        activeTargetLine = LineRendererManager.Instance.CreateNewLine(source, Mouse.Instance.gameObject);
+        
+    }
+    public void EndTargetEvent(string seed)
+    {
+        Mouse.Instance.targetModeOn = false;
+        activeTargetLine.RemoveLine();
+        WebSocketService.PlayCard(References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.GetCardWithSeed(targettingCardData.seed)), targettingCardData.seed, seed);
+    }
+
+
     public void PlayerPlayCard(CardData data, int boardIndex = 0, int player = -1, float attackCD = 0)
     {
         if (player == -1) player = playerNumber;
         if(player == playerNumber)
         {
             playerStats.playerBurnValue -= data.cost;
-            References.i.yourMonsterZone.AddNewMonsterCard(true, boardIndex, data);
-            Hand.Instance.RemoveCard(data.seed);
             References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = playerStats.playerBurnValue.ToString();
         }
         else
         {
             enemyPlayerStats.playerBurnValue -= data.cost;
-            References.i.opponentMonsterZone.AddNewMonsterCard(false, boardIndex, data);
             References.i.opponentMonsterZone.GetCardWithSeed(data.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD, true);
             References.i.opponentMonsterZone.GetCardWithSeed(data.seed).GetComponent<InGameCard>().owner = player;
             //for now removes card with index 0
@@ -486,10 +514,53 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void BuffBoard()
+    public void CardDataChange(StatChangeMessage statChangeMessage)
     {
+        List<CardDataMessage> finalCardDatas = new List<CardDataMessage>();
+        foreach(string target in statChangeMessage.targets)
+        {
+            CardDataMessage data = JsonUtility.FromJson<CardDataMessage>(target);
+            finalCardDatas.Add(JsonUtility.FromJson<CardDataMessage>(target));
+        }
+        statChangeMessage.convertedTargets = finalCardDatas;
 
+        foreach(CardDataMessage cardData in statChangeMessage.convertedTargets)
+        {
+            GameObject target = GetCardFromInGameCards(cardData.seed);
+            CardData data = target.GetComponent<InGameCard>().cardData;
+            data.rp = cardData.rp;
+            data.lp = cardData.lp;
+            data.enchantments = cardData.enchantments;
+            data.monsterTags = cardData.mtag;
+            data.spellTags = cardData.stag;
+            data.cardName = cardData.cardName;
+            data.cost = cardData.cardCost;
+            data.attackDirection = (Card.AttackDirection)cardData.attackDirection;
+            data.value = cardData.cardValue;
+            PlayDataChangeEffect(cardData.buffType, target);
+            target.GetComponent<InGameCard>().UpdateCardTexts();
+        }
     }
+
+    public void PlayDataChangeEffect(CardDataMessage.BuffType buffType, GameObject target)
+    {
+        switch(buffType)
+        {
+            case CardDataMessage.BuffType.Damage:
+                Debug.LogWarning("Trigger Damage effect here");
+                break;
+            case CardDataMessage.BuffType.StatBuff:
+                Debug.LogWarning("Trigger StatBuff effect here");
+                break;
+            case CardDataMessage.BuffType.StatDebuff:
+                Debug.LogWarning("Trigger StatDebuff effect here");
+                break;
+            case CardDataMessage.BuffType.Default:
+                Debug.LogWarning("Trigger Default effect here");
+                break;
+        }
+    }
+
 
     public bool IsYou(int player)
     {

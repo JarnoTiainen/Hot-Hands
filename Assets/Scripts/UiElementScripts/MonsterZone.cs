@@ -37,14 +37,17 @@ public class MonsterZone : MonoBehaviour
     }
 
 
-    [Button]public void AddNewMonsterCard(bool isYourCard, int boardIndex, CardData data)
+    [Button]public GameObject AddNewMonsterCard(bool isYourCard, int boardIndex, CardData data, bool isPreAddedCard = true)
     {
+        GameObject newCard;
         if(isYourCard)
         {
+            //if (isPreAddedCard) ghostCard.GetComponent<CardMovement>().LevitateCard(0.1f);
             ghostCard.GetComponent<InGameCard>().ToggleGhostCard();
             ghostCard.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
             unhandledCards.Add(ghostCard);
             if(debugModeOn) Debug.Log("Added unhandled");
+            newCard = ghostCard;
             ghostCard = null;
             //ReCalculateCardIndexes();
         } else {
@@ -67,7 +70,9 @@ public class MonsterZone : MonoBehaviour
             GameManager.Instance.AddCardToInGameCards(newMonster);
             ReCalculateServerCardIndexes();
             RepositionMonsterCards();
+            newCard = newMonster;
         }
+        return newCard;
     }
 
     public void RemoveMonsterCard(string seed)
@@ -191,7 +196,7 @@ public class MonsterZone : MonoBehaviour
             for (int i = 0; i < monsterCards.Count; i++)
             {
                 newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
-                Vector3 newPos = new Vector3(newPosX, 0, 0);
+                Vector3 newPos = new Vector3(newPosX, 0, transform.position.z);
                 if(ghostCard)
                 {
                     if(monsterCards[i] != ghostCard)

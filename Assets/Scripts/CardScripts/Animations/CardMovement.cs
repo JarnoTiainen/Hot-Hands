@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class CardMovement : MonoBehaviour
 {
@@ -27,7 +28,6 @@ public class CardMovement : MonoBehaviour
     private Vector3 startAttackPoint;
     public Vector3 endPoint;
     private Vector3 endAttackPoint;
-
 
     private float elapsedRotationTime;
     private float elapsedTime;
@@ -59,7 +59,7 @@ public class CardMovement : MonoBehaviour
             if (doMove && transform.localPosition != endPoint) {
                 elapsedTime += Time.deltaTime;
                 //smoothly moves towards the endpoint. should this be in the fixedUpdate?
-                transform.localPosition = Vector3.Lerp(startPoint, endPoint, curve.Evaluate(elapsedTime / duration));
+                transform.localPosition = Vector3.Lerp(startPoint, new Vector3(endPoint.x, endPoint.y, endPoint.z), curve.Evaluate(elapsedTime / duration));
             } else if (doMove && transform.localPosition == endPoint) {  //if the card has moved to the destination, reset variables
                 doMove = false;
                 curve = defaultCurve;
@@ -258,5 +258,9 @@ public class CardMovement : MonoBehaviour
         }
     }
 
-
+    [Button] public void LevitateCard(float levitateAmount)
+    {
+        Debug.Log("levitating card");
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - levitateAmount); 
+    }
 }

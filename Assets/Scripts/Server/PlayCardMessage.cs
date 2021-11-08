@@ -14,8 +14,8 @@ public class PlayCardMessage
     public bool auto;
     public int serverBurnValue;
     public int cardSource;
-    public int handIndex;
     public int boardIndex;
+    public string targetSeed;
 
     public int player;
     public float attackCooldown;
@@ -31,11 +31,11 @@ public class PlayCardMessage
     public string seed;
 
 
-    public PlayCardMessage(string seed, int cardSource = 0, int boardIndex = 0, int sender = 0)
+    public PlayCardMessage(string seed, int cardSource = 0, int boardIndex = 0, string targetSeed = "")
     {
         this.seed = seed;
         this.cardSource = cardSource;
-        this.player = sender;
         this.boardIndex = boardIndex;
+        this.targetSeed = targetSeed;
     }
 }

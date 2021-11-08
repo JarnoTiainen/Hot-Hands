@@ -68,11 +68,7 @@ public class Mouse : MonoBehaviour
 
             if (GameManager.Instance.playerStats.playerBurnValue >= Hand.Instance.GetCardData(handIndex).cost && GameManager.Instance.playerStats.playerFieldCards < GameManager.Instance.maxFieldCardCount)
             {
-                GameManager.Instance.playerStats.playerFieldCards++;
-
-                WebSocketService.PlayCard(References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.ghostCard), heldCard.GetComponent<InGameCard>().cardData.seed);
-                GameManager.Instance.PlayerPlayCard(heldCard.GetComponent<InGameCard>().cardData);
-                heldCard = null;
+                SummonCard();
             }
             else
             {
@@ -96,5 +92,20 @@ public class Mouse : MonoBehaviour
             Hand.Instance.ReturnVisibleCard(heldCard);
             heldCard = null;
         }
+    }
+
+    private void SummonCard()
+    {
+        GameManager.Instance.playerStats.playerFieldCards++;
+        if (true)
+        {
+            GameManager.Instance.PrePlayCard(heldCard.GetComponent<InGameCard>().cardData, true);
+        }
+        else
+        {
+            WebSocketService.PlayCard(References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.ghostCard), heldCard.GetComponent<InGameCard>().cardData.seed);
+            GameManager.Instance.PrePlayCard(heldCard.GetComponent<InGameCard>().cardData, false);
+        }
+        heldCard = null;
     }
 }

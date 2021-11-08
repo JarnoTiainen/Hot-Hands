@@ -194,9 +194,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void OnClickElement()
     {
-        LineRendererManager.Instance.CreateNewLine(gameObject, Mouse.Instance.gameObject);
-
-        Debug.Log("Clicked elent");
         if (!Mouse.Instance.targetModeOn)
         {
             if (!attackOnCD && !preAttackOnCD && GameManager.Instance.IsYou(owner))
@@ -208,7 +205,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         }
         else
         {
-            Debug.Log("target element " + cardData.cardName);
+            GameManager.Instance.EndTargetEvent(cardData.seed);
         }
     }
 

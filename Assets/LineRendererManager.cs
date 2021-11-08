@@ -28,17 +28,18 @@ public class LineRendererManager : MonoBehaviour
         mesh = CreateMesh();
     }
 
-    [Button] public void CreateNewLine(GameObject sourceGameObject, GameObject targetGameObject)
+    [Button] public Line CreateNewLine(GameObject sourceGameObject, GameObject targetGameObject)
     {
+        Debug.Log("create new line");
         Line newLineGameObject = Instantiate(lineGameObject).GetComponent<Line>();
         newLineGameObject.SetNewTargetAndSource(targetGameObject, sourceGameObject, scale, lineMaterial.shader, mesh);
+        return newLineGameObject.GetComponent<Line>();
     }
 
     [Button]
     public Mesh CreateMesh()
     {
         Mesh mesh = new Mesh();
-        int numberOfVerticies = 100;
         Vector3[] verticies = new Vector3[numberOfVerticies * 3];
         Vector2[] uv = new Vector2[numberOfVerticies * 3];
         int[] triangles = new int[numberOfVerticies * 12 - 12];
