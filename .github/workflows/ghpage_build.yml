@@ -1,68 +1,63 @@
-name: GitHub Page Build
-
-on: 
-  workflow_dispatch: {}
-
-env:
-  UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-  UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-  UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
-
-jobs:
-
-  buildWebGL:
-    name: Build for WebGL 🖥️
+--- 
+env: 
+  UNITY_EMAIL: "${{ secrets.UNITY_EMAIL }}"
+  UNITY_PASSWORD: "${{ secrets.UNITY_PASSWORD }}"
+  UNITY_SERIAL: "${{ secrets.UNITY_SERIAL }}"
+jobs: 
+  buildWebGL: 
+    name: "Build for WebGL 🖥️"
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    steps:
-      - name: Checkout code
+    steps: 
+      - 
+        name: "Checkout code"
         uses: actions/checkout@v2
-
-      - name: SSH key
+      - 
+        name: "SSH key"
         uses: webfactory/ssh-agent@v0.5.2
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} 
-
-      - name: Cache
+        with: 
+          ssh-private-key: "${{ secrets.SSH_PRIVATE_KEY }}"
+      - 
+        name: Cache
         uses: actions/cache@v2
-        with:
-          path: Library
+        with: 
           key: Library-WebGL
+          path: Library
           restore-keys: Library-
-
-      - name: Build
+      - 
+        name: Build
         uses: game-ci/unity-builder@v2
-        with:
+        with: 
           targetPlatform: WebGL
           unityVersion: auto
           versioning: Semantic
-
-      - name: Upload artifact
+      - 
+        name: "Upload artifact"
         uses: actions/upload-artifact@v2
-        with:
+        with: 
           name: build-HotHandsWebGL
           path: build/WebGL
-
-  deployPages:
+    strategy: 
+      fail-fast: false
+  deployPage: 
+    name: "Deploy to Github Pages 🚀"
     needs: buildWebGL
-    name: Deploy to Github Pages 🚀
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
+    steps: 
+      - 
+        name: "Checkout code"
         uses: actions/checkout@v2
-
-      - name: Download artifact
+      - 
+        name: "Download artifact"
         uses: actions/download-artifact@v2
-        with:
+        with: 
           name: build-HotHandsWebGL
           path: build
-
-      - name: Deploy 🚀
+      - 
+        name: "Deploy 🚀"
         uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
+        with: 
           branch: gh-pages
           folder: build/WebGL
-
-
-  
+name: "GitHub Page Build"
+true: 
+  workflow_dispatch: {}
