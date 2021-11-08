@@ -28,9 +28,10 @@ public class CollectionManager : MonoBehaviour
     private Color32 defaultDeckBGColor = new Color32(89, 89, 89, 255);
     private Color32 activeDeckBGColor = new Color32(40, 205, 40 ,255);
 
-
-
-
+    /*
+    @todo Testing todo-bot
+    @body Body of the test todo-issue
+    */
     void Start()
     {
         Instance = gameObject.GetComponent<CollectionManager>();
