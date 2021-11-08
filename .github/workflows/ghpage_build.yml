@@ -10,7 +10,7 @@ env:
 
 jobs:
 
- buildWebGL:
+  buildWebGL:
     name: Build for WebGL 🖥️
     runs-on: ubuntu-latest
     strategy:
@@ -43,7 +43,6 @@ jobs:
         with:
           name: build-HotHandsWebGL
           path: build/WebGL
-
 
   deployPages:
     needs: buildWebGL
