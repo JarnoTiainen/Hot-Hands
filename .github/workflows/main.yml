@@ -18,21 +18,26 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: SSH key
         uses: webfactory/ssh-agent@v0.5.2
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} 
 
-      - uses: actions/cache@v2
+      - name: Cache
+        uses: actions/cache@v2
         with:
           path: Library
           key: Library-StandaloneWindows64
           restore-keys: Library-
 
-      - uses: game-ci/unity-builder@v2
+      - name: Build
+        uses: game-ci/unity-builder@v2
         with:
           targetPlatform: StandaloneWindows64
 
-      - uses: actions/upload-artifact@v2
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
         with:
           name: build-StandaloneWindows64
           path: build/StandaloneWindows64
@@ -47,23 +52,28 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: SSH key
         uses: webfactory/ssh-agent@v0.5.2
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} 
 
-      - uses: actions/cache@v2
+      - name: Cache
+        uses: actions/cache@v2
         with:
           path: Library
           key: Library-WebGL
           restore-keys: Library-
 
-      - uses: game-ci/unity-builder@v2
+      - name: Build
+        uses: game-ci/unity-builder@v2
         with:
           targetPlatform: WebGL
           unityVersion: auto
           versioning: Semantic
 
-      - uses: actions/upload-artifact@v2
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
         with:
           name: build-WebGL
           path: build/WebGL
