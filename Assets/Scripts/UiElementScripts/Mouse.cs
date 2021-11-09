@@ -13,7 +13,7 @@ public class Mouse : MonoBehaviour
     public Vector2 mousePosInWorld;
     public GameObject markerPrefab;
     [SerializeField] private bool debuggingModeOn = false;
-    [SerializeField] private float mouseHightFromTableTop;
+    [SerializeField] public float mouseHightFromTableTop;
     [SerializeField] public bool targetModeOn;
     [SerializeField] public GameObject targetSource;
 

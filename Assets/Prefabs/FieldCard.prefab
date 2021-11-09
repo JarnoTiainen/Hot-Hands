@@ -1053,8 +1053,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   endPoint: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0}
   doMove: 0
   doAttack: 0
+  isFieldCard: 1
   maxMovementRotateAngle: 45
   targetCard: {fileID: 0}
 --- !u!114 &8021123931307860835

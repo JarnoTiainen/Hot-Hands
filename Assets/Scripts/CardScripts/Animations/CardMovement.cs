@@ -21,12 +21,17 @@ public class CardMovement : MonoBehaviour
 
     private Quaternion startRotation;
     private Quaternion endRotation;
+    private Quaternion moveRot;
 
     private Vector3 startPoint;
     private Vector3 startAttackPoint;
     public Vector3 endPoint;
     private Vector3 endAttackPoint;
     private Vector3 originalPos;
+    private Vector3 previousPos;
+    private Vector3 pos;
+
+    public Vector2 velocity;
 
     private float elapsedRotationTime;
     private float elapsedTime;
@@ -36,12 +41,13 @@ public class CardMovement : MonoBehaviour
 
     public bool doMove = false;
     public bool doAttack = false;
+    public bool isFieldCard = false;
     private bool doRotate = false;
     private bool doLift = false;
     private bool anotherRoutine = false;
 
     [SerializeField] private float maxMovementRotateAngle;
-    private Vector3 previousPos;
+    
 
     [SerializeField] private GameObject targetCard;
 
@@ -50,6 +56,40 @@ public class CardMovement : MonoBehaviour
     {  
         //this is so that we can set the used curve back to the default, if the curve value has been changed
         defaultCurve = curve;
+        previousPos = transform.position;
+    }
+
+    private void FixedUpdate()
+    {
+        pos = transform.position;
+        if (pos - previousPos != Vector3.zero) {
+            velocity = pos - previousPos;
+
+            //Debug.Log("velocity x" + velocity.x + "velocity y" + velocity.y);
+            
+            velocity = new Vector2(Mathf.Clamp(velocity.x, -0.01f, 0.01f), Mathf.Clamp(velocity.y, -0.01f, 0.01f));
+
+            moveRot = Quaternion.LookRotation(-velocity);
+            //clamp the rotation of card
+            moveRot = new Quaternion(Mathf.Clamp(moveRot.x, -0.3f, 0.3f), Mathf.Clamp(moveRot.y, -0.3f, 0.3f), Mathf.Clamp(moveRot.z, -0.3f, 0.3f), Mathf.Clamp(moveRot.w, -0.3f, 0.3f));
+
+            
+            //Debug.Log("velocity x" + velocity.x + "velocity y" + velocity.y);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, moveRot, 0.7f);
+            //transform.rotation = Quaternion.LookRotation(-(pos - previousPos));
+
+            //transform.rotation = new Quaternion(Mathf.Clamp(transform.rotation.x, -0.3f, 0.3f), Mathf.Clamp(transform.rotation.y, -0.3f, 0.3f), Mathf.Clamp(transform.rotation.z, -0.3f, 0.3f), Mathf.Clamp(transform.rotation.w, -0.3f, 0.3f));
+
+            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime / 0.5f);
+            
+        } else {
+            if (transform.rotation != Quaternion.identity) {
+                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.identity, 1);
+            }
+        }
+           
+        previousPos = transform.position;
+        
     }
 
     void Update()
@@ -66,7 +106,11 @@ public class CardMovement : MonoBehaviour
             }
         }
         
+        if (isFieldCard) {
+             //transform.rotation.SetLookRotation(new Vector3(Mouse.Instance.mousePosInWorld.x, Mouse.Instance.mousePosInWorld.y, Mouse.Instance.mouseHightFromTableTop));
 
+        }
+       
         //using euler angles here because quaternions would be different, but the euler angles are same
         if(doRotate && transform.rotation.eulerAngles != endRotation.eulerAngles) {
             elapsedRotationTime += Time.deltaTime;
