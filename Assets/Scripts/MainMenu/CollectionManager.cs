@@ -15,6 +15,7 @@ public class CollectionManager : MonoBehaviour
     public List<Toggle> cardListToggles = new List<Toggle>();
     public List<GameObject> cardLists = new List<GameObject>();
     public List<List<Card>> playerDecks = new List<List<Card>>();
+    public List<string> deckNames = new List<string>();
     [SerializeField] private GameObject cardListWindow;
     [SerializeField] private GameObject togglesRow;
     [SerializeField] private GameObject pageText;
@@ -24,7 +25,7 @@ public class CollectionManager : MonoBehaviour
     [SerializeField] private Toggle cardListTogglePrefab;
     public int activeList = 0;
     private int lastActiveDeck = 0;
-    [SerializeField] private int playerDeckLimit = 5;
+    public int playerDeckLimit = 5;
     private Color32 defaultDeckBGColor = new Color32(89, 89, 89, 255);
     private Color32 activeDeckBGColor = new Color32(40, 205, 40 ,255);
 
@@ -36,11 +37,15 @@ public class CollectionManager : MonoBehaviour
     {
         Instance = gameObject.GetComponent<CollectionManager>();
         resourcesCardList = Resources.Load("Card List") as CardList;
+        for(int i = 0; playerDeckLimit > i; i++)
+        {
+            deckNames.Add("");
+        }
 
         SetAllCardsList();
         UpdatePageText();
 
-        createButton.GetComponent<Button>().onClick.AddListener(() => CreateButtonCallback(""));
+        createButton.GetComponent<Button>().onClick.AddListener(() => CreateButtonCallback());
         setActiveButton.GetComponent<Button>().onClick.AddListener(() => SetActiveButtonCallback());
     }
 
@@ -48,14 +53,15 @@ public class CollectionManager : MonoBehaviour
     public void SetPlayerDecks(GetDecksMessage getDecksMessage)
     {
         ////////////////////////////
-        Debug.Log(getDecksMessage);
-        Debug.Log(getDecksMessage.decks.Count);
-        Debug.Log(getDecksMessage.decks[0].deck);
-        Debug.Log(getDecksMessage.decks[0].deck.Count);
-        Debug.Log(getDecksMessage.activeDeckIndex);
+        //Debug.Log(getDecksMessage);
+        //Debug.Log(getDecksMessage.decks.Count);
+        //Debug.Log(getDecksMessage.decks[0].deck);
+        //Debug.Log(getDecksMessage.decks[0].deck.Count);
+        //Debug.Log(getDecksMessage.activeDeckIndex);
         //////////////////////////////
 
         List<GetDecksMessage.Deck> playerDecks = getDecksMessage.decks;
+        List<string> deckNames = getDecksMessage.deckNames;
 
         foreach (GetDecksMessage.Deck deck in playerDecks)
         {
@@ -84,8 +90,8 @@ public class CollectionManager : MonoBehaviour
 
         for (int i = 0; playerDecks.Count > i; i++)
         {
-            CreateNewDeck("DECK " + (i + 1), true, true);
-            SetPlayerDeckList(i);
+            CreateNewDeck(deckNames[i], true, true);
+            UpdateDeckUI(i);
             
         }
 
@@ -97,14 +103,20 @@ public class CollectionManager : MonoBehaviour
         }
     }
 
-    // Sends the players active deck data to the online database and visually shows which deck is active
-    public void SetActiveDeck()
+    // Sends the players active deck index to the db and visually shows which deck is active
+    public void SetActiveDeckToDB()
     {
         if (activeList == 0) return;
-        DeckObject deckString = new DeckObject(playerDecks[activeList - 1], activeList - 1);
-        WebSocketService.SaveDeck(JsonUtility.ToJson(deckString));
         WebSocketService.SetActiveDeck(activeList - 1);
         SetActiveDeckUI();
+    }
+
+    // Sends the players deck data to the db
+    public void SaveDeckToDB(int index)
+    {
+        //@todo Needs to send deck name as well
+        DeckObject deckString = new DeckObject(playerDecks[index], index);
+        WebSocketService.SaveDeck(JsonUtility.ToJson(deckString));
     }
 
     // Sets the visuals that show which deck is active
@@ -137,12 +149,20 @@ public class CollectionManager : MonoBehaviour
     }
 
     // Passes a specific player deck's cards to the corresponding ingame list and calls it's populate function
-    public void SetPlayerDeckList(int i)
+    public void UpdateDeckUI(int i)
     {
         CollectionCardList cardListScript = cardLists[i + 1].GetComponent<CollectionCardList>();
         cardListScript.cards = playerDecks[i];
         cardListScript.PopulatePage(1);
 
+        if(deckNames[i] == null || deckNames[i] == "")
+        {
+            cardListToggles[i + 1].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "DECK " + (i + 1);
+        }
+        else
+        {
+            cardListToggles[i + 1].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = deckNames[i];
+        }
     }
 
     // Creates new empty ingame list and deck when called
@@ -212,14 +232,14 @@ public class CollectionManager : MonoBehaviour
     }
 
     // Bound to an onClick event from the "Create Button'. Calls CreateNewDeck function
-    private void CreateButtonCallback(string name)
+    private void CreateButtonCallback()
     {
-        CreateNewDeck(name);
+        CreateNewDeck();
     }
 
     // Bound to an onClick event from the "Set Active Button'. Calls SetActiveDeck function
     private void SetActiveButtonCallback()
     {
-        SetActiveDeck();
+        SetActiveDeckToDB();
     }
 }

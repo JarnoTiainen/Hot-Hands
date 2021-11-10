@@ -27,4 +27,9 @@ public class ToggleSounds : MonoBehaviour
             sfxLibrary.GetComponent<ButtonSFX>().OnClick();
         }
     }
+
+    public void OnClickAlways()
+    {
+        sfxLibrary.GetComponent<ButtonSFX>().OnClick();
+    }
 }

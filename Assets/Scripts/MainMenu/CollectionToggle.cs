@@ -6,12 +6,10 @@ using UnityEngine.UI;
 public class CollectionToggle : MonoBehaviour
 {
     public int index;
-    private Toggle toggle;
 
     private void Start()
     {
-        toggle = gameObject.GetComponent<Toggle>();
-        toggle.onValueChanged.AddListener(delegate
+        gameObject.GetComponent<Toggle>().onValueChanged.AddListener(delegate
         {
             ChangeDeck();
         });
@@ -19,7 +17,7 @@ public class CollectionToggle : MonoBehaviour
 
     public void ChangeDeck()
     {
-        GameObject.Find("SettingsManager").GetComponent<CollectionManager>().ChangeActiveCardList(index);
+        CollectionManager.Instance.ChangeActiveCardList(index);
     }
 
 }

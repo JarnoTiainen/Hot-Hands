@@ -5,6 +5,7 @@ using System;
 public class GetDecksMessage
 {
     public List<Deck> decks;
+    public List<string> deckNames;
     public int activeDeckIndex;
 
     [System.Serializable]

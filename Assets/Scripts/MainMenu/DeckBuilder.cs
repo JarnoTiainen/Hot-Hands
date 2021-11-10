@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class DeckBuilder : MonoBehaviour
 {
     private CollectionManager cm;
+    [SerializeField] private SaveDeckPopup saveDeckPopup;
     private List<BuildCard> build = new List<BuildCard>();
     [SerializeField] private GameObject countText;
     [SerializeField] private GameObject deckBuildCardPrefab;
@@ -138,11 +139,19 @@ public class DeckBuilder : MonoBehaviour
     // Saves the build on DeckBuilder's list on to the currently open deck and sets it as the player's active deck
     public void SaveDeck()
     {
-        if (cm.activeList == 0) return;
+        int deckIndex = -1;
+        for (int i = 0; saveDeckPopup.saveDeckToggles.Count > i; i++)
+        {
+            if (saveDeckPopup.saveDeckToggles[i].isOn)
+            {
+                deckIndex = i;
+                saveDeckPopup.saveDeckToggles[i].isOn = false;
+                break;
+            }
+        }
+        if (deckIndex == -1) return;
 
-        int playerDeckIndex = cm.activeList - 1;
         List<Card> tempDeck = new List<Card>();
-
         for (int i = 0; build.Count > i; i++)
         {
             // Only one card of it's type in the build
@@ -166,18 +175,22 @@ public class DeckBuilder : MonoBehaviour
         
         });
      
-        if (cm.playerDecks[playerDeckIndex] == null)
+        // Add deck to CollectionManager's playerDecks
+        if (cm.playerDecks[deckIndex] == null)
         {
             cm.playerDecks.Add(tempDeck);
         }
         else
         {
-            cm.playerDecks[playerDeckIndex] = tempDeck;
+            cm.playerDecks[deckIndex] = tempDeck;
         }
-        cm.SetPlayerDeckList(playerDeckIndex);
+        cm.deckNames[deckIndex] = saveDeckPopup.deckNameInput.text;
+        saveDeckPopup.deckNameInput.text = "";
+        cm.SaveDeckToDB(deckIndex);
+        cm.UpdateDeckUI(deckIndex);
         cm.UpdatePageText();
-        cm.SetActiveDeck();
         ClearBuild();
+        saveDeckPopup.transform.parent.gameObject.SetActive(false);
     }
 
     // Copies the cards from the currently open deck to the builder

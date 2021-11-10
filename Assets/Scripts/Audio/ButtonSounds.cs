@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class ButtonSounds : MonoBehaviour
 {
     private static GameObject sfxLibrary;
+    [SerializeField] bool clearTriggersOnDisable = true;
 
     private void Start()
     {
@@ -16,6 +17,7 @@ public class ButtonSounds : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!clearTriggersOnDisable) return;
         gameObject.GetComponent<Button>().onClick.AddListener(() => OnClick());
 
         if (gameObject.GetComponent<EventTrigger>() == null) return;
@@ -27,6 +29,7 @@ public class ButtonSounds : MonoBehaviour
     }
     private void OnDisable()
     {
+        if (!clearTriggersOnDisable) return;
         gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
         if (gameObject.GetComponent<EventTrigger>() == null) return;
         gameObject.GetComponent<EventTrigger>().triggers.Clear();
