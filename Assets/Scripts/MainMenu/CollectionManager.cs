@@ -47,17 +47,21 @@ public class CollectionManager : MonoBehaviour
 
     public void SetPlayerDecks(GetDecksMessage getDecksMessage)
     {
-        List<List<string>> playerDecks = new List<List<string>>();
-        playerDecks.Add(getDecksMessage.deck0);
-        playerDecks.Add(getDecksMessage.deck1);
-        playerDecks.Add(getDecksMessage.deck2);
-        playerDecks.Add(getDecksMessage.deck3);
-        playerDecks.Add(getDecksMessage.deck4);
+        ////////////////////////////
+        Debug.Log(getDecksMessage);
+        Debug.Log(getDecksMessage.decks.Count);
+        Debug.Log(getDecksMessage.decks[0].deck);
+        Debug.Log(getDecksMessage.decks[0].deck.Count);
+        Debug.Log(getDecksMessage.activeDeckIndex);
+        //////////////////////////////
 
-        foreach (List<string> deck in playerDecks)
+        List<GetDecksMessage.Deck> playerDecks = getDecksMessage.decks;
+
+        foreach (GetDecksMessage.Deck deck in playerDecks)
         {
             List<Card> tempDeck = new List<Card>();
-            foreach(string cardName in deck)
+
+            foreach(string cardName in deck.deck)
             {
                 for(int i = 0; resourcesCardList.allCards.Count > i; i++)
                 {
@@ -117,11 +121,18 @@ public class CollectionManager : MonoBehaviour
     // Gets all game cards and passes them to the 'All Cards List' and calls it's populate function
     private void SetAllCardsList()
     {
+        // Add all cards in the resources allCards-list to Collection's "All Cards"
         CollectionCardList cardListScript = cardLists[0].GetComponent<CollectionCardList>();
         foreach (CardList.ListCard listCard in resourcesCardList.allCards)
         {
             cardListScript.cards.Add(listCard.card);
         }
+        // Sort alphabetically
+        cardListScript.cards.Sort(delegate (Card card1, Card card2)
+        {
+            return card1.cardName.CompareTo(card2.cardName);
+
+        });
         cardListScript.PopulatePage(1);
     }
 

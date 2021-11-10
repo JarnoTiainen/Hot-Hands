@@ -50,7 +50,7 @@ public class WebSocketService : MonoBehaviour
         {
             
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
-            if (showServerMessage) Debug.Log("server message: " + data[0] + " " + data[1]);
+            if (showServerMessage) Debug.Log("server message: " + data[0] + " " + data[1] + " " + data[2]);
             switch ((string)data[0])
             {
                 case "OPPONENTJOIN":
@@ -177,7 +177,7 @@ public class WebSocketService : MonoBehaviour
                 case "BUFFBOARD":
                     gameManager.CardDataChange(JsonUtility.FromJson<StatChangeMessage>(data[1]));
                     break;
-                case "SEEDMISSMATCH":
+                case "SEEDMISMATCH":
                     Debug.LogError("SEED MISSMATCH! not found");
                     break;
                 default:
@@ -232,6 +232,7 @@ public class WebSocketService : MonoBehaviour
 
     public static void PlayCard(int boardIndex, string seed, string targetSeed = "")
     {
+        Debug.Log("playing card with seed: " + seed);
         if (Instance.debuggerModeOn) Debug.LogWarning("PLAYING CARD TO INDEX " + boardIndex);
         PlayCardMessage playCardMessage = new PlayCardMessage(seed, 2, boardIndex, targetSeed);
         string playCardMessageJSON = JsonUtility.ToJson(playCardMessage);
@@ -310,6 +311,7 @@ public class WebSocketService : MonoBehaviour
     //Make this main function and delete one above
     public static void Burn(string seed)
     {
+        Debug.Log("burnign card with: " + seed);
         if (Instance.debuggerModeOn) Debug.Log("Burned card with seed " + seed);
 
         GameMessage message = new GameMessage("OnMessage", "BURNCARD", seed);

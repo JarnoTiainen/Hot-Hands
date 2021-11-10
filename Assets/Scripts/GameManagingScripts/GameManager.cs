@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public int maxDeckSize = 20;
     public bool deckSet = true;
     
-    [SerializeField] private List<GameObject> unHandledBurnedCards = new List<GameObject>();
     [SerializeField] private int playerStartHealth = 100;
     [SerializeField] private bool debuggerModeOn;
     [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerBurnCard;
@@ -30,7 +29,8 @@ public class GameManager : MonoBehaviour
     private GameObject sfxLibrary;
 
     [SerializeField] private Dictionary<string, GameObject> inGameCards = new Dictionary<string, GameObject>();
-    
+
+
     public void AddCardToInGameCards(GameObject newCard)
     {
         
@@ -45,18 +45,22 @@ public class GameManager : MonoBehaviour
         }
         inGameCards.Add(newCard.GetComponent<InGameCard>().cardData.seed, newCard);
     }
+    /*
     public void RemoveCardFromInGameCards(GameObject newCard)
     {
+        Debug.Log("trying to remove card from list with seed " + newCard.GetComponent<InGameCard>().cardData.seed);
         if(inGameCards.ContainsValue(newCard))
         {
             Debug.LogWarning("removing " + newCard.GetComponent<InGameCard>().cardData.cardName + " from list");
             inGameCards.Remove(newCard.GetComponent<InGameCard>().cardData.seed);
         }
     }
+    */
     public void RemoveCardFromInGameCards(string seed)
     {
         if (inGameCards.ContainsKey(seed))
         {
+            Debug.LogWarning("removing " + seed + " from list");
             inGameCards.Remove(seed);
         }
     }
@@ -68,7 +72,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("card with seed was not found from list");
+            Debug.LogError("card with seed was not found from list: " + seed);
             return null;
         }
         
@@ -109,8 +113,8 @@ public class GameManager : MonoBehaviour
     {
         if (burnCardMessage.denied)
         {
-            UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue - unHandledBurnedCards[0].GetComponent<InGameCard>().cardData.value);
-            ReturnBurnedCardToHand();
+            UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue - GetCardFromInGameCards(burnCardMessage.seed).GetComponent<InGameCard>().cardData.value);
+            ReturnBurnedCardToHand(burnCardMessage.seed);
             return;
         }
 
@@ -121,7 +125,6 @@ public class GameManager : MonoBehaviour
         RemoveCardFromInGameCards(burnCardMessage.seed);
         if (cardMessage.player == playerNumber)
         {
-            unHandledBurnedCards.Remove(unHandledBurnedCards[0]);
             playerStats.playerHandCards--;
         }
         else
@@ -164,11 +167,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ReturnBurnedCardToHand()
+    public void ReturnBurnedCardToHand(string seed)
     {
         if (debugPlayerBurnCard) Debug.Log("Ret removing ");
-        Hand.AddNewCardToHand(unHandledBurnedCards[0]);
-        unHandledBurnedCards.Remove(unHandledBurnedCards[0]);
+        Hand.AddNewCardToHand(GetCardFromInGameCards(seed));
     }
 
     public void PlayerBurnCard(GameObject card, int player = -1)
@@ -180,7 +182,6 @@ public class GameManager : MonoBehaviour
         if (player == playerNumber)
         {
             if(debugPlayerBurnCard) Debug.Log("adding ");
-            unHandledBurnedCards.Add(card);
             card.transform.SetParent(References.i.yourBonfire.transform);
             UpdatePlayerBurnValue(player, playerStats.playerBurnValue + value);
             References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = playerStats.playerBurnValue.ToString();
