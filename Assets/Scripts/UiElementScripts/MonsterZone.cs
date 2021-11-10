@@ -27,14 +27,54 @@ public class MonsterZone : MonoBehaviour
     {
         GameObject newMonster = Instantiate(References.i.fieldCard);
         serverConfirmedCards.Add(newMonster);
-        newMonster.transform.SetParent(transform);
+
         if (debugModeOn) Debug.Log("index: " + boardIndex);
         monsterCards.Insert(boardIndex, newMonster);
+        Vector3 instancePos = CalculatePosition(boardIndex, isYourCard);
+        newMonster.transform.position = instancePos;
+        newMonster.transform.SetParent(transform, true);
         newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
         ReCalculateServerCardIndexes();
         RepositionMonsterCards();
         return newMonster;
     }
+
+    /// <summary>
+    /// Calculate the instantiation position for new card
+    /// </summary>
+    /// <param name="boardIndex"></param>
+    /// <param name="isYourCard"></param>
+    /// <returns></returns>
+    private Vector3 CalculatePosition(int boardIndex, bool isYourCard)
+    {
+        cardXposDictionary = new Dictionary<GameObject, float>();
+
+        Vector3 newPos;
+        Vector2 cardDim = (Vector2)References.i.fieldCard.GetComponent<BoxCollider>().size;
+        float cardRowWidth = monsterCards.Count * cardDim.x + (monsterCards.Count - 1) * gapBetweenCards;
+        float firstCardOffsetX = (-cardRowWidth + cardDim.x) / 2;
+        float gapBetweenCardCenters = cardDim.x + gapBetweenCards;
+        float newPosX;
+        if (monsterCards.Count == 1) {
+            return Vector3.zero;
+        } else {
+            for (int i = 0; i < monsterCards.Count; i++) {
+                if(i == boardIndex) {
+                    newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
+                    if (!isYourCard) {
+                        newPos = new Vector3(newPosX, References.i.yourMonsterZone.transform.position.y, References.i.monsterzoneContainer.transform.position.z);
+                    } else {
+                        newPos = new Vector3(newPosX, References.i.opponentMonsterZone.transform.position.y, References.i.monsterzoneContainer.transform.position.z);
+                    }
+                    
+                    return newPos;
+                }
+            }
+
+        }
+        return Vector3.zero;
+    }
+
 
 
     [Button]public GameObject AddNewMonsterCard(bool isYourCard, int boardIndex, CardData data, bool isPreAddedCard = true)
@@ -48,6 +88,7 @@ public class MonsterZone : MonoBehaviour
             unhandledCards.Add(ghostCard);
             if(debugModeOn) Debug.Log("Added unhandled");
             newCard = ghostCard;
+            newCard.transform.position = CalculatePosition(boardIndex, isYourCard);
             ghostCard = null;
             //ReCalculateCardIndexes();
         } else {
@@ -62,15 +103,19 @@ public class MonsterZone : MonoBehaviour
 
             GameObject newMonster = Instantiate(References.i.fieldCard);
             serverConfirmedCards.Add(newMonster);
+
             newMonster.transform.SetParent(transform);
+            
             if (debugModeOn) Debug.Log("index: " + index);
             if (index > monsterCards.Count) index = monsterCards.Count;
             monsterCards.Insert(index, newMonster);
+            newMonster.transform.position = CalculatePosition(boardIndex, isYourCard);
             newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
             GameManager.Instance.AddCardToInGameCards(newMonster);
             ReCalculateServerCardIndexes();
             RepositionMonsterCards();
             newCard = newMonster;
+            
         }
         return newCard;
     }
@@ -190,21 +235,19 @@ public class MonsterZone : MonoBehaviour
         float firstCardOffsetX = (-cardRowWidth + cardDim.x) / 2;
         float gapBetweenCardCenters = cardDim.x + gapBetweenCards;
         float newPosX;
-        if (monsterCards.Count == 1) monsterCards[0].GetComponent<Transform>().localPosition = Vector3.zero;
-        else 
-        {
-            for (int i = 0; i < monsterCards.Count; i++)
-            {
+        if (monsterCards.Count == 1) {
+            monsterCards[0].GetComponent<Transform>().localPosition = Vector3.zero;
+            //monsterCards[0].GetComponent<CardMovement>().OnCardMove(Vector3.zero, GameManager.Instance.rearrangeDuration);
+        } else {
+            for (int i = 0; i < monsterCards.Count; i++) {
                 newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
                 Vector3 newPos = new Vector3(newPosX, 0, transform.position.z);
-                if(ghostCard)
-                {
-                    if(monsterCards[i] != ghostCard)
-                    {
+                if (ghostCard) {
+                    if (monsterCards[i] != ghostCard) {
                         cardXposDictionary.Add(monsterCards[i], newPosX);
                     }
-                }
-                else cardXposDictionary.Add(monsterCards[i], newPosX);
+                } else cardXposDictionary.Add(monsterCards[i], newPosX);
+
                 monsterCards[i].GetComponent<CardMovement>().OnCardMove(newPos, GameManager.Instance.rearrangeDuration);
             }
 

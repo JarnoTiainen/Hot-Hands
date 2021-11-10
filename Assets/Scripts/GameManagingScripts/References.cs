@@ -30,6 +30,7 @@ public class References: MonoBehaviour
     public GameObject opponentDeckObj;
     public GameObject yourDeckObj;
     public GameObject opponentBonfire;
+    public GameObject monsterzoneContainer;
     public GameObject yourBonfire;
     public MonsterZone yourMonsterZone;
     public MonsterZone opponentMonsterZone;

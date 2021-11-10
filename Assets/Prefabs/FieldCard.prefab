@@ -1772,6 +1772,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GaOb_card
       objectReference: {fileID: 0}
+    - target: {fileID: 5072624707291292710, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5498164340434577439, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1820,6 +1824,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2183c94f58350c34088f665f337358b3, type: 2}
+    - target: {fileID: 8477228164739970812, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8741229637245729170, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_CastShadows
       value: 0
