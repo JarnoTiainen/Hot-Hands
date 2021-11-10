@@ -81,10 +81,20 @@ public class Mouse : MonoBehaviour
         {
             References.i.yourMonsterZone.RemoveGhostCard();
             if(debuggingModeOn) Debug.Log("Card discarded with seed: " + heldCard.GetComponent<InGameCard>().cardData.seed);
-            WebSocketService.Burn(heldCard.GetComponent<InGameCard>().cardData.seed);
-            GameManager.Instance.PlayerBurnCard(heldCard);
-            Hand.Instance.RemoveCardNoDestroy(heldCard.GetComponent<InGameCard>().cardData.seed);
-            heldCard = null;
+            if(GameManager.Instance.GetCardFromInGameCards(heldCard.GetComponent<InGameCard>().cardData.seed) != null)
+            {
+                WebSocketService.Burn(heldCard.GetComponent<InGameCard>().cardData.seed);
+                GameManager.Instance.PlayerBurnCard(heldCard);
+                Hand.Instance.RemoveCardNoDestroy(heldCard.GetComponent<InGameCard>().cardData.seed);
+                heldCard = null;
+            }
+            else
+            {
+                References.i.yourMonsterZone.RemoveGhostCard();
+                Hand.Instance.ReturnVisibleCard(heldCard);
+                heldCard = null;
+            }
+            
         }
         else
         {

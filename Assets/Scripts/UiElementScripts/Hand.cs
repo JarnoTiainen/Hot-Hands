@@ -125,7 +125,7 @@ public class Hand : MonoBehaviour
         {
             handCards.Remove(removedCard);
             visibleHandCards.Remove(removedCard);
-            GameManager.Instance.RemoveCardFromInGameCards(removedCard);
+            //GameManager.Instance.RemoveCardFromInGameCards(removedCard);
             Destroy(removedCard);
             SetNewCardPositions();
             Instance.UpdateCanAffortCards();

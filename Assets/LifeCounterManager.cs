@@ -72,7 +72,6 @@ public class LifeCounterManager : MonoBehaviour
         char lastNumber = numberArray[1];
 
 
-        Debug.Log(firstNumber + " " + lastNumber);
         leftNumber.text = firstNumber.ToString();
         rightNumber.text = lastNumber.ToString();
     }
