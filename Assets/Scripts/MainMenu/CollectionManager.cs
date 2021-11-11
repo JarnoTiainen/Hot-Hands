@@ -29,13 +29,10 @@ public class CollectionManager : MonoBehaviour
     private Color32 defaultDeckBGColor = new Color32(89, 89, 89, 255);
     private Color32 activeDeckBGColor = new Color32(40, 205, 40 ,255);
 
-    /*
-    @todo Testing todo-bot
-    @body Body of the test todo-issue
-    */
+
     void Start()
     {
-        Instance = gameObject.GetComponent<CollectionManager>();
+        Instance = this;
         resourcesCardList = Resources.Load("Card List") as CardList;
         for(int i = 0; playerDeckLimit > i; i++)
         {
@@ -92,7 +89,6 @@ public class CollectionManager : MonoBehaviour
         {
             CreateNewDeck(deckNames[i], true, true);
             UpdateDeckUI(i);
-            
         }
 
         lastActiveDeck = getDecksMessage.activeDeckIndex + 1;
@@ -114,7 +110,10 @@ public class CollectionManager : MonoBehaviour
     // Sends the players deck data to the db
     public void SaveDeckToDB(int index)
     {
-        //@todo Needs to send deck name as well
+        /*
+         * @todo Needs to send deck name as well
+         * @body :)))
+         */
         DeckObject deckString = new DeckObject(playerDecks[index], index);
         WebSocketService.SaveDeck(JsonUtility.ToJson(deckString));
     }
@@ -140,21 +139,19 @@ public class CollectionManager : MonoBehaviour
             cardListScript.cards.Add(listCard.card);
         }
         // Sort alphabetically
-        cardListScript.cards.Sort(delegate (Card card1, Card card2)
-        {
-            return card1.cardName.CompareTo(card2.cardName);
-
-        });
+        cardListScript.SortList(CollectionCardList.SortMethod.Name);
         cardListScript.PopulatePage(1);
     }
 
     // Passes a specific player deck's cards to the corresponding ingame list and calls it's populate function
     public void UpdateDeckUI(int i)
     {
+        // Updates cards on list
         CollectionCardList cardListScript = cardLists[i + 1].GetComponent<CollectionCardList>();
         cardListScript.cards = playerDecks[i];
-        cardListScript.PopulatePage(1);
+        cardListScript.SortList(SortMethodDropdown.Instance.GetSortMethod(), SortMethodDropdown.Instance.reverse);
 
+        // Updates name on toggle
         if(deckNames[i] == null || deckNames[i] == "")
         {
             cardListToggles[i + 1].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "DECK " + (i + 1);

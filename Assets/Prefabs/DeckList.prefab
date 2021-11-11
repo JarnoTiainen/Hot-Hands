@@ -52,12 +52,12 @@ MonoBehaviour:
   m_Padding:
     m_Left: 30
     m_Right: 30
-    m_Top: 20
-    m_Bottom: 20
+    m_Top: 0
+    m_Bottom: 0
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 290, y: 415}
+  m_CellSize: {x: 285, y: 410}
   m_Spacing: {x: 30, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 4
@@ -74,7 +74,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container3DPrefab: {fileID: 1501014297592997676, guid: 4756cd0792811004db8f3f57c2361f1c, type: 3}
-  cardsPerPage: 8
   calculatedCardsPerPage: 0
   currentPage: 0
   totalPages: 0

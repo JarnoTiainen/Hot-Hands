@@ -6,10 +6,8 @@ using UnityEngine.UI;
 
 public class CollectionCardList : MonoBehaviour
 {
-
     [SerializeField] private GameObject container3DPrefab;
     [SerializeField] private int calculatedCardsPerPage;
-
     public int currentPage;
     public int totalPages;
     public List<Card> cards = new List<Card>();
@@ -20,12 +18,11 @@ public class CollectionCardList : MonoBehaviour
         GridLayoutGroup grid = gameObject.GetComponent<GridLayoutGroup>();
         RectTransform rectTransform = gameObject.transform.parent.GetComponent<RectTransform>();
 
-
         int perRowWithoutSpacing = Mathf.FloorToInt(rectTransform.rect.width / grid.cellSize.x);
         int perColumnWithoutSpacing = Mathf.FloorToInt(rectTransform.rect.height / grid.cellSize.y);
 
-        float cardsPlusSpacingWidth = perRowWithoutSpacing * grid.cellSize.x + (perRowWithoutSpacing - 1) * grid.spacing.x;
-        float cardsPlusSpacingHeight = perColumnWithoutSpacing * grid.cellSize.y + (perColumnWithoutSpacing - 1) * grid.spacing.y;
+        float cardsPlusSpacingWidth = perRowWithoutSpacing * grid.cellSize.x + (perRowWithoutSpacing - 1) * grid.spacing.x + grid.padding.left + grid.padding.right;
+        float cardsPlusSpacingHeight = perColumnWithoutSpacing * grid.cellSize.y + (perColumnWithoutSpacing - 1) * grid.spacing.y + grid.padding.top + grid.padding.bottom;
 
         if (cardsPlusSpacingWidth > rectTransform.rect.width)
         {
@@ -43,16 +40,14 @@ public class CollectionCardList : MonoBehaviour
             if(cardsPlusSpacingHeight > rectTransform.rect.height)
             {
                 calculatedCardsPerPage = perRowWithoutSpacing * (perColumnWithoutSpacing - 1);
-
             }
             else
             {
                 calculatedCardsPerPage = perRowWithoutSpacing * perColumnWithoutSpacing;
             }
         }
-
-
     }
+
 
     public void PopulatePage(int page)
     {
@@ -112,7 +107,108 @@ public class CollectionCardList : MonoBehaviour
             }
             currentPage = page;
         }
-
-
     }
+
+
+    public void SortList(SortMethod sortMethod, bool reverse = false)
+    {
+        switch (sortMethod)
+        {
+            case SortMethod.Name:
+                cards.Sort(SortByName);
+                if (reverse) cards.Reverse();
+                break;
+
+            case SortMethod.Cost:
+                cards.Sort(SortByCost);
+                if (reverse) cards.Reverse();
+                break;
+
+            case SortMethod.Value:
+                cards.Sort(SortByValue);
+                if (reverse) cards.Reverse();
+                break;
+
+            case SortMethod.RP:
+                cards.Sort(SortByRP);
+                if (reverse) cards.Reverse();
+                break;
+
+            case SortMethod.LP:
+                cards.Sort(SortByLP);
+                if (reverse) cards.Reverse();
+                break;
+        }
+        PopulatePage(1);
+    }
+
+
+    // Sorting methods below
+    public enum SortMethod
+    {
+        Name,   //0
+        Cost,   //1
+        Value,  //2
+        RP,     //3
+        LP      //4
+    }
+
+    public int SortByName(Card card1, Card card2)
+    {
+        return card1.cardName.CompareTo(card2.cardName);
+    }
+
+    public int SortByCost(Card card1, Card card2)
+    {
+        int value = card1.cost.CompareTo(card2.cost);
+        if (value != 0)
+        {
+            return -value;
+        }
+        else
+        {
+            return card1.name.CompareTo(card2.name);
+        }
+    }
+
+    public int SortByValue(Card card1, Card card2)
+    {
+        int value = card1.value.CompareTo(card2.value);
+        if(value != 0)
+        {
+            return -value;
+        }
+        else
+        {
+            return card1.name.CompareTo(card2.name);
+        }
+    }
+
+    public int SortByRP(Card card1, Card card2)
+    {
+        int value = card1.rp.CompareTo(card2.rp);
+        if (value != 0)
+        {
+            return -value;
+        }
+        else
+        {
+            return card1.name.CompareTo(card2.name);
+        }
+    }
+
+    public int SortByLP(Card card1, Card card2)
+    {
+        int value = card1.lp.CompareTo(card2.lp);
+        if (value != 0)
+        {
+            return -value;
+        }
+        else
+        {
+            return card1.name.CompareTo(card2.name);
+        }
+    }
+
+
 }
