@@ -14,12 +14,20 @@ public class Enchantment
     public EnchantmentEffect enchantmentEffect;
     public Trigger trigger;
     public int weight;
-
-
+    public bool targeting;
 
     public enum EnchantmentEffect
     {
-        Default, DrawCard, GainBurn, PlaySelf, DiscardPileDuplication, SummonToEnemy, HealPlayer, BuffBoardAttackDirectionPowers, EssenceSiphon
+        Default,
+        DrawCard, 
+        GainBurn, 
+        PlaySelf, 
+        DiscardPileDuplication, 
+        SummonToEnemy, 
+        HealPlayer, 
+        BuffBoardAttackDirectionPowers, 
+        EssenceSiphon, 
+        Scorch
     }
     public enum Trigger
     {
@@ -29,6 +37,8 @@ public class Enchantment
         Drawtivation,
         Sacrifice,
         Retaliate,
-        Brutality
+        Brutality, 
+        Spell
     }
+
 }

@@ -78,6 +78,15 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public bool CheckIfInGameCardsContainsCard(GameObject card)
+    {
+        if(inGameCards.ContainsValue(card))
+        {
+            return true;
+        }
+        return false;
+    }
+
     [Button] public void PrintInGameCards()
     {
         Debug.LogWarning("Cards in inGameCards: " + inGameCards.Count + " cards: ");
@@ -438,17 +447,22 @@ public class GameManager : MonoBehaviour
     }
     public void PrePlayCard(CardData data, bool hasTargetAbility = false)
     {
-        GameObject newCard = References.i.yourMonsterZone.AddNewMonsterCard(true, 0, data);
-        Hand.Instance.RemoveCard(data.seed);
+        if(data.cardType == Card.CardType.Monster)
+        {
+            GameObject newCard = References.i.yourMonsterZone.AddNewMonsterCard(true, 0, data);
 
-        if(!hasTargetAbility)
-        {
-            PlayerPlayCard(data);
-        }
-        else
-        {
-            targettingCardData = data;
-            StartTargetEvent(newCard);
+            //TODO: make sure that card with that seed still exists in the game(instead of removing move to container or something)
+            Hand.Instance.RemoveCard(data.seed);
+
+            if (!hasTargetAbility)
+            {
+                PlayerPlayCard(data);
+            }
+            else
+            {
+                targettingCardData = data;
+                StartTargetEvent(newCard);
+            }
         }
     }
 
@@ -552,6 +566,23 @@ public class GameManager : MonoBehaviour
             target.GetComponent<InGameCard>().UpdateCardTexts();
         }
     }
+
+    public void PlaySpell(PlaySpellMessage playSpellMessage)
+    {
+        if(IsYou(playSpellMessage.player))
+        {
+            References.i.spellZone.PlaySpell(playSpellMessage.seed);
+        }
+        else
+        {
+            References.i.spellZone.PlaySpell(References.i.cardList.GetCardData(playSpellMessage));
+        }
+
+        
+
+        //TODO: Add enemy carddata
+    }
+
 
     public void PlayDataChangeEffect(CardDataMessage.BuffType buffType, GameObject target)
     {

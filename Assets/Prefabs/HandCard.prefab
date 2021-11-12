@@ -874,6 +874,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a17b8afeade60a46b77dd8a023f42ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puffEffectPrefab: {fileID: 0}
+  onTargetMode: 0
+  twirlEffect: {fileID: 5602073806498860480, guid: 64fe9b29524a8a542a6c65e4fb77ac44, type: 3}
 --- !u!114 &424058452700800159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -898,6 +901,7 @@ MonoBehaviour:
     rp: 0
     lp: 0
     seed: 
+    targetting: 0
     enchantments: []
   nameText: {fileID: 8906596261901186246}
   cost: {fileID: 6910323822229337869}
@@ -1022,8 +1026,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   endPoint: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0}
   doMove: 0
   doAttack: 0
+  isFieldCard: 0
   maxMovementRotateAngle: 45
   targetCard: {fileID: 0}
 --- !u!114 &2172893466288287300
@@ -1862,6 +1868,10 @@ PrefabInstance:
     - target: {fileID: 7384301967465324284, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418000911509646159, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7584598214010481171, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_Materials.Array.data[0]

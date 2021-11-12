@@ -180,6 +180,10 @@ public class WebSocketService : MonoBehaviour
                 case "SEEDMISMATCH":
                     Debug.LogError("SEED MISSMATCH! not found");
                     break;
+                case "PLAYSPELL":
+                    if (debuggerModeOn) Debug.Log("Message type was PLAYSPELL");
+                    gameManager.PlaySpell(JsonUtility.FromJson<PlaySpellMessage>(data[1]));
+                    break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                     break;

@@ -231,6 +231,14 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         transform.GetChild(1).gameObject.SetActive(false);
     }
 
+    public void SpellBurn()
+    {
+        ToggleCanAffordEffect(false);
+        GetComponent<DissolveEffect>().StartDissolving(mat);
+        //GetComponent<DissolveMove>().StartDissolving();
+        transform.GetChild(1).gameObject.SetActive(false);
+    }
+
     public void ToggleGhostCard()
     {
         if(!isGhostCard)

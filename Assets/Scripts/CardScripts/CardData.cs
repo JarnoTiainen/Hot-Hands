@@ -25,10 +25,11 @@ public class CardData
     public int rp;
     public int lp;
     public string seed;
+    public bool targetting;
     [SerializeField] public List<Enchantment> enchantments = new List<Enchantment>();
 
     //add missing ones later
-    public CardData(Sprite cardSprite, string cardName, int cost, int value, Card.CardType cardType, Card.AttackDirection attackDirection, int rp, int lp, List<Enchantment> enchantments, string seed) //List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags)
+    public CardData(Sprite cardSprite, bool targetting, string cardName, int cost, int value, Card.CardType cardType, Card.AttackDirection attackDirection, int rp, int lp, List<Enchantment> enchantments, string seed) //List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags)
     {
         this.seed = seed;
         this.cardSprite = cardSprite;
@@ -42,5 +43,21 @@ public class CardData
         this.rp = rp;
         this.lp = lp;
         this.enchantments = enchantments;
+        this.targetting = targetting;
+
+    }
+
+    public CardData(Sprite cardSprite, bool targetting, string cardName, int cost, int value, Card.CardType cardType, List<Enchantment> enchantments, string seed)
+    {
+        this.seed = seed;
+        this.cardSprite = cardSprite;
+        this.cardName = cardName;
+        this.cost = cost;
+        this.value = value;
+        this.cardType = cardType;
+        //this.spellTags = spellTags;
+        //this.monsterTags = monsterTags;
+        this.enchantments = enchantments;
+        this.targetting = targetting;
     }
 }

@@ -41,6 +41,7 @@ public class References: MonoBehaviour
     public CardEnchantmentEffectManager cardEnchantmentEffectManager;
     public LifeCounterManager yourLifeCounter;
     public LifeCounterManager opponentLifeCounter;
+    public SpellZone spellZone;
 
    
 }
