@@ -80,6 +80,7 @@ public class MainMenu : MonoBehaviour
         {
             LoadScene(1);
         }
+        
     }
     public void GameFound(int scene)
     {

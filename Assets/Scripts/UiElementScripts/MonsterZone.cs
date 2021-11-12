@@ -33,9 +33,10 @@ public class MonsterZone : MonoBehaviour
 
         if (debugModeOn) Debug.Log("index: " + boardIndex);
         monsterCards.Insert(boardIndex, newMonster);
-        Vector3 instancePos = CalculatePosition(boardIndex, isYourCard);
-        newMonster.transform.position = instancePos;
+        
         newMonster.transform.SetParent(transform, true);
+        Vector3 instancePos = CalculatePosition(boardIndex, !isYourCard, newMonster);
+        newMonster.transform.position = instancePos;
         newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
         ReCalculateServerCardIndexes();
         RepositionMonsterCards();
@@ -48,7 +49,7 @@ public class MonsterZone : MonoBehaviour
     /// <param name="boardIndex"></param>
     /// <param name="isYourCard"></param>
     /// <returns></returns>
-    private Vector3 CalculatePosition(int boardIndex, bool isYourCard)
+    private Vector3 CalculatePosition(int boardIndex, bool isYourCard, GameObject cardObj)
     {
         cardXposDictionary = new Dictionary<GameObject, float>();
 
@@ -58,23 +59,30 @@ public class MonsterZone : MonoBehaviour
         float firstCardOffsetX = (-cardRowWidth + cardDim.x) / 2;
         float gapBetweenCardCenters = cardDim.x + gapBetweenCards;
         float newPosX;
-        if (monsterCards.Count == 1) {
-            return Vector3.zero;
-        } else {
+        //if (monsterCards.Count == 1) {
+        //    if (isYourCard) {
+        //        newPos = new Vector3(0, References.i.yourMonsterZone.transform.position.y, 0);
+        //    } else {
+        //        newPos = new Vector3(newPosX, References.i.opponentMonsterZone.transform.position.y, 0);
+        //    }
+        //    return new Vector3(0, References.i.yourMonsterZone.transform.position.y, 0);
+        //} else {
             for (int i = 0; i < monsterCards.Count; i++) {
-                if(i == boardIndex) {
+                if(monsterCards[i] == cardObj) {
                     newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
-                    if (!isYourCard) {
-                        newPos = new Vector3(newPosX, References.i.yourMonsterZone.transform.position.y, References.i.monsterzoneContainer.transform.position.z);
+                    if (isYourCard) {
+                        newPos = new Vector3(newPosX, References.i.yourMonsterZone.transform.position.y, 0);
                     } else {
-                        newPos = new Vector3(newPosX, References.i.opponentMonsterZone.transform.position.y, References.i.monsterzoneContainer.transform.position.z);
+                        newPos = new Vector3(newPosX, References.i.opponentMonsterZone.transform.position.y, 0);
                     }
+
+                    Debug.Log("index is " + boardIndex);
                     
                     return newPos;
                 }
             }
 
-        }
+       // }
         return Vector3.zero;
     }
 
@@ -91,7 +99,7 @@ public class MonsterZone : MonoBehaviour
             unhandledCards.Add(ghostCard);
             if(debugModeOn) Debug.Log("Added unhandled");
             newCard = ghostCard;
-            newCard.transform.position = CalculatePosition(boardIndex, isYourCard);
+            newCard.transform.position = CalculatePosition(boardIndex, isYourCard, newCard);
             ghostCard = null;
             //ReCalculateCardIndexes();
         } else {
@@ -112,7 +120,7 @@ public class MonsterZone : MonoBehaviour
             if (debugModeOn) Debug.Log("index: " + index);
             if (index > monsterCards.Count) index = monsterCards.Count;
             monsterCards.Insert(index, newMonster);
-            newMonster.transform.position = CalculatePosition(boardIndex, isYourCard);
+            newMonster.transform.position = CalculatePosition(boardIndex, isYourCard, newMonster);
             newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
             GameManager.Instance.AddCardToInGameCards(newMonster);
             ReCalculateServerCardIndexes();
@@ -240,7 +248,7 @@ public class MonsterZone : MonoBehaviour
         float newPosX;
         if (monsterCards.Count == 1) {
             monsterCards[0].GetComponent<Transform>().localPosition = Vector3.zero;
-            //monsterCards[0].GetComponent<CardMovement>().OnCardMove(Vector3.zero, GameManager.Instance.rearrangeDuration);
+            
         } else {
             for (int i = 0; i < monsterCards.Count; i++) {
                 newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
