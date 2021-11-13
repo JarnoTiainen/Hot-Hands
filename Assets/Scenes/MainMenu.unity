@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8018cbeb3bcb85547b5aac98f5e500b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearTriggersOnDisable: 1
+  clearTriggersOnDisable: 0
 --- !u!114 &12408484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3915,7 +3915,11 @@ MonoBehaviour:
   cardListPrefab: {fileID: 5615912896467758309, guid: 063a0d915ce38e64fb752acbf25b16da, type: 3}
   cardListTogglePrefab: {fileID: 6601235587835085345, guid: 13fbccb6683337b44971f1c755e3cf7e, type: 3}
   activeList: 0
+  activeDeckToggle: 0
   playerDeckLimit: 5
+  editingDeckBGColor:
+    serializedVersion: 2
+    rgba: 4279553485
 --- !u!1 &360289199
 GameObject:
   m_ObjectHideFlags: 0
@@ -4589,7 +4593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8018cbeb3bcb85547b5aac98f5e500b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearTriggersOnDisable: 1
+  clearTriggersOnDisable: 0
 --- !u!114 &409405892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4633,19 +4637,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 409405893}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 766729026}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &409405893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4659,7 +4651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29411766, g: 0.007843138, b: 0.007843138, a: 1}
+  m_Color: {r: 0.62352943, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6308,7 +6300,7 @@ GameObject:
   - component: {fileID: 575469750}
   - component: {fileID: 575469749}
   m_Layer: 5
-  m_Name: CopyButton
+  m_Name: EditButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6363,7 +6355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8018cbeb3bcb85547b5aac98f5e500b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearTriggersOnDisable: 1
+  clearTriggersOnDisable: 0
 --- !u!114 &575469751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6421,7 +6413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
+  m_Color: {r: 0.8039216, g: 0.8039216, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8371,7 +8363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38679248, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.62352943, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8542,7 +8534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8018cbeb3bcb85547b5aac98f5e500b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearTriggersOnDisable: 1
+  clearTriggersOnDisable: 0
 --- !u!1 &766729026
 GameObject:
   m_ObjectHideFlags: 0
@@ -9072,7 +9064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29411766, g: 0.007843138, b: 0.007843138, a: 1}
+  m_Color: {r: 0.62352943, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9509,9 +9501,10 @@ MonoBehaviour:
   countText: {fileID: 1598563733}
   deckBuildCardPrefab: {fileID: 7760491796736766473, guid: 35a84b717ab300d4db5db1c8abd649fc, type: 3}
   deckSizeLimit: 20
-  saveButton: {fileID: 793912498}
-  copyButton: {fileID: 575469747}
-  clearButton: {fileID: 12408480}
+  popupSaveButton: {fileID: 793912502}
+  builderSaveButton: {fileID: 409405892}
+  editButton: {fileID: 575469751}
+  clearButton: {fileID: 12408484}
 --- !u!114 &853345994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12256,7 +12249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8018cbeb3bcb85547b5aac98f5e500b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearTriggersOnDisable: 1
+  clearTriggersOnDisable: 0
 --- !u!1 &1201327180
 GameObject:
   m_ObjectHideFlags: 0
@@ -12702,7 +12695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8018cbeb3bcb85547b5aac98f5e500b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearTriggersOnDisable: 1
+  clearTriggersOnDisable: 0
 --- !u!114 &1235064588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12760,7 +12753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29411766, g: 0.007843138, b: 0.007843138, a: 1}
+  m_Color: {r: 0.15686275, g: 0.8039216, b: 0.15686275, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13927,7 +13920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8018cbeb3bcb85547b5aac98f5e500b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearTriggersOnDisable: 1
+  clearTriggersOnDisable: 0
 --- !u!1 &1369549040
 GameObject:
   m_ObjectHideFlags: 0
@@ -14541,7 +14534,7 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 285, y: 410}
+  m_CellSize: {x: 285, y: 400}
   m_Spacing: {x: 30, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 4
@@ -14814,7 +14807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2830189, g: 0.252314, b: 0.252314, a: 1}
+  m_Color: {r: 0.1254902, g: 0.1882353, b: 0.41568628, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15286,7 +15279,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: COPY
+  m_text: EDIT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -16248,7 +16241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8018cbeb3bcb85547b5aac98f5e500b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearTriggersOnDisable: 1
+  clearTriggersOnDisable: 0
 --- !u!114 &1638483314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17217,7 +17210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8018cbeb3bcb85547b5aac98f5e500b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearTriggersOnDisable: 1
+  clearTriggersOnDisable: 0
 --- !u!114 &1754834577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20213,7 +20206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8018cbeb3bcb85547b5aac98f5e500b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearTriggersOnDisable: 1
+  clearTriggersOnDisable: 0
 --- !u!114 &2046221072
 MonoBehaviour:
   m_ObjectHideFlags: 0

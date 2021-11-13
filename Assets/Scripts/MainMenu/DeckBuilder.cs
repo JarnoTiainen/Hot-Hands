@@ -13,21 +13,24 @@ public class DeckBuilder : MonoBehaviour
     [SerializeField] private GameObject deckBuildCardPrefab;
     [SerializeField] private int deckSizeLimit = 20;
     private int currentBuildSize = 0;
-    [SerializeField] private GameObject saveButton;
-    [SerializeField] private GameObject copyButton;
-    [SerializeField] private GameObject clearButton;
-
+    private int editIndex = -1;
+    [SerializeField] private Button popupSaveButton;
+    [SerializeField] private Button builderSaveButton;
+    [SerializeField] private Button editButton;
+    [SerializeField] private Button clearButton;
+    private Color32 stopEditingColor = new Color32(255, 0, 0, 255);
 
 
     private void Start()
     {
         cm = CollectionManager.Instance;
-        saveButton.GetComponent<Button>().onClick.AddListener(() => saveButtonCallback());
-        copyButton.GetComponent<Button>().onClick.AddListener(() => CopyButtonCallback());
-        clearButton.GetComponent<Button>().onClick.AddListener(() => clearButtonCallback());
+        popupSaveButton.onClick.AddListener(SaveButtonCallback);
+        builderSaveButton.onClick.AddListener(BuilderSaveButtonCallback);
+        editButton.onClick.AddListener(EditButtonCallback);
+        clearButton.onClick.AddListener(ClearButtonCallback);
+        editButton.gameObject.GetComponent<Image>().color = cm.editingDeckBGColor;
         UpdateBuildSize();
     }
-
 
     // Adds a card to the builder
     public void AddCard(Card card)
@@ -37,18 +40,15 @@ public class DeckBuilder : MonoBehaviour
         {
             return;
         }
-
         // First card in the build
         if (build.Count == 0)
         {
             AddNewCard(card);
             return;
         }
-
         // Add duplicate card to build
         for (int i = 0; build.Count > i; i++)
         {
-
             if (build[i].name == card.name)
             {
                 build[i].amount++;
@@ -90,7 +90,6 @@ public class DeckBuilder : MonoBehaviour
         {
             return;
         }
-
         // Build has > 0 cards
         for (int i = 0; build.Count > i; i++)
         {
@@ -133,20 +132,55 @@ public class DeckBuilder : MonoBehaviour
         {
             countText.GetComponent<TextMeshProUGUI>().text = currentBuildSize + "/" + deckSizeLimit;
         }
+    }
 
+    // Edit currently open deck
+    public void EditDeck()
+    {
+        if (cm.activeList == 0) return;
+        ClearBuild();
+        int playerDeckIndex = cm.activeList - 1;
+        foreach (Card card in cm.playerDecks[playerDeckIndex])
+        {
+            AddCard(card);
+        }
+        builderSaveButton.onClick.RemoveListener(BuilderSaveButtonCallback);
+        builderSaveButton.onClick.AddListener(SaveButtonCallbackEditing);
+        editButton.onClick.RemoveListener(EditButtonCallback);
+        editButton.onClick.AddListener(EditButtonCallbackEditing);
+        cm.SetEditDeckUI(playerDeckIndex + 1, true);
+        editButton.gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "STOP EDITING";
+        editButton.gameObject.GetComponent<Image>().color = stopEditingColor;
+        editIndex = playerDeckIndex;
+    }
+
+    private void StopEditing()
+    {
+        cm.SetEditDeckUI(editIndex + 1, false);
+        builderSaveButton.onClick.RemoveListener(SaveButtonCallbackEditing);
+        builderSaveButton.onClick.AddListener(BuilderSaveButtonCallback);
+        editButton.onClick.RemoveListener(EditButtonCallbackEditing);
+        editButton.onClick.AddListener(EditButtonCallback);
+        editButton.gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "EDIT";
+        editButton.gameObject.GetComponent<Image>().color = cm.editingDeckBGColor;
+        ClearBuild();
     }
 
     // Saves the build on DeckBuilder's list on to the currently open deck and sets it as the player's active deck
-    public void SaveDeck()
+    public void SaveDeck(bool editing = false)
     {
         int deckIndex = -1;
-        for (int i = 0; saveDeckPopup.saveDeckToggles.Count > i; i++)
+        if (editing) deckIndex = editIndex;
+        else
         {
-            if (saveDeckPopup.saveDeckToggles[i].isOn)
+            for (int i = 0; saveDeckPopup.saveDeckToggles.Count > i; i++)
             {
-                deckIndex = i;
-                saveDeckPopup.saveDeckToggles[i].isOn = false;
-                break;
+                if (saveDeckPopup.saveDeckToggles[i].isOn)
+                {
+                    deckIndex = i;
+                    saveDeckPopup.saveDeckToggles[i].isOn = false;
+                    break;
+                }
             }
         }
         if (deckIndex == -1) return;
@@ -168,13 +202,13 @@ public class DeckBuilder : MonoBehaviour
                 }
             }
         }
+
         // Sorts alphabetically
         tempDeck.Sort(delegate(Card card1, Card card2) 
         {
             return card1.cardName.CompareTo(card2.cardName);
         
         });
-     
         // Add deck to CollectionManager's playerDecks
         if (cm.playerDecks[deckIndex] == null)
         {
@@ -184,23 +218,17 @@ public class DeckBuilder : MonoBehaviour
         {
             cm.playerDecks[deckIndex] = tempDeck;
         }
-        cm.deckNames[deckIndex] = saveDeckPopup.deckNameInput.text;
-        saveDeckPopup.deckNameInput.text = "";
+
         cm.SaveDeckToDB(deckIndex);
         cm.UpdateDeckUI(deckIndex);
         cm.UpdatePageText();
-        ClearBuild();
-        saveDeckPopup.transform.parent.gameObject.SetActive(false);
-    }
-
-    // Copies the cards from the currently open deck to the builder
-    public void CopyDeck()
-    {
-        if (cm.activeList == 0) return;
-        int playerDeckIndex = cm.activeList - 1;
-        foreach(Card card in cm.playerDecks[playerDeckIndex])
+        if (editing) StopEditing();
+        else
         {
-            AddCard(card);
+            cm.deckNames[deckIndex] = saveDeckPopup.deckNameInput.text;
+            saveDeckPopup.deckNameInput.text = "";
+            saveDeckPopup.transform.parent.gameObject.SetActive(false);
+            ClearBuild();
         }
     }
 
@@ -215,18 +243,12 @@ public class DeckBuilder : MonoBehaviour
         UpdateBuildSize();
     }
 
-    private void CopyButtonCallback()
-    {
-        CopyDeck();
-    }
-    private void saveButtonCallback()
-    {
-        SaveDeck();
-    }
-    private void clearButtonCallback()
-    {
-        ClearBuild();
-    }
+    private void EditButtonCallback() => EditDeck();
+    private void EditButtonCallbackEditing() => StopEditing();
+    private void SaveButtonCallback() => SaveDeck(false);
+    private void SaveButtonCallbackEditing() => SaveDeck(true);
+    private void BuilderSaveButtonCallback() => saveDeckPopup.transform.parent.gameObject.SetActive(true);
+    private void ClearButtonCallback() => ClearBuild();
 
     private class BuildCard
     {

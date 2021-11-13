@@ -10,8 +10,6 @@ public class CollectionManager : MonoBehaviour
 {
     public static CollectionManager Instance { get; private set; }
     private CardList resourcesCardList;
-
-
     public List<Toggle> cardListToggles = new List<Toggle>();
     public List<GameObject> cardLists = new List<GameObject>();
     public List<List<Card>> playerDecks = new List<List<Card>>();
@@ -24,9 +22,10 @@ public class CollectionManager : MonoBehaviour
     [SerializeField] private GameObject cardListPrefab;
     [SerializeField] private Toggle cardListTogglePrefab;
     public int activeList = 0;
-    private int lastActiveDeck = 0;
+    public int activeDeckToggle = 0;
     public int playerDeckLimit = 5;
     private Color32 defaultDeckBGColor = new Color32(89, 89, 89, 255);
+    public Color32 editingDeckBGColor = new Color32(205, 205, 0, 255);
     private Color32 activeDeckBGColor = new Color32(40, 205, 40 ,255);
 
 
@@ -38,12 +37,12 @@ public class CollectionManager : MonoBehaviour
         {
             deckNames.Add("");
         }
-
         SetAllCardsList();
         UpdatePageText();
 
         createButton.GetComponent<Button>().onClick.AddListener(() => CreateButtonCallback());
         setActiveButton.GetComponent<Button>().onClick.AddListener(() => SetActiveButtonCallback());
+        setActiveButton.gameObject.GetComponent<Image>().color = activeDeckBGColor;
     }
 
 
@@ -63,7 +62,6 @@ public class CollectionManager : MonoBehaviour
         foreach (GetDecksMessage.Deck deck in playerDecks)
         {
             List<Card> tempDeck = new List<Card>();
-
             foreach(string cardName in deck.deck)
             {
                 for(int i = 0; resourcesCardList.allCards.Count > i; i++)
@@ -84,15 +82,13 @@ public class CollectionManager : MonoBehaviour
                 this.playerDecks.Add(tempDeck);
             }
         }
-
         for (int i = 0; playerDecks.Count > i; i++)
         {
             CreateNewDeck(deckNames[i], true, true);
             UpdateDeckUI(i);
         }
-
-        lastActiveDeck = getDecksMessage.activeDeckIndex + 1;
-        cardListToggles[getDecksMessage.activeDeckIndex + 1].transform.Find("Background").GetComponent<Image>().color = activeDeckBGColor;
+        activeDeckToggle = getDecksMessage.activeDeckIndex + 1;
+        cardListToggles[activeDeckToggle].transform.Find("Background").GetComponent<Image>().color = activeDeckBGColor;
         if (playerDecks.Count == playerDeckLimit)
         {
             createButton.SetActive(false);
@@ -111,8 +107,8 @@ public class CollectionManager : MonoBehaviour
     public void SaveDeckToDB(int index)
     {
         /*
-         * @todo Needs to send deck name as well
-         * @body :)))
+          @todo Needs to send deck name as well
+          @body :)))
          */
         DeckObject deckString = new DeckObject(playerDecks[index], index);
         WebSocketService.SaveDeck(JsonUtility.ToJson(deckString));
@@ -121,12 +117,29 @@ public class CollectionManager : MonoBehaviour
     // Sets the visuals that show which deck is active
     public void SetActiveDeckUI()
     {
-        if (lastActiveDeck != 0)
+        if (activeDeckToggle != 0)
         {
-            cardListToggles[lastActiveDeck].transform.Find("Background").GetComponent<Image>().color = defaultDeckBGColor;
-        };
+            cardListToggles[activeDeckToggle].transform.Find("Background").GetComponent<Image>().color = defaultDeckBGColor;
+        }
         cardListToggles[activeList].transform.Find("Background").GetComponent<Image>().color = activeDeckBGColor;
-        lastActiveDeck = activeList;
+        activeDeckToggle = activeList;
+    }
+
+    // Sets the visuals that show which deck is being edited
+    public void SetEditDeckUI(int toggleIndex, bool editing)
+    {
+        if (editing) cardListToggles[toggleIndex].transform.Find("Background").GetComponent<Image>().color = editingDeckBGColor;
+        else
+        {
+            if (activeDeckToggle == toggleIndex)
+            {
+                cardListToggles[toggleIndex].transform.Find("Background").GetComponent<Image>().color = activeDeckBGColor;
+            }
+            else
+            {
+                cardListToggles[toggleIndex].transform.Find("Background").GetComponent<Image>().color = defaultDeckBGColor;
+            }
+        }
     }
 
     // Gets all game cards and passes them to the 'All Cards List' and calls it's populate function
@@ -150,7 +163,6 @@ public class CollectionManager : MonoBehaviour
         CollectionCardList cardListScript = cardLists[i + 1].GetComponent<CollectionCardList>();
         cardListScript.cards = playerDecks[i];
         cardListScript.SortList(SortMethodDropdown.Instance.GetSortMethod(), SortMethodDropdown.Instance.reverse);
-
         // Updates name on toggle
         if(deckNames[i] == null || deckNames[i] == "")
         {
@@ -185,7 +197,6 @@ public class CollectionManager : MonoBehaviour
         newToggle.GetComponent<CollectionToggle>().index = cardListToggles.IndexOf(newToggle);
 
         if (!isStart) playerDecks.Add(new List<Card>());
-
         // Force rebuilds the toggle row so that the content size fitter component behaves properly
         RectTransform togglesRectTransform = togglesRow.transform.parent.GetComponent<RectTransform>();
         LayoutRebuilder.ForceRebuildLayoutImmediate(togglesRectTransform);
@@ -229,14 +240,7 @@ public class CollectionManager : MonoBehaviour
     }
 
     // Bound to an onClick event from the "Create Button'. Calls CreateNewDeck function
-    private void CreateButtonCallback()
-    {
-        CreateNewDeck();
-    }
-
+    private void CreateButtonCallback() => CreateNewDeck();
     // Bound to an onClick event from the "Set Active Button'. Calls SetActiveDeck function
-    private void SetActiveButtonCallback()
-    {
-        SetActiveDeckToDB();
-    }
+    private void SetActiveButtonCallback() => SetActiveDeckToDB();
 }

@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8018cbeb3bcb85547b5aac98f5e500b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clearTriggersOnDisable: 1
 --- !u!1 &2320621391863656014
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +441,7 @@ Transform:
   m_GameObject: {fileID: 2320621391863656014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4000, y: 4000, z: 4000}
+  m_LocalScale: {x: 3800, y: 3800, z: 3800}
   m_Children:
   - {fileID: 7521515163796800952}
   - {fileID: 4247880488610386313}
