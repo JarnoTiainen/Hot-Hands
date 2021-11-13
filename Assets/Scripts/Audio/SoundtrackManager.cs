@@ -151,7 +151,6 @@ public class SoundtrackManager : MonoBehaviour
                 {
                     Object.Destroy(soundtrackGameObject, audioSource.clip.length);
                 }
-
             }
             else
             {
@@ -201,7 +200,6 @@ public class SoundtrackManager : MonoBehaviour
     {
         switch (currentSceneIndex)
         {
-
             case 0:
                 StartCoroutine(FadeMixerGroup.StartFade(masterMixer, "mainMenuMusicVol", mainMenuFadeOut, 0.0001f));
                 StartCoroutine(FadeMixerGroup.DestroySoundtrack(GameObject.Find("MainMenuSoundtrackPlayer"), mainMenuFadeOut));
@@ -276,8 +274,3 @@ public class SoundtrackManager : MonoBehaviour
         ResultScreen
     }
 }
-
-
-
-
-
