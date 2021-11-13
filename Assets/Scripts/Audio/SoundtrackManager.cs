@@ -23,7 +23,6 @@ public class SoundtrackManager : MonoBehaviour
     [SerializeField] private float resultScreenFadeOut = 1f;
     private int currentSceneIndex;
 
-
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -39,7 +38,6 @@ public class SoundtrackManager : MonoBehaviour
         mainMenuMusicGroup = masterMixer.FindMatchingGroups("MainMenuMusic")[0];
         inGameMusicGroup = masterMixer.FindMatchingGroups("InGameMusic")[0];
         resultScreenMusicGroup = masterMixer.FindMatchingGroups("ResultScreenMusic")[0];
-
         StartMusic();
     }
 
@@ -105,8 +103,7 @@ public class SoundtrackManager : MonoBehaviour
 
     public static void PlaySoundtrack(SoundtrackClip soundtrack, bool waitToFinish = true, bool loop = true, bool useDefault = true, AudioSource audioSource = null)
     {
-        if (audioSource == null)
-            audioSource = SoundtrackManager.instance.defaultAudioSource;
+        if (audioSource == null) audioSource = SoundtrackManager.instance.defaultAudioSource;
 
         if (useDefault && audioSource == null)
         {
@@ -200,7 +197,6 @@ public class SoundtrackManager : MonoBehaviour
         StartCoroutine(FadeMixerGroup.DestroySoundtrack(soundtrack, time));
     }
 
-
     private void ChangedActiveScene(Scene current, Scene next)
     {
         switch (currentSceneIndex)
@@ -260,7 +256,6 @@ public class SoundtrackManager : MonoBehaviour
     {
         SceneManager.activeSceneChanged -= ChangedActiveScene;
     }
-
 
     [HorizontalGroup("AudioSource")]
     [ShowIf("@defaultAudioSource == null")]

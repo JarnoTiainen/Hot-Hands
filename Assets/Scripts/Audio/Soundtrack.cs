@@ -66,7 +66,6 @@ public class Soundtrack
         _soundtrackBase = soundtrackToPlay;
     }
 
-
     private void SelectSoundtrack()
     {
         // Platform #define directives for UnityEditor

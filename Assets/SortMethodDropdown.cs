@@ -7,11 +7,9 @@ using TMPro;
 public class SortMethodDropdown : MonoBehaviour
 {
     public static SortMethodDropdown Instance { get; private set; }
-
     public bool reverse = false;
     [SerializeField] private GameObject dropdownButton;
     [SerializeField] private GameObject orderToggle;
-
 
     private void Start()
     {

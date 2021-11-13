@@ -12,7 +12,6 @@ public class CollectionCardList : MonoBehaviour
     public int totalPages;
     public List<Card> cards = new List<Card>();
 
-
     private void CalculateCardsPerPage()
     {
         GridLayoutGroup grid = gameObject.GetComponent<GridLayoutGroup>();
@@ -21,8 +20,8 @@ public class CollectionCardList : MonoBehaviour
         int perRowWithoutSpacing = Mathf.FloorToInt(rectTransform.rect.width / grid.cellSize.x);
         int perColumnWithoutSpacing = Mathf.FloorToInt(rectTransform.rect.height / grid.cellSize.y);
 
-        float cardsPlusSpacingWidth = perRowWithoutSpacing * grid.cellSize.x + (perRowWithoutSpacing - 1) * grid.spacing.x + grid.padding.left + grid.padding.right;
-        float cardsPlusSpacingHeight = perColumnWithoutSpacing * grid.cellSize.y + (perColumnWithoutSpacing - 1) * grid.spacing.y + grid.padding.top + grid.padding.bottom;
+        float cardsPlusSpacingWidth = (perRowWithoutSpacing * grid.cellSize.x) + ((perRowWithoutSpacing - 1) * grid.spacing.x) + grid.padding.left + grid.padding.right;
+        float cardsPlusSpacingHeight = (perColumnWithoutSpacing * grid.cellSize.y) + ((perColumnWithoutSpacing - 1) * grid.spacing.y) + grid.padding.top + grid.padding.bottom;
 
         if (cardsPlusSpacingWidth > rectTransform.rect.width)
         {
@@ -48,7 +47,6 @@ public class CollectionCardList : MonoBehaviour
         }
     }
 
-
     public void PopulatePage(int page)
     {
         CalculateCardsPerPage();
@@ -59,7 +57,6 @@ public class CollectionCardList : MonoBehaviour
         }
 
         totalPages = Mathf.CeilToInt((cards.Count - 1) / calculatedCardsPerPage) + 1;
-
         if(cards.Count <= calculatedCardsPerPage)
         {
             foreach (Card card in cards)
@@ -142,7 +139,6 @@ public class CollectionCardList : MonoBehaviour
         PopulatePage(1);
     }
 
-
     // Sorting methods below
     public enum SortMethod
     {
@@ -209,6 +205,4 @@ public class CollectionCardList : MonoBehaviour
             return card1.name.CompareTo(card2.name);
         }
     }
-
-
 }

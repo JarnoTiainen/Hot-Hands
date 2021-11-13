@@ -65,5 +65,4 @@ public class LoginKeyboardCommands : MonoBehaviour
     public void UsernameFieldSelected() => inputIndex = 0;
     public void PasswordFieldSelected() => inputIndex = 1;
     public void EmailFieldSelected() => inputIndex = 2;
-
 }

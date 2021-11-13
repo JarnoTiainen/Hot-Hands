@@ -17,8 +17,5 @@ public class MainMenuDecorativeCards : MonoBehaviour
             cardScript.card = randomCard;
             cardScript.UpdateUI();
         }
-
     }
-
-
 }

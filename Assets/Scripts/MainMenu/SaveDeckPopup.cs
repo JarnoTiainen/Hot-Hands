@@ -11,7 +11,6 @@ public class SaveDeckPopup : MonoBehaviour
     public TMP_InputField deckNameInput;
     public List<Toggle> saveDeckToggles = new List<Toggle>();
 
- 
     private void OnEnable()
     {
         UpdateSaveToggles();

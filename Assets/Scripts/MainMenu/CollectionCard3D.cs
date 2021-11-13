@@ -16,7 +16,6 @@ public class CollectionCard3D : MonoBehaviour
         cardCanvas.Find("RP").GetComponent<TextMeshProUGUI>().text = card.rp.ToString();
         cardCanvas.Find("LP").GetComponent<TextMeshProUGUI>().text = card.lp.ToString();
         cardCanvas.Find("Value").GetComponent<TextMeshProUGUI>().text = card.value.ToString();
-
         meshRendererImage.material.SetTexture("_CardImage", card.cardSprite.texture);
     }
 
@@ -24,6 +23,4 @@ public class CollectionCard3D : MonoBehaviour
     {
         GameObject.FindGameObjectWithTag("DeckBuilder").GetComponent<DeckBuilder>().AddCard(card);
     }
-
-
 }

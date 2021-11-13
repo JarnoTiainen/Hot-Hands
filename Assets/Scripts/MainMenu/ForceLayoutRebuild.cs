@@ -14,5 +14,4 @@ public class ForceLayoutRebuild : MonoBehaviour
         RectTransform togglesRectTransform = togglesRow.transform.parent.GetComponent<RectTransform>();
         LayoutRebuilder.ForceRebuildLayoutImmediate(togglesRectTransform);
     }
-
 }

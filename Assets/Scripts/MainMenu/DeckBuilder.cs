@@ -20,7 +20,6 @@ public class DeckBuilder : MonoBehaviour
     [SerializeField] private Button clearButton;
     private Color32 stopEditingColor = new Color32(255, 0, 0, 255);
 
-
     private void Start()
     {
         cm = CollectionManager.Instance;
@@ -207,7 +206,6 @@ public class DeckBuilder : MonoBehaviour
         tempDeck.Sort(delegate(Card card1, Card card2) 
         {
             return card1.cardName.CompareTo(card2.cardName);
-        
         });
         // Add deck to CollectionManager's playerDecks
         if (cm.playerDecks[deckIndex] == null)

@@ -11,11 +11,6 @@ public class BuildCardUI : MonoBehaviour
     private TextMeshProUGUI nameText;
     private TextMeshProUGUI amountText;
 
-
-    void Start()
-    {
-    }
-
     public void UpdateName()
     {
         nameText = gameObject.transform.Find("Name").GetComponent<TextMeshProUGUI>();

@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-
 public class SettingsMenu : MonoBehaviour
 {
-
     public AudioMixer masterMixer;
     public Slider masterSlider;
     public Slider musicSlider;
@@ -15,7 +13,6 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private float masterDefaultVolume;
     [SerializeField] private float musicDefaultVolume;
     [SerializeField] private float sfxDefaultVolume;
-
     public Toggle[] resolutionToggles;
     public Toggle fullscreenToggle;
     public int[] screenWidths;
@@ -29,14 +26,12 @@ public class SettingsMenu : MonoBehaviour
         sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", sfxDefaultVolume);
 
         activeScreenResIndex = PlayerPrefs.GetInt("ScreenResIndex", defaultScreenResIndex);
-        //Debug.Log(PlayerPrefs.GetInt("ScreenResIndex"));
         bool isFullscreen = (PlayerPrefs.GetInt("Fullscreen") == 1) ? true : false;
 
         for (int i = 0; i < resolutionToggles.Length; i++)
         {
                 resolutionToggles[i].isOn = i == activeScreenResIndex;
         }
-
         fullscreenToggle.isOn = isFullscreen;
     }
 
@@ -46,6 +41,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("MasterVolume", sliderValue);
         PlayerPrefs.Save();
     }
+
     public void SetMusicVolume(float sliderValue)
     {
         masterMixer.SetFloat("mainMenuMusicVol", Mathf.Log10(sliderValue) * 20);
@@ -54,6 +50,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("MusicVolume", sliderValue);
         PlayerPrefs.Save();
     }
+
     public void SetSFXVolume(float sliderValue)
     {
         masterMixer.SetFloat("sfxVol", Mathf.Log10(sliderValue) * 20);
@@ -79,7 +76,6 @@ public class SettingsMenu : MonoBehaviour
         {
             resolutionToggles[i].interactable = !isFullscreen;
         }
-
         if (isFullscreen)
         {
             Resolution[] allResolutions = Screen.resolutions;
@@ -90,7 +86,6 @@ public class SettingsMenu : MonoBehaviour
         {
             SetScreenResolution(activeScreenResIndex);
         }
-
         PlayerPrefs.SetInt("Fullscreen", ((isFullscreen) ? 1 : 0));
         PlayerPrefs.Save();
     }

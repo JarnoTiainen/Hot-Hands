@@ -12,7 +12,6 @@ public class ResultMenu : MonoBehaviour
     public GameObject disconnectConfirmation;
     public GameObject quitConfirmation;
 
-
     public void Return()
     {
         gameObject.SetActive(false);

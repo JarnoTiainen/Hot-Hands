@@ -10,9 +10,7 @@ public class DrawCardSFX : MonoBehaviour
 
     public void Play()
     {
-        //Debug.Log("Draw sound");
         int x = Random.Range(1, 4);
-
         switch (x)
         {
             case 1:

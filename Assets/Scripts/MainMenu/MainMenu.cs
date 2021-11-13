@@ -21,8 +21,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Vector3 mainCamCollectionPos;
     [SerializeField] private Quaternion mainCamCollectionRotation;
 
-
-
     private void Start()
     {
         if (WebSocketService.Instance.isLoggedIn)
@@ -82,6 +80,7 @@ public class MainMenu : MonoBehaviour
         }
         
     }
+
     public void GameFound(int scene)
     {
         LoadScene(scene);

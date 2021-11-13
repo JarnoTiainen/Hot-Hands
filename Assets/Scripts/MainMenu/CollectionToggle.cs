@@ -19,5 +19,4 @@ public class CollectionToggle : MonoBehaviour
     {
         CollectionManager.Instance.ChangeActiveCardList(index);
     }
-
 }

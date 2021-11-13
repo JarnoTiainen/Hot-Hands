@@ -34,6 +34,7 @@ public class ButtonSounds : MonoBehaviour
         entry.callback.AddListener((data) => OnHover());
         trigger.triggers.Add(entry);
     }
+
     private void OnDisable()
     {
         if (!clearTriggersOnDisable) return;
@@ -58,6 +59,4 @@ public class ButtonSounds : MonoBehaviour
     {
         sfxLibrary.GetComponent<ButtonSFX>().OnClick();
     }
-
-
 }

@@ -14,7 +14,6 @@ public class SFXManager : MonoBehaviour
     private static AudioSource uiSFXAudioSource;
     [SerializeField] private float sfxDefaultVolume = 0.5f;
 
-
     private void Start()
     {
         masterMixer = Resources.Load("MasterMixer") as AudioMixer;
