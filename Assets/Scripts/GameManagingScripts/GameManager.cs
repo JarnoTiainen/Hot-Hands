@@ -504,8 +504,6 @@ public class GameManager : MonoBehaviour
 
     public void PlayerAttack(AttackEventMessage attackEventMessage)
     {
-        
-
         attackEventMessage.attackerValues = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.attacker);
         CardPowersMessage attacker = attackEventMessage.attackerValues;
         if (attackEventMessage.denied)
@@ -514,7 +512,6 @@ public class GameManager : MonoBehaviour
             AttackDenied(attacker);
             return;
         }
-
         
         CardPowersMessage target = JsonUtility.FromJson<CardPowersMessage>(attackEventMessage.target);
         if (attackEventMessage.directHit)
@@ -553,8 +550,17 @@ public class GameManager : MonoBehaviour
         {
             GameObject target = GetCardFromInGameCards(cardData.seed);
             CardData data = target.GetComponent<InGameCard>().cardData;
+
             data.rp = cardData.rp;
             data.lp = cardData.lp;
+
+            if (data.lp <= 0 || data.rp <= 0)
+            {
+                GameManager.Instance.playerStats.playerFieldCards--;
+                target.GetComponent<InGameCard>().StartDestructionEvent();
+            }
+
+
             data.enchantments = cardData.enchantments;
             data.monsterTags = cardData.mtag;
             data.spellTags = cardData.stag;
@@ -575,12 +581,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            enemyPlayerStats.playerBurnValue -= playSpellMessage.cardCost;
+            References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
             References.i.spellZone.PlaySpell(References.i.cardList.GetCardData(playSpellMessage));
         }
-
-        
-
-        //TODO: Add enemy carddata
     }
 
 

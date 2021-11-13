@@ -14,4 +14,6 @@ public class PlaySpellMessage
     public List<Card.MonsterTag> mtag;
     public List<Card.SpellTag> stag;
     public List<Enchantment> enchantments;
+
+    public List<string> targets;
 }

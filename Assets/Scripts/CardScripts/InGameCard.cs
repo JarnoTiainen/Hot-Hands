@@ -32,6 +32,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] public Canvas textCanvas;
     [SerializeField] private CardBurn cardBurn;
     [SerializeField] private bool canAffordBool;
+    public bool interActable = true;
     [SerializeField] public int seed;
 
     [ShowIf("debuggerModeOn", true)] public int serverConfirmedIndex;
@@ -194,7 +195,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void OnClickElement()
     {
-        if (!Mouse.Instance.targetModeOn)
+        if (!Mouse.Instance.targetModeOn && interActable)
         {
             if (!attackOnCD && !preAttackOnCD && GameManager.Instance.IsYou(owner))
             {
@@ -292,5 +293,14 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
             canAffordBool = false;
             cardBurn.EndCanAfford();
         }
+    }
+
+    public void StartDestructionEvent()
+    {
+        interActable = false;
+        References.i.opponentMonsterZone.TryRemoveMonsterCard(cardData.seed);
+        References.i.yourMonsterZone.TryRemoveMonsterCard(cardData.seed);
+        //TODO: play animation here before destroying the card
+        Destroy(gameObject);
     }
 }

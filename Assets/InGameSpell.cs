@@ -16,16 +16,37 @@ public class InGameSpell : MonoBehaviour
     [SerializeField] private AnimationCurve rotCurve;
     private float elapsedRotationTime = 0;
     [SerializeField] private float rotSpeed;
-    [SerializeField] private MeshRenderer imageMesh;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
+    [SerializeField] private List<MeshRenderer> lightMeshes = new List<MeshRenderer>();
+    [SerializeField] private Material lightMaterial;
+    private int lightsOn;
     public bool slotTaken;
 
+    private void Awake()
+    {
+        foreach(MeshRenderer lightMesh in lightMeshes)
+        {
+            lightMesh.material = lightMaterial;
+            lightMesh.material.SetInt("_LightOn", 0);
+        }
+    }
+
+    [Button] public void TurnLightsOn()
+    {
+        foreach (MeshRenderer lightMesh in lightMeshes)
+        {
+            lightMesh.material.SetInt("_LightOn", 1);
+        }
+    }
 
     public void SetNewCardData(CardData cardData)
     {
         this.cardData = cardData;
         slotTaken = true;
-        imageMesh.material.SetTexture("_CardImage", cardData.cardSprite.texture);
+        Debug.Log(cardData.cardSprite);
+        spriteRenderer.sprite = cardData.cardSprite;
+        TurnLightsOn();
         FlipSpell();
     }
 
@@ -71,5 +92,24 @@ public class InGameSpell : MonoBehaviour
             }
         }
         
+    }
+
+    [Button] public void StartCounter(float duration)
+    {
+        lightsOn = 6;
+        int numberOfLights = 6;
+        float timeBetweenTicks = duration / numberOfLights;
+        InvokeRepeating("Tick", timeBetweenTicks, timeBetweenTicks);
+    }
+
+    public void Tick()
+    {
+        Debug.Log("TICK " + lightsOn);
+        lightsOn--;
+        lightMeshes[lightsOn].material.SetInt("_LightOn", 0);
+        if (lightsOn <= 0)
+        {
+            CancelInvoke();
+        }
     }
 }

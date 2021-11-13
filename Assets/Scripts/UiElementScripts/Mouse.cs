@@ -197,6 +197,8 @@ public class Mouse : MonoBehaviour
                     {
                         if(GameManager.Instance.CheckIfInGameCardsContainsCard(RayCaster.Instance.target))
                         {
+                            GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().cardData.cost;
+                            References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
                             WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().cardData.seed, RayCaster.Instance.target.GetComponent<InGameCard>().cardData.seed);
                             heldCard = null;
                             return;
@@ -207,6 +209,8 @@ public class Mouse : MonoBehaviour
             }
             else
             {
+                GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().cardData.cost;
+                References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
                 WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().cardData.seed);
                 LimboCardHolder.Instance.StoreNewCard(heldCard);
             }
