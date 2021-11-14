@@ -14,6 +14,11 @@ public class AttackEventHandler : MonoBehaviour
     public float fadeOutTime = 1f;
     public AnimationCurve shakeCurve;
 
+    [SerializeField] private GameObject impactPrefab;
+    [SerializeField] private GameObject damagePrefab;
+
+
+
     public void StartAttackEvent(bool wasYourAttack, CardPowersMessage attacker, CardPowersMessage target, float attackCD)
     {
         Debug.Log("starting attack event");
@@ -28,12 +33,14 @@ public class AttackEventHandler : MonoBehaviour
             GameObject attackingCard = yourMonsterZone.GetCardWithSeed(attacker.seed);
             GameObject targetCard = opponentMonsterZone.GetCardWithSeed(target.seed);
 
-            Debug.LogWarning("Attack: attacker: " + attackingCard.GetComponent<InGameCard>().cardData.cardName + " rp: " + attackingCard.GetComponent<InGameCard>().cardData.rp + " lp: " + attackingCard.GetComponent<InGameCard>().cardData.lp + " target: " + targetCard.GetComponent<InGameCard>().cardData.cardName + " rp: " + targetCard.GetComponent<InGameCard>().cardData.rp + " lp: " + targetCard.GetComponent<InGameCard>().cardData.lp);
+            Debug.LogWarning("Attack: attacker: " + attackingCard.GetComponent<InGameCard>().GetData().cardName + " rp: " + attackingCard.GetComponent<InGameCard>().GetData().rp + " lp: " + attackingCard.GetComponent<InGameCard>().GetData().lp + " target: " + targetCard.GetComponent<InGameCard>().GetData().cardName + " rp: " + targetCard.GetComponent<InGameCard>().GetData().rp + " lp: " + targetCard.GetComponent<InGameCard>().GetData().lp);
 
 
             attackingCard.GetComponent<InGameCard>().StartAttackCooldown(attackCD);
-            References.i.yourMonsterZone.UpdateCardData(wasYourAttack, attacker);
-            References.i.opponentMonsterZone.UpdateCardData(!wasYourAttack, target);
+            GameManager.Instance.GetCardFromInGameCards(attacker.seed).GetComponent<InGameCard>().tempRp = attacker.rp;
+            GameManager.Instance.GetCardFromInGameCards(attacker.seed).GetComponent<InGameCard>().tempLp = attacker.lp;
+            GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempRp = target.lp;
+            GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempLp = target.rp;
 
             attackingCard.GetComponent<CardMovement>().OnCardAttack(targetCard, attackAnimationSpeed);
             
@@ -43,11 +50,13 @@ public class AttackEventHandler : MonoBehaviour
             GameObject attackingCard = opponentMonsterZone.GetCardWithSeed(attacker.seed);
             GameObject targetCard = yourMonsterZone.GetCardWithSeed(target.seed);
 
-            Debug.Log(" 2 Attack: attacker: " + attackingCard.GetComponent<InGameCard>().cardData.cardName + " rp: " + attackingCard.GetComponent<InGameCard>().cardData.rp + " lp: " + attackingCard.GetComponent<InGameCard>().cardData.lp + " target: " + targetCard.GetComponent<InGameCard>().cardData.cardName + " rp: " + targetCard.GetComponent<InGameCard>().cardData.rp + " lp: " + targetCard.GetComponent<InGameCard>().cardData.lp);
+            Debug.Log(" 2 Attack: attacker: " + attackingCard.GetComponent<InGameCard>().GetData().cardName + " rp: " + attackingCard.GetComponent<InGameCard>().GetData().rp + " lp: " + attackingCard.GetComponent<InGameCard>().GetData().lp + " target: " + targetCard.GetComponent<InGameCard>().GetData().cardName + " rp: " + targetCard.GetComponent<InGameCard>().GetData().rp + " lp: " + targetCard.GetComponent<InGameCard>().GetData().lp);
 
             attackingCard.GetComponent<InGameCard>().StartAttackCooldown(attackCD);
-            References.i.yourMonsterZone.UpdateCardData(!wasYourAttack, target);
-            References.i.opponentMonsterZone.UpdateCardData(wasYourAttack, attacker);
+            GameManager.Instance.GetCardFromInGameCards(attacker.seed).GetComponent<InGameCard>().tempRp = attacker.lp;
+            GameManager.Instance.GetCardFromInGameCards(attacker.seed).GetComponent<InGameCard>().tempLp = attacker.rp;
+            GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempRp = target.rp;
+            GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempLp = target.lp;
 
             attackingCard.GetComponent<CardMovement>().OnCardAttack(targetCard, attackAnimationSpeed);
             attackingCard.GetComponent<InGameCard>().ToggleAttackBurnEffect(false);
@@ -73,6 +82,12 @@ public class AttackEventHandler : MonoBehaviour
         }
     }
 
+    public void SpawnImpactEffect(Vector3 pos)
+    {
+        Debug.Log("Spawning effect");
+        Instantiate(impactPrefab, pos, Quaternion.identity);
+    }
+
     public void StartDamageEvent(int player, GameObject attacker, GameObject target)
     {
 
@@ -82,8 +97,11 @@ public class AttackEventHandler : MonoBehaviour
         }
         else
         {
-            CardData targetCard = target.GetComponent<InGameCard>().cardData;
-            CardData attackerCard = attacker.GetComponent<InGameCard>().cardData;
+            target.GetComponent<InGameCard>().SetTempValuesAsValues();
+            attacker.GetComponent<InGameCard>().SetTempValuesAsValues();
+
+            CardData targetCard = target.GetComponent<InGameCard>().GetData();
+            CardData attackerCard = attacker.GetComponent<InGameCard>().GetData();
             attacker.GetComponent<InGameCard>().UpdateCardTexts();
             target.GetComponent<InGameCard>().UpdateCardTexts();
             bool wasYourAttack = GameManager.Instance.IsYou(player);

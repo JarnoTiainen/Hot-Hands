@@ -16,7 +16,7 @@ public class MonsterZone : MonoBehaviour
     {
         if (Mouse.Instance.heldCard != null && isYourMonsterZone && GameManager.Instance.playerStats.playerFieldCards < GameManager.Instance.maxFieldCardCount)
         {
-            if(Mouse.Instance.heldCard.GetComponent<InGameCard>().cardData.cardType == Card.CardType.Monster)
+            if(Mouse.Instance.heldCard.GetComponent<InGameCard>().GetData().cardType == Card.CardType.Monster)
             {
                 MakeRoom();
             }
@@ -140,7 +140,7 @@ public class MonsterZone : MonoBehaviour
         {
             if(card != ghostCard)
             {
-                if (card.GetComponent<InGameCard>().cardData.seed == seed) return card;
+                if (card.GetComponent<InGameCard>().GetData().seed == seed) return card;
             }
             
         }
@@ -223,8 +223,8 @@ public class MonsterZone : MonoBehaviour
                     //}
 
                     
-                    WebSocketService.Attack(card.GetComponent<InGameCard>().cardData.seed);
-                    if (debugModeOn) Debug.Log("found match for attacker: " + monsterCards[i].GetComponent<InGameCard>().cardData.cardName);
+                    WebSocketService.Attack(card.GetComponent<InGameCard>().GetData().seed);
+                    if (debugModeOn) Debug.Log("found match for attacker: " + monsterCards[i].GetComponent<InGameCard>().GetData().cardName);
                     return;
                 }
             }
@@ -251,7 +251,7 @@ public class MonsterZone : MonoBehaviour
 
             unhandledCards.Remove(handledCard);
             if (debugModeOn) Debug.Log("Removed unhandled " + unhandledCards.Count);
-            Debug.Log("card name in slot " + monsterCards[playCardMessage.boardIndex].GetComponent<InGameCard>().cardData.cardName);
+            Debug.Log("card name in slot " + monsterCards[playCardMessage.boardIndex].GetComponent<InGameCard>().GetData().cardName);
             monsterCards[playCardMessage.boardIndex].GetComponent<InGameCard>().SetNewCardData(isYourCard, References.i.cardList.GetCardData(playCardMessage));
         }
         else
@@ -290,15 +290,13 @@ public class MonsterZone : MonoBehaviour
         if (debugModeOn) Debug.Log("seed " + cardPower.seed);
         if(isYourCard)
         {
-            GetCardWithSeed(cardPower.seed).GetComponent<InGameCard>().SetStatLp(cardPower.lp);
-            GetCardWithSeed(cardPower.seed).GetComponent<InGameCard>().SetStatRp(cardPower.rp);
+            GetCardWithSeed(cardPower.seed).GetComponent<InGameCard>().UpdateRPLP(cardPower.rp, cardPower.lp);
             
         }
         else
         {
-            GetCardWithSeed(cardPower.seed).GetComponent<InGameCard>().SetStatLp(cardPower.rp);
-            GetCardWithSeed(cardPower.seed).GetComponent<InGameCard>().SetStatRp(cardPower.lp);
-            
+            GetCardWithSeed(cardPower.seed).GetComponent<InGameCard>().UpdateRPLP(cardPower.lp, cardPower.rp);
+
         }
         GetCardWithSeed(cardPower.seed).GetComponent<InGameCard>().UpdateCardTexts();
         if (cardPower.lp <= 0 || cardPower.rp <= 0) GameManager.Instance.GetCardFromInGameCards(cardPower.seed).GetComponent<InGameCard>().interActable = false;

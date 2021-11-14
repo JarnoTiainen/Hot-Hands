@@ -46,7 +46,7 @@ public class Mouse : MonoBehaviour
         
         if(heldCard)
         {
-            if (heldCard.GetComponent<InGameCard>().cardData.cardType == Card.CardType.Monster)
+            if (heldCard.GetComponent<InGameCard>().GetData().cardType == Card.CardType.Monster)
             {
                 if (Input.GetMouseButtonUp(0))
                 {
@@ -98,7 +98,7 @@ public class Mouse : MonoBehaviour
     public void ValuatePlaceCard()
     {
 
-        if (Mathf.Abs(mousePosInWorld.x) < monsterHitBox.x && Mathf.Abs(mousePosInWorld.y) < monsterHitBox.y && heldCard.GetComponent<InGameCard>().cardData.cardType == Card.CardType.Monster)
+        if (Mathf.Abs(mousePosInWorld.x) < monsterHitBox.x && Mathf.Abs(mousePosInWorld.y) < monsterHitBox.y && heldCard.GetComponent<InGameCard>().GetData().cardType == Card.CardType.Monster)
         {
             TrySummonMonster();
         }
@@ -116,7 +116,7 @@ public class Mouse : MonoBehaviour
     public void TrySummonMonster()
     {
         int playerBurnValue = GameManager.Instance.playerStats.playerBurnValue;
-        bool canAffordToPlayCard = playerBurnValue >= heldCard.GetComponent<InGameCard>().cardData.cost;
+        bool canAffordToPlayCard = playerBurnValue >= heldCard.GetComponent<InGameCard>().GetData().cost;
         bool isEnoghSpace = GameManager.Instance.playerStats.playerFieldCards < GameManager.Instance.maxFieldCardCount;
 
         if (canAffordToPlayCard && isEnoghSpace)
@@ -131,7 +131,7 @@ public class Mouse : MonoBehaviour
     public void TryCastSpell()
     {
         int playerBurnValue = GameManager.Instance.playerStats.playerBurnValue;
-        bool canAffordToPlayCard = playerBurnValue >= heldCard.GetComponent<InGameCard>().cardData.cost;
+        bool canAffordToPlayCard = playerBurnValue >= heldCard.GetComponent<InGameCard>().GetData().cost;
         bool isEnoughSpace = true; //TODO: change this to check if there are open spellSlots
 
         if (canAffordToPlayCard && isEnoughSpace)
@@ -147,12 +147,12 @@ public class Mouse : MonoBehaviour
     public void TryBurnCard()
     {
         References.i.yourMonsterZone.RemoveGhostCard();
-        if (debuggingModeOn) Debug.Log("Card discarded with seed: " + heldCard.GetComponent<InGameCard>().cardData.seed);
-        if (GameManager.Instance.GetCardFromInGameCards(heldCard.GetComponent<InGameCard>().cardData.seed) != null)
+        if (debuggingModeOn) Debug.Log("Card discarded with seed: " + heldCard.GetComponent<InGameCard>().GetData().seed);
+        if (GameManager.Instance.GetCardFromInGameCards(heldCard.GetComponent<InGameCard>().GetData().seed) != null)
         {
-            WebSocketService.Burn(heldCard.GetComponent<InGameCard>().cardData.seed);
+            WebSocketService.Burn(heldCard.GetComponent<InGameCard>().GetData().seed);
             GameManager.Instance.PlayerBurnCard(heldCard);
-            Hand.Instance.RemoveCardNoDestroy(heldCard.GetComponent<InGameCard>().cardData.seed);
+            Hand.Instance.RemoveCardNoDestroy(heldCard.GetComponent<InGameCard>().GetData().seed);
             heldCard = null;
         }
         else
@@ -173,24 +173,24 @@ public class Mouse : MonoBehaviour
 
     private void PlayCard()
     {
-        if(heldCard.GetComponent<InGameCard>().cardData.cardType == Card.CardType.Monster)
+        if(heldCard.GetComponent<InGameCard>().GetData().cardType == Card.CardType.Monster)
         {
             GameManager.Instance.playerStats.playerFieldCards++;
-            if (heldCard.GetComponent<InGameCard>().cardData.targetting)
+            if (heldCard.GetComponent<InGameCard>().GetData().targetting)
             {
                 Debug.Log("Card was targetting");
-                GameManager.Instance.PrePlayCard(heldCard.GetComponent<InGameCard>().cardData, true);
+                GameManager.Instance.PrePlayCard(heldCard.GetComponent<InGameCard>().GetData(), true);
             }
             else
             {
-                WebSocketService.PlayCard(References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.ghostCard), heldCard.GetComponent<InGameCard>().cardData.seed);
-                GameManager.Instance.PrePlayCard(heldCard.GetComponent<InGameCard>().cardData, false);
+                WebSocketService.PlayCard(References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.ghostCard), heldCard.GetComponent<InGameCard>().GetData().seed);
+                GameManager.Instance.PrePlayCard(heldCard.GetComponent<InGameCard>().GetData(), false);
             }
             
         }
         else
         {
-            if (heldCard.GetComponent<InGameCard>().cardData.targetting)
+            if (heldCard.GetComponent<InGameCard>().GetData().targetting)
             {
                 if(RayCaster.Instance.target)
                 {
@@ -198,9 +198,9 @@ public class Mouse : MonoBehaviour
                     {
                         if(GameManager.Instance.CheckIfInGameCardsContainsCard(RayCaster.Instance.target))
                         {
-                            GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().cardData.cost;
+                            GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().GetData().cost;
                             References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
-                            WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().cardData.seed, RayCaster.Instance.target.GetComponent<InGameCard>().cardData.seed);
+                            WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed, RayCaster.Instance.target.GetComponent<InGameCard>().GetData().seed);
                             heldCard = null;
                             return;
                         }
@@ -210,9 +210,9 @@ public class Mouse : MonoBehaviour
             }
             else
             {
-                GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().cardData.cost;
+                GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().GetData().cost;
                 References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
-                WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().cardData.seed);
+                WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed);
                 LimboCardHolder.Instance.StoreNewCard(heldCard);
             }
 

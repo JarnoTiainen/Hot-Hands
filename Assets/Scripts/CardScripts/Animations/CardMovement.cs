@@ -10,7 +10,7 @@ public class CardMovement : MonoBehaviour
     public float rotationSpeed = 0.5f;
     public float curveMultiplier = 0.1f;
     public float liftAmount = 0.05f;
-    public float liftDur = 1f;
+    public float liftDur = 0.5f;
 
     //specifies the movement curve of the card
     [SerializeField]
@@ -150,12 +150,16 @@ public class CardMovement : MonoBehaviour
     void Update()
     {
         //priotize attacking over normal movement
-        if (!doAttack) {
-            if (doMove && transform.localPosition != endPoint) {
+        if (!doAttack) 
+        {
+            if (doMove && transform.localPosition != endPoint) 
+            {
                 elapsedTime += Time.deltaTime;
                 //smoothly moves towards the endpoint. should this be in the fixedUpdate?
                 transform.localPosition = Vector3.Lerp(startPoint, new Vector3(endPoint.x, endPoint.y, endPoint.z), curve.Evaluate(elapsedTime / duration));
-            } else if (doMove && transform.localPosition == endPoint) {  //if the card has moved to the destination, reset variables
+            } 
+            else if (doMove && transform.localPosition == endPoint) 
+            {  //if the card has moved to the destination, reset variables
                 doMove = false;
                 curve = defaultCurve;
             }
@@ -167,11 +171,14 @@ public class CardMovement : MonoBehaviour
         }
        
         //using euler angles here because quaternions would be different, but the euler angles are same
-        if(doRotate && transform.rotation.eulerAngles != endRotation.eulerAngles) {
+        if(doRotate && transform.rotation.eulerAngles != endRotation.eulerAngles) 
+        {
             elapsedRotationTime += Time.deltaTime;
             
             transform.localRotation = Quaternion.Slerp(startRotation, endRotation, curve.Evaluate(elapsedRotationTime / rotationSpeed));
-        } else if (doRotate && transform.rotation.eulerAngles == endRotation.eulerAngles) {
+        }
+        else if (doRotate && transform.rotation.eulerAngles == endRotation.eulerAngles) 
+        {
             doRotate = false;
         }
 
@@ -281,10 +288,10 @@ public class CardMovement : MonoBehaviour
             }
 
             //set the attack point offset and direction for the attackcurve
-            if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Left) {
+            if (GetComponent<InGameCard>().GetData().attackDirection == Card.AttackDirection.Left) {
                 endAttackPoint.x -= References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
                 dirMultiplier *= -1;
-            } else if (GetComponent<InGameCard>().cardData.attackDirection == Card.AttackDirection.Right) {
+            } else if (GetComponent<InGameCard>().GetData().attackDirection == Card.AttackDirection.Right) {
                 endAttackPoint.x += References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
             }
 
@@ -359,11 +366,13 @@ public class CardMovement : MonoBehaviour
                 AttackEventHandler ah = References.i.attackEventHandler;
                 int owner = GetComponent<InGameCard>().owner;
                 //shake the camera
-                ah.CameraShake(this.GetComponent<InGameCard>().cardData);
-
+                ah.CameraShake(this.GetComponent<InGameCard>().GetData());
+                Vector3 impactEffectPos = endAttackPoint + (targetCard.transform.position - endAttackPoint).normalized * Vector3.Distance(targetCard.transform.position,endAttackPoint) * 0.5f;
+                ah.SpawnImpactEffect(impactEffectPos + new Vector3(0,0,-0.03f));
                 yield return new WaitForSeconds(liftDur);
 
                 //damage event
+                
                 ah.StartDamageEvent(owner, gameObject, targetCard);
                 doAttack = false;
                 //if another script is trying to move this, let it do so

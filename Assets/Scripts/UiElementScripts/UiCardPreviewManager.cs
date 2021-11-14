@@ -17,7 +17,7 @@ public class UiCardPreviewManager : MonoBehaviour
     public GameObject ShowCardPreview(GameObject card)
     {
         GameObject newCardPreview = Instantiate(cardPreviewGameObject);
-        newCardPreview.GetComponent<UiCardPreview>().SetNewCardData(card.GetComponent<InGameCard>().cardData);
+        newCardPreview.GetComponent<UiCardPreview>().SetNewCardData(card.GetComponent<InGameCard>().GetData());
         RectTransform rectTransform = newCardPreview.GetComponent<RectTransform>();
         rectTransform.SetParent(card.GetComponent<InGameCard>().textCanvas.transform);
 

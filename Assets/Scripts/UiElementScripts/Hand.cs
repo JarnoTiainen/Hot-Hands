@@ -76,7 +76,7 @@ public class Hand : MonoBehaviour
     {
         foreach(GameObject card in visibleHandCards)
         {
-            if (card.GetComponent<InGameCard>().cardData.seed == seed) return card;
+            if (card.GetComponent<InGameCard>().GetData().seed == seed) return card;
         }
         return null;
     }
@@ -87,7 +87,7 @@ public class Hand : MonoBehaviour
         visibleHandCards.Add(newCard);
         handCards.Add(newCard);
         
-        newCard.GetComponent<InGameCard>().SetNewCardData(true, card.GetComponent<InGameCard>().cardData);
+        newCard.GetComponent<InGameCard>().SetNewCardData(true, card.GetComponent<InGameCard>().GetData());
         newCard.GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0, 0, 0), Instance.rotationSpeed);
         SetNewCardPositions();
         Instance.UpdateCanAffortCards();
@@ -97,7 +97,7 @@ public class Hand : MonoBehaviour
     {
         foreach(GameObject card in handCards)
         {
-            if(GameManager.Instance.playerStats.playerBurnValue >= card.GetComponent<InGameCard>().cardData.cost)
+            if(GameManager.Instance.playerStats.playerBurnValue >= card.GetComponent<InGameCard>().GetData().cost)
             {
                 card.GetComponent<InGameCard>().ToggleCanAffordEffect(true);
             }
@@ -153,7 +153,7 @@ public class Hand : MonoBehaviour
         GameObject removedCard = null;
         foreach (GameObject card in handCards)
         {
-            if (card.GetComponent<InGameCard>().cardData.seed == seed) removedCard = card;
+            if (card.GetComponent<InGameCard>().GetData().seed == seed) removedCard = card;
         }
         if(removedCard != null)
         {
@@ -174,7 +174,7 @@ public class Hand : MonoBehaviour
     {
         foreach(GameObject card in handCards)
         {
-            if(card.GetComponent<InGameCard>().cardData.seed == seed)
+            if(card.GetComponent<InGameCard>().GetData().seed == seed)
             {
                 return card;
             }
@@ -241,6 +241,6 @@ public class Hand : MonoBehaviour
 
     public CardData GetCardData(int handIndex)
     {
-        return handCards[handIndex].GetComponent<InGameCard>().cardData;
+        return handCards[handIndex].GetComponent<InGameCard>().GetData();
     }
 }

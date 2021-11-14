@@ -929,6 +929,7 @@ MonoBehaviour:
     rp: 0
     lp: 0
     seed: 
+    targetting: 0
     enchantments: []
   nameText: {fileID: 120260980706194099}
   cost: {fileID: 7117940552052851705}
@@ -954,7 +955,8 @@ MonoBehaviour:
   textCanvas: {fileID: 344395278571197130}
   cardBurn: {fileID: 143564926150220506}
   canAffordBool: 0
-  seed: 0
+  interActable: 1
+  takeDamageEffectPrefab: {fileID: 6828562433823424567, guid: d4eef3cb4ba30694a967b19030cb2db4, type: 3}
   serverConfirmedIndex: 0
   confirmedByServer: 0
   isGhostCard: 0
@@ -964,6 +966,8 @@ MonoBehaviour:
   preAttackOnCD: 0
   showTooltips: 0
   owner: 0
+  tempRp: 0
+  tempLp: 0
 --- !u!65 &9060123631021853949
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -994,7 +998,7 @@ MonoBehaviour:
   rotationSpeed: 0.5
   curveMultiplier: 0.2
   liftAmount: 0.03
-  liftDur: 0.5
+  liftDur: 0.2
   curve:
     serializedVersion: 2
     m_Curve:

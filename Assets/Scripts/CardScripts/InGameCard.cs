@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 
 public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterElement, IOnHoverExitElement
 {
-    [SerializeField] public CardData cardData;
+    [SerializeField] private CardData cardData;
     [SerializeField] public TextMeshProUGUI nameText;
     [SerializeField] public TextMeshProUGUI cost;
     [SerializeField] public TextMeshProUGUI value;
@@ -33,7 +33,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private CardBurn cardBurn;
     [SerializeField] private bool canAffordBool;
     public bool interActable = true;
-    [SerializeField] public int seed;
+    [SerializeField] private GameObject takeDamageEffectPrefab;
 
     [ShowIf("debuggerModeOn", true)] public int serverConfirmedIndex;
     public bool confirmedByServer;
@@ -49,6 +49,13 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     public int owner;
     private bool doOnce;
 
+    [HideInInspector] public int tempRp;
+    [HideInInspector] public int tempLp;
+
+    public void SetTempValuesAsValues()
+    {
+        UpdateRPLP(tempRp, tempLp);
+    }
 
     private void Awake()
     {
@@ -83,6 +90,24 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         maxAttackCoolDown = duration;
     }
 
+    public void UpdateRPLP(int rp, int lp)
+    {
+        Debug.Log("Updating rp and lp");
+
+        if(rp < cardData.rp && lp <= cardData.lp || rp <= cardData.rp && lp < cardData.lp) 
+        {
+            GameObject newTakeDamageEffect = Instantiate(takeDamageEffectPrefab);
+            newTakeDamageEffect.transform.SetParent(transform);
+            newTakeDamageEffect.transform.localPosition = new Vector3(0, 0, -0.03f);
+        }
+        cardData.rp = rp;
+        cardData.lp = lp;
+    }
+    public CardData GetData()
+    {
+        return cardData;
+    }
+ 
     private void Update()
     {
         if (currentAttackCoolDown > 0) {
@@ -155,12 +180,16 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void SetNewCardData(bool isYourCard, CardData cardData)
     {
+        Debug.Log("Setting new card data");
+
         this.cardData = cardData;
         if (name != null) nameText.text = cardData.cardName;
         if (cost != null) cost.text = cardData.cost.ToString();
         if (value != null) value.text = cardData.value.ToString();
 
         meshRendererImage.material.SetTexture("_CardImage", cardData.cardSprite.texture);
+        UpdateRPLP(cardData.rp, cardData.lp);
+
 
         if (isYourCard)
         {
@@ -208,15 +237,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         {
             GameManager.Instance.EndTargetEvent(cardData.seed);
         }
-    }
-
-    public void SetStatLp(int lp)
-    {
-        cardData.lp = lp;
-    }
-    public void SetStatRp(int rp)
-    {
-        cardData.rp = rp;
     }
     public void UpdateCardTexts()
     {

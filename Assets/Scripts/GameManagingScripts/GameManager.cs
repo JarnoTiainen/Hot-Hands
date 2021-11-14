@@ -34,16 +34,16 @@ public class GameManager : MonoBehaviour
     public void AddCardToInGameCards(GameObject newCard)
     {
         
-        if(inGameCards.ContainsKey(newCard.GetComponent<InGameCard>().cardData.seed))
+        if(inGameCards.ContainsKey(newCard.GetComponent<InGameCard>().GetData().seed))
         {
-            inGameCards.Remove(newCard.GetComponent<InGameCard>().cardData.seed);
-            Debug.LogWarning("REadding " + newCard.GetComponent<InGameCard>().cardData.cardName + " to list");
+            inGameCards.Remove(newCard.GetComponent<InGameCard>().GetData().seed);
+            Debug.LogWarning("REadding " + newCard.GetComponent<InGameCard>().GetData().cardName + " to list");
         }
         else
         {
-            Debug.LogWarning("adding " + newCard.GetComponent<InGameCard>().cardData.cardName + " to list");
+            Debug.LogWarning("adding " + newCard.GetComponent<InGameCard>().GetData().cardName + " to list");
         }
-        inGameCards.Add(newCard.GetComponent<InGameCard>().cardData.seed, newCard);
+        inGameCards.Add(newCard.GetComponent<InGameCard>().GetData().seed, newCard);
     }
     /*
     public void RemoveCardFromInGameCards(GameObject newCard)
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 
         foreach (KeyValuePair<string, GameObject> kvp in inGameCards)
         {
-            Debug.Log(kvp.Key + " " + kvp.Value.GetComponent<InGameCard>().cardData.cardName);
+            Debug.Log(kvp.Key + " " + kvp.Value.GetComponent<InGameCard>().GetData().cardName);
         }
             
 
@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
     {
         if (burnCardMessage.denied)
         {
-            UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue - GetCardFromInGameCards(burnCardMessage.seed).GetComponent<InGameCard>().cardData.value);
+            UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue - GetCardFromInGameCards(burnCardMessage.seed).GetComponent<InGameCard>().GetData().value);
             ReturnBurnedCardToHand(burnCardMessage.seed);
             return;
         }
@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
             newCard = Instantiate(References.i.handCard, cardPos, Quaternion.Euler(0, 180, 0));
             EnemyHand.Instance.RemoveCard(burnCardMessage.seed);
             CardData cardData = References.i.cardList.GetCardData(cardMessage);
-            newCard.GetComponent<InGameCard>().cardData = cardData;
+            newCard.GetComponent<InGameCard>().SetNewCardData(false, cardData);
             enemyPlayerStats.playerBurnValue = burnCardMessage.newBurnValue;
             PlayerBurnCard(newCard, cardMessage.player);
         }
@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
         if (player == -1) player = playerNumber;
         sfxLibrary.GetComponent<BurnSFX>().Play();
         
-        int value = card.GetComponent<InGameCard>().cardData.value;
+        int value = card.GetComponent<InGameCard>().GetData().value;
         if (player == playerNumber)
         {
             if(debugPlayerBurnCard) Debug.Log("adding ");
@@ -391,7 +391,7 @@ public class GameManager : MonoBehaviour
     public void CardSummonDenied()
     {
         playerStats.playerFieldCards--;
-        UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue + References.i.yourMonsterZone.unhandledCards[0].GetComponent<InGameCard>().cardData.cost);
+        UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue + References.i.yourMonsterZone.unhandledCards[0].GetComponent<InGameCard>().GetData().cost);
         References.i.yourMonsterZone.RecallCard(playerNumber, References.i.yourMonsterZone.unhandledCards[0]);
     }
 
@@ -401,7 +401,7 @@ public class GameManager : MonoBehaviour
         if(playCardMessage.denied)
         {
             playerStats.playerFieldCards--;
-            UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue + References.i.yourMonsterZone.unhandledCards[0].GetComponent<InGameCard>().cardData.cost);
+            UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue + References.i.yourMonsterZone.unhandledCards[0].GetComponent<InGameCard>().GetData().cost);
             if (playCardMessage.serverBurnValue != playerStats.playerBurnValue) UpdatePlayerBurnValue(playerNumber, playCardMessage.serverBurnValue);
             References.i.yourMonsterZone.RecallCard(playerNumber, References.i.yourMonsterZone.unhandledCards[0]);
             return;
@@ -549,7 +549,7 @@ public class GameManager : MonoBehaviour
         foreach(CardDataMessage cardData in statChangeMessage.convertedTargets)
         {
             GameObject target = GetCardFromInGameCards(cardData.seed);
-            CardData data = target.GetComponent<InGameCard>().cardData;
+            CardData data = target.GetComponent<InGameCard>().GetData();
 
             data.rp = cardData.rp;
             data.lp = cardData.lp;

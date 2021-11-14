@@ -52,8 +52,8 @@ public class InGameSpell : MonoBehaviour
 
     public void SetNewSpellToslot(GameObject newSpell)
     {
-        SetNewCardData(newSpell.GetComponent<InGameCard>().cardData);
-        Debug.LogWarning("Play sound and effect here. New card with name: " + newSpell.GetComponent<InGameCard>().cardData.cardName + " set");
+        SetNewCardData(newSpell.GetComponent<InGameCard>().GetData());
+        Debug.LogWarning("Play sound and effect here. New card with name: " + newSpell.GetComponent<InGameCard>().GetData().cardName + " set");
     }
 
     [Button] public void RemoveSpellFromSlot()

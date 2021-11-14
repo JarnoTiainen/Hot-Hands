@@ -19,7 +19,7 @@ public class HandCard : MonoBehaviour, IOnClickDownUIElement
         }
         else
         {
-            Debug.Log("targeting card " + gameObject.GetComponent<InGameCard>().cardData.cardName);
+            Debug.Log("targeting card " + gameObject.GetComponent<InGameCard>().GetData().cardName);
         }
     }
 

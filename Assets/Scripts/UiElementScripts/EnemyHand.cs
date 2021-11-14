@@ -47,7 +47,9 @@ public class EnemyHand : MonoBehaviour
     {
         GameObject newCard = InstantiateNewCard();
         unhandledCards.Add(newCard);
-        newCard.GetComponent<InGameCard>().cardData.seed = seed;
+        CardData newCardData = newCard.GetComponent<InGameCard>().GetData();
+        newCardData.seed = seed;
+        newCard.GetComponent<InGameCard>().SetNewCardData(false, newCardData);
         SetNewCardPositions();
         GameManager.Instance.AddCardToInGameCards(newCard);
     }
@@ -56,7 +58,7 @@ public class EnemyHand : MonoBehaviour
     {
         foreach(GameObject card in unhandledCards)
         {
-            if(card.GetComponent<InGameCard>().cardData.seed == seed)
+            if(card.GetComponent<InGameCard>().GetData().seed == seed)
             {
                 return card;
             }
