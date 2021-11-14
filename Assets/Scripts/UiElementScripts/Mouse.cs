@@ -178,6 +178,7 @@ public class Mouse : MonoBehaviour
             GameManager.Instance.playerStats.playerFieldCards++;
             if (heldCard.GetComponent<InGameCard>().cardData.targetting)
             {
+                Debug.Log("Card was targetting");
                 GameManager.Instance.PrePlayCard(heldCard.GetComponent<InGameCard>().cardData, true);
             }
             else

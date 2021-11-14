@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ImpactMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: e3b85858b1cf874498705933a8e00fca, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_777ac29ab43c4ecab6dc6f2e066841ed:
+        m_Texture: {fileID: 2800000, guid: 686eb815ec8d64542acd29166fa2ae5c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_ef55d2ccbe4844c399447589b140276e:
+        m_Texture: {fileID: 2800000, guid: 5e7316ebdf2c34b4c83ba87396cc85a9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_f232d46ab2cc4996b7258347159517dd:
+        m_Texture: {fileID: 2800000, guid: 92e3a453c7ba41a42ba3bf1ef3e7848c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_53e8185662554ced848ffb653a9b94e6_Texture_1:
+        m_Texture: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_ab2a834eb7cb485b8d99a329d1edaba5_Texture_1:
+        m_Texture: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_19dcc7f56e5e46f0baf68233b08b8882: 0.259
+    - Vector1_315486977790475dbef9e3b680fc6253: 0.106
+    - Vector1_69e86b1aa840447082c3c1c99a7e66a8: 0.605
+    m_Colors:
+    - Color_553bbc16b1e44e98b6f27b5082bb244e: {r: 14.92853, g: 14.92853, b: 14.92853, a: 0}
+  m_BuildTextureStacks: []
