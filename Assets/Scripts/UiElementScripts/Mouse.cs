@@ -46,6 +46,7 @@ public class Mouse : MonoBehaviour
         
         if(heldCard)
         {
+ 
             if (heldCard.GetComponent<InGameCard>().GetData().cardType == Card.CardType.Monster)
             {
                 if (Input.GetMouseButtonUp(0))
@@ -87,6 +88,7 @@ public class Mouse : MonoBehaviour
     [Button] public void SetNewHeldCard(GameObject newCard)
     {
         heldCard = newCard;
+        heldCard.GetComponent<InGameCard>().isInHand = true;
         newCard.transform.SetParent(gameObject.transform);
         newCard.transform.localPosition = Vector3.zero;
     }
@@ -201,6 +203,7 @@ public class Mouse : MonoBehaviour
                             GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().GetData().cost;
                             References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
                             WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed, RayCaster.Instance.target.GetComponent<InGameCard>().GetData().seed);
+                            heldCard.GetComponent<InGameCard>().isInHand = false;
                             heldCard = null;
                             return;
                         }
@@ -217,6 +220,7 @@ public class Mouse : MonoBehaviour
             }
 
         }
+        heldCard.GetComponent<InGameCard>().isInHand = false;
         heldCard = null;
     }
 }

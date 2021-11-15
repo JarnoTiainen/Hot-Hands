@@ -909,6 +909,7 @@ MonoBehaviour:
   rp: {fileID: 5759760883158312004}
   fadeDuration: 0.5
   coolDownSlider: {fileID: 4354812131388942114}
+  isInHand: 0
   debuggerModeOn: 0
   cardMainBodyMaterial: {fileID: -6465566751694194690, guid: 0a9d315ef8089e247a582c0c35f2f748, type: 3}
   cardImageShader: {fileID: -6465566751694194690, guid: d1c493463931c0a4f979c1a868b36962, type: 3}
@@ -926,7 +927,8 @@ MonoBehaviour:
   textCanvas: {fileID: 4525997025527728775}
   cardBurn: {fileID: 6134887068788904234}
   canAffordBool: 0
-  seed: 0
+  interActable: 1
+  takeDamageEffectPrefab: {fileID: 0}
   serverConfirmedIndex: 0
   confirmedByServer: 0
   isGhostCard: 0
@@ -936,6 +938,8 @@ MonoBehaviour:
   preAttackOnCD: 0
   showTooltips: 0
   owner: 0
+  tempRp: 0
+  tempLp: 0
 --- !u!65 &6490331289218157256
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -944,7 +948,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7611825709596717884}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.064126, y: 0.08893682, z: 0.004450273}

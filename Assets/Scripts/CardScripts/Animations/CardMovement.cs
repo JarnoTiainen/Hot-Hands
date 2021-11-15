@@ -62,90 +62,106 @@ public class CardMovement : MonoBehaviour
     }
 
 
-    /*
-     * work in progress
+    
     private void FixedUpdate()
     {
         pos = transform.position;
-        if (pos - previousPos != Vector3.zero) {
-            velocity = (pos - previousPos) / Time.deltaTime;
+        if (gameObject.GetComponent<InGameCard>().isInHand) {
+            if (pos - previousPos != Vector3.zero) {
+                velocity = (pos - previousPos) / Time.deltaTime;
 
-            Vector2 accel = (velocity - prevVelocity) / Time.deltaTime;
+                ///Vector2 accel = (velocity - prevVelocity) / Time.deltaTime;
 
-            //moveRot = Quaternion.LookRotation(accel);
+                //moveRot = Quaternion.LookRotation(accel);
 
-           // Debug.Log("acceleration  x" + accel.x + " y " + accel.y);
-                 
+               // Debug.Log("acceleration  x" + accel.x + " y " + accel.y);
 
-
-            //if (velocity.x <= 50 || velocity.y >= 310) {
+                //if (velocity.x <= 50 || velocity.y >= 310) {
                 
-            //} else if (velocity.x > 50 && velocity.x < 180) {
-            //    velocity.x = 50;
-            //} else if (velocity.x > 180 && velocity.x < 310) {
-            //    velocity.x = 310;
-            //}
+                //} else if (velocity.x > 50 && velocity.x < 180) {
+                //    velocity.x = 50;
+                //} else if (velocity.x > 180 && velocity.x < 310) {
+                //    velocity.x = 310;
+                //}
 
-            //transform.rotation = Quaternion.Euler(velocity.x, velocity.y, 0);
+                //transform.rotation = Quaternion.Euler(velocity.x, velocity.y, 0);
 
 
-            //Debug.Log("velocity x" + velocity.x + "velocity y" + velocity.y);
-            // velocity = new Vector2(Mathf.Clamp(velocity.x, -0.01f, 0.01f), Mathf.Clamp(velocity.y, -0.01f, 0.01f));
+                //Debug.Log("velocity x" + velocity.x + "velocity y" + velocity.y);
+                // velocity = new Vector2(Mathf.Clamp(velocity.x, -0.01f, 0.01f), Mathf.Clamp(velocity.y, -0.01f, 0.01f));
             
-            //velocity = new Vector2(Mathf.Clamp(velocity.x, -0.01f, 0.01f), Mathf.Clamp(velocity.y, -0.01f, 0.01f));
+                //velocity = new Vector2(Mathf.Clamp(velocity.x, -0.01f, 0.01f), Mathf.Clamp(velocity.y, -0.01f, 0.01f));
 
-           /// moveRot = Quaternion.LookRotation(accel);
-            //moveRot = Quaternion.LookRotation(-velocity);
-            //clamp the rotation of card
-            //moveRot = new Quaternion(Mathf.Clamp(moveRot.x, -0.3f, 0.3f), Mathf.Clamp(moveRot.y, -0.3f, 0.3f), Mathf.Clamp(moveRot.z, -0.3f, 0.3f), Mathf.Clamp(moveRot.w, -0.3f, 0.3f));
+                ///moveRot = Quaternion.LookRotation(accel);
+                ///moveRot = Quaternion.Euler(moveRot.eulerAngles.x, moveRot.eulerAngles.y, 0);
 
+                //moveRot = Quaternion.LookRotation(-velocity);
+                //clamp the rotation of card
+                //moveRot = new Quaternion(Mathf.Clamp(moveRot.x, -0.3f, 0.3f), Mathf.Clamp(moveRot.y, -0.3f, 0.3f), Mathf.Clamp(moveRot.z, -0.3f, 0.3f), Mathf.Clamp(moveRot.w, -0.3f, 0.3f));
+
+
+
+                //Debug.Log("velocity x" + velocity.x + "velocity y" + velocity.y);
+                //transform.rotation = Quaternion.RotateTowards(transform.rotation, moveRot, 0.7f);
+
+                //if (transform.eulerAngles.x <= 50 || transform.eulerAngles.x >= 310) {
+                //    velocity.x = transform.eulerAngles.x;
+                //} else if (velocity.x > 50 && velocity.x < 180) {
+                //    velocity.x = 50;
+                //} else if (transform.eulerAngles.x > 180 && transform.eulerAngles.x < 310) {
+                //    velocity.x = 310;
+                //}
+
+                //if (transform.eulerAngles.y <= 50 || transform.eulerAngles.y >= 310) {
+                //    velocity.y = transform.eulerAngles.y;
+                //} else if (velocity.y > 50 && velocity.y < 180) {
+                //    velocity.y = 50;
+                //} else if (transform.eulerAngles.y > 180 && transform.eulerAngles.y < 310) {
+                //    velocity.y = 310;
+                //}
+
+
+                transform.rotation = Quaternion.Euler(new Vector3(velocity.y * 15, -velocity.x * 15, 0));
+          
             
 
-            //Debug.Log("velocity x" + velocity.x + "velocity y" + velocity.y);
-            //transform.rotation = Quaternion.RotateTowards(transform.rotation, moveRot, 0.7f);
+                //transform.rotation = Quaternion.LookRotation(-(pos - previousPos));
 
-            //if (transform.eulerAngles.x <= 50 || transform.eulerAngles.x >= 310) {
-            //    velocity.x = transform.eulerAngles.x;
-            //} else if (velocity.x > 50 && velocity.x < 180) {
-            //    velocity.x = 50;
-            //} else if (transform.eulerAngles.x > 180 && transform.eulerAngles.x < 310) {
-            //    velocity.x = 310;
-            //}
+                //transform.rotation = new Quaternion(Mathf.Clamp(transform.rotation.x, -0.3f, 0.3f), Mathf.Clamp(transform.rotation.y, -0.3f, 0.3f), Mathf.Clamp(transform.rotation.z, -0.3f, 0.3f), Mathf.Clamp(transform.rotation.w, -0.3f, 0.3f));
 
-            //if (transform.eulerAngles.y <= 50 || transform.eulerAngles.y >= 310) {
-            //    velocity.y = transform.eulerAngles.y;
-            //} else if (velocity.y > 50 && velocity.y < 180) {
-            //    velocity.y = 50;
-            //} else if (transform.eulerAngles.y > 180 && transform.eulerAngles.y < 310) {
-            //    velocity.y = 310;
-            //}
-
+                //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime / 0.5f);
             
 
-            ///transform.rotation = Quaternion.Lerp(transform.rotation, moveRot, Time.deltaTime * 1);
-            
-            prevVelocity = velocity;
-            
 
-            //transform.rotation = Quaternion.LookRotation(-(pos - previousPos));
+                //Vector3 endPos = source.transform.position;
+                //Vector3 startPos = target.transform.position;
 
-            //transform.rotation = new Quaternion(Mathf.Clamp(transform.rotation.x, -0.3f, 0.3f), Mathf.Clamp(transform.rotation.y, -0.3f, 0.3f), Mathf.Clamp(transform.rotation.z, -0.3f, 0.3f), Mathf.Clamp(transform.rotation.w, -0.3f, 0.3f));
 
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime / 0.5f);
+                // transform.GetChild(0).position = (pos + previousPos) / 2;
 
-        } else {
-            if (transform.rotation != Quaternion.identity) {
-                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.identity, 1);
+                ////rotation
+                //Vector3 targetDir = previousPos - pos;
+                //float angleXY = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
+                //float hyp = Mathf.Sqrt(Mathf.Pow(targetDir.y, 2) + Mathf.Pow(targetDir.x, 2));
+                //float angleZhyp = Mathf.Atan2(targetDir.z, hyp) * Mathf.Rad2Deg;
+                //var quatXY = Quaternion.AngleAxis(angleXY, Vector3.forward);
+                //var quatZX = Quaternion.AngleAxis(angleZhyp, Vector3.down);
+
+            } else {
+                if (transform.rotation != Quaternion.identity) {
+                     transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.identity, 1);
+                }
             }
-            prevVelocity = Vector2.zero;
         }
+        
 
         
            
         previousPos = transform.position;
         
     }
-    */
+    
+    
 
     void Update()
     {
@@ -160,6 +176,7 @@ public class CardMovement : MonoBehaviour
             } 
             else if (doMove && transform.localPosition == endPoint) 
             {  //if the card has moved to the destination, reset variables
+               
                 doMove = false;
                 curve = defaultCurve;
             }

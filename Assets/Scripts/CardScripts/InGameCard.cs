@@ -14,6 +14,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] public TextMeshProUGUI rp;
     public float fadeDuration = 0.5f;
     public Slider coolDownSlider;
+    public bool isInHand;
 
     [SerializeField] private bool debuggerModeOn = false;
     [SerializeField] private Shader cardMainBodyMaterial;
