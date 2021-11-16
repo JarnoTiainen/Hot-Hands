@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CardBuffMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 59100a132d700f943b3c857512408599, type: 3}
+  m_Name: PuffParticleMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: a734362002b0cdf42a58a535ecd97f9b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,8 +19,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _SampleTexture2D_642c26cc95a94d989153ef1760dd4247_Texture_1:
-        m_Texture: {fileID: 2800000, guid: de63da6f192713a4696ea9ac0b388178, type: 3}
+    - Texture2D_e4c7d3207ec04cdca5f979f37ce95b74:
+        m_Texture: {fileID: 2800000, guid: 6a6c6018a7444f643b6db69d5b48a606, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -35,9 +35,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - Vector1_e6ccf0d25fa14f66ac4723b6de598d39: 0
-    - _TransparencyAmount: 1
+    m_Floats: []
     m_Colors:
-    - Color_64e38382e7f44ee98eb3b6f90dc7974d: {r: 0, g: 183.70053, b: 766.9961, a: 0}
+    - Color_d1b511e3ecdd453ebf7ac9288e3b9f8a: {r: 0, g: 30.4677, b: 126.50718, a: 0}
   m_BuildTextureStacks: []

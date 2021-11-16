@@ -53,6 +53,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [HideInInspector] public int tempRp;
     [HideInInspector] public int tempLp;
 
+    [SerializeField] private CardRuneEffectManager cardRuneEffectManager;
+
     public void SetTempValuesAsValues()
     {
         UpdateRPLP(tempRp, tempLp);
@@ -253,17 +255,22 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         transform.GetChild(1).gameObject.SetActive(false);
     }
 
-    public void SpellBurn()
+    [Button] public void SpellBurn()
     {
         ToggleCanAffordEffect(false);
-        GetComponent<DissolveEffect>().StartDissolving(mat);
-        //GetComponent<DissolveMove>().StartDissolving();
-        transform.GetChild(1).gameObject.SetActive(false);
+        cardRuneEffectManager.PlayRuneEffect();
     }
 
-    public void ToggleGhostCard()
+    [Button]
+    public void ReverseSpellBurn()
     {
-        if(!isGhostCard)
+        ToggleCanAffordEffect(true);
+        cardRuneEffectManager.PlayReverseRuneEffect();
+    }
+
+    public void ToggleGhostCard(bool on)
+    {
+        if(on)
         {
             isGhostCard = true;
             //you can use just this to hide the whole gameobject
@@ -324,4 +331,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         //TODO: play animation here before destroying the card
         Destroy(gameObject);
     }
+
+    
 }

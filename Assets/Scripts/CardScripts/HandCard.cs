@@ -3,7 +3,8 @@ using UnityEngine;
 public class HandCard : MonoBehaviour, IOnClickDownUIElement
 {
     [SerializeField] private bool onTargetMode;
-    [SerializeField] private GameObject twirlEffect;
+    [SerializeField] private GameObject twirlEffectPrefab;
+    GameObject newTwirlEffect;
 
     public void OnClickElement()
     {
@@ -28,15 +29,24 @@ public class HandCard : MonoBehaviour, IOnClickDownUIElement
        
     }
 
-    public void SwitchToTargetMode()
+    public void SwitchToSpellMode()
     {
         if(!onTargetMode)
         {
             GetComponent<InGameCard>().SpellBurn();
-            GameObject newTwirlEffect = Instantiate(twirlEffect);
+            newTwirlEffect = Instantiate(twirlEffectPrefab);
             newTwirlEffect.transform.SetParent(transform);
             newTwirlEffect.transform.localPosition = Vector3.zero;
             onTargetMode = true;
+        }
+    }
+    public void SwitchToCardMode()
+    {
+        if (onTargetMode)
+        {
+            GetComponent<InGameCard>().ReverseSpellBurn();
+            Destroy(newTwirlEffect);
+            onTargetMode = false;
         }
     }
 }

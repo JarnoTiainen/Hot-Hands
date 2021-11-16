@@ -60,21 +60,15 @@ public class Mouse : MonoBehaviour
                 if (!Hand.Instance.CheckIfInsideHandBox(transform.position))
                 {
                     if (debuggingModeOn) Debug.Log("placing down");
-                    if (!Hand.Instance.CheckIfInsideHandBox(transform.position))
+                    TransformIntoTargetMode();
+                    if (Input.GetMouseButtonUp(0))
                     {
-                        TransformIntoTargetMode();
-                        if(Input.GetMouseButtonUp(0))
-                        {
-                            TryCastSpell();
-                        }
-                    }
-                    else
-                    {
-                        //TODO: TransformBack
+                        TryCastSpell();
                     }
                 }
                 else
                 {
+                    TransformIntoCardMode();
                     if (Input.GetMouseButtonUp(0))
                     {
                         ReturnHeldCardToHand();
@@ -143,6 +137,7 @@ public class Mouse : MonoBehaviour
         else
         {
             Debug.Log("Could not afford to cast spell");
+            TransformIntoCardMode();
             ReturnHeldCardToHand();
         }
     }
@@ -170,7 +165,11 @@ public class Mouse : MonoBehaviour
     }
     public void TransformIntoTargetMode()
     {
-        heldCard.GetComponent<HandCard>().SwitchToTargetMode();
+        heldCard.GetComponent<HandCard>().SwitchToSpellMode();
+    }
+    public void TransformIntoCardMode()
+    {
+        heldCard.GetComponent<HandCard>().SwitchToCardMode();
     }
 
     private void PlayCard()

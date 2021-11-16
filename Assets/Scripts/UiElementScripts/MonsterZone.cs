@@ -44,7 +44,7 @@ public class MonsterZone : MonoBehaviour
         GameObject newCard;
         if(isYourCard)
         {
-            ghostCard.GetComponent<InGameCard>().ToggleGhostCard();
+            ghostCard.GetComponent<InGameCard>().ToggleGhostCard(false);
             ghostCard.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
             unhandledCards.Add(ghostCard);
             if(debugModeOn) Debug.Log("Added unhandled");
@@ -340,7 +340,7 @@ public class MonsterZone : MonoBehaviour
         if (!ghostCard)
         {
             GameObject newGhostCard = Instantiate(References.i.fieldCard, Mouse.Instance.mousePosInWorld, Quaternion.identity);
-            newGhostCard.GetComponent<InGameCard>().ToggleGhostCard();
+            newGhostCard.GetComponent<InGameCard>().ToggleGhostCard(true);
             newGhostCard.transform.SetParent(transform, true);
             monsterCards.Insert(index, newGhostCard);
             ghostCard = newGhostCard;
