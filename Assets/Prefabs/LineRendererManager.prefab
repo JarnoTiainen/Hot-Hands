@@ -44,5 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scale: 0.1
-  lineMaterial: {fileID: 2100000, guid: a5ac4ef882559294b8a036af52cb4983, type: 2}
+  lineMaterial: {fileID: 2100000, guid: 398e7c445768dc84a88718e2a4eac83b, type: 2}
   lineGameObject: {fileID: 2776490609683145043, guid: e1833752d5163254d9fa083eb9ed52a8, type: 3}
+  lineThickness:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  numberOfVerticies: 0

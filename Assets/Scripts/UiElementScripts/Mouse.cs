@@ -207,6 +207,7 @@ public class Mouse : MonoBehaviour
                             WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed, RayCaster.Instance.target.GetComponent<InGameCard>().GetData().seed);
                             LimboCardHolder.Instance.StoreNewCard(heldCard);
                             heldCard.GetComponent<InGameCard>().isInHand = false;
+                            TransformIntoCardMode();
                             heldCard = null;
                             return;
                         }
