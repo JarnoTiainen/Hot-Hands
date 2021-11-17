@@ -16,6 +16,8 @@ public class Enchantment
     public int weight;
     public bool targeting;
 
+    
+
     public enum EnchantmentEffect
     {
         Default,
@@ -27,7 +29,9 @@ public class Enchantment
         HealPlayer, 
         BuffBoardAttackDirectionPowers, 
         EssenceSiphon, 
-        Scorch
+        Scorch,
+        Fireball,
+        Deny
     }
     public enum Trigger
     {
@@ -40,5 +44,5 @@ public class Enchantment
         Brutality, 
         Spell
     }
-
+    
 }

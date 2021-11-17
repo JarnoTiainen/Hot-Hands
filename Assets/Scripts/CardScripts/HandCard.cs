@@ -4,6 +4,7 @@ public class HandCard : MonoBehaviour, IOnClickDownUIElement
 {
     [SerializeField] private bool onTargetMode;
     [SerializeField] private GameObject twirlEffectPrefab;
+    [SerializeField] private Line line;
     GameObject newTwirlEffect;
 
     public void OnClickElement()
@@ -38,6 +39,11 @@ public class HandCard : MonoBehaviour, IOnClickDownUIElement
             newTwirlEffect.transform.SetParent(transform);
             newTwirlEffect.transform.localPosition = Vector3.zero;
             onTargetMode = true;
+
+            if (gameObject.GetComponent<InGameCard>().GetData().targetting)
+            {
+                line = LineRendererManager.Instance.CreateNewLine(References.i.yourPlayerTarget, gameObject);
+            }
         }
     }
     public void SwitchToCardMode()
@@ -47,6 +53,11 @@ public class HandCard : MonoBehaviour, IOnClickDownUIElement
             GetComponent<InGameCard>().ReverseSpellBurn();
             Destroy(newTwirlEffect);
             onTargetMode = false;
+            if(line != null)
+            {
+                line.RemoveLine();
+            }
+            
         }
     }
 }

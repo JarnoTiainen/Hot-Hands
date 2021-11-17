@@ -27,8 +27,6 @@ public class CardPuffEffect : MonoBehaviour
     {
         currentLifetime -= Time.deltaTime;
         currentTranparency = currentLifetime / lifetime;
-        Debug.Log(effectParticleRenderer.material.GetFloat("_TransparencyAmount") + " " + currentTranparency);
-        effectParticleRenderer.material.SetFloat("_TransparencyAmount", currentTranparency);
         if (currentLifetime < 0) Destroy(gameObject);
     }
 }

@@ -63,6 +63,7 @@ MonoBehaviour:
     seed: 
     targetting: 0
     enchantments: []
+    description: 
   spellSlotNumber: 0
   cardImage: {fileID: 0}
   rotating: 0
@@ -102,6 +103,7 @@ MonoBehaviour:
   - {fileID: 6946278979593491627}
   lightMaterial: {fileID: 2100000, guid: df776303ed63e654a8878f09ffc5964d, type: 2}
   slotTaken: 0
+  speed: 1
 --- !u!1 &3895069396858854367
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 {
     [SerializeField] private CardData cardData;
     [SerializeField] public TextMeshProUGUI nameText;
+    [SerializeField] public TextMeshProUGUI descriptionText;
     [SerializeField] public TextMeshProUGUI cost;
     [SerializeField] public TextMeshProUGUI value;
     [SerializeField] public TextMeshProUGUI lp;
@@ -35,6 +36,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private bool canAffordBool;
     public bool interActable = true;
     [SerializeField] private GameObject takeDamageEffectPrefab;
+    [SerializeField] private DescriptionLogoManager descriptionLogoManager;
 
     [ShowIf("debuggerModeOn", true)] public int serverConfirmedIndex;
     public bool confirmedByServer;
@@ -332,5 +334,9 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         Destroy(gameObject);
     }
 
-    
+    public void SetDescriptionImage()
+    {
+        descriptionLogoManager.SetNewImage(cardData.enchantments);
+        
+    }
 }

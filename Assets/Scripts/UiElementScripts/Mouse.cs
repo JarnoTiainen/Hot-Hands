@@ -160,12 +160,15 @@ public class Mouse : MonoBehaviour
     public void ReturnHeldCardToHand()
     {
         References.i.yourMonsterZone.RemoveGhostCard();
+        Debug.Log("name. " + heldCard.name);
         Hand.Instance.ReturnVisibleCard(heldCard);
+        heldCard.GetComponent<InGameCard>().isInHand = false;
         heldCard = null;
     }
     public void TransformIntoTargetMode()
     {
         heldCard.GetComponent<HandCard>().SwitchToSpellMode();
+        
     }
     public void TransformIntoCardMode()
     {
@@ -202,24 +205,34 @@ public class Mouse : MonoBehaviour
                             GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().GetData().cost;
                             References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
                             WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed, RayCaster.Instance.target.GetComponent<InGameCard>().GetData().seed);
+                            LimboCardHolder.Instance.StoreNewCard(heldCard);
                             heldCard.GetComponent<InGameCard>().isInHand = false;
                             heldCard = null;
                             return;
                         }
                     }
+                    else
+                    {
+                        TransformIntoCardMode();
+                        ReturnHeldCardToHand();
+                    }
                 }
-                ReturnHeldCardToHand();
+                else
+                {
+                    TransformIntoCardMode();
+                    ReturnHeldCardToHand();
+                }
+                
             }
             else
             {
                 GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().GetData().cost;
+                
                 References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
                 WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed);
                 LimboCardHolder.Instance.StoreNewCard(heldCard);
             }
 
         }
-        heldCard.GetComponent<InGameCard>().isInHand = false;
-        heldCard = null;
     }
 }

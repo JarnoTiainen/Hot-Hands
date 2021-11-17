@@ -17,13 +17,15 @@ public class References: MonoBehaviour
     public GameObject cardPreviewGameObject;
     //EnchantmentIcons
     public CardList cardList;
-    public Sprite lastBreathIcon;
-    public Sprite openerIcon;
-    public Sprite battlecryIcon;
-    public Sprite drawtivationIcon;
-    public Sprite sacrifice;
-    public Sprite retaliate;
-    public Sprite brutalityIcon;
+    public Texture lastBreathIcon;
+    public Texture openerIcon;
+    public Texture drawtivationIcon;
+    public Texture sacrifice;
+    public Color lastBreathColor;
+    public Color openerColor;
+    public Color drawtivationColor;
+    public Color sacrificeColor;
+
 
     public GameObject fieldCard;
     public GameObject handCard;

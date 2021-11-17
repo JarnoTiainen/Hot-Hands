@@ -575,18 +575,25 @@ public class GameManager : MonoBehaviour
 
     public void PlaySpell(PlaySpellMessage playSpellMessage)
     {
-        if(IsYou(playSpellMessage.player))
+        
+
+        if (IsYou(playSpellMessage.player))
         {
-            References.i.spellZone.PlaySpell(playSpellMessage.seed);
+            References.i.spellZone.PlaySpell(playSpellMessage.seed, playSpellMessage.targets, playSpellMessage.windup);
+            GameManager.Instance.playerStats.playerHandCards--;
         }
         else
         {
             enemyPlayerStats.playerBurnValue -= playSpellMessage.cardCost;
+            GameManager.Instance.enemyPlayerStats.playerHandCards--;
             References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
-            References.i.spellZone.PlaySpell(References.i.cardList.GetCardData(playSpellMessage));
+            References.i.spellZone.PlaySpell(References.i.cardList.GetCardData(playSpellMessage), playSpellMessage.targets, playSpellMessage.windup);
         }
     }
-
+    public void TriggerSpell(TriggerSpellMessage triggerSpellMessage)
+    {
+        SpellZone.Instance.TriggerSpellChain(triggerSpellMessage.index, triggerSpellMessage.denied);
+    }
 
     public void PlayDataChangeEffect(CardDataMessage.BuffType buffType, GameObject target)
     {

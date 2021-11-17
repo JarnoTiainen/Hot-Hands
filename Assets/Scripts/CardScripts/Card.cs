@@ -14,7 +14,7 @@ public class Card : ScriptableObject
     }
     public enum SpellTag
     {
-        Trap, Aura, Counter, Quick
+        Counter, Quick
     }
     public enum AttackDirection
     {

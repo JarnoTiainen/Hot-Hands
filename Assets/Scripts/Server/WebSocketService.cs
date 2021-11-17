@@ -184,6 +184,9 @@ public class WebSocketService : MonoBehaviour
                     if (debuggerModeOn) Debug.Log("Message type was PLAYSPELL");
                     gameManager.PlaySpell(JsonUtility.FromJson<PlaySpellMessage>(data[1]));
                     break;
+                case "TRIGGERSPELL":
+                    gameManager.TriggerSpell(JsonUtility.FromJson<TriggerSpellMessage>(data[1]));
+                    break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                     break;
@@ -321,4 +324,11 @@ public class WebSocketService : MonoBehaviour
         GameMessage message = new GameMessage("OnMessage", "BURNCARD", seed);
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
+    public static void TriggerSpellChain()
+    {
+        Debug.Log("Sending message trigger spellchain");
+        GameMessage message = new GameMessage("OnMessage", "TRIGGERSPELLCHAIN", "");
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
+
 }

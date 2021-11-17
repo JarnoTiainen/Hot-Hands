@@ -22,6 +22,10 @@ public class InGameSpell : MonoBehaviour
     [SerializeField] private Material lightMaterial;
     private int lightsOn;
     public bool slotTaken;
+    float time;
+    [SerializeField] private float speed;
+    private bool animating = false;
+    public List<Line> lines;
 
     private void Awake()
     {
@@ -91,11 +95,26 @@ public class InGameSpell : MonoBehaviour
                 rotating = false;
             }
         }
-        
+        if(animating)
+        {
+            time -= Time.deltaTime * speed;
+            foreach(MeshRenderer lightMesh in lightMeshes)
+            {
+                lightMesh.material.SetFloat("_LightAnimationStep", time);
+            }
+            if(time <= 0)
+            {
+                animating = false;
+                time = 1;
+                FlipSpell();
+            }
+        }
     }
 
     [Button] public void StartCounter(float duration)
     {
+        CancelInvoke();
+        TurnLightsOn();
         lightsOn = 6;
         int numberOfLights = 6;
         float timeBetweenTicks = duration / numberOfLights;
@@ -104,12 +123,23 @@ public class InGameSpell : MonoBehaviour
 
     public void Tick()
     {
-        Debug.Log("TICK " + lightsOn);
         lightsOn--;
         lightMeshes[lightsOn].material.SetInt("_LightOn", 0);
         if (lightsOn <= 0)
         {
             CancelInvoke();
         }
+    }
+
+    [Button]public void StartActivateEffect()
+    {
+        animating = true;
+        time = 1;
+        slotTaken = false;
+        foreach(Line line in lines)
+        {
+            line.RemoveLine();
+        }
+        lines = new List<Line>();
     }
 }

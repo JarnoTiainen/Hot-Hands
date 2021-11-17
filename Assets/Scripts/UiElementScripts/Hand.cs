@@ -125,6 +125,8 @@ public class Hand : MonoBehaviour
             unhandledCards[0].GetComponent<InGameCard>().SetNewCardData(true, cardData);
             unhandledCards[0].GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0,0,0), Instance.rotationSpeed);
             unhandledCards[0].GetComponent<InGameCard>().nameText.text = drawCardMessage.cardName;
+            unhandledCards[0].GetComponent<InGameCard>().descriptionText.text = unhandledCards[0].GetComponent<InGameCard>().GetCardData().description;
+            unhandledCards[0].GetComponent<InGameCard>().SetDescriptionImage();
             card = unhandledCards[0];
             unhandledCards.Remove(unhandledCards[0]);
             Instance.UpdateCanAffortCards();
@@ -221,6 +223,7 @@ public class Hand : MonoBehaviour
     //returns card back to hand
     public void ReturnVisibleCard(GameObject card)
     {
+        Debug.Log("name. " + card.name);
         card.GetComponent<BoxCollider>().enabled = true;
         card.transform.SetParent(transform, true);
         visibleHandCards.Add(card);
