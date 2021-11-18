@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TriangleCrackMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 190d87e68090b3b47be5c0180286509b, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _SampleTexture2D_3237f0f37b1d4950b9631cf02297e949_Texture_1:
+        m_Texture: {fileID: 2800000, guid: d072e8252067a5e4aa4b975c414e5d07, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_b92582e09b104be394ebba43e872f23a_Texture_1:
+        m_Texture: {fileID: 2800000, guid: b01897afcba617b4ca874665033d7af4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_177d8ab6e8364b5a92e20fb7319ee7b0: 0.5
+    - Vector1_8a1b142e4e684d1696ff77147b488d82: 0.5
+    - Vector1_bdc79d96de4a4e2692392051668bba7a: 0.3
+    - _AnimationStep: 0.5
+    m_Colors:
+    - Color_221e0fcd51404e04b968bc686b6722fa: {r: 236.07077, g: 1.2359726, b: 0, a: 0}
+    - Color_4c59603bdff34e37b44b8a51e01c498a: {r: 19.468573, g: 0.1019297, b: 0, a: 0}
+    - Color_54bb4152980d4bae824467f5e90c04ae: {r: 0.41509432, g: 0.058601547, b: 0, a: 0}
+  m_BuildTextureStacks: []

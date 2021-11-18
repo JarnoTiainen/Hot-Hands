@@ -332,9 +332,17 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     public void StartDestructionEvent()
     {
         interActable = false;
-        References.i.opponentMonsterZone.TryRemoveMonsterCard(cardData.seed);
-        References.i.yourMonsterZone.TryRemoveMonsterCard(cardData.seed);
+        
         //TODO: play animation here before destroying the card
+        StartCoroutine(DestructionAnimation());
+    }
+
+    private IEnumerator DestructionAnimation()
+    {
+        Debug.Log("Destroy event");
+        cardRuneEffectManager.PlayRuneEffect();
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Destroy event finish");
         Destroy(gameObject);
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class CardRuneEffectManager : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class CardRuneEffectManager : MonoBehaviour
             {
                 time = 1;
                 effectOn = false;
+                transform.GetChild(0).gameObject.SetActive(false);
             }
         }
         else if(reverseOn)
@@ -57,17 +59,20 @@ public class CardRuneEffectManager : MonoBehaviour
             {
                 time = 0;
                 reverseOn = false;
+                transform.GetChild(0).gameObject.SetActive(false);
             }
         }
     }
 
-    public void PlayRuneEffect()
+    [Button]public void PlayRuneEffect()
     {
+        transform.GetChild(0).gameObject.SetActive(true);
         puffDone = false;
         effectOn = true;
         time = 0;
     }
 
+    [Button]
     public void PlayReverseRuneEffect()
     {
         puffDone = false;
