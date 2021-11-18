@@ -232,6 +232,8 @@ public class Mouse : MonoBehaviour
                 References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
                 WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed);
                 LimboCardHolder.Instance.StoreNewCard(heldCard);
+                TransformIntoCardMode();
+                heldCard = null;
             }
 
         }

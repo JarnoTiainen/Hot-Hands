@@ -10778,6 +10778,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1914475879}
     m_Modifications:
+    - target: {fileID: 262185891815864490, guid: dc2be233611102847adc1f88c1a58a93, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1236107244064376304, guid: dc2be233611102847adc1f88c1a58a93, type: 3}
       propertyPath: m_Name
       value: Your Deck
@@ -10825,6 +10829,18 @@ PrefabInstance:
     - target: {fileID: 1302925009845773302, guid: dc2be233611102847adc1f88c1a58a93, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922986649043520959, guid: dc2be233611102847adc1f88c1a58a93, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603048856639323494, guid: dc2be233611102847adc1f88c1a58a93, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7738411968420650807, guid: dc2be233611102847adc1f88c1a58a93, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc2be233611102847adc1f88c1a58a93, type: 3}

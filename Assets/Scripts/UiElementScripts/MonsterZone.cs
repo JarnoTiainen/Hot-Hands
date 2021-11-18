@@ -34,6 +34,8 @@ public class MonsterZone : MonoBehaviour
         Vector3 instancePos = CalculatePosition(boardIndex, !isYourCard, newMonster);
         newMonster.transform.position = instancePos;
         newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
+        newMonster.GetComponent<InGameCard>().SetDescription();
+        newMonster.GetComponent<InGameCard>().SetAttackDirectionSymbol();
         RepositionMonsterCards();
         return newMonster;
     }
@@ -46,6 +48,8 @@ public class MonsterZone : MonoBehaviour
         {
             ghostCard.GetComponent<InGameCard>().ToggleGhostCard(false);
             ghostCard.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
+            ghostCard.GetComponent<InGameCard>().SetDescription();
+            ghostCard.GetComponent<InGameCard>().SetAttackDirectionSymbol();
             unhandledCards.Add(ghostCard);
             if(debugModeOn) Debug.Log("Added unhandled");
             newCard = ghostCard;
@@ -73,6 +77,16 @@ public class MonsterZone : MonoBehaviour
             monsterCards.Insert(index, newMonster);
             newMonster.transform.position = CalculatePosition(boardIndex, isYourCard, newMonster);
             newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
+            if(GameManager.Instance.playerNumber == 0)
+            {
+                newMonster.GetComponent<InGameCard>().owner = 1;
+            }
+            else
+            {
+                newMonster.GetComponent<InGameCard>().owner = 0;
+            }
+            newMonster.GetComponent<InGameCard>().SetDescription();
+            newMonster.GetComponent<InGameCard>().SetAttackDirectionSymbol();
             GameManager.Instance.AddCardToInGameCards(newMonster);
             RepositionMonsterCards();
             newCard = newMonster;

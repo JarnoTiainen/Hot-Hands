@@ -8,7 +8,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 {
     [SerializeField] private CardData cardData;
     [SerializeField] public TextMeshProUGUI nameText;
-    [SerializeField] public TextMeshProUGUI descriptionText;
+    [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] public TextMeshProUGUI cost;
     [SerializeField] public TextMeshProUGUI value;
     [SerializeField] public TextMeshProUGUI lp;
@@ -37,6 +37,10 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     public bool interActable = true;
     [SerializeField] private GameObject takeDamageEffectPrefab;
     [SerializeField] private DescriptionLogoManager descriptionLogoManager;
+    [SerializeField] private GameObject leftAttackSymbol;
+    [SerializeField] private GameObject rigthAttackSymbol;
+    [SerializeField] private GameObject leftDefenceSymbol;
+    [SerializeField] private GameObject rightDefenceSymbol;
 
     [ShowIf("debuggerModeOn", true)] public int serverConfirmedIndex;
     public bool confirmedByServer;
@@ -334,9 +338,47 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         Destroy(gameObject);
     }
 
-    public void SetDescriptionImage()
+    public void SetDescription()
     {
         descriptionLogoManager.SetNewImage(cardData.enchantments);
-        
+        descriptionText.text = cardData.description;
+
+
+    }
+
+    public void SetAttackDirectionSymbol()
+    {
+        Debug.Log("Owenr " + owner);
+        if(cardData.attackDirection == Card.AttackDirection.Left)
+        {
+            if(GameManager.Instance.IsYou(owner))
+            {
+                leftAttackSymbol.SetActive(true);
+                rightDefenceSymbol.SetActive(true);
+            }
+            else
+            {
+                rigthAttackSymbol.SetActive(true);
+                leftDefenceSymbol.SetActive(true);
+            }
+        }
+        else if(cardData.attackDirection == Card.AttackDirection.Right)
+        {
+            if (GameManager.Instance.IsYou(owner))
+            {
+                rigthAttackSymbol.SetActive(true);
+                leftDefenceSymbol.SetActive(true);
+            }
+            else
+            {
+                leftAttackSymbol.SetActive(true);
+                rightDefenceSymbol.SetActive(true);
+            }
+        }
+        if(cardData.cardType == Card.CardType.Spell)
+        {
+            rp.gameObject.SetActive(false);
+            lp.gameObject.SetActive(false);
+        }
     }
 }

@@ -307,7 +307,7 @@ public class GameManager : MonoBehaviour
         {
             if(Hand.Instance.GetVisibleCardWithSeed(summonCardMessage.seed) != null)
             {
-                Hand.Instance.RemoveCard(summonCardMessage.seed);
+                Hand.Instance.TryRemoveCard(summonCardMessage.seed);
             }
 
             if(summonCardMessage.auto)
@@ -356,7 +356,7 @@ public class GameManager : MonoBehaviour
             {
                 if (removeCardMessage.removal)
                 {
-                    Hand.Instance.RemoveCard(removeCardMessage.seed);
+                    Hand.Instance.TryRemoveCard(removeCardMessage.seed);
                 }
                 playerStats.playerHandCards--;
             }
@@ -413,7 +413,7 @@ public class GameManager : MonoBehaviour
             if(playCardMessage.auto)
             {
                 References.i.yourMonsterZone.AutoAddNewMonsterCard(true, playCardMessage.boardIndex, References.i.cardList.GetCardData(playCardMessage));
-                Hand.Instance.RemoveCard(playCardMessage.seed);
+                Hand.Instance.TryRemoveCard(playCardMessage.seed);
                 References.i.yourMonsterZone.GetCardWithSeed(playCardMessage.seed).GetComponent<InGameCard>().StartAttackCooldown(playCardMessage.attackCooldown, true);
                 return;
             }
@@ -452,7 +452,7 @@ public class GameManager : MonoBehaviour
             GameObject newCard = References.i.yourMonsterZone.AddNewMonsterCard(true, 0, data);
 
             //TODO: make sure that card with that seed still exists in the game(instead of removing move to container or something)
-            Hand.Instance.RemoveCard(data.seed);
+            Hand.Instance.TryRemoveCard(data.seed);
 
             if (!hasTargetAbility)
             {

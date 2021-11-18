@@ -125,8 +125,8 @@ public class Hand : MonoBehaviour
             unhandledCards[0].GetComponent<InGameCard>().SetNewCardData(true, cardData);
             unhandledCards[0].GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0,0,0), Instance.rotationSpeed);
             unhandledCards[0].GetComponent<InGameCard>().nameText.text = drawCardMessage.cardName;
-            unhandledCards[0].GetComponent<InGameCard>().descriptionText.text = unhandledCards[0].GetComponent<InGameCard>().GetCardData().description;
-            unhandledCards[0].GetComponent<InGameCard>().SetDescriptionImage();
+            unhandledCards[0].GetComponent<InGameCard>().SetDescription();
+            unhandledCards[0].GetComponent<InGameCard>().SetAttackDirectionSymbol();
             card = unhandledCards[0];
             unhandledCards.Remove(unhandledCards[0]);
             Instance.UpdateCanAffortCards();
@@ -150,7 +150,7 @@ public class Hand : MonoBehaviour
     }
 
     //Removes one card from hand and if there is no parameter remove card with last index
-    [Button] public void RemoveCard(string seed)
+    [Button] public void TryRemoveCard(string seed)
     {
         GameObject removedCard = null;
         foreach (GameObject card in handCards)
