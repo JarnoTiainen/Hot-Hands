@@ -48,21 +48,35 @@ public class CollectionManager : MonoBehaviour
 
     public void SetPlayerDecks(GetDecksMessage getDecksMessage)
     {
-        ////////////////////////////
-        //Debug.Log(getDecksMessage);
-        //Debug.Log(getDecksMessage.decks.Count);
-        //Debug.Log(getDecksMessage.decks[0].deck);
-        //Debug.Log(getDecksMessage.decks[0].deck.Count);
-        //Debug.Log(getDecksMessage.activeDeckIndex);
-        //////////////////////////////
+        // Monke
+        /*
+        List<List<string>> playerDecksTemp = new List<List<string>>();
+        playerDecksTemp.Add(getDecksMessage.deck0);
+        playerDecksTemp.Add(getDecksMessage.deck1);
+        playerDecksTemp.Add(getDecksMessage.deck2);
+        playerDecksTemp.Add(getDecksMessage.deck3);
+        playerDecksTemp.Add(getDecksMessage.deck4);
+        deckNames.Add(getDecksMessage.deck0Name);
+        deckNames.Add(getDecksMessage.deck1Name);
+        deckNames.Add(getDecksMessage.deck2Name);
+        deckNames.Add(getDecksMessage.deck3Name);
+        deckNames.Add(getDecksMessage.deck4Name);
+        */
 
-        List<GetDecksMessage.Deck> playerDecks = getDecksMessage.decks;
-        List<string> deckNames = getDecksMessage.deckNames;
+        // Not monke
+        foreach(string deckString in getDecksMessage.decks)
+        {
+            getDecksMessage.convertedDecks.Add(JsonUtility.FromJson<GetDecksMessage.Deck>(deckString));
+        }
+        foreach(string deckName in getDecksMessage.deckNames)
+        {
+            this.deckNames.Add(deckName);
+        }
 
-        foreach (GetDecksMessage.Deck deck in playerDecks)
+        foreach (GetDecksMessage.Deck deck in getDecksMessage.convertedDecks)
         {
             List<Card> tempDeck = new List<Card>();
-            foreach(string cardName in deck.deck)
+            foreach(string cardName in deck.deckContent)
             {
                 for(int i = 0; resourcesCardList.allCards.Count > i; i++)
                 {
@@ -106,11 +120,7 @@ public class CollectionManager : MonoBehaviour
     // Sends the players deck data to the db
     public void SaveDeckToDB(int index)
     {
-        /*
-          @todo Needs to send deck name as well
-          @body :)))
-         */
-        DeckObject deckString = new DeckObject(playerDecks[index], index);
+        DeckObject deckString = new DeckObject(playerDecks[index], index, deckNames[index]);
         WebSocketService.SaveDeck(JsonUtility.ToJson(deckString));
     }
 
@@ -162,7 +172,7 @@ public class CollectionManager : MonoBehaviour
         // Updates cards on list
         CollectionCardList cardListScript = cardLists[i + 1].GetComponent<CollectionCardList>();
         cardListScript.cards = playerDecks[i];
-        cardListScript.SortList(SortMethodDropdown.Instance.GetSortMethod(), SortMethodDropdown.Instance.reverse);
+        if(!(cardListScript.cards.Count == 0)) cardListScript.SortList(SortMethodDropdown.Instance.GetSortMethod(), SortMethodDropdown.Instance.reverse);
         // Updates name on toggle
         if(deckNames[i] == null || deckNames[i] == "")
         {

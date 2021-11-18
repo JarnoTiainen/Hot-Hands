@@ -132,6 +132,7 @@ public class WebSocketService : MonoBehaviour
                     {
                         isLoggedIn = true;
                         Debug.Log("Created new account");
+                        GetDecks();
                     }
                     else
                     {
@@ -144,7 +145,7 @@ public class WebSocketService : MonoBehaviour
                         isLoggedIn = true;
                         GameObject.Find("LoginPanel").GetComponent<LoginManager>().CloseLoginScreen();
                         Debug.Log("Login ok");
-                        
+                        GetDecks();
                     }
                     else
                     {

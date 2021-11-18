@@ -18,7 +18,6 @@ public class LoginManager : MonoBehaviour
     public void Login()
     {
         WebSocketService.Login(userNameField.text, passwordField.text);
-        WebSocketService.GetDecks();
     }
 
     [Button]
