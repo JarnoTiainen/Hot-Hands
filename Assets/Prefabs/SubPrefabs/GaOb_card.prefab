@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2693052331591507951}
   - component: {fileID: 8760169796159325437}
   - component: {fileID: 8074817894813965854}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BurnBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1334393981728670061}
   - component: {fileID: 5331695023264873615}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Burn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 5844464774046636914}
   - component: {fileID: 5220990806309450296}
   - component: {fileID: 9051487578554768884}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BurnLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5498164340434577439}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GaOb_card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 7538298447018103475}
   - component: {fileID: 1419732299062331194}
   - component: {fileID: 184396826800287751}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BurnRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 1797765885006161178}
   - component: {fileID: 2067173098234711125}
   - component: {fileID: 1040323248101044185}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BurnTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -561,6 +561,10 @@ PrefabInstance:
       value: health_right
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1a496c5feecef7f46954e38d5ace42e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1a496c5feecef7f46954e38d5ace42e1, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -629,6 +633,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c80f88e9c766c5d4f921b4da378c1e40, type: 3}
       propertyPath: m_Name
       value: power_left
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c80f88e9c766c5d4f921b4da378c1e40, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c80f88e9c766c5d4f921b4da378c1e40, type: 3}
       propertyPath: m_IsActive
@@ -704,13 +712,29 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: cd2ab7db35791bb48b3b26daf7fad7c3, type: 2}
+    - target: {fileID: -4238686787257041405, guid: e7b09dae432f8d340a2fcfae328192d4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -3661126834982480673, guid: e7b09dae432f8d340a2fcfae328192d4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -967854901013363964, guid: e7b09dae432f8d340a2fcfae328192d4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: cd2ab7db35791bb48b3b26daf7fad7c3, type: 2}
+    - target: {fileID: -653699788699439911, guid: e7b09dae432f8d340a2fcfae328192d4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e7b09dae432f8d340a2fcfae328192d4, type: 3}
       propertyPath: m_Name
       value: card
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e7b09dae432f8d340a2fcfae328192d4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e7b09dae432f8d340a2fcfae328192d4, type: 3}
       propertyPath: m_IsActive
@@ -720,6 +744,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: cd2ab7db35791bb48b3b26daf7fad7c3, type: 2}
+    - target: {fileID: 5565192552681582832, guid: e7b09dae432f8d340a2fcfae328192d4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5751863142899928838, guid: e7b09dae432f8d340a2fcfae328192d4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7b09dae432f8d340a2fcfae328192d4, type: 3}
 --- !u!4 &20039029720796434 stripped
@@ -790,6 +822,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: health_left
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1a496c5feecef7f46954e38d5ace42e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a496c5feecef7f46954e38d5ace42e1, type: 3}
 --- !u!4 &6453122884072103728 stripped
@@ -856,6 +892,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: power_right
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c80f88e9c766c5d4f921b4da378c1e40, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c80f88e9c766c5d4f921b4da378c1e40, type: 3}
 --- !u!4 &8428594168214363543 stripped
@@ -921,6 +961,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5bddab7c71c141b4eb25e107dc57f8dd, type: 3}
       propertyPath: m_Name
       value: burn_value
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5bddab7c71c141b4eb25e107dc57f8dd, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bddab7c71c141b4eb25e107dc57f8dd, type: 3}
