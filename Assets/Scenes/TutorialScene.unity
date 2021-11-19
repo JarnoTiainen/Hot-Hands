@@ -6600,7 +6600,7 @@ GameObject:
   - component: {fileID: 1296718859}
   - component: {fileID: 1296718858}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: DIalogueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12308,3 +12308,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueAnimator: {fileID: 1592613504}
+  dialogue: {fileID: 3195456240092804555}
+  dialogueText: {fileID: 1296718858}
+--- !u!114 &3195456240092804555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3195456240092804553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 293591429f7a05b46ba3c134a24df6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speaker_name: Mascot
+  sentences:
+  - this firts aaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa rrrrrrrrrrrrrrrrrrr rrrrrrrrrrrrrrrrrrrrr
+    rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr rrrrrrrrrrrrrrrrrrrr hhhhhhhhhhhh hhhhhhhhhhhhhhhhh
+  - second
+  - 33333333333
+  - 44444444
+  - 555555555
+  - 666666666

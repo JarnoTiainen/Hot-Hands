@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Sirenix.OdinInspector;
 
-[Serializable][CreateAssetMenu(fileName = "New Card", menuName = "Card/Empty Card")]
-public class Dialogue : ScriptableObject
+[Serializable] [CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue")]
+public class Dialogue : MonoBehaviour
 {
-    public string name;
+    public string speaker_name;
+
+    [BoxGroup ("Split/Sentences")]
+    [TextArea]
     public string[] sentences;
+
 }
