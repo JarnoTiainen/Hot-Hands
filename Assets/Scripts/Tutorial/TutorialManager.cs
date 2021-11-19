@@ -17,6 +17,7 @@ public class TutorialManager : MonoBehaviour
     {
         skipTime = 0;
         skipBar.fillAmount = 0;
+        
     }
 
     // Update is called once per frame
