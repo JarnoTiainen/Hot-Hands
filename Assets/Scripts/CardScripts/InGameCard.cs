@@ -242,11 +242,12 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
                 if (GameManager.Instance.IsYou(owner)) WebSocketService.Attack(cardData.seed);
             }
         }
-        else
+        else if(interActable)
         {
             GameManager.Instance.EndTargetEvent(cardData.seed);
         }
     }
+
     public void UpdateCardTexts()
     {
         this.lp.text = cardData.lp.ToString();
@@ -267,8 +268,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         cardRuneEffectManager.PlayRuneEffect();
     }
 
-    [Button]
-    public void ReverseSpellBurn()
+    [Button] public void ReverseSpellBurn()
     {
         ToggleCanAffordEffect(true);
         cardRuneEffectManager.PlayReverseRuneEffect();
@@ -279,24 +279,14 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         if(on)
         {
             isGhostCard = true;
-            //you can use just this to hide the whole gameobject
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
-            meshRendererBorderLow.enabled = false;
-            meshRenderercardBackLow.enabled = false;
-            meshRendererIconZoneLow.enabled = false;
-            meshRendererNameZoneLow.enabled = false;
             textCanvas.enabled = false;
             cardHidden = true;
         }
         else
         {
             isGhostCard = false;
-            
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
-            meshRendererBorderLow.enabled = true;
-            meshRenderercardBackLow.enabled = true;
-            meshRendererIconZoneLow.enabled = true;
-            meshRendererNameZoneLow.enabled = true;
             textCanvas.enabled = true;
             cardHidden = false;
         }
@@ -340,7 +330,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     private IEnumerator DestructionAnimation()
     {
         Debug.Log("Destroy event");
-        cardRuneEffectManager.PlayRuneEffect();
+        cardRuneEffectManager.PlayRuneDestroyEffect();
         yield return new WaitForSeconds(0.5f);
         Debug.Log("Destroy event finish");
         Destroy(gameObject);
@@ -350,8 +340,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     {
         descriptionLogoManager.SetNewImage(cardData.enchantments);
         descriptionText.text = cardData.description;
-
-
     }
 
     public void SetAttackDirectionSymbol()

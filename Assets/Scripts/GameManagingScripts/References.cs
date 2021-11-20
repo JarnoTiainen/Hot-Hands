@@ -28,7 +28,6 @@ public class References: MonoBehaviour
 
 
     public GameObject fieldCard;
-    public GameObject handCard;
     public GameObject opponentDeckObj;
     public GameObject yourDeckObj;
     public GameObject opponentBonfire;

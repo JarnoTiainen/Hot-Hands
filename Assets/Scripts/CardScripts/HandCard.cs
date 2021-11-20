@@ -6,10 +6,13 @@ public class HandCard : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] private GameObject twirlEffectPrefab;
     [SerializeField] private Line line;
     GameObject newTwirlEffect;
+    public bool targetable = true;
 
     public void OnClickElement()
     {
-        if(!Mouse.Instance.targetModeOn)
+        Debug.Log("Clicked element");
+
+        if(!Mouse.Instance.targetModeOn && targetable)
         {
             if (!GetComponent<InGameCard>().cardHidden)
             {

@@ -36,6 +36,7 @@ public class MonsterZone : MonoBehaviour
         newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
         newMonster.GetComponent<InGameCard>().SetDescription();
         newMonster.GetComponent<InGameCard>().SetAttackDirectionSymbol();
+        newMonster.GetComponent<HandCard>().targetable = false;
         RepositionMonsterCards();
         return newMonster;
     }
@@ -50,6 +51,7 @@ public class MonsterZone : MonoBehaviour
             ghostCard.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
             ghostCard.GetComponent<InGameCard>().SetDescription();
             ghostCard.GetComponent<InGameCard>().SetAttackDirectionSymbol();
+            ghostCard.GetComponent<HandCard>().targetable = false;
             unhandledCards.Add(ghostCard);
             if(debugModeOn) Debug.Log("Added unhandled");
             newCard = ghostCard;
@@ -87,6 +89,7 @@ public class MonsterZone : MonoBehaviour
             }
             newMonster.GetComponent<InGameCard>().SetDescription();
             newMonster.GetComponent<InGameCard>().SetAttackDirectionSymbol();
+            newMonster.GetComponent<HandCard>().targetable = false;
             GameManager.Instance.AddCardToInGameCards(newMonster);
             RepositionMonsterCards();
             newCard = newMonster;

@@ -18,7 +18,7 @@ public class EnemyHand : MonoBehaviour
 
     private static GameObject InstantiateNewCard()
     {
-        GameObject newCard = Instantiate(References.i.handCard, References.i.opponentDeckObj.transform.position, Quaternion.Euler(0, 180, 0));
+        GameObject newCard = Instantiate(References.i.fieldCard, References.i.opponentDeckObj.transform.position, Quaternion.Euler(0, 180, 0));
         newCard.GetComponent<InGameCard>().cardHidden = true;
         newCard.transform.SetParent(Instance.gameObject.transform, true);
         newCard.transform.localScale = new Vector3(Instance.cardScaleInHand, Instance.cardScaleInHand, Instance.cardScaleInHand);
@@ -28,7 +28,7 @@ public class EnemyHand : MonoBehaviour
     //sets new card positions in hand
     private static void SetNewCardPositions()
     {
-        float inGameWidth = References.i.handCard.GetComponent<BoxCollider>().size.x;
+        float inGameWidth = References.i.fieldCard.GetComponent<BoxCollider>().size.x;
         float totalCardsWidth = inGameWidth * unhandledCards.Count + Instance.gapBetweenCards * (unhandledCards.Count - 1);
         float newPosX;
         float firstCardOffsetX = (-totalCardsWidth + inGameWidth) / 2;

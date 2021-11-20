@@ -60,6 +60,7 @@ public class Hand : MonoBehaviour
     {
         GameObject newCard = InstantiateNewCard();
         newCard.GetComponent<InGameCard>().cardHidden = true;
+        newCard.GetComponent<InGameCard>().interActable = false;
         //adds the card to list of cards that have not been 
         unhandledCards.Add(newCard);
 
@@ -109,7 +110,7 @@ public class Hand : MonoBehaviour
     //instanciate and rotate card facedown
     private static GameObject InstantiateNewCard()
     {
-        GameObject newCard = Instantiate(References.i.handCard, References.i.yourDeckObj.transform.position, Quaternion.Euler(0, 180, 0));
+        GameObject newCard = Instantiate(References.i.fieldCard, References.i.yourDeckObj.transform.position, Quaternion.Euler(0, 180, 0));
         newCard.transform.SetParent(Instance.gameObject.transform, true);
         
         return newCard;
@@ -199,7 +200,7 @@ public class Hand : MonoBehaviour
     //sets new card positions in hand
     private static void SetNewCardPositions()
     {
-        float inGameWidth = References.i.handCard.GetComponent<BoxCollider>().size.x;
+        float inGameWidth = References.i.fieldCard.GetComponent<BoxCollider>().size.x;
         float totalCardsWidth = inGameWidth * visibleHandCards.Count + Instance.gapBetweenCards * (visibleHandCards.Count - 1);
         float newPosX;
         float firstCardOffsetX = (-totalCardsWidth + inGameWidth) / 2;

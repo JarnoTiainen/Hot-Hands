@@ -42,19 +42,47 @@ public class RayCaster : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                if (target.GetComponent<IOnClickDownUIElement>() != null) target.GetComponent<IOnClickDownUIElement>().OnClickElement();
+                if (target.GetComponent<IOnClickDownUIElement>() != null)
+                {
+                    IOnClickDownUIElement[] iOnClickDownUIElements = target.GetComponents<IOnClickDownUIElement>();
+                    foreach(IOnClickDownUIElement element in iOnClickDownUIElements)
+                    {
+                        element.OnClickElement();
+                    }
+                }
             }
 
             if (Input.GetMouseButton(0))
             {
-                if (target.GetComponent<IOnHoldDownElement>() != null) target.GetComponent<IOnHoldDownElement>().OnHoldDownElement();
+                if (target.GetComponent<IOnHoldDownElement>() != null)
+                {
+                    IOnHoldDownElement[] onHoldDownElements = target.GetComponents<IOnHoldDownElement>();
+                    foreach(IOnHoldDownElement element in onHoldDownElements)
+                    {
+                        element.OnHoldDownElement();
+                    }
+                }
             }
             if (Input.GetMouseButtonUp(0))
             {
-                if (target.GetComponent<IOnClickUpElement>() != null) target.GetComponent<IOnClickUpElement>().OnClickUpElement();
+                if (target.GetComponent<IOnClickUpElement>() != null)
+                {
+                    IOnClickUpElement[] onClickUpElements = target.GetComponents<IOnClickUpElement>();
+                    foreach(IOnClickUpElement element in onClickUpElements)
+                    {
+                        element.OnClickUpElement();
+                    }
+                }
             }
 
-            if (target.GetComponent<IOnHoverUIElement>() != null) target.GetComponent<IOnHoverUIElement>().OnHoverElement();
+            if (target.GetComponent<IOnHoverUIElement>() != null)
+            {
+                IOnHoverUIElement[] onHoverUIElements = target.GetComponents<IOnHoverUIElement>();
+                foreach(IOnHoverUIElement element in onHoverUIElements)
+                {
+                    element.OnHoverElement();
+                }
+            }
         }
         else
         {
@@ -65,7 +93,14 @@ public class RayCaster : MonoBehaviour
             }
             if (previousTarget)
             {
-                if (previousTarget.GetComponent<IOnHoverExitElement>() != null) previousTarget.GetComponent<IOnHoverExitElement>().OnHoverExit();
+                if (previousTarget.GetComponent<IOnHoverExitElement>() != null)
+                {
+                    IOnHoverExitElement[] onHoverExitElements = previousTarget.GetComponents<IOnHoverExitElement>();
+                    foreach(IOnHoverExitElement element in onHoverExitElements)
+                    {
+                        element.OnHoverExit();
+                    }
+                }
                 previousTarget = null;
             }
         }
@@ -75,12 +110,23 @@ public class RayCaster : MonoBehaviour
     {
         if (oldTarget)
         {
-            if (oldTarget.GetComponent<IOnHoverExitElement>() != null) oldTarget.GetComponent<IOnHoverExitElement>().OnHoverExit();
+            if (oldTarget.GetComponent<IOnHoverExitElement>() != null)
+            {
+                IOnHoverExitElement[] onHoverExitElements = oldTarget.GetComponents<IOnHoverExitElement>();
+                foreach (IOnHoverExitElement element in onHoverExitElements)
+                {
+                    element.OnHoverExit();
+                }
+            }
         }
 
         if (newTarget.GetComponent<IOnHoverEnterElement>() != null)
         {
-            newTarget.GetComponent<IOnHoverEnterElement>().OnHoverEnter();
+            IOnHoverEnterElement[] onHoverEnterElements = newTarget.GetComponents<IOnHoverEnterElement>();
+            foreach(IOnHoverEnterElement element in onHoverEnterElements)
+            {
+                element.OnHoverEnter();
+            }
         }
         
     }

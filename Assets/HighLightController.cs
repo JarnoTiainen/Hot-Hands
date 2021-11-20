@@ -8,6 +8,12 @@ public class HighLightController : MonoBehaviour
     [SerializeField] Material material;
     [SerializeField] MeshRenderer meshRenderer;
 
+    float speed = 1;
+    bool animating = false;
+    bool animatingBack = false;
+    float time = 0;
+    bool effectOn = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -15,15 +21,43 @@ public class HighLightController : MonoBehaviour
         meshRenderer.material = material;
     }
 
+    public void Update()
+    {
+        if(animating)
+        {
+            time += speed * Time.deltaTime;
+            meshRenderer.material.SetFloat("_FadeInStep", time);
+
+            if(time >= 1)
+            {
+                animating = false;
+            }
+        }
+        else if(animatingBack)
+        {
+            time -= speed * Time.deltaTime;
+            meshRenderer.material.SetFloat("_FadeInStep", time);
+
+            if (time < 0)
+            {
+                animatingBack = false;
+            }
+        }
+    }
+
     [Button]public void ToggleHighlightAnimation()
     {
-        if(meshRenderer.material.GetInt("_HighlightOn") == 1)
+        if(effectOn)
         {
-            meshRenderer.material.SetInt("_HighlightOn", 0);
+            effectOn = false;
+            animatingBack = true;
+            time = 1;
         }
         else
         {
-            meshRenderer.material.SetInt("_HighlightOn", 1);
+            effectOn = true;
+            animating = true;
+            time = 0;
         }
     }
 
