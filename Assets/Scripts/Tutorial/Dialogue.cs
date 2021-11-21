@@ -9,8 +9,10 @@ public class Dialogue : MonoBehaviour
 {
     public string speaker_name;
 
-    [BoxGroup ("Split/Sentences")]
+    
+    [BoxGroup("Sentences")]
     [TextArea]
-    public string[] sentences;
+    public List<string> sentences;
+    //public string[] sentences;
 
 }

@@ -152,6 +152,7 @@ Transform:
   m_Children:
   - {fileID: 1822666716}
   - {fileID: 1690448893}
+  - {fileID: 1113587590}
   m_Father: {fileID: 904054462}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2017,7 +2018,7 @@ Transform:
   m_Children:
   - {fileID: 1551477570}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &350191307
 GameObject:
@@ -2817,7 +2818,6 @@ MonoBehaviour:
   drawtivationColor: {r: 0, g: 0, b: 0, a: 0}
   sacrificeColor: {r: 0, g: 0, b: 0, a: 0}
   fieldCard: {fileID: 5484217012206740924, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
-  handCard: {fileID: 7611825709596717884, guid: 9f8e5799bc8e632418cb743be7732cc0, type: 3}
   opponentDeckObj: {fileID: 2142339687}
   yourDeckObj: {fileID: 1992818074}
   opponentBonfire: {fileID: 1690448894}
@@ -5069,7 +5069,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6828562433823424564, guid: d4eef3cb4ba30694a967b19030cb2db4, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6828562433823424564, guid: d4eef3cb4ba30694a967b19030cb2db4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5588,6 +5588,68 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 150}
   m_SizeDelta: {x: 500, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1113587589
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2787896}
+    m_Modifications:
+    - target: {fileID: 8660152257813744670, guid: 5539a0971be39804ebe5f97e63d3c5a8, type: 3}
+      propertyPath: m_Name
+      value: BonfireHighlighter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660152257813744671, guid: 5539a0971be39804ebe5f97e63d3c5a8, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660152257813744671, guid: 5539a0971be39804ebe5f97e63d3c5a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.039
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660152257813744671, guid: 5539a0971be39804ebe5f97e63d3c5a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.049
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660152257813744671, guid: 5539a0971be39804ebe5f97e63d3c5a8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.123
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660152257813744671, guid: 5539a0971be39804ebe5f97e63d3c5a8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.55075496
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660152257813744671, guid: 5539a0971be39804ebe5f97e63d3c5a8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.4992358
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660152257813744671, guid: 5539a0971be39804ebe5f97e63d3c5a8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.46993035
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660152257813744671, guid: 5539a0971be39804ebe5f97e63d3c5a8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.47602323
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660152257813744671, guid: 5539a0971be39804ebe5f97e63d3c5a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660152257813744671, guid: 5539a0971be39804ebe5f97e63d3c5a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660152257813744671, guid: 5539a0971be39804ebe5f97e63d3c5a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5539a0971be39804ebe5f97e63d3c5a8, type: 3}
+--- !u!4 &1113587590 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8660152257813744671, guid: 5539a0971be39804ebe5f97e63d3c5a8, type: 3}
+  m_PrefabInstance: {fileID: 1113587589}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1121548721
 GameObject:
   m_ObjectHideFlags: 0
@@ -6645,7 +6707,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to Hot Hands!
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6672,7 +6734,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8996,7 +9058,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: -440}
-  m_SizeDelta: {x: -100, y: 400}
+  m_SizeDelta: {x: -100, y: 314.9435}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1592613502
 MonoBehaviour:
@@ -10229,6 +10291,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6168684155693025260, guid: ab277c4cb529f6d44a97eb5140ba30a3, type: 3}
   m_PrefabInstance: {fileID: 1822666715}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1822666718 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4876228334081457232, guid: ab277c4cb529f6d44a97eb5140ba30a3, type: 3}
+  m_PrefabInstance: {fileID: 1822666715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b82f42ca7954d8f4295e406cc1fb46e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1852501469
 GameObject:
   m_ObjectHideFlags: 0
@@ -11138,6 +11211,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1236107244064376304, guid: dc2be233611102847adc1f88c1a58a93, type: 3}
   m_PrefabInstance: {fileID: 1992818072}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1992818075 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1133285670556558487, guid: dc2be233611102847adc1f88c1a58a93, type: 3}
+  m_PrefabInstance: {fileID: 1992818072}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b82f42ca7954d8f4295e406cc1fb46e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2027301574
 GameObject:
   m_ObjectHideFlags: 0
@@ -11682,7 +11766,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6874800851760066624, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6874800851760066624, guid: 05566b2af76f7254ab7d5263395511d4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12310,6 +12394,10 @@ MonoBehaviour:
   dialogueAnimator: {fileID: 1592613504}
   dialogue: {fileID: 3195456240092804555}
   dialogueText: {fileID: 1296718858}
+  highLightControllers:
+  - {fileID: 1992818075}
+  - {fileID: 1822666718}
+  - {fileID: 0}
 --- !u!114 &3195456240092804555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12324,10 +12412,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speaker_name: Mascot
   sentences:
-  - this firts aaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa rrrrrrrrrrrrrrrrrrr rrrrrrrrrrrrrrrrrrrrr
-    rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr rrrrrrrrrrrrrrrrrrrr hhhhhhhhhhhh hhhhhhhhhhhhhhhhh
-  - second
-  - 33333333333
-  - 44444444
-  - 555555555
-  - 666666666
+  - Welcome to Hot Hands!
+  - Defeat the <opponetn name> by playing cards and attacking with them.
+  - Start by picking up 5 cards from your deck.
+  - 
+  - This is a monster card. Drag it to the table to start attacking with it.
+  - 
+  - Hot Hands is a realtime strategy game, so there are no turns. Speed is key!
+  - 
+  - When the card starts glowing pink you can attack by clicking it.
+  - 
+  - Now this is where it gets interesting.
+  - When a card attacks another card, the numbers on the inside indicate the offensive
+    values...
+  - In other words, the damage it deals.
+  - 
+  - The numbers on the outside are defense values. Your card deals damage to the
+    opponents defense value and vice versa
