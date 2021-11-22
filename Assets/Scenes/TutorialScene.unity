@@ -10833,7 +10833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cards:
   - {fileID: 11400000, guid: ffce4c5f022b5f248a7fa1b313cd3351, type: 2}
-  - {fileID: 11400000, guid: a39e18548f706e84dba0f87ec7017baa, type: 2}
+  - {fileID: 11400000, guid: 4dfa973cdd1caca44ae6e7792d781b0d, type: 2}
   - {fileID: 11400000, guid: 7709c982bed85fc41975e20d4de4da8d, type: 2}
   - {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
   - {fileID: 11400000, guid: d1e2bbe766bed76469b95bcc6eda80b2, type: 2}
@@ -12033,21 +12033,26 @@ MonoBehaviour:
   sentences:
   - Welcome to Hot Hands!
   - Defeat the <opponetn name> by playing cards and attacking with them.
-  - Start by picking up a card from your deck.
+  - Start by picking up two cards from your deck.
+  - 
+  - 'When you want to play a card, you have to have the amount of burn value that
+    the card costs. '
+  - To gain burn value you have to burn cards from your hand in your bonfire.
   - 
   - This is a monster card. Drag it to the table to start attacking with it.
   - 
   - Hot Hands is a realtime strategy game, so there are no turns. Speed is key!
-  - 
   - When the card starts glowing pink you can attack by clicking it.
-  - 
   - Now this is where it gets interesting.
   - When a card attacks another card, the numbers on the inside indicate the offensive
     values...
   - In other words, the damage it deals.
+  - 'The numbers on the outside are defense values. '
   - 
-  - The numbers on the outside are defense values. Your card deals damage to the
-    opponents defense value and vice versa
+  - 
+  - Your card deals damage to the opponents defense value and vice versa
+  - 
+  - 
 --- !u!1001 &5067975732789722992
 PrefabInstance:
   m_ObjectHideFlags: 0

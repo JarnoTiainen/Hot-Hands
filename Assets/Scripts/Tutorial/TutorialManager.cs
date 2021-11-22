@@ -21,8 +21,11 @@ public class TutorialManager : MonoBehaviour
     {
         Introduction,
         CardDraw,
+        Dialogue1,
         BurnCard,
+        Dialogue2,
         CardPlay,
+        Dialogue3,
         CardAttack,
         
         SpellCard,

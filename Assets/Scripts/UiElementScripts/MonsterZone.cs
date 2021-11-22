@@ -99,7 +99,7 @@ public class MonsterZone : MonoBehaviour
             newCard = newMonster;
             
         }
-        RepositionMonsterCards();
+        //RepositionMonsterCards();
         return newCard;
     }
 
@@ -384,9 +384,9 @@ public class MonsterZone : MonoBehaviour
         if (monsterCards.Contains(ghostCard)) {
             monsterCards.Remove(ghostCard);
             Destroy(ghostCard);
-            
+            RepositionMonsterCards();
         }
-        RepositionMonsterCards();
+        
         
     }
 }

@@ -88,9 +88,9 @@ public class AttackEventHandler : MonoBehaviour
         Instantiate(impactPrefab, pos, Quaternion.identity);
     }
 
-    public void StartDamageEvent(int player, GameObject attacker, GameObject target)
+    public bool StartDamageEvent(int player, GameObject attacker, GameObject target)
     {
-
+        bool attackerDied = false;
         if (target == References.i.yourPlayerTarget || target == References.i.enemyPlayerTarget)
         {
             //Update player hp heal/trigger lose game event??
@@ -114,6 +114,8 @@ public class AttackEventHandler : MonoBehaviour
                     //GameManager.Instance.RemoveCardFromInGameCards(attacker);
                     
                     References.i.yourMonsterZone.TryRemoveMonsterCard(attacker.GetComponent<InGameCard>().GetData().seed);
+                    attackerDied = true;
+
                 }
                 if (targetCard.lp <= 0 || targetCard.rp <= 0)
                 {
@@ -129,6 +131,7 @@ public class AttackEventHandler : MonoBehaviour
                     GameManager.Instance.enemyPlayerStats.playerFieldCards--;
                     //GameManager.Instance.RemoveCardFromInGameCards(attacker);
                     References.i.opponentMonsterZone.TryRemoveMonsterCard(attacker.GetComponent<InGameCard>().GetData().seed);
+                    attackerDied = true;
                 }
                 if (targetCard.lp <= 0 || targetCard.rp <= 0)
                 {
@@ -138,6 +141,8 @@ public class AttackEventHandler : MonoBehaviour
                 }
             }
         }
+
+        return attackerDied;
     }
 
     public void CameraShake(CardData attackerCard)

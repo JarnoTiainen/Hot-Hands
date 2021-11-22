@@ -63,93 +63,15 @@ public class CardMovement : MonoBehaviour
     }
 
 
-    
+    //card tilting in hand
     private void FixedUpdate()
     {
         pos = transform.position;
         if (gameObject.GetComponent<InGameCard>().isInHand) {
             if (pos - previousPos != Vector3.zero) {
                 doOnce = true;
-
                 velocity = (pos - previousPos) / Time.deltaTime;
-
-                ///Vector2 accel = (velocity - prevVelocity) / Time.deltaTime;
-
-                //moveRot = Quaternion.LookRotation(accel);
-
-               // Debug.Log("acceleration  x" + accel.x + " y " + accel.y);
-
-                //if (velocity.x <= 50 || velocity.y >= 310) {
-                
-                //} else if (velocity.x > 50 && velocity.x < 180) {
-                //    velocity.x = 50;
-                //} else if (velocity.x > 180 && velocity.x < 310) {
-                //    velocity.x = 310;
-                //}
-
-                //transform.rotation = Quaternion.Euler(velocity.x, velocity.y, 0);
-
-
-                //Debug.Log("velocity x" + velocity.x + "velocity y" + velocity.y);
-                // velocity = new Vector2(Mathf.Clamp(velocity.x, -0.01f, 0.01f), Mathf.Clamp(velocity.y, -0.01f, 0.01f));
-            
-                //velocity = new Vector2(Mathf.Clamp(velocity.x, -0.01f, 0.01f), Mathf.Clamp(velocity.y, -0.01f, 0.01f));
-
-                ///moveRot = Quaternion.LookRotation(accel);
-                ///moveRot = Quaternion.Euler(moveRot.eulerAngles.x, moveRot.eulerAngles.y, 0);
-
-                //moveRot = Quaternion.LookRotation(-velocity);
-                //clamp the rotation of card
-                //moveRot = new Quaternion(Mathf.Clamp(moveRot.x, -0.3f, 0.3f), Mathf.Clamp(moveRot.y, -0.3f, 0.3f), Mathf.Clamp(moveRot.z, -0.3f, 0.3f), Mathf.Clamp(moveRot.w, -0.3f, 0.3f));
-
-
-
-                //Debug.Log("velocity x" + velocity.x + "velocity y" + velocity.y);
-                //transform.rotation = Quaternion.RotateTowards(transform.rotation, moveRot, 0.7f);
-
-                //if (transform.eulerAngles.x <= 50 || transform.eulerAngles.x >= 310) {
-                //    velocity.x = transform.eulerAngles.x;
-                //} else if (velocity.x > 50 && velocity.x < 180) {
-                //    velocity.x = 50;
-                //} else if (transform.eulerAngles.x > 180 && transform.eulerAngles.x < 310) {
-                //    velocity.x = 310;
-                //}
-
-                //if (transform.eulerAngles.y <= 50 || transform.eulerAngles.y >= 310) {
-                //    velocity.y = transform.eulerAngles.y;
-                //} else if (velocity.y > 50 && velocity.y < 180) {
-                //    velocity.y = 50;
-                //} else if (transform.eulerAngles.y > 180 && transform.eulerAngles.y < 310) {
-                //    velocity.y = 310;
-                //}
-
-
                 transform.rotation = Quaternion.Euler(new Vector3(velocity.y * 15, -velocity.x * 15, 0));
-          
-            
-
-                //transform.rotation = Quaternion.LookRotation(-(pos - previousPos));
-
-                //transform.rotation = new Quaternion(Mathf.Clamp(transform.rotation.x, -0.3f, 0.3f), Mathf.Clamp(transform.rotation.y, -0.3f, 0.3f), Mathf.Clamp(transform.rotation.z, -0.3f, 0.3f), Mathf.Clamp(transform.rotation.w, -0.3f, 0.3f));
-
-                //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime / 0.5f);
-            
-
-
-                //Vector3 endPos = source.transform.position;
-                //Vector3 startPos = target.transform.position;
-
-
-                // transform.GetChild(0).position = (pos + previousPos) / 2;
-
-                ////rotation
-                //Vector3 targetDir = previousPos - pos;
-                //float angleXY = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
-                //float hyp = Mathf.Sqrt(Mathf.Pow(targetDir.y, 2) + Mathf.Pow(targetDir.x, 2));
-                //float angleZhyp = Mathf.Atan2(targetDir.z, hyp) * Mathf.Rad2Deg;
-                //var quatXY = Quaternion.AngleAxis(angleXY, Vector3.forward);
-                //var quatZX = Quaternion.AngleAxis(angleZhyp, Vector3.down);
-
             } else {
                 if (transform.rotation != Quaternion.identity) {
                      transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.identity, 1);
@@ -371,14 +293,21 @@ public class CardMovement : MonoBehaviour
 
                 //damage event
                 
-                ah.StartDamageEvent(owner, gameObject, targetCard);
+                bool attackerDied = ah.StartDamageEvent(owner, gameObject, targetCard);
                 doAttack = false;
                 //if another script is trying to move this, let it do so
                 if (doMove) {
                     startPoint = transform.position;
                 } else {
-                    if (GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) OnCardMove(References.i.yourMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
-                    else OnCardMove(References.i.opponentMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
+                    if (!attackerDied) {
+                        if (GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) {
+                            Debug.Log("your card moves back");
+                            OnCardMove(References.i.yourMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
+                        } else {
+                            Debug.Log("opponent card moves back");
+                            OnCardMove(References.i.opponentMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
+                        }
+                    }
                 }
             }
         }

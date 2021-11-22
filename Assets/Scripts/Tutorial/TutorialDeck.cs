@@ -58,8 +58,7 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
             Card drawnCard = cardsQueue.Dequeue();
             string seed = "0000000" + cardsQueue.Count.ToString();
 
-
-            DrawCardMessage drawCardMessage = new DrawCardMessage(0, drawnCard.name, drawnCard.cost, drawnCard.value, (int) drawnCard.cardType, (int) drawnCard.attackDirection, drawnCard.monsterTags, drawnCard.spellTags, drawnCard.rp, drawnCard.lp, drawnCard.enchantments, seed, drawCooldown);
+            DrawCardMessage drawCardMessage = new DrawCardMessage(0, seed, drawCooldown, drawnCard);
             GameManager.Instance.PlayerDrawCard(0, seed);
             GameManager.Instance.PlayerDrawCard(drawCardMessage);
             drawnCards++;

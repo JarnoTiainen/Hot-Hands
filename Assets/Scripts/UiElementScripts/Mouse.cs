@@ -177,7 +177,10 @@ public class Mouse : MonoBehaviour
                 GameManager.Instance.playerStats.playerHandCards--;
                 GameManager.Instance.PlayerBurnCard(heldCard);
                 Hand.Instance.RemoveCardNoDestroy(heldCard.GetComponent<InGameCard>().GetData().seed);
+                //if (heldCard.GetComponent<InGameCard>().GetData().seed == "00000")
                 heldCard = null;
+
+                TutorialManager.tutorialManagerInstance.NextTutorialState();
             } else {
                 Debug.Log("Returning card");
                 ReturnHeldCardToHand();
