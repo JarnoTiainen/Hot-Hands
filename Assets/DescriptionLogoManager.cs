@@ -17,8 +17,7 @@ public class DescriptionLogoManager : MonoBehaviour
 
     public void SetNewImage(List<Enchantment> enchantmnets)
     {
-        
-
+        gameObject.SetActive(true);
         foreach (Enchantment enchantment in enchantmnets)
         {
             switch (enchantment.trigger)
