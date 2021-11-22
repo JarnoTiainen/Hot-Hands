@@ -23,7 +23,7 @@ public class DrawCardMessage
         player = playerIn;
     }
 
-    public DrawCardMessage(int player, string cardName, int cardCost, int cardValue, int cardType, int attackDirection, List<Card.MonsterTag> mtag, List<Card.SpellTag> stag, int rp, int lp)
+    public DrawCardMessage(int player, string cardName, int cardCost, int cardValue, int cardType, int attackDirection, List<Card.MonsterTag> mtag, List<Card.SpellTag> stag, int rp, int lp, List<Enchantment> enchantments, string seed, float drawCooldown)
     {
         this.player = player;
         this.cardName = cardName;
@@ -35,5 +35,8 @@ public class DrawCardMessage
         this.stag = stag;
         this.rp = rp;
         this.lp = lp;
+        this.enchantments = enchantments;
+        this.seed = seed;
+        this.drawCooldown = drawCooldown;
     }
 }

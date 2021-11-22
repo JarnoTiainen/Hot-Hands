@@ -19,9 +19,13 @@ public class MonsterZone : MonoBehaviour
             if(Mouse.Instance.heldCard.GetComponent<InGameCard>().GetData().cardType == Card.CardType.Monster)
             {
                 MakeRoom();
+            } else {
+                RemoveGhostCard();
             }
+        } else {
+            RemoveGhostCard();
         }
-    }
+    } 
 
     public GameObject AutoAddNewMonsterCard(bool isYourCard, int boardIndex, CardData data)
     {
@@ -95,6 +99,7 @@ public class MonsterZone : MonoBehaviour
             newCard = newMonster;
             
         }
+        RepositionMonsterCards();
         return newCard;
     }
 
@@ -171,6 +176,8 @@ public class MonsterZone : MonoBehaviour
 
     public void RepositionMonsterCards()
     {
+        Debug.Log("Repositioning monster cards " + monsterCards.Count);
+        
         cardXposDictionary = new Dictionary<GameObject, float>();
 
         Vector2 cardDim = (Vector2)References.i.fieldCard.GetComponent<BoxCollider>().size;
@@ -287,6 +294,7 @@ public class MonsterZone : MonoBehaviour
             handledCard = unhandledCards[0];
             if (monsterCards.IndexOf(handledCard) != summonCardMessage.boardIndex)
             {
+                Debug.Log("chost index " + summonCardMessage.boardIndex);
                 monsterCards.Remove(handledCard);
                 monsterCards.Insert(summonCardMessage.boardIndex, handledCard);
             }
@@ -373,8 +381,12 @@ public class MonsterZone : MonoBehaviour
 
     public void RemoveGhostCard()
     {
-        monsterCards.Remove(ghostCard);
-        Destroy(ghostCard);
+        if (monsterCards.Contains(ghostCard)) {
+            monsterCards.Remove(ghostCard);
+            Destroy(ghostCard);
+            
+        }
         RepositionMonsterCards();
+        
     }
 }

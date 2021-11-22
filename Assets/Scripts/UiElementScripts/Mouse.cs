@@ -14,6 +14,7 @@ public class Mouse : MonoBehaviour
     public Vector2 mousePosInWorld;
     public GameObject markerPrefab;
     [SerializeField] private bool debuggingModeOn = false;
+    [SerializeField] private bool tutorialMode;
     [SerializeField] public float mouseHightFromTableTop;
     [SerializeField] public bool targetModeOn;
     [SerializeField] public GameObject targetSource;
@@ -75,7 +76,7 @@ public class Mouse : MonoBehaviour
                     }
                 }
             }
-        }
+        } 
         
     }
 
@@ -100,8 +101,17 @@ public class Mouse : MonoBehaviour
         }
         else if(RayCaster.Instance.target == References.i.yourBonfire)
         {
-            TryBurnCard();
-        }
+            if (!tutorialMode) {
+                TryBurnCard();
+            } else if (TutorialManager.tutorialManagerInstance.burnignAllowed) {
+                TryBurnCard();
+            } else {
+                References.i.yourMonsterZone.RemoveGhostCard();
+                Hand.Instance.ReturnVisibleCard(heldCard);
+                heldCard = null;
+            }
+            
+        } 
         else
         {
             References.i.yourMonsterZone.RemoveGhostCard();
@@ -117,7 +127,15 @@ public class Mouse : MonoBehaviour
 
         if (canAffordToPlayCard && isEnoghSpace)
         {
-            PlayCard();
+            if (!tutorialMode) {
+                PlayCard();
+            } else if (TutorialManager.tutorialManagerInstance.summoningAllowed) {
+                Debug.Log("tutorial palaycard");
+                PlayCard();
+            } else {
+                ReturnHeldCardToHand();
+            }
+            
         }
         else
         {
@@ -143,14 +161,27 @@ public class Mouse : MonoBehaviour
     }
     public void TryBurnCard()
     {
+        Debug.Log("TryBurnCard");
+
         References.i.yourMonsterZone.RemoveGhostCard();
         if (debuggingModeOn) Debug.Log("Card discarded with seed: " + heldCard.GetComponent<InGameCard>().GetData().seed);
         if (GameManager.Instance.GetCardFromInGameCards(heldCard.GetComponent<InGameCard>().GetData().seed) != null)
         {
-            WebSocketService.Burn(heldCard.GetComponent<InGameCard>().GetData().seed);
-            GameManager.Instance.PlayerBurnCard(heldCard);
-            Hand.Instance.RemoveCardNoDestroy(heldCard.GetComponent<InGameCard>().GetData().seed);
-            heldCard = null;
+            if (!tutorialMode) {
+                WebSocketService.Burn(heldCard.GetComponent<InGameCard>().GetData().seed);
+                GameManager.Instance.PlayerBurnCard(heldCard);
+                Hand.Instance.RemoveCardNoDestroy(heldCard.GetComponent<InGameCard>().GetData().seed);
+                heldCard = null;
+            } else if (TutorialManager.tutorialManagerInstance.burnignAllowed) {
+                Debug.Log("MouseTutorialMode");
+                GameManager.Instance.playerStats.playerHandCards--;
+                GameManager.Instance.PlayerBurnCard(heldCard);
+                Hand.Instance.RemoveCardNoDestroy(heldCard.GetComponent<InGameCard>().GetData().seed);
+                heldCard = null;
+            } else {
+                Debug.Log("Returning card");
+                ReturnHeldCardToHand();
+            }
         }
         else
         {
@@ -187,8 +218,23 @@ public class Mouse : MonoBehaviour
             }
             else
             {
-                WebSocketService.PlayCard(References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.ghostCard), heldCard.GetComponent<InGameCard>().GetData().seed);
+                if (!tutorialMode) {
+                    WebSocketService.PlayCard(References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.ghostCard), heldCard.GetComponent<InGameCard>().GetData().seed);
+                } 
+               
+                int ghostIndex = References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.ghostCard);
                 GameManager.Instance.PrePlayCard(heldCard.GetComponent<InGameCard>().GetData(), false);
+
+
+                if (tutorialMode) {
+                    Debug.Log("tutorial playcard in mouse");
+                    CardData cardData = heldCard.GetComponent<InGameCard>().GetData();
+                    
+                    Debug.Log("ghost index 2 " + ghostIndex);
+                    bool free = cardData.cost == 0;
+                    SummonCardMessage summonCard = new SummonCardMessage(ghostIndex, 0, false, free, TutorialManager.tutorialManagerInstance.attackCoolDown, cardData);
+                    GameManager.Instance.PlayerSummonCard(summonCard);
+                }
             }
             
         }

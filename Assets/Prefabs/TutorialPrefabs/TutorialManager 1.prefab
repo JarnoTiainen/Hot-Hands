@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8740598179979385530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8740598179979385525}
+  - component: {fileID: 8740598179979385524}
+  - component: {fileID: 6130627493717856279}
+  - component: {fileID: 6130627493717856278}
+  m_Layer: 0
+  m_Name: TutorialManager 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8740598179979385525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740598179979385530}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 53.531914, y: 14.897695, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8740598179979385524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740598179979385530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8504b29f276ded47a389e8529cfbc60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skipDuration: 3
+  skipBar: {fileID: 0}
+  skipTime: 0
+  tutorialState: 1
+--- !u!114 &6130627493717856279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740598179979385530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f3e9762c864ae46a9d49e09d3471ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueAnimator: {fileID: 0}
+  dialogue: {fileID: 6130627493717856278}
+  dialogueText: {fileID: 0}
+  highLightControllers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &6130627493717856278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740598179979385530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 293591429f7a05b46ba3c134a24df6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speaker_name: Mascot
+  sentences:
+  - Welcome to Hot Hands!
+  - Defeat the <opponetn name> by playing cards and attacking with them.
+  - Start by picking up a card from your deck.
+  - 
+  - This is a monster card. Drag it to the table to start attacking with it.
+  - 
+  - Hot Hands is a realtime strategy game, so there are no turns. Speed is key!
+  - 
+  - When the card starts glowing pink you can attack by clicking it.
+  - 
+  - Now this is where it gets interesting.
+  - When a card attacks another card, the numbers on the inside indicate the offensive
+    values...
+  - In other words, the damage it deals.
+  - 
+  - The numbers on the outside are defense values. Your card deals damage to the
+    opponents defense value and vice versa

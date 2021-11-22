@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     [BoxGroup("Highlighters")]
     public List<HighLightController> highLightControllers;
+    private TutorialManager tutorialManager;
     private Queue<string> sentences;
     private int effectCounter = 0;
     private bool startBool = false;
@@ -25,6 +26,8 @@ public class DialogueManager : MonoBehaviour
         foreach (string s in dialogue.sentences) {
             sentences.Enqueue(s);
         }
+
+        tutorialManager = TutorialManager.tutorialManagerInstance;
 
         StartCoroutine(StartDialogue());
     }
@@ -51,6 +54,8 @@ public class DialogueManager : MonoBehaviour
                 if (sentence == "") {
                     dialogueAnimator.SetBool("dialogueOn", false);
                     DialogueTrigger();
+                    tutorialManager.NextTutorialState();
+
                 } else {
                     StartCoroutine(RollDialogue(sentence));
                 }
@@ -64,8 +69,11 @@ public class DialogueManager : MonoBehaviour
 
     public void DialogueTrigger()
     {
-        highLightControllers[effectCounter].ToggleHighlightAnimation();
-        effectCounter++;
+        if (effectCounter < 2) {
+            highLightControllers[effectCounter].ToggleHighlightAnimation();
+            effectCounter++;
+        }
+       
     }
 
     private void EndDialogue()

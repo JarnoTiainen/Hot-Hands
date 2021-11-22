@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9005937444623638824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9005937444623638822}
+  - component: {fileID: 9005937444623638825}
+  m_Layer: 0
+  m_Name: Enchantmentlist
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9005937444623638822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9005937444623638824}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.03776408, y: -0.5082757, z: 0.07808917}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9005937444623638825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9005937444623638824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2c772d3a2559d4ab3c5df3e027304f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawCardDescription: 'Draw :power: '
+  gainBurnDescription: 'Burn :power:'
+  playSelfDescription: Summon this card
+  discardPileDuplicationDescription: Add extra copy of this card to discardpile
+  summonToEnemyDescription: Summon this card to the enemy
+  healPlayerDescription: 'Heal :power:'
+  buffBoardAttackDirectionPowersDescription: 'Buff your fieldcards attack by :power:'
+  essenceSiphonDescription: Steal all your other field cards effects
+  scorchDescription: 'Deal :power: damage to all enemy fieldcards'

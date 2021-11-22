@@ -13,6 +13,4 @@ public class Dialogue : MonoBehaviour
     [BoxGroup("Sentences")]
     [TextArea]
     public List<string> sentences;
-    //public string[] sentences;
-
 }

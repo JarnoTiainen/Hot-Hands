@@ -11021,58 +11021,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6297383564347516220, guid: c1c982bf436bacf40a8ee060338fc6c1, type: 3}
   m_PrefabInstance: {fileID: 1144737280}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2037237542
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2037237544}
-  - component: {fileID: 2037237543}
-  m_Layer: 0
-  m_Name: Enchantmentlist
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2037237543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2037237542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e2c772d3a2559d4ab3c5df3e027304f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drawCardDescription: 'Draw :power: '
-  gainBurnDescription: 'Burn :power:'
-  playSelfDescription: Summon this card
-  discardPileDuplicationDescription: Add extra copy of this card to discardpile
-  summonToEnemyDescription: Summon this card to the enemy
-  healPlayerDescription: 'Heal :power:'
-  buffBoardAttackDirectionPowersDescription: 'Buff your fieldcards attack by :power:'
-  essenceSiphonDescription: Steal all your other field cards effects
-  scorchDescription: 'Deal :power: damage to all enemy fieldcards'
---- !u!4 &2037237544
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2037237542}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.03776408, y: -0.5082757, z: 0.07808917}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2041566476
 GameObject:
   m_ObjectHideFlags: 0
@@ -11742,3 +11690,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4eef3cb4ba30694a967b19030cb2db4, type: 3}
+--- !u!1001 &9005937442896979470
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 9005937444623638822, guid: b2cb461b2a5a9594fb864a188a6982a8, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005937444623638822, guid: b2cb461b2a5a9594fb864a188a6982a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.03776408
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005937444623638822, guid: b2cb461b2a5a9594fb864a188a6982a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5082757
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005937444623638822, guid: b2cb461b2a5a9594fb864a188a6982a8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.07808917
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005937444623638822, guid: b2cb461b2a5a9594fb864a188a6982a8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005937444623638822, guid: b2cb461b2a5a9594fb864a188a6982a8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005937444623638822, guid: b2cb461b2a5a9594fb864a188a6982a8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005937444623638822, guid: b2cb461b2a5a9594fb864a188a6982a8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005937444623638822, guid: b2cb461b2a5a9594fb864a188a6982a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005937444623638822, guid: b2cb461b2a5a9594fb864a188a6982a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005937444623638822, guid: b2cb461b2a5a9594fb864a188a6982a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005937444623638824, guid: b2cb461b2a5a9594fb864a188a6982a8, type: 3}
+      propertyPath: m_Name
+      value: Enchantmentlist
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b2cb461b2a5a9594fb864a188a6982a8, type: 3}

@@ -236,7 +236,12 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                References.i.yourDeckObj.GetComponent<Deck>().StartDrawCooldown(drawCardMessage.drawCooldown);
+                if(References.i.yourDeckObj.GetComponent<Deck>() != null) {
+                    References.i.yourDeckObj.GetComponent<Deck>().StartDrawCooldown(drawCardMessage.drawCooldown);
+                } else if (References.i.yourDeckObj.GetComponent<TutorialDeck>() != null) {
+                    References.i.yourDeckObj.GetComponent<TutorialDeck>().StartDrawCooldown(drawCardMessage.drawCooldown);
+                }
+                
             }
             AddCardToInGameCards(Hand.RevealNewCard(drawCardMessage));
 
