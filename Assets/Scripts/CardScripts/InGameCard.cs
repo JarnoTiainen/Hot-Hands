@@ -101,8 +101,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void UpdateRPLP(int rp, int lp)
     {
-        Debug.Log("Updating rp and lp");
-
         if(rp < cardData.rp && lp <= cardData.lp || rp <= cardData.rp && lp < cardData.lp) 
         {
             GameObject newTakeDamageEffect = Instantiate(takeDamageEffectPrefab);
@@ -329,10 +327,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     private IEnumerator DestructionAnimation()
     {
-        Debug.Log("Destroy event");
         cardRuneEffectManager.PlayRuneDestroyEffect();
         yield return new WaitForSeconds(0.5f);
-        Debug.Log("Destroy event finish");
         Destroy(gameObject);
     }
 
@@ -344,7 +340,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void SetAttackDirectionSymbol()
     {
-        Debug.Log("Owenr " + owner);
         if(cardData.attackDirection == Card.AttackDirection.Left)
         {
             if(GameManager.Instance.IsYou(owner))

@@ -130,8 +130,6 @@ public class GameManager : MonoBehaviour
 
         burnCardMessage.burnedCardDone = JsonUtility.FromJson<DrawCardMessage>(burnCardMessage.burnedCard);
         DrawCardMessage cardMessage = burnCardMessage.burnedCardDone;
-
-        RemoveCardFromInGameCards(burnCardMessage.seed);
         if (cardMessage.player == playerNumber)
         {
             playerStats.playerHandCards--;
@@ -538,11 +536,13 @@ public class GameManager : MonoBehaviour
 
     public void CardDataChange(StatChangeMessage statChangeMessage)
     {
+        Debug.Log("message: " + JsonUtility.ToJson(statChangeMessage));
+
         List<CardDataMessage> finalCardDatas = new List<CardDataMessage>();
         foreach(string target in statChangeMessage.targets)
         {
             CardDataMessage data = JsonUtility.FromJson<CardDataMessage>(target);
-            finalCardDatas.Add(JsonUtility.FromJson<CardDataMessage>(target));
+            finalCardDatas.Add(data);
         }
         statChangeMessage.convertedTargets = finalCardDatas;
 
@@ -557,7 +557,8 @@ public class GameManager : MonoBehaviour
             if (data.lp <= 0 || data.rp <= 0)
             {
                 GameManager.Instance.playerStats.playerFieldCards--;
-                target.GetComponent<InGameCard>().StartDestructionEvent();
+                References.i.yourMonsterZone.TryRemoveMonsterCard(cardData.seed);
+                References.i.opponentMonsterZone.TryRemoveMonsterCard(cardData.seed);
             }
 
 

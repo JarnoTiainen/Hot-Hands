@@ -48,7 +48,6 @@ public class InGameSpell : MonoBehaviour
     {
         this.cardData = cardData;
         slotTaken = true;
-        Debug.Log(cardData.cardSprite);
         spriteRenderer.sprite = cardData.cardSprite;
         TurnLightsOn();
         FlipSpell();

@@ -47,7 +47,6 @@ public class CardRuneEffectManager : MonoBehaviour
             {
                 if (time > runeEffectPuffEffectTime && !puffDone)
                 {
-                    Debug.Log("rune");
                     Instantiate(puffEffectPrefab, transform.position, Quaternion.identity);
                     card.ToggleGhostCard(true);
                     puffDone = true;
@@ -57,7 +56,6 @@ public class CardRuneEffectManager : MonoBehaviour
             {
                 if (time > destroyEffectPuffEffectTime && !puffDone)
                 {
-                    Debug.Log("destroy");
                     Instantiate(triangleShatterEffectPrefab, transform.position, Quaternion.identity);
                     card.ToggleGhostCard(true);
                     puffDone = true;
@@ -74,8 +72,6 @@ public class CardRuneEffectManager : MonoBehaviour
         }
         else if(reverseOn)
         {
-            Debug.Log(time);
-
             if (effectType == EffectType.RuneBurn) time -= Time.deltaTime * runeEffectspeed;
             else if (effectType == EffectType.Destroy) time -= Time.deltaTime * destroyEffectspeed;
 
