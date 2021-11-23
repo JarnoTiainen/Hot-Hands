@@ -17,7 +17,7 @@ public class DescriptionLogoManager : MonoBehaviour
 
     public void SetNewImage(List<Enchantment> enchantmnets)
     {
-        gameObject.SetActive(true);
+        if(enchantmnets.Count > 0) gameObject.SetActive(true);
         foreach (Enchantment enchantment in enchantmnets)
         {
             switch (enchantment.trigger)
@@ -38,6 +38,8 @@ public class DescriptionLogoManager : MonoBehaviour
                     meshRenderer.material.SetTexture("_Texture2D", References.i.drawtivationIcon);
                     meshRenderer.material.SetColor("_SpriteColor", References.i.drawtivationColor);
                     break;
+                default:
+                break;
             }
         }
     }

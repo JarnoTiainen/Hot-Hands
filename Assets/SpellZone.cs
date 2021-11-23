@@ -112,4 +112,8 @@ public class SpellZone : MonoBehaviour
         }
     }
 
+    public bool HasFreeSlot()
+    {
+        return !spellSlot3.slotTaken;
+    }
 }

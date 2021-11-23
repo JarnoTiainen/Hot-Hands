@@ -22,6 +22,7 @@ public class Mouse : MonoBehaviour
 
     private void Awake()
     {
+        
         Instance = gameObject.GetComponent<Mouse>();
     }
 
@@ -82,6 +83,7 @@ public class Mouse : MonoBehaviour
 
     [Button] public void SetNewHeldCard(GameObject newCard)
     {
+        Cursor.visible = false;
         heldCard = newCard;
         heldCard.GetComponent<InGameCard>().isInHand = true;
         newCard.transform.SetParent(gameObject.transform);
@@ -109,6 +111,7 @@ public class Mouse : MonoBehaviour
                 References.i.yourMonsterZone.RemoveGhostCard();
                 Hand.Instance.ReturnVisibleCard(heldCard);
                 heldCard = null;
+                Cursor.visible = true;
             }
             
         } 
@@ -117,6 +120,7 @@ public class Mouse : MonoBehaviour
             References.i.yourMonsterZone.RemoveGhostCard();
             Hand.Instance.ReturnVisibleCard(heldCard);
             heldCard = null;
+            Cursor.visible = true;
         }
     }
     public void TrySummonMonster()
@@ -146,7 +150,7 @@ public class Mouse : MonoBehaviour
     {
         int playerBurnValue = GameManager.Instance.playerStats.playerBurnValue;
         bool canAffordToPlayCard = playerBurnValue >= heldCard.GetComponent<InGameCard>().GetData().cost;
-        bool isEnoughSpace = true; //TODO: change this to check if there are open spellSlots
+        bool isEnoughSpace = SpellZone.Instance.HasFreeSlot();
 
         if (canAffordToPlayCard && isEnoughSpace)
         {
@@ -172,6 +176,7 @@ public class Mouse : MonoBehaviour
                 GameManager.Instance.PlayerBurnCard(heldCard);
                 Hand.Instance.RemoveCardNoDestroy(heldCard.GetComponent<InGameCard>().GetData().seed);
                 heldCard = null;
+                Cursor.visible = true;
             } else if (TutorialManager.tutorialManagerInstance.burnignAllowed) {
                 Debug.Log("MouseTutorialMode");
                 GameManager.Instance.playerStats.playerHandCards--;
@@ -179,12 +184,13 @@ public class Mouse : MonoBehaviour
                 Hand.Instance.RemoveCardNoDestroy(heldCard.GetComponent<InGameCard>().GetData().seed);
                 //if (heldCard.GetComponent<InGameCard>().GetData().seed == "00000")
                 heldCard = null;
-
+                Cursor.visible = true;
                 TutorialManager.tutorialManagerInstance.NextTutorialState();
             } else {
                 Debug.Log("Returning card");
                 ReturnHeldCardToHand();
             }
+            References.i.yourMonsterZone.RepositionMonsterCards();
         }
         else
         {
@@ -198,6 +204,7 @@ public class Mouse : MonoBehaviour
         Hand.Instance.ReturnVisibleCard(heldCard);
         heldCard.GetComponent<InGameCard>().isInHand = false;
         heldCard = null;
+        Cursor.visible = true;
     }
     public void TransformIntoTargetMode()
     {
@@ -252,12 +259,14 @@ public class Mouse : MonoBehaviour
                         if(GameManager.Instance.CheckIfInGameCardsContainsCard(RayCaster.Instance.target))
                         {
                             GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().GetData().cost;
+                            Hand.Instance.UpdateCanAffortCards();
                             References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
                             WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed, RayCaster.Instance.target.GetComponent<InGameCard>().GetData().seed);
                             LimboCardHolder.Instance.StoreNewCard(heldCard);
                             heldCard.GetComponent<InGameCard>().isInHand = false;
                             TransformIntoCardMode();
                             heldCard = null;
+                            Cursor.visible = true;
                             return;
                         }
                     }
@@ -283,8 +292,10 @@ public class Mouse : MonoBehaviour
                 LimboCardHolder.Instance.StoreNewCard(heldCard);
                 TransformIntoCardMode();
                 heldCard = null;
+                
             }
 
         }
+        Cursor.visible = true;
     }
 }

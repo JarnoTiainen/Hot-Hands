@@ -188,6 +188,7 @@ public class GameManager : MonoBehaviour
         int value = card.GetComponent<InGameCard>().GetData().value;
         if (player == playerNumber)
         {
+           
             if(debugPlayerBurnCard) Debug.Log("adding ");
             card.transform.SetParent(References.i.yourBonfire.transform);
             UpdatePlayerBurnValue(player, playerStats.playerBurnValue + value);
@@ -396,6 +397,7 @@ public class GameManager : MonoBehaviour
         playerStats.playerFieldCards--;
         UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue + References.i.yourMonsterZone.unhandledCards[0].GetComponent<InGameCard>().GetData().cost);
         References.i.yourMonsterZone.RecallCard(playerNumber, References.i.yourMonsterZone.unhandledCards[0]);
+        Hand.Instance.UpdateCanAffortCards();
     }
 
 
@@ -466,6 +468,7 @@ public class GameManager : MonoBehaviour
                 targettingCardData = data;
                 StartTargetEvent(newCard);
             }
+            Hand.Instance.UpdateCanAffortCards();
         }
     }
 
@@ -581,8 +584,6 @@ public class GameManager : MonoBehaviour
 
     public void PlaySpell(PlaySpellMessage playSpellMessage)
     {
-        
-
         if (IsYou(playSpellMessage.player))
         {
             References.i.spellZone.PlaySpell(playSpellMessage.seed, playSpellMessage.targets, playSpellMessage.windup);

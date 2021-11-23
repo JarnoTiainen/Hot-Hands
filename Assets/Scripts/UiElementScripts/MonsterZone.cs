@@ -174,7 +174,7 @@ public class MonsterZone : MonoBehaviour
         return null;
     }
 
-    public void RepositionMonsterCards()
+    [Button] public void RepositionMonsterCards()
     {
         Debug.Log("Repositioning monster cards " + monsterCards.Count);
         

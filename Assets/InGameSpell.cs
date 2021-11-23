@@ -63,7 +63,6 @@ public class InGameSpell : MonoBehaviour
     {
         cardData = null;
         slotTaken = false;
-        FlipSpell();
     }
 
     [Button]public void FlipSpell()
@@ -78,6 +77,7 @@ public class InGameSpell : MonoBehaviour
         {
             endRot = Quaternion.Euler(0, -180, 90);
             isFaceUp = false;
+            RemoveSpellFromSlot();
         }
         elapsedRotationTime = 0;
         rotating = true;
