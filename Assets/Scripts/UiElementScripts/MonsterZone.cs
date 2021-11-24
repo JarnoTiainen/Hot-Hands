@@ -119,17 +119,19 @@ public class MonsterZone : MonoBehaviour
         float firstCardOffsetX = (-cardRowWidth + cardDim.x) / 2;
         float gapBetweenCardCenters = cardDim.x + gapBetweenCards;
         float newPosX;
-        for (int i = 0; i < monsterCards.Count; i++) {
-            if(monsterCards[i] == cardObj) {
+        for (int i = 0; i < monsterCards.Count; i++) 
+        {
+            if(monsterCards[i] == cardObj) 
+            {
                 newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
-                if (isYourCard) {
+                if (isYourCard) 
+                {
                     newPos = new Vector3(newPosX, References.i.yourMonsterZone.transform.position.y, References.i.yourMonsterZone.transform.position.z);
-                } else {
+                }
+                else 
+                {
                     newPos = new Vector3(newPosX, References.i.opponentMonsterZone.transform.position.y, References.i.opponentMonsterZone.transform.position.z);
                 }
-
-                Debug.Log("index is " + boardIndex);
-                    
                 return newPos;
             }
         }
@@ -176,8 +178,6 @@ public class MonsterZone : MonoBehaviour
 
     [Button] public void RepositionMonsterCards()
     {
-        Debug.Log("Repositioning monster cards " + monsterCards.Count);
-        
         cardXposDictionary = new Dictionary<GameObject, float>();
 
         Vector2 cardDim = (Vector2)References.i.fieldCard.GetComponent<BoxCollider>().size;
@@ -186,21 +186,34 @@ public class MonsterZone : MonoBehaviour
         float gapBetweenCardCenters = cardDim.x + gapBetweenCards;
         float newPosX;
         if (monsterCards.Count == 1) {
-            monsterCards[0].GetComponent<Transform>().localPosition = Vector3.zero;
-        } else {
-            for (int i = 0; i < monsterCards.Count; i++) {
+            newPosX = 0;
+            Vector3 newPos = new Vector3(newPosX, 0, transform.position.z);
+            monsterCards[0].GetComponent<CardMovement>().OnCardMove(newPos, GameManager.Instance.rearrangeDuration);
+        }
+        else 
+        {
+            for (int i = 0; i < monsterCards.Count; i++) 
+            {
                 newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
                 Vector3 newPos = new Vector3(newPosX, 0, transform.position.z);
-                if (ghostCard) {
-                    if (monsterCards[i] != ghostCard) {
+                if (ghostCard) 
+                {
+                    if (monsterCards[i] != ghostCard) 
+                    {
                         cardXposDictionary.Add(monsterCards[i], newPosX);
                     }
-                } else cardXposDictionary.Add(monsterCards[i], newPosX);
+                } 
+                else cardXposDictionary.Add(monsterCards[i], newPosX);
 
                 monsterCards[i].GetComponent<CardMovement>().OnCardMove(newPos, GameManager.Instance.rearrangeDuration);
             }
 
         }
+    }
+
+    public void CheckCardPositions()
+    {
+
     }
 
     public void RecallCard(int player, GameObject card)

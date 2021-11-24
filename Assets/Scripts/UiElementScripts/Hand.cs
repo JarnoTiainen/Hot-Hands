@@ -226,7 +226,6 @@ public class Hand : MonoBehaviour
     //returns card back to hand
     public void ReturnVisibleCard(GameObject card)
     {
-        Debug.Log("name. " + card.name);
         card.GetComponent<BoxCollider>().enabled = true;
         card.transform.SetParent(transform, true);
         visibleHandCards.Add(card);

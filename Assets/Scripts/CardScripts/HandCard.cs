@@ -10,8 +10,6 @@ public class HandCard : MonoBehaviour, IOnClickDownUIElement
 
     public void OnClickElement()
     {
-        Debug.Log("Clicked element");
-
         if(!Mouse.Instance.targetModeOn && targetable)
         {
             if (!GetComponent<InGameCard>().cardHidden)
