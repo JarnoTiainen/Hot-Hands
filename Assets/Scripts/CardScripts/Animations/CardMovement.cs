@@ -289,6 +289,8 @@ public class CardMovement : MonoBehaviour
                 ah.CameraShake(this.GetComponent<InGameCard>().GetData());
                 Vector3 impactEffectPos = endAttackPoint + (targetCard.transform.position - endAttackPoint).normalized * Vector3.Distance(targetCard.transform.position,endAttackPoint) * 0.5f;
                 ah.SpawnImpactEffect(impactEffectPos + new Vector3(0,0,-0.03f));
+                GetComponent<InGameCard>().ToggleTrails(false);
+                if(targetCard.GetComponent<InGameCard>() != null) targetCard.GetComponent<InGameCard>().ToggleTrails(false);
                 yield return new WaitForSeconds(liftDur);
 
                 //damage event

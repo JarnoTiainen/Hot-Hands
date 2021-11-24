@@ -41,6 +41,7 @@ public class AttackEventHandler : MonoBehaviour
             GameManager.Instance.GetCardFromInGameCards(attacker.seed).GetComponent<InGameCard>().tempLp = attacker.lp;
             GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempRp = target.lp;
             GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempLp = target.rp;
+            attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
 
             attackingCard.GetComponent<CardMovement>().OnCardAttack(targetCard, attackAnimationSpeed);
             
@@ -57,6 +58,7 @@ public class AttackEventHandler : MonoBehaviour
             GameManager.Instance.GetCardFromInGameCards(attacker.seed).GetComponent<InGameCard>().tempLp = attacker.rp;
             GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempRp = target.rp;
             GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempLp = target.lp;
+            attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
 
             attackingCard.GetComponent<CardMovement>().OnCardAttack(targetCard, attackAnimationSpeed);
             attackingCard.GetComponent<InGameCard>().ToggleAttackBurnEffect(false);
@@ -69,6 +71,7 @@ public class AttackEventHandler : MonoBehaviour
         {
             GameObject attackingCard = References.i.yourMonsterZone.GetCardWithSeed(attacker.seed);
             attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.enemyPlayerTarget, attackAnimationSpeed);
+            attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
             References.i.yourMonsterZone.GetCardWithSeed(attacker.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
             GameManager.Instance.enemyPlayerStats.playerHealth -= playerTakenDamage;
         }
@@ -77,6 +80,7 @@ public class AttackEventHandler : MonoBehaviour
             GameObject attackingCard = References.i.opponentMonsterZone.GetCardWithSeed(attacker.seed);
             attackingCard.GetComponent<InGameCard>().ToggleAttackBurnEffect(false);
             attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.yourPlayerTarget, attackAnimationSpeed);
+            attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
             References.i.opponentMonsterZone.GetCardWithSeed(attacker.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
             GameManager.Instance.playerStats.playerHealth -= playerTakenDamage;
         }

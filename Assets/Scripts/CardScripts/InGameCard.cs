@@ -35,12 +35,12 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private CardBurn cardBurn;
     [SerializeField] private bool canAffordBool;
     public bool interActable = true;
-    [SerializeField] private GameObject takeDamageEffectPrefab;
     [SerializeField] private DescriptionLogoManager descriptionLogoManager;
     [SerializeField] private GameObject leftAttackSymbol;
     [SerializeField] private GameObject rigthAttackSymbol;
     [SerializeField] private GameObject leftDefenceSymbol;
     [SerializeField] private GameObject rightDefenceSymbol;
+    [SerializeField] private CardTakeDamageManager cardTakeDamageManager;
 
     [ShowIf("debuggerModeOn", true)] public int serverConfirmedIndex;
     public bool confirmedByServer;
@@ -60,6 +60,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [HideInInspector] public int tempLp;
 
     [SerializeField] private CardRuneEffectManager cardRuneEffectManager;
+    [SerializeField] private CardTrailManager cardTrailManager;
 
     public void SetTempValuesAsValues()
     {
@@ -101,11 +102,10 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void UpdateRPLP(int rp, int lp)
     {
-        if(rp < cardData.rp && lp <= cardData.lp || rp <= cardData.rp && lp < cardData.lp) 
+        Debug.Log("Updating rplp");
+        if((rp < cardData.rp && lp <= cardData.lp || rp <= cardData.rp && lp < cardData.lp) && (rp > 0 && lp > 0)) 
         {
-            GameObject newTakeDamageEffect = Instantiate(takeDamageEffectPrefab);
-            newTakeDamageEffect.transform.SetParent(transform);
-            newTakeDamageEffect.transform.localPosition = new Vector3(0, 0, -0.03f);
+            cardTakeDamageManager.PlayEffect();
         }
         cardData.rp = rp;
         cardData.lp = lp;
@@ -114,6 +114,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     {
         return cardData;
     }
+
+
  
     private void Update()
     {
@@ -374,4 +376,16 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
             lp.gameObject.SetActive(false);
         }
     }
+    public void ToggleTrails(bool state)
+    {
+        if(state)
+        {
+            cardTrailManager.EnableTrails();
+        }
+        else
+        {
+            cardTrailManager.DisableTrails();
+        }
+    }
+
 }
