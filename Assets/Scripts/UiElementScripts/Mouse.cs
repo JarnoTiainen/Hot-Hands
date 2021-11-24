@@ -62,11 +62,24 @@ public class Mouse : MonoBehaviour
                 if (!Hand.Instance.CheckIfInsideHandBox(transform.position))
                 {
                     if (debuggingModeOn) Debug.Log("placing down");
-                    TransformIntoTargetMode();
-                    if (Input.GetMouseButtonUp(0))
+                    if(RayCaster.Instance.target == References.i.yourBonfire)
                     {
-                        TryCastSpell();
+                        TransformIntoCardMode();
+                        if (Input.GetMouseButtonUp(0))
+                        {
+                            TryBurnCard();
+                        }
                     }
+                    else
+                    {
+                        TransformIntoTargetMode();
+                        if (Input.GetMouseButtonUp(0))
+                        {
+                            TryCastSpell();
+                        }
+                    }
+                    
+                    
                 }
                 else
                 {

@@ -25,23 +25,6 @@ public class Hand : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("start");
-
-        GameObject rightUpMark = Instantiate(References.i.testCube);
-        rightUpMark.transform.SetParent(transform);
-        rightUpMark.transform.localPosition = new Vector3(handBoxDimension.x, handBoxDimension.y, 0);
-
-        GameObject leftUpMark = Instantiate(References.i.testCube);
-        leftUpMark.transform.SetParent(transform);
-        leftUpMark.transform.localPosition = new Vector3(-handBoxDimension.x, handBoxDimension.y, 0);
-
-        GameObject rightDownMark = Instantiate(References.i.testCube);
-        rightDownMark.transform.SetParent(transform);
-        rightDownMark.transform.localPosition = new Vector3(handBoxDimension.x, -handBoxDimension.y, 0);
-
-        GameObject leftDownMark = Instantiate(References.i.testCube);
-        leftDownMark.transform.SetParent(transform);
-        leftDownMark.transform.localPosition = new Vector3(-handBoxDimension.x, -handBoxDimension.y, 0);
 
     }
 

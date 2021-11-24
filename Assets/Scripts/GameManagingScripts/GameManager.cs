@@ -188,7 +188,7 @@ public class GameManager : MonoBehaviour
         int value = card.GetComponent<InGameCard>().GetData().value;
         if (player == playerNumber)
         {
-           
+            References.i.yourBonfire.GetComponent<Bonfire>().PlayEffect();
             if(debugPlayerBurnCard) Debug.Log("adding ");
             card.transform.SetParent(References.i.yourBonfire.transform);
             UpdatePlayerBurnValue(player, playerStats.playerBurnValue + value);
@@ -196,6 +196,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            References.i.opponentBonfire.GetComponent<Bonfire>().PlayEffect();
             card.transform.SetParent(References.i.opponentBonfire.transform);
             References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
         }
