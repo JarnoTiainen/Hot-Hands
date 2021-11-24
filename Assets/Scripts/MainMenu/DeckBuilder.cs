@@ -217,9 +217,6 @@ public class DeckBuilder : MonoBehaviour
             cm.playerDecks[deckIndex] = tempDeck;
         }
 
-        cm.SaveDeckToDB(deckIndex);
-        cm.UpdateDeckUI(deckIndex);
-        cm.UpdatePageText();
         if (editing) StopEditing();
         else
         {
@@ -228,6 +225,9 @@ public class DeckBuilder : MonoBehaviour
             saveDeckPopup.transform.parent.gameObject.SetActive(false);
             ClearBuild();
         }
+        cm.SaveDeckToDB(deckIndex);
+        cm.UpdateDeckUI(deckIndex);
+        cm.UpdatePageText();
     }
 
     // Clears all the cards from the builder
