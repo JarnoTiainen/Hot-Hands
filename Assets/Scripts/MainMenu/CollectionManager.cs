@@ -177,11 +177,6 @@ public class CollectionManager : MonoBehaviour
         CollectionCardList cardListScript = cardLists[i + 1].GetComponent<CollectionCardList>();
         cardListScript.cards = playerDecks[i];
 
-        Debug.Log(cardListScript.cards.Count);
-        Debug.Log(cardListScript.cards[0]);
-        Debug.Log(SortMethodDropdown.Instance.GetSortMethod());
-        Debug.Log(SortMethodDropdown.Instance.reverse);
-
         if (!(cardListScript.cards.Count == 0)) cardListScript.SortList(SortMethodDropdown.Instance.GetSortMethod(), SortMethodDropdown.Instance.reverse);
         // Updates name on toggle
         if(deckNames[i] == null || deckNames[i] == "")
