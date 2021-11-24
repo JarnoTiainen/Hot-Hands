@@ -17,7 +17,6 @@ public class CollectionCard3D : MonoBehaviour
     [SerializeField] private GameObject powerLeftGO;
     [SerializeField] private GameObject powerRightGO;
 
-
     private void Start()
     {
         nameText.text = card.cardName;
