@@ -9,7 +9,7 @@ public class BonfireEffectManager : MonoBehaviour
     [SerializeField] private Material material;
     [SerializeField] private float time = 1;
     [SerializeField] private float speed = 1;
-    [SerializeField] private ParticleSystem particleSystem;
+    [SerializeField] private ParticleSystem particleSyste;
     private bool effectOn;
 
     private void Awake()
@@ -22,7 +22,7 @@ public class BonfireEffectManager : MonoBehaviour
         if (effectOn)
         {
             time += Time.deltaTime * speed;
-            meshRenderer.material.SetFloat("_AnimationStep", time);
+            //meshRenderer.material.SetFloat("_AnimationStep", time);
             if (time > 1)
             {
                 time = 1;
@@ -36,6 +36,6 @@ public class BonfireEffectManager : MonoBehaviour
     {
         time = 0;
         effectOn = true;
-        particleSystem.Play();
+        particleSyste.Play();
     }
 }

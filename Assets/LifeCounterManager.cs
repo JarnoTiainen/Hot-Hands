@@ -68,8 +68,27 @@ public class LifeCounterManager : MonoBehaviour
     public void SetNewNumber(bool isYou, int newNumber)
     {
         string numberArray = newNumber.ToString();
-        char firstNumber = numberArray[0];
-        char lastNumber = numberArray[1];
+        char firstNumber = '0';
+        char lastNumber;
+        if (numberArray.Length > 1)
+        {
+            firstNumber = numberArray[0];
+            lastNumber = numberArray[1];
+        }
+        
+        else
+        {
+            lastNumber = numberArray[0];
+        }
+
+
+        if (firstNumber == '-')
+        {
+            firstNumber = '0';
+            lastNumber = '0';
+        }
+
+        Debug.Log("number array: " + numberArray + " first number " + firstNumber + " last number " + lastNumber);
 
 
         leftNumber.text = firstNumber.ToString();
