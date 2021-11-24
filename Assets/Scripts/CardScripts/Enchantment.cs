@@ -31,7 +31,9 @@ public class Enchantment
         EssenceSiphon, 
         Scorch,
         Fireball,
-        Deny
+        Deny,
+        DestroyCombatant,
+        BuffSelfPermanent
     }
     public enum Trigger
     {
