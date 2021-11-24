@@ -132,7 +132,6 @@ public class WebSocketService : MonoBehaviour
                     {
                         isLoggedIn = true;
                         Debug.Log("Created new account");
-                        GetDecks();
                     }
                     else
                     {

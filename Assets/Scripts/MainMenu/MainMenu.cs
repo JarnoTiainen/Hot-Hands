@@ -44,7 +44,8 @@ public class MainMenu : MonoBehaviour
 
     public void CollectionMenuSetActive(bool value)
     {
-        collectionMenu.SetActive(value);
+        if (collectionMenu.activeSelf == true) CollectionManager.Instance.MoveCollectionMenu(true);
+        else collectionMenu.SetActive(value);
         if (value) SetCameraCollectionMenu();
     }
 

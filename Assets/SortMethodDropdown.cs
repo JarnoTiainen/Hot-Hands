@@ -14,6 +14,7 @@ public class SortMethodDropdown : MonoBehaviour
     private void Start()
     {
         Instance = this;
+        Debug.Log("SortMethodDropdown instance set");
         gameObject.SetActive(false);
     }
 
