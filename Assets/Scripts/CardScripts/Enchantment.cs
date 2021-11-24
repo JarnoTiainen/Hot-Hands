@@ -15,6 +15,7 @@ public class Enchantment
     public Trigger trigger;
     public int weight;
     public bool targeting;
+    public CardDataMessage.BuffType buffType;
 
     
 
