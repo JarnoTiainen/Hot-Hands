@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
-using System.Reflection;
 
 public class CollectionManager : MonoBehaviour
 {
@@ -21,17 +20,26 @@ public class CollectionManager : MonoBehaviour
     [SerializeField] private GameObject setActiveButton;
     [SerializeField] private GameObject cardListPrefab;
     [SerializeField] private Toggle cardListTogglePrefab;
+    [SerializeField] private GameObject collectionMenu;
     public int activeList = 0;
     public int activeDeckToggle = 0;
     public int playerDeckLimit = 5;
     private Color32 defaultDeckBGColor = new Color32(89, 89, 89, 255);
     public Color32 editingDeckBGColor = new Color32(205, 205, 0, 255);
     private Color32 activeDeckBGColor = new Color32(40, 205, 40 ,255);
+    private float collectionX;
+    private float collectionY;
+    private float collectionZ;
 
 
     void Start()
     {
         Instance = this;
+        collectionMenu.SetActive(true);
+        collectionX = collectionMenu.transform.position.x;
+        collectionY = collectionMenu.transform.position.y;
+        collectionZ = collectionMenu.transform.position.z;
+        MoveCollectionMenu(false);
         resourcesCardList = Resources.Load("Card List") as CardList;
         for(int i = 0; playerDeckLimit > i; i++)
         {
@@ -45,38 +53,31 @@ public class CollectionManager : MonoBehaviour
         setActiveButton.gameObject.GetComponent<Image>().color = activeDeckBGColor;
     }
 
+    public void MoveCollectionMenu(bool visible)
+    {
+        if(visible) collectionMenu.transform.position = new Vector3(collectionX, collectionY, collectionZ);
+        else collectionMenu.transform.position = new Vector3(collectionX, collectionY, -1000);
+    }
 
     public void SetPlayerDecks(GetDecksMessage getDecksMessage)
     {
         // Monke
-        /*
         List<List<string>> playerDecksTemp = new List<List<string>>();
         playerDecksTemp.Add(getDecksMessage.deck0);
         playerDecksTemp.Add(getDecksMessage.deck1);
         playerDecksTemp.Add(getDecksMessage.deck2);
         playerDecksTemp.Add(getDecksMessage.deck3);
         playerDecksTemp.Add(getDecksMessage.deck4);
-        deckNames.Add(getDecksMessage.deck0Name);
-        deckNames.Add(getDecksMessage.deck1Name);
-        deckNames.Add(getDecksMessage.deck2Name);
-        deckNames.Add(getDecksMessage.deck3Name);
-        deckNames.Add(getDecksMessage.deck4Name);
-        */
+        deckNames[0] = getDecksMessage.deck0Name;
+        deckNames[1] = getDecksMessage.deck1Name;
+        deckNames[2] = getDecksMessage.deck2Name;
+        deckNames[3] = getDecksMessage.deck3Name;
+        deckNames[4] = getDecksMessage.deck4Name;
 
-        // Not monke
-        foreach(string deckString in getDecksMessage.decks)
-        {
-            getDecksMessage.convertedDecks.Add(JsonUtility.FromJson<GetDecksMessage.Deck>(deckString));
-        }
-        foreach(string deckName in getDecksMessage.deckNames)
-        {
-            this.deckNames.Add(deckName);
-        }
-
-        foreach (GetDecksMessage.Deck deck in getDecksMessage.convertedDecks)
+        foreach (List<string> deck in playerDecksTemp)
         {
             List<Card> tempDeck = new List<Card>();
-            foreach(string cardName in deck.deckContent)
+            foreach(string cardName in deck)
             {
                 for(int i = 0; resourcesCardList.allCards.Count > i; i++)
                 {
@@ -96,13 +97,16 @@ public class CollectionManager : MonoBehaviour
                 this.playerDecks.Add(tempDeck);
             }
         }
+
         for (int i = 0; playerDecks.Count > i; i++)
         {
             CreateNewDeck(deckNames[i], true, true);
             UpdateDeckUI(i);
         }
+
         activeDeckToggle = getDecksMessage.activeDeckIndex + 1;
         cardListToggles[activeDeckToggle].transform.Find("Background").GetComponent<Image>().color = activeDeckBGColor;
+
         if (playerDecks.Count == playerDeckLimit)
         {
             createButton.SetActive(false);
@@ -172,7 +176,13 @@ public class CollectionManager : MonoBehaviour
         // Updates cards on list
         CollectionCardList cardListScript = cardLists[i + 1].GetComponent<CollectionCardList>();
         cardListScript.cards = playerDecks[i];
-        if(!(cardListScript.cards.Count == 0)) cardListScript.SortList(SortMethodDropdown.Instance.GetSortMethod(), SortMethodDropdown.Instance.reverse);
+
+        Debug.Log(cardListScript.cards.Count);
+        Debug.Log(cardListScript.cards[0]);
+        Debug.Log(SortMethodDropdown.Instance.GetSortMethod());
+        Debug.Log(SortMethodDropdown.Instance.reverse);
+
+        if (!(cardListScript.cards.Count == 0)) cardListScript.SortList(SortMethodDropdown.Instance.GetSortMethod(), SortMethodDropdown.Instance.reverse);
         // Updates name on toggle
         if(deckNames[i] == null || deckNames[i] == "")
         {
