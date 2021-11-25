@@ -130,12 +130,13 @@ public class WebSocketService : MonoBehaviour
                 case "SAVEUSER":
                     if(data[1] == "ok")
                     {
-                        isLoggedIn = true;
                         Debug.Log("Created new account");
+                        MainMenu.Instance.CreatePopupNotification("Created new account.");
                     }
                     else
                     {
                         Debug.Log("Created new account Failed!");
+                        MainMenu.Instance.CreatePopupNotification("Account creation failed!");
                     }
                     break;
                 case "LOGIN":
@@ -144,11 +145,13 @@ public class WebSocketService : MonoBehaviour
                         isLoggedIn = true;
                         GameObject.Find("LoginPanel").GetComponent<LoginManager>().CloseLoginScreen();
                         Debug.Log("Login ok");
+                        MainMenu.Instance.CreatePopupNotification("Logged in.");
                         GetDecks();
                     }
                     else
                     {
                         Debug.Log("Login Failed!");
+                        MainMenu.Instance.CreatePopupNotification("Login Failed!");
                     }
                     break;
                 case "JOINGAME":
