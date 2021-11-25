@@ -8,6 +8,8 @@ public class CollectionMenuButtonManager : MonoBehaviour
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private Material material;
     [SerializeField] private ButtonType buttonType;
+    [SerializeField] private bool deckSelected = false;
+    [SerializeField] private bool activeDeck = false;
 
     private enum ButtonType
     {
@@ -41,12 +43,12 @@ public class CollectionMenuButtonManager : MonoBehaviour
 
     public void OnHoverEnter()
     {
-        ToggleButton(true);
+        
     }
 
     public void OnHoverExit()
     {
-        ToggleButton(false);
+        
     }
 
     private void Awake()
@@ -55,28 +57,32 @@ public class CollectionMenuButtonManager : MonoBehaviour
     }
 
     [Button]
-    private void ToggleButton(bool state)
+    public void ToggleButton()
     {
-        if (state)
+        if (!deckSelected)
         {
+            deckSelected = true;
             meshRenderer.material.SetInt("_ButtonSelected", 1);
         }
         else
         {
+            deckSelected = false;
             meshRenderer.material.SetInt("_ButtonSelected", 0);
         }
     }
 
 
     [Button]
-    private void ToggleDeckSelected(bool state)
+    public void ToggleDeckSelected()
     {
-        if (state)
+        if (!activeDeck)
         {
+            activeDeck = true;
             meshRenderer.material.SetInt("_DeckSelected", 1);
         }
         else
         {
+            activeDeck = false;
             meshRenderer.material.SetInt("_DeckSelected", 0);
         }
     }
