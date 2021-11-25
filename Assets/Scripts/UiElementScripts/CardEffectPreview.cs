@@ -17,6 +17,11 @@ public class CardEffectPreview : MonoBehaviour
     [SerializeField] private float lifeTime;
     [SerializeField] private DescriptionLogoManager descriptionLogoManager;
 
+    [SerializeField] private GameObject rightAttackPower;
+    [SerializeField] private GameObject leftAttackPower;
+
+    [SerializeField] private GameObject rightDefencePower;
+    [SerializeField] private GameObject leftDefencePower;
 
     public void SetNewPreviewData(CardData data)
     {
@@ -30,6 +35,22 @@ public class CardEffectPreview : MonoBehaviour
         descriptionLogoManager.SetNewImage(data.enchantments);
         description.text = data.description;
 
+
+        if(data.attackDirection == Card.AttackDirection.Right)
+        {
+            rightAttackPower.SetActive(true);
+            leftDefencePower.SetActive(true);
+        }
+        else if(data.attackDirection == Card.AttackDirection.Left)
+        {
+            leftAttackPower.SetActive(true);
+            rightDefencePower.SetActive(true);
+        }
+        else
+        {
+            lp.gameObject.SetActive(false);
+            rp.gameObject.SetActive(false);
+        }
     }
 
     private void Awake()

@@ -61,6 +61,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     [SerializeField] private CardRuneEffectManager cardRuneEffectManager;
     [SerializeField] private CardTrailManager cardTrailManager;
+    [SerializeField] private BuffEffectMaterial buffEffectManager;
 
     public void SetTempValuesAsValues()
     {
@@ -386,6 +387,11 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         {
             cardTrailManager.DisableTrails();
         }
+    }
+
+    public void PlayBuffEffect()
+    {
+        buffEffectManager.PlayEffect();
     }
 
 }

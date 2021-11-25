@@ -5,4 +5,5 @@ public class StatChangeMessage
 {
     public List<string> targets;
     public List<CardDataMessage> convertedTargets;
+    public CardDataMessage.BuffType buffType;
 }

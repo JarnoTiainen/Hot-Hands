@@ -578,7 +578,7 @@ public class GameManager : MonoBehaviour
             data.cost = cardData.cardCost;
             data.attackDirection = (Card.AttackDirection)cardData.attackDirection;
             data.value = cardData.cardValue;
-            PlayDataChangeEffect(cardData.buffType, target);
+            PlayDataChangeEffect(statChangeMessage.buffType, target);
             target.GetComponent<InGameCard>().UpdateCardTexts();
         }
     }
@@ -611,6 +611,7 @@ public class GameManager : MonoBehaviour
                 Debug.LogWarning("Trigger Damage effect here");
                 break;
             case CardDataMessage.BuffType.StatBuff:
+                target.GetComponent<InGameCard>().PlayBuffEffect();
                 Debug.LogWarning("Trigger StatBuff effect here");
                 break;
             case CardDataMessage.BuffType.StatDebuff:

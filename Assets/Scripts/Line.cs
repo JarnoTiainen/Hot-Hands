@@ -74,7 +74,10 @@ public class Line : MonoBehaviour
 
     public void RemoveLine()
     {
-        Destroy(gameObject);
+        if(gameObject != null)
+        {
+            Destroy(gameObject);
+        }
     }
 }
 
