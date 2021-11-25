@@ -111,6 +111,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         cardData.rp = rp;
         cardData.lp = lp;
     }
+
     public CardData GetData()
     {
         return cardData;
@@ -240,7 +241,32 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
             {
                 preAttackOnCD = true;
                 ToggleAttackBurnEffect(false);
-                if (GameManager.Instance.IsYou(owner)) WebSocketService.Attack(cardData.seed);
+                if (GameManager.Instance.IsYou(owner)) {
+                    if (!References.i.mouse.tutorialMode) {
+                        WebSocketService.Attack(cardData.seed);
+                    } else {
+                        Debug.Log("Attack in tutorial!");
+                        CardPowersMessage[] cardPowers = TutorialManager.tutorialManagerInstance.GetAttackTarget(cardData);
+
+                        int playerTakenDamage = 0;
+
+                        if (cardData.attackDirection == Card.AttackDirection.Left) {
+                            playerTakenDamage = cardData.lp;
+                        } else if (cardData.attackDirection == Card.AttackDirection.Right) {
+                            playerTakenDamage = cardData.rp;
+                        }
+
+                        if (cardPowers.Length == 1) {
+                            //direct attack
+                            Debug.Log("Player taken dmg " + playerTakenDamage);
+                            TutorialManager.tutorialManagerInstance.Attack(true, owner, playerTakenDamage, cardPowers[0]);
+                        } else {
+                            TutorialManager.tutorialManagerInstance.Attack(false, owner, 0, cardPowers[0], cardPowers[1]);
+
+                        }
+                        
+                    }
+                }
             }
         }
         else if(interActable)

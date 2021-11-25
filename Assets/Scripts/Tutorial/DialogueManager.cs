@@ -41,29 +41,30 @@ public class DialogueManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F)) {
             dialogueAnimator.SetBool("dialogueOn", true);
         }
-
-        if (Input.GetKeyDown(KeyCode.Space) || startBool) {
-            startBool = false;
+        if( (int)tutorialManager.GetState() % 2 == 0) {
             if(dialogueAnimator.GetBool("dialogueOn") == false) {
-                dialogueAnimator.SetBool("dialogueOn", true);
+                StartCoroutine(StartDialogue());
             }
 
-            if(sentences.Count > 0) {
-                StopAllCoroutines();
-                string sentence = sentences.Dequeue();
-                if (sentence == "") {
-                    dialogueAnimator.SetBool("dialogueOn", false);
-                    DialogueTrigger();
-                    tutorialManager.NextTutorialState();
+            if (Input.GetKeyDown(KeyCode.Space) || startBool) {
+                startBool = false;
+                if(sentences.Count > 0) {
+                    StopAllCoroutines();
+                    string sentence = sentences.Dequeue();
+                    if (sentence == "") {
+                        EndDialogue();
+                        DialogueTrigger();
+                        tutorialManager.NextTutorialState();
 
+                    } else {
+                        StartCoroutine(RollDialogue(sentence));
+                    }
                 } else {
-                    StartCoroutine(RollDialogue(sentence));
+                    EndDialogue();
                 }
-                
-            } else {
-                EndDialogue();
             }
         }
+        
 
     }
 
@@ -78,6 +79,7 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
+
         dialogueAnimator.SetBool("dialogueOn", false);
     }
 
@@ -92,7 +94,9 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator StartDialogue()
     {
+        dialogueText.text = "";
         yield return new WaitForSeconds(1f);
+        dialogueAnimator.SetBool("dialogueOn", true);
         startBool = true;
     }
 }

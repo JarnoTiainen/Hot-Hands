@@ -35,6 +35,7 @@ public class References: MonoBehaviour
     public GameObject yourBonfire;
     public MonsterZone yourMonsterZone;
     public MonsterZone opponentMonsterZone;
+    public Mouse mouse;
     public AttackEventHandler attackEventHandler;
     public GameObject testCube;
     public GameObject yourPlayerTarget;

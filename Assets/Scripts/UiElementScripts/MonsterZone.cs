@@ -30,7 +30,7 @@ public class MonsterZone : MonoBehaviour
     public GameObject AutoAddNewMonsterCard(bool isYourCard, int boardIndex, CardData data)
     {
         GameObject newMonster = Instantiate(References.i.fieldCard);
-
+        Debug.Log("index board " + boardIndex);
         if (debugModeOn) Debug.Log("index: " + boardIndex);
         monsterCards.Insert(boardIndex, newMonster);
         

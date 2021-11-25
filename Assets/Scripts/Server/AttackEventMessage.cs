@@ -12,4 +12,15 @@ public class AttackEventMessage
     public string target;
     public CardPowersMessage attackerValues;
     public CardPowersMessage targetValues;
+
+    public AttackEventMessage(bool denied, float attackCooldown, bool directHit, int playerTakenDamage, int player, CardPowersMessage attackerValues, CardPowersMessage targetValues)
+    {
+        this.denied = denied;
+        this.attackCooldown = attackCooldown;
+        this.directHit = directHit;
+        this.playerTakenDamage = playerTakenDamage;
+        this.player = player;
+        this.attackerValues = attackerValues;
+        this.targetValues = targetValues;
+    }
 }

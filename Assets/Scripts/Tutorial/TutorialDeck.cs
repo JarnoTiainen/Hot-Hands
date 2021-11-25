@@ -16,8 +16,6 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
 
     private void Awake()
     {
-
-
         cardsQueue = new Queue<Card>();
 
         tutorialManager = TutorialManager.tutorialManagerInstance;
@@ -25,16 +23,18 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
         foreach (Card card in cards ) {
             cardsQueue.Enqueue(card);
         }
-
-
     }
 
-    
+    private void Start()
+    {
+        drawnCards = 0;
+    }
+
     public void StartDrawCooldown(float duration)
     {
         cardDrawReady = false;
         cardCooldown = duration;
-        drawnCards = 0;
+        
     }
 
     public void FinisheDrawCooldown()
@@ -55,17 +55,25 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
     public void OnClickElement()
     { 
         if (tutorialManager.GetState() == TutorialManager.TutorialState.CardDraw && cardDrawReady) {
-            Card drawnCard = cardsQueue.Dequeue();
-            string seed = "0000000" + cardsQueue.Count.ToString();
+            if(cardsQueue.Count != 0) {
+                Card drawnCard = cardsQueue.Dequeue();
+                string seed = "0000000" + cardsQueue.Count.ToString();
 
-            DrawCardMessage drawCardMessage = new DrawCardMessage(0, seed, drawCooldown, drawnCard);
-            GameManager.Instance.PlayerDrawCard(0, seed);
-            GameManager.Instance.PlayerDrawCard(drawCardMessage);
-            drawnCards++;
+                DrawCardMessage drawCardMessage = new DrawCardMessage(0, seed, drawCooldown, drawnCard);
+                GameManager.Instance.PlayerDrawCard(0, seed);
+                GameManager.Instance.PlayerDrawCard(drawCardMessage);
+                drawnCards++;
 
-            if(drawnCards == 2) {
-                tutorialManager.NextTutorialState();
+                if(drawnCards == 2) {
+                    tutorialManager.NextTutorialState();
+                }
+            } else {
+                //reshuffle here?
+                foreach (Card card in cards ) {
+                    cardsQueue.Enqueue(card);
+                }
             }
+            
         }
     }
 }

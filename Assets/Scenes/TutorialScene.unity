@@ -2853,14 +2853,14 @@ MonoBehaviour:
   container: {fileID: 0}
   cardPreviewGameObject: {fileID: 0}
   cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
-  lastBreathIcon: {fileID: 0}
-  openerIcon: {fileID: 0}
-  drawtivationIcon: {fileID: 0}
-  sacrifice: {fileID: 0}
-  lastBreathColor: {r: 0, g: 0, b: 0, a: 0}
-  openerColor: {r: 0, g: 0, b: 0, a: 0}
-  drawtivationColor: {r: 0, g: 0, b: 0, a: 0}
-  sacrificeColor: {r: 0, g: 0, b: 0, a: 0}
+  lastBreathIcon: {fileID: 2800000, guid: 2c1f0e22fa64e484daf6e4e5471881ae, type: 3}
+  openerIcon: {fileID: 2800000, guid: 35974a171f9725a4d949ddfe97108fbe, type: 3}
+  drawtivationIcon: {fileID: 2800000, guid: e7a050743b403e2459d82792ac362b27, type: 3}
+  sacrifice: {fileID: 2800000, guid: 559b5b80b37ec52439815d8be075b3bc, type: 3}
+  lastBreathColor: {r: 0.2976286, g: 0.13007298, b: 0.3490566, a: 0}
+  openerColor: {r: 0.09095763, g: 0.26415092, b: 0.119937524, a: 0}
+  drawtivationColor: {r: 0.113697045, g: 0.24315555, b: 0.3301887, a: 0}
+  sacrificeColor: {r: 0.38679248, g: 0.11494304, b: 0.11494304, a: 0}
   fieldCard: {fileID: 5484217012206740924, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
   opponentDeckObj: {fileID: 2142339687}
   yourDeckObj: {fileID: 1992818074}
@@ -2869,13 +2869,14 @@ MonoBehaviour:
   yourBonfire: {fileID: 1822666717}
   yourMonsterZone: {fileID: 2119922071}
   opponentMonsterZone: {fileID: 1349768121}
+  mouse: {fileID: 350191309}
   attackEventHandler: {fileID: 343450298}
   testCube: {fileID: 6855733043432703946, guid: 159beb3f77efb3a4389649ad29c1f06f, type: 3}
   yourPlayerTarget: {fileID: 130352518}
   enemyPlayerTarget: {fileID: 2036633349}
   cardEnchantmentEffectManager: {fileID: 343450297}
-  yourLifeCounter: {fileID: 0}
-  opponentLifeCounter: {fileID: 0}
+  yourLifeCounter: {fileID: 1690656286}
+  opponentLifeCounter: {fileID: 656659339}
   spellZone: {fileID: 1444694193}
 --- !u!1 &525874310
 GameObject:
@@ -3226,6 +3227,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 136792910539738098, guid: bcd32465df92b2e4ca5407faa321cdc3, type: 3}
   m_PrefabInstance: {fileID: 656659337}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &656659339 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4458364429712655605, guid: bcd32465df92b2e4ca5407faa321cdc3, type: 3}
+  m_PrefabInstance: {fileID: 656659337}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ea6769cf0a8fa4d8f2c4e5f2f571b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &659022111
 GameObject:
   m_ObjectHideFlags: 0
@@ -9287,6 +9299,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 136792910539738098, guid: bcd32465df92b2e4ca5407faa321cdc3, type: 3}
   m_PrefabInstance: {fileID: 1690656284}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1690656286 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4458364429712655605, guid: bcd32465df92b2e4ca5407faa321cdc3, type: 3}
+  m_PrefabInstance: {fileID: 1690656284}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ea6769cf0a8fa4d8f2c4e5f2f571b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1700507547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10838,8 +10861,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
   - {fileID: 11400000, guid: d1e2bbe766bed76469b95bcc6eda80b2, type: 2}
   - {fileID: 11400000, guid: b5c3ee5c867e1084dae6c84fa1ea32ac, type: 2}
-  drawCooldown: 2
-  cardCooldown: 0
+  drawCooldown: 1
+  cardCooldown: 3
   cardDrawReady: 1
 --- !u!1 &2027301574
 GameObject:
@@ -11987,6 +12010,10 @@ PrefabInstance:
       propertyPath: skipBar
       value: 
       objectReference: {fileID: 666864765}
+    - target: {fileID: 3195456241456581281, guid: 62f8452f7e8d1914b9163d11d1576398, type: 3}
+      propertyPath: startBurnValue
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3195456241456581295, guid: 62f8452f7e8d1914b9163d11d1576398, type: 3}
       propertyPath: m_Name
       value: TutorialManager
@@ -12016,6 +12043,7 @@ MonoBehaviour:
   highLightControllers:
   - {fileID: 1992818075}
   - {fileID: 1822666718}
+  - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &3195456240092804555
 MonoBehaviour:
@@ -12147,6 +12175,34 @@ PrefabInstance:
     - target: {fileID: 5067975731186848486, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_fontSize
+      value: 63.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_lineSpacing
+      value: -72
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_overflowMode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7860855754641139642, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7860855754641139642, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_fontSize
+      value: 36
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}

@@ -14,7 +14,7 @@ public class Mouse : MonoBehaviour
     public Vector2 mousePosInWorld;
     public GameObject markerPrefab;
     [SerializeField] private bool debuggingModeOn = false;
-    [SerializeField] private bool tutorialMode;
+    [SerializeField] public bool tutorialMode;
     [SerializeField] public float mouseHightFromTableTop;
     [SerializeField] public bool targetModeOn;
     [SerializeField] public GameObject targetSource;
@@ -253,8 +253,8 @@ public class Mouse : MonoBehaviour
                     Debug.Log("tutorial playcard in mouse");
                     CardData cardData = heldCard.GetComponent<InGameCard>().GetData();
                     
-                    Debug.Log("ghost index 2 " + ghostIndex);
                     bool free = cardData.cost == 0;
+                    Debug.Log("attack cd mouse " + TutorialManager.tutorialManagerInstance.attackCoolDown);
                     SummonCardMessage summonCard = new SummonCardMessage(ghostIndex, 0, false, free, TutorialManager.tutorialManagerInstance.attackCoolDown, cardData);
                     GameManager.Instance.PlayerSummonCard(summonCard);
                 }

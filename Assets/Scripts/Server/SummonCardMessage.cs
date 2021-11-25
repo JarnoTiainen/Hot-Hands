@@ -37,6 +37,7 @@ public class SummonCardMessage
         this.player = player;
         this.auto = auto;
         this.free = free;
+        this.attackCooldown = attackCooldown;
         this.cardName = cardData.cardName;
         this.cardCost = cardData.cost;
         this.cardValue = cardData.value;

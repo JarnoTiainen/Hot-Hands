@@ -308,6 +308,7 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerSummonCard(SummonCardMessage summonCardMessage)
     {
+        Debug.Log("attack cd gamemanager " + summonCardMessage.attackCooldown);
         if (summonCardMessage.player == playerNumber)
         {
             if(Hand.Instance.GetVisibleCardWithSeed(summonCardMessage.seed) != null)
@@ -541,6 +542,29 @@ public class GameManager : MonoBehaviour
             if (debugPlayerAttack) Debug.LogWarning("was your attack " + wasYourAttack);
             References.i.attackEventHandler.StartAttackEvent(wasYourAttack, attacker, target, attackEventMessage.attackCooldown);
         }
+    }
+
+    public void TutorialPlayerAttack(AttackEventMessage attackEventMessage)
+    {
+        
+        if (attackEventMessage.directHit)
+        {
+            if (attackEventMessage.player == playerNumber)
+            {
+                References.i.attackEventHandler.StartAttackEvent(true, attackEventMessage.attackerValues, attackEventMessage.playerTakenDamage, attackEventMessage.attackCooldown);
+            }
+            else
+            {    
+                References.i.attackEventHandler.StartAttackEvent(false, attackEventMessage.attackerValues, attackEventMessage.playerTakenDamage, attackEventMessage.attackCooldown);
+            }
+        }
+        else
+        {
+            bool wasYourAttack = false;
+            if (attackEventMessage.player == playerNumber) wasYourAttack = true;
+            References.i.attackEventHandler.StartAttackEvent(wasYourAttack, attackEventMessage.attackerValues, attackEventMessage.targetValues, attackEventMessage.attackCooldown);
+        }
+        Debug.Log("Player taken dmg " + attackEventMessage.playerTakenDamage);
     }
 
     public void CardDataChange(StatChangeMessage statChangeMessage)
