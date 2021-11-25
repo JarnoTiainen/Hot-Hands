@@ -365,7 +365,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void SetDescription()
     {
-        descriptionLogoManager.SetNewImage(cardData.enchantments);
         descriptionText.text = cardData.description;
     }
 
