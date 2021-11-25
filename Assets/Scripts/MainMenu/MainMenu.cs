@@ -7,8 +7,6 @@ using TMPro;
 public class MainMenu : MonoBehaviour
 {
     public static MainMenu Instance { get; private set; }
-    private GameObject canvas;
-    public GameObject mainMenuButtons;
     public GameObject settingsMenu;
     public GameObject collectionMenu;
     public GameObject quitConfirmation;
@@ -28,7 +26,6 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         Instance = this;
-        canvas = GameObject.Find("Canvas");
         if (WebSocketService.Instance.isLoggedIn)
         {
             loginScreen.SetActive(false);
@@ -40,12 +37,6 @@ public class MainMenu : MonoBehaviour
             Debug.Log("isLoggedIn: " + WebSocketService.Instance.isLoggedIn);
             Debug.Log("Login screen SetActive true");
         }
-    }
-
-    public void MenuButtonsSetActive(bool value)
-    {
-        mainMenuButtons.SetActive(value);
-        if (value) SetCameraMainMenu();
     }
 
     public void CollectionMenuSetActive(bool value)
