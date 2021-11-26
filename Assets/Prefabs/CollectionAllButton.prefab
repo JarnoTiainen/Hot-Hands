@@ -31,13 +31,13 @@ RectTransform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 102680491744994266}
-  m_Father: {fileID: 5510794842441720272}
+  m_Father: {fileID: 2726192216620796267}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.015955448, y: 0.0029684305}
-  m_SizeDelta: {x: 0.0894, y: 0.0215}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0.08939999, y: 0.021499991}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3708546027891966223
 Canvas:
@@ -108,10 +108,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5510794842441720272}
+  - component: {fileID: 2726192216620796267}
   - component: {fileID: 5450784568813151146}
   - component: {fileID: 979612648061611329}
   - component: {fileID: 174077583751812599}
+  - component: {fileID: 7338924456426666586}
   m_Layer: 5
   m_Name: CollectionAllButton
   m_TagString: Untagged
@@ -119,8 +120,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5510794842441720272
-Transform:
+--- !u!224 &2726192216620796267
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -128,12 +129,17 @@ Transform:
   m_GameObject: {fileID: 5167657242989243836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 300, y: 300, z: 1}
+  m_LocalScale: {x: 200, y: 200, z: 1}
   m_Children:
   - {fileID: 8260763761211404583}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 180, y: 40}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &5450784568813151146
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -200,6 +206,19 @@ MonoBehaviour:
   buttonType: 0
   deckSelected: 0
   activeDeck: 0
+--- !u!65 &7338924456426666586
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5167657242989243836}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9, y: 0.22, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5603741496304304462
 GameObject:
   m_ObjectHideFlags: 0

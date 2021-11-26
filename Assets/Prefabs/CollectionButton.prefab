@@ -8,33 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 420475715925404296}
+  - component: {fileID: 2064577144016150158}
   - component: {fileID: 420475715925404297}
   - component: {fileID: 420475715925404298}
   - component: {fileID: 420475715925404407}
   - component: {fileID: 7854699452251258972}
-  m_Layer: 11
+  m_Layer: 5
   m_Name: CollectionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &420475715925404296
-Transform:
+--- !u!224 &2064577144016150158
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 420475715925404300}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3765, y: 0.5305, z: -4.020229}
-  m_LocalScale: {x: 300, y: 300, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -4.020229}
+  m_LocalScale: {x: 200, y: 200, z: 1}
   m_Children:
   - {fileID: 6294883500654531251}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.3765, y: 0.5305}
+  m_SizeDelta: {x: 180, y: 40}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &420475715925404297
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -99,6 +104,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 420475715925404298}
   material: {fileID: 2100000, guid: 8b3c10c024fa698409f280a17f4cb812, type: 2}
   buttonType: 0
+  buttonText: {fileID: 1156387590752536884}
   deckSelected: 0
   activeDeck: 0
 --- !u!65 &7854699452251258972
@@ -112,8 +118,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.22022307, z: 6.1232336e-17}
-  m_Center: {x: 0, y: -0.0037315488, z: 0}
+  m_Size: {x: 0.9, y: 0.22, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3348112506678163951
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +131,7 @@ GameObject:
   - component: {fileID: 466136318117640041}
   - component: {fileID: 7148409976100637239}
   - component: {fileID: 1156387590752536884}
-  m_Layer: 11
+  m_Layer: 5
   m_Name: ButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +266,7 @@ GameObject:
   - component: {fileID: 2190394081298179361}
   - component: {fileID: 5039279283809804619}
   - component: {fileID: 224216007721755242}
-  m_Layer: 11
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,13 +285,13 @@ RectTransform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 466136318117640041}
-  m_Father: {fileID: 420475715925404296}
+  m_Father: {fileID: 2064577144016150158}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.0147, y: 0.0012}
-  m_SizeDelta: {x: 0.0894, y: 0.0215}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0.08939999, y: 0.021499991}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2190394081298179361
 Canvas:
@@ -330,7 +336,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &224216007721755242
 MonoBehaviour:
   m_ObjectHideFlags: 0

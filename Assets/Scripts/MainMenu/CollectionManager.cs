@@ -9,17 +9,15 @@ public class CollectionManager : MonoBehaviour
 {
     public static CollectionManager Instance { get; private set; }
     private CardList resourcesCardList;
-    public List<Toggle> cardListToggles = new List<Toggle>();
+    public List<CollectionMenuButtonManager> cardListToggles = new List<CollectionMenuButtonManager>();
     public List<GameObject> cardLists = new List<GameObject>();
     public List<List<Card>> playerDecks = new List<List<Card>>();
     public List<string> deckNames = new List<string>();
     [SerializeField] private GameObject cardListWindow;
     [SerializeField] private GameObject togglesRow;
     [SerializeField] private GameObject pageText;
-    [SerializeField] private GameObject createButton;
     [SerializeField] private GameObject setActiveButton;
     [SerializeField] private GameObject cardListPrefab;
-    [SerializeField] private Toggle cardListTogglePrefab;
     [SerializeField] private GameObject collectionMenu;
     public int activeList = 0;
     public int activeDeckToggle = 0;
@@ -48,7 +46,6 @@ public class CollectionManager : MonoBehaviour
         SetAllCardsList();
         UpdatePageText();
 
-        createButton.GetComponent<Button>().onClick.AddListener(() => CreateButtonCallback());
         setActiveButton.GetComponent<Button>().onClick.AddListener(() => SetActiveButtonCallback());
         setActiveButton.gameObject.GetComponent<Image>().color = activeDeckBGColor;
     }
@@ -105,12 +102,7 @@ public class CollectionManager : MonoBehaviour
         }
 
         activeDeckToggle = getDecksMessage.activeDeckIndex + 1;
-        cardListToggles[activeDeckToggle].transform.Find("Background").GetComponent<Image>().color = activeDeckBGColor;
-
-        if (playerDecks.Count == playerDeckLimit)
-        {
-            createButton.SetActive(false);
-        }
+        cardListToggles[activeDeckToggle].ToggleDeckSelected();
     }
 
     // Sends the players active deck index to the db and visually shows which deck is active
@@ -133,15 +125,16 @@ public class CollectionManager : MonoBehaviour
     {
         if (activeDeckToggle != 0)
         {
-            cardListToggles[activeDeckToggle].transform.Find("Background").GetComponent<Image>().color = defaultDeckBGColor;
+            cardListToggles[activeDeckToggle].ToggleDeckSelected();
         }
-        cardListToggles[activeList].transform.Find("Background").GetComponent<Image>().color = activeDeckBGColor;
+        cardListToggles[activeList].ToggleDeckSelected();
         activeDeckToggle = activeList;
     }
 
     // Sets the visuals that show which deck is being edited
     public void SetEditDeckUI(int toggleIndex, bool editing)
     {
+        /*
         if (editing) cardListToggles[toggleIndex].transform.Find("Background").GetComponent<Image>().color = editingDeckBGColor;
         else
         {
@@ -154,6 +147,7 @@ public class CollectionManager : MonoBehaviour
                 cardListToggles[toggleIndex].transform.Find("Background").GetComponent<Image>().color = defaultDeckBGColor;
             }
         }
+        */
     }
 
     // Gets all game cards and passes them to the 'All Cards List' and calls it's populate function
@@ -181,11 +175,11 @@ public class CollectionManager : MonoBehaviour
         // Updates name on toggle
         if(deckNames[i] == null || deckNames[i] == "")
         {
-            cardListToggles[i + 1].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "DECK " + (i + 1);
+            cardListToggles[i + 1].ChangeDeckName("DECK " + (i + 1));
         }
         else
         {
-            cardListToggles[i + 1].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = deckNames[i];
+            cardListToggles[i + 1].ChangeDeckName(deckNames[i]);
         }
     }
 
@@ -193,7 +187,6 @@ public class CollectionManager : MonoBehaviour
     public void CreateNewDeck(string newName = null, bool isStart = false, bool isLoadingFromDB = false)
     {
         if (playerDecks.Count >= playerDeckLimit && !isLoadingFromDB) return;
-        if (playerDeckLimit - playerDecks.Count == 1) createButton.SetActive(false);
 
         GameObject newCardList = Instantiate(cardListPrefab) as GameObject;
         newCardList.SetActive(false);
@@ -202,14 +195,11 @@ public class CollectionManager : MonoBehaviour
         newCardList.transform.SetParent(cardListWindow.transform, false);
         cardLists.Add(newCardList);
 
-        Toggle newToggle = Instantiate(cardListTogglePrefab) as Toggle;
-        if (newName == null || newName == "") newToggle.name = "DECK " + (playerDecks.Count + 1);
-        else newToggle.name = newName;
-        newToggle.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = newCardList.name;
-        newToggle.group = togglesRow.GetComponent<ToggleGroup>();
-        newToggle.transform.SetParent(togglesRow.transform, false);
-        cardListToggles.Add(newToggle);
-        newToggle.GetComponent<CollectionToggle>().index = cardListToggles.IndexOf(newToggle);
+        Debug.Log("cardListToggles.Count: " + cardListToggles.Count);
+        Debug.Log("playerDecks.Count: " + playerDecks.Count);
+
+        if (newName == null || newName == "") cardListToggles[playerDecks.Count].name = "DECK " + (playerDecks.Count + 1);
+        else cardListToggles[playerDecks.Count].name = newName;
 
         if (!isStart) playerDecks.Add(new List<Card>());
         // Force rebuilds the toggle row so that the content size fitter component behaves properly
@@ -220,11 +210,12 @@ public class CollectionManager : MonoBehaviour
     // Check's which toggle is checked and sets the corresponding ingame list active
     public void ChangeActiveCardList(int toggle)
     {
-        if (!cardListToggles[toggle].isOn) return;
-
+        Debug.Log("ChangeActiveCardList start");
+        if (!cardListToggles[toggle].deckSelected) return;
+        Debug.Log("ChangeActiveCardList");
         for(int i = 0; cardListToggles.Count > i; i++)
         {
-            if (cardListToggles[i].isOn)
+            if (cardListToggles[i].deckSelected)
             {
                 cardLists[i].SetActive(true);
                 activeList = toggle;
@@ -254,8 +245,6 @@ public class CollectionManager : MonoBehaviour
         pageText.GetComponent<TextMeshProUGUI>().text = (list.currentPage) + "/" + list.totalPages;
     }
 
-    // Bound to an onClick event from the "Create Button'. Calls CreateNewDeck function
-    private void CreateButtonCallback() => CreateNewDeck();
     // Bound to an onClick event from the "Set Active Button'. Calls SetActiveDeck function
     private void SetActiveButtonCallback() => SetActiveDeckToDB();
 }

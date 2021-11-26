@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using TMPro;
 
 public class CollectionMenuButtonManager : MonoBehaviour
 {
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private Material material;
     [SerializeField] private ButtonType buttonType;
-    [SerializeField] private bool deckSelected = false;
+    [SerializeField] private TextMeshProUGUI buttonText;
+    public bool deckSelected = false;
     [SerializeField] private bool activeDeck = false;
 
     private enum ButtonType
@@ -26,14 +28,24 @@ public class CollectionMenuButtonManager : MonoBehaviour
         switch (buttonType)
         {
             case ButtonType.Deck1:
+                ToggleButton();
+                CollectionManager.Instance.ChangeActiveCardList(1);
                 break;
             case ButtonType.Deck2:
+                ToggleButton();
+                CollectionManager.Instance.ChangeActiveCardList(2);
                 break;
             case ButtonType.Deck3:
+                ToggleButton();
+                CollectionManager.Instance.ChangeActiveCardList(3);
                 break;
             case ButtonType.Deck4:
+                ToggleButton();
+                CollectionManager.Instance.ChangeActiveCardList(4);
                 break;
             case ButtonType.Deck5:
+                ToggleButton();
+                CollectionManager.Instance.ChangeActiveCardList(5);
                 break;
             default:
                 break;
@@ -71,7 +83,6 @@ public class CollectionMenuButtonManager : MonoBehaviour
         }
     }
 
-
     [Button]
     public void ToggleDeckSelected()
     {
@@ -85,5 +96,10 @@ public class CollectionMenuButtonManager : MonoBehaviour
             activeDeck = false;
             meshRenderer.material.SetInt("_DeckSelected", 0);
         }
+    }
+
+    public void ChangeDeckName(string text)
+    {
+        buttonText.text = text;
     }
 }
