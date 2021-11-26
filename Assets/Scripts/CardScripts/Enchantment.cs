@@ -17,6 +17,7 @@ public class Enchantment
     public bool targeting;
     public CardDataMessage.BuffType buffType;
     public BuffVanishType buffVanishType;
+    public bool hidden;
 
     public enum BuffVanishType
     {
