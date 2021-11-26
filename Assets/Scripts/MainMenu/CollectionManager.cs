@@ -209,6 +209,7 @@ public class CollectionManager : MonoBehaviour
     // Check's which toggle is checked and sets the corresponding ingame list active
     public void ChangeActiveCardList(int toggle)
     {
+        Debug.Log(toggle);
         if (!cardListToggles[toggle].deckSelected) return;
         for(int i = 0; cardListToggles.Count > i; i++)
         {

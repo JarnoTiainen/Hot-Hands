@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3708546027891966223}
   - component: {fileID: 7088293341523385752}
   - component: {fileID: 1552624837873370135}
-  m_Layer: 11
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,6 +204,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 979612648061611329}
   material: {fileID: 2100000, guid: 3931e614df1cde940a10aef012f42326, type: 2}
   buttonType: 0
+  buttonText: {fileID: 0}
   deckSelected: 0
   activeDeck: 0
 --- !u!65 &7338924456426666586
@@ -230,7 +231,7 @@ GameObject:
   - component: {fileID: 102680491744994266}
   - component: {fileID: 1554151397867833467}
   - component: {fileID: 3082675113135797855}
-  m_Layer: 11
+  m_Layer: 5
   m_Name: ButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
