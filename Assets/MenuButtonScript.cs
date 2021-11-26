@@ -20,7 +20,6 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
 
     public void OnClickElement()
     {
-        Debug.Log("Clicked button: " + gameObject.name);
         switch(buttonType)
         {
             case ButtonType.Play:
@@ -65,7 +64,8 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
         meshRenderer.material = material;
     }
 
-    [Button] private void ToggleButton(bool state)
+    [Button]
+    private void ToggleButton(bool state)
     {
         if(state)
         {

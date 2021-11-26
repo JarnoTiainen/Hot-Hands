@@ -103,6 +103,7 @@ public class CollectionManager : MonoBehaviour
 
         activeDeckToggle = getDecksMessage.activeDeckIndex + 1;
         cardListToggles[activeDeckToggle].ToggleDeckSelected();
+        cardListToggles[0].ToggleButton(0);
     }
 
     // Sends the players active deck index to the db and visually shows which deck is active
@@ -209,7 +210,6 @@ public class CollectionManager : MonoBehaviour
     // Check's which toggle is checked and sets the corresponding ingame list active
     public void ChangeActiveCardList(int toggle)
     {
-        Debug.Log(toggle);
         if (!cardListToggles[toggle].deckSelected) return;
         for(int i = 0; cardListToggles.Count > i; i++)
         {

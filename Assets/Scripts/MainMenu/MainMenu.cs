@@ -34,6 +34,7 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
+            mainMenuButtons.SetActive(false);
             loginScreen.SetActive(true);
             Debug.Log("isLoggedIn: " + WebSocketService.Instance.isLoggedIn);
             Debug.Log("Login screen SetActive true");
