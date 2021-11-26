@@ -53,7 +53,7 @@ public class CollectionManager : MonoBehaviour
     public void MoveCollectionMenu(bool visible)
     {
         if(visible) collectionMenu.transform.position = new Vector3(collectionX, collectionY, collectionZ);
-        else collectionMenu.transform.position = new Vector3(collectionX, collectionY, -1000);
+        else collectionMenu.transform.position = new Vector3(1000, collectionY, -1000);
     }
 
     public void SetPlayerDecks(GetDecksMessage getDecksMessage)

@@ -108,6 +108,7 @@ public class RayCaster : MonoBehaviour
 
     private void NewTarget(GameObject oldTarget, GameObject newTarget)
     {
+        Debug.Log("new target " + newTarget.name);
         if (oldTarget)
         {
             if (oldTarget.GetComponent<IOnHoverExitElement>() != null)

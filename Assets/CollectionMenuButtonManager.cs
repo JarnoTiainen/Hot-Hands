@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using TMPro;
 
-public class CollectionMenuButtonManager : MonoBehaviour
+public class CollectionMenuButtonManager : MonoBehaviour, IOnClickDownUIElement
 {
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private Material material;
@@ -24,7 +24,6 @@ public class CollectionMenuButtonManager : MonoBehaviour
 
     public void OnClickElement()
     {
-        Debug.Log("Clicked button: " + gameObject.name);
         switch (buttonType)
         {
             case ButtonType.Deck1:

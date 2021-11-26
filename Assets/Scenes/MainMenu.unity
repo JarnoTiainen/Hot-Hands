@@ -1602,6 +1602,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialMenuButton
       objectReference: {fileID: 0}
+    - target: {fileID: 592620376861400803, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 592620376861400807, guid: 8345af873d9471043ad230e588f91b06, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1649,6 +1653,14 @@ PrefabInstance:
     - target: {fileID: 1858667968010569014, guid: 8345af873d9471043ad230e588f91b06, type: 3}
       propertyPath: m_text
       value: Tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347859755922421536, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802996928734281167, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8345af873d9471043ad230e588f91b06, type: 3}
@@ -7498,7 +7510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077c4fb68eacc7a429ede28ac25ce8d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayCamera: {fileID: 197352071}
+  rayCamera: {fileID: 1520746804}
   target: {fileID: 0}
   newTarget: {fileID: 0}
   previousTarget: {fileID: 0}
@@ -7545,7 +7557,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 197352072}
-  - {fileID: 1282775889}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12751,6 +12762,7 @@ RectTransform:
   - {fileID: 1971603281}
   - {fileID: 1256247236}
   - {fileID: 354924824}
+  - {fileID: 1282775889}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12768,7 +12780,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1282775889}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MainMenuButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12783,16 +12795,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1282775888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.18693143, y: 0.10632275, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -638, y: 212, z: 0}
+  m_LocalScale: {x: 4000, y: 4000, z: 108}
   m_Children:
   - {fileID: 243606469}
   - {fileID: 1255997597}
   - {fileID: 1031774077}
   - {fileID: 1216978334}
   - {fileID: 596350176}
-  m_Father: {fileID: 650834445}
-  m_RootOrder: 1
+  m_Father: {fileID: 1281100701}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1285918387
 GameObject:
@@ -13727,6 +13739,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingsMenuButton
       objectReference: {fileID: 0}
+    - target: {fileID: 592620376861400803, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 592620376861400807, guid: 8345af873d9471043ad230e588f91b06, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -13774,6 +13790,14 @@ PrefabInstance:
     - target: {fileID: 1858667968010569014, guid: 8345af873d9471043ad230e588f91b06, type: 3}
       propertyPath: m_text
       value: Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347859755922421536, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802996928734281167, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8345af873d9471043ad230e588f91b06, type: 3}
@@ -13903,6 +13927,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuitMenuButton
       objectReference: {fileID: 0}
+    - target: {fileID: 592620376861400803, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 592620376861400807, guid: 8345af873d9471043ad230e588f91b06, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -13950,6 +13978,14 @@ PrefabInstance:
     - target: {fileID: 1858667968010569014, guid: 8345af873d9471043ad230e588f91b06, type: 3}
       propertyPath: m_text
       value: Quit
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347859755922421536, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802996928734281167, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8345af873d9471043ad230e588f91b06, type: 3}
@@ -17928,6 +17964,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CollectionMenuButton
       objectReference: {fileID: 0}
+    - target: {fileID: 592620376861400803, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 592620376861400807, guid: 8345af873d9471043ad230e588f91b06, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -17975,6 +18015,14 @@ PrefabInstance:
     - target: {fileID: 1858667968010569014, guid: 8345af873d9471043ad230e588f91b06, type: 3}
       propertyPath: m_text
       value: Collection
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347859755922421536, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802996928734281167, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8345af873d9471043ad230e588f91b06, type: 3}
@@ -20436,6 +20484,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayMenuButton
       objectReference: {fileID: 0}
+    - target: {fileID: 592620376861400803, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 592620376861400807, guid: 8345af873d9471043ad230e588f91b06, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -20483,6 +20535,14 @@ PrefabInstance:
     - target: {fileID: 1858667968010569014, guid: 8345af873d9471043ad230e588f91b06, type: 3}
       propertyPath: m_text
       value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347859755922421536, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802996928734281167, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8345af873d9471043ad230e588f91b06, type: 3}
