@@ -15,6 +15,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject popupNotification;
     [SerializeField] private TextMeshProUGUI popupNotificationText;
+    [SerializeField] private float popupDuration = 2.5f;
+    [SerializeField] private float popupMovementDuration = 0.3f;
     public Slider progressSlider;
     public TextMeshProUGUI progressText;
     public bool soloPlayEnabled;
@@ -103,20 +105,21 @@ public class MainMenu : MonoBehaviour
     IEnumerator ShowPopupNotification(string text)
     {
         float currentTime = 0;
-        float duration = 2.5f;
+        popupNotification.SetActive(true);
         popupNotificationText.text = text;
         StartCoroutine(MovePopup(true));
-        while (currentTime < duration)
+        while (currentTime < popupDuration)
         {
             currentTime += Time.deltaTime;
             yield return null;
         }
         StartCoroutine(MovePopup(false));
+        yield return new WaitForSeconds(popupMovementDuration);
+        popupNotification.SetActive(false);
     }
 
     IEnumerator MovePopup(bool direction)
     {
-        float duration = 0.3f;
         RectTransform popupRectTransform = popupNotification.GetComponent<RectTransform>();
 
         float popupYPosStart;
@@ -133,10 +136,10 @@ public class MainMenu : MonoBehaviour
         }
 
         float currentTime = 0;
-        while (currentTime < duration)
+        while (currentTime < popupMovementDuration)
         {
             currentTime += Time.deltaTime;
-            float newPos = Mathf.Lerp(popupYPosStart, popupYPosEnd, currentTime / duration);
+            float newPos = Mathf.Lerp(popupYPosStart, popupYPosEnd, currentTime / popupMovementDuration);
             popupRectTransform.anchoredPosition = new Vector2(popupRectTransform.anchoredPosition.x, newPos);
             yield return null;
         }
