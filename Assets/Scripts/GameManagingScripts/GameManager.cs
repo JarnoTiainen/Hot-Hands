@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerModifyHealth(ModifyHealth modifyHealth)
     {
-        if (debuggerModeOn) Debug.Log("player modifyHealth " + modifyHealth.amount);
+        Debug.Log("player modifyHealth " + modifyHealth.amount);
         if(IsYou(modifyHealth.player))
         {
             if(modifyHealth.amount > 0)
@@ -158,7 +158,7 @@ public class GameManager : MonoBehaviour
             }
             else if(modifyHealth.amount < 0)
             {
-                playerStats.playerHealth -= modifyHealth.amount;
+                playerStats.playerHealth += modifyHealth.amount;
             }
         }
         else
@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
             }
             else if(modifyHealth.amount < 0)
             {
-                enemyPlayerStats.playerHealth -= modifyHealth.amount;
+                enemyPlayerStats.playerHealth += modifyHealth.amount;
             }
         }
     }
@@ -208,6 +208,7 @@ public class GameManager : MonoBehaviour
         {   
             playerStats.playerBurnValue = newValue;
             References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = playerStats.playerBurnValue.ToString();
+            Hand.Instance.UpdateCanAffortCards();
         }
         else
         {

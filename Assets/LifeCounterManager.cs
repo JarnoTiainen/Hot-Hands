@@ -32,6 +32,7 @@ public class LifeCounterManager : MonoBehaviour
 
     private void HealthPointsChangeEvent(bool isYou, int change)
     {
+        Debug.Log("change " + change);
         if (change < 0)
         {
             if (isYou)
