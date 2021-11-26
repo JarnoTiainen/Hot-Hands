@@ -23,7 +23,11 @@ MonoBehaviour:
   lp: 2
   attackDirection: 1
   enchantments:
-  - enchantmentName: War Ballad
+  - enchantmentName: Soothing Tune
     enchantmentEffect: 6
     trigger: 1
     weight: 4
+    targeting: 0
+    buffType: 0
+    buffVanishType: 0
+    hidden: 0

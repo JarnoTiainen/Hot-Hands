@@ -23,7 +23,11 @@ MonoBehaviour:
   lp: 3
   attackDirection: 1
   enchantments:
-  - enchantmentName: Betrayal most foul
+  - enchantmentName: Betrayal Most Foul
     enchantmentEffect: 5
     trigger: 4
     weight: 1
+    targeting: 0
+    buffType: 0
+    buffVanishType: 0
+    hidden: 0

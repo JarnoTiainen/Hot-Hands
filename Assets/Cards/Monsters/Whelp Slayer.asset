@@ -15,15 +15,11 @@ MonoBehaviour:
   cardSprite: {fileID: 21300000, guid: 31106d9a5827ca649b6ee03cf8043ad8, type: 3}
   cardName: Whelp Slayer
   cost: 3
-  value: 2
+  value: 3
   cardType: 1
   spellTags: 
   monsterTags: 00000000
   rp: 5
   lp: 2
   attackDirection: 2
-  enchantments:
-  - enchantmentName: Draw Card
-    enchantmentEffect: 1
-    trigger: 1
-    weight: 1
+  enchantments: []

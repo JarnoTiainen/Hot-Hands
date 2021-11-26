@@ -40,7 +40,8 @@ public class Enchantment
         Deny,
         DestroyCombatant,
         BuffSelfPermanent,
-        ReduceHighestCost
+        ReduceHighestCost,
+        DamagePlayer
     }
     public enum Trigger
     {
