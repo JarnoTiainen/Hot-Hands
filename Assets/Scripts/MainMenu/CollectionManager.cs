@@ -97,7 +97,7 @@ public class CollectionManager : MonoBehaviour
 
         for (int i = 0; playerDecks.Count > i; i++)
         {
-            CreateNewDeck(deckNames[i], true, true);
+            CreateNewDeck(deckNames[i], true, true, i);
             UpdateDeckUI(i);
         }
 
@@ -184,29 +184,32 @@ public class CollectionManager : MonoBehaviour
     }
 
     // Creates new empty ingame list and deck when called
-    public void CreateNewDeck(string newName = null, bool isStart = false, bool isLoadingFromDB = false)
+    public void CreateNewDeck(string newName = null, bool isStart = false, bool isLoadingFromDB = false, int nameIndex = -1)
     {
         if (playerDecks.Count >= playerDeckLimit && !isLoadingFromDB) return;
 
         GameObject newCardList = Instantiate(cardListPrefab) as GameObject;
         newCardList.SetActive(false);
-        if (newName == null || newName == "") newCardList.name = "DECK " + (playerDecks.Count + 1);
+        if (newName == null || newName == "") newCardList.name = "DECK " + (nameIndex + 1);
         else newCardList.name = newName;
         newCardList.transform.SetParent(cardListWindow.transform, false);
         cardLists.Add(newCardList);
 
-        if (newName == null || newName == "") cardListToggles[playerDecks.Count].name = "DECK " + (playerDecks.Count);
-        else cardListToggles[playerDecks.Count].name = newName;
+        if (newName == null || newName == "") cardListToggles[nameIndex + 1].name = "DECK " + (nameIndex + 1);
+        else cardListToggles[nameIndex + 1].name = newName;
 
         if (!isStart) playerDecks.Add(new List<Card>());
         // Force rebuilds the toggle row so that the content size fitter component behaves properly
+        /*
         RectTransform togglesRectTransform = togglesRow.transform.parent.GetComponent<RectTransform>();
         LayoutRebuilder.ForceRebuildLayoutImmediate(togglesRectTransform);
+        */
     }
 
     // Check's which toggle is checked and sets the corresponding ingame list active
     public void ChangeActiveCardList(int toggle)
     {
+        Debug.Log(toggle);
         if (!cardListToggles[toggle].deckSelected) return;
         for(int i = 0; cardListToggles.Count > i; i++)
         {

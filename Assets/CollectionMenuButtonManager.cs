@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using TMPro;
 
-public class CollectionMenuButtonManager : MonoBehaviour, IOnClickDownUIElement
+public class CollectionMenuButtonManager : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterElement, IOnHoverExitElement
 {
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private Material material;
@@ -34,12 +34,12 @@ public class CollectionMenuButtonManager : MonoBehaviour, IOnClickDownUIElement
 
     public void OnHoverEnter()
     {
-        
+        meshRenderer.material.SetInt("_IsHovered", 1);
     }
 
     public void OnHoverExit()
     {
-        
+        meshRenderer.material.SetInt("_IsHovered", 0);
     }
 
     private void Awake()

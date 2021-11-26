@@ -32,14 +32,17 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
             case ButtonType.Collection:
                 MainMenu.Instance.CollectionMenuSetActive(true);
                 MainMenu.Instance.SetCameraCollectionMenu();
+                MainMenu.Instance.MainMenuButtonsSetActive(false);
                 break;
             case ButtonType.Settings:
                 MainMenu.Instance.SettingsMenuSetActive(true);
                 MainMenu.Instance.SetCameraCollectionMenu();
+                MainMenu.Instance.MainMenuButtonsSetActive(false);
                 break;
             case ButtonType.Quit:
                 MainMenu.Instance.QuitConfirmationSetActive(true);
                 MainMenu.Instance.SetCameraCollectionMenu();
+                MainMenu.Instance.MainMenuButtonsSetActive(false);
                 break;
             default:
                 break;
