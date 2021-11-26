@@ -3377,7 +3377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 420475715925404407, guid: bbb38818c73724341896c1433cf98c43, type: 3}
       propertyPath: buttonType
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2064577144016150158, guid: bbb38818c73724341896c1433cf98c43, type: 3}
       propertyPath: m_Pivot.x
@@ -15621,7 +15621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 420475715925404407, guid: bbb38818c73724341896c1433cf98c43, type: 3}
       propertyPath: buttonType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2064577144016150158, guid: bbb38818c73724341896c1433cf98c43, type: 3}
       propertyPath: m_Pivot.x
@@ -17613,7 +17613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 420475715925404407, guid: bbb38818c73724341896c1433cf98c43, type: 3}
       propertyPath: buttonType
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2064577144016150158, guid: bbb38818c73724341896c1433cf98c43, type: 3}
       propertyPath: m_Pivot.x
@@ -18375,6 +18375,10 @@ PrefabInstance:
     - target: {fileID: 420475715925404300, guid: bbb38818c73724341896c1433cf98c43, type: 3}
       propertyPath: m_Name
       value: CollectionButton1
+      objectReference: {fileID: 0}
+    - target: {fileID: 420475715925404407, guid: bbb38818c73724341896c1433cf98c43, type: 3}
+      propertyPath: buttonType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2064577144016150158, guid: bbb38818c73724341896c1433cf98c43, type: 3}
       propertyPath: m_Pivot.x
@@ -19619,7 +19623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 420475715925404407, guid: bbb38818c73724341896c1433cf98c43, type: 3}
       propertyPath: buttonType
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2064577144016150158, guid: bbb38818c73724341896c1433cf98c43, type: 3}
       propertyPath: m_Pivot.x

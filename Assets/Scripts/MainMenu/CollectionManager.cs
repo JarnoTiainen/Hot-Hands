@@ -195,10 +195,7 @@ public class CollectionManager : MonoBehaviour
         newCardList.transform.SetParent(cardListWindow.transform, false);
         cardLists.Add(newCardList);
 
-        Debug.Log("cardListToggles.Count: " + cardListToggles.Count);
-        Debug.Log("playerDecks.Count: " + playerDecks.Count);
-
-        if (newName == null || newName == "") cardListToggles[playerDecks.Count].name = "DECK " + (playerDecks.Count + 1);
+        if (newName == null || newName == "") cardListToggles[playerDecks.Count].name = "DECK " + (playerDecks.Count);
         else cardListToggles[playerDecks.Count].name = newName;
 
         if (!isStart) playerDecks.Add(new List<Card>());
@@ -210,21 +207,13 @@ public class CollectionManager : MonoBehaviour
     // Check's which toggle is checked and sets the corresponding ingame list active
     public void ChangeActiveCardList(int toggle)
     {
-        Debug.Log("ChangeActiveCardList start");
         if (!cardListToggles[toggle].deckSelected) return;
-        Debug.Log("ChangeActiveCardList");
         for(int i = 0; cardListToggles.Count > i; i++)
         {
-            if (cardListToggles[i].deckSelected)
-            {
-                cardLists[i].SetActive(true);
-                activeList = toggle;
-            }
-            else
-            {
-                cardLists[i].SetActive(false);
-            }
+            cardLists[i].SetActive(false);
         }
+        cardLists[toggle].SetActive(true);
+        activeList = toggle;
         UpdatePageText();
     }
 

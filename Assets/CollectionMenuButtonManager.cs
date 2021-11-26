@@ -12,44 +12,24 @@ public class CollectionMenuButtonManager : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] private TextMeshProUGUI buttonText;
     public bool deckSelected = false;
     [SerializeField] private bool activeDeck = false;
+    private static GameObject sfxLibrary;
 
     private enum ButtonType
     {
-        Deck1,
-        Deck2,
-        Deck3,
-        Deck4,
-        Deck5
+        All,    //0
+        Deck1,  //1
+        Deck2,  //2
+        Deck3,  //3
+        Deck4,  //4
+        Deck5   //5
     }
 
     public void OnClickElement()
     {
-        switch (buttonType)
-        {
-            case ButtonType.Deck1:
-                ToggleButton();
-                CollectionManager.Instance.ChangeActiveCardList(1);
-                break;
-            case ButtonType.Deck2:
-                ToggleButton();
-                CollectionManager.Instance.ChangeActiveCardList(2);
-                break;
-            case ButtonType.Deck3:
-                ToggleButton();
-                CollectionManager.Instance.ChangeActiveCardList(3);
-                break;
-            case ButtonType.Deck4:
-                ToggleButton();
-                CollectionManager.Instance.ChangeActiveCardList(4);
-                break;
-            case ButtonType.Deck5:
-                ToggleButton();
-                CollectionManager.Instance.ChangeActiveCardList(5);
-                break;
-            default:
-                break;
-        }
-
+        if (deckSelected) return;
+        ToggleButton((int)buttonType);
+        CollectionManager.Instance.ChangeActiveCardList((int)buttonType);
+        sfxLibrary.GetComponent<ButtonSFX>().OnClick();
     }
 
     public void OnHoverEnter()
@@ -65,10 +45,11 @@ public class CollectionMenuButtonManager : MonoBehaviour, IOnClickDownUIElement
     private void Awake()
     {
         meshRenderer.material = material;
+        sfxLibrary = GameObject.Find("SFXLibrary");
     }
 
     [Button]
-    public void ToggleButton()
+    public void ToggleButton(int index)
     {
         if (!deckSelected)
         {
@@ -80,6 +61,21 @@ public class CollectionMenuButtonManager : MonoBehaviour, IOnClickDownUIElement
             deckSelected = false;
             meshRenderer.material.SetInt("_ButtonSelected", 0);
         }
+
+        int siblings = gameObject.transform.parent.childCount;
+        for(int i = 0; siblings > i; i++)
+        {
+            if(i != index)
+            {
+                gameObject.transform.parent.GetChild(i).GetComponent<CollectionMenuButtonManager>().TurnOff();
+            }
+        }
+    }
+
+    public void TurnOff()
+    {
+        deckSelected = false;
+        meshRenderer.material.SetInt("_ButtonSelected", 0);
     }
 
     [Button]
