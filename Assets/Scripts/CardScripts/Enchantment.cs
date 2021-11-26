@@ -34,7 +34,8 @@ public class Enchantment
         Fireball,
         Deny,
         DestroyCombatant,
-        BuffSelfPermanent
+        BuffSelfPermanent,
+        ReduceHighestCost
     }
     public enum Trigger
     {
