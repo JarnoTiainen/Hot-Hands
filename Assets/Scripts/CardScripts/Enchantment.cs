@@ -16,8 +16,12 @@ public class Enchantment
     public int weight;
     public bool targeting;
     public CardDataMessage.BuffType buffType;
+    public BuffVanishType buffVanishType;
 
-    
+    public enum BuffVanishType
+    {
+        Permanent, All, Sacrifice, LastBreath
+    }
 
     public enum EnchantmentEffect
     {
