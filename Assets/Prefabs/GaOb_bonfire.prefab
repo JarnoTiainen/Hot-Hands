@@ -299,7 +299,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8010137211644612649
 Transform:
@@ -668,6 +668,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7450113518584564989}
     m_Modifications:
+    - target: {fileID: -9153439365154604952, guid: 60fa2702f8b8c1f4f9224565a9932d7d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 60fa2702f8b8c1f4f9224565a9932d7d, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -720,6 +724,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c015e3b13ba783247b6b0f992925c439, type: 2}
+    - target: {fileID: -1919298537937051115, guid: 60fa2702f8b8c1f4f9224565a9932d7d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: -592029264769593347, guid: 60fa2702f8b8c1f4f9224565a9932d7d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -728,9 +736,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: bonfire
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 60fa2702f8b8c1f4f9224565a9932d7d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438269910277763409, guid: 60fa2702f8b8c1f4f9224565a9932d7d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4107249058017664394, guid: 60fa2702f8b8c1f4f9224565a9932d7d, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107249058017664394, guid: 60fa2702f8b8c1f4f9224565a9932d7d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8230570273184807283, guid: 60fa2702f8b8c1f4f9224565a9932d7d, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -753,6 +773,14 @@ PrefabInstance:
     - target: {fileID: 2815928705905295616, guid: 88f6fc547e88fdd45ab22a6bb937a7dd, type: 3}
       propertyPath: m_Name
       value: BonfireEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2815928705905295616, guid: 88f6fc547e88fdd45ab22a6bb937a7dd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680917454860132229, guid: 88f6fc547e88fdd45ab22a6bb937a7dd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8766435796288366550, guid: 88f6fc547e88fdd45ab22a6bb937a7dd, type: 3}
       propertyPath: m_RootOrder

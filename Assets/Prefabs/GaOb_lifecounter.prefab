@@ -567,6 +567,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6761368515954915868, guid: aaa887dbbb276e74b8c9536a6e1c7223, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: -5654080011043813245, guid: aaa887dbbb276e74b8c9536a6e1c7223, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -579,10 +583,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: lifecounter
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aaa887dbbb276e74b8c9536a6e1c7223, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 3927723427988158217, guid: aaa887dbbb276e74b8c9536a6e1c7223, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0369b51d5b220f14080712aa3a517490, type: 2}
+    - target: {fileID: 5357378370696606467, guid: aaa887dbbb276e74b8c9536a6e1c7223, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097734373906851511, guid: aaa887dbbb276e74b8c9536a6e1c7223, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaa887dbbb276e74b8c9536a6e1c7223, type: 3}
 --- !u!4 &6371014702284837398 stripped

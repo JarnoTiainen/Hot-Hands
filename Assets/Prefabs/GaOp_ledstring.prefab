@@ -82,9 +82,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8609426716307066277, guid: 836dd9752a1c9ec49baef4e60e45dc7a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -8274941203850205650, guid: 836dd9752a1c9ec49baef4e60e45dc7a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 836dd9752a1c9ec49baef4e60e45dc7a, type: 3}
       propertyPath: m_Name
       value: ledstring
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 836dd9752a1c9ec49baef4e60e45dc7a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 836dd9752a1c9ec49baef4e60e45dc7a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 7707843706255484300, guid: 836dd9752a1c9ec49baef4e60e45dc7a, type: 3}
       propertyPath: m_Materials.Array.data[0]
