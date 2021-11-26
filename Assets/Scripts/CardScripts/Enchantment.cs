@@ -41,7 +41,8 @@ public class Enchantment
         DestroyCombatant,
         BuffSelfPermanent,
         ReduceHighestCost,
-        DamagePlayer
+        DamagePlayer,
+        Vanish
     }
     public enum Trigger
     {
