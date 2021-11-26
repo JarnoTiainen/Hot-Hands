@@ -7,11 +7,12 @@ using TMPro;
 public class MainMenu : MonoBehaviour
 {
     public static MainMenu Instance { get; private set; }
-    public GameObject settingsMenu;
-    public GameObject collectionMenu;
-    public GameObject quitConfirmation;
-    public GameObject loginScreen;
-    public GameObject loadingScreen;
+    [SerializeField] private GameObject mainMenuButtons;
+    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject collectionMenu;
+    [SerializeField] private GameObject quitConfirmation;
+    [SerializeField] private GameObject loginScreen;
+    [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject popupNotification;
     [SerializeField] private TextMeshProUGUI popupNotificationText;
     public Slider progressSlider;
@@ -38,6 +39,8 @@ public class MainMenu : MonoBehaviour
             Debug.Log("Login screen SetActive true");
         }
     }
+
+    public void MainMenuButtonsSetActive(bool value) => mainMenuButtons.SetActive(value);
 
     public void CollectionMenuSetActive(bool value)
     {
