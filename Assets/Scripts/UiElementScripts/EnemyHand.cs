@@ -39,6 +39,7 @@ public class EnemyHand : MonoBehaviour
             newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
             Vector3 newPos = new Vector3(newPosX, 0, 0);
             unhandledCards[i].GetComponent<CardMovement>().OnCardMove(newPos, GameManager.Instance.moveDuration);
+            unhandledCards[i].GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0, 180, 0), GameManager.Instance.rotationSpeed);
         }
     }
 
@@ -61,6 +62,7 @@ public class EnemyHand : MonoBehaviour
         newCard.GetComponent<InGameCard>().SetNewCardData(false, newCardData);
         SetNewCardPositions();
         GameManager.Instance.AddCardToInGameCards(newCard);
+        
     }
 
     public GameObject GetCardWithSeed(string seed)

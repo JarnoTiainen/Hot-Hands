@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public PlayerStats enemyPlayerStats;
     public float attackDuration = 0.3f;
     public float moveDuration = 0.4f;
+    public float rotationSpeed = 0.2f;
     public float rearrangeDuration = 0.4f;
     public int playerNumber;
     public int maxHandSize = 5;

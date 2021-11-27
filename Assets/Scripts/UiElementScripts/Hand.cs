@@ -14,7 +14,6 @@ public class Hand : MonoBehaviour
     private static List<GameObject> unhandledCards = new List<GameObject>();
 
     [SerializeField] private float gapBetweenCards = 0;
-    [SerializeField] private float rotationSpeed = 0.1f;
 
     [SerializeField] private Vector2 handBoxDimension;
 
@@ -81,7 +80,7 @@ public class Hand : MonoBehaviour
         newCard.GetComponent<InGameCard>().SetNewCardData(true, card.GetComponent<InGameCard>().GetData());
         newCard.GetComponent<InGameCard>().SetDescription();
         newCard.GetComponent<InGameCard>().SetAttackDirectionSymbol();
-        newCard.GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0, 0, 0), Instance.rotationSpeed);
+        newCard.GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0, 0, 0), GameManager.Instance.rotationSpeed);
         SetNewCardPositions();
         Instance.UpdateCanAffortCards();
     }
@@ -116,7 +115,7 @@ public class Hand : MonoBehaviour
         {
             unhandledCards[0].GetComponent<InGameCard>().cardHidden = false;
             unhandledCards[0].GetComponent<InGameCard>().SetNewCardData(true, cardData);
-            unhandledCards[0].GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0,0,0), Instance.rotationSpeed);
+            unhandledCards[0].GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0,0,0), GameManager.Instance.rotationSpeed);
             unhandledCards[0].GetComponent<InGameCard>().nameText.text = drawCardMessage.cardName;
             unhandledCards[0].GetComponent<InGameCard>().SetDescription();
             unhandledCards[0].GetComponent<InGameCard>().SetAttackDirectionSymbol();
