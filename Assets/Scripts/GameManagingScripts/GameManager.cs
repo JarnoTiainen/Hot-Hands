@@ -240,7 +240,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 if(References.i.yourDeckObj.GetComponent<Deck>() != null) {
-                    References.i.yourDeck.StartDrawCooldown(drawCardMessage.drawCooldown);
+                    References.i.yourDeck.GetComponent<DeckGaObConstructor>().StartDrawCooldown(drawCardMessage.drawCooldown);
                 } else if (References.i.yourDeckObj.GetComponent<TutorialDeck>() != null) {
                     References.i.yourDeckObj.GetComponent<TutorialDeck>().StartDrawCooldown(drawCardMessage.drawCooldown);
                 }
@@ -290,7 +290,7 @@ public class GameManager : MonoBehaviour
     [Button]public void PlayerReturnDrawCard()
     {
         Hand.RemoveHiddenCard();
-        References.i.yourDeck.StartDrawCooldown(0);
+        References.i.yourDeck.GetComponent<DeckGaObConstructor>().StartDrawCooldown(0);
         playerStats.deckCardCount++;
         playerStats.playerHandCards--;
     }
@@ -300,7 +300,7 @@ public class GameManager : MonoBehaviour
         if(setDeckMessage.player == playerNumber)
         {
             playerStats.deckCardCount = setDeckMessage.deckCards;
-            References.i.yourDeck.CreateDeck();
+            References.i.yourDeck.GetComponent<DeckGaObConstructor>().CreateDeck();
             deckSet = true;
         }
         else

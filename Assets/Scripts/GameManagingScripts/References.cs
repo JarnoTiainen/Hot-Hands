@@ -45,7 +45,7 @@ public class References: MonoBehaviour
     public LifeCounterManager opponentLifeCounter;
     public SpellZone spellZone;
 
-    public DeckGaObConstructor yourDeck;
-    public DeckGaObConstructor opponentDeck;
+    public GameObject yourDeck;
+    public GameObject opponentDeck;
    
 }

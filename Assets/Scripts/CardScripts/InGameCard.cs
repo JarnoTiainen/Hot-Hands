@@ -198,7 +198,10 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         if (cost != null) cost.text = cardData.cost.ToString();
         if (value != null) value.text = cardData.value.ToString();
 
-        meshRendererImage.material.SetTexture("_CardImage", cardData.cardSprite.texture);
+        if (isYourCard) {
+            meshRendererImage.material.SetTexture("_CardImage", cardData.cardSprite.texture);
+        }
+        
         UpdateRPLP(cardData.rp, cardData.lp);
 
 
