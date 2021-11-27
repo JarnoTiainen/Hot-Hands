@@ -19,7 +19,10 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
         Login,
         OpenSignup,
         Signup,
-        LoginBack
+        LoginBack,
+        SettingsBack,
+        QuitYes,
+        QuitNo
     }
 
     public void OnClickElement()
@@ -59,6 +62,19 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
                 break;
             case ButtonType.LoginBack:
                 LoginManager.Instance.GoBack();
+                break;
+            case ButtonType.SettingsBack:
+                MainMenu.Instance.SettingsMenuSetActive(false);
+                MainMenu.Instance.SetCameraMainMenu();
+                MainMenu.Instance.MainMenuButtonsSetActive(true);
+                break;
+            case ButtonType.QuitYes:
+                MainMenu.Instance.QuitGame();
+                break;
+            case ButtonType.QuitNo:
+                MainMenu.Instance.QuitConfirmationSetActive(false);
+                MainMenu.Instance.SetCameraMainMenu();
+                MainMenu.Instance.MainMenuButtonsSetActive(true);
                 break;
             default:
                 break;

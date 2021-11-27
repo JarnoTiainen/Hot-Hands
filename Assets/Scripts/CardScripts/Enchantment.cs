@@ -42,7 +42,10 @@ public class Enchantment
         BuffSelfPermanent,
         ReduceHighestCost,
         DamagePlayer,
-        Vanish
+        Vanish,
+        AddSpellToHand,
+        AddGolemToDiscardPile,
+        BuffAllGolems
     }
     public enum Trigger
     {

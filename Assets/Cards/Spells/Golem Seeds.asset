@@ -10,16 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
-  m_Name: Rat Goliath
+  m_Name: Golem Seeds
   m_EditorClassIdentifier: 
-  cardSprite: {fileID: 21300000, guid: db78076f48b4b5b428e4ec2c1438f89c, type: 3}
-  cardName: Rat Goliath
+  cardSprite: {fileID: 21300000, guid: eb3db5b0868bc4f348e3d3a1dfbf32a8, type: 3}
+  cardName: Golem Seeds
   cost: 4
-  value: 2
-  cardType: 1
+  value: 3
+  cardType: 0
   spellTags: 
   monsterTags: 
-  rp: 6
-  lp: 6
-  attackDirection: 1
-  enchantments: []
+  rp: 0
+  lp: 0
+  attackDirection: 0
+  enchantments:
+  - enchantmentName: Sow the Seeds
+    enchantmentEffect: 18
+    trigger: 7
+    weight: 3
+    targeting: 0
+    buffType: 0
+    buffVanishType: 0
+    hidden: 0
