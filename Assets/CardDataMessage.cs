@@ -10,11 +10,11 @@ public class CardDataMessage
     }
 
 
-    public string cardName;
-    public int cardCost;
-    public int cardValue;
-    public int cardType;
-    public int attackDirection;
+    public string name;
+    public int cost;
+    public int value;
+    public int cardtype;
+    public int direction;
     public List<Card.MonsterTag> mtag;
     public List<Card.SpellTag> stag;
     public int rp;

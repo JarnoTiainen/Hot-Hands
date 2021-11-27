@@ -34,6 +34,8 @@ public class DeckBuilder : MonoBehaviour
     // Adds a card to the builder
     public void AddCard(Card card)
     {
+        Debug.Log("adding card");
+
         // Reached max size
         if(currentBuildSize >= deckSizeLimit)
         {
@@ -45,6 +47,7 @@ public class DeckBuilder : MonoBehaviour
             AddNewCard(card);
             return;
         }
+        Debug.Log("adding card 2");
         // Add duplicate card to build
         for (int i = 0; build.Count > i; i++)
         {

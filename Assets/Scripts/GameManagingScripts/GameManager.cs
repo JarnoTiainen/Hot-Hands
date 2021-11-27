@@ -582,6 +582,7 @@ public class GameManager : MonoBehaviour
 
         foreach(CardDataMessage cardData in statChangeMessage.convertedTargets)
         {
+            Debug.Log("seed " + JsonUtility.ToJson(cardData));
             GameObject target = GetCardFromInGameCards(cardData.seed);
             CardData data = target.GetComponent<InGameCard>().GetData();
 
@@ -599,10 +600,11 @@ public class GameManager : MonoBehaviour
             data.enchantments = cardData.enchantments;
             data.monsterTags = cardData.mtag;
             data.spellTags = cardData.stag;
-            data.cardName = cardData.cardName;
-            data.cost = cardData.cardCost;
-            data.attackDirection = (Card.AttackDirection)cardData.attackDirection;
-            data.value = cardData.cardValue;
+            data.cardName = cardData.name;
+            data.cost = cardData.cost;
+            data.attackDirection = (Card.AttackDirection)cardData.direction;
+            data.value = cardData.value;
+            Debug.Log("card new cost = " + cardData.cost);
             PlayDataChangeEffect(statChangeMessage.buffType, target);
             target.GetComponent<InGameCard>().UpdateCardTexts();
         }

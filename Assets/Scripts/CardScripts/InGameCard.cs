@@ -279,6 +279,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     {
         this.lp.text = cardData.lp.ToString();
         this.rp.text = cardData.rp.ToString();
+        this.cost.text = cardData.cost.ToString();
+        this.value.text = cardData.value.ToString();
     }
 
     public void Burn()

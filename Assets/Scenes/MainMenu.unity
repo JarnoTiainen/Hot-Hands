@@ -2831,7 +2831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &261637964
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4948,23 +4948,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2305062187910285920, guid: 21371863ba3d03747818a395ddb176c6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2305062187910285920, guid: 21371863ba3d03747818a395ddb176c6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2305062187910285920, guid: 21371863ba3d03747818a395ddb176c6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2305062187910285920, guid: 21371863ba3d03747818a395ddb176c6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -8.000244
       objectReference: {fileID: 0}
     - target: {fileID: 2305062187910285920, guid: 21371863ba3d03747818a395ddb176c6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 2305062187910285920, guid: 21371863ba3d03747818a395ddb176c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9841,11 +9841,11 @@ RectTransform:
   m_Father: {fileID: 1514397630}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: NaN, y: NaN}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: NaN, y: NaN}
 --- !u!114 &853345993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12837,6 +12837,8 @@ MonoBehaviour:
   loadingScreen: {fileID: 1256247235}
   popupNotification: {fileID: 261637963}
   popupNotificationText: {fileID: 748368254}
+  popupDuration: 2.5
+  popupMovementDuration: 0.3
   progressSlider: {fileID: 198881204}
   progressText: {fileID: 394806715}
   soloPlayEnabled: 1
@@ -14438,8 +14440,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 920}
+  m_AnchoredPosition: {x: -1.1799927, y: 45.41}
+  m_SizeDelta: {x: -56.92, y: 852.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1514397631
 MonoBehaviour:
@@ -16641,8 +16643,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.79, y: 0}
   m_AnchorMax: {x: 1, y: 0.92}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -36.630005, y: -36.650024}
+  m_SizeDelta: {x: -12.37, y: -73.28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1728509030
 MonoBehaviour:
@@ -19306,7 +19308,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.87}
-  m_AnchoredPosition: {x: 908, y: -0.000061035156}
+  m_AnchoredPosition: {x: 901, y: -0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!64 &2026529008
@@ -20056,7 +20058,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -40}
+  m_AnchoredPosition: {x: -24.699997, y: 65.70001}
   m_SizeDelta: {x: 0, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2080187383
