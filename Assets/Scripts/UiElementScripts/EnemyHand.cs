@@ -45,7 +45,8 @@ public class EnemyHand : MonoBehaviour
     //add a new card to enemy hand
     [Button] public static void AddNewCard(string seed)
     {
-        GameObject newCard = InstantiateNewCard();
+        GameObject newCard = References.i.opponentDeck.TakeTopCard();
+        newCard.transform.SetParent(Instance.transform);
         unhandledCards.Add(newCard);
         CardData newCardData = newCard.GetComponent<InGameCard>().GetData();
         newCardData.seed = seed;

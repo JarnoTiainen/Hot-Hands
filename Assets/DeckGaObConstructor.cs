@@ -23,7 +23,8 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
     }
     private void Start()
     {
-        deckCardsCount = GameManager.Instance.playerStats.deckCardCount;
+        if(owner == 0) deckCardsCount = GameManager.Instance.playerStats.deckCardCount;
+        else if(owner == 1) deckCardsCount = GameManager.Instance.enemyPlayerStats.deckCardCount;
         CreateDeck();
     }
     public void Update()
@@ -37,7 +38,9 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
 
     [Button] public void CreateDeck()
     {
-        deckCardsCount = GameManager.Instance.playerStats.deckCardCount;
+        if (owner == 0) deckCardsCount = GameManager.Instance.playerStats.deckCardCount;
+        else if (owner == 1) deckCardsCount = GameManager.Instance.enemyPlayerStats.deckCardCount;
+
         for (int i = 0; i < deckCardsCount; i++)
         {
             GameObject newDeckCard = Instantiate(cardPrefab);
