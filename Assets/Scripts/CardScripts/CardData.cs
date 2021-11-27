@@ -16,7 +16,7 @@ public class CardData
     public int value;
     public Card.CardType cardType;
     public Card.AttackDirection attackDirection;
-
+    public bool legendary;
     //info that only spells share
     public List<Card.SpellTag> spellTags;
 
@@ -31,7 +31,7 @@ public class CardData
     public string description;
 
     //add missing ones later
-    public CardData(Sprite cardSprite, bool targetting, string cardName, int cost, int value, Card.CardType cardType, Card.AttackDirection attackDirection, int rp, int lp, List<Enchantment> enchantments, string seed, string description) //List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags)
+    public CardData(Sprite cardSprite, bool targetting, string cardName, int cost, int value, Card.CardType cardType, Card.AttackDirection attackDirection, int rp, int lp, List<Enchantment> enchantments, string seed, string description, bool legendary) //List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags)
     {
         this.seed = seed;
         this.cardSprite = cardSprite;
@@ -47,10 +47,11 @@ public class CardData
         this.enchantments = enchantments;
         this.targetting = targetting;
         this.description = description;
+        this.legendary = legendary;
 
     }
 
-    public CardData(Sprite cardSprite, bool targetting, string cardName, int cost, int value, Card.CardType cardType, List<Enchantment> enchantments, string seed, string description)
+    public CardData(Sprite cardSprite, bool targetting, string cardName, int cost, int value, Card.CardType cardType, List<Enchantment> enchantments, string seed, string description, bool legendary)
     {
         this.seed = seed;
         this.cardSprite = cardSprite;
@@ -63,5 +64,6 @@ public class CardData
         this.enchantments = enchantments;
         this.targetting = targetting;
         this.description = description;
+        this.legendary = legendary;
     }
 }

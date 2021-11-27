@@ -18,7 +18,9 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     public bool isInHand;
 
     [SerializeField] private bool debuggerModeOn = false;
-    [SerializeField] private Shader cardMainBodyMaterial;
+    [SerializeField] private Material cardMainBodyMaterial;
+    [SerializeField] private Material spellardMainBodyMaterial;
+    [SerializeField] private Material legendaryCardMainBodyMaterial;
     [SerializeField] private Shader cardImageShader;
     [SerializeField] private Material mat;
     [SerializeField] private Texture2D cardImage;
@@ -70,14 +72,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     private void Awake()
     {
-        mat = meshRendererBorderLow.material;
-        meshRendererImage.material.shader = cardImageShader;
-        
-        meshRendererImageLow.material.shader = cardMainBodyMaterial;
-        meshRendererBorderLow.material.shader = cardMainBodyMaterial;
-        meshRenderercardBackLow.material.shader = cardMainBodyMaterial;
-        meshRendererIconZoneLow.material.shader = cardMainBodyMaterial;
-        meshRendererNameZoneLow.material.shader = cardMainBodyMaterial;
+        SetCardMaterial();
         coolDownSlider.gameObject.SetActive(false);
 
 
@@ -90,6 +85,43 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         meshRendererIconZoneLow.material.renderQueue = 2900;
         meshRendererNameZoneLow.material.renderQueue = 2900;
         meshRendererImage.material.renderQueue = 3100; */
+        
+    }
+
+    public void SetCardMaterial()
+    {
+        if(cardData.cardType == Card.CardType.Monster)
+        {
+            meshRendererImageLow.material = cardMainBodyMaterial;
+            meshRendererBorderLow.material = cardMainBodyMaterial;
+            meshRenderercardBackLow.material = cardMainBodyMaterial;
+            meshRendererIconZoneLow.material = cardMainBodyMaterial;
+            meshRendererNameZoneLow.material = cardMainBodyMaterial;
+
+            mat = meshRendererBorderLow.material;
+        }
+        else
+        {
+            meshRendererImageLow.material = spellardMainBodyMaterial;
+            meshRendererBorderLow.material = spellardMainBodyMaterial;
+            meshRenderercardBackLow.material = spellardMainBodyMaterial;
+            meshRendererIconZoneLow.material = spellardMainBodyMaterial;
+            meshRendererNameZoneLow.material = spellardMainBodyMaterial;
+
+            mat = meshRendererBorderLow.material;
+        }
+        if(cardData.legendary)
+        {
+            meshRendererImageLow.material = legendaryCardMainBodyMaterial;
+            meshRendererBorderLow.material = legendaryCardMainBodyMaterial;
+            meshRenderercardBackLow.material = legendaryCardMainBodyMaterial;
+            meshRendererIconZoneLow.material = legendaryCardMainBodyMaterial;
+            meshRendererNameZoneLow.material = legendaryCardMainBodyMaterial;
+
+            mat = meshRendererBorderLow.material;
+        }
+        meshRendererImage.material.shader = cardImageShader;
+
         
     }
 
@@ -198,7 +230,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         if (cost != null) cost.text = cardData.cost.ToString();
         if (value != null) value.text = cardData.value.ToString();
 
-        if (cardData.cardSprite != null) {
+        if (cardData.cardSprite) {
             meshRendererImage.material.SetTexture("_CardImage", cardData.cardSprite.texture);
         }
         
@@ -215,7 +247,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
             if (value != null) lp.text = cardData.rp.ToString();
             if (value != null) rp.text = cardData.lp.ToString();
         }
-        
+        SetCardMaterial();
     }
 
     public void OnHoverEnter()

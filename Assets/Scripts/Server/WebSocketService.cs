@@ -190,6 +190,9 @@ public class WebSocketService : MonoBehaviour
                 case "TRIGGERSPELL":
                     gameManager.TriggerSpell(JsonUtility.FromJson<TriggerSpellMessage>(data[1]));
                     break;
+                case "LOADCHAT":
+                    gameManager.LoadChat(JsonUtility.FromJson<LoadChatMessage>(data[1]));
+                    break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                     break;

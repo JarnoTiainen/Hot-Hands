@@ -30,6 +30,7 @@ public class SummonCardMessage
     public int lp;
     public List<Enchantment> enchantments;
     public string seed;
+    public bool legendary;
 
     public SummonCardMessage(int boardIndex, int player, bool auto, bool free, float attackCooldown, CardData cardData)
     {

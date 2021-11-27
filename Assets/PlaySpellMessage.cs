@@ -15,6 +15,7 @@ public class PlaySpellMessage
     public List<Card.SpellTag> stag;
     public List<Enchantment> enchantments;
     public float windup;
+    public bool legendary;
 
     public List<string> targets;
 }

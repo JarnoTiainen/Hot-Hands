@@ -32,6 +32,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Dictionary<string, GameObject> inGameCards = new Dictionary<string, GameObject>();
 
 
+    public void LoadChat(LoadChatMessage loadChatMessage)
+    {
+        List<Message> newparsedMessages = new List<Message>();
+        foreach(string rawMessage in loadChatMessage.rawMessages)
+        {
+            newparsedMessages.Add(JsonUtility.FromJson<Message>(rawMessage));
+        }
+        loadChatMessage.parsedMessages = newparsedMessages;
+
+        //Add functionality here
+    }
+
+
     public void AddCardToInGameCards(GameObject newCard)
     {
         

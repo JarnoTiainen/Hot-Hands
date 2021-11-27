@@ -1479,6 +1479,7 @@ MonoBehaviour:
     value: 0
     cardType: 0
     attackDirection: 0
+    legendary: 0
     spellTags: 
     monsterTags: 
     rp: 0
@@ -1497,7 +1498,9 @@ MonoBehaviour:
   coolDownSlider: {fileID: 4745231975343201543}
   isInHand: 0
   debuggerModeOn: 0
-  cardMainBodyMaterial: {fileID: -6465566751694194690, guid: 0a9d315ef8089e247a582c0c35f2f748, type: 3}
+  cardMainBodyMaterial: {fileID: 2100000, guid: cd2ab7db35791bb48b3b26daf7fad7c3, type: 2}
+  spellardMainBodyMaterial: {fileID: 2100000, guid: 3dce14f6b3218d6468f461ed2ad9ff36, type: 2}
+  legendaryCardMainBodyMaterial: {fileID: 2100000, guid: 83818141bb9b4cf4bb0fa4f1b5dd8200, type: 2}
   cardImageShader: {fileID: -6465566751694194690, guid: d1c493463931c0a4f979c1a868b36962, type: 3}
   mat: {fileID: 2100000, guid: cd2ab7db35791bb48b3b26daf7fad7c3, type: 2}
   cardImage: {fileID: 2800000, guid: ab6eb980e32067e4fb1a4dc467dadc54, type: 3}
@@ -2977,7 +2980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 683967952693219769, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 796259486109439912, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_IsActive
@@ -3041,7 +3044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5964395100338357642, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7418000911509646159, guid: c979e4bf1bde9cb40a0087587698b2c7, type: 3}
       propertyPath: m_Layer

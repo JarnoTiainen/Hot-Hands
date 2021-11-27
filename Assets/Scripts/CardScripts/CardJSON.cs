@@ -12,8 +12,9 @@ public class CardJSON
     public int lp;
     public Card.AttackDirection attackDirection;
     public List<Enchantment> enchantments;
+    public bool legendary;
 
-    public CardJSON(string name, int cost, int value, Card.CardType cardType, List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags, int rp, int lp, Card.AttackDirection attackDirection, List<Enchantment> enchantments)
+    public CardJSON(string name, int cost, int value, Card.CardType cardType, List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags, int rp, int lp, Card.AttackDirection attackDirection, List<Enchantment> enchantments, bool legendary)
     {
         this.name = name;
         this.cost = cost;
@@ -25,6 +26,7 @@ public class CardJSON
         this.lp = lp;
         this.attackDirection = attackDirection;
         this.enchantments = enchantments;
+        this.legendary = legendary;
     }
 
 }

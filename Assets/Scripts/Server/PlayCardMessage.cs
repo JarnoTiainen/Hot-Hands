@@ -29,6 +29,7 @@ public class PlayCardMessage
     public int lp;
     public List<Enchantment> enchantments;
     public string seed;
+    public bool legendary;
 
 
     public PlayCardMessage(string seed, int cardSource = 0, int boardIndex = 0, string targetSeed = "")

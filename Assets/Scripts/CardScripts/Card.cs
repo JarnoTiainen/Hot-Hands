@@ -48,6 +48,7 @@ public class Card : ScriptableObject
     [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] public string cardName;
     [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] public int cost;
     [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] public int value;
+    [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] public bool legendary;
     [VerticalGroup("Card Data/Basic Info")] [EnumToggleButtons] [HideLabel] public CardType cardType;
 
     //info that only spells share
@@ -58,13 +59,13 @@ public class Card : ScriptableObject
     [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] [ShowIf("cardType", CardType.Monster)] public int rp;
     [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] [ShowIf("cardType", CardType.Monster)] public int lp;
     [VerticalGroup("Card Data/Basic Info")] [LabelWidth(100)] [ShowIf("cardType", CardType.Monster)] public AttackDirection attackDirection;
-
+    
     [SerializeField] public List<Enchantment> enchantments = new List<Enchantment>();
 
 
     [Button] public string CreateCardJSON()
     {
-        CardJSON cardJSON = new CardJSON(cardName, cost, value, cardType, spellTags, monsterTags, rp, lp, attackDirection, enchantments);
+        CardJSON cardJSON = new CardJSON(cardName, cost, value, cardType, spellTags, monsterTags, rp, lp, attackDirection, enchantments, legendary);
         string cardJSONstring = JsonUtility.ToJson(cardJSON);
         Debug.Log(cardJSONstring);
         return cardJSONstring;

@@ -45,7 +45,8 @@ public class Enchantment
         Vanish,
         AddSpellToHand,
         AddGolemToDiscardPile,
-        BuffAllGolems
+        BuffAllGolems,
+        SpellDrawCard
     }
     public enum Trigger
     {
