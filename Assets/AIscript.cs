@@ -12,14 +12,14 @@ public class AIscript : MonoBehaviour
         if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.CardDraw && drawnCards == 0) {
             Debug.Log("Enemy draws card");
             References.i.opponentDeck.GetComponent<TutorialDeck>().OpponentDraw();
-            doOnce = false;
+           
             drawnCards++;
             
         }
 
-        if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.CardPlay) {
+        if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.CardPlay && doOnce) {
             Debug.Log("Enemy plays card");
-
+            doOnce = false;
             
         }
         
