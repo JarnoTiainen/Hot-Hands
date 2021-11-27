@@ -8,14 +8,18 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private Material material;
     [SerializeField] private ButtonType buttonType;
-    
-    private enum ButtonType
+
+    public enum ButtonType
     {
         Play,
         Tutorial,
         Collection,
         Settings,
-        Quit
+        Quit,
+        Login,
+        OpenSignup,
+        Signup,
+        LoginBack
     }
 
     public void OnClickElement()
@@ -43,6 +47,18 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
                 MainMenu.Instance.QuitConfirmationSetActive(true);
                 MainMenu.Instance.SetCameraCollectionMenu();
                 MainMenu.Instance.MainMenuButtonsSetActive(false);
+                break;
+            case ButtonType.Login:
+                LoginManager.Instance.Login();
+                break;
+            case ButtonType.OpenSignup:
+                LoginManager.Instance.OpenSignup();
+                break;
+            case ButtonType.Signup:
+                LoginManager.Instance.CreateNewAccount();
+                break;
+            case ButtonType.LoginBack:
+                LoginManager.Instance.GoBack();
                 break;
             default:
                 break;

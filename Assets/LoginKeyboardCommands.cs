@@ -10,8 +10,8 @@ public class LoginKeyboardCommands : MonoBehaviour
     [SerializeField] private TMP_InputField usernameField;
     [SerializeField] private TMP_InputField passwordField;
     [SerializeField] private TMP_InputField emailField;
-    [SerializeField] private Button loginButton;
-    [SerializeField] private Button signupButton;
+    [SerializeField] private GameObject loginButton;
+    [SerializeField] private GameObject signupButton;
     public int inputIndex;
 
     void Update()
@@ -45,8 +45,8 @@ public class LoginKeyboardCommands : MonoBehaviour
 
     private void EnterPressed()
     {
-        if (emailField.gameObject.activeSelf) signupButton.onClick.Invoke();
-        else loginButton.onClick.Invoke();
+        if (emailField.gameObject.activeSelf) signupButton.GetComponent<MenuButtonScript>().OnClickElement();
+        else loginButton.GetComponent<MenuButtonScript>().OnClickElement();
     }
 
     private void SelectInputField()
