@@ -198,7 +198,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         if (cost != null) cost.text = cardData.cost.ToString();
         if (value != null) value.text = cardData.value.ToString();
 
-        if (isYourCard) {
+        if (cardData.cardSprite != null) {
             meshRendererImage.material.SetTexture("_CardImage", cardData.cardSprite.texture);
         }
         

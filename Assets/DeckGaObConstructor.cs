@@ -19,11 +19,12 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
 
     private void Awake()
     {
-        cardPrefab = References.i.fieldCard;
+        
     }
     private void Start()
     {
-        if(owner == 0) deckCardsCount = GameManager.Instance.playerStats.deckCardCount;
+        cardPrefab = References.i.fieldCard;
+        if (owner == 0) deckCardsCount = GameManager.Instance.playerStats.deckCardCount;
         else if(owner == 1) deckCardsCount = GameManager.Instance.enemyPlayerStats.deckCardCount;
         CreateDeck();
     }
@@ -44,6 +45,7 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         for (int i = 0; i < deckCardsCount; i++)
         {
             GameObject newDeckCard = Instantiate(cardPrefab);
+            //Set position to burnpile
             newDeckCard.transform.SetParent(transform);
             newDeckCard.transform.rotation = Quaternion.Euler(0, 180, Random.Range(-cardZrotationOffset, cardZrotationOffset));
             newDeckCard.transform.localPosition = new Vector3(Random.Range(-cardPosOffset, cardPosOffset), Random.Range(-cardPosOffset, cardPosOffset), -i * cardOverlapAmount);
