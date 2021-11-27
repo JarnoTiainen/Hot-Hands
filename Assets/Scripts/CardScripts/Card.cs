@@ -23,7 +23,9 @@ public class Card : ScriptableObject
 
     public enum MonsterTag
     {
-        Warrior, Dragon
+        Warrior,
+        Dragon,
+        Golem
     }
 
     public bool IsTypeOfCard(CardType type)
