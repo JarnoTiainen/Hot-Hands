@@ -18,6 +18,8 @@ public class SettingsMenu : MonoBehaviour
     public int[] screenWidths;
     private int activeScreenResIndex;
     [SerializeField] private int defaultScreenResIndex = 0;
+    [SerializeField] private Camera mainCam;
+    [SerializeField] private Camera canvasCam;
 
     void Start()
     {
@@ -88,5 +90,7 @@ public class SettingsMenu : MonoBehaviour
         }
         PlayerPrefs.SetInt("Fullscreen", ((isFullscreen) ? 1 : 0));
         PlayerPrefs.Save();
+        //mainCam.GetComponent<ForceAspectRatio>().FuckYouNico();
+        //canvasCam.GetComponent<ForceAspectRatio>().FuckYouNico();
     }
 }
