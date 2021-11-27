@@ -16,7 +16,9 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] private float cardCooldown;
     [SerializeField] private bool OnPreDrawCD = false;
     [SerializeField] private bool cardDrawReady = true;
+    [SerializeField] private bool interactable = false;
 
+    private int i;
     private void Awake()
     {
         
@@ -41,18 +43,31 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
     {
         if (owner == 0) deckCardsCount = GameManager.Instance.playerStats.deckCardCount;
         else if (owner == 1) deckCardsCount = GameManager.Instance.enemyPlayerStats.deckCardCount;
-
-        for (int i = 0; i < deckCardsCount; i++)
-        {
-            GameObject newDeckCard = Instantiate(cardPrefab);
-            //Set position to burnpile
-            newDeckCard.transform.SetParent(transform);
-            newDeckCard.transform.rotation = Quaternion.Euler(0, 180, Random.Range(-cardZrotationOffset, cardZrotationOffset));
-            newDeckCard.transform.localPosition = new Vector3(Random.Range(-cardPosOffset, cardPosOffset), Random.Range(-cardPosOffset, cardPosOffset), -i * cardOverlapAmount);
-            newDeckCard.GetComponent<InGameCard>().interActable = false;
-            deckCards.Add(newDeckCard);
-        }
+        i = 0;
+        InvokeRepeating("AddCardToDeck", 0, 0.1f);
     }
+    public void AddCardToDeck()
+    {
+        if (deckCards.Count == deckCardsCount)
+        {
+            interactable = true;
+            CancelInvoke();
+            return;
+        }
+        
+        GameObject newDeckCard = Instantiate(cardPrefab);
+        //Set position to burnpile
+        newDeckCard.transform.SetParent(transform);
+        newDeckCard.transform.rotation = Quaternion.Euler(0, 180, Random.Range(-cardZrotationOffset, cardZrotationOffset));
+        newDeckCard.transform.position = References.i.yourBurnPile.transform.position;
+        Vector3 finalCardPosition = new Vector3(Random.Range(-cardPosOffset, cardPosOffset), Random.Range(-cardPosOffset, cardPosOffset), -i * cardOverlapAmount);
+        newDeckCard.GetComponent<CardMovement>().OnCardMove(newDeckCard.transform.localPosition, finalCardPosition, 0.3f);
+        newDeckCard.GetComponent<InGameCard>().interActable = false;
+        deckCards.Add(newDeckCard);
+        i++;
+    }
+
+
     [Button] public GameObject TakeTopCard()
     {
         GameObject topCard = deckCards[deckCards.Count-1];

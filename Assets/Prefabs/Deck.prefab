@@ -48,10 +48,12 @@ MonoBehaviour:
   deckCardsCount: 0
   deckCards: []
   cardZrotationOffset: 5
+  cardPosOffset: 0.001
   owner: 0
   cardCooldown: 0
   OnPreDrawCD: 0
   cardDrawReady: 1
+  interactable: 0
 --- !u!65 &3074894214458072047
 BoxCollider:
   m_ObjectHideFlags: 0

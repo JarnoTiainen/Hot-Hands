@@ -12138,7 +12138,7 @@ MonoBehaviour:
   popupMovementDuration: 0.3
   progressSlider: {fileID: 198881204}
   progressText: {fileID: 394806715}
-  soloPlayEnabled: 0
+  soloPlayEnabled: 1
   mainCamera: {fileID: 774524565}
   mainCamMenuPos: {x: 0.1, y: -0.05, z: -0.23}
   mainCamMenuRotation: {x: -0.08818042, y: 0.041159213, z: -0.022252142, w: 0.9950051}
@@ -18987,6 +18987,7 @@ MonoBehaviour:
     playerFieldCards: 0
   attackDuration: 0.3
   moveDuration: 0.4
+  rotationSpeed: 0.2
   rearrangeDuration: 0.4
   playerNumber: 0
   maxHandSize: 5

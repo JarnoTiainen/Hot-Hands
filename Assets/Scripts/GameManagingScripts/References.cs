@@ -47,5 +47,7 @@ public class References: MonoBehaviour
 
     public GameObject yourDeck;
     public GameObject opponentDeck;
+
+    public GameObject yourBurnPile;
    
 }
