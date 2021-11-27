@@ -24,6 +24,7 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
         {
             case ButtonType.Play:
                 MainMenu.Instance.Play();
+                MainMenu.Instance.MainMenuButtonsSetActive(false);
                 break;
             case ButtonType.Tutorial:
                 MainMenu.Instance.OnTutorialButton();
