@@ -11,7 +11,7 @@ public class PlayerStats
 
     public PlayerStats(int playerStartHealth)
     {
-        deckCardCount = 0;
+        deckCardCount = 20;
         discardpileCardCount = 0;
         playerBurnValue = 0;
         playerHealth = playerStartHealth;

@@ -41,9 +41,9 @@ public class Hand : MonoBehaviour
     //Adds new facedown card to hand (ADD DRAW ANIMATION HERE)
     public static void AddNewCard()
     {
-        GameObject newCard = InstantiateNewCard();
+        GameObject newCard = References.i.yourDeck.TakeTopCard();
+        newCard.transform.SetParent(Instance.gameObject.transform, true);
         newCard.GetComponent<InGameCard>().cardHidden = true;
-        newCard.GetComponent<InGameCard>().interActable = false;
         //adds the card to list of cards that have not been 
         unhandledCards.Add(newCard);
 

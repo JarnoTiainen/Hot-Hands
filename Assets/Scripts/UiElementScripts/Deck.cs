@@ -48,13 +48,7 @@ public class Deck : MonoBehaviour, IOnClickDownUIElement
 
     
 
-    public void StartDrawCooldown(float duration)
-    {
-        OnPreDrawCD = false;
-        cardDrawReady = false;
-        if (debuggerModeOn) Debug.Log("Draw cooldown started: " + duration);
-        cardCooldown = duration;
-    }
+    
     public void FinisheDrawCooldown()
     {
         cardDrawReady = true;
