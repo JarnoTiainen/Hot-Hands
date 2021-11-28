@@ -146,6 +146,14 @@ public class MonsterZone : MonoBehaviour
             if (debugModeOn) Debug.Log("Removing monster " + seed);
             GameObject deadMonster = GetCardWithSeed(seed);
             monsterCards.Remove(deadMonster);
+            if(GameManager.Instance.IsYou(deadMonster.GetComponent<InGameCard>().owner))
+            {
+                GameManager.Instance.playerStats.discardpileCardCount++;
+            }
+            else
+            {
+                GameManager.Instance.enemyPlayerStats.discardpileCardCount++;
+            }
             deadMonster.GetComponent<InGameCard>().StartDestructionEvent();
             RepositionMonsterCards();
         }

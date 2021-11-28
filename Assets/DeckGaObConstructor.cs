@@ -41,6 +41,11 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
 
     [Button] public void CreateDeck()
     {
+        foreach(GameObject deckCard in deckCards)
+        {
+            Destroy(deckCard);
+        }
+        deckCards = new List<GameObject>();
         if (owner == 0) deckCardsCount = GameManager.Instance.playerStats.deckCardCount;
         else if (owner == 1) deckCardsCount = GameManager.Instance.enemyPlayerStats.deckCardCount;
         i = 0;
@@ -59,7 +64,14 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         //Set position to burnpile
         newDeckCard.transform.SetParent(transform);
         newDeckCard.transform.rotation = Quaternion.Euler(0, 180, Random.Range(-cardZrotationOffset, cardZrotationOffset));
-        newDeckCard.transform.position = References.i.yourBurnPile.transform.position;
+        if(owner == 0)
+        {
+            newDeckCard.transform.position = References.i.yourBurnPile.transform.position;
+        }
+        if (owner == 1)
+        {
+            newDeckCard.transform.position = References.i.opponentBurnPile.transform.position;
+        }
         Vector3 finalCardPosition = new Vector3(Random.Range(-cardPosOffset, cardPosOffset), Random.Range(-cardPosOffset, cardPosOffset), -i * cardOverlapAmount);
         newDeckCard.GetComponent<CardMovement>().OnCardMove(newDeckCard.transform.localPosition, finalCardPosition, 0.3f);
         newDeckCard.GetComponent<InGameCard>().interActable = false;

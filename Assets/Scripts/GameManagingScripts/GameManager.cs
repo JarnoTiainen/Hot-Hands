@@ -138,6 +138,7 @@ public class GameManager : MonoBehaviour
         {
             UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue - GetCardFromInGameCards(burnCardMessage.seed).GetComponent<InGameCard>().GetData().value);
             ReturnBurnedCardToHand(burnCardMessage.seed);
+            playerStats.discardpileCardCount--;
             return;
         }
 
@@ -147,6 +148,7 @@ public class GameManager : MonoBehaviour
         if (cardMessage.player == playerNumber)
         {
             playerStats.playerHandCards--;
+            playerStats.discardpileCardCount++;
         }
         else
         {
@@ -314,12 +316,14 @@ public class GameManager : MonoBehaviour
         if(setDeckMessage.player == playerNumber)
         {
             playerStats.deckCardCount = setDeckMessage.deckCards;
+            playerStats.discardpileCardCount = 0;
             References.i.yourDeck.GetComponent<DeckGaObConstructor>().CreateDeck();
             deckSet = true;
         }
         else
         {
             enemyPlayerStats.deckCardCount = setDeckMessage.deckCards;
+            enemyPlayerStats.discardpileCardCount = 0;
         }
     }
     public void PlayerSummonCard(SummonCardMessage summonCardMessage)
@@ -630,12 +634,14 @@ public class GameManager : MonoBehaviour
         if (IsYou(playSpellMessage.player))
         {
             References.i.spellZone.PlaySpell(playSpellMessage.seed, playSpellMessage.targets, playSpellMessage.windup);
-            GameManager.Instance.playerStats.playerHandCards--;
+            playerStats.playerHandCards--;
+            playerStats.discardpileCardCount++;
         }
         else
         {
             enemyPlayerStats.playerBurnValue -= playSpellMessage.cardCost;
-            GameManager.Instance.enemyPlayerStats.playerHandCards--;
+            enemyPlayerStats.playerHandCards--;
+            enemyPlayerStats.discardpileCardCount++;
             References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
             References.i.spellZone.PlaySpell(References.i.cardList.GetCardData(playSpellMessage), playSpellMessage.targets, playSpellMessage.windup);
         }
