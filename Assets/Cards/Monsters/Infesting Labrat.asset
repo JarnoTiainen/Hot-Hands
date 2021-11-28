@@ -16,6 +16,7 @@ MonoBehaviour:
   cardName: Infesting Labrat
   cost: 1
   value: 1
+  legendary: 1
   cardType: 1
   spellTags: 
   monsterTags: 
@@ -27,7 +28,15 @@ MonoBehaviour:
     enchantmentEffect: 3
     trigger: 3
     weight: 1
+    targeting: 0
+    buffType: 0
+    buffVanishType: 0
+    hidden: 0
   - enchantmentName: Menace
     enchantmentEffect: 4
     trigger: 0
     weight: 1
+    targeting: 0
+    buffType: 0
+    buffVanishType: 0
+    hidden: 0

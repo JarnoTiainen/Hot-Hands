@@ -63,6 +63,7 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         Vector3 finalCardPosition = new Vector3(Random.Range(-cardPosOffset, cardPosOffset), Random.Range(-cardPosOffset, cardPosOffset), -i * cardOverlapAmount);
         newDeckCard.GetComponent<CardMovement>().OnCardMove(newDeckCard.transform.localPosition, finalCardPosition, 0.3f);
         newDeckCard.GetComponent<InGameCard>().interActable = false;
+        newDeckCard.GetComponent<InGameCard>().ReverseBurn();
         deckCards.Add(newDeckCard);
         i++;
     }

@@ -325,6 +325,11 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         GetComponent<DissolveMove>().StartDissolving();
         transform.GetChild(1).gameObject.SetActive(false);
     }
+    public void ReverseBurn()
+    {
+        GetComponent<DissolveEffect>().StartReverseDissolving(mat);
+        
+    }
 
     [Button] public void SpellBurn()
     {

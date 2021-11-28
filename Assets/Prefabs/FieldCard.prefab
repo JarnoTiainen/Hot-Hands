@@ -1760,6 +1760,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDissolving: 0
+  isReverseDissolving: 0
+  dissolveSpeed: 1
+  dissolveSpeedReverse: 3
 --- !u!114 &4581686303165211893
 MonoBehaviour:
   m_ObjectHideFlags: 0
