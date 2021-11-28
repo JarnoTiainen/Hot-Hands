@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Globalization;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class ChatManager : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class ChatManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (EventSystem.current.currentSelectedGameObject == messageInput.gameObject && Input.GetKeyDown(KeyCode.Return))
         {
             SendMessage();
         }
@@ -51,8 +52,16 @@ public class ChatManager : MonoBehaviour
 
     private void SendMessage()
     {
+        if (messageInput.text == "")
+        {
+            messageInput.ActivateInputField();
+            messageInput.Select();
+            return;
+        }
         string message = messageInput.text;
         messageInput.text = "";
         WebSocketService.SendNewMessage(message);
+        messageInput.ActivateInputField();
+        messageInput.Select();
     }
 }
