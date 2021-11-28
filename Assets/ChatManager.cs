@@ -13,6 +13,7 @@ public class ChatManager : MonoBehaviour
     [SerializeField] private GameObject messageObject;
     [SerializeField] private GameObject chatContent;
     [SerializeField] private TMP_InputField messageInput;
+    [SerializeField] private Toggle tab;
 
     private void Start()
     {
@@ -63,5 +64,18 @@ public class ChatManager : MonoBehaviour
         WebSocketService.SendNewMessage(message);
         messageInput.ActivateInputField();
         messageInput.Select();
+    }
+
+    public void ToggleChat(bool open)
+    {
+        RectTransform chat = gameObject.GetComponent<RectTransform>();
+        if (open)
+        {
+            chat.anchoredPosition = new Vector2(-400, 300);
+        }
+        else
+        {
+            chat.anchoredPosition = new Vector2(-400, -300);
+        }
     }
 }
