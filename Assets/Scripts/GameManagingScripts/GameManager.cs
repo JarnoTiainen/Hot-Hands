@@ -39,9 +39,7 @@ public class GameManager : MonoBehaviour
         {
             newparsedMessages.Add(JsonUtility.FromJson<Message>(rawMessage));
         }
-        loadChatMessage.parsedMessages = newparsedMessages;
-
-        //Add functionality here
+        ChatManager.Instance.PopulateChat(newparsedMessages);
     }
 
 

@@ -12,7 +12,7 @@ public class LoadChatMessage
 [Serializable]
 public class Message
 {
-    public int date;
+    public string uuid;
     public string message;
-    public string sender;
+    public string username;
 }

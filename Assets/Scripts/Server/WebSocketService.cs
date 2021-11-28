@@ -146,6 +146,7 @@ public class WebSocketService : MonoBehaviour
                         GameObject.Find("LoginPanel").GetComponent<LoginManager>().CloseLoginScreen();
                         Debug.Log("Login ok");
                         MainMenu.Instance.CreatePopupNotification("Logged in.");
+                        LoadChat();
                         GetDecks();
                     }
                     else
@@ -192,6 +193,9 @@ public class WebSocketService : MonoBehaviour
                     break;
                 case "LOADCHAT":
                     gameManager.LoadChat(JsonUtility.FromJson<LoadChatMessage>(data[1]));
+                    break;
+                case "CHATMESSAGE":
+                    LoadChat();
                     break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
