@@ -336,5 +336,10 @@ public class WebSocketService : MonoBehaviour
         GameMessage message = new GameMessage("OnMessage", "TRIGGERSPELLCHAIN", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
-
+    public static void SendNewMessage(string rawmessage)
+    {
+        Debug.Log("Sending new chat message");
+        GameMessage message = new GameMessage("OnMessage", "CHATMESSAGE", rawmessage);
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
 }
