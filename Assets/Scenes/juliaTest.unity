@@ -2066,6 +2066,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2428524616114487173, guid: bc16445b8c737714f823494cb6d2e4e0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 11585c46a3583a04ca40bfa5e586690b, type: 2}
     - target: {fileID: 3410663734156823296, guid: bc16445b8c737714f823494cb6d2e4e0, type: 3}
       propertyPath: m_Name
       value: GaOp_ledstring
