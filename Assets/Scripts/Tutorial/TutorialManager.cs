@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
+
     public float skipDuration = 3;
     public float attackCoolDown = 3;
     public Image skipBar;
@@ -13,7 +14,9 @@ public class TutorialManager : MonoBehaviour
     public bool summoningAllowed;
     public bool attackingAllowed;
     [SerializeField] private int startBurnValue = 0;
+    [SerializeField] private int enemyStartBurnValue;
     [SerializeField] private float skipTime;
+    public List<string> enemyCardSeeds;
 
     [SerializeField] private TutorialState tutorialState = TutorialState.Introduction;
     public static TutorialManager tutorialManagerInstance { get; private set; }
@@ -47,6 +50,7 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialManagerInstance = gameObject.GetComponent<TutorialManager>();
         WebSocketService.Instance.enabled = false;
+        enemyCardSeeds = new List<string>();
     }
 
     // Start is called before the first frame update
@@ -56,6 +60,7 @@ public class TutorialManager : MonoBehaviour
         skipBar.fillAmount = 0;
         GameManager.Instance.playerNumber = 0;
         GameManager.Instance.playerStats.playerBurnValue = startBurnValue;
+        GameManager.Instance.enemyPlayerStats.playerBurnValue = enemyStartBurnValue;
         References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = startBurnValue.ToString();
     }
 
@@ -98,22 +103,40 @@ public class TutorialManager : MonoBehaviour
 
     }
 
-    public CardPowersMessage[] GetAttackTarget(CardData data)
+    public CardPowersMessage[] GetAttackTarget(CardData data, bool isYourAttack)
     {
         List<GameObject> opponentCards = References.i.opponentMonsterZone.monsterCards;
+        List<GameObject> yourCards = References.i.yourMonsterZone.monsterCards;
         GameObject attackTarget = null;
-        //direct hit
-        if (opponentCards.Count == 0) {
-            CardPowersMessage cardPowersMessage = new CardPowersMessage(data.seed, data.rp, data.lp);
-            CardPowersMessage[] message = {cardPowersMessage};
-            return message;
-        }
 
-        if (data.attackDirection == Card.AttackDirection.Left) {
-            attackTarget = opponentCards[0];
-        } else if (data.attackDirection == Card.AttackDirection.Right) {
-            attackTarget = opponentCards[-1];
+        if (isYourAttack) {
+            //direct hit
+            if (opponentCards.Count == 0) {
+                CardPowersMessage cardPowersMessage = new CardPowersMessage(data.seed, data.rp, data.lp);
+                CardPowersMessage[] message = {cardPowersMessage};
+                return message;
+            }
+
+            if (data.attackDirection == Card.AttackDirection.Left) {
+                attackTarget = opponentCards[opponentCards.Count - 1];
+            } else if (data.attackDirection == Card.AttackDirection.Right) {
+                attackTarget = opponentCards[0];
+            }
+        } else {
+            //direct hit
+            if (yourCards.Count == 0) {
+                CardPowersMessage cardPowersMessage = new CardPowersMessage(data.seed, data.rp, data.lp);
+                CardPowersMessage[] message = {cardPowersMessage};
+                return message;
+            }
+
+            if (data.attackDirection == Card.AttackDirection.Left) {
+                attackTarget = yourCards[opponentCards.Count - 1];
+            } else if (data.attackDirection == Card.AttackDirection.Right) {
+                attackTarget = yourCards[0];
+            }
         }
+        
         CardData attackTargetData = attackTarget.GetComponent<InGameCard>().GetCardData();
 
         int targetNewlp = attackTargetData.lp;
@@ -131,7 +154,6 @@ public class TutorialManager : MonoBehaviour
         
         CardPowersMessage attackerCardPowersMessage = new CardPowersMessage(data.seed, attackerNewrp, attackerNewlp);
         CardPowersMessage targetCardPowersMessage = new CardPowersMessage(attackTargetData.seed, targetNewrp, targetNewlp);
-
         CardPowersMessage[] messages = { attackerCardPowersMessage, targetCardPowersMessage };
 
         return messages;

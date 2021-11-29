@@ -246,8 +246,11 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         {
             if (value != null) lp.text = cardData.rp.ToString();
             if (value != null) rp.text = cardData.lp.ToString();
+            Debug.Log("rp " + rp.text + "lp " + lp.text + " name " + name);
         }
         SetCardMaterial();
+
+
     }
 
     public void OnHoverEnter()
@@ -281,7 +284,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
                         WebSocketService.Attack(cardData.seed);
                     } else {
                         Debug.Log("Attack in tutorial!");
-                        CardPowersMessage[] cardPowers = TutorialManager.tutorialManagerInstance.GetAttackTarget(cardData);
+                        CardPowersMessage[] cardPowers = TutorialManager.tutorialManagerInstance.GetAttackTarget(cardData, true);
 
                         int playerTakenDamage = 0;
 
@@ -309,6 +312,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
             GameManager.Instance.EndTargetEvent(cardData.seed);
         }
     }
+
+
 
     public void UpdateCardTexts()
     {

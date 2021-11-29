@@ -2884,6 +2884,8 @@ MonoBehaviour:
   spellZone: {fileID: 1444694193}
   yourDeck: {fileID: 1019851974}
   opponentDeck: {fileID: 1966657018}
+  yourBurnPile: {fileID: 0}
+  opponentBurnPile: {fileID: 0}
 --- !u!1 &525874310
 GameObject:
   m_ObjectHideFlags: 0
@@ -5211,8 +5213,7 @@ MonoBehaviour:
   cardDrawReady: 1
   cardOverlapAmount: 0
   deckCardsCount: 0
-  deckCards:
-  - {fileID: 0}
+  deckCards: []
   cardZrotationOffset: 5
   cardPosOffset: 0.01
   owner: 0
@@ -8860,7 +8861,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardList: {fileID: 11400000, guid: 3d233b591f907c34198963425d8fb028, type: 2}
   gapBetweenCards: 0.01
-  rotationSpeed: 0.2
   handBoxDimension: {x: 0.3, y: 0.07}
 --- !u!95 &1592613504 stripped
 Animator:
@@ -10955,7 +10955,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cards:
-  - {fileID: 11400000, guid: 840992e74c22e334fbbe4f73d5cac532, type: 2}
   - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
   - {fileID: 11400000, guid: 62ee803afdae33e438c72e196932e47a, type: 2}
   - {fileID: 11400000, guid: 4dfa973cdd1caca44ae6e7792d781b0d, type: 2}
@@ -12268,6 +12267,10 @@ PrefabInstance:
     - target: {fileID: 3195456241456581281, guid: 62f8452f7e8d1914b9163d11d1576398, type: 3}
       propertyPath: startBurnValue
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195456241456581281, guid: 62f8452f7e8d1914b9163d11d1576398, type: 3}
+      propertyPath: enemyStartBurnValue
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3195456241456581295, guid: 62f8452f7e8d1914b9163d11d1576398, type: 3}
       propertyPath: m_Name

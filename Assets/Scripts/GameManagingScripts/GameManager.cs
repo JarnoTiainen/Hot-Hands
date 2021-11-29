@@ -265,8 +265,34 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            PlayerDrawCard(drawCardMessage.player, drawCardMessage.seed);
+            
+            if(!References.i.mouse.tutorialMode) {
+                PlayerDrawCard(drawCardMessage.player, drawCardMessage.seed);
+            } else {
+                PlayerDrawCard(drawCardMessage.player, drawCardMessage.seed, drawCardMessage);
+            }
         }
+    }
+
+    public void PlayerDrawCard(int player, string seed = "", DrawCardMessage drawCardMessage = null)
+    {
+        if(player == playerNumber)
+        {
+            playerStats.deckCardCount--;
+            Hand.AddNewCard();
+        }
+        else
+        {
+            enemyPlayerStats.deckCardCount--;
+            if(debugPlayerDrawCard) Debug.Log("Remaining cards " + enemyPlayerStats.deckCardCount);
+            if (drawCardMessage == null) {
+                EnemyHand.AddNewCard(seed);
+            } else {
+                EnemyHand.AddNewCard(seed, drawCardMessage);
+            }
+            
+        }
+        sfxLibrary.GetComponent<DrawCardSFX>().Play();
     }
 
     public void AddNewCard(AddNewCardMessage addNewCardMessage)
@@ -285,21 +311,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void PlayerDrawCard(int player, string seed = "")
-    {
-        if(player == playerNumber)
-        {
-            playerStats.deckCardCount--;
-            Hand.AddNewCard();
-        }
-        else
-        {
-            enemyPlayerStats.deckCardCount--;
-            if(debugPlayerDrawCard) Debug.Log("Remaining cards " + enemyPlayerStats.deckCardCount);
-            EnemyHand.AddNewCard(seed);
-        }
-        sfxLibrary.GetComponent<DrawCardSFX>().Play();
-    }
+    
 
     [Button]public void PlayerReturnDrawCard()
     {
@@ -470,6 +482,28 @@ public class GameManager : MonoBehaviour
             PlayerPlayCard(References.i.cardList.GetCardData(playCardMessage), playCardMessage.boardIndex, playCardMessage.player, playCardMessage.attackCooldown);
         }
     }
+
+    public void PlayerPlayCard(CardData data, int boardIndex = 0, int player = -1, float attackCD = 0)
+    {
+        if (player == -1) player = playerNumber;
+        if(player == playerNumber)
+        {
+            playerStats.playerBurnValue -= data.cost;
+            References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = playerStats.playerBurnValue.ToString();
+        }
+        else
+        {
+            enemyPlayerStats.playerBurnValue -= data.cost;
+            References.i.opponentMonsterZone.GetCardWithSeed(data.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD, true);
+            References.i.opponentMonsterZone.GetCardWithSeed(data.seed).GetComponent<InGameCard>().owner = player;
+            //for now removes card with index 0
+            if(debugPlayerPlayCard) Debug.Log("Removing card from hand");
+            EnemyHand.Instance.RemoveCard(data.seed);
+            References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
+        }
+        sfxLibrary.GetComponent<PlayCardSFX>().Play();
+    }
+
     public void PrePlayCard(CardData data, bool hasTargetAbility = false)
     {
         if(data.cardType == Card.CardType.Monster)
@@ -507,26 +541,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void PlayerPlayCard(CardData data, int boardIndex = 0, int player = -1, float attackCD = 0)
-    {
-        if (player == -1) player = playerNumber;
-        if(player == playerNumber)
-        {
-            playerStats.playerBurnValue -= data.cost;
-            References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = playerStats.playerBurnValue.ToString();
-        }
-        else
-        {
-            enemyPlayerStats.playerBurnValue -= data.cost;
-            References.i.opponentMonsterZone.GetCardWithSeed(data.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD, true);
-            References.i.opponentMonsterZone.GetCardWithSeed(data.seed).GetComponent<InGameCard>().owner = player;
-            //for now removes card with index 0
-            if(debugPlayerPlayCard) Debug.Log("Removing card from hand");
-            EnemyHand.Instance.RemoveCard(data.seed);
-            References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
-        }
-        sfxLibrary.GetComponent<PlayCardSFX>().Play();
-    }
+    
 
     public void PlayerAttack(AttackEventMessage attackEventMessage)
     {

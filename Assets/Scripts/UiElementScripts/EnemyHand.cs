@@ -44,7 +44,7 @@ public class EnemyHand : MonoBehaviour
     }
 
     //add a new card to enemy hand
-    [Button] public static void AddNewCard(string seed)
+    [Button] public static void AddNewCard(string seed, DrawCardMessage drawCardMessage = null)
     {
         GameObject newCard;
         if(References.i.mouse.tutorialMode) {
@@ -55,7 +55,13 @@ public class EnemyHand : MonoBehaviour
 
         newCard.transform.SetParent(Instance.transform);
         unhandledCards.Add(newCard);
-        CardData newCardData = newCard.GetComponent<InGameCard>().GetData();
+        CardData newCardData;
+        if (drawCardMessage == null) {
+            newCardData = newCard.GetComponent<InGameCard>().GetData();
+        } else {
+            newCardData = Hand.Instance.cardList.GetCardData(drawCardMessage);;
+        }
+        
         Debug.Log("enemy card data from enemy hand " + newCardData.cardName);
 
         newCardData.seed = seed;

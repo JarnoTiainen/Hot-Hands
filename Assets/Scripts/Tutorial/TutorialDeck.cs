@@ -173,10 +173,11 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
                     Debug.Log("enemy seed " + seed);
                     Debug.Log("enemy card data " + drawnCard.cardName);
                     DrawCardMessage drawCardMessage = new DrawCardMessage(1, seed, drawCooldown, drawnCard);
-                    GameManager.Instance.PlayerDrawCard(1, seed);
+                    //GameManager.Instance.PlayerDrawCard(1, seed);
                     
                     GameManager.Instance.PlayerDrawCard(drawCardMessage);
                     GameManager.Instance.enemyPlayerStats.playerHandCards++;
+                    TutorialManager.tutorialManagerInstance.enemyCardSeeds.Add(seed);
 
                 }
                 else
