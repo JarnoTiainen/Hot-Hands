@@ -10,6 +10,7 @@ public class LoginManager : MonoBehaviour
     [SerializeField] private TMP_InputField userNameField;
     [SerializeField] private TMP_InputField passwordField;
     [SerializeField] private TMP_InputField emailField;
+    [SerializeField] private TextMeshProUGUI characterCounterText;
     [SerializeField] private GameObject loginButton;
     [SerializeField] private GameObject openSignUpButton;
     [SerializeField] private GameObject signUpButton;
@@ -40,6 +41,9 @@ public class LoginManager : MonoBehaviour
         signUpButton.SetActive(true);
         backButton.SetActive(true);
         emailField.gameObject.SetActive(true);
+        characterCounterText.gameObject.SetActive(true);
+        userNameField.onValueChanged.AddListener((call) => UpdateCharacterCount());
+        UpdateCharacterCount();
     }
 
     public void GoBack()
@@ -49,6 +53,24 @@ public class LoginManager : MonoBehaviour
         backButton.SetActive(false);
         loginButton.SetActive(true);
         openSignUpButton.SetActive(true);
+        characterCounterText.gameObject.SetActive(false);
+        userNameField.onValueChanged.RemoveAllListeners();
+    }
+
+
+
+    private void UpdateCharacterCount()
+    {
+        int msgLength = userNameField.text.Length;
+        characterCounterText.text = msgLength + "/20";
+        if (msgLength >= 20)
+        {
+            characterCounterText.color = Color.yellow;
+        }
+        else
+        {
+            characterCounterText.color = Color.white;
+        }
     }
 
     [Button]

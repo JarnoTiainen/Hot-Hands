@@ -9,11 +9,19 @@ public class SaveDeckPopup : MonoBehaviour
     [SerializeField] private Toggle togglePrefab;
     [SerializeField] private GameObject toggles;
     public TMP_InputField deckNameInput;
+    [SerializeField] private TextMeshProUGUI deckNameCharacterCountText;
     public List<Toggle> saveDeckToggles = new List<Toggle>();
 
     private void OnEnable()
     {
         UpdateSaveToggles();
+        deckNameInput.onValueChanged.AddListener((call) => UpdateCharacterCount());
+        UpdateCharacterCount();
+    }
+
+    private void OnDisable()
+    {
+        deckNameInput.onValueChanged.RemoveAllListeners();
     }
 
     private void InstantiateSaveToggle(int index)
@@ -46,6 +54,20 @@ public class SaveDeckPopup : MonoBehaviour
             {
                 saveDeckToggles[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = deckNames[i];
             }
+        }
+    }
+
+    private void UpdateCharacterCount()
+    {
+        int msgLength = deckNameInput.text.Length;
+        deckNameCharacterCountText.text = msgLength + "/20";
+        if (msgLength >= 20)
+        {
+            deckNameCharacterCountText.color = Color.yellow;
+        }
+        else
+        {
+            deckNameCharacterCountText.color = Color.white;
         }
     }
 }

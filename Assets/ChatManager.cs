@@ -19,6 +19,7 @@ public class ChatManager : MonoBehaviour
     {
         Instance = this;
         messageInput.onValueChanged.AddListener((call) => UpdateCharacterCount());
+        UpdateCharacterCount();
     }
 
     private void Update()
@@ -37,13 +38,8 @@ public class ChatManager : MonoBehaviour
         }
         foreach(Message message in parsedMessages)
         {
-            Debug.Log(JsonUtility.ToJson(message));
-            Debug.Log(message.uuid);
-
             GameObject newMessageObject = Instantiate(messageObject);
             string rawDateString = message.uuid.Substring(16, 8);
-            Debug.Log(rawDateString);
-
             //System.DateTime dateTime = System.DateTime.ParseExact(rawDateString, "MM/dd/yyyy hh:mm:ss", CultureInfo.InvariantCulture);
             //string timeString = dateTime.ToString();
             newMessageObject.GetComponent<MessageObjectScript>().UpdateMessage(rawDateString, message.username, message.message);
