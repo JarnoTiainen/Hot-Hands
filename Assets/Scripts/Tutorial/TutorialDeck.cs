@@ -21,6 +21,8 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] private float cardZrotationOffset = 5;
     [SerializeField] private float cardPosOffset = 0.01f;
     [SerializeField] private int owner;
+    private bool interactable;
+    private int i;
 
     private void Awake()
     {
@@ -50,15 +52,39 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
         if (owner == 0) deckCardsCount = GameManager.Instance.playerStats.deckCardCount;
         else if (owner == 1) deckCardsCount = GameManager.Instance.enemyPlayerStats.deckCardCount;
 
-        for (int i = 0; i < deckCardsCount; i++)
+        
+
+        i = 0;
+        InvokeRepeating("AddCardToDeck", 0, 0.1f);
+    }
+
+    public void AddCardToDeck()
+    {
+        if (deckCards.Count == deckCardsCount)
         {
-            GameObject newDeckCard = Instantiate(cardPrefab);
-            newDeckCard.transform.SetParent(transform);
-            newDeckCard.transform.rotation = Quaternion.Euler(0, 180, Random.Range(-cardZrotationOffset, cardZrotationOffset));
-            newDeckCard.transform.localPosition = new Vector3(Random.Range(-cardPosOffset, cardPosOffset), Random.Range(-cardPosOffset, cardPosOffset), -i * cardOverlapAmount);
-            newDeckCard.GetComponent<InGameCard>().interActable = false;
-            deckCards.Add(newDeckCard);
+            interactable = true;
+            CancelInvoke();
+            return;
         }
+        
+        GameObject newDeckCard = Instantiate(cardPrefab);
+        //Set position to burnpile
+        newDeckCard.transform.SetParent(transform);
+        newDeckCard.transform.rotation = Quaternion.Euler(0, 180, Random.Range(-cardZrotationOffset, cardZrotationOffset));
+        if(owner == 0)
+        {
+            newDeckCard.transform.position = References.i.yourBurnPile.transform.position;
+        }
+        if (owner == 1)
+        {
+            newDeckCard.transform.position = References.i.opponentBurnPile.transform.position;
+        }
+        Vector3 finalCardPosition = new Vector3(Random.Range(-cardPosOffset, cardPosOffset), Random.Range(-cardPosOffset, cardPosOffset), -i * cardOverlapAmount);
+        newDeckCard.GetComponent<CardMovement>().OnCardMove(newDeckCard.transform.localPosition, finalCardPosition, 0.3f);
+        newDeckCard.GetComponent<InGameCard>().interActable = false;
+        newDeckCard.GetComponent<InGameCard>().ReverseBurn();
+        deckCards.Add(newDeckCard);
+        i++;
     }
 
     [Button] public GameObject TakeTopCard()
@@ -140,7 +166,7 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
                             GameManager.Instance.PlayerDrawCard(drawCardMessage);
                             GameManager.Instance.playerStats.playerHandCards++;
 
-                            if(GameManager.Instance.playerStats.playerHandCards == 2) {
+                            if(GameManager.Instance.playerStats.playerHandCards == 4) {
                                 tutorialManager.NextTutorialState();
                             }
 

@@ -21,6 +21,14 @@ public class AttackEventHandler : MonoBehaviour
 
     public void StartAttackEvent(bool wasYourAttack, CardPowersMessage attacker, CardPowersMessage target, float attackCD)
     {
+        //trigger for the first attack in tutorial
+        if(References.i.mouse.tutorialMode) {
+            if(!TutorialManager.tutorialManagerInstance.firstAttack) {
+                TutorialManager.tutorialManagerInstance.firstAttack = true;
+                TutorialManager.tutorialManagerInstance.NextTutorialState();
+            }
+        }
+
         Debug.Log("starting attack event");
 
         //maybe put these ifs to start/awake?

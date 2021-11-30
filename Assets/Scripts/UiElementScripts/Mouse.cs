@@ -263,6 +263,7 @@ public class Mouse : MonoBehaviour
         }
         else
         {
+            //spells
             if (heldCard.GetComponent<InGameCard>().GetData().targetting)
             {
                 if(RayCaster.Instance.target)
@@ -274,7 +275,14 @@ public class Mouse : MonoBehaviour
                             GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().GetData().cost;
                             Hand.Instance.UpdateCanAffortCards();
                             References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
-                            WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed, RayCaster.Instance.target.GetComponent<InGameCard>().GetData().seed);
+                            if (!tutorialMode) {
+                                WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed, RayCaster.Instance.target.GetComponent<InGameCard>().GetData().seed);
+                            } else {
+                                TutorialManager.tutorialManagerInstance.spellCardSeed.Add(heldCard.GetComponent<InGameCard>().GetCardData().seed);
+                                PlaySpellMessage playSpellMessage = new PlaySpellMessage(0, heldCard.GetComponent<InGameCard>().GetCardData(), TutorialManager.tutorialManagerInstance.spellWindup, RayCaster.Instance.target.GetComponent<InGameCard>().GetData().seed);
+                                GameManager.Instance.PlaySpell(playSpellMessage);
+                            }
+                            
                             LimboCardHolder.Instance.StoreNewCard(heldCard);
                             heldCard.GetComponent<InGameCard>().isInHand = false;
                             TransformIntoCardMode();
@@ -301,7 +309,13 @@ public class Mouse : MonoBehaviour
                 GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().GetData().cost;
                 
                 References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
-                WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed);
+                if (!tutorialMode) {
+                    WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed);
+                } else {
+                    PlaySpellMessage playSpellMessage = new PlaySpellMessage(0, heldCard.GetComponent<InGameCard>().GetCardData(), TutorialManager.tutorialManagerInstance.spellWindup);
+                    GameManager.Instance.PlaySpell(playSpellMessage);
+                }
+                
                 LimboCardHolder.Instance.StoreNewCard(heldCard);
                 TransformIntoCardMode();
                 heldCard = null;

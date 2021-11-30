@@ -25,8 +25,6 @@ public class SpellZone : MonoBehaviour
     {
         GameObject newSpell = Instantiate(spellGameObject);
 
-        
-
         if (!spellSlot1.slotTaken)
         {
             spellSlot1.SetNewSpellToslot(GameManager.Instance.GetCardFromInGameCards(seed));
@@ -108,7 +106,14 @@ public class SpellZone : MonoBehaviour
         if (counter <= 0)
         {
             CancelInvoke();
-            WebSocketService.TriggerSpellChain();
+            if (!References.i.mouse.tutorialMode) {
+                WebSocketService.TriggerSpellChain();
+            } else {
+                //StatChangeMessage statChangeMessage = new StatChangeMessage();
+                TutorialManager.tutorialManagerInstance.TriggerSpellchain();
+
+            }
+            
         }
     }
 

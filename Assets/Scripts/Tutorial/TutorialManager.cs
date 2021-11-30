@@ -9,14 +9,17 @@ public class TutorialManager : MonoBehaviour
 
     public float skipDuration = 3;
     public float attackCoolDown = 3;
+    public float spellWindup = 4;
     public Image skipBar;
     public bool burnignAllowed;
     public bool summoningAllowed;
     public bool attackingAllowed;
+    public bool firstAttack;
     [SerializeField] private int startBurnValue = 0;
     [SerializeField] private int enemyStartBurnValue;
     [SerializeField] private float skipTime;
     public List<string> enemyCardSeeds;
+    public List<string> spellCardSeed;
 
     [SerializeField] private TutorialState tutorialState = TutorialState.Introduction;
     public static TutorialManager tutorialManagerInstance { get; private set; }
@@ -31,6 +34,7 @@ public class TutorialManager : MonoBehaviour
         CardPlay,
         Dialogue3,
         CardAttack,
+        Dialogue4,
         SpellCard,
         Damage
     }
@@ -45,12 +49,18 @@ public class TutorialManager : MonoBehaviour
         tutorialState++;
     }
 
+    public void SwitchState(TutorialState newState)
+    {
+        tutorialState = newState;
+    }
+
 
     private void Awake()
     {
         tutorialManagerInstance = gameObject.GetComponent<TutorialManager>();
         WebSocketService.Instance.enabled = false;
         enemyCardSeeds = new List<string>();
+        spellCardSeed = new List<string>();
     }
 
     // Start is called before the first frame update
@@ -95,13 +105,11 @@ public class TutorialManager : MonoBehaviour
             attackingAllowed = true;
         }
 
-    }
 
-    public void SwitchState(TutorialState newState)
-    {
-        tutorialState = newState;
 
     }
+
+    
 
     public CardPowersMessage[] GetAttackTarget(CardData data, bool isYourAttack)
     {
@@ -113,7 +121,7 @@ public class TutorialManager : MonoBehaviour
             //direct hit
             if (opponentCards.Count == 0) {
                 CardPowersMessage cardPowersMessage = new CardPowersMessage(data.seed, data.rp, data.lp);
-                CardPowersMessage[] message = {cardPowersMessage};
+                CardPowersMessage[] message = { cardPowersMessage };
                 return message;
             }
 
@@ -126,7 +134,7 @@ public class TutorialManager : MonoBehaviour
             //direct hit
             if (yourCards.Count == 0) {
                 CardPowersMessage cardPowersMessage = new CardPowersMessage(data.seed, data.rp, data.lp);
-                CardPowersMessage[] message = {cardPowersMessage};
+                CardPowersMessage[] message = { cardPowersMessage };
                 return message;
             }
 
@@ -136,7 +144,7 @@ public class TutorialManager : MonoBehaviour
                 attackTarget = yourCards[0];
             }
         }
-        
+
         CardData attackTargetData = attackTarget.GetComponent<InGameCard>().GetCardData();
 
         int targetNewlp = attackTargetData.lp;
@@ -151,7 +159,7 @@ public class TutorialManager : MonoBehaviour
             attackerNewlp = data.lp - attackTargetData.lp;
             targetNewrp = attackTargetData.rp - data.rp;
         }
-        
+
         CardPowersMessage attackerCardPowersMessage = new CardPowersMessage(data.seed, attackerNewrp, attackerNewlp);
         CardPowersMessage targetCardPowersMessage = new CardPowersMessage(attackTargetData.seed, targetNewrp, targetNewlp);
         CardPowersMessage[] messages = { attackerCardPowersMessage, targetCardPowersMessage };
@@ -165,4 +173,26 @@ public class TutorialManager : MonoBehaviour
 
         GameManager.Instance.TutorialPlayerAttack(attackEventMessage);
     }
+
+    public void TriggerSpellchain()
+    {
+        
+        InvokeRepeating("TriggerSpell", 0, 0.5f);
+    }
+
+    public void TriggerSpell()
+    {
+        string activatingSpell = spellCardSeed[spellCardSeed.Count - 1];
+        TriggerSpellMessage triggerSpellMessage = new TriggerSpellMessage(false, spellCardSeed.IndexOf(activatingSpell));
+        GameManager.Instance.TriggerSpell(triggerSpellMessage);
+        Debug.Log("spellcards count " );
+        spellCardSeed.Remove(activatingSpell);
+        if (spellCardSeed.Count == 0) {
+            Debug.Log("Cancel invoke");
+            CancelInvoke();
+        }
+    }
+
+
+
 }

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int maxFieldCardCount = 5;
     public int maxDeckSize = 20;
     public bool deckSet = true;
+
     
     [SerializeField] private int playerStartHealth = 100;
     [SerializeField] private bool debuggerModeOn;
@@ -659,6 +660,7 @@ public class GameManager : MonoBehaviour
             References.i.spellZone.PlaySpell(References.i.cardList.GetCardData(playSpellMessage), playSpellMessage.targets, playSpellMessage.windup);
         }
     }
+
     public void TriggerSpell(TriggerSpellMessage triggerSpellMessage)
     {
         SpellZone.Instance.TriggerSpellChain(triggerSpellMessage.index, triggerSpellMessage.denied);
