@@ -32,24 +32,29 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
             case ButtonType.Play:
                 MainMenu.Instance.Play();
                 MainMenu.Instance.MainMenuButtonsSetActive(false);
+                ChatManager.Instance.HideChat(true);
                 break;
             case ButtonType.Tutorial:
                 MainMenu.Instance.OnTutorialButton();
+                ChatManager.Instance.HideChat(true);
                 break;
             case ButtonType.Collection:
                 MainMenu.Instance.CollectionMenuSetActive(true);
                 MainMenu.Instance.SetCameraCollectionMenu();
                 MainMenu.Instance.MainMenuButtonsSetActive(false);
+                ChatManager.Instance.HideChat(true);
                 break;
             case ButtonType.Settings:
                 MainMenu.Instance.SettingsMenuSetActive(true);
                 MainMenu.Instance.SetCameraCollectionMenu();
                 MainMenu.Instance.MainMenuButtonsSetActive(false);
+                ChatManager.Instance.HideChat(true);
                 break;
             case ButtonType.Quit:
                 MainMenu.Instance.QuitConfirmationSetActive(true);
                 MainMenu.Instance.SetCameraCollectionMenu();
                 MainMenu.Instance.MainMenuButtonsSetActive(false);
+                ChatManager.Instance.HideChat(true);
                 break;
             case ButtonType.Login:
                 LoginManager.Instance.Login();
@@ -67,6 +72,7 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
                 MainMenu.Instance.SettingsMenuSetActive(false);
                 MainMenu.Instance.SetCameraMainMenu();
                 MainMenu.Instance.MainMenuButtonsSetActive(true);
+                ChatManager.Instance.HideChat(false);
                 break;
             case ButtonType.QuitYes:
                 MainMenu.Instance.QuitGame();
@@ -75,6 +81,7 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
                 MainMenu.Instance.QuitConfirmationSetActive(false);
                 MainMenu.Instance.SetCameraMainMenu();
                 MainMenu.Instance.MainMenuButtonsSetActive(true);
+                ChatManager.Instance.HideChat(false);
                 break;
             default:
                 break;

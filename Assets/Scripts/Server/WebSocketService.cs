@@ -146,6 +146,7 @@ public class WebSocketService : MonoBehaviour
                         GameObject.Find("LoginPanel").GetComponent<LoginManager>().CloseLoginScreen();
                         Debug.Log("Login ok");
                         MainMenu.Instance.CreatePopupNotification("Logged in.");
+                        ChatManager.Instance.HideChat(false);
                         LoadChat();
                         GetDecks();
                     }

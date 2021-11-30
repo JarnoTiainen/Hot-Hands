@@ -33,6 +33,7 @@ public class MainMenu : MonoBehaviour
         {
             loginScreen.SetActive(false);
             Debug.Log("Login screen SetActive false");
+            ChatManager.Instance.HideChat(false);
         }
         else
         {

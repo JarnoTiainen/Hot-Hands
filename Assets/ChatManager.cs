@@ -78,4 +78,17 @@ public class ChatManager : MonoBehaviour
             chat.anchoredPosition = new Vector2(-400, -300);
         }
     }
+
+    public void HideChat(bool hidden)
+    {
+        RectTransform chat = gameObject.GetComponent<RectTransform>();
+        if (hidden)
+        {
+            chat.anchoredPosition = new Vector2(-400, -1000);
+        }
+        else
+        {
+            chat.anchoredPosition = new Vector2(-400, -300);
+        }
+    }
 }

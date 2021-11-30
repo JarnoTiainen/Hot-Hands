@@ -12,6 +12,7 @@ public class CollectionCard3D : MonoBehaviour
     [SerializeField] private TextMeshProUGUI rpText;
     [SerializeField] private TextMeshProUGUI lpText;
     [SerializeField] private TextMeshProUGUI valueText;
+    [SerializeField] private TextMeshProUGUI description;
     [SerializeField] private GameObject healthLeftGO;
     [SerializeField] private GameObject healthRightGO;
     [SerializeField] private GameObject powerLeftGO;
@@ -24,6 +25,12 @@ public class CollectionCard3D : MonoBehaviour
         rpText.text = card.rp.ToString();
         lpText.text = card.lp.ToString();
         valueText.text = card.value.ToString();
+        string effect = "";
+        foreach (Enchantment enchantment in card.enchantments)
+        {
+            effect += EnchantmentList.Instance.GetEnchantmentDescription(enchantment);
+        }
+        description.text = effect;
         meshRendererImage.material.SetTexture("_CardImage", card.cardSprite.texture);
         SetAttackDirectionSymbol();
     }
