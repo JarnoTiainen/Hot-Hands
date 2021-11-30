@@ -8282,7 +8282,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680967953}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2305062186485525640}
@@ -19213,7 +19213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.54509807}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -21373,23 +21373,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6438953206409408410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8279259761800855232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ecafbbbdfdf7244aa9716a888bc1951, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultScaleX: 1450
-  defaultScaleY: 1450
-  defaultResolution: {x: 1920, y: 1080}
-  canvasRect: {fileID: 0}
-  rectTransform: {fileID: 2305062186485525640}
 --- !u!64 &8108143843488960529
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -21416,11 +21399,10 @@ GameObject:
   - component: {fileID: 4341769715013504989}
   - component: {fileID: 6386761036824853070}
   - component: {fileID: 8108143843488960529}
-  - component: {fileID: 6438953206409408410}
   m_Layer: 5
   m_Name: LoginBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
