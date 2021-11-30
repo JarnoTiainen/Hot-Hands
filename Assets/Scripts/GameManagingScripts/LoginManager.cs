@@ -19,6 +19,8 @@ public class LoginManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
+        userNameField.ActivateInputField();
+        userNameField.Select();
     }
 
     public void CreateNewAccount()

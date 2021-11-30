@@ -13,11 +13,12 @@ public class ChatManager : MonoBehaviour
     [SerializeField] private GameObject messageObject;
     [SerializeField] private GameObject chatContent;
     [SerializeField] private TMP_InputField messageInput;
-    [SerializeField] private Toggle tab;
+    [SerializeField] private TextMeshProUGUI characterCountText;
 
     private void Start()
     {
         Instance = this;
+        messageInput.onValueChanged.AddListener((call) => UpdateCharacterCount());
     }
 
     private void Update()
@@ -89,6 +90,20 @@ public class ChatManager : MonoBehaviour
         else
         {
             chat.anchoredPosition = new Vector2(-400, -300);
+        }
+    }
+
+    private void UpdateCharacterCount()
+    {
+        int msgLength = messageInput.text.Length;
+        characterCountText.text = msgLength + "/200";
+        if(msgLength >= 200)
+        {
+            characterCountText.color = Color.yellow;
+        }
+        else
+        {
+            characterCountText.color = Color.white;
         }
     }
 }
