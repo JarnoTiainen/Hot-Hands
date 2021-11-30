@@ -333,7 +333,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     public void ReverseBurn()
     {
         GetComponent<DissolveEffect>().StartReverseDissolving(mat);
-        
     }
 
     [Button] public void SpellBurn()

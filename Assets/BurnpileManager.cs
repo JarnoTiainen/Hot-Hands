@@ -43,7 +43,7 @@ public class BurnpileManager : MonoBehaviour
             }
         }
     }
-
+        
     [Button] public void Animate()
     {
         time = 0;

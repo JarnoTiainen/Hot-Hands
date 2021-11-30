@@ -25,31 +25,57 @@ public class EnchantmentList : MonoBehaviour
     // :power: is replaced with power.
     public string GetEnchantmentDescription(Enchantment enchantment)
     {
+        string effect = "";
         switch (enchantment.enchantmentEffect)
         {
             case Enchantment.EnchantmentEffect.Default:
-                return "default";
+                effect = "default";
+                break;
             case Enchantment.EnchantmentEffect.DrawCard:
-                return drawCardDescription.Replace(":power:", enchantment.weight.ToString());
+                effect = drawCardDescription.Replace(":power:", enchantment.weight.ToString());
+                break;
             case Enchantment.EnchantmentEffect.GainBurn:
-                return gainBurnDescription.Replace(":power:", AddPlusOrMinus(enchantment.weight)); ;
+                effect = gainBurnDescription.Replace(":power:", AddPlusOrMinus(enchantment.weight));
+                break;
             case Enchantment.EnchantmentEffect.PlaySelf:
-                return playSelfDescription.Replace(":power:", enchantment.weight.ToString()); ;
+                effect = playSelfDescription.Replace(":power:", enchantment.weight.ToString());
+                break;
             case Enchantment.EnchantmentEffect.DiscardPileDuplication:
-                return discardPileDuplicationDescription.Replace(":power:", enchantment.weight.ToString()); ;
+                effect = discardPileDuplicationDescription.Replace(":power:", enchantment.weight.ToString());
+                break;
             case Enchantment.EnchantmentEffect.SummonToEnemy:
-                return summonToEnemyDescription.Replace(":power:", enchantment.weight.ToString()); ;
+                effect = summonToEnemyDescription.Replace(":power:", enchantment.weight.ToString());
+                break;
             case Enchantment.EnchantmentEffect.HealPlayer:
-                return healPlayerDescription.Replace(":power:", enchantment.weight.ToString()); ;
+                effect = healPlayerDescription.Replace(":power:", enchantment.weight.ToString());
+                break;
             case Enchantment.EnchantmentEffect.BuffBoardAttackDirectionPowers:
-                return buffBoardAttackDirectionPowersDescription.Replace(":power:", enchantment.weight.ToString()); ;
+                effect = buffBoardAttackDirectionPowersDescription.Replace(":power:", enchantment.weight.ToString());
+                break;
             case Enchantment.EnchantmentEffect.EssenceSiphon:
-                return essenceSiphonDescription.Replace(":power:", enchantment.weight.ToString()); ;
+                effect = essenceSiphonDescription.Replace(":power:", enchantment.weight.ToString());
+                break;
             case Enchantment.EnchantmentEffect.Scorch:
-                return scorchDescription.Replace(":power:", enchantment.weight.ToString()); ;
+                effect = scorchDescription.Replace(":power:", enchantment.weight.ToString());
+                break;
             default:
-                return "null";
+                effect = "null";
+                break;
         }
+        switch(enchantment.trigger)
+        {
+            case Enchantment.Trigger.Opener:
+                return "<b>Opener</b>: " + effect;
+            case Enchantment.Trigger.Drawtivation:
+                return "<b>Wild</b>: " + effect;
+            case Enchantment.Trigger.LastBreath:
+                return "<b>Lastbreath</b>: " + effect;
+            case Enchantment.Trigger.Sacrifice:
+                return "<b>Sacrifice</b>: " + effect;
+            default:
+                return effect;
+        }
+
     }
     public string AddPlusOrMinus(int number)
     {
