@@ -7,6 +7,7 @@ using Sirenix.OdinInspector;
 public class DialogueManager : MonoBehaviour
 {
     public Animator dialogueAnimator;
+    public Animator mascotAnimator;
     public Dialogue dialogue;
     public TextMeshProUGUI dialogueText;
     [BoxGroup("Highlighters")]
@@ -36,10 +37,12 @@ public class DialogueManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.D)) {
             dialogueAnimator.SetBool("dialogueOn", false);
+            mascotAnimator.SetBool("dialogueOn", false);
         }
 
         if (Input.GetKeyDown(KeyCode.F)) {
             dialogueAnimator.SetBool("dialogueOn", true);
+            mascotAnimator.SetBool("dialogueOn", true);
         }
         if( (int)tutorialManager.GetState() % 2 == 0) {
             if(dialogueAnimator.GetBool("dialogueOn") == false) {
@@ -81,6 +84,7 @@ public class DialogueManager : MonoBehaviour
     {
 
         dialogueAnimator.SetBool("dialogueOn", false);
+        mascotAnimator.SetBool("dialogueOn", false);
     }
 
     IEnumerator RollDialogue(string sentence)
@@ -97,6 +101,7 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
         yield return new WaitForSeconds(1f);
         dialogueAnimator.SetBool("dialogueOn", true);
+        mascotAnimator.SetBool("dialogueOn", true);
         startBool = true;
     }
 }

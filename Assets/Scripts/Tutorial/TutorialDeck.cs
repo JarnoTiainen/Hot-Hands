@@ -125,7 +125,8 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
         if (tutorialManager.GetState() == TutorialManager.TutorialState.CardDraw && cardDrawReady) {
             if(cardsQueue.Count != 0) {
                 Card drawnCard = cardsQueue.Dequeue();
-                string seed = "0000000" + cardsQueue.Count.ToString();
+                string seed = "0000000" + cards.IndexOf(drawnCard);
+                
 
                 DrawCardMessage drawCardMessage = new DrawCardMessage(0, seed, drawCooldown, drawnCard);
                 GameManager.Instance.PlayerDrawCard(0, seed);

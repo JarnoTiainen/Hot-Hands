@@ -15,6 +15,7 @@ public class TutorialManager : MonoBehaviour
     public bool summoningAllowed;
     public bool attackingAllowed;
     public bool firstAttack;
+    [SerializeField] private int enemyStartHP;
     [SerializeField] private int startBurnValue = 0;
     [SerializeField] private int enemyStartBurnValue;
     [SerializeField] private float skipTime;
@@ -69,6 +70,7 @@ public class TutorialManager : MonoBehaviour
         skipTime = 0;
         skipBar.fillAmount = 0;
         GameManager.Instance.playerNumber = 0;
+        GameManager.Instance.enemyPlayerStats.playerHealth = enemyStartHP;
         GameManager.Instance.playerStats.playerBurnValue = startBurnValue;
         GameManager.Instance.enemyPlayerStats.playerBurnValue = enemyStartBurnValue;
         References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = startBurnValue.ToString();
