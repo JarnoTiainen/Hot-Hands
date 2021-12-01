@@ -11,10 +11,14 @@ public class BuildCardUI : MonoBehaviour
     private TextMeshProUGUI nameText;
     private TextMeshProUGUI amountText;
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Color spellColor;
+
     public void UpdateName()
     {
         nameText = gameObject.transform.Find("Name").GetComponent<TextMeshProUGUI>();
         nameText.text = cardName;
+        //spriteRenderer.color = spellColor;
     }
 
     public void UpdateAmount()

@@ -379,8 +379,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void ToggleCanAffordEffect(bool canAfford)
     {
-        Debug.Log("Toggling effect");
-
         if(debuggerModeOn) Debug.Log(canAfford + " " + cardData.cardName);
         if (canAfford && !canAffordBool)
         {

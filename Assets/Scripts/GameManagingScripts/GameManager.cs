@@ -647,7 +647,7 @@ public class GameManager : MonoBehaviour
     {
         if (IsYou(playSpellMessage.player))
         {
-            References.i.spellZone.PlaySpell(playSpellMessage.seed, playSpellMessage.targets, playSpellMessage.windup);
+            References.i.spellZone.PlaySpell(playSpellMessage.seed, playSpellMessage.targets, playSpellMessage.windup, playSpellMessage.slot);
             playerStats.playerHandCards--;
             playerStats.discardpileCardCount++;
         }
@@ -657,7 +657,7 @@ public class GameManager : MonoBehaviour
             enemyPlayerStats.playerHandCards--;
             enemyPlayerStats.discardpileCardCount++;
             References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
-            References.i.spellZone.PlaySpell(References.i.cardList.GetCardData(playSpellMessage), playSpellMessage.targets, playSpellMessage.windup);
+            References.i.spellZone.PlaySpell(References.i.cardList.GetCardData(playSpellMessage), playSpellMessage.targets, playSpellMessage.windup, playSpellMessage.slot);
         }
     }
 

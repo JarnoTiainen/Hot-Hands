@@ -250,7 +250,7 @@ public class WebSocketService : MonoBehaviour
 
     public static void PlayCard(int boardIndex, string seed, string targetSeed = "")
     {
-        Debug.Log("playing card with seed: " + seed);
+        Debug.Log("playing card with seed: " + seed + " target: " + targetSeed);
         if (Instance.debuggerModeOn) Debug.LogWarning("PLAYING CARD TO INDEX " + boardIndex);
         PlayCardMessage playCardMessage = new PlayCardMessage(seed, 2, boardIndex, targetSeed);
         string playCardMessageJSON = JsonUtility.ToJson(playCardMessage);

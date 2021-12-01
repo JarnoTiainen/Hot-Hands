@@ -12,7 +12,6 @@ public class InGameSpell : MonoBehaviour
     private Quaternion startRot;
     private Quaternion endRot;
     [SerializeField] private bool rotating;
-    [SerializeField] private bool isFaceUp;
     [SerializeField] private AnimationCurve rotCurve;
     private float elapsedRotationTime = 0;
     [SerializeField] private float rotSpeed;
@@ -26,6 +25,7 @@ public class InGameSpell : MonoBehaviour
     [SerializeField] private float speed;
     private bool animating = false;
     public List<Line> lines;
+    bool faceup;
 
     private void Awake()
     {
@@ -46,41 +46,42 @@ public class InGameSpell : MonoBehaviour
 
     public void SetNewCardData(CardData cardData)
     {
+        Debug.Log("Setting new spell to coin");
         this.cardData = cardData;
-        slotTaken = true;
         spriteRenderer.sprite = cardData.cardSprite;
         TurnLightsOn();
-        FlipSpell();
+        FlipSpell(true);
     }
 
     public void SetNewSpellToslot(GameObject newSpell)
     {
         SetNewCardData(newSpell.GetComponent<InGameCard>().GetData());
+        slotTaken = true;
         Debug.LogWarning("Play sound and effect here. New card with name: " + newSpell.GetComponent<InGameCard>().GetData().cardName + " set");
     }
 
     [Button] public void RemoveSpellFromSlot()
     {
+        Debug.Log("Removing spell from slot");
         cardData = null;
         slotTaken = false;
     }
 
-    [Button]public void FlipSpell()
+    [Button]public void FlipSpell(bool toUp)
     {
+        Debug.Log("flipping " + toUp);
+
         startRot = transform.rotation;
-        if(!isFaceUp)
+        if(toUp)
         {
             endRot = Quaternion.Euler(0, 0, 0);
-            isFaceUp = true;
         }
         else
         {
             endRot = Quaternion.Euler(0, -180, 90);
-            isFaceUp = false;
             RemoveSpellFromSlot();
         }
         elapsedRotationTime = 0;
-        rotating = true;
     }
 
     private void Update()
@@ -105,7 +106,7 @@ public class InGameSpell : MonoBehaviour
             {
                 animating = false;
                 time = 1;
-                FlipSpell();
+                FlipSpell(false);
             }
         }
     }
@@ -132,13 +133,16 @@ public class InGameSpell : MonoBehaviour
 
     [Button]public void StartActivateEffect()
     {
-        animating = true;
-        time = 1;
-        slotTaken = false;
-        foreach(Line line in lines)
+        if(slotTaken)
         {
-            line.RemoveLine();
+            animating = true;
+            time = 1;
+            slotTaken = false;
+            foreach (Line line in lines)
+            {
+                line.RemoveLine();
+            }
+            lines = new List<Line>();
         }
-        lines = new List<Line>();
     }
 }

@@ -609,6 +609,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 0}
+  image: {fileID: 0}
+  spellColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1485272514196529870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,6 +818,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: 
   amount: 0
+  spriteRenderer: {fileID: 0}
+  spellColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &8418590170730748339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,6 +833,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 0}
+  image: {fileID: 2096887548134205057}
+  spellColor: {r: 0.010636972, g: 0.3962264, b: 0, a: 1}
 --- !u!222 &8795102390933154795
 CanvasRenderer:
   m_ObjectHideFlags: 0

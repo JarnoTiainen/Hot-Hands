@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  cardSprite: {fileID: 21300000, guid: 19d03a22b0077b149acc07d1b05374be, type: 3}
+  cardSprite: {fileID: 21300000, guid: 426c190e066eab64a87750462c293a2e, type: 3}
   cardName: Fireball
   cost: 3
   value: 3
+  legendary: 0
   cardType: 0
   spellTags: 
   monsterTags: 
@@ -28,3 +29,6 @@ MonoBehaviour:
     trigger: 7
     weight: 4
     targeting: 1
+    buffType: 0
+    buffVanishType: 0
+    hidden: 0
