@@ -10,10 +10,12 @@ public class SaveDeckPopup : MonoBehaviour
     [SerializeField] private GameObject toggles;
     public TMP_InputField deckNameInput;
     [SerializeField] private TextMeshProUGUI deckNameCharacterCountText;
+    private int charLimit;
     public List<Toggle> saveDeckToggles = new List<Toggle>();
 
     private void OnEnable()
     {
+        charLimit = deckNameInput.characterLimit;
         UpdateSaveToggles();
         deckNameInput.onValueChanged.AddListener((call) => UpdateCharacterCount());
         UpdateCharacterCount();
@@ -27,7 +29,7 @@ public class SaveDeckPopup : MonoBehaviour
     private void InstantiateSaveToggle(int index)
     {
         Toggle newToggle = Instantiate(togglePrefab) as Toggle;
-        newToggle.name = "DECK " + (index + 1);
+        newToggle.name = "Deck " + (index + 1);
         newToggle.group = toggles.GetComponent<ToggleGroup>();
         newToggle.transform.SetParent(toggles.transform, false);
         saveDeckToggles.Add(newToggle);
@@ -48,7 +50,7 @@ public class SaveDeckPopup : MonoBehaviour
         {
             if(deckNames[i] == null || deckNames[i] == "")
             {
-                saveDeckToggles[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "DECK " + (i + 1);
+                saveDeckToggles[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Deck " + (i + 1);
             }
             else
             {
@@ -60,8 +62,8 @@ public class SaveDeckPopup : MonoBehaviour
     private void UpdateCharacterCount()
     {
         int msgLength = deckNameInput.text.Length;
-        deckNameCharacterCountText.text = msgLength + "/20";
-        if (msgLength >= 20)
+        deckNameCharacterCountText.text = msgLength + "/" + charLimit;
+        if (msgLength >= charLimit)
         {
             deckNameCharacterCountText.color = Color.yellow;
         }

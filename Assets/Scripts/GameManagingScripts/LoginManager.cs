@@ -16,12 +16,14 @@ public class LoginManager : MonoBehaviour
     [SerializeField] private GameObject signUpButton;
     [SerializeField] private GameObject backButton;
     [SerializeField] private GameObject mainMenuButtons;
+    private int charLimit;
 
     private void Start()
     {
         Instance = this;
         userNameField.ActivateInputField();
         userNameField.Select();
+        charLimit = userNameField.characterLimit;
     }
 
     public void CreateNewAccount()
@@ -61,8 +63,8 @@ public class LoginManager : MonoBehaviour
     private void UpdateCharacterCount()
     {
         int msgLength = userNameField.text.Length;
-        characterCounterText.text = msgLength + "/20";
-        if (msgLength >= 20)
+        characterCounterText.text = msgLength + "/" + charLimit;
+        if (msgLength >= charLimit)
         {
             characterCounterText.color = Color.yellow;
         }

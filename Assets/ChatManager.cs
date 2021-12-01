@@ -14,22 +14,22 @@ public class ChatManager : MonoBehaviour
     [SerializeField] private GameObject chatContent;
     [SerializeField] private TMP_InputField messageInput;
     [SerializeField] private TextMeshProUGUI characterCountText;
+    private int charLimit;
 
     private void Awake()
     {
         Instance = this;
+        charLimit = messageInput.characterLimit;
     }
 
     private void Start()
     {
-        
         messageInput.onValueChanged.AddListener((call) => UpdateCharacterCount());
         UpdateCharacterCount();
     }
 
     private void Update()
     {
-        
         if (EventSystem.current.currentSelectedGameObject == messageInput.gameObject && Input.GetKeyDown(KeyCode.Return))
         {
             SendMessage();
@@ -108,8 +108,8 @@ public class ChatManager : MonoBehaviour
     private void UpdateCharacterCount()
     {
         int msgLength = messageInput.text.Length;
-        characterCountText.text = msgLength + "/200";
-        if(msgLength >= 200)
+        characterCountText.text = msgLength + "/" + charLimit;
+        if(msgLength >= charLimit)
         {
             characterCountText.color = Color.yellow;
         }

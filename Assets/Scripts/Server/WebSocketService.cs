@@ -2,6 +2,8 @@ using UnityEngine;
 using NativeWebSocket;
 using Sirenix.OdinInspector;
 using SimpleJSON;
+using UnityEngine.SceneManagement;
+
 public class WebSocketService : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
@@ -196,7 +198,10 @@ public class WebSocketService : MonoBehaviour
                     gameManager.TriggerSpell(JsonUtility.FromJson<TriggerSpellMessage>(data[1]));
                     break;
                 case "LOADCHAT":
-                    gameManager.LoadChat(JsonUtility.FromJson<LoadChatMessage>(data[1]));
+                    if(SceneManager.GetActiveScene().buildIndex == 0)
+                    {
+                        gameManager.LoadChat(JsonUtility.FromJson<LoadChatMessage>(data[1]));
+                    }
                     break;
                 case "CHATMESSAGE":
                     LoadChat();

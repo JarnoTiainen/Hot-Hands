@@ -175,7 +175,7 @@ public class CollectionManager : MonoBehaviour
         // Updates name on toggle
         if(deckNames[i] == null || deckNames[i] == "")
         {
-            cardListToggles[i + 1].ChangeDeckName("DECK " + (i + 1));
+            cardListToggles[i + 1].ChangeDeckName("Deck " + (i + 1));
         }
         else
         {
@@ -190,12 +190,12 @@ public class CollectionManager : MonoBehaviour
 
         GameObject newCardList = Instantiate(cardListPrefab) as GameObject;
         newCardList.SetActive(false);
-        if (newName == null || newName == "") newCardList.name = "DECK " + (nameIndex + 1);
+        if (newName == null || newName == "") newCardList.name = "Deck " + (nameIndex + 1);
         else newCardList.name = newName;
         newCardList.transform.SetParent(cardListWindow.transform, false);
         cardLists.Add(newCardList);
 
-        if (newName == null || newName == "") cardListToggles[nameIndex + 1].name = "DECK " + (nameIndex + 1);
+        if (newName == null || newName == "") cardListToggles[nameIndex + 1].name = "Deck " + (nameIndex + 1);
         else cardListToggles[nameIndex + 1].name = newName;
 
         if (!isStart) playerDecks.Add(new List<Card>());
