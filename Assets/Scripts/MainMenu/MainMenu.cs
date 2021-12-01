@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject loginScreen;
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject popupNotification;
+    [SerializeField] private GameObject searchingGame;
     [SerializeField] private TextMeshProUGUI popupNotificationText;
     [SerializeField] private float popupDuration = 2.5f;
     [SerializeField] private float popupMovementDuration = 0.3f;
@@ -57,6 +58,8 @@ public class MainMenu : MonoBehaviour
 
     public void QuitConfirmationSetActive(bool value) => quitConfirmation.SetActive(value);
 
+    public void SearchingGamePanelSetActive(bool value) => searchingGame.SetActive(value);
+
     public void SetCameraMainMenu()
     {
         mainCamera.transform.position = mainCamMenuPos;
@@ -73,14 +76,13 @@ public class MainMenu : MonoBehaviour
     {
         WebSocketService.JoinGame(soloPlayEnabled);
         Debug.Log("Play");
-        if(soloPlayEnabled)
-        {
-            LoadScene(1);
-        }
+        if (soloPlayEnabled) LoadScene(1);
+        else searchingGame.SetActive(true);
     }
 
     public void GameFound(int scene)
     {
+        searchingGame.SetActive(false);
         LoadScene(scene);
         Debug.Log("Game Found");
     }

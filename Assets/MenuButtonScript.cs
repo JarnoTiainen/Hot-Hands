@@ -22,7 +22,8 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
         LoginBack,
         SettingsBack,
         QuitYes,
-        QuitNo
+        QuitNo,
+        CancelSearch
     }
 
     public void OnClickElement()
@@ -32,7 +33,6 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
             case ButtonType.Play:
                 MainMenu.Instance.Play();
                 MainMenu.Instance.MainMenuButtonsSetActive(false);
-                ChatManager.Instance.HideChat(true);
                 break;
             case ButtonType.Tutorial:
                 MainMenu.Instance.OnTutorialButton();
@@ -83,10 +83,15 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
                 MainMenu.Instance.MainMenuButtonsSetActive(true);
                 ChatManager.Instance.HideChat(false);
                 break;
+            case ButtonType.CancelSearch:
+                Debug.Log("Canceling search");
+                WebSocketService.StopSearch();
+                MainMenu.Instance.SearchingGamePanelSetActive(false);
+                MainMenu.Instance.MainMenuButtonsSetActive(true);
+                break;
             default:
                 break;
         }
-
     }
 
     public void OnHoverEnter()
