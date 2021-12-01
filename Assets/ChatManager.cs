@@ -51,6 +51,16 @@ public class ChatManager : MonoBehaviour
             newMessageObject.GetComponent<MessageObjectScript>().UpdateMessage(rawDateString, message.username, message.message);
             newMessageObject.transform.SetParent(chatContent.transform, false);
         }
+        foreach(Transform messageObj in chatContent.transform)
+        {
+            messageObj.GetComponent<MessageObjectScript>().FitMessageContent();
+        }
+        StartCoroutine(ForceUpdateLayout());
+    }
+
+    private IEnumerator ForceUpdateLayout()
+    {
+        yield return null;
         LayoutRebuilder.ForceRebuildLayoutImmediate(chatContent.GetComponent<RectTransform>());
     }
 

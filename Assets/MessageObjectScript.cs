@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using Sirenix.OdinInspector;
 
@@ -11,19 +10,38 @@ public class MessageObjectScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI usernameText;
     [SerializeField] private TextMeshProUGUI messageText;
     private int maxMsgLimit = 200;
-    [SerializeField] private float marginMinusFactor = 2f;
-
+    private float marginMinusFactor = 2f;
+    [SerializeField] private float msgObjMaxWidth = 780f;
+    [SerializeField] private float timeMaxWidth = 90f;
 
     public void UpdateMessage(string time, string username, string message)
     {
         timeText.text = "[" + time + "]";
         usernameText.text = username + ":";
         messageText.text = message;
-        StartCoroutine(ResizeMessageText());
     }
 
-    [Button]
-    IEnumerator ResizeMessageText()
+    public void FitMessageContent()
+    {
+        // Get's space left for the MessageText after username width
+        float usernameWidth = usernameText.preferredWidth;
+        float spaceForMsg = msgObjMaxWidth - timeMaxWidth - usernameWidth;
+
+        // Set's MessageText's width to the available space
+        RectTransform msgRect = messageText.gameObject.GetComponent<RectTransform>();
+        msgRect.sizeDelta = new Vector2(spaceForMsg, msgRect.rect.height);
+
+        // Get's the heigth MessageText needs to show all lines of the message and sets it as the MessageObject's heigth
+        float newMsgHeigth = messageText.preferredHeight;
+        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(msgObjMaxWidth, newMsgHeigth);
+
+        // Finally set's MessageText's heigth and positions it correctly
+        msgRect.sizeDelta = new Vector2(spaceForMsg, newMsgHeigth);
+        msgRect.anchoredPosition = new Vector2(-(spaceForMsg), 0);
+    }
+
+    // Leaving this here as a reminder of the suffering that is Unity UI
+    private IEnumerator ResizeMessageText()
     {
         yield return null;
         if(messageText.textInfo.lineCount > 1)
