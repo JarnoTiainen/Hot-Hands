@@ -16,6 +16,17 @@ public class EnchantmentList : MonoBehaviour
     [SerializeField] [TextArea] private string buffBoardAttackDirectionPowersDescription;
     [SerializeField] [TextArea] private string essenceSiphonDescription;
     [SerializeField] [TextArea] private string scorchDescription;
+    [SerializeField] [TextArea] private string fireballDescription;
+    [SerializeField] [TextArea] private string denyDescription;
+    [SerializeField] [TextArea] private string destroyCombatantDescription;
+    [SerializeField] [TextArea] private string buffSelfPermanentDescription;
+    [SerializeField] [TextArea] private string reduceHighestCostDescription;
+    [SerializeField] [TextArea] private string damagePlayerDescription;
+    [SerializeField] [TextArea] private string vanishDescription;
+    [SerializeField] [TextArea] private string addSpellToHandDescription;
+    [SerializeField] [TextArea] private string addGolemToDiscardPileDescription;
+    [SerializeField] [TextArea] private string buffAllGolemsDescription;
+    [SerializeField] [TextArea] private string spellDrawCardDescription;
 
     private void Awake()
     {
@@ -32,46 +43,82 @@ public class EnchantmentList : MonoBehaviour
                 effect = "default";
                 break;
             case Enchantment.EnchantmentEffect.DrawCard:
-                effect = drawCardDescription.Replace(":power:", enchantment.weight.ToString());
+                effect = drawCardDescription;
                 break;
             case Enchantment.EnchantmentEffect.GainBurn:
-                effect = gainBurnDescription.Replace(":power:", AddPlusOrMinus(enchantment.weight));
+                effect = gainBurnDescription;
                 break;
             case Enchantment.EnchantmentEffect.PlaySelf:
-                effect = playSelfDescription.Replace(":power:", enchantment.weight.ToString());
+                effect = playSelfDescription;
                 break;
             case Enchantment.EnchantmentEffect.DiscardPileDuplication:
-                effect = discardPileDuplicationDescription.Replace(":power:", enchantment.weight.ToString());
+                effect = discardPileDuplicationDescription;
                 break;
             case Enchantment.EnchantmentEffect.SummonToEnemy:
-                effect = summonToEnemyDescription.Replace(":power:", enchantment.weight.ToString());
+                effect = summonToEnemyDescription;
                 break;
             case Enchantment.EnchantmentEffect.HealPlayer:
-                effect = healPlayerDescription.Replace(":power:", enchantment.weight.ToString());
+                effect = healPlayerDescription;
                 break;
             case Enchantment.EnchantmentEffect.BuffBoardAttackDirectionPowers:
-                effect = buffBoardAttackDirectionPowersDescription.Replace(":power:", enchantment.weight.ToString());
+                effect = buffBoardAttackDirectionPowersDescription;
                 break;
             case Enchantment.EnchantmentEffect.EssenceSiphon:
-                effect = essenceSiphonDescription.Replace(":power:", enchantment.weight.ToString());
+                effect = essenceSiphonDescription;
                 break;
             case Enchantment.EnchantmentEffect.Scorch:
-                effect = scorchDescription.Replace(":power:", enchantment.weight.ToString());
+                effect = scorchDescription;
+                break;
+            case Enchantment.EnchantmentEffect.Fireball:
+                effect = fireballDescription;
+                break;
+            case Enchantment.EnchantmentEffect.Deny:
+                effect = denyDescription;
+                break;
+            case Enchantment.EnchantmentEffect.DestroyCombatant:
+                effect = destroyCombatantDescription;
+                break;
+            case Enchantment.EnchantmentEffect.BuffSelfPermanent:
+                effect = buffSelfPermanentDescription;
+                break;
+            case Enchantment.EnchantmentEffect.ReduceHighestCost:
+                effect = reduceHighestCostDescription;
+                break;
+            case Enchantment.EnchantmentEffect.DamagePlayer:
+                effect = damagePlayerDescription;
+                break;
+            case Enchantment.EnchantmentEffect.Vanish:
+                effect = vanishDescription;
+                break;
+            case Enchantment.EnchantmentEffect.AddSpellToHand:
+                effect = addSpellToHandDescription;
+                break;
+            case Enchantment.EnchantmentEffect.AddGolemToDiscardPile:
+                effect = addGolemToDiscardPileDescription;
+                break;
+            case Enchantment.EnchantmentEffect.BuffAllGolems:
+                effect = buffAllGolemsDescription;
+                break;
+            case Enchantment.EnchantmentEffect.SpellDrawCard:
+                effect = spellDrawCardDescription;
                 break;
             default:
                 effect = "null";
                 break;
+
+                
         }
-        switch(enchantment.trigger)
+        effect = effect.Replace(":power:", enchantment.weight.ToString());
+        switch (enchantment.trigger)
         {
             case Enchantment.Trigger.Opener:
-                return "<b>Opener</b>: " + effect;
+                return "<b>Opener</b>: " + effect + " ";
             case Enchantment.Trigger.Drawtivation:
-                return "<b>Wild</b>: " + effect;
+                return "<b>Wild</b>: " + effect + " ";
             case Enchantment.Trigger.LastBreath:
-                return "<b>Lastbreath</b>: " + effect;
+                return "<b>Lastbreath</b>: " + effect + " ";
             case Enchantment.Trigger.Sacrifice:
-                return "<b>Sacrifice</b>: " + effect;
+                return "<b>Sacrifice</b>: " + effect + " ";
             default:
                 return effect;
         }

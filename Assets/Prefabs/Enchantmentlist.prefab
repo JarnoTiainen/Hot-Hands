@@ -46,9 +46,20 @@ MonoBehaviour:
   drawCardDescription: 'Draw :power: '
   gainBurnDescription: 'Burn :power:'
   playSelfDescription: Summon this card
-  discardPileDuplicationDescription: Add extra copy of this card to discardpile
+  discardPileDuplicationDescription: duplicate
   summonToEnemyDescription: Summon this card to the enemy
   healPlayerDescription: 'Heal :power:'
   buffBoardAttackDirectionPowersDescription: 'Buff your fieldcards attack by :power:'
   essenceSiphonDescription: Steal all your other field cards effects
   scorchDescription: 'Deal :power: damage to all enemy fieldcards'
+  fireballDescription: 'Deal :power: damage to target'
+  denyDescription: Negate the previously played spell
+  destroyCombatantDescription: Destroy the enemy that killed this card
+  buffSelfPermanentDescription: 'Gain :power: LP and RP for the rest of this game'
+  reduceHighestCostDescription: 'Reduce cost of your most expensive card by :power:'
+  damagePlayerDescription: 'Take :power: damage'
+  vanishDescription: Remove this card from game
+  addSpellToHandDescription: 
+  addGolemToDiscardPileDescription: 'Add :power: Golem(s) to your discard pile'
+  buffAllGolemsDescription: 'give :power: LP and RP for all your golems'
+  spellDrawCardDescription: 'Draw :power:'

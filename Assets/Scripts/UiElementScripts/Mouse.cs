@@ -165,6 +165,8 @@ public class Mouse : MonoBehaviour
         bool canAffordToPlayCard = playerBurnValue >= heldCard.GetComponent<InGameCard>().GetData().cost;
         bool isEnoughSpace = SpellZone.Instance.HasFreeSlot();
 
+        Debug.Log(playerBurnValue + " >= " + heldCard.GetComponent<InGameCard>().GetData().cost + " " + SpellZone.Instance.HasFreeSlot());
+
         if (canAffordToPlayCard && isEnoughSpace)
         {
             PlayCard();

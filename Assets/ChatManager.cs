@@ -15,15 +15,21 @@ public class ChatManager : MonoBehaviour
     [SerializeField] private TMP_InputField messageInput;
     [SerializeField] private TextMeshProUGUI characterCountText;
 
-    private void Start()
+    private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        
         messageInput.onValueChanged.AddListener((call) => UpdateCharacterCount());
         UpdateCharacterCount();
     }
 
     private void Update()
     {
+        
         if (EventSystem.current.currentSelectedGameObject == messageInput.gameObject && Input.GetKeyDown(KeyCode.Return))
         {
             SendMessage();

@@ -31,6 +31,7 @@ public class LoginManager : MonoBehaviour
 
     public void Login()
     {
+        Debug.Log("loging");
         WebSocketService.Login(userNameField.text, passwordField.text);
     }
 
