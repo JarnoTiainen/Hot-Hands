@@ -47,7 +47,8 @@ public class Enchantment
         AddGolemToDiscardPile,
         BuffAllGolems,
         SpellDrawCard,
-        StoneCarving
+        StoneCarving,
+        Purgatory
     }
     public enum Trigger
     {
