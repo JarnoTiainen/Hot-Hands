@@ -43,6 +43,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private GameObject leftDefenceSymbol;
     [SerializeField] private GameObject rightDefenceSymbol;
     [SerializeField] private CardTakeDamageManager cardTakeDamageManager;
+    [SerializeField] private SpectralEffectManager spectralEffectManager;
 
     [ShowIf("debuggerModeOn", true)] public int serverConfirmedIndex;
     public bool confirmedByServer;
@@ -250,7 +251,20 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         }
         SetCardMaterial();
 
+        if (CheckIfSpectral()) spectralEffectManager.StartEffect();
+      
 
+    }
+    public bool CheckIfSpectral()
+    {
+        foreach(Enchantment enchantment in cardData.enchantments)
+        {
+            if(enchantment.enchantmentEffect == Enchantment.EnchantmentEffect.Vanish)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void OnHoverEnter()

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
   m_Name: Scorch
   m_EditorClassIdentifier: 
-  cardSprite: {fileID: 527152531899906861, guid: 3e522165922107a43bb51cae666eb0b4, type: 3}
+  cardSprite: {fileID: 21300000, guid: 476e4ea796902684c9be22bbb88ce28b, type: 3}
   cardName: Scorch
   cost: 5
   value: 3
+  legendary: 0
   cardType: 0
   spellTags: 01000000
   monsterTags: 
@@ -28,3 +29,6 @@ MonoBehaviour:
     trigger: 7
     weight: 3
     targeting: 0
+    buffType: 0
+    buffVanishType: 0
+    hidden: 0

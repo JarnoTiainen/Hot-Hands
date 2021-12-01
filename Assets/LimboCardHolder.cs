@@ -5,7 +5,7 @@ using UnityEngine;
 public class LimboCardHolder : MonoBehaviour
 {
     public static LimboCardHolder Instance { get; private set; }
-
+    public List<GameObject> limboCards = new List<GameObject>();
 
     private void Awake()
     {
@@ -14,6 +14,7 @@ public class LimboCardHolder : MonoBehaviour
 
     public void StoreNewCard(GameObject card)
     {
+        limboCards.Add(card);
         card.transform.SetParent(gameObject.transform);
         card.transform.localPosition = Vector3.zero;
     }

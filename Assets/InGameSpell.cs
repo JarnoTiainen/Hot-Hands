@@ -82,6 +82,8 @@ public class InGameSpell : MonoBehaviour
             RemoveSpellFromSlot();
         }
         elapsedRotationTime = 0;
+
+        rotating = true;
     }
 
     private void Update()

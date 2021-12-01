@@ -432,6 +432,10 @@ public class GameManager : MonoBehaviour
         References.i.yourMonsterZone.RecallCard(playerNumber, References.i.yourMonsterZone.unhandledCards[0]);
         Hand.Instance.UpdateCanAffortCards();
     }
+    [Button] public void SpellDenied(string seed)
+    {
+        Hand.AddNewCardToHand(GetCardFromInGameCards(seed));
+    }
 
 
     public void PlayerPlayCard(PlayCardMessage playCardMessage)
@@ -664,6 +668,11 @@ public class GameManager : MonoBehaviour
     public void TriggerSpell(TriggerSpellMessage triggerSpellMessage)
     {
         SpellZone.Instance.TriggerSpellChain(triggerSpellMessage.index, triggerSpellMessage.denied);
+    }
+
+    public void LockSpellChain(bool lockState)
+    {
+
     }
 
     public void PlayDataChangeEffect(CardDataMessage.BuffType buffType, GameObject target)

@@ -69,6 +69,9 @@ public class WebSocketService : MonoBehaviour
                 case "SUMMONDENIED":
                     gameManager.CardSummonDenied();
                     break;
+                case "SPELLDENIED":
+                    gameManager.SpellDenied(data[1]);
+                    break;
                 case "REMOVECARD":
                     RemoveCardMessage removeCardMessage = JsonUtility.FromJson<RemoveCardMessage>(data[1]);
                     gameManager.RemoveCard(removeCardMessage);
@@ -197,6 +200,9 @@ public class WebSocketService : MonoBehaviour
                     break;
                 case "CHATMESSAGE":
                     LoadChat();
+                    break;
+                case "LOCKSPELLCHAIN":
+                    gameManager.LockSpellChain(data[1]);
                     break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);

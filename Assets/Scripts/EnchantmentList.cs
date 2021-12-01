@@ -27,6 +27,7 @@ public class EnchantmentList : MonoBehaviour
     [SerializeField] [TextArea] private string addGolemToDiscardPileDescription;
     [SerializeField] [TextArea] private string buffAllGolemsDescription;
     [SerializeField] [TextArea] private string spellDrawCardDescription;
+    [SerializeField] [TextArea] private string stoneCarvingDescription;
 
     private void Awake()
     {
@@ -101,6 +102,9 @@ public class EnchantmentList : MonoBehaviour
                 break;
             case Enchantment.EnchantmentEffect.SpellDrawCard:
                 effect = spellDrawCardDescription;
+                break;
+            case Enchantment.EnchantmentEffect.StoneCarving:
+                effect = stoneCarvingDescription;
                 break;
             default:
                 effect = "null";
