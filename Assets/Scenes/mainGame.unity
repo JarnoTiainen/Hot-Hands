@@ -2146,7 +2146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3792631631054189128, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5279
+      value: -0.543
       objectReference: {fileID: 0}
     - target: {fileID: 3792631631054189128, guid: 9b6e90a13544ebb46b5121a935532710, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10335,10 +10335,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 4.7
-  m_SpotAngle: 31.812084
-  m_InnerSpotAngle: 23.614178
+  m_Intensity: 11
+  m_Range: 2.33
+  m_SpotAngle: 30.755411
+  m_InnerSpotAngle: 22.557507
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -11864,11 +11864,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 117229253622763002, guid: ad32c51441c3e9d40881a5470a36f0e3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0306
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 117229253622763002, guid: ad32c51441c3e9d40881a5470a36f0e3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0532
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 117229253622763002, guid: ad32c51441c3e9d40881a5470a36f0e3, type: 3}
       propertyPath: m_LocalRotation.w
