@@ -50,7 +50,8 @@ public class Enchantment
         StoneCarving,
         Purgatory,
         DivineDeluge,
-        WinGame
+        WinGame,
+        StealTopCard
     }
     public enum Trigger
     {
