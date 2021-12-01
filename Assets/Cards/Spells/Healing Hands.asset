@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
-  m_Name: Stone Carving
+  m_Name: Healing Hands
   m_EditorClassIdentifier: 
-  cardSprite: {fileID: 21300000, guid: eb3db5b0868bc4f348e3d3a1dfbf32a8, type: 3}
-  cardName: Stone Carving
-  cost: 2
-  value: 3
+  cardSprite: {fileID: 21300000, guid: e8f8ebe026061974c98b74a094616ce3, type: 3}
+  cardName: Healing Hands
+  cost: 0
+  value: 0
   legendary: 0
   cardType: 0
-  spellTags: 01000000
+  spellTags: 
   monsterTags: 
   rp: 0
   lp: 0
   attackDirection: 0
   enchantments:
-  - enchantmentName: Stone Carving
-    enchantmentEffect: 21
+  - enchantmentName: Hands of Healing
+    enchantmentEffect: 0
     trigger: 7
-    weight: 1
+    weight: 0
     targeting: 0
     buffType: 0
     buffVanishType: 0
