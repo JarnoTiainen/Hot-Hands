@@ -11,7 +11,6 @@ public class MessageObjectScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI messageText;
     private int maxMsgLimit = 200;
     private float marginMinusFactor = 2f;
-    [SerializeField] private float msgObjMaxWidth = 780f;
     [SerializeField] private float timeMaxWidth = 90f;
 
     public void UpdateMessage(string time, string username, string message)
@@ -24,6 +23,7 @@ public class MessageObjectScript : MonoBehaviour
     public void FitMessageContent()
     {
         // Get's space left for the MessageText after username width
+        float msgObjMaxWidth = gameObject.transform.parent.gameObject.GetComponent<RectTransform>().rect.width;
         float usernameWidth = usernameText.preferredWidth;
         float spaceForMsg = msgObjMaxWidth - timeMaxWidth - usernameWidth;
 

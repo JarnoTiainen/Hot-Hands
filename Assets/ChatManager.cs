@@ -84,11 +84,11 @@ public class ChatManager : MonoBehaviour
         RectTransform chat = gameObject.GetComponent<RectTransform>();
         if (open)
         {
-            chat.anchoredPosition = new Vector2(-400, 300);
+            chat.anchoredPosition = new Vector2(-(gameObject.GetComponent<RectTransform>().rect.width / 2), gameObject.GetComponent<RectTransform>().rect.height / 2);
         }
         else
         {
-            chat.anchoredPosition = new Vector2(-400, -300);
+            chat.anchoredPosition = new Vector2(-(gameObject.GetComponent<RectTransform>().rect.width / 2), -(gameObject.GetComponent<RectTransform>().rect.height / 2));
         }
     }
 
@@ -97,11 +97,11 @@ public class ChatManager : MonoBehaviour
         RectTransform chat = gameObject.GetComponent<RectTransform>();
         if (hidden)
         {
-            chat.anchoredPosition = new Vector2(-400, -1000);
+            chat.anchoredPosition = new Vector2(-(gameObject.GetComponent<RectTransform>().rect.width / 2), -1000);
         }
         else
         {
-            chat.anchoredPosition = new Vector2(-400, -300);
+            chat.anchoredPosition = new Vector2(-(gameObject.GetComponent<RectTransform>().rect.width / 2), -(gameObject.GetComponent<RectTransform>().rect.height / 2));
         }
     }
 
