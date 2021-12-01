@@ -58,8 +58,6 @@ public class LoginManager : MonoBehaviour
         userNameField.onValueChanged.RemoveAllListeners();
     }
 
-
-
     private void UpdateCharacterCount()
     {
         int msgLength = userNameField.text.Length;
