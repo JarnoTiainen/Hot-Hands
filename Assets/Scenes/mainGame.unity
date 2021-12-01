@@ -11213,6 +11213,10 @@ PrefabInstance:
       propertyPath: owner
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2804075678379874751, guid: 12fa3e88bd7c84d4ba040f2b8b4663b3, type: 3}
+      propertyPath: discardPile
+      value: 
+      objectReference: {fileID: 1934072953}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12fa3e88bd7c84d4ba040f2b8b4663b3, type: 3}
 --- !u!1 &2004435787 stripped
@@ -11813,6 +11817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7fc8e01f36495e4bbf171ca459e9c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  limboCards: []
 --- !u!1 &2139614999
 GameObject:
   m_ObjectHideFlags: 0
@@ -12003,6 +12008,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Deck
       objectReference: {fileID: 0}
+    - target: {fileID: 2804075678379874751, guid: 12fa3e88bd7c84d4ba040f2b8b4663b3, type: 3}
+      propertyPath: yourDeck
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2804075678379874751, guid: 12fa3e88bd7c84d4ba040f2b8b4663b3, type: 3}
+      propertyPath: discardPile
+      value: 
+      objectReference: {fileID: 1893584672}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12fa3e88bd7c84d4ba040f2b8b4663b3, type: 3}
 --- !u!1 &2804075679939788281 stripped

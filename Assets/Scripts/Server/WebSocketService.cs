@@ -72,7 +72,7 @@ public class WebSocketService : MonoBehaviour
                     gameManager.CardSummonDenied();
                     break;
                 case "SPELLDENIED":
-                    gameManager.SpellDenied(data[1]);
+                    gameManager.CardDenied(data[1]);
                     break;
                 case "REMOVECARD":
                     RemoveCardMessage removeCardMessage = JsonUtility.FromJson<RemoveCardMessage>(data[1]);
@@ -227,6 +227,12 @@ public class WebSocketService : MonoBehaviour
         string msg = "";
         if (soloPlayEnabled) msg = "solo";
         GameMessage message = new GameMessage("OnMessage", "JOINGAME", msg);
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
+
+    [Button] public static void StopSearch()
+    {
+        GameMessage message = new GameMessage("OnMessage", "QUITQUEUE", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 

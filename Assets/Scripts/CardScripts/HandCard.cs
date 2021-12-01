@@ -58,7 +58,6 @@ public class HandCard : MonoBehaviour, IOnClickDownUIElement
             {
                 line.RemoveLine();
             }
-            
         }
     }
 }

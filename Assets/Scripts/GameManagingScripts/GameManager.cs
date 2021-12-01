@@ -432,7 +432,7 @@ public class GameManager : MonoBehaviour
         References.i.yourMonsterZone.RecallCard(playerNumber, References.i.yourMonsterZone.unhandledCards[0]);
         Hand.Instance.UpdateCanAffortCards();
     }
-    [Button] public void SpellDenied(string seed)
+    [Button] public void CardDenied(string seed)
     {
         Hand.AddNewCardToHand(GetCardFromInGameCards(seed));
     }
@@ -440,15 +440,6 @@ public class GameManager : MonoBehaviour
 
     public void PlayerPlayCard(PlayCardMessage playCardMessage)
     {
-        if(playCardMessage.denied)
-        {
-            playerStats.playerFieldCards--;
-            UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue + References.i.yourMonsterZone.unhandledCards[0].GetComponent<InGameCard>().GetData().cost);
-            if (playCardMessage.serverBurnValue != playerStats.playerBurnValue) UpdatePlayerBurnValue(playerNumber, playCardMessage.serverBurnValue);
-            References.i.yourMonsterZone.RecallCard(playerNumber, References.i.yourMonsterZone.unhandledCards[0]);
-            return;
-        }
-        
         if (playCardMessage.player == playerNumber)
         {
          

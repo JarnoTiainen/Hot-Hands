@@ -12,11 +12,13 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] private float cardZrotationOffset = 5;
     [SerializeField] private float cardPosOffset = 0.01f;
     [SerializeField] private int owner;
+    [SerializeField] private bool yourDeck;
 
     [SerializeField] private float cardCooldown;
     [SerializeField] private bool OnPreDrawCD = false;
     [SerializeField] private bool cardDrawReady = true;
     [SerializeField] private bool interactable = false;
+    [SerializeField] private GameObject discardPile;
 
     private int i;
     private void Awake()
@@ -29,6 +31,8 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         if (owner == 0) deckCardsCount = GameManager.Instance.playerStats.deckCardCount;
         else if(owner == 1) deckCardsCount = GameManager.Instance.enemyPlayerStats.deckCardCount;
         CreateDeck();
+        if (yourDeck) owner = GameManager.Instance.playerNumber;
+        else owner = 1 - GameManager.Instance.playerNumber;
     }
     public void Update()
     {
@@ -37,6 +41,11 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         {
             FinisheDrawCooldown();
         }
+    }
+
+    public void SetOwner(int i)
+    {
+        owner = i;
     }
 
     [Button] public void CreateDeck()
@@ -51,6 +60,9 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         i = 0;
         InvokeRepeating("AddCardToDeck", 0, 0.1f);
     }
+
+
+
     public void AddCardToDeck()
     {
         if (deckCards.Count == deckCardsCount)
@@ -64,14 +76,8 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         //Set position to burnpile
         newDeckCard.transform.SetParent(transform);
         newDeckCard.transform.rotation = Quaternion.Euler(0, 180, Random.Range(-cardZrotationOffset, cardZrotationOffset));
-        if(owner == 0)
-        {
-            newDeckCard.transform.position = References.i.yourBurnPile.transform.position;
-        }
-        if (owner == 1)
-        {
-            newDeckCard.transform.position = References.i.opponentBurnPile.transform.position;
-        }
+        newDeckCard.transform.position = discardPile.transform.position;
+
         Vector3 finalCardPosition = new Vector3(Random.Range(-cardPosOffset, cardPosOffset), Random.Range(-cardPosOffset, cardPosOffset), -i * cardOverlapAmount);
         newDeckCard.GetComponent<CardMovement>().OnCardMove(newDeckCard.transform.localPosition, finalCardPosition, 0.3f);
         newDeckCard.GetComponent<InGameCard>().interActable = false;
@@ -124,7 +130,7 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
 
     public void OnClickElement()
     {
-        if(GameManager.Instance.IsYou(owner))
+        if(yourDeck)
         {
             //let the player pick a card if the deck is set
             if (GameManager.Instance.deckSet)

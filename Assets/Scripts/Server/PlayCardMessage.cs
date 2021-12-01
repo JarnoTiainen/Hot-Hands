@@ -10,7 +10,6 @@ public class PlayCardMessage
         Hand,        //2
         DiscardPile, //3
     }
-    public bool denied;
     public bool auto;
     public int serverBurnValue;
     public int cardSource;

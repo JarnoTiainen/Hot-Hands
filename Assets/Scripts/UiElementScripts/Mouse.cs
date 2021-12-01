@@ -229,6 +229,7 @@ public class Mouse : MonoBehaviour
     public void TransformIntoCardMode()
     {
         heldCard.GetComponent<HandCard>().SwitchToCardMode();
+        Hand.Instance.UpdateCanAffortCards();
     }
 
     private void PlayCard()
