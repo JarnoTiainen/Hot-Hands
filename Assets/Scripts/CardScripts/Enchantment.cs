@@ -48,7 +48,9 @@ public class Enchantment
         BuffAllGolems,
         SpellDrawCard,
         StoneCarving,
-        Purgatory
+        Purgatory,
+        DivineDeluge,
+        WinGame
     }
     public enum Trigger
     {
