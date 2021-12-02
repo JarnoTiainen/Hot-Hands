@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DeckEditorCardArrowMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: a17613416f717bf4a85c2306dfb900e8, type: 3}
+  m_Name: DrawCardReadyMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: b430073668ad9a04ea0af8751e6818e3, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,8 +19,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_0070cfb542ca471a8f7940a24284a309:
-        m_Texture: {fileID: 2800000, guid: caa12e5d83c8706499747c2128de0223, type: 3}
+    - _SampleTexture2D_3005caf3426342b4b4ca2d70d933b57d_Texture_1:
+        m_Texture: {fileID: 2800000, guid: d072e8252067a5e4aa4b975c414e5d07, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_622c691e99b14ed997af19fe2d902dc6_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 5a4b53125f09f5a4098294689e4cd13e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -35,16 +39,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - Vector1_1: -3.8
-    - Vector1_2: -3.9
-    - Vector1_88e7bc7548554b62903d7a8f7cccfcc2: 3.5
-    - Vector1_9ce3d507d43547708213efdc7b608071: 3.4
-    - Vector1_a046aa72792b46f8b9844b5567da2daf: -0.57
-    - _AnimationStep: 0
-    - _IsHovered: 0
+    m_Floats: []
     m_Colors:
-    - Color_c7ed7896e260405a97d16fc7e6c6f250: {r: 0.010457456, g: 0.39798304, b: 0.4433962, a: 0}
-    - Color_d23ad0d86e0e4c4f8824237a37ff44d1: {r: 4.0156865, g: 590.3059, b: 746.91766, a: 0}
-    - Color_f603f4d4e3d64f809a42a40d8f11011d: {r: 0.002428216, g: 0.57758063, b: 0.730461, a: 0}
+    - Color_60b68304086f47669e5a757ffcdf3b49: {r: 19.698313, g: 7.029594, b: 0, a: 0}
   m_BuildTextureStacks: []

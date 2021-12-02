@@ -32,7 +32,6 @@ public class CardEffectPreview : MonoBehaviour
         rp.text = data.rp.ToString();
         meshRendererImage.material.SetTexture("_CardImage", data.cardSprite.texture);
 
-        descriptionLogoManager.SetNewImage(data.enchantments);
         description.text = data.description;
 
 
