@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 
 public class AIscript : MonoBehaviour
 {
-    bool doOnce = true;
+    public bool doOnce = true;
     int drawnCards = 0;
 
     private void Update()
@@ -18,9 +18,11 @@ public class AIscript : MonoBehaviour
             
         }
         
-        if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.CardPlay && doOnce) { 
-            OpponentSummonCard();    
-            doOnce = false;
+        if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.CardPlay && doOnce) {
+            if (GameManager.Instance.playerStats.playerFieldCards == 1) {
+                StartCoroutine(WaitToSummon());   
+                doOnce = false;
+            }
             
         }
 
@@ -42,5 +44,14 @@ public class AIscript : MonoBehaviour
     [Button] public void OpponentAttack()
     {
 
+    }
+
+    private IEnumerator WaitToSummon()
+    {
+        yield return new WaitForSeconds(2f);
+        OpponentSummonCard();
+        if(TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.CardPlay) {
+            TutorialManager.tutorialManagerInstance.NextTutorialState();
+        }
     }
 }

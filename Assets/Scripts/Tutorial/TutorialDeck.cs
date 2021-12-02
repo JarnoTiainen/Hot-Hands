@@ -167,7 +167,7 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
                             GameManager.Instance.PlayerDrawCard(drawCardMessage);
                             GameManager.Instance.playerStats.playerHandCards++;
 
-                            if(GameManager.Instance.playerStats.playerHandCards == 4) {
+                            if(GameManager.Instance.playerStats.playerHandCards == 2) {
                                 tutorialManager.NextTutorialState();
                             }
 

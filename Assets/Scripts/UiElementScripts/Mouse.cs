@@ -19,10 +19,11 @@ public class Mouse : MonoBehaviour
     [SerializeField] public bool targetModeOn;
     [SerializeField] public GameObject targetSource;
     [SerializeField] private GameObject spellSwirlPrefab;
+    private int burnTries;
 
     private void Awake()
     {
-        
+
         Instance = gameObject.GetComponent<Mouse>();
     }
 
@@ -193,14 +194,29 @@ public class Mouse : MonoBehaviour
                 heldCard = null;
                 Cursor.visible = true;
             } else if (TutorialManager.tutorialManagerInstance.burnignAllowed) {
-                Debug.Log("MouseTutorialMode");
+                //let the player burn only one specific card
+                if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.BurnCard) {
+                    Debug.Log("seed " + heldCard.GetComponent<InGameCard>().GetCardData().seed);
+                    //don't use magic strings
+                    if (heldCard.GetComponent<InGameCard>().GetCardData().seed != "000000018") {
+                        burnTries++;
+                        Debug.Log("Returning card");
+                        ReturnHeldCardToHand();
+                        if(burnTries == 5) {
+                            //do a funny line here
+                        }
+                        return;
+                    }
+                }
                 GameManager.Instance.playerStats.playerHandCards--;
                 GameManager.Instance.PlayerBurnCard(heldCard);
                 Hand.Instance.RemoveCardNoDestroy(heldCard.GetComponent<InGameCard>().GetData().seed);
-                //if (heldCard.GetComponent<InGameCard>().GetData().seed == "00000")
                 heldCard = null;
                 Cursor.visible = true;
-                TutorialManager.tutorialManagerInstance.NextTutorialState();
+                if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.BurnCard) {
+                    TutorialManager.tutorialManagerInstance.NextTutorialState();
+                }
+                
             } else {
                 Debug.Log("Returning card");
                 ReturnHeldCardToHand();

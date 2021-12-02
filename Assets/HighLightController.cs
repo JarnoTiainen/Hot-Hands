@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+
+
 public class HighLightController : MonoBehaviour
 {
     [SerializeField] Material material;
@@ -47,6 +49,7 @@ public class HighLightController : MonoBehaviour
 
     [Button]public void ToggleHighlightAnimation()
     {
+        Debug.Log("toggleing highlit");
         if(effectOn)
         {
             effectOn = false;

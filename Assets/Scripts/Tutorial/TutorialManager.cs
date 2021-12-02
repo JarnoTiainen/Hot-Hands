@@ -1,8 +1,17 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
+
+
+
+
+
+
 
 public class TutorialManager : MonoBehaviour
 {
@@ -58,6 +67,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log(GameManager.Instance.attackDuration);
         tutorialManagerInstance = gameObject.GetComponent<TutorialManager>();
         WebSocketService.Instance.enabled = false;
         enemyCardSeeds = new List<string>();
@@ -81,13 +91,13 @@ public class TutorialManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (skipTime >= skipDuration) {
+            SceneManager.LoadScene(0);
+        }
+
         if (Input.GetKey(KeyCode.E)) {
             skipTime += Time.deltaTime;
             skipBar.fillAmount = skipTime / skipDuration;
-        }
-
-        if (skipTime >= skipDuration) {
-            SceneManager.LoadScene(0);
         }
 
         if (Input.GetKeyUp(KeyCode.E)) {
@@ -95,23 +105,28 @@ public class TutorialManager : MonoBehaviour
             skipBar.fillAmount = 0;
         }
 
-        if (tutorialState == TutorialState.BurnCard) {
+        if (tutorialState == TutorialState.BurnCard && !burnignAllowed) {
             burnignAllowed = true;
+            BurnState();
         }
 
-        if (tutorialState == TutorialState.CardPlay) {
+        if (tutorialState == TutorialState.CardPlay && !summoningAllowed) {
             summoningAllowed = true;
         }
 
-        if (tutorialState == TutorialState.CardAttack) {
+        if (tutorialState == TutorialState.CardAttack && !attackingAllowed) {
             attackingAllowed = true;
         }
 
-
+        
 
     }
 
-    
+    private void BurnState()
+    {
+        GameObject burnCard = GameManager.Instance.GetCardFromInGameCards("000000018");
+        burnCard.GetComponentsInChildren<HighLightController>()[2].ToggleHighlightAnimation();
+    }
 
     public CardPowersMessage[] GetAttackTarget(CardData data, bool isYourAttack)
     {
@@ -178,7 +193,6 @@ public class TutorialManager : MonoBehaviour
 
     public void TriggerSpellchain()
     {
-        
         InvokeRepeating("TriggerSpell", 0, 0.5f);
     }
 
