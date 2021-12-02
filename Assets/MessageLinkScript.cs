@@ -15,7 +15,15 @@ public class MessageLinkScript : MonoBehaviour
         {
             int startIndex = msg.IndexOf("https://", 0);
             string linkStart = msg.Substring(startIndex, msg.Length - startIndex);
-            int endIndex = linkStart.IndexOf(" ", 0);
+            int endIndex;
+            if (linkStart.Contains(" "))
+            {
+                endIndex = linkStart.IndexOf(" ", 0);
+            }
+            else
+            {
+                endIndex = linkStart.Length;
+            }
             string linkString = linkStart.Substring(0, endIndex);
 
             string beforeLink = messageText.text.Substring(0, startIndex);
@@ -31,7 +39,15 @@ public class MessageLinkScript : MonoBehaviour
         {
             int startIndex = msg.IndexOf("http://", 0);
             string linkStart = msg.Substring(startIndex, msg.Length - startIndex);
-            int endIndex = linkStart.IndexOf(" ", 0);
+            int endIndex;
+            if (linkStart.Contains(" "))
+            {
+                endIndex = linkStart.IndexOf(" ", 0);
+            }
+            else
+            {
+                endIndex = linkStart.Length;
+            }
             string linkString = linkStart.Substring(0, endIndex);
 
             string beforeLink = messageText.text.Substring(0, startIndex);
