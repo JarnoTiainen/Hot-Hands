@@ -7,40 +7,37 @@ public class DeckEditorCardButtonManager : MonoBehaviour, IOnHoverEnterElement, 
 {
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private Material material;
-    [SerializeField] private float speed;
-    private float time;
-    private bool animating;
-   private enum Button
-    {
-        Add, Remove
-    }
+    [SerializeField] private float animationDuration = 0.25f;
     [SerializeField] private Button buttonType;
-
-
-    [SerializeField] private BuildCardButtons buildCardButtons;
+    private BuildCardScript buildCardScript;
+    private enum Button
+    {
+        Add,
+        Remove
+    }
 
     private void Awake()
     {
         meshRenderer.material = material;
+        buildCardScript = gameObject.transform.parent.gameObject.GetComponent<BuildCardScript>();
     }
-    public void Update()
+
+    private void OnDisable()
     {
-        if (animating)
-        {
-            time -= speed * Time.deltaTime;
-            if (time < 0)
-            {
-                animating = false;
-            }
-            meshRenderer.material.SetFloat("_AnimationStep", time);
-        }
+        StopAllCoroutines();
+        meshRenderer.material.SetFloat("_AnimationStep", 0);
     }
 
     [Button]
-    public void StartAnimation()
+    public IEnumerator Animation()
     {
-        time = 1;
-        animating = true;
+        float progress = 1;
+        while(progress > 0)
+        {
+            progress -= (Time.deltaTime / animationDuration);
+            meshRenderer.material.SetFloat("_AnimationStep", progress);
+            yield return null;
+        }
     }
 
     public void OnHoverEnter()
@@ -55,8 +52,8 @@ public class DeckEditorCardButtonManager : MonoBehaviour, IOnHoverEnterElement, 
 
     public void OnClickElement()
     {
-        if (buttonType == Button.Add) buildCardButtons.AddCard();
-        else if (buttonType == Button.Remove) buildCardButtons.DeleteCard();
-        StartAnimation();
+        if (buttonType == Button.Add) buildCardScript.AddCard();
+        else if (buttonType == Button.Remove) buildCardScript.DeleteCard();
+        if(gameObject.activeSelf) StartCoroutine(Animation());
     }
 }

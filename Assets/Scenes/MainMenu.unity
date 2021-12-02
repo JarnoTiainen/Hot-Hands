@@ -4145,12 +4145,12 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 354924823}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 261637964}
   m_Father: {fileID: 1281100701}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -10424,6 +10424,8 @@ MonoBehaviour:
   countText: {fileID: 1598563733}
   deckBuildCardPrefab: {fileID: 7760491796736766473, guid: 35a84b717ab300d4db5db1c8abd649fc, type: 3}
   deckSizeLimit: 20
+  duplicateLimit: 2
+  legendaryLimit: 2
   popupSaveButton: {fileID: 793912502}
   builderSaveButton: {fileID: 409405892}
   editButton: {fileID: 575469751}
@@ -13876,8 +13878,8 @@ RectTransform:
   - {fileID: 1971603281}
   - {fileID: 1256247236}
   - {fileID: 1377643134}
-  - {fileID: 354924824}
   - {fileID: 1418446982}
+  - {fileID: 354924824}
   - {fileID: 1282775889}
   - {fileID: 20582564}
   m_Father: {fileID: 0}
@@ -15208,7 +15210,7 @@ RectTransform:
   - {fileID: 1059891482}
   - {fileID: 1897830372}
   m_Father: {fileID: 1281100701}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}

@@ -306,9 +306,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 6402823337356301257}
   material: {fileID: 2100000, guid: fbac3e202255f964aad742a44d127b0c, type: 2}
-  speed: 4
+  animationDuration: 0.25
   buttonType: 0
-  buildCardButtons: {fileID: 8418590170730748339}
 --- !u!65 &1295752952117368000
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -322,121 +321,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9503878, y: 0.5245715, z: 0.05}
   m_Center: {x: -0.0041506304, y: -0.021175617, z: 0}
---- !u!1 &3137795491387091019
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2594505749207144524}
-  - component: {fileID: 8920514844819310271}
-  - component: {fileID: 3394445425598954819}
-  - component: {fileID: 8365662326041574122}
-  m_Layer: 5
-  m_Name: DeleteCardButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &2594505749207144524
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3137795491387091019}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.84486, y: 0.84486, z: 0.84486}
-  m_Children: []
-  m_Father: {fileID: 5699503736701703229}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -90.2, y: -13.5}
-  m_SizeDelta: {x: 40, y: 40}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8920514844819310271
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3137795491387091019}
-  m_CullTransparentMesh: 1
---- !u!114 &3394445425598954819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3137795491387091019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8418590170730748339}
-        m_TargetAssemblyTypeName: BuildCardButtons, Assembly-CSharp
-        m_MethodName: DeleteCard
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &8365662326041574122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3137795491387091019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8018cbeb3bcb85547b5aac98f5e500b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clearTriggersOnDisable: 1
 --- !u!1 &3827942417386052739
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,9 +418,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 5089249756741566501}
   material: {fileID: 2100000, guid: fbac3e202255f964aad742a44d127b0c, type: 2}
-  speed: 4
+  animationDuration: 0.25
   buttonType: 1
-  buildCardButtons: {fileID: 8418590170730748339}
 --- !u!65 &6354915315732234436
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -550,80 +433,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9503878, y: 0.51892406, z: 0.05}
   m_Center: {x: -0.004150631, y: -0.012302828, z: 0}
---- !u!1 &7153279417792443179
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 46632209583324928}
-  - component: {fileID: 1200571072391973074}
-  - component: {fileID: 5799904846175974265}
-  - component: {fileID: 1485272514196529870}
-  m_Layer: 5
-  m_Name: AddCardButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &46632209583324928
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7153279417792443179}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.84486, y: 0.84486, z: 0.84486}
-  m_Children: []
-  m_Father: {fileID: 5699503736701703229}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -91.5, y: 13.6}
-  m_SizeDelta: {x: 40, y: 40}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &1200571072391973074
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7153279417792443179}
-  m_CullTransparentMesh: 1
---- !u!114 &5799904846175974265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7153279417792443179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb90553d998780a44a221b2107c99581, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  card: {fileID: 0}
-  image: {fileID: 0}
-  spellColor: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &1485272514196529870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7153279417792443179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8018cbeb3bcb85547b5aac98f5e500b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clearTriggersOnDisable: 1
 --- !u!1 &7741993878249649631
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,12 +576,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5699503736701703229}
-  - component: {fileID: 8873122045167493035}
-  - component: {fileID: 8418590170730748339}
   - component: {fileID: 8795102390933154795}
-  - component: {fileID: 8970471771277789041}
+  - component: {fileID: 3103935728769886987}
   m_Layer: 5
-  m_Name: DeckBuildCard
+  m_Name: BuildCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -794,8 +601,6 @@ RectTransform:
   - {fileID: 7524476418146320899}
   - {fileID: 6174689985367956648}
   - {fileID: 8877548320763431898}
-  - {fileID: 46632209583324928}
-  - {fileID: 2594505749207144524}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -804,37 +609,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1.1329956, y: 0}
   m_SizeDelta: {x: 315.1869, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8873122045167493035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7760491796736766473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a2b89c865c409a40a00e6e9c4e76c3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardName: 
-  amount: 0
-  spriteRenderer: {fileID: 0}
-  spellColor: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &8418590170730748339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7760491796736766473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb90553d998780a44a221b2107c99581, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  card: {fileID: 0}
-  image: {fileID: 2096887548134205057}
-  spellColor: {r: 0.010636972, g: 0.3962264, b: 0, a: 1}
 --- !u!222 &8795102390933154795
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -843,33 +617,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7760491796736766473}
   m_CullTransparentMesh: 1
---- !u!114 &8970471771277789041
+--- !u!114 &3103935728769886987
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7760491796736766473}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 00d4429daeb310e46941f9b4a8982163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.8962264, g: 0.21560161, b: 0.6080788, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 51d8d7a4a9d27814892ad18b1f542ed1, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  amount: 0
+  card: {fileID: 0}
+  nameText: {fileID: 7931787297853427351}
+  amountText: {fileID: 1639409267057391755}
+  addButton: {fileID: 2877629303763242825}
+  spellColor: {r: 0.011764707, g: 0.39607847, b: 0, a: 1}
+  legendaryColor: {r: 0.8018868, g: 0.68943834, b: 0.018912422, a: 1}
+  image: {fileID: 2096887548134205057}

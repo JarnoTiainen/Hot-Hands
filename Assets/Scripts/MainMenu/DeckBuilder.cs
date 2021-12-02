@@ -6,19 +6,28 @@ using UnityEngine.UI;
 
 public class DeckBuilder : MonoBehaviour
 {
+    public static DeckBuilder Instance { get; private set; }
     private CollectionManager cm;
     [SerializeField] private SaveDeckPopup saveDeckPopup;
     private List<BuildCard> build = new List<BuildCard>();
     [SerializeField] private GameObject countText;
     [SerializeField] private GameObject deckBuildCardPrefab;
     [SerializeField] private int deckSizeLimit = 20;
+    [SerializeField] private int duplicateLimit = 2;
+    [SerializeField] private int legendaryLimit = 2;
     private int currentBuildSize = 0;
+    private int legendaryAmount = 0;
     private int editIndex = -1;
     [SerializeField] private Button popupSaveButton;
     [SerializeField] private Button builderSaveButton;
     [SerializeField] private Button editButton;
     [SerializeField] private Button clearButton;
     private Color32 stopEditingColor = new Color32(255, 0, 0, 255);
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -34,32 +43,27 @@ public class DeckBuilder : MonoBehaviour
     // Adds a card to the builder
     public void AddCard(Card card)
     {
-        Debug.Log("adding card");
-
         // Reached max size
-        if(currentBuildSize >= deckSizeLimit)
-        {
-            return;
-        }
-        // First card in the build
-        if (build.Count == 0)
-        {
-            AddNewCard(card);
-            return;
-        }
-        Debug.Log("adding card 2");
+        if(currentBuildSize >= deckSizeLimit) return;
+
         // Add duplicate card to build
         for (int i = 0; build.Count > i; i++)
         {
             if (build[i].name == card.name)
             {
+                if (build[i].legendary || build[i].amount == duplicateLimit) return;
+
+                BuildCardScript buildCardScript = gameObject.transform.Find(card.name).GetComponent<BuildCardScript>();
+                if(buildCardScript.amount == (duplicateLimit - 1)) buildCardScript.AddButtonSetActive(false);
+
                 build[i].amount++;
-                gameObject.transform.Find(card.name).GetComponent<BuildCardUI>().amount++;
-                gameObject.transform.Find(card.name).GetComponent<BuildCardUI>().UpdateAmount();
+                buildCardScript.amount++;
+                buildCardScript.UpdateAmount();
                 UpdateBuildSize();
                 return;
             }
         }
+
         // Add non-duplicate card to build
         AddNewCard(card);
     }
@@ -67,15 +71,16 @@ public class DeckBuilder : MonoBehaviour
     // Adds a non-duplicate card to the builder
     private void AddNewCard(Card card)
     {
-        GameObject buildCardGameObject = Instantiate(deckBuildCardPrefab) as GameObject;
-        BuildCardUI buildCardGameObjectUI = buildCardGameObject.GetComponent<BuildCardUI>();
+        if (card.legendary && legendaryAmount >= legendaryLimit) return;
+        if (card.legendary) legendaryAmount++;
+
+        GameObject buildCardGameObject = Instantiate(deckBuildCardPrefab);
+        BuildCardScript buildCardScript = buildCardGameObject.GetComponent<BuildCardScript>();
         buildCardGameObject.SetActive(true);
         buildCardGameObject.name = card.name;
-        buildCardGameObjectUI.cardName = card.name;
-        buildCardGameObjectUI.amount = 1;
-        buildCardGameObjectUI.UpdateName();
-        buildCardGameObjectUI.UpdateAmount();
-        buildCardGameObject.GetComponent<BuildCardButtons>().card = card;
+        buildCardScript.card = card;
+        buildCardScript.amount = 1;
+        buildCardScript.Initialize();
         buildCardGameObject.transform.SetParent(gameObject.transform, false);
 
         BuildCard buildCard = new BuildCard(card);
@@ -100,18 +105,20 @@ public class DeckBuilder : MonoBehaviour
                 // Card being deleted is the only one of it's type in the build
                 if(build[i].amount == 1)
                 {
+                    if (build[i].legendary) legendaryAmount--;
                     build.RemoveAt(i);
                     Destroy(GameObject.Find(card.name));
                 }
                 // Card being deleted has duplicates in the build
                 else
                 {
+                    BuildCardScript buildCardScript = gameObject.transform.Find(card.name).GetComponent<BuildCardScript>();
                     build[i].amount--;
-                    gameObject.transform.Find(card.name).GetComponent<BuildCardUI>().amount--;
-                    gameObject.transform.Find(card.name).GetComponent<BuildCardUI>().UpdateAmount();
+                    buildCardScript.amount--;
+                    buildCardScript.UpdateAmount();
+                    buildCardScript.AddButtonSetActive(true);
                 }
                 UpdateBuildSize();
-                return;
             }
         }
     }
@@ -256,11 +263,13 @@ public class DeckBuilder : MonoBehaviour
         public string name;
         public Card card;
         public int amount;
+        public bool legendary;
 
         public BuildCard(Card card)
         {
             this.name = card.cardName;
             this.card = card;
+            this.legendary = card.legendary;
         }
     }
 }
