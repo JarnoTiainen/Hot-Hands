@@ -59,11 +59,18 @@ MonoBehaviour:
   reduceHighestCostDescription: 'Reduce cost of your most expensive card by :power:'
   damagePlayerDescription: 'Take :power: damage'
   vanishDescription: Remove this card from game
-  addSpellToHandDescription: 
+  addSpellToHanDescription: 
   addGolemToDiscardPileDescription: 'Add :power: Golem(s) to your discard pile'
   buffAllGolemsDescription: 'give :power: LP and RP for all your golems'
   spellDrawCardDescription: 'Draw :power:'
   stoneCarvingDescription: 'Draw :power: and add :power: golem(s) into your discardpile'
   purgatoryDescription: Remove all field cards from the game
-  sharpshotDescription: 'Deal :power: damage to target'
   silenceDescription: Silence the target
+  armorUpDescription: 'Give Target + :power: LP and LP'
+  stealTopCardDescription: 'Steal :power: top cards from your opponents deck'
+  winGameDescription: You win the game
+  divineDelugeDescription: 
+  zapDescription: 'Deal :power: damage to your opponent'
+  blessingOfTheDragonDescription: 'Give your fielcards :power: defence'
+  businessDealDescription: Sell your own target cards
+  sharpshotDescription: 'Deal :power: damage to target'

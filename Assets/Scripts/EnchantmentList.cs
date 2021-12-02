@@ -23,14 +23,21 @@ public class EnchantmentList : MonoBehaviour
     [SerializeField] [TextArea] private string reduceHighestCostDescription;
     [SerializeField] [TextArea] private string damagePlayerDescription;
     [SerializeField] [TextArea] private string vanishDescription;
-    [SerializeField] [TextArea] private string addSpellToHandDescription;
+    [SerializeField] [TextArea] private string addSpellToHanDescription;
     [SerializeField] [TextArea] private string addGolemToDiscardPileDescription;
     [SerializeField] [TextArea] private string buffAllGolemsDescription;
     [SerializeField] [TextArea] private string spellDrawCardDescription;
     [SerializeField] [TextArea] private string stoneCarvingDescription;
     [SerializeField] [TextArea] private string purgatoryDescription;
-    [SerializeField] [TextArea] private string sharpshotDescription;
     [SerializeField] [TextArea] private string silenceDescription;
+    [SerializeField] [TextArea] private string armorUpDescription;
+    [SerializeField] [TextArea] private string stealTopCardDescription;
+    [SerializeField] [TextArea] private string winGameDescription;
+    [SerializeField] [TextArea] private string divineDelugeDescription;
+    [SerializeField] [TextArea] private string zapDescription;
+    [SerializeField] [TextArea] private string blessingOfTheDragonDescription;
+    [SerializeField] [TextArea] private string businessDealDescription;
+    [SerializeField] [TextArea] private string sharpshotDescription;
 
 
     private void Awake()
@@ -96,7 +103,7 @@ public class EnchantmentList : MonoBehaviour
                 effect = vanishDescription;
                 break;
             case Enchantment.EnchantmentEffect.AddSpellToHand:
-                effect = addSpellToHandDescription;
+                effect = addSpellToHanDescription;
                 break;
             case Enchantment.EnchantmentEffect.AddGolemToDiscardPile:
                 effect = addGolemToDiscardPileDescription;
@@ -118,6 +125,27 @@ public class EnchantmentList : MonoBehaviour
                 break;
             case Enchantment.EnchantmentEffect.Silence:
                 effect = silenceDescription;
+                break;
+            case Enchantment.EnchantmentEffect.ArmorUp:
+                effect = armorUpDescription;
+                break;
+            case Enchantment.EnchantmentEffect.StealTopCard:
+                effect = stealTopCardDescription;
+                break;
+            case Enchantment.EnchantmentEffect.WinGame:
+                effect = winGameDescription;
+                break;
+            case Enchantment.EnchantmentEffect.DivineDeluge:
+                effect = divineDelugeDescription;
+                break;
+            case Enchantment.EnchantmentEffect.Zap:
+                effect = zapDescription;
+                break;
+            case Enchantment.EnchantmentEffect.BlessingOfTheDragon:
+                effect = blessingOfTheDragonDescription;
+                break;
+            case Enchantment.EnchantmentEffect.BusinessDeal:
+                effect = businessDealDescription;
                 break;
             default:
                 effect = "null";
