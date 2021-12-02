@@ -326,6 +326,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7bc121f0b054344ea9a952106b67153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 6320452959971904619}
+  material: {fileID: 2100000, guid: 4b51e4a6c9bf17a4faca04da1c1ab2e8, type: 2}
+  time: 1
+  speed: 0.5
 --- !u!114 &2021274444064906058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1623,6 +1627,7 @@ MonoBehaviour:
   rightDefenceSymbol: {fileID: 4719216952286902252}
   cardTakeDamageManager: {fileID: 4428839583900564036}
   spectralEffectManager: {fileID: 5675215703554237757}
+  debuffEffectManager: {fileID: 2119203380989007508}
   serverConfirmedIndex: 0
   confirmedByServer: 0
   isGhostCard: 0

@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
-  m_Name: Hundred Dragon
+  m_Name: Zap
   m_EditorClassIdentifier: 
-  cardSprite: {fileID: 21300000, guid: 4e88d37e244e223478d1e4bb1982b765, type: 3}
-  cardName: Hundred Dragon
-  cost: 100
-  value: 3
-  legendary: 1
-  cardType: 1
+  cardSprite: {fileID: 21300000, guid: 426c190e066eab64a87750462c293a2e, type: 3}
+  cardName: Zap
+  cost: 0
+  value: 4
+  legendary: 0
+  cardType: 0
   spellTags: 
   monsterTags: 
-  rp: 100
-  lp: 100
-  attackDirection: 1
+  rp: 0
+  lp: 0
+  attackDirection: 0
   enchantments:
-  - enchantmentName: Hundred Years of Terror
-    enchantmentEffect: 24
-    trigger: 1
-    weight: 1
+  - enchantmentName: Zapp!
+    enchantmentEffect: 29
+    trigger: 7
+    weight: 3
     targeting: 0
-    buffType: 0
+    buffType: 3
     buffVanishType: 0
     hidden: 0

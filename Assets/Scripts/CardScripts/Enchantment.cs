@@ -51,7 +51,13 @@ public class Enchantment
         Purgatory,
         DivineDeluge,
         WinGame,
-        StealTopCard
+        StealTopCard,
+        Sharphot,
+        ArmorUp,
+        Silence,
+        Zap,
+        BlessingOfTheDragon,
+        BusinessDeal
     }
     public enum Trigger
     {

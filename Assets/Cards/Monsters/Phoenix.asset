@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
-  m_Name: Hundred Dragon
+  m_Name: Phoenix
   m_EditorClassIdentifier: 
-  cardSprite: {fileID: 21300000, guid: 4e88d37e244e223478d1e4bb1982b765, type: 3}
-  cardName: Hundred Dragon
-  cost: 100
-  value: 3
+  cardSprite: {fileID: 21300000, guid: 42c0ec633fc280f4086cd563ee31c265, type: 3}
+  cardName: Phoenix
+  cost: 1
+  value: 1
   legendary: 1
   cardType: 1
   spellTags: 
   monsterTags: 
-  rp: 100
-  lp: 100
-  attackDirection: 1
+  rp: 1
+  lp: 1
+  attackDirection: 2
   enchantments:
-  - enchantmentName: Hundred Years of Terror
-    enchantmentEffect: 24
-    trigger: 1
-    weight: 1
+  - enchantmentName: Resurrection
+    enchantmentEffect: 1
+    trigger: 0
+    weight: 3
     targeting: 0
     buffType: 0
     buffVanishType: 0

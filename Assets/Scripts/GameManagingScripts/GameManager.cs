@@ -634,7 +634,9 @@ public class GameManager : MonoBehaviour
             data.value = cardData.value;
             Debug.Log("card new cost = " + cardData.cost);
             PlayDataChangeEffect(statChangeMessage.buffType, target);
+            target.GetComponent<InGameCard>().SetNewDescription(References.i.cardList.GetCardDescription(data.enchantments));
             target.GetComponent<InGameCard>().UpdateCardTexts();
+            target.GetComponent<InGameCard>().SetDescription();
         }
     }
 
@@ -671,14 +673,15 @@ public class GameManager : MonoBehaviour
         switch(buffType)
         {
             case CardDataMessage.BuffType.Damage:
-                Debug.LogWarning("Trigger Damage effect here");
+                target.GetComponent<InGameCard>().PlayTakeDamageEffect();
                 break;
             case CardDataMessage.BuffType.StatBuff:
                 target.GetComponent<InGameCard>().PlayBuffEffect();
                 Debug.LogWarning("Trigger StatBuff effect here");
                 break;
             case CardDataMessage.BuffType.StatDebuff:
-                Debug.LogWarning("Trigger StatDebuff effect here");
+                target.GetComponent<InGameCard>().PlayDebuffEffect();
+                Debug.LogWarning("Trigger StatDeBuff effect here");
                 break;
             case CardDataMessage.BuffType.Default:
                 Debug.LogWarning("Trigger Default effect here");

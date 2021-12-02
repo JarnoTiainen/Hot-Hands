@@ -44,6 +44,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private GameObject rightDefenceSymbol;
     [SerializeField] private CardTakeDamageManager cardTakeDamageManager;
     [SerializeField] private SpectralEffectManager spectralEffectManager;
+    [SerializeField] private DebuffEffectManager debuffEffectManager;
 
     [ShowIf("debuggerModeOn", true)] public int serverConfirmedIndex;
     public bool confirmedByServer;
@@ -150,7 +151,20 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         return cardData;
     }
 
+    public void PlayTakeDamageEffect()
+    {
+        cardTakeDamageManager.PlayEffect();
+    }
 
+    public void SetNewDescription(string newDescription)
+    {
+        cardData.description = newDescription;
+    }
+
+    public void PlayBuffEffect()
+    {
+
+    }
  
     private void Update()
     {
@@ -472,9 +486,9 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         }
     }
 
-    public void PlayBuffEffect()
+    public void PlayDebuffEffect()
     {
-        buffEffectManager.PlayEffect();
+        debuffEffectManager.PlayEffect();
     }
 
 }

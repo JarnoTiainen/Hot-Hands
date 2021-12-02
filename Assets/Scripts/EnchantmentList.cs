@@ -28,6 +28,10 @@ public class EnchantmentList : MonoBehaviour
     [SerializeField] [TextArea] private string buffAllGolemsDescription;
     [SerializeField] [TextArea] private string spellDrawCardDescription;
     [SerializeField] [TextArea] private string stoneCarvingDescription;
+    [SerializeField] [TextArea] private string purgatoryDescription;
+    [SerializeField] [TextArea] private string sharpshotDescription;
+    [SerializeField] [TextArea] private string silenceDescription;
+
 
     private void Awake()
     {
@@ -105,6 +109,15 @@ public class EnchantmentList : MonoBehaviour
                 break;
             case Enchantment.EnchantmentEffect.StoneCarving:
                 effect = stoneCarvingDescription;
+                break;
+            case Enchantment.EnchantmentEffect.Purgatory:
+                effect = purgatoryDescription;
+                break;
+            case Enchantment.EnchantmentEffect.Sharphot:
+                effect = sharpshotDescription;
+                break;
+            case Enchantment.EnchantmentEffect.Silence:
+                effect = silenceDescription;
                 break;
             default:
                 effect = "null";
