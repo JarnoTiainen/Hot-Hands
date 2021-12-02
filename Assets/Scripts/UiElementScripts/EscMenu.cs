@@ -48,7 +48,8 @@ public class EscMenu : MonoBehaviour
 
     public void Return()
     {
-        gameObject.SetActive(false);
+        escMenu.SetActive(false);
+        open = false;
     }
 
     public void EscMenuButtonsSetActive(bool value)
