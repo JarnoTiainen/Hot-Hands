@@ -136,12 +136,12 @@ public class WebSocketService : MonoBehaviour
                     if(data[1] == "ok")
                     {
                         Debug.Log("Created new account");
-                        MainMenu.Instance.CreatePopupNotification("Created new account.");
+                        MainMenu.Instance.CreatePopupNotification("Created new account.", MainMenu.PopupCorner.BottomLeft);
                     }
                     else
                     {
                         Debug.Log("Created new account Failed!");
-                        MainMenu.Instance.CreatePopupNotification("Account creation failed!");
+                        MainMenu.Instance.CreatePopupNotification("Account creation failed!", MainMenu.PopupCorner.BottomLeft);
                     }
                     break;
                 case "LOGIN":
@@ -150,7 +150,7 @@ public class WebSocketService : MonoBehaviour
                         isLoggedIn = true;
                         GameObject.Find("LoginPanel").GetComponent<LoginManager>().CloseLoginScreen();
                         Debug.Log("Login ok");
-                        MainMenu.Instance.CreatePopupNotification("Logged in.");
+                        MainMenu.Instance.CreatePopupNotification("Logged in.", MainMenu.PopupCorner.BottomLeft);
                         ChatManager.Instance.HideChat(false);
                         LoadChat();
                         GetDecks();
@@ -158,7 +158,7 @@ public class WebSocketService : MonoBehaviour
                     else
                     {
                         Debug.Log("Login Failed!");
-                        MainMenu.Instance.CreatePopupNotification("Login Failed!");
+                        MainMenu.Instance.CreatePopupNotification("Login Failed!", MainMenu.PopupCorner.BottomLeft);
                     }
                     break;
                 case "JOINGAME":

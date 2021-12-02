@@ -26,6 +26,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Quaternion mainCamMenuRotation;
     [SerializeField] private Vector3 mainCamCollectionPos;
     [SerializeField] private Quaternion mainCamCollectionRotation;
+    private bool activePopup = false;
 
     private void Start()
     {
@@ -103,22 +104,57 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void CreatePopupNotification(string text) => StartCoroutine(ShowPopupNotification(text));
-
-    IEnumerator ShowPopupNotification(string text)
+    public void CreatePopupNotification(string text, PopupCorner corner)
     {
+        if (activePopup) return;
+        StartCoroutine(ShowPopupNotification(text, corner));
+    }
+
+    IEnumerator ShowPopupNotification(string text, PopupCorner corner)
+    {
+        activePopup = true;
+        RectTransform popupRectTransform = popupNotification.GetComponent<RectTransform>();
+        switch (corner)
+        {
+            case PopupCorner.TopLeft:
+                popupRectTransform.anchorMin = new Vector2(0, 1);
+                popupRectTransform.anchorMax = new Vector2(0, 1);
+                popupRectTransform.anchoredPosition = new Vector2(popupRectTransform.rect.width / 2, popupRectTransform.rect.height / 2);
+                break;
+            case PopupCorner.TopRight:
+                popupRectTransform.anchorMin = new Vector2(1, 1);
+                popupRectTransform.anchorMax = new Vector2(1, 1);
+                popupRectTransform.anchoredPosition = new Vector2(-(popupRectTransform.rect.width / 2), popupRectTransform.rect.height / 2);
+                break;
+            case PopupCorner.BottomLeft:
+                popupRectTransform.anchorMin = new Vector2(0, 0);
+                popupRectTransform.anchorMax = new Vector2(0, 0);
+                popupRectTransform.anchoredPosition = new Vector2(popupRectTransform.rect.width / 2, -(popupRectTransform.rect.height / 2));
+                break;
+            case PopupCorner.BottomRight:
+                popupRectTransform.anchorMin = new Vector2(1, 0);
+                popupRectTransform.anchorMax = new Vector2(1, 0);
+                popupRectTransform.anchoredPosition = new Vector2(-(popupRectTransform.rect.width / 2), -(popupRectTransform.rect.height / 2));
+                break;
+            default:
+                break;
+        }
+
         float currentTime = 0;
         popupNotification.SetActive(true);
         popupNotificationText.text = text;
-        StartCoroutine(MovePopup(true));
+        if (corner == PopupCorner.BottomLeft || corner == PopupCorner.BottomRight) StartCoroutine(MovePopup(true));
+        else StartCoroutine(MovePopup(false));
         while (currentTime < popupDuration)
         {
             currentTime += Time.deltaTime;
             yield return null;
         }
-        StartCoroutine(MovePopup(false));
+        if (corner == PopupCorner.BottomLeft || corner == PopupCorner.BottomRight) StartCoroutine(MovePopup(false));
+        else StartCoroutine(MovePopup(true));
         yield return new WaitForSeconds(popupMovementDuration);
         popupNotification.SetActive(false);
+        activePopup = false;
     }
 
     IEnumerator MovePopup(bool direction)
@@ -146,6 +182,14 @@ public class MainMenu : MonoBehaviour
             popupRectTransform.anchoredPosition = new Vector2(popupRectTransform.anchoredPosition.x, newPos);
             yield return null;
         }
+    }
+
+    public enum PopupCorner
+    {
+        TopLeft,
+        TopRight,
+        BottomLeft,
+        BottomRight
     }
 
     public void OnTutorialButton()

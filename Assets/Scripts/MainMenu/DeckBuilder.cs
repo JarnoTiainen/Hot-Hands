@@ -52,8 +52,16 @@ public class DeckBuilder : MonoBehaviour
         {
             if (build[i].name == card.name)
             {
-                if (build[i].legendary || build[i].amount == duplicateLimit) return;
-
+                if (build[i].legendary)
+                {
+                    MainMenu.Instance.CreatePopupNotification("Can not have duplicates of legendary cards!", MainMenu.PopupCorner.TopRight);
+                    return;
+                }
+                if(build[i].amount == duplicateLimit)
+                {
+                    MainMenu.Instance.CreatePopupNotification("Can not have more than " + duplicateLimit + " duplicates of same card!", MainMenu.PopupCorner.TopRight);
+                    return;
+                }
                 BuildCardScript buildCardScript = gameObject.transform.Find(card.name).GetComponent<BuildCardScript>();
                 if(buildCardScript.amount == (duplicateLimit - 1)) buildCardScript.AddButtonSetActive(false);
 
@@ -72,7 +80,11 @@ public class DeckBuilder : MonoBehaviour
     // Adds a non-duplicate card to the builder
     private void AddNewCard(Card card)
     {
-        if (card.legendary && legendaryAmount >= legendaryLimit) return;
+        if (card.legendary && legendaryAmount >= legendaryLimit)
+        {
+            MainMenu.Instance.CreatePopupNotification("Can not have more than " + legendaryLimit + " legendary cards in one deck!", MainMenu.PopupCorner.TopRight);
+            return;
+        }
         if (card.legendary) legendaryAmount++;
 
         GameObject buildCardGameObject = Instantiate(deckBuildCardPrefab);
