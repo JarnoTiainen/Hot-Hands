@@ -18,6 +18,7 @@ public class MessageObjectScript : MonoBehaviour
         timeText.text = "[" + time + "]";
         usernameText.text = username + ":";
         messageText.text = message;
+        messageText.gameObject.GetComponent<MessageLinkScript>().FindLink();
     }
 
     public void FitMessageContent()
