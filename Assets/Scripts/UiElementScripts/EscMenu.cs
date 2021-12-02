@@ -7,22 +7,43 @@ using UnityEngine.EventSystems;
 
 public class EscMenu : MonoBehaviour
 {
-    public GameObject escMenuButtons;
-    public GameObject settingsMenu;
-    public GameObject disconnectConfirmation;
-    public GameObject quitConfirmation;
+    public static EscMenu Instance { get; private set; }
+    [SerializeField] private GameObject escMenu;
+    [SerializeField] private GameObject escMenuButtons;
+    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject disconnectConfirmation;
+    [SerializeField] private GameObject quitConfirmation;
+    private bool open = false;
 
-    private void OnEnable()
+    private void Awake()
     {
-        escMenuButtons.SetActive(true);
+        Instance = this;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (open)
+            {
+                CloseEscMenu();
+                open = false;
+            }
+            else
+            {
+                escMenu.SetActive(true);
+                open = true;
+            }
+        }
+    }
+
+    private void CloseEscMenu()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
         settingsMenu.SetActive(false);
         disconnectConfirmation.SetActive(false);
         quitConfirmation.SetActive(false);
-    }
-
-    private void OnDisable()
-    {
-        EventSystem.current.SetSelectedGameObject(null);
+        escMenu.SetActive(false);
     }
 
     public void Return()

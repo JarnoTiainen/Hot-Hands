@@ -19,8 +19,6 @@ public class ShowEscMenu : MonoBehaviour
                 escMenu.SetActive(true);
 
             }
-        }
-
-        
+        } 
     }
 }
