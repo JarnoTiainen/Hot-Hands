@@ -13,9 +13,9 @@ public class MainMenuDecorativeCards : MonoBehaviour
         foreach(Transform child in transform)
         {
             Card randomCard = allCards[Random.Range(0, (allCards.Count - 1))].card;
-            DecorativeCard cardScript = child.GetComponent<DecorativeCard>();
+            CollectionCard3D cardScript = child.gameObject.GetComponent<CollectionCard3D>();
             cardScript.card = randomCard;
-            cardScript.UpdateUI();
+            cardScript.Initialize();
         }
     }
 }

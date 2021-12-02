@@ -9,9 +9,11 @@ public class CollectionCardContainer : MonoBehaviour
 
     public void InstantiateCard()
     {
-        GameObject card3D = Instantiate(card3DPrefab) as GameObject;
+        GameObject card3D = Instantiate(card3DPrefab);
         card3D.SetActive(true);
-        card3D.GetComponent<CollectionCard3D>().card = card;
+        CollectionCard3D collectionCard3D = card3D.GetComponent<CollectionCard3D>();
+        collectionCard3D.card = card;
+        collectionCard3D.Initialize();
         card3D.transform.SetParent(gameObject.transform, false);
     }
 }

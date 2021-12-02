@@ -27,7 +27,7 @@ public class CollectionCard3D : MonoBehaviour
     [SerializeField] private MeshRenderer meshRendererNameZoneLow;
     [SerializeField] private MeshRenderer meshRendererImageLow;
 
-    private void Start()
+    public void Initialize()
     {
         nameText.text = card.cardName;
         costText.text = card.cost.ToString();
