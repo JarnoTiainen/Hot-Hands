@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LegendaryCardMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 0a9d315ef8089e247a582c0c35f2f748, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 5b9cd2dd5656307419c4229a62df1a7c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -21,6 +21,10 @@ Material:
     m_TexEnvs:
     - Texture2D_684442f9a7634f68aec51ddf357aeba4:
         m_Texture: {fileID: 2800000, guid: 35f0869619f81ab4abf8aa869f321509, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_928763ba68034263945c2d064686ec6e:
+        m_Texture: {fileID: 2800000, guid: 2b26b4b77661f8948ac47a0789b62f23, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_a17b1315853c4878b32447ced802c326:
@@ -44,8 +48,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_8534a0251a2749508ec5932c9fd6e34c: 1
+    - Vector1_8fb34c627bd3402ea593775b30d7ee84: 0.8
     - Vector1_9f5160f5fcc343efbbd5b5a123e57563: 0.04
     - _DissolveAmount: 0.01
     m_Colors:
     - Color_45cbda14cd1648bfa2aad3dfcac68ca6: {r: 0, g: 1, b: 0.1359541, a: 0}
+    - Color_a4ca75888db24bf38f9fca181307c8e4: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
