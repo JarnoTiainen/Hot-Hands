@@ -16,14 +16,11 @@ MonoBehaviour:
   cardName: Soot Hound
   cost: 3
   value: 2
+  legendary: 0
   cardType: 1
   spellTags: 
   monsterTags: 
   rp: 4
   lp: 3
   attackDirection: 2
-  enchantments:
-  - enchantmentName: Ember Charge
-    enchantmentEffect: 1
-    trigger: 4
-    weight: 1
+  enchantments: []
