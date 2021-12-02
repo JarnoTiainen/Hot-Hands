@@ -194,6 +194,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         {
             coolDownSlider.gameObject.SetActive(false);
             ToggleAttackBurnEffect(true);
+            
             attackOnCD = false;
             preAttackOnCD = false;
             currentAttackCoolDown = 0;

@@ -21,13 +21,7 @@ public class AttackEventHandler : MonoBehaviour
 
     public void StartAttackEvent(bool wasYourAttack, CardPowersMessage attacker, CardPowersMessage target, float attackCD)
     {
-        //trigger for the first attack in tutorial
-        if(References.i.mouse.tutorialMode) {
-            if(!TutorialManager.tutorialManagerInstance.firstAttack) {
-                TutorialManager.tutorialManagerInstance.firstAttack = true;
-                TutorialManager.tutorialManagerInstance.NextTutorialState();
-            }
-        }
+        
 
         Debug.Log("starting attack event");
 
@@ -71,6 +65,9 @@ public class AttackEventHandler : MonoBehaviour
             attackingCard.GetComponent<CardMovement>().OnCardAttack(targetCard, attackAnimationSpeed);
             attackingCard.GetComponent<InGameCard>().ToggleAttackBurnEffect(false);
         }
+
+        
+
     }
 
     public void StartAttackEvent(bool wasYourAttack, CardPowersMessage attacker, int playerTakenDamage, float attackCD)
@@ -86,22 +83,54 @@ public class AttackEventHandler : MonoBehaviour
         else
         {
             GameObject attackingCard = References.i.opponentMonsterZone.GetCardWithSeed(attacker.seed);
+
             attackingCard.GetComponent<InGameCard>().ToggleAttackBurnEffect(false);
             attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.yourPlayerTarget, attackAnimationSpeed);
             attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
             References.i.opponentMonsterZone.GetCardWithSeed(attacker.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
             GameManager.Instance.playerStats.playerHealth -= playerTakenDamage;
         }
+        //TODO
+        if (References.i.mouse.tutorialMode) {
+            if (!TutorialManager.tutorialManagerInstance.firstAttack) {
+                TutorialManager.tutorialManagerInstance.firstAttack = true;
+                TutorialManager.tutorialManagerInstance.NextTutorialState();
+            }
+        }
     }
 
     public void SpawnImpactEffect(Vector3 pos)
     {
-        Debug.Log("Spawning effect");
-        Instantiate(impactPrefab, pos, Quaternion.identity);
+        if(!References.i.mouse.tutorialMode) {
+            Debug.Log("Spawning effect");
+            Instantiate(impactPrefab, pos, Quaternion.identity);
+        } else {
+            //TODO: change this
+            if(!TutorialManager.tutorialManagerInstance.firstAttack) {
+                Debug.Log("Spawning effect");
+                Instantiate(impactPrefab, pos, Quaternion.identity);
+            
+            }
+        }
+        
     }
 
     public bool StartDamageEvent(int player, GameObject attacker, GameObject target)
     {
+        //trigger for the first attack in tutorial
+        if(References.i.mouse.tutorialMode) {
+            if (!TutorialManager.tutorialManagerInstance.firstAttack) {
+                Debug.Log("scaling timwe");
+                Time.timeScale = 0f;
+                StartCoroutine(StartDamageEventTutorial(player, attacker, target));
+                return false;
+            }
+            
+        }
+        
+        
+        
+
         bool attackerDied = false;
         if (target == References.i.yourPlayerTarget || target == References.i.enemyPlayerTarget)
         {
@@ -155,6 +184,62 @@ public class AttackEventHandler : MonoBehaviour
         }
 
         return attackerDied;
+    }
+
+    public IEnumerator StartDamageEventTutorial(int player, GameObject attacker, GameObject target)
+    {
+        yield return new WaitUntil(() => TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.SpellCard);
+        Debug.Log("Yee waituntil works in damage event!");
+        Time.timeScale = 1;
+
+        if (target == References.i.yourPlayerTarget || target == References.i.enemyPlayerTarget)
+        {
+            //Update player hp heal/trigger lose game event??
+        }
+        else
+        {
+            target.GetComponent<InGameCard>().SetTempValuesAsValues();
+            attacker.GetComponent<InGameCard>().SetTempValuesAsValues();
+
+            CardData targetCard = target.GetComponent<InGameCard>().GetData();
+            CardData attackerCard = attacker.GetComponent<InGameCard>().GetData();
+            attacker.GetComponent<InGameCard>().UpdateCardTexts();
+            target.GetComponent<InGameCard>().UpdateCardTexts();
+            bool wasYourAttack = GameManager.Instance.IsYou(player);
+
+            if (wasYourAttack)
+            {
+                if (attackerCard.lp <= 0 || attackerCard.rp <= 0)
+                {
+                    GameManager.Instance.playerStats.playerFieldCards--;
+                    //GameManager.Instance.RemoveCardFromInGameCards(attacker);
+                    
+                    References.i.yourMonsterZone.TryRemoveMonsterCard(attacker.GetComponent<InGameCard>().GetData().seed);
+
+                }
+                if (targetCard.lp <= 0 || targetCard.rp <= 0)
+                {
+                    GameManager.Instance.enemyPlayerStats.playerFieldCards--;
+                    //GameManager.Instance.RemoveCardFromInGameCards(target);
+                    References.i.opponentMonsterZone.TryRemoveMonsterCard(target.GetComponent<InGameCard>().GetData().seed);
+                }
+            }
+            else
+            {
+                if (attackerCard.lp <= 0 || attackerCard.rp <= 0)
+                {
+                    GameManager.Instance.enemyPlayerStats.playerFieldCards--;
+                    //GameManager.Instance.RemoveCardFromInGameCards(attacker);
+                    References.i.opponentMonsterZone.TryRemoveMonsterCard(attacker.GetComponent<InGameCard>().GetData().seed);
+                }
+                if (targetCard.lp <= 0 || targetCard.rp <= 0)
+                {
+                    GameManager.Instance.playerStats.playerFieldCards--;
+                    //GameManager.Instance.RemoveCardFromInGameCards(target);
+                    References.i.yourMonsterZone.TryRemoveMonsterCard(target.GetComponent<InGameCard>().GetData().seed);
+                }
+            }
+        }
     }
 
     public void CameraShake(CardData attackerCard)

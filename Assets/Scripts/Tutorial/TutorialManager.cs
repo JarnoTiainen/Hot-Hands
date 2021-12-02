@@ -24,6 +24,7 @@ public class TutorialManager : MonoBehaviour
     public bool summoningAllowed;
     public bool attackingAllowed;
     public bool firstAttack;
+    private bool doOnce;
     [SerializeField] private int enemyStartHP;
     [SerializeField] private int startBurnValue = 0;
     [SerializeField] private int enemyStartBurnValue;
@@ -110,6 +111,11 @@ public class TutorialManager : MonoBehaviour
             BurnState();
         }
 
+        if (tutorialState == TutorialState.Dialogue2 && !doOnce) {
+            BurnState();
+            doOnce = true;
+        }
+
         if (tutorialState == TutorialState.CardPlay && !summoningAllowed) {
             summoningAllowed = true;
         }
@@ -126,6 +132,7 @@ public class TutorialManager : MonoBehaviour
     {
         GameObject burnCard = GameManager.Instance.GetCardFromInGameCards("000000018");
         burnCard.GetComponentsInChildren<HighLightController>()[2].ToggleHighlightAnimation();
+        References.i.yourBonfire.GetComponentInChildren<HighLightController>().ToggleHighlightAnimation();
     }
 
     public CardPowersMessage[] GetAttackTarget(CardData data, bool isYourAttack)

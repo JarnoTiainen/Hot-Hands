@@ -335,6 +335,8 @@ public class MonsterZone : MonoBehaviour
 
     public void UpdateCardData(bool isYourCard, CardPowersMessage cardPower)
     {
+        
+
         if (debugModeOn) Debug.Log("seed " + cardPower.seed);
         if(isYourCard)
         {
@@ -379,7 +381,6 @@ public class MonsterZone : MonoBehaviour
 
     }
 
-    //Give this animation later
     public void MakeRoom()
     {
         int index = GetNewGhostCardIndex();

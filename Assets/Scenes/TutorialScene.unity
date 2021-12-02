@@ -458,6 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee6d5c8be7c672441af4c5c2026b3e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doOnce: 1
 --- !u!4 &75656071
 Transform:
   m_ObjectHideFlags: 0
@@ -5355,7 +5356,7 @@ MonoBehaviour:
   deckCardsCount: 0
   deckCards: []
   cardZrotationOffset: 5
-  cardPosOffset: 0.01
+  cardPosOffset: 0.001
   owner: 0
 --- !u!1 &1021366503
 GameObject:
@@ -11211,7 +11212,7 @@ MonoBehaviour:
   deckCardsCount: 0
   deckCards: []
   cardZrotationOffset: 5
-  cardPosOffset: 0.01
+  cardPosOffset: 0.001
   owner: 1
 --- !u!1 &2027301574
 GameObject:
@@ -12531,6 +12532,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 65
       objectReference: {fileID: 0}
+    - target: {fileID: 5067975732162356720, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5067975732274443020, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 46.29
@@ -12570,7 +12575,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 8fb5908ad1fb1d14a93fc4bf4fe2a313, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 

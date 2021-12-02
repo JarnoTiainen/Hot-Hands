@@ -73,10 +73,10 @@ public class DialogueManager : MonoBehaviour
 
     public void DialogueTrigger()
     {
-        if (effectCounter < 2) {
-            highLightControllers[effectCounter].ToggleHighlightAnimation();
-            effectCounter++;
-        }
+        //if (effectCounter < 2) {
+        //    highLightControllers[effectCounter].ToggleHighlightAnimation();
+        //    effectCounter++;
+        //}
        
     }
 
@@ -92,14 +92,14 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
         foreach (char c in sentence.ToCharArray()) {
             dialogueText.text += c;
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSecondsRealtime(0.01f);
         }
     }
 
     IEnumerator StartDialogue()
     {
         dialogueText.text = "";
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
         dialogueAnimator.SetBool("dialogueOn", true);
         mascotAnimator.SetBool("dialogueOn", true);
         startBool = true;
