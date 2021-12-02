@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class DeckBuilder : MonoBehaviour
 {
@@ -144,7 +145,7 @@ public class DeckBuilder : MonoBehaviour
     }
 
     // Edit currently open deck
-    public void EditDeck()
+    [Button]public void EditDeck()
     {
         if (cm.activeList == 0) return;
         ClearBuild();
@@ -243,6 +244,7 @@ public class DeckBuilder : MonoBehaviour
     // Clears all the cards from the builder
     public void ClearBuild()
     {
+        legendaryAmount = 0;
         build.Clear();
         foreach(Transform child in transform)
         {

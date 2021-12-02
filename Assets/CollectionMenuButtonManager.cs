@@ -26,10 +26,12 @@ public class CollectionMenuButtonManager : MonoBehaviour, IOnClickDownUIElement,
 
     public void OnClickElement()
     {
+        
         if (deckSelected) return;
         ToggleButton((int)buttonType);
         CollectionManager.Instance.ChangeActiveCardList((int)buttonType);
         sfxLibrary.GetComponent<ButtonSFX>().OnClick();
+        DeckBuilder.Instance.EditDeck();
     }
 
     public void OnHoverEnter()
