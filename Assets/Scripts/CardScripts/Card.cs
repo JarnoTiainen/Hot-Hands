@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using SimpleJSON;
 using System;
 
 [Serializable][CreateAssetMenu(fileName = "New Card", menuName = "Card/Empty Card")]
 public class Card : ScriptableObject
 {
-
     public enum CardType {
         Spell, Monster
     }

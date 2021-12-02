@@ -61,12 +61,14 @@ public class CollectionCardList : MonoBehaviour
         {
             foreach (Card card in cards)
             {
-                GameObject container3D = Instantiate(container3DPrefab) as GameObject;
+                GameObject container3D = Instantiate(container3DPrefab);
+                container3D.name = card.cardName;
                 container3D.SetActive(true);
                 container3D.transform.SetParent(gameObject.transform, false);
 
-                container3D.GetComponent<CollectionCardContainer>().card = card;
-                container3D.GetComponent<CollectionCardContainer>().InstantiateCard();
+                CollectionCardContainer containerScript = container3D.GetComponent<CollectionCardContainer>();
+                containerScript.card = card;
+                containerScript.InstantiateCard();
             }
             currentPage = 1;
         }
@@ -79,7 +81,8 @@ public class CollectionCardList : MonoBehaviour
                 for (int i = startIndex; cards.Count > i; i++)
                 {
                     Card card = cards[i];
-                    GameObject container3D = Instantiate(container3DPrefab) as GameObject;
+                    GameObject container3D = Instantiate(container3DPrefab);
+                    container3D.name = card.cardName;
                     container3D.SetActive(true);
                     container3D.transform.SetParent(gameObject.transform, false);
 
@@ -93,7 +96,8 @@ public class CollectionCardList : MonoBehaviour
                 for (int i = startIndex; (startIndex + calculatedCardsPerPage) > i; i++)
                 {
                     Card card = cards[i];
-                    GameObject container3D = Instantiate(container3DPrefab) as GameObject;
+                    GameObject container3D = Instantiate(container3DPrefab);
+                    container3D.name = card.cardName;
                     container3D.SetActive(true);
                     container3D.transform.SetParent(gameObject.transform, false);
 
@@ -105,7 +109,6 @@ public class CollectionCardList : MonoBehaviour
             currentPage = page;
         }
     }
-
 
     public void SortList(SortMethod sortMethod, bool reverse = false)
     {

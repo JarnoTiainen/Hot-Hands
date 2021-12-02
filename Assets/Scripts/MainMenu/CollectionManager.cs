@@ -14,7 +14,6 @@ public class CollectionManager : MonoBehaviour
     public List<List<Card>> playerDecks = new List<List<Card>>();
     public List<string> deckNames = new List<string>();
     [SerializeField] private GameObject cardListWindow;
-    [SerializeField] private GameObject togglesRow;
     [SerializeField] private GameObject pageText;
     [SerializeField] private GameObject setActiveButton;
     [SerializeField] private GameObject cardListPrefab;
@@ -29,10 +28,13 @@ public class CollectionManager : MonoBehaviour
     private float collectionY;
     private float collectionZ;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
-        Instance = this;
         collectionMenu.SetActive(true);
         collectionX = collectionMenu.transform.position.x;
         collectionY = collectionMenu.transform.position.y;

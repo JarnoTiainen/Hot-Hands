@@ -107,7 +107,7 @@ public class DeckBuilder : MonoBehaviour
                 {
                     if (build[i].legendary) legendaryAmount--;
                     build.RemoveAt(i);
-                    Destroy(GameObject.Find(card.name));
+                    Destroy(transform.Find(card.name).gameObject);
                 }
                 // Card being deleted has duplicates in the build
                 else
