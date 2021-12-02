@@ -1,26 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using System;
 
-public class RayCaster : MonoBehaviour
+public class NonstaticRayCaster : MonoBehaviour
 {
-    public static RayCaster Instance { get; private set; }
-
-
     [SerializeField] private Camera rayCamera;
     public GameObject target;
     public GameObject newTarget;
     public GameObject previousTarget;
     public bool firstTimeCall = true;
-
-    private void Awake()
-    {
-        Instance = gameObject.GetComponent<RayCaster>();
-    }
-
 
     private void Update()
     {
@@ -28,7 +14,7 @@ public class RayCaster : MonoBehaviour
         Ray ray = rayCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit))
         {
-            if(target)
+            if (target)
             {
                 newTarget = hit.transform.gameObject;
                 if (target != hit.transform.gameObject)
@@ -44,7 +30,7 @@ public class RayCaster : MonoBehaviour
                 if (target.GetComponent<IOnClickDownUIElement>() != null)
                 {
                     IOnClickDownUIElement[] iOnClickDownUIElements = target.GetComponents<IOnClickDownUIElement>();
-                    foreach(IOnClickDownUIElement element in iOnClickDownUIElements)
+                    foreach (IOnClickDownUIElement element in iOnClickDownUIElements)
                     {
                         element.OnClickElement();
                     }
@@ -56,7 +42,7 @@ public class RayCaster : MonoBehaviour
                 if (target.GetComponent<IOnHoldDownElement>() != null)
                 {
                     IOnHoldDownElement[] onHoldDownElements = target.GetComponents<IOnHoldDownElement>();
-                    foreach(IOnHoldDownElement element in onHoldDownElements)
+                    foreach (IOnHoldDownElement element in onHoldDownElements)
                     {
                         element.OnHoldDownElement();
                     }
@@ -67,7 +53,7 @@ public class RayCaster : MonoBehaviour
                 if (target.GetComponent<IOnClickUpElement>() != null)
                 {
                     IOnClickUpElement[] onClickUpElements = target.GetComponents<IOnClickUpElement>();
-                    foreach(IOnClickUpElement element in onClickUpElements)
+                    foreach (IOnClickUpElement element in onClickUpElements)
                     {
                         element.OnClickUpElement();
                     }
@@ -77,7 +63,7 @@ public class RayCaster : MonoBehaviour
             if (target.GetComponent<IOnHoverUIElement>() != null)
             {
                 IOnHoverUIElement[] onHoverUIElements = target.GetComponents<IOnHoverUIElement>();
-                foreach(IOnHoverUIElement element in onHoverUIElements)
+                foreach (IOnHoverUIElement element in onHoverUIElements)
                 {
                     element.OnHoverElement();
                 }
@@ -95,7 +81,7 @@ public class RayCaster : MonoBehaviour
                 if (previousTarget.GetComponent<IOnHoverExitElement>() != null)
                 {
                     IOnHoverExitElement[] onHoverExitElements = previousTarget.GetComponents<IOnHoverExitElement>();
-                    foreach(IOnHoverExitElement element in onHoverExitElements)
+                    foreach (IOnHoverExitElement element in onHoverExitElements)
                     {
                         element.OnHoverExit();
                     }
@@ -122,11 +108,12 @@ public class RayCaster : MonoBehaviour
         if (newTarget.GetComponent<IOnHoverEnterElement>() != null)
         {
             IOnHoverEnterElement[] onHoverEnterElements = newTarget.GetComponents<IOnHoverEnterElement>();
-            foreach(IOnHoverEnterElement element in onHoverEnterElements)
+            foreach (IOnHoverEnterElement element in onHoverEnterElements)
             {
                 element.OnHoverEnter();
             }
         }
-        
+
     }
 }
+
