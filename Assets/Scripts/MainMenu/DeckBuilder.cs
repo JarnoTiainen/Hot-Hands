@@ -11,7 +11,8 @@ public class DeckBuilder : MonoBehaviour
     private CollectionManager cm;
     [SerializeField] private SaveDeckPopup saveDeckPopup;
     private List<BuildCard> build = new List<BuildCard>();
-    [SerializeField] private GameObject countText;
+    [SerializeField] private TextMeshProUGUI countText;
+    [SerializeField] private TextMeshProUGUI legendaryCountText;
     [SerializeField] private GameObject deckBuildCardPrefab;
     [SerializeField] private int deckSizeLimit = 20;
     [SerializeField] private int duplicateLimit = 2;
@@ -148,12 +149,13 @@ public class DeckBuilder : MonoBehaviour
         currentBuildSize = count;
         if(currentBuildSize < 10)
         {
-            countText.GetComponent<TextMeshProUGUI>().text = "0" + currentBuildSize + "/" + deckSizeLimit;
+            countText.text = "0" + currentBuildSize + "/" + deckSizeLimit;
         }
         else
         {
-            countText.GetComponent<TextMeshProUGUI>().text = currentBuildSize + "/" + deckSizeLimit;
+            countText.text = currentBuildSize + "/" + deckSizeLimit;
         }
+        legendaryCountText.text = legendaryAmount + "/" + legendaryLimit;
     }
 
     // Edit currently open deck
