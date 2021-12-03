@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: DiscardPileMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: a13a0bc613b8a744b9de5d9b6a26e3b8, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 58c1bea010f12d1469ef45b0a33371b3, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,6 +19,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_b1bc9321b8aa4d3cb3c5a6476d091ea6:
+        m_Texture: {fileID: 2800000, guid: bbfcf0ca015436a4ea6de951d20bf915, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_1ab8c85f541743a08b7dba9472fbd535_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_3b1bf39b2d8f43f9b6ece226a82fd452_Texture_1:
         m_Texture: {fileID: 2800000, guid: 1b73d0652ac748d48b06e34de59bd2bd, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -52,6 +60,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_512b4ecc6a754fd2ba5117add8044c7d: 1
     - _AnimationStep: 1
     m_Colors:
     - Color_37d60dd68bb6430f82bd75f46a25c175: {r: 33.89676, g: 2.662049, b: 0, a: 0}
