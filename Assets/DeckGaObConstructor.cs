@@ -21,23 +21,21 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
     [SerializeField] private GameObject discardPile;
 
     private int i;
-    private void Awake()
-    {
-        
-    }
+
     private void Start()
     {
         cardPrefab = References.i.fieldCard;
         if (owner == 0) deckCardsCount = GameManager.Instance.playerStats.deckCardCount;
         else if(owner == 1) deckCardsCount = GameManager.Instance.enemyPlayerStats.deckCardCount;
         CreateDeck();
+
         if (yourDeck) owner = GameManager.Instance.playerNumber;
         else owner = 1 - GameManager.Instance.playerNumber;
     }
     public void Update()
     {
         if (cardCooldown > 0) cardCooldown -= Time.deltaTime;
-        else if (cardCooldown <= 0 && !OnPreDrawCD)
+        else if (cardCooldown <= 0 && !OnPreDrawCD && !cardDrawReady)
         {
             FinisheDrawCooldown();
         }
@@ -67,6 +65,13 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
     {
         if (deckCards.Count == deckCardsCount)
         {
+            if(cardDrawReady)
+            {
+                foreach (GameObject card in deckCards)
+                {
+                    card.GetComponent<InGameCard>().StartDrawCardReadyEffect();
+                }
+            }
             interactable = true;
             CancelInvoke();
             return;
@@ -125,6 +130,7 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
             topCard = deckCards[deckCards.Count - 1];
         }
         deckCards.Remove(topCard);
+        topCard.GetComponent<InGameCard>().StopDrawCardReadyEffect();
         return topCard;
     }
 
@@ -159,6 +165,12 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
 
     public void StartDrawCooldown(float duration)
     {
+        Debug.Log("draw CD start");
+
+        foreach (GameObject card in deckCards)
+        {
+            card.GetComponent<InGameCard>().StopDrawCardReadyEffect();
+        }
         OnPreDrawCD = false;
         cardDrawReady = false;
         cardCooldown = duration;
@@ -166,6 +178,12 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
 
     public void FinisheDrawCooldown()
     {
+        Debug.Log("draw CD end");
+
+        foreach (GameObject card in deckCards)
+        {
+            card.GetComponent<InGameCard>().StartDrawCardReadyEffect();
+        }
         cardDrawReady = true;
         cardCooldown = 0;
     }

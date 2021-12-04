@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: VictoryTextMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: b0ffa6086d8ea464283d4355722d96de, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _SampleTexture2D_86bc60ae982540c0abcd6eff634d5002_Texture_1:
+        m_Texture: {fileID: 2800000, guid: c5c8d1f8ad4a84b49ad89a430c3c630a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_a3b986a4c8dc47d5970ce6eb82ddbec5_Texture_1:
+        m_Texture: {fileID: 2800000, guid: b01897afcba617b4ca874665033d7af4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AnimationStep: 0
+    m_Colors:
+    - Color_3542a16867514b62b971cff71f6f868b: {r: 1, g: 0, b: 0, a: 0}
+    - Color_8d40880ea1d747af80a32d8d059de4e2: {r: 1, g: 1, b: 1, a: 0}
+  m_BuildTextureStacks: []

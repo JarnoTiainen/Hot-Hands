@@ -65,7 +65,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     [SerializeField] private CardRuneEffectManager cardRuneEffectManager;
     [SerializeField] private CardTrailManager cardTrailManager;
-    [SerializeField] private BuffEffectMaterial buffEffectManager;
+    [SerializeField] private DrawCardReadyManager drawCardReadyManager;
 
     public void SetTempValuesAsValues()
     {
@@ -492,4 +492,12 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         debuffEffectManager.PlayEffect();
     }
 
+    public void StartDrawCardReadyEffect()
+    {
+        drawCardReadyManager.StartAnimation();
+    }
+    public void StopDrawCardReadyEffect()
+    {
+        drawCardReadyManager.StopAnimation();
+    }
 }
