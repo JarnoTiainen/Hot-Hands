@@ -10,6 +10,7 @@ public class SortMethodDropdown : MonoBehaviour
     public bool reverse = false;
     [SerializeField] private GameObject dropdownButton;
     [SerializeField] private GameObject orderToggle;
+    [SerializeField] private TextMeshProUGUI orderToggleIcon;
 
     private void Start()
     {
@@ -20,10 +21,7 @@ public class SortMethodDropdown : MonoBehaviour
     public void SortAllLists()
     {
         CollectionCardList.SortMethod sortMethod = GetSortMethod();
-        foreach(GameObject list in CollectionManager.Instance.cardLists)
-        {
-            list.GetComponent<CollectionCardList>().SortList(sortMethod, reverse);
-        }
+        CollectionManager.Instance.collectionCardList.GetComponent<CollectionCardList>().SortList(sortMethod, reverse);
         dropdownButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = sortMethod.ToString().ToUpper();
         CollectionManager.Instance.UpdatePageText();
         gameObject.SetActive(false);
@@ -44,13 +42,11 @@ public class SortMethodDropdown : MonoBehaviour
         GameObject iconContainer = orderToggle.transform.Find("IconContainer").gameObject;
         if (reverse)
         {
-            iconContainer.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "<=";
-            iconContainer.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "|''";
+            orderToggleIcon.text = "<<";
         }
         else
         {
-            iconContainer.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "=>";
-            iconContainer.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "''|";
+            orderToggleIcon.text = ">>";
         }
         this.reverse = reverse;
         SortAllLists();

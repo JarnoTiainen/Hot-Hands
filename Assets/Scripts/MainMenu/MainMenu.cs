@@ -50,16 +50,41 @@ public class MainMenu : MonoBehaviour
 
     public void CollectionMenuSetActive(bool value)
     {
-        if (collectionMenu.activeSelf == true) CollectionManager.Instance.MoveCollectionMenu(true);
-        else collectionMenu.SetActive(value);
-        if (value) SetCameraCollectionMenu();
+        collectionMenu.SetActive(value);
+        MainMenuButtonsSetActive(!value);
+        ChatManager.Instance.HideChat(value);
+        if (value)
+        {
+            CollectionManager.Instance.MoveCollectionMenu(true);
+            SetCameraCollectionMenu();
+        }
+        else SetCameraMainMenu();
     }
 
-    public void SettingsMenuSetActive(bool value) => settingsMenu.SetActive(value);
+    public void SettingsMenuSetActive(bool value)
+    {
+        settingsMenu.SetActive(value);
+        ChatManager.Instance.HideChat(value);
+        MainMenuButtonsSetActive(!value);
+        if (value) SetCameraCollectionMenu();
+        else SetCameraMainMenu();
+    }
 
-    public void QuitConfirmationSetActive(bool value) => quitConfirmation.SetActive(value);
+    public void QuitConfirmationSetActive(bool value)
+    {
+        quitConfirmation.SetActive(value);
+        MainMenuButtonsSetActive(!value);
+        ChatManager.Instance.HideChat(value);
+        if (value) SetCameraCollectionMenu();
+        else SetCameraMainMenu();
+    }
 
-    public void SearchingGamePanelSetActive(bool value) => searchingGame.SetActive(value);
+    public void SearchingGamePanelSetActive(bool value)
+    {
+        searchingGame.SetActive(value);
+        MainMenuButtonsSetActive(!value);
+
+    }
 
     public void SetCameraMainMenu()
     {
@@ -75,6 +100,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
+        MainMenuButtonsSetActive(false);
         WebSocketService.JoinGame(soloPlayEnabled);
         Debug.Log("Play");
         if (soloPlayEnabled) LoadScene(1);
@@ -194,6 +220,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnTutorialButton()
     {
+        ChatManager.Instance.HideChat(true);
         SceneManager.LoadScene("TutorialScene");
     }
 

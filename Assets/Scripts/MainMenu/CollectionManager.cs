@@ -9,21 +9,14 @@ public class CollectionManager : MonoBehaviour
 {
     public static CollectionManager Instance { get; private set; }
     private CardList resourcesCardList;
-    public List<CollectionMenuButtonManager> cardListToggles = new List<CollectionMenuButtonManager>();
-    public List<GameObject> cardLists = new List<GameObject>();
+    public List<CollectionMenuButtonManager> deckToggles = new List<CollectionMenuButtonManager>();
     public List<List<Card>> playerDecks = new List<List<Card>>();
     public List<string> deckNames = new List<string>();
-    [SerializeField] private GameObject cardListWindow;
+    public GameObject collectionCardList;
     [SerializeField] private GameObject pageText;
-    [SerializeField] private GameObject setActiveButton;
-    [SerializeField] private GameObject cardListPrefab;
     [SerializeField] private GameObject collectionMenu;
-    public int activeList = 0;
-    public int activeDeckToggle = 0;
+    [SerializeField] private RenameDeckPopup renameDeckPopup;
     public int playerDeckLimit = 5;
-    private Color32 defaultDeckBGColor = new Color32(89, 89, 89, 255);
-    public Color32 editingDeckBGColor = new Color32(205, 205, 0, 255);
-    private Color32 activeDeckBGColor = new Color32(40, 205, 40 ,255);
     private float collectionX;
     private float collectionY;
     private float collectionZ;
@@ -47,15 +40,27 @@ public class CollectionManager : MonoBehaviour
         }
         SetAllCardsList();
         UpdatePageText();
-
-        setActiveButton.GetComponent<Button>().onClick.AddListener(() => SetActiveButtonCallback());
-        setActiveButton.gameObject.GetComponent<Image>().color = activeDeckBGColor;
     }
 
     public void MoveCollectionMenu(bool visible)
     {
         if(visible) collectionMenu.transform.position = new Vector3(collectionX, collectionY, collectionZ);
         else collectionMenu.transform.position = new Vector3(1000, collectionY, -1000);
+    }
+
+    public void RenamePopupSetActive(bool value)
+    {
+        int deckIndex = -1;
+        for (int i = 0; deckToggles.Count > i; i++)
+        {
+            if (deckToggles[i].deckSelected)
+            {
+                deckIndex = i;
+                break;
+            }
+        }
+        if (deckIndex == -1) return;
+        renameDeckPopup.gameObject.SetActive(value);
     }
 
     public void SetPlayerDecks(GetDecksMessage getDecksMessage)
@@ -96,68 +101,70 @@ public class CollectionManager : MonoBehaviour
                 this.playerDecks.Add(tempDeck);
             }
         }
-
+        
         for (int i = 0; playerDecks.Count > i; i++)
         {
-            CreateNewDeck(deckNames[i], true, true, i);
-            UpdateDeckUI(i);
+            if (deckNames[i] == null || deckNames[i] == "") deckToggles[i].ChangeDeckName("Deck " + (i + 1));
+            else deckToggles[i].ChangeDeckName(deckNames[i]);
         }
 
-        activeDeckToggle = getDecksMessage.activeDeckIndex + 1;
-        cardListToggles[activeDeckToggle].ToggleDeckSelected();
-        cardListToggles[0].ToggleButton(0);
+        deckToggles[getDecksMessage.activeDeckIndex].ToggleDeckSelected();
+        gameObject.SetActive(false);
+        //deckToggles[0].ToggleButton(0);
     }
 
     // Sends the players active deck index to the db and visually shows which deck is active
     public void SetActiveDeckToDB()
     {
-        if (activeList == 0) return;
-        WebSocketService.SetActiveDeck(activeList - 1);
-        SetActiveDeckUI();
+        int deckIndex = -1;
+        for (int i = 0; deckToggles.Count > i; i++)
+        {
+            if (deckToggles[i].deckSelected)
+            {
+                deckIndex = i;
+                break;
+            }
+        }
+        if (deckIndex == -1) return;
+        WebSocketService.SetActiveDeck(deckIndex);
+        deckToggles[deckIndex].ToggleDeckSelected();
+        MainMenu.Instance.CreatePopupNotification("Active deck changed.", MainMenu.PopupCorner.TopRight);
     }
 
     // Sends the players deck data to the db
-    public void SaveDeckToDB(int index)
+    public void SaveDeckToDB(int index, bool rename = false)
     {
-        DeckObject deckString = new DeckObject(playerDecks[index], index, deckNames[index]);
-        WebSocketService.SaveDeck(JsonUtility.ToJson(deckString));
-    }
-
-    // Sets the visuals that show which deck is active
-    public void SetActiveDeckUI()
-    {
-        if (activeDeckToggle != 0)
-        {
-            cardListToggles[activeDeckToggle].ToggleDeckSelected();
-        }
-        cardListToggles[activeList].ToggleDeckSelected();
-        activeDeckToggle = activeList;
-    }
-
-    // Sets the visuals that show which deck is being edited
-    public void SetEditDeckUI(int toggleIndex, bool editing)
-    {
-        /*
-        if (editing) cardListToggles[toggleIndex].transform.Find("Background").GetComponent<Image>().color = editingDeckBGColor;
+        DeckObject deckString;
+        if (!rename) deckString = new DeckObject(playerDecks[index], index, deckNames[index]);
         else
         {
-            if (activeDeckToggle == toggleIndex)
+            int deckIndex = -1;
+            for (int i = 0; deckToggles.Count > i; i++)
             {
-                cardListToggles[toggleIndex].transform.Find("Background").GetComponent<Image>().color = activeDeckBGColor;
+                if (deckToggles[i].deckSelected)
+                {
+                    deckIndex = i;
+                    break;
+                }
             }
-            else
-            {
-                cardListToggles[toggleIndex].transform.Find("Background").GetComponent<Image>().color = defaultDeckBGColor;
-            }
+            if (deckIndex == -1 || renameDeckPopup.deckNameInput.text.Length == 0) return;
+
+            string newName = renameDeckPopup.deckNameInput.text;
+            renameDeckPopup.deckNameInput.text = "";
+            deckNames[deckIndex] = newName;
+            deckToggles[deckIndex].ChangeDeckName(newName);
+            deckString = new DeckObject(playerDecks[deckIndex], deckIndex, newName);
+            renameDeckPopup.gameObject.SetActive(false);
         }
-        */
+        WebSocketService.SaveDeck(JsonUtility.ToJson(deckString));
+        MainMenu.Instance.CreatePopupNotification("Deck saved.", MainMenu.PopupCorner.TopRight);
     }
 
     // Gets all game cards and passes them to the 'All Cards List' and calls it's populate function
     private void SetAllCardsList()
     {
         // Add all cards in the resources allCards-list to Collection's "All Cards"
-        CollectionCardList cardListScript = cardLists[0].GetComponent<CollectionCardList>();
+        CollectionCardList cardListScript = collectionCardList.GetComponent<CollectionCardList>();
         foreach (CardList.ListCard listCard in resourcesCardList.allCards)
         {
             cardListScript.cards.Add(listCard.card);
@@ -168,10 +175,11 @@ public class CollectionManager : MonoBehaviour
     }
 
     // Passes a specific player deck's cards to the corresponding ingame list and calls it's populate function
+    /*
     public void UpdateDeckUI(int i)
     {
         // Updates cards on list
-        CollectionCardList cardListScript = cardLists[i + 1].GetComponent<CollectionCardList>();
+        CollectionCardList cardListScript = collectionCardList.GetComponent<CollectionCardList>();
         cardListScript.cards = playerDecks[i];
         if (!(cardListScript.cards.Count == 0)) cardListScript.SortList(SortMethodDropdown.Instance.GetSortMethod(), SortMethodDropdown.Instance.reverse);
         // Updates name on toggle
@@ -184,23 +192,26 @@ public class CollectionManager : MonoBehaviour
             cardListToggles[i + 1].ChangeDeckName(deckNames[i]);
         }
     }
+    */
 
     // Creates new empty ingame list and deck when called
     public void CreateNewDeck(string newName = null, bool isStart = false, bool isLoadingFromDB = false, int nameIndex = -1)
     {
         if (playerDecks.Count >= playerDeckLimit && !isLoadingFromDB) return;
 
+        /*
         GameObject newCardList = Instantiate(cardListPrefab) as GameObject;
         newCardList.SetActive(false);
         if (newName == null || newName == "") newCardList.name = "Deck " + (nameIndex + 1);
         else newCardList.name = newName;
         newCardList.transform.SetParent(cardListWindow.transform, false);
         cardLists.Add(newCardList);
+        */
 
-        if (newName == null || newName == "") cardListToggles[nameIndex + 1].name = "Deck " + (nameIndex + 1);
-        else cardListToggles[nameIndex + 1].name = newName;
+        if (newName == null || newName == "") deckToggles[nameIndex].name = "Deck " + (nameIndex + 1);
+        else deckToggles[nameIndex].name = newName;
 
-        if (!isStart) playerDecks.Add(new List<Card>());
+        //if (!isStart) playerDecks.Add(new List<Card>());
         // Force rebuilds the toggle row so that the content size fitter component behaves properly
         /*
         RectTransform togglesRectTransform = togglesRow.transform.parent.GetComponent<RectTransform>();
@@ -208,23 +219,10 @@ public class CollectionManager : MonoBehaviour
         */
     }
 
-    // Check's which toggle is checked and sets the corresponding ingame list active
-    public void ChangeActiveCardList(int toggle)
-    {
-        if (!cardListToggles[toggle].deckSelected) return;
-        for(int i = 0; cardListToggles.Count > i; i++)
-        {
-            cardLists[i].SetActive(false);
-        }
-        cardLists[toggle].SetActive(true);
-        activeList = toggle;
-        UpdatePageText();
-    }
-
     // Changes the page on the active ingame list
     public void ChangePage(int i)
     {
-        CollectionCardList list = cardLists[activeList].GetComponent<CollectionCardList>();
+        CollectionCardList list = collectionCardList.GetComponent<CollectionCardList>();
         if(list.currentPage == 1 && i == -1) return;
         if(list.currentPage == list.totalPages && i == 1) return;
         list.PopulatePage(list.currentPage + i);
@@ -234,10 +232,7 @@ public class CollectionManager : MonoBehaviour
     // Updates the page counter
     public void UpdatePageText()
     {
-        CollectionCardList list = cardLists[activeList].GetComponent<CollectionCardList>();
+        CollectionCardList list = collectionCardList.GetComponent<CollectionCardList>();
         pageText.GetComponent<TextMeshProUGUI>().text = (list.currentPage) + "/" + list.totalPages;
     }
-
-    // Bound to an onClick event from the "Set Active Button'. Calls SetActiveDeck function
-    private void SetActiveButtonCallback() => SetActiveDeckToDB();
 }

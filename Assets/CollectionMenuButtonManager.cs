@@ -11,27 +11,24 @@ public class CollectionMenuButtonManager : MonoBehaviour, IOnClickDownUIElement,
     [SerializeField] private ButtonType buttonType;
     [SerializeField] private TextMeshProUGUI buttonText;
     public bool deckSelected = false;
-    [SerializeField] private bool activeDeck = false;
+    public bool activeDeck = false;
     private static GameObject sfxLibrary;
 
     private enum ButtonType
     {
-        All,    //0
-        Deck1,  //1
-        Deck2,  //2
-        Deck3,  //3
-        Deck4,  //4
-        Deck5   //5
+        Deck1,  //0
+        Deck2,  //1
+        Deck3,  //2
+        Deck4,  //3
+        Deck5   //4
     }
 
     public void OnClickElement()
     {
-        
         if (deckSelected) return;
-        ToggleButton((int)buttonType);
-        CollectionManager.Instance.ChangeActiveCardList((int)buttonType);
+        ToggleButton();
         sfxLibrary.GetComponent<ButtonSFX>().OnClick();
-        DeckBuilder.Instance.EditDeck();
+        DeckBuilder.Instance.OpenDeck((int)buttonType);
     }
 
     public void OnHoverEnter()
@@ -51,27 +48,20 @@ public class CollectionMenuButtonManager : MonoBehaviour, IOnClickDownUIElement,
     }
 
     [Button]
-    public void ToggleButton(int index)
+    public void ToggleButton()
     {
-        if (!deckSelected)
-        {
-            deckSelected = true;
-            meshRenderer.material.SetInt("_ButtonSelected", 1);
-        }
-        else
-        {
-            deckSelected = false;
-            meshRenderer.material.SetInt("_ButtonSelected", 0);
-        }
-
         int siblings = gameObject.transform.parent.childCount;
-        for(int i = 0; siblings > i; i++)
+        for (int i = 0; siblings > i; i++)
         {
-            if(i != index)
+            CollectionMenuButtonManager sibling = gameObject.transform.parent.GetChild(i).GetComponent<CollectionMenuButtonManager>();
+            if (sibling.deckSelected)
             {
-                gameObject.transform.parent.GetChild(i).GetComponent<CollectionMenuButtonManager>().TurnOff();
+                sibling.TurnOff();
+                break;
             }
         }
+        deckSelected = true;
+        meshRenderer.material.SetInt("_ButtonSelected", 1);
     }
 
     public void TurnOff()
@@ -80,19 +70,27 @@ public class CollectionMenuButtonManager : MonoBehaviour, IOnClickDownUIElement,
         meshRenderer.material.SetInt("_ButtonSelected", 0);
     }
 
+    public void TurnActiveOff()
+    {
+        activeDeck = false;
+        meshRenderer.material.SetInt("_DeckSelected", 0);
+    }
+
     [Button]
     public void ToggleDeckSelected()
     {
-        if (!activeDeck)
+        int siblings = gameObject.transform.parent.childCount;
+        for (int i = 0; siblings > i; i++)
         {
-            activeDeck = true;
-            meshRenderer.material.SetInt("_DeckSelected", 1);
+            CollectionMenuButtonManager sibling = gameObject.transform.parent.GetChild(i).GetComponent<CollectionMenuButtonManager>();
+            if (sibling.activeDeck)
+            {
+                sibling.TurnActiveOff();
+                break;
+            }
         }
-        else
-        {
-            activeDeck = false;
-            meshRenderer.material.SetInt("_DeckSelected", 0);
-        }
+        activeDeck = true;
+        meshRenderer.material.SetInt("_DeckSelected", 1);
     }
 
     public void ChangeDeckName(string text)

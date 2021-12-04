@@ -32,29 +32,18 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
         {
             case ButtonType.Play:
                 MainMenu.Instance.Play();
-                MainMenu.Instance.MainMenuButtonsSetActive(false);
                 break;
             case ButtonType.Tutorial:
                 MainMenu.Instance.OnTutorialButton();
-                ChatManager.Instance.HideChat(true);
                 break;
             case ButtonType.Collection:
                 MainMenu.Instance.CollectionMenuSetActive(true);
-                MainMenu.Instance.SetCameraCollectionMenu();
-                MainMenu.Instance.MainMenuButtonsSetActive(false);
-                ChatManager.Instance.HideChat(true);
                 break;
             case ButtonType.Settings:
                 MainMenu.Instance.SettingsMenuSetActive(true);
-                MainMenu.Instance.SetCameraCollectionMenu();
-                MainMenu.Instance.MainMenuButtonsSetActive(false);
-                ChatManager.Instance.HideChat(true);
                 break;
             case ButtonType.Quit:
                 MainMenu.Instance.QuitConfirmationSetActive(true);
-                MainMenu.Instance.SetCameraCollectionMenu();
-                MainMenu.Instance.MainMenuButtonsSetActive(false);
-                ChatManager.Instance.HideChat(true);
                 break;
             case ButtonType.Login:
                 LoginManager.Instance.Login();
@@ -70,9 +59,6 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
                 break;
             case ButtonType.SettingsBack:
                 MainMenu.Instance.SettingsMenuSetActive(false);
-                MainMenu.Instance.SetCameraMainMenu();
-                MainMenu.Instance.MainMenuButtonsSetActive(true);
-                ChatManager.Instance.HideChat(false);
                 break;
             case ButtonType.QuitYes:
                 MainMenu.Instance.QuitGame();
@@ -87,7 +73,6 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
                 Debug.Log("Canceling search");
                 WebSocketService.StopSearch();
                 MainMenu.Instance.SearchingGamePanelSetActive(false);
-                MainMenu.Instance.MainMenuButtonsSetActive(true);
                 break;
             default:
                 break;
