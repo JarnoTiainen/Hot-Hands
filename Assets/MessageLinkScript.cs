@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 public class MessageLinkScript : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI messageText;
-    [SerializeField] private string link = "No links found";
+    public string link = "No links found";
     public void FindLink()
     {
         string msg = messageText.text;

@@ -14,6 +14,9 @@ public class ChatManager : MonoBehaviour
     [SerializeField] private GameObject chatContent;
     [SerializeField] private TMP_InputField messageInput;
     [SerializeField] private TextMeshProUGUI characterCountText;
+    public GameObject openLinkConfirmation;
+    public TextMeshProUGUI linkConfirmationText;
+    public Button openLinkButton;
     private int charLimit;
 
     private void Awake()

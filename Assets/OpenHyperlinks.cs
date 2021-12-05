@@ -8,23 +8,32 @@ using TMPro;
 public class OpenHyperlinks : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private TextMeshProUGUI messageText;
-    [SerializeField] private Camera camera;
+    [SerializeField] private Camera cameraUI;
+    private TMP_LinkInfo linkInfo;
 
     private void Start()
     {
-        camera = GameObject.Find("CanvasCamera").GetComponent<Camera>();
+        cameraUI = GameObject.Find("CanvasCamera").GetComponent<Camera>();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        int linkIndex = TMP_TextUtilities.FindIntersectingLink(messageText, Input.mousePosition, camera);
+        int linkIndex = TMP_TextUtilities.FindIntersectingLink(messageText, Input.mousePosition, cameraUI);
 
-        if (linkIndex != -1)
-        { // was a link clicked?
-            TMP_LinkInfo linkInfo = messageText.textInfo.linkInfo[linkIndex];
-
-            // open the link id as a url, which is the metadata we added in the text field
-            Application.OpenURL(linkInfo.GetLinkID());
+        if (linkIndex != -1)  // was a link clicked?
+        {
+            linkInfo = messageText.textInfo.linkInfo[linkIndex];
+            ChatManager.Instance.openLinkConfirmation.SetActive(true);
+            ChatManager.Instance.linkConfirmationText.text = "<u>" + gameObject.GetComponent<MessageLinkScript>().link + "</u>";
+            ChatManager.Instance.openLinkButton.onClick.AddListener(() => OpenLink());
         }
+    }
+
+    public void OpenLink()
+    {
+        // open the link id as a url, which is the metadata we added in the text field
+        ChatManager.Instance.openLinkButton.onClick.RemoveAllListeners();
+        ChatManager.Instance.openLinkConfirmation.SetActive(false);
+        Application.OpenURL(linkInfo.GetLinkID());
     }
 }
