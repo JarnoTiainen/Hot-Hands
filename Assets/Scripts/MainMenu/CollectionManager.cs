@@ -109,7 +109,7 @@ public class CollectionManager : MonoBehaviour
         }
 
         deckToggles[getDecksMessage.activeDeckIndex].ToggleDeckSelected();
-        gameObject.SetActive(false);
+        collectionMenu.SetActive(false);
         //deckToggles[0].ToggleButton(0);
     }
 
