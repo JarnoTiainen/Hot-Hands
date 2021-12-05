@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using Sirenix.OdinInspector;
 
@@ -15,6 +16,7 @@ public class LoginManager : MonoBehaviour
     [SerializeField] private GameObject openSignUpButton;
     [SerializeField] private GameObject signUpButton;
     [SerializeField] private GameObject backButton;
+    [SerializeField] private Toggle rememberMeToggle;
     [SerializeField] private GameObject mainMenuButtons;
     private int charLimit;
 
@@ -24,6 +26,15 @@ public class LoginManager : MonoBehaviour
         userNameField.ActivateInputField();
         userNameField.Select();
         charLimit = userNameField.characterLimit;
+
+        rememberMeToggle.isOn = System.Convert.ToBoolean(PlayerPrefs.GetInt("RememberMe", 0));
+        if (rememberMeToggle.isOn) GetUserCredentials();
+    }
+
+    private void OnDisable()
+    {
+        ToggleRememberMe(rememberMeToggle.isOn);
+        SaveUserCredentials(rememberMeToggle.isOn);
     }
 
     public void CreateNewAccount()
@@ -71,6 +82,34 @@ public class LoginManager : MonoBehaviour
         else
         {
             characterCounterText.color = Color.white;
+        }
+    }
+
+    private void ToggleRememberMe(bool value)
+    {
+        PlayerPrefs.SetInt("RememberMe", System.Convert.ToInt32(value));
+        PlayerPrefs.Save();
+    }
+
+    private void GetUserCredentials()
+    {
+        userNameField.text = PlayerPrefs.GetString("Username", "");
+        passwordField.text = PlayerPrefs.GetString("Password", "");
+    }
+
+    private void SaveUserCredentials(bool rememberMe)
+    {
+        if (rememberMe)
+        {
+            PlayerPrefs.SetString("Username", userNameField.text);
+            PlayerPrefs.SetString("Password", passwordField.text);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            PlayerPrefs.SetString("Username", "");
+            PlayerPrefs.SetString("Password", "");
+            PlayerPrefs.Save();
         }
     }
 
