@@ -108,9 +108,11 @@ public class CollectionManager : MonoBehaviour
             else deckToggles[i].ChangeDeckName(deckNames[i]);
         }
 
-        deckToggles[getDecksMessage.activeDeckIndex].ToggleDeckSelected();
+        int activeDeck = getDecksMessage.activeDeckIndex;
+        deckToggles[activeDeck].ToggleButton();
+        deckToggles[activeDeck].ToggleDeckSelected();
+        DeckBuilder.Instance.OpenDeck(activeDeck);
         collectionMenu.SetActive(false);
-        //deckToggles[0].ToggleButton(0);
     }
 
     // Sends the players active deck index to the db and visually shows which deck is active
