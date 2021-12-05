@@ -138,6 +138,67 @@ public class MonsterZone : MonoBehaviour
         return Vector3.zero;
     }
 
+    public void TryReturnCardToHand(string seed)
+    {
+        Debug.Log("Trying to return card to hand");
+        if (CheckIfCardWithSeedInMOnsterCards(seed))
+        {
+            Debug.Log("Contains yes");
+
+            Hand.AddNewCardToHand(GetCardFromMonsterCards(seed));
+            RemoveCardFromMOnsterCardswithseed(seed);
+            RemoveCardFromUnhandledCardswithseed(seed);
+            RepositionMonsterCards();
+            GameManager.Instance.playerStats.playerFieldCards--;
+        }
+    }
+
+    public bool CheckIfCardWithSeedInMOnsterCards(string seed)
+    {
+        foreach(GameObject card in monsterCards)
+        {
+            if (card.GetComponent<InGameCard>().GetData().seed == seed) return true;
+        }
+        return false;
+    }
+    public void RemoveCardFromMOnsterCardswithseed(string seed)
+    {
+        GameObject removedCard = null;
+        foreach (GameObject card in monsterCards)
+        {
+            if (card.GetComponent<InGameCard>().GetData().seed == seed) removedCard = card;
+        }
+        if(removedCard != null)
+        {
+            monsterCards.Remove(removedCard);
+            Destroy(removedCard);
+        }
+        
+    }
+    public void RemoveCardFromUnhandledCardswithseed(string seed)
+    {
+        GameObject removedCard = null;
+        foreach (GameObject card in unhandledCards)
+        {
+            if (card.GetComponent<InGameCard>().GetData().seed == seed) removedCard = card;
+        }
+        if (removedCard != null)
+        {
+            unhandledCards.Remove(removedCard);
+            Destroy(removedCard);
+        }
+
+    }
+
+    public GameObject GetCardFromMonsterCards(string seed)
+    {
+        foreach (GameObject card in monsterCards)
+        {
+            if (card.GetComponent<InGameCard>().GetData().seed == seed) return card;
+        }
+        return null;
+    }
+
 
     public void TryRemoveMonsterCard(string seed)
     {

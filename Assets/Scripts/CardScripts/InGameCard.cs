@@ -336,10 +336,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
                 }
             }
         }
-        else if(interActable)
-        {
-            GameManager.Instance.EndTargetEvent(cardData.seed);
-        }
     }
 
 

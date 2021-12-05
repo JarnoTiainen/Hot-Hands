@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     private Line activeTargetLine;
     private CardData targettingCardData;
+    private GameObject targettingCard;
 
     private GameObject sfxLibrary;
 
@@ -435,7 +436,14 @@ public class GameManager : MonoBehaviour
     }
     [Button] public void CardDenied(string seed)
     {
-        Hand.AddNewCardToHand(GetCardFromInGameCards(seed));
+        if(References.i.yourMonsterZone.monsterCards.Contains(GetCardFromInGameCards(seed)))
+        {
+            References.i.yourMonsterZone.TryReturnCardToHand(seed);
+        }
+        else
+        {
+            Hand.AddNewCardToHand(GetCardFromInGameCards(seed));
+        }
     }
 
 
@@ -517,6 +525,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 targettingCardData = data;
+                targettingCard = newCard;
                 StartTargetEvent(newCard);
             }
             Hand.Instance.UpdateCanAffortCards();
@@ -536,9 +545,49 @@ public class GameManager : MonoBehaviour
         WebSocketService.PlayCard(References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.GetCardWithSeed(targettingCardData.seed)), targettingCardData.seed, seed);
         PlayerPlayCard(targettingCardData);
     }
+    public void CancelTargetEvent()
+    {
+        Debug.Log("cancelling");
 
+        Mouse.Instance.targetModeOn = false;
+        activeTargetLine.RemoveLine();
+        References.i.yourMonsterZone.TryReturnCardToHand(targettingCardData.seed);
 
-    
+    }
+
+    public void Update()
+    {
+        if(Input.GetMouseButtonUp(0))
+        {
+            if(targettingCardData != null)
+            {
+                if (Mouse.Instance.targetModeOn)
+                {
+                    if(RayCaster.Instance.target.GetComponent<InGameCard>())
+                    {
+                        if(!IsYou(RayCaster.Instance.target.GetComponent<InGameCard>().owner) && targettingCardData.targetType == Enchantment.TargetType.Ally)
+                        {
+                            CancelTargetEvent();
+                            return;
+                        }
+                        if (IsYou(RayCaster.Instance.target.GetComponent<InGameCard>().owner) && targettingCardData.targetType == Enchantment.TargetType.Enemy)
+                        {
+                            CancelTargetEvent();
+                            return;
+                        }
+                        GameManager.Instance.EndTargetEvent(RayCaster.Instance.target.GetComponent<InGameCard>().GetData().seed);
+                    }
+                    if (!RayCaster.Instance.target.GetComponent<InGameCard>())
+                    {
+                        CancelTargetEvent();
+                    }
+                }
+            }
+            
+        }
+        
+    }
+
 
     public void PlayerAttack(AttackEventMessage attackEventMessage)
     {

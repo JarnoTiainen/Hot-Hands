@@ -143,6 +143,8 @@ public class Mouse : MonoBehaviour
         bool canAffordToPlayCard = playerBurnValue >= heldCard.GetComponent<InGameCard>().GetData().cost;
         bool isEnoghSpace = GameManager.Instance.playerStats.playerFieldCards < GameManager.Instance.maxFieldCardCount;
 
+        Debug.Log(canAffordToPlayCard + " " + isEnoghSpace);
+
         if (canAffordToPlayCard && isEnoghSpace)
         {
             if (!tutorialMode) {
@@ -257,6 +259,7 @@ public class Mouse : MonoBehaviour
             {
                 Debug.Log("Card was targetting");
                 GameManager.Instance.PrePlayCard(heldCard.GetComponent<InGameCard>().GetData(), true);
+                heldCard = null;
             }
             else
             {
@@ -277,6 +280,7 @@ public class Mouse : MonoBehaviour
                     SummonCardMessage summonCard = new SummonCardMessage(ghostIndex, 0, false, free, TutorialManager.tutorialManagerInstance.attackCoolDown, cardData);
                     GameManager.Instance.PlayerSummonCard(summonCard);
                 }
+                heldCard = null;
             }
             
         }

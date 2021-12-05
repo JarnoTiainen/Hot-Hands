@@ -370,4 +370,10 @@ public class WebSocketService : MonoBehaviour
         GameMessage message = new GameMessage("OnMessage", "LOADCHAT", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
+    [Button] public static void StartGame()
+    {
+        Debug.Log("Send game StartGame");
+        GameMessage message = new GameMessage("OnMessage", "STARTGAME", "");
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
 }

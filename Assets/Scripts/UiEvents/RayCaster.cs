@@ -15,6 +15,7 @@ public class RayCaster : MonoBehaviour
     public GameObject newTarget;
     public GameObject previousTarget;
     public bool firstTimeCall = true;
+    public bool eventsOn = true;
 
     private void Awake()
     {
@@ -26,7 +27,7 @@ public class RayCaster : MonoBehaviour
     {
         RaycastHit hit;
         Ray ray = rayCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit))
+        if (eventsOn && Physics.Raycast(ray, out hit))
         {
             if(target)
             {
@@ -39,7 +40,7 @@ public class RayCaster : MonoBehaviour
             target = hit.transform.gameObject;
 
 
-            if (Input.GetMouseButtonDown(0))
+            if (eventsOn && Input.GetMouseButtonDown(0))
             {
                 if (target.GetComponent<IOnClickDownUIElement>() != null)
                 {
@@ -51,7 +52,7 @@ public class RayCaster : MonoBehaviour
                 }
             }
 
-            if (Input.GetMouseButton(0))
+            if (eventsOn && Input.GetMouseButton(0))
             {
                 if (target.GetComponent<IOnHoldDownElement>() != null)
                 {
@@ -62,7 +63,7 @@ public class RayCaster : MonoBehaviour
                     }
                 }
             }
-            if (Input.GetMouseButtonUp(0))
+            if (eventsOn && Input.GetMouseButtonUp(0))
             {
                 if (target.GetComponent<IOnClickUpElement>() != null)
                 {
@@ -74,7 +75,7 @@ public class RayCaster : MonoBehaviour
                 }
             }
 
-            if (target.GetComponent<IOnHoverUIElement>() != null)
+            if (eventsOn && target.GetComponent<IOnHoverUIElement>() != null)
             {
                 IOnHoverUIElement[] onHoverUIElements = target.GetComponents<IOnHoverUIElement>();
                 foreach(IOnHoverUIElement element in onHoverUIElements)
@@ -92,7 +93,7 @@ public class RayCaster : MonoBehaviour
             }
             if (previousTarget)
             {
-                if (previousTarget.GetComponent<IOnHoverExitElement>() != null)
+                if (eventsOn && previousTarget.GetComponent<IOnHoverExitElement>() != null)
                 {
                     IOnHoverExitElement[] onHoverExitElements = previousTarget.GetComponents<IOnHoverExitElement>();
                     foreach(IOnHoverExitElement element in onHoverExitElements)
@@ -109,7 +110,7 @@ public class RayCaster : MonoBehaviour
     {
         if (oldTarget)
         {
-            if (oldTarget.GetComponent<IOnHoverExitElement>() != null)
+            if (eventsOn && oldTarget.GetComponent<IOnHoverExitElement>() != null)
             {
                 IOnHoverExitElement[] onHoverExitElements = oldTarget.GetComponents<IOnHoverExitElement>();
                 foreach (IOnHoverExitElement element in onHoverExitElements)
@@ -119,7 +120,7 @@ public class RayCaster : MonoBehaviour
             }
         }
 
-        if (newTarget.GetComponent<IOnHoverEnterElement>() != null)
+        if (eventsOn && newTarget.GetComponent<IOnHoverEnterElement>() != null)
         {
             IOnHoverEnterElement[] onHoverEnterElements = newTarget.GetComponents<IOnHoverEnterElement>();
             foreach(IOnHoverEnterElement element in onHoverEnterElements)
