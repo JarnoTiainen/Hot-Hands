@@ -99,7 +99,9 @@ public class CardList : ScriptableObject
 
     public CardData GetCardData(PlaySpellMessage playSpellMessage)
     {
+        Debug.Log("GEtting card data with name: " + playSpellMessage.cardName);
         Card card = GetCardData(playSpellMessage.cardName);
+        Debug.Log("Card image name is: " + card.cardSprite.name);
         CardData cardData = new CardData(card.cardSprite, CheckIfCardIsTargetting(playSpellMessage.enchantments), playSpellMessage.cardName, playSpellMessage.cardCost, playSpellMessage.cardValue, card.cardType, playSpellMessage.enchantments, playSpellMessage.seed, GetCardDescription(playSpellMessage.enchantments), playSpellMessage.legendary);
         return cardData;
     }

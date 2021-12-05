@@ -652,9 +652,12 @@ public class GameManager : MonoBehaviour
         {
             enemyPlayerStats.playerBurnValue -= playSpellMessage.cardCost;
             enemyPlayerStats.playerHandCards--;
-            EnemyHand.Instance.RemoveCard(playSpellMessage.seed);
             enemyPlayerStats.discardpileCardCount++;
             References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
+            GameObject card = EnemyHand.Instance.GetCardWithSeed(playSpellMessage.seed);
+            card.GetComponent<InGameCard>().SetNewCardData(false, References.i.cardList.GetCardData(playSpellMessage));
+            AddCardToInGameCards(card);
+            EnemyHand.Instance.RemoveCard(playSpellMessage.seed);
             References.i.spellZone.PlaySpell(References.i.cardList.GetCardData(playSpellMessage), playSpellMessage.targets, playSpellMessage.windup, playSpellMessage.slot);
         }
     }
