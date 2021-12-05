@@ -78,7 +78,6 @@ public class AttackEventHandler : MonoBehaviour
             attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.enemyPlayerTarget, attackAnimationSpeed);
             attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
             References.i.yourMonsterZone.GetCardWithSeed(attacker.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
-            GameManager.Instance.enemyPlayerStats.playerHealth -= playerTakenDamage;
         }
         else
         {
@@ -88,7 +87,6 @@ public class AttackEventHandler : MonoBehaviour
             attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.yourPlayerTarget, attackAnimationSpeed);
             attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
             References.i.opponentMonsterZone.GetCardWithSeed(attacker.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
-            GameManager.Instance.playerStats.playerHealth -= playerTakenDamage;
         }
         //TODO
         if (References.i.mouse.tutorialMode) {

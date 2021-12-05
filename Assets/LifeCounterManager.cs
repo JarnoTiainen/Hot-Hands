@@ -26,8 +26,15 @@ public class LifeCounterManager : MonoBehaviour
 
     private void Update()
     {
-        if (isYourCounter && GameManager.Instance.playerStats.playerHealth != displayedYourLifePoints) HealthPointsChangeEvent(true, GameManager.Instance.playerStats.playerHealth - displayedYourLifePoints);
-        if (!isYourCounter && GameManager.Instance.enemyPlayerStats.playerHealth != displayedOpponentLifePoints) HealthPointsChangeEvent(false, GameManager.Instance.enemyPlayerStats.playerHealth - displayedOpponentLifePoints);
+        if (isYourCounter && GameManager.Instance.playerStats.playerHealth != displayedYourLifePoints)
+        {
+            Debug.Log("Modifying your health: " + GameManager.Instance.playerStats.playerHealth + ", " + displayedYourLifePoints);
+            HealthPointsChangeEvent(true, GameManager.Instance.playerStats.playerHealth - displayedYourLifePoints);
+        }
+        if (!isYourCounter && GameManager.Instance.enemyPlayerStats.playerHealth != displayedOpponentLifePoints)
+        {
+            HealthPointsChangeEvent(false, GameManager.Instance.enemyPlayerStats.playerHealth - displayedOpponentLifePoints);
+        }
     }
 
     private void HealthPointsChangeEvent(bool isYou, int change)

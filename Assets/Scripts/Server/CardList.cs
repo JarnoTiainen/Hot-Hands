@@ -76,7 +76,7 @@ public class CardList : ScriptableObject
     public CardData GetCardData(SummonCardMessage summonCardMessage)
     {
         Card card = GetCardData(summonCardMessage.cardName);
-        CardData cardData = new CardData(card.cardSprite, CheckIfCardIsTargetting(summonCardMessage.enchantments), summonCardMessage.cardName, summonCardMessage.cardCost, summonCardMessage.cardValue, card.cardType, card.attackDirection, summonCardMessage.rp, summonCardMessage.lp, summonCardMessage.enchantments, summonCardMessage.seed, GetCardDescription(summonCardMessage.enchantments), summonCardMessage.legendary);
+        CardData cardData = new CardData(card.cardSprite, CheckIfCardIsTargetting(summonCardMessage.enchantments), summonCardMessage.cardName, summonCardMessage.cardCost, summonCardMessage.cardValue, card.cardType, card.attackDirection, summonCardMessage.rp, summonCardMessage.lp, summonCardMessage.enchantments, summonCardMessage.seed, GetCardDescription(summonCardMessage.enchantments), summonCardMessage.legendary, CheckCardTargetType(summonCardMessage.enchantments));
 
         return cardData;
     }
@@ -84,7 +84,7 @@ public class CardList : ScriptableObject
     public CardData GetCardData(PlayCardMessage playCardMessage)
     {
         Card card = GetCardData(playCardMessage.cardName);
-        CardData cardData = new CardData(card.cardSprite, CheckIfCardIsTargetting(playCardMessage.enchantments), playCardMessage.cardName, playCardMessage.cardCost, playCardMessage.cardValue, card.cardType, card.attackDirection, playCardMessage.rp, playCardMessage.lp, playCardMessage.enchantments, playCardMessage.seed, GetCardDescription(playCardMessage.enchantments), playCardMessage.legendary);
+        CardData cardData = new CardData(card.cardSprite, CheckIfCardIsTargetting(playCardMessage.enchantments), playCardMessage.cardName, playCardMessage.cardCost, playCardMessage.cardValue, card.cardType, card.attackDirection, playCardMessage.rp, playCardMessage.lp, playCardMessage.enchantments, playCardMessage.seed, GetCardDescription(playCardMessage.enchantments), playCardMessage.legendary, CheckCardTargetType(playCardMessage.enchantments));
 
         return cardData;
     }
@@ -92,7 +92,7 @@ public class CardList : ScriptableObject
     public CardData GetCardData(DrawCardMessage drawCardMessage)
     {
         Card card = GetCardData(drawCardMessage.cardName);
-        CardData cardData = new CardData(card.cardSprite, CheckIfCardIsTargetting(drawCardMessage.enchantments), drawCardMessage.cardName, drawCardMessage.cardCost, drawCardMessage.cardValue, card.cardType, (Card.AttackDirection)drawCardMessage.attackDirection, drawCardMessage.rp, drawCardMessage.lp, drawCardMessage.enchantments, drawCardMessage.seed, GetCardDescription(drawCardMessage.enchantments), drawCardMessage.legendary);
+        CardData cardData = new CardData(card.cardSprite, CheckIfCardIsTargetting(drawCardMessage.enchantments), drawCardMessage.cardName, drawCardMessage.cardCost, drawCardMessage.cardValue, card.cardType, (Card.AttackDirection)drawCardMessage.attackDirection, drawCardMessage.rp, drawCardMessage.lp, drawCardMessage.enchantments, drawCardMessage.seed, GetCardDescription(drawCardMessage.enchantments), drawCardMessage.legendary, CheckCardTargetType(drawCardMessage.enchantments));
         //Debug.Log("new card seed: " + cardData.seed);
         return cardData;
     }
@@ -123,6 +123,18 @@ public class CardList : ScriptableObject
             if (enchantment.targeting) return true;
         }
         return false;
+    }
+
+    public Enchantment.TargetType CheckCardTargetType(List<Enchantment> enchantments)
+    {
+        foreach (Enchantment enchantment in enchantments)
+        {
+            if (enchantment.targeting)
+            {
+                return enchantment.targetType;
+            }
+        }
+        return Enchantment.TargetType.Both;
     }
 
 

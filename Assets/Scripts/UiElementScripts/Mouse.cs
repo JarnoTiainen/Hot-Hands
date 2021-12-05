@@ -291,6 +291,25 @@ public class Mouse : MonoBehaviour
                     {
                         if(GameManager.Instance.CheckIfInGameCardsContainsCard(RayCaster.Instance.target))
                         {
+                            if(heldCard.GetComponent<InGameCard>().GetData().targetType == Enchantment.TargetType.Ally)
+                            {
+                                if(!GameManager.Instance.IsYou(RayCaster.Instance.target.GetComponent<InGameCard>().owner))
+                                {
+                                    TransformIntoCardMode();
+                                    ReturnHeldCardToHand();
+                                    return;
+                                }
+                            }
+                            if (heldCard.GetComponent<InGameCard>().GetData().targetType == Enchantment.TargetType.Enemy)
+                            {
+                                if (GameManager.Instance.IsYou(RayCaster.Instance.target.GetComponent<InGameCard>().owner))
+                                {
+                                    TransformIntoCardMode();
+                                    ReturnHeldCardToHand();
+                                    return;
+                                }
+                            }
+
                             GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().GetData().cost;
                             Hand.Instance.UpdateCanAffortCards();
                             References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
@@ -308,6 +327,11 @@ public class Mouse : MonoBehaviour
                             heldCard = null;
                             Cursor.visible = true;
                             return;
+                        }
+                        else
+                        {
+                            TransformIntoCardMode();
+                            ReturnHeldCardToHand();
                         }
                     }
                     else

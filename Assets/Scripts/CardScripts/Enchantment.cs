@@ -15,9 +15,15 @@ public class Enchantment
     public Trigger trigger;
     public int weight;
     public bool targeting;
+    public TargetType targetType;
     public CardDataMessage.BuffType buffType;
     public BuffVanishType buffVanishType;
     public bool hidden;
+
+    public enum TargetType
+    {
+        Both, Ally, Enemy
+    }
 
     public enum BuffVanishType
     {

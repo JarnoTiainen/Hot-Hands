@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerModifyHealth(ModifyHealth modifyHealth)
     {
-        Debug.Log("player modifyHealth " + modifyHealth.amount);
+        Debug.Log("player modifyHealth " + modifyHealth.amount + " player hp: " + playerStats.playerHealth);
         if(IsYou(modifyHealth.player))
         {
             if(modifyHealth.amount > 0)
@@ -187,6 +187,7 @@ public class GameManager : MonoBehaviour
                 enemyPlayerStats.playerHealth += modifyHealth.amount;
             }
         }
+        Debug.Log("player modifyHealth " + modifyHealth.amount + " player hp: " + playerStats.playerHealth);
     }
 
     public void ReturnBurnedCardToHand(string seed)
@@ -654,7 +655,8 @@ public class GameManager : MonoBehaviour
             enemyPlayerStats.playerHandCards--;
             enemyPlayerStats.discardpileCardCount++;
             References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
-            GameObject card = EnemyHand.Instance.GetCardWithSeed(playSpellMessage.seed);
+            GameObject card = GetCardFromInGameCards(playSpellMessage.seed);
+            Debug.Log("card naem: " + card.name);
             card.GetComponent<InGameCard>().SetNewCardData(false, References.i.cardList.GetCardData(playSpellMessage));
             AddCardToInGameCards(card);
             EnemyHand.Instance.RemoveCard(playSpellMessage.seed);
