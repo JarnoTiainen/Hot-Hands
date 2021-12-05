@@ -52,6 +52,7 @@ public class LoginManager : MonoBehaviour
     {
         loginButton.SetActive(false);
         openSignUpButton.SetActive(false);
+        rememberMeToggle.gameObject.SetActive(false);
         signUpButton.SetActive(true);
         backButton.SetActive(true);
         emailField.gameObject.SetActive(true);
@@ -67,6 +68,7 @@ public class LoginManager : MonoBehaviour
         backButton.SetActive(false);
         loginButton.SetActive(true);
         openSignUpButton.SetActive(true);
+        rememberMeToggle.gameObject.SetActive(true);
         characterCounterText.gameObject.SetActive(false);
         userNameField.onValueChanged.RemoveAllListeners();
     }
