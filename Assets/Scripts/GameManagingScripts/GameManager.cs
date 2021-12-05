@@ -652,6 +652,7 @@ public class GameManager : MonoBehaviour
         {
             enemyPlayerStats.playerBurnValue -= playSpellMessage.cardCost;
             enemyPlayerStats.playerHandCards--;
+            EnemyHand.Instance.RemoveCard(playSpellMessage.seed);
             enemyPlayerStats.discardpileCardCount++;
             References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
             References.i.spellZone.PlaySpell(References.i.cardList.GetCardData(playSpellMessage), playSpellMessage.targets, playSpellMessage.windup, playSpellMessage.slot);
