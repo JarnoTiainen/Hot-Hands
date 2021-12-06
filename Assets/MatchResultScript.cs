@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 public class MatchResultScript : MonoBehaviour
 {
     public static MatchResultScript Instance { get; private set; }
+    [SerializeField] private EscMenu escMenuManager;
     [SerializeField] private GameObject resultScreenButtons;
     [SerializeField] private Image panelDim;
     [SerializeField] private TextMeshProUGUI resultText;
@@ -28,6 +29,7 @@ public class MatchResultScript : MonoBehaviour
     {
         if (winner) resultText.text = "VICTORY";
         else resultText.text = "DEFEAT";
+        escMenuManager.gameObject.SetActive(false);
         StartCoroutine(DimAnimation());
     }
 
