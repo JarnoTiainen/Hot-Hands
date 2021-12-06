@@ -28,26 +28,14 @@ public class WebSocketService : MonoBehaviour
         websocket = new WebSocket("wss://n14bom45md.execute-api.eu-north-1.amazonaws.com/production");
         OpenNewConnection();
 
-        websocket.OnOpen += () =>
-        {
-            Debug.Log("Connection open!");
-            
-            
-        };
+        websocket.OnOpen += () => Debug.Log("Connection open!");
 
-        websocket.OnError += (e) =>
-        {
-            Debug.Log("Error! " + e);
-        };
+        websocket.OnError += (e) => Debug.Log("Error! " + e);
 
-        websocket.OnClose += (e) =>
-        {
-            Debug.Log("Connection closed!");
-        };
+        websocket.OnClose += (e) => Debug.Log("Connection closed!");
 
         websocket.OnMessage += (bytes) =>
         {
-            
             JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
             if (showServerMessage) Debug.Log("server message: " + data[0] + " " + data[1] + " " + data[2]);
             switch ((string)data[0])
@@ -99,7 +87,6 @@ public class WebSocketService : MonoBehaviour
                     if (debuggerModeOn) Debug.Log("Message type was ATTACK");
                     AttackEventMessage attackEventMessage = JsonUtility.FromJson<AttackEventMessage>(data[1]);
                     gameManager.PlayerAttack(attackEventMessage);
-
 
                     break;
                 case "SAVECARD":
@@ -245,18 +232,15 @@ public class WebSocketService : MonoBehaviour
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 
-
     void Update()
     {
     #if !UNITY_WEBGL || UNITY_EDITOR
         websocket.DispatchMessageQueue();
     #endif
-
     }
 
     async static void SendWebSocketMessage(string message)
     {
-
         if (websocket.State == WebSocketState.Open)
         {
             await websocket.SendText(message);
@@ -286,41 +270,41 @@ public class WebSocketService : MonoBehaviour
         //sfxLibrary.GetComponent<PlayCardSFX>().Play();
     }
 
-
-
-
     [Button]
     public static void CreateNewAccount(string name, string password, string email)
     {
         CreateUsersMessage createUserMessage = new CreateUsersMessage(name, password, email);
         GameMessage message = new GameMessage("OnMessage", "SAVEUSER", JsonUtility.ToJson(createUserMessage));
         SendWebSocketMessage(JsonUtility.ToJson(message));
-        
     }
+
     [Button]
     public static void Login(string name, string password)
     {
         CreateUsersMessage createUserMessage = new CreateUsersMessage(name, password);
         GameMessage message = new GameMessage("OnMessage", "LOGIN", JsonUtility.ToJson(createUserMessage));
         SendWebSocketMessage(JsonUtility.ToJson(message));
-
     }
+
     [Button]
     public static void GetDecks()
     {
         GameMessage message = new GameMessage("OnMessage", "GETDECKS", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
+
     public static void GetPlayerNumber()
     {
         GameMessage playCard = new GameMessage("OnMessage", "GETSIDE", "");
         SendWebSocketMessage(JsonUtility.ToJson(playCard));
     }
+
     public static void DrawCard()
     {
         GameMessage message = new GameMessage("OnMessage", "DRAWCARD", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
+
     public static void SaveCardToDataBase(Card card)
     {
         Debug.Log("sending new cards");
@@ -328,6 +312,7 @@ public class WebSocketService : MonoBehaviour
         card.SaveCardToCardList();
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
+
     public static void SetActiveDeck(int deckIndex)
     {
         if(Instance.debuggerModeOn) Debug.Log("Send deck data");
@@ -335,6 +320,7 @@ public class WebSocketService : MonoBehaviour
         GameMessage message = new GameMessage("OnMessage", "SETACTIVEDECK", deckIndex.ToString());
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
+
     public static void SaveDeck(string deckJson)
     {
         if (Instance.debuggerModeOn) Debug.Log("Send deck data " + deckJson);
@@ -361,24 +347,28 @@ public class WebSocketService : MonoBehaviour
         GameMessage message = new GameMessage("OnMessage", "BURNCARD", seed);
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
+
     public static void TriggerSpellChain()
     {
         Debug.Log("Sending message trigger spellchain");
         GameMessage message = new GameMessage("OnMessage", "TRIGGERSPELLCHAIN", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
-    [Button] public static void SendNewMessage(string rawmessage)
+
+    public static void SendNewMessage(string rawmessage)
     {
         Debug.Log("Sending new chat message");
         GameMessage message = new GameMessage("OnMessage", "CHATMESSAGE", rawmessage);
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
-    [Button] public static void LoadChat()
+
+    public static void LoadChat()
     {
         Debug.Log("Sending new chat message load chad");
         GameMessage message = new GameMessage("OnMessage", "LOADCHAT", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
+
     [Button] public static void StartGame()
     {
         Debug.Log("Send game StartGame");
