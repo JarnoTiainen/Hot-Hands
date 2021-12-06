@@ -12,7 +12,7 @@ public class EscMenu : MonoBehaviour
     [SerializeField] private GameObject escMenu;
     [SerializeField] private GameObject escMenuButtons;
     [SerializeField] private GameObject volumeSliders;
-    [SerializeField] private GameObject disconnectConfirmation;
+    [SerializeField] private GameObject surrenderConfirmation;
     [SerializeField] private GameObject quitConfirmation;
     [SerializeField] private AudioMixer masterMixer;
     [SerializeField] private Slider masterSlider;
@@ -57,7 +57,7 @@ public class EscMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         escMenuButtons.SetActive(true);
         volumeSliders.SetActive(true);
-        disconnectConfirmation.SetActive(false);
+        surrenderConfirmation.SetActive(false);
         quitConfirmation.SetActive(false);
         escMenu.SetActive(false);
     }
@@ -68,30 +68,15 @@ public class EscMenu : MonoBehaviour
         open = false;
     }
 
-    public void EscMenuButtonsSetActive(bool value)
-    {
-        escMenuButtons.SetActive(value);
-    }
+    public void EscMenuButtonsSetActive(bool value) => escMenuButtons.SetActive(value);
 
-    public void VolumeSlidersSetActive(bool value)
-    {
-        volumeSliders.SetActive(value);
-    }
+    public void VolumeSlidersSetActive(bool value) => volumeSliders.SetActive(value);
 
-    public void DisconnectConfirmationSetActive(bool value)
-    {
-        disconnectConfirmation.SetActive(value);
-    }
+    public void SurrenderConfirmationSetActive(bool value) => surrenderConfirmation.SetActive(value);
 
-    public void QuitConfirmationSetActive(bool value)
-    {
-        quitConfirmation.SetActive(value);
-    }
+    public void QuitConfirmationSetActive(bool value) => quitConfirmation.SetActive(value);
 
-    public void ReturnToMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
+    public void ReturnToMenu() => SceneManager.LoadScene(0);
 
     public void QuitGame()
     {

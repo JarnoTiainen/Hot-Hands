@@ -3315,7 +3315,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DISCONNECT?
+  m_text: SURRENDER?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3775167555a6bb5478b15945de75ee81, type: 2}
   m_sharedMaterial: {fileID: 4267115259555605201, guid: 3775167555a6bb5478b15945de75ee81, type: 2}
@@ -3827,7 +3827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1825564823822971177, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: buttonType
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7572653857003962766, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: m_RootOrder
@@ -3923,7 +3923,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 424258169595033768, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: m_Name
-      value: DisconnectButton
+      value: SurrenderButton
       objectReference: {fileID: 0}
     - target: {fileID: 424258169595033768, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: m_Layer
@@ -3931,7 +3931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1446074609837630333, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: m_text
-      value: DISCONNECT
+      value: SURRENDER
       objectReference: {fileID: 0}
     - target: {fileID: 1825564823822971177, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: buttonType
@@ -4241,7 +4241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1825564823822971177, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: buttonType
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7572653857003962766, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: m_RootOrder
@@ -4601,7 +4601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1825564823822971177, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: buttonType
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7572653857003962766, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: m_RootOrder
@@ -4863,9 +4863,9 @@ MonoBehaviour:
   escMenu: {fileID: 1723102457}
   escMenuButtons: {fileID: 225383794}
   volumeSliders: {fileID: 2014137393}
-  disconnectConfirmation: {fileID: 2093189387}
+  surrenderConfirmation: {fileID: 2093189387}
   quitConfirmation: {fileID: 774565296}
-  masterMixer: {fileID: 0}
+  masterMixer: {fileID: 24100000, guid: 27a0ffbe5594a90409a7c8dec850949a, type: 2}
   masterSlider: {fileID: 2141605263}
   musicSlider: {fileID: 1187693872}
   sfxSlider: {fileID: 610972037}
@@ -5513,7 +5513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1825564823822971177, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: buttonType
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7572653857003962766, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: m_RootOrder
@@ -7577,7 +7577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1825564823822971177, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: buttonType
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7572653857003962766, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: m_RootOrder
@@ -7876,7 +7876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2093189388}
   m_Layer: 5
-  m_Name: DisconnectConfirmation
+  m_Name: SurrenderConfirmation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8749,7 +8749,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1825564823822971177, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: buttonType
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7572653857003962766, guid: b36eb7189cb6d544d971c942f742fa1e, type: 3}
       propertyPath: m_RootOrder

@@ -19,7 +19,6 @@ public class ChatManager : MonoBehaviour
     public TextMeshProUGUI linkConfirmationText;
     public Button openLinkButton;
     private int charLimit;
-    private bool isOpen = false;
 
     private void Awake()
     {
@@ -108,13 +107,11 @@ public class ChatManager : MonoBehaviour
         if (open)
         {
             chat.anchoredPosition = new Vector2(-(gameObject.GetComponent<RectTransform>().rect.width / 2), gameObject.GetComponent<RectTransform>().rect.height / 2);
-            isOpen = true;
             newMsgNotification.SetActive(false);
         }
         else
         {
             chat.anchoredPosition = new Vector2(-(gameObject.GetComponent<RectTransform>().rect.width / 2), -(gameObject.GetComponent<RectTransform>().rect.height / 2));
-            isOpen = false;
         }
     }
 
