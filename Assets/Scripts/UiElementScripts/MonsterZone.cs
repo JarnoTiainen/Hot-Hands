@@ -39,6 +39,8 @@ public class MonsterZone : MonoBehaviour
         newMonster.transform.position = instancePos;
         newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
         newMonster.GetComponent<InGameCard>().SetDescription();
+        if (isYourCard) newMonster.GetComponent<InGameCard>().owner = GameManager.Instance.playerNumber;
+
         newMonster.GetComponent<InGameCard>().SetAttackDirectionSymbol();
         newMonster.GetComponent<HandCard>().targetable = false;
         RepositionMonsterCards();
@@ -53,6 +55,7 @@ public class MonsterZone : MonoBehaviour
         {
             ghostCard.GetComponent<InGameCard>().ToggleGhostCard(false);
             ghostCard.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
+            ghostCard.GetComponent<InGameCard>().owner = GameManager.Instance.playerNumber;
             ghostCard.GetComponent<InGameCard>().SetDescription();
             ghostCard.GetComponent<InGameCard>().SetAttackDirectionSymbol();
             ghostCard.GetComponent<HandCard>().targetable = false;

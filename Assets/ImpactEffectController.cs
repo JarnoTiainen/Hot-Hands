@@ -18,7 +18,7 @@ public class ImpactEffectController : MonoBehaviour
     private void Update()
     {
         time += Time.deltaTime * speed;
-        //if (time < 0) Destroy(gameObject);
         meshRenderer.material.SetFloat("_AnimationStep", time);
+        if (time > 1) Destroy(gameObject);
     }
 }

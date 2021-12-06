@@ -437,26 +437,32 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     {
         if(cardData.attackDirection == Card.AttackDirection.Left)
         {
+            Debug.Log("Left");
             if(GameManager.Instance.IsYou(owner))
             {
+                Debug.Log("Owner is you");
                 leftAttackSymbol.SetActive(true);
                 rightDefenceSymbol.SetActive(true);
             }
             else
             {
+                Debug.Log("Owner is opponent");
                 rigthAttackSymbol.SetActive(true);
                 leftDefenceSymbol.SetActive(true);
             }
         }
         else if(cardData.attackDirection == Card.AttackDirection.Right)
         {
+            Debug.Log("Right");
             if (GameManager.Instance.IsYou(owner))
             {
+                Debug.Log("Owner is you");
                 rigthAttackSymbol.SetActive(true);
                 leftDefenceSymbol.SetActive(true);
             }
             else
             {
+                Debug.Log("Owner is opponent");
                 leftAttackSymbol.SetActive(true);
                 rightDefenceSymbol.SetActive(true);
             }

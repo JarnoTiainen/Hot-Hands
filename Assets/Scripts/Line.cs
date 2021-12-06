@@ -11,6 +11,7 @@ public class Line : MonoBehaviour
     [SerializeField] private float scale;
     private int numberOfVerticies;
     bool isLineActive;
+    bool lineRemoved = false;
 
     // Update is called once per frame
 
@@ -74,8 +75,9 @@ public class Line : MonoBehaviour
 
     public void RemoveLine()
     {
-        if(gameObject != null)
+        if(!lineRemoved)
         {
+            lineRemoved = true;
             Destroy(gameObject);
         }
     }
