@@ -30,8 +30,7 @@ public class CollectionButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHo
 
     public void OnClickElement()
     {
-        meshRenderer.material.SetInt("_IsClicked", 1);
-        StartCoroutine(MouseButtonUp());
+        StartCoroutine(ClickAnimation());
         switch (button)
         {
             case Button.Save:
@@ -60,8 +59,9 @@ public class CollectionButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHo
         }
     }
 
-    private IEnumerator MouseButtonUp()
+    private IEnumerator ClickAnimation()
     {
+        meshRenderer.material.SetInt("_IsClicked", 1);
         while (!Input.GetMouseButtonUp(0))
         {
             yield return null;
