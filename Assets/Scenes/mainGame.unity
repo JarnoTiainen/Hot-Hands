@@ -1148,7 +1148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &236449312
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1644,6 +1644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   secondsBeforeStart: 4
   gameStarted: 0
+  cardDrawDone: 0
   textCountdownNumber: {fileID: 2126802122}
 --- !u!1001 &472557253
 PrefabInstance:
