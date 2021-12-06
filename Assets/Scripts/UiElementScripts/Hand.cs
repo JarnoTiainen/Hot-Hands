@@ -26,6 +26,8 @@ public class Hand : MonoBehaviour
     private void Start()
     {
         visibleHandCards = new List<GameObject>();
+        handCards = new List<GameObject>();
+        unhandledCards = new List<GameObject>();
     }
 
     public bool CheckIfInsideHandBox(Vector2 pos)

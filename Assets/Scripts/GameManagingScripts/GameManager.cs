@@ -31,7 +31,17 @@ public class GameManager : MonoBehaviour
 
     private GameObject sfxLibrary;
 
+
+
     [SerializeField] private Dictionary<string, GameObject> inGameCards = new Dictionary<string, GameObject>();
+
+
+    public void Start()
+    {
+        
+    }
+
+
 
     public void EndGame(int player)
     {

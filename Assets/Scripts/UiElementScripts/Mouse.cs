@@ -263,13 +263,14 @@ public class Mouse : MonoBehaviour
             }
             else
             {
-                if (!tutorialMode) {
-                    WebSocketService.PlayCard(References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.ghostCard), heldCard.GetComponent<InGameCard>().GetData().seed);
-                } 
-               
                 int ghostIndex = References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.ghostCard);
                 GameManager.Instance.PrePlayCard(heldCard.GetComponent<InGameCard>().GetData(), false);
 
+
+                if (!tutorialMode)
+                {
+                    WebSocketService.PlayCard(ghostIndex, heldCard.GetComponent<InGameCard>().GetData().seed);
+                }
 
                 if (tutorialMode) {
                     Debug.Log("tutorial playcard in mouse");
