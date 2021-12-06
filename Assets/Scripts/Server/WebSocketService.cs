@@ -220,6 +220,12 @@ public class WebSocketService : MonoBehaviour
         Debug.Log("opening");
     }
 
+    [Button] public static void Surrender()
+    {
+        GameMessage message = new GameMessage("OnMessage", "SURRENDER", "");
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
+
     [Button] public async void OpenNewConnection()
     {
         await websocket.Connect();
