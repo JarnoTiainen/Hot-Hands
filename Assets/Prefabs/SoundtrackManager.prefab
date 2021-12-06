@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8141048939576357604}
   - component: {fileID: 8141048939576357605}
   - component: {fileID: 8141048939576357606}
-  - component: {fileID: 3082705246300206721}
+  - component: {fileID: 5576864431030000858}
   m_Layer: 0
   m_Name: SoundtrackManager
   m_TagString: SoundtrackManager
@@ -55,10 +55,10 @@ MonoBehaviour:
   resultScreenFadeOut: 2
   defaultAudioSource: {fileID: 8141048939576357606}
   menuSoundtrack:
-  - {fileID: 11400000, guid: 7b7062388f3e2714c9e032dcc9c8a98c, type: 2}
+  - {fileID: 11400000, guid: a769432db0a3fd44e8b04f858242a993, type: 2}
+  - {fileID: 11400000, guid: 81ad148391841a24ca2fa58dcae4fd64, type: 2}
   inGameSoundtrack:
   - {fileID: 11400000, guid: 0ded0eba931060f43a5004e52ad42488, type: 2}
-  - {fileID: 11400000, guid: 161733ab3e8d307498d69bb35604183d, type: 2}
   resultScreenSoundtrack:
   - {fileID: 11400000, guid: 899ce18cf9df6af4a837e1da92b967fb, type: 2}
 --- !u!82 &8141048939576357606
@@ -157,7 +157,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3082705246300206721
+--- !u!114 &5576864431030000858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,41 +171,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu:
     soundtrackType: 0
+    soundtrackToPlay: {fileID: 11400000, guid: 81ad148391841a24ca2fa58dcae4fd64, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _soundtrackBase: {fileID: 11400000, guid: 81ad148391841a24ca2fa58dcae4fd64, type: 2}
+    waitToPlay: 1
+    loop: 1
+    useDefault: 1
+    audiosource: {fileID: 0}
+  inGame:
+    soundtrackType: 0
     soundtrackToPlay: {fileID: 11400000, guid: a769432db0a3fd44e8b04f858242a993, type: 2}
     showSettings: 0
     editSettings: 0
-    _soundtrackBase: {fileID: 11400000, guid: 7b7062388f3e2714c9e032dcc9c8a98c, type: 2}
-    waitToPlay: 0
+    _soundtrackBase: {fileID: 11400000, guid: a769432db0a3fd44e8b04f858242a993, type: 2}
+    waitToPlay: 1
     loop: 1
-    useDefault: 0
+    useDefault: 1
     audiosource: {fileID: 0}
-  inGame:
+  resultScreen:
+    soundtrackType: 0
+    soundtrackToPlay: {fileID: 11400000, guid: a769432db0a3fd44e8b04f858242a993, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _soundtrackBase: {fileID: 11400000, guid: a769432db0a3fd44e8b04f858242a993, type: 2}
+    waitToPlay: 1
+    loop: 1
+    useDefault: 1
+    audiosource: {fileID: 0}
+  defaultSoundtrack:
     soundtrackType: 1
     soundtrackToPlay: {fileID: 11400000, guid: 0ded0eba931060f43a5004e52ad42488, type: 2}
     showSettings: 0
     editSettings: 0
     _soundtrackBase: {fileID: 11400000, guid: 0ded0eba931060f43a5004e52ad42488, type: 2}
-    waitToPlay: 0
+    waitToPlay: 1
     loop: 1
-    useDefault: 0
-    audiosource: {fileID: 0}
-  resultScreen:
-    soundtrackType: 1
-    soundtrackToPlay: {fileID: 11400000, guid: 161733ab3e8d307498d69bb35604183d, type: 2}
-    showSettings: 0
-    editSettings: 0
-    _soundtrackBase: {fileID: 11400000, guid: 161733ab3e8d307498d69bb35604183d, type: 2}
-    waitToPlay: 0
-    loop: 1
-    useDefault: 0
-    audiosource: {fileID: 0}
-  defaultSoundtrack:
-    soundtrackType: 2
-    soundtrackToPlay: {fileID: 11400000, guid: 899ce18cf9df6af4a837e1da92b967fb, type: 2}
-    showSettings: 0
-    editSettings: 0
-    _soundtrackBase: {fileID: 11400000, guid: 899ce18cf9df6af4a837e1da92b967fb, type: 2}
-    waitToPlay: 0
-    loop: 1
-    useDefault: 0
+    useDefault: 1
     audiosource: {fileID: 0}
