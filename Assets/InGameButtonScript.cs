@@ -20,7 +20,8 @@ public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverE
         QuitYes,
         BackToMenu,
         ResultQuit,
-        ResultQuitNo
+        ResultQuitNo,
+        ResultQuitYes
     }
 
     public void OnClickElement()
@@ -60,12 +61,16 @@ public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverE
                 MatchResultScript.Instance.ResultScreenButtonsSetActive(true);
                 MatchResultScript.Instance.ResultQuitConfirmationButtonsSetActive(false);
                 break;
+            case ButtonType.ResultQuitYes:
+                EscMenu.Instance.QuitGame();
+                break;
             case ButtonType.QuitNo:
                 EscMenu.Instance.EscMenuButtonsSetActive(true);
                 EscMenu.Instance.VolumeSlidersSetActive(true);
                 EscMenu.Instance.QuitConfirmationSetActive(false);
                 break;
             case ButtonType.QuitYes:
+                WebSocketService.Surrender();
                 EscMenu.Instance.QuitGame();
                 break;
             default:

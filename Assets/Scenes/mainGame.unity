@@ -1183,7 +1183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.69411767}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1646,6 +1646,9 @@ MonoBehaviour:
   gameStarted: 0
   cardDrawDone: 0
   textCountdownNumber: {fileID: 2126802122}
+  panelImage: {fileID: 236449313}
+  dimStart: 220
+  dimEnd: 70
 --- !u!1001 &472557253
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5013,8 +5016,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1190847580}
   - component: {fileID: 1190847579}
+  - component: {fileID: 1190847581}
   m_Layer: 0
-  m_Name: EscMenuManager
+  m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5058,6 +5062,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1190847581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190847578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ad930a2f7e134a4fa24d9818ba38d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1NameText: {fileID: 511741909}
+  player2NameText: {fileID: 1828541642}
 --- !u!1 &1193816062
 GameObject:
   m_ObjectHideFlags: 0
@@ -8575,7 +8593,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: QUIT GAME?
+  m_text: SURRENDER AND QUIT GAME?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3775167555a6bb5478b15945de75ee81, type: 2}
   m_sharedMaterial: {fileID: 4267115259555605201, guid: 3775167555a6bb5478b15945de75ee81, type: 2}

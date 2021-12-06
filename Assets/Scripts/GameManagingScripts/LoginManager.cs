@@ -44,8 +44,9 @@ public class LoginManager : MonoBehaviour
 
     public void Login()
     {
-        Debug.Log("loging");
+        Debug.Log("login");
         WebSocketService.Login(userNameField.text, passwordField.text);
+        PlayerPrefs.SetString("LoginName", userNameField.text);
     }
 
     public void OpenSignup()
