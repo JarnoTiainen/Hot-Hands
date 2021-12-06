@@ -7,7 +7,7 @@ public class GameStarter : MonoBehaviour
 {
     [SerializeField] private float secondsBeforeStart;
     [SerializeField] private bool gameStarted;
-
+    [SerializeField] private bool cardDrawDone;
     [SerializeField] private TextMeshProUGUI textCountdownNumber;
 
     private void Start()
@@ -20,9 +20,13 @@ public class GameStarter : MonoBehaviour
     {
         secondsBeforeStart -= Time.deltaTime;
         textCountdownNumber.text = ((int)secondsBeforeStart).ToString();
-        if(secondsBeforeStart < 0 && !gameStarted)
+        if(secondsBeforeStart < 1 && !cardDrawDone)
         {
             WebSocketService.StartGame();
+            cardDrawDone = true;
+        }
+        if(secondsBeforeStart < 0 && !gameStarted)
+        {
             gameStarted = true;
             transform.parent.gameObject.SetActive(false);
             RayCaster.Instance.eventsOn = true;

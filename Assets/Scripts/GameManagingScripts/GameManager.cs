@@ -405,7 +405,7 @@ public class GameManager : MonoBehaviour
 
             if(summonCardMessage.auto)
             {
-                AddCardToInGameCards(References.i.yourMonsterZone.AutoAddNewMonsterCard(false, summonCardMessage.boardIndex, References.i.cardList.GetCardData(summonCardMessage)));
+                AddCardToInGameCards(References.i.yourMonsterZone.AutoAddNewMonsterCard(true, summonCardMessage.boardIndex, References.i.cardList.GetCardData(summonCardMessage)));
                 References.i.yourMonsterZone.GetCardWithSeed(summonCardMessage.seed).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
                 playerStats.playerFieldCards++;
                 playerStats.playerHandCards--;
