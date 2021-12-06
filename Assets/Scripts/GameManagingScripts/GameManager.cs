@@ -33,6 +33,17 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Dictionary<string, GameObject> inGameCards = new Dictionary<string, GameObject>();
 
+    public void EndGame(int player)
+    {
+        if(IsYou(player))
+        {
+
+        }
+        else
+        {
+
+        }
+    }
 
     public void LoadChat(LoadChatMessage loadChatMessage)
     {

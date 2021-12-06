@@ -209,6 +209,9 @@ public class WebSocketService : MonoBehaviour
                 case "LOCKSPELLCHAIN":
                     gameManager.LockSpellChain(data[1]);
                     break;
+                case "GAMEOVER":
+                    gameManager.EndGame(data[1]);
+                    break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                     break;
