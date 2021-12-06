@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class EscMenu : MonoBehaviour
 {
@@ -13,11 +14,25 @@ public class EscMenu : MonoBehaviour
     [SerializeField] private GameObject volumeSliders;
     [SerializeField] private GameObject disconnectConfirmation;
     [SerializeField] private GameObject quitConfirmation;
+    [SerializeField] private AudioMixer masterMixer;
+    [SerializeField] private Slider masterSlider;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+    [SerializeField] private float masterDefaultVolume;
+    [SerializeField] private float musicDefaultVolume;
+    [SerializeField] private float sfxDefaultVolume;
     private bool open = false;
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        masterSlider.value = PlayerPrefs.GetFloat("MasterVolume", masterDefaultVolume);
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", musicDefaultVolume);
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", sfxDefaultVolume);
     }
 
     void Update()
@@ -82,5 +97,28 @@ public class EscMenu : MonoBehaviour
     {
         Debug.Log("Quit.");
         Application.Quit();
+    }
+
+    public void SetMasterVolume(float sliderValue)
+    {
+        masterMixer.SetFloat("masterVol", Mathf.Log10(sliderValue) * 20);
+        PlayerPrefs.SetFloat("MasterVolume", sliderValue);
+        PlayerPrefs.Save();
+    }
+
+    public void SetMusicVolume(float sliderValue)
+    {
+        masterMixer.SetFloat("mainMenuMusicVol", Mathf.Log10(sliderValue) * 20);
+        masterMixer.SetFloat("inGameMusicVol", Mathf.Log10(sliderValue) * 20);
+        masterMixer.SetFloat("resultScreenMusicVol", Mathf.Log10(sliderValue) * 20);
+        PlayerPrefs.SetFloat("MusicVolume", sliderValue);
+        PlayerPrefs.Save();
+    }
+
+    public void SetSFXVolume(float sliderValue)
+    {
+        masterMixer.SetFloat("sfxVol", Mathf.Log10(sliderValue) * 20);
+        PlayerPrefs.SetFloat("SFXVolume", sliderValue);
+        PlayerPrefs.Save();
     }
 }

@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 7355201}
   - component: {fileID: 7355204}
   - component: {fileID: 7355205}
-  - component: {fileID: 7355200}
   m_Layer: 0
   m_Name: GameManager2
   m_TagString: GameManager
@@ -143,34 +142,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7355200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7355199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69836f8397216724ba58fcdb1b097a25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  masterMixer: {fileID: 24100000, guid: 27a0ffbe5594a90409a7c8dec850949a, type: 2}
-  masterSlider: {fileID: 0}
-  musicSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
-  masterDefaultVolume: 0.5
-  musicDefaultVolume: 0.5
-  sfxDefaultVolume: 0.5
-  resolutionToggles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  fullscreenToggle: {fileID: 0}
-  screenWidths: 0005000080070000000a0000
-  defaultScreenResIndex: 0
-  mainCam: {fileID: 0}
-  canvasCam: {fileID: 0}
 --- !u!114 &7355201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2154,8 +2125,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1190847581}
-        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+      - m_Target: {fileID: 1190847579}
+        m_TargetAssemblyTypeName: EscMenu, Assembly-CSharp
         m_MethodName: SetSFXVolume
         m_Mode: 0
         m_Arguments:
@@ -4825,8 +4796,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1190847581}
-        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+      - m_Target: {fileID: 1190847579}
+        m_TargetAssemblyTypeName: EscMenu, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
         m_Arguments:
@@ -4870,7 +4841,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1190847580}
   - component: {fileID: 1190847579}
-  - component: {fileID: 1190847581}
   m_Layer: 0
   m_Name: EscMenuManager
   m_TagString: Untagged
@@ -4895,6 +4865,13 @@ MonoBehaviour:
   volumeSliders: {fileID: 2014137393}
   disconnectConfirmation: {fileID: 2093189387}
   quitConfirmation: {fileID: 774565296}
+  masterMixer: {fileID: 0}
+  masterSlider: {fileID: 2141605263}
+  musicSlider: {fileID: 1187693872}
+  sfxSlider: {fileID: 610972037}
+  masterDefaultVolume: 0.5
+  musicDefaultVolume: 0.5
+  sfxDefaultVolume: 0.5
 --- !u!4 &1190847580
 Transform:
   m_ObjectHideFlags: 0
@@ -4909,31 +4886,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1190847581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190847578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69836f8397216724ba58fcdb1b097a25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  masterMixer: {fileID: 24100000, guid: 27a0ffbe5594a90409a7c8dec850949a, type: 2}
-  masterSlider: {fileID: 2141605263}
-  musicSlider: {fileID: 1187693872}
-  sfxSlider: {fileID: 610972037}
-  masterDefaultVolume: 0.5
-  musicDefaultVolume: 0.5
-  sfxDefaultVolume: 0.5
-  resolutionToggles: []
-  fullscreenToggle: {fileID: 0}
-  screenWidths: 
-  defaultScreenResIndex: 0
-  mainCam: {fileID: 0}
-  canvasCam: {fileID: 0}
 --- !u!1 &1193816062
 GameObject:
   m_ObjectHideFlags: 0
@@ -8399,8 +8351,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1190847581}
-        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+      - m_Target: {fileID: 1190847579}
+        m_TargetAssemblyTypeName: EscMenu, Assembly-CSharp
         m_MethodName: SetMasterVolume
         m_Mode: 0
         m_Arguments:
