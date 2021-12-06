@@ -37,11 +37,11 @@ public class GameManager : MonoBehaviour
     {
         if(IsYou(player))
         {
-
+            MatchResultScript.Instance.GameEnd(true);
         }
         else
         {
-
+            MatchResultScript.Instance.GameEnd(false);
         }
     }
 

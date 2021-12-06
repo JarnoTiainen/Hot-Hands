@@ -20,13 +20,20 @@ public class MatchResultScript : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        StartCoroutine(DimAnimation());
     }
 
     public void ResultScreenButtonsSetActive(bool value) => resultScreenButtons.SetActive(value);
 
-    public IEnumerator DimAnimation()
+    public void GameEnd(bool winner)
     {
+        if (winner) resultText.text = "VICTORY";
+        else resultText.text = "DEFEAT";
+        StartCoroutine(DimAnimation());
+    }
+
+    private IEnumerator DimAnimation()
+    {
+        panelDim.enabled = true;
         float time = 0;
         while (time < dimMaxFade)
         {
