@@ -32,6 +32,7 @@ public class MatchResultScript : MonoBehaviour
     public void GameEnd(bool winner)
     {
         escMenuManager.gameObject.SetActive(false);
+        RayCaster.Instance.eventsOn = false;
         StartCoroutine(DimAnimation(winner));
     }
 
