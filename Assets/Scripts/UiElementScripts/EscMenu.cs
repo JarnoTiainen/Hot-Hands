@@ -10,7 +10,7 @@ public class EscMenu : MonoBehaviour
     public static EscMenu Instance { get; private set; }
     [SerializeField] private GameObject escMenu;
     [SerializeField] private GameObject escMenuButtons;
-    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject volumeSliders;
     [SerializeField] private GameObject disconnectConfirmation;
     [SerializeField] private GameObject quitConfirmation;
     private bool open = false;
@@ -40,7 +40,8 @@ public class EscMenu : MonoBehaviour
     private void CloseEscMenu()
     {
         EventSystem.current.SetSelectedGameObject(null);
-        settingsMenu.SetActive(false);
+        escMenuButtons.SetActive(true);
+        volumeSliders.SetActive(true);
         disconnectConfirmation.SetActive(false);
         quitConfirmation.SetActive(false);
         escMenu.SetActive(false);
@@ -57,10 +58,11 @@ public class EscMenu : MonoBehaviour
         escMenuButtons.SetActive(value);
     }
 
-    public void SettingsMenuSetActive(bool value)
+    public void VolumeSlidersSetActive(bool value)
     {
-        settingsMenu.SetActive(value);
+        volumeSliders.SetActive(value);
     }
+
     public void DisconnectConfirmationSetActive(bool value)
     {
         disconnectConfirmation.SetActive(value);
