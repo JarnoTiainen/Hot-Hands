@@ -22,20 +22,20 @@ public class DrawCDEffectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(animating)
+        deckCardCount.text = GameManager.Instance.playerStats.deckCardCount.ToString();
+        if (animating)
         {
             time += Time.deltaTime/effDur;
             image.fillAmount = time;
-            if(time > 0)
+            if(time > 1)
             {
-                Debug.Log("ASread<gsty gfdszgfdzas");
                 animating = false;
                 image.fillAmount = 0;
             }
         }
     }
 
-    [Button] public void StartDrawCDEffect(float duration)
+    [Button] public void StartDrawCDEffect(float duration = 3)
     {
         time = 0;
         animating = true;
