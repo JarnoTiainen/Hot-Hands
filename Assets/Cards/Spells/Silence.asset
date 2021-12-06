@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
   m_Name: Silence
   m_EditorClassIdentifier: 
-  cardSprite: {fileID: 21300000, guid: 059a2c35f2ce2c94b80fa4edc72e385e, type: 3}
+  cardSprite: {fileID: 21300000, guid: a3a438f2d45c0a642939a78b690a8ea1, type: 3}
   cardName: Silence
   cost: 3
   value: 3
@@ -29,6 +29,7 @@ MonoBehaviour:
     trigger: 7
     weight: 0
     targeting: 0
+    targetType: 0
     buffType: 2
     buffVanishType: 0
     hidden: 0

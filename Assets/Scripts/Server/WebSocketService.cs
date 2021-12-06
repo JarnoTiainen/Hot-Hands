@@ -222,6 +222,7 @@ public class WebSocketService : MonoBehaviour
 
     [Button] public static void Surrender()
     {
+        Debug.Log("Surrender");
         GameMessage message = new GameMessage("OnMessage", "SURRENDER", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
@@ -265,8 +266,8 @@ public class WebSocketService : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        if(SceneManager.GetActiveScene().buildIndex == 1) Surrender();
         CloseConnection();
-
     }
 
     public async void CloseConnection()

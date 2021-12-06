@@ -245,9 +245,6 @@ public class Hand : MonoBehaviour
         {   
             newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
             Vector3 newPos = new Vector3(newPosX, 0, 0);
-            Debug.Log(visibleHandCards[i]);
-            Debug.Log(visibleHandCards[i].GetComponent<CardMovement>());
-            Debug.Log(GameManager.Instance.rearrangeDuration);
             visibleHandCards[i].GetComponent<CardMovement>().OnCardMove(newPos, GameManager.Instance.rearrangeDuration);
         }
     }

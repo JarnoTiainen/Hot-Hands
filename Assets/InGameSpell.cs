@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 
 public class InGameSpell : MonoBehaviour
 {
-    [SerializeField] public CardData cardData;
+    [SerializeField] private CardData cardData = null;
     [SerializeField] private int spellSlotNumber;
     [SerializeField] private Texture2D cardImage;
 
@@ -26,6 +26,7 @@ public class InGameSpell : MonoBehaviour
     private bool animating = false;
     public List<Line> lines;
     bool faceup;
+    [SerializeField] private bool cardDataOverwritten;
 
     private void Awake()
     {
@@ -46,7 +47,11 @@ public class InGameSpell : MonoBehaviour
 
     public void SetNewCardData(CardData cardData)
     {
-        Debug.Log("Setting new spell to coin");
+        if(this.cardData.cardName != "")
+        {
+            cardDataOverwritten = true;
+            Debug.Log("Data overwritten");
+        }
         this.cardData = cardData;
         spriteRenderer.sprite = cardData.cardSprite;
         TurnLightsOn();
@@ -62,28 +67,39 @@ public class InGameSpell : MonoBehaviour
 
     [Button] public void RemoveSpellFromSlot()
     {
-        Debug.Log("Removing spell from slot");
-        cardData = null;
-        slotTaken = false;
+        if(!cardDataOverwritten)
+        {
+            Debug.Log("Removing spell from slot");
+            cardData.cardName = "";
+            slotTaken = false;
+        }
+        else
+        {
+            cardDataOverwritten = false;
+        }
     }
 
     [Button]public void FlipSpell(bool toUp)
     {
-        Debug.Log("flipping " + toUp);
-
-        startRot = transform.rotation;
-        if(toUp)
+        if((!faceup && toUp) || (faceup && !toUp))
         {
-            endRot = Quaternion.Euler(0, 0, 0);
-        }
-        else
-        {
-            endRot = Quaternion.Euler(0, -180, 90);
-            RemoveSpellFromSlot();
-        }
-        elapsedRotationTime = 0;
+            Debug.Log("flipping " + toUp);
+            startRot = transform.rotation;
+            if (toUp)
+            {
+                endRot = Quaternion.Euler(0, 0, 0);
+                faceup = true;
+            }
+            else
+            {
+                endRot = Quaternion.Euler(0, -180, 90);
+                RemoveSpellFromSlot();
+                faceup = false;
+            }
+            elapsedRotationTime = 0;
 
-        rotating = true;
+            rotating = true;
+        }
     }
 
     private void Update()
@@ -108,7 +124,17 @@ public class InGameSpell : MonoBehaviour
             {
                 animating = false;
                 time = 1;
-                FlipSpell(false);
+                if (!cardDataOverwritten)
+                {
+                    Debug.Log("Card data not overwritten flipping");
+                    FlipSpell(false);
+                   
+                }
+                else
+                {
+                    Debug.Log("Card data overwritten not flipping");
+                    cardDataOverwritten = false;
+                }
             }
         }
     }

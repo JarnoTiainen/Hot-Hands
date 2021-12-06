@@ -39,20 +39,16 @@ public class LifeCounterManager : MonoBehaviour
 
     private void HealthPointsChangeEvent(bool isYou, int change)
     {
-        Debug.Log("change " + change);
         if (change < 0)
         {
             if (isYou)
             {
-                Debug.Log("you lost health " + change);
                 displayedYourLifePoints = GameManager.Instance.playerStats.playerHealth;
                 SetNewNumber(true, displayedYourLifePoints);
             }
             else
             {
-                Debug.Log("opponent lost health "  + change);
                 displayedOpponentLifePoints = GameManager.Instance.enemyPlayerStats.playerHealth;
-                Debug.Log(displayedOpponentLifePoints);
                 SetNewNumber(false, displayedOpponentLifePoints);
             }
         }
