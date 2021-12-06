@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
   m_Name: Cerberus
   m_EditorClassIdentifier: 
-  cardSprite: {fileID: 21300000, guid: 5e21c6d2ddc17454d93420464b3dd119, type: 3}
+  cardSprite: {fileID: 21300000, guid: 4576a5cacbac2ac49a8e1532e275e4d0, type: 3}
   cardName: Cerberus
   cost: 5
   value: 2
@@ -29,6 +29,7 @@ MonoBehaviour:
     trigger: 4
     weight: 1
     targeting: 0
+    targetType: 0
     buffType: 0
     buffVanishType: 0
     hidden: 0
