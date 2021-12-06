@@ -12,8 +12,6 @@ public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverE
     public enum ButtonType
     {
         Return,
-        Settings,
-        SettingsBack,
         Disconnect,
         DisconnectNo,
         DisconnectYes,
@@ -31,20 +29,14 @@ public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverE
             case ButtonType.Return:
                 EscMenu.Instance.Return();
                 break;
-            case ButtonType.Settings:
-                EscMenu.Instance.EscMenuButtonsSetActive(false);
-                EscMenu.Instance.SettingsMenuSetActive(true);
-                break;
-            case ButtonType.SettingsBack:
-                EscMenu.Instance.EscMenuButtonsSetActive(true);
-                EscMenu.Instance.SettingsMenuSetActive(false);
-                break;
             case ButtonType.Disconnect:
                 EscMenu.Instance.EscMenuButtonsSetActive(false);
+                EscMenu.Instance.VolumeSlidersSetActive(false);
                 EscMenu.Instance.DisconnectConfirmationSetActive(true);
                 break;
             case ButtonType.DisconnectNo:
                 EscMenu.Instance.EscMenuButtonsSetActive(true);
+                EscMenu.Instance.VolumeSlidersSetActive(true);
                 EscMenu.Instance.DisconnectConfirmationSetActive(false);
                 break;
             case ButtonType.DisconnectYes:
@@ -52,6 +44,7 @@ public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverE
                 break;
             case ButtonType.EscQuit:
                 EscMenu.Instance.EscMenuButtonsSetActive(false);
+                EscMenu.Instance.VolumeSlidersSetActive(false);
                 EscMenu.Instance.QuitConfirmationSetActive(true);
                 break;
             case ButtonType.ResultQuit:
@@ -64,6 +57,7 @@ public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverE
                 break;
             case ButtonType.QuitNo:
                 EscMenu.Instance.EscMenuButtonsSetActive(true);
+                EscMenu.Instance.VolumeSlidersSetActive(true);
                 EscMenu.Instance.QuitConfirmationSetActive(false);
                 break;
             case ButtonType.QuitYes:
