@@ -10,6 +10,10 @@ public class EnemyHand : MonoBehaviour
     [SerializeField] private float gapBetweenCards = 0;
     [SerializeField] private float cardScaleInHand = 1;
 
+    public void Start()
+    {
+        unhandledCards = new List<GameObject>();
+    }
 
     public void Awake()
     {

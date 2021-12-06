@@ -137,7 +137,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void UpdateRPLP(int rp, int lp)
     {
-        Debug.Log("Updating rplp");
         if((rp < cardData.rp && lp <= cardData.lp || rp <= cardData.rp && lp < cardData.lp) && (rp > 0 && lp > 0)) 
         {
             cardTakeDamageManager.PlayEffect();
@@ -239,8 +238,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void SetNewCardData(bool isYourCard, CardData cardData)
     {
-        Debug.Log("Setting new card data");
-
         this.cardData = cardData;
         if (name != null) nameText.text = cardData.cardName;
         if (cost != null) cost.text = cardData.cost.ToString();
@@ -262,7 +259,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         {
             if (value != null) lp.text = cardData.rp.ToString();
             if (value != null) rp.text = cardData.lp.ToString();
-            Debug.Log("rp " + rp.text + "lp " + lp.text + " name " + name);
         }
         SetCardMaterial();
 

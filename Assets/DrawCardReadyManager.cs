@@ -42,7 +42,6 @@ public class DrawCardReadyManager : MonoBehaviour
 
     [Button] public void StopAnimation()
     {
-        Debug.Log("stopping animation");
         time = 1;
         reversing = true;
         animating = false;

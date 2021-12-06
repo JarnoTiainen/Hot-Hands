@@ -10,7 +10,7 @@ public class Hand : MonoBehaviour
     public static Hand Instance { get; private set; }
 
     private static List<GameObject> handCards = new List<GameObject>();
-    private static List<GameObject> visibleHandCards = new List<GameObject>();
+    [SerializeField] private static List<GameObject> visibleHandCards = new List<GameObject>();
     private static List<GameObject> unhandledCards = new List<GameObject>();
 
     [SerializeField] private float gapBetweenCards = 0;
@@ -20,11 +20,12 @@ public class Hand : MonoBehaviour
     public void Awake()
     {
         Instance = gameObject.GetComponent<Hand>();
+        Debug.Log("SETTING HAND INSTANCE");
     }
 
     private void Start()
     {
-
+        visibleHandCards = new List<GameObject>();
     }
 
     public bool CheckIfInsideHandBox(Vector2 pos)
@@ -44,6 +45,7 @@ public class Hand : MonoBehaviour
 
         if (presetCard != null)
         {
+            Debug.Log("PRESET");
             newCard = presetCard;
         }
         else
@@ -63,9 +65,11 @@ public class Hand : MonoBehaviour
         }
         newCard.transform.SetParent(Instance.gameObject.transform, true);
 
+        Debug.Log(newCard);
+
         //adds to list which manages card positions in hand
         visibleHandCards.Add(newCard);
-
+        Debug.Log(visibleHandCards.Count);
         //adds the card to total cards in hand
         handCards.Add(newCard);
         SetNewCardPositions();
@@ -105,6 +109,8 @@ public class Hand : MonoBehaviour
         Debug.Log("lenght1 " + unhandledCards.Count);
         unhandledCards.Add(newCard);
         newCard.transform.SetParent(Instance.gameObject.transform, true);
+
+        Debug.Log(newCard);
 
         //adds to list which manages card positions in hand
         visibleHandCards.Add(newCard);
@@ -234,6 +240,9 @@ public class Hand : MonoBehaviour
         {   
             newPosX = firstCardOffsetX + gapBetweenCardCenters * i;
             Vector3 newPos = new Vector3(newPosX, 0, 0);
+            Debug.Log(visibleHandCards[i]);
+            Debug.Log(visibleHandCards[i].GetComponent<CardMovement>());
+            Debug.Log(GameManager.Instance.rearrangeDuration);
             visibleHandCards[i].GetComponent<CardMovement>().OnCardMove(newPos, GameManager.Instance.rearrangeDuration);
         }
     }

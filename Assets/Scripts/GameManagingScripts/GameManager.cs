@@ -474,6 +474,7 @@ public class GameManager : MonoBehaviour
     public void CardSummonDenied()
     {
         playerStats.playerFieldCards--;
+        if(References.i.yourMonsterZone.unhandledCards.Count > 0)
         UpdatePlayerBurnValue(playerNumber, playerStats.playerBurnValue + References.i.yourMonsterZone.unhandledCards[0].GetComponent<InGameCard>().GetData().cost);
         References.i.yourMonsterZone.RecallCard(playerNumber, References.i.yourMonsterZone.unhandledCards[0]);
         Hand.Instance.UpdateCanAffortCards();
