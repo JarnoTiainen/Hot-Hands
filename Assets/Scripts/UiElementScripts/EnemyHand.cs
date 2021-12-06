@@ -71,6 +71,41 @@ public class EnemyHand : MonoBehaviour
         
     }
 
+    [Button]
+    public static void AddNewCardFromEnemyDeck(string seed, DrawCardMessage drawCardMessage = null)
+    {
+        GameObject newCard;
+        if (References.i.mouse.tutorialMode)
+        {
+            newCard = References.i.yourDeck.GetComponent<TutorialDeck>().TakeTopCard();
+        }
+        else
+        {
+            newCard = References.i.yourDeck.GetComponent<DeckGaObConstructor>().TakeTopCard();
+        }
+
+        newCard.transform.SetParent(Instance.transform);
+        unhandledCards.Add(newCard);
+        CardData newCardData;
+        if (drawCardMessage == null)
+        {
+            newCardData = newCard.GetComponent<InGameCard>().GetData();
+        }
+        else
+        {
+            newCardData = Hand.Instance.cardList.GetCardData(drawCardMessage); ;
+        }
+
+        Debug.Log("enemy card data from enemy hand " + newCardData.cardName);
+
+        newCardData.seed = seed;
+        newCard.GetComponent<InGameCard>().SetNewCardData(false, newCardData);
+        SetNewCardPositions();
+        GameManager.Instance.AddCardToInGameCards(newCard);
+
+    }
+
+
     public GameObject GetCardWithSeed(string seed)
     {
         foreach(GameObject card in unhandledCards)

@@ -94,6 +94,26 @@ public class Hand : MonoBehaviour
         Instance.UpdateCanAffortCards();
     }
 
+    public static void AddNewCardFromOpponentDeck()
+    {
+        GameObject newCard;
+
+        newCard = References.i.opponentDeck.GetComponent<DeckGaObConstructor>().TakeTopCard();
+
+        newCard.GetComponent<InGameCard>().cardHidden = true;
+        //adds the card to list of cards that have not been 
+        Debug.Log("lenght1 " + unhandledCards.Count);
+        unhandledCards.Add(newCard);
+        newCard.transform.SetParent(Instance.gameObject.transform, true);
+
+        //adds to list which manages card positions in hand
+        visibleHandCards.Add(newCard);
+
+        //adds the card to total cards in hand
+        handCards.Add(newCard);
+        SetNewCardPositions();
+    }
+
     public void UpdateCanAffortCards()
     {
         foreach(GameObject card in handCards)
@@ -120,6 +140,8 @@ public class Hand : MonoBehaviour
     {
         CardData cardData = Instance.cardList.GetCardData(drawCardMessage);
         GameObject card = null;
+        Debug.Log("lenght4 " + unhandledCards.Count);
+
         if(cardData != null)
         {
             Debug.Log("card exists");

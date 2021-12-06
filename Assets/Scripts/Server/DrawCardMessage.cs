@@ -17,6 +17,7 @@ public class DrawCardMessage
     public List<Enchantment> enchantments;
     public string seed;
     public bool legendary;
+    public bool enemyDeck;
 
 
     public DrawCardMessage(int playerIn)

@@ -2340,7 +2340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae91bb6bb98b4b4c9e4bd33ae4b0d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondsBeforeStart: 10
+  secondsBeforeStart: 4
   gameStarted: 0
   textCountdownNumber: {fileID: 2126802122}
 --- !u!1 &453386775
@@ -9628,7 +9628,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3775167555a6bb5478b15945de75ee81, type: 2}
   m_sharedMaterial: {fileID: 4267115259555605201, guid: 3775167555a6bb5478b15945de75ee81, type: 2}

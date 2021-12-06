@@ -378,7 +378,18 @@ public class MonsterZone : MonoBehaviour
             {
                 Debug.Log("chost index " + summonCardMessage.boardIndex);
                 monsterCards.Remove(handledCard);
-                monsterCards.Insert(summonCardMessage.boardIndex, handledCard);
+                if(monsterCards.Count == 0)
+                {
+                    monsterCards.Insert(0, handledCard);
+                }
+                else if(monsterCards.Count - 1 < summonCardMessage.boardIndex)
+                {
+                    monsterCards.Insert(monsterCards.Count, handledCard);
+                }
+                else
+                {
+                    monsterCards.Insert(summonCardMessage.boardIndex, handledCard);
+                }
             }
             RepositionMonsterCards();
 

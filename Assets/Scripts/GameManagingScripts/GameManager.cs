@@ -249,9 +249,18 @@ public class GameManager : MonoBehaviour
 
         if (drawCardMessage.player == playerNumber)
         {
-            if(drawCardMessage.drawCooldown == -1)
+            Debug.LogWarning("you draw");
+            if (drawCardMessage.drawCooldown == -1)
             {
-                PlayerDrawCard(drawCardMessage.player, drawCardMessage.seed);
+                if(drawCardMessage.enemyDeck)
+                {
+                    Hand.AddNewCardFromOpponentDeck();
+                }
+                else
+                {
+                    PlayerDrawCard(drawCardMessage.player, drawCardMessage.seed);
+                }
+                
                 GameManager.Instance.playerStats.playerHandCards++;
             }
             else
@@ -269,10 +278,34 @@ public class GameManager : MonoBehaviour
         else
         {
             
-            if(!References.i.mouse.tutorialMode) {
-                PlayerDrawCard(drawCardMessage.player, drawCardMessage.seed);
-            } else {
-                PlayerDrawCard(drawCardMessage.player, drawCardMessage.seed, drawCardMessage);
+            if (!References.i.mouse.tutorialMode) {
+                if (drawCardMessage.enemyDeck)
+                {
+                    enemyPlayerStats.playerHandCards++;
+                    playerStats.deckCardCount--;
+                    EnemyHand.AddNewCardFromEnemyDeck(drawCardMessage.seed);
+                }
+                else
+                {
+                    PlayerDrawCard(drawCardMessage.player, drawCardMessage.seed);
+                    enemyPlayerStats.playerHandCards++;
+                }
+                    
+            } 
+            else 
+            {
+                if (drawCardMessage.enemyDeck)
+                {
+                    enemyPlayerStats.playerHandCards++;
+                    playerStats.deckCardCount--;
+                    EnemyHand.AddNewCardFromEnemyDeck(drawCardMessage.seed);
+                }
+                else
+                {
+                    PlayerDrawCard(drawCardMessage.player, drawCardMessage.seed, drawCardMessage);
+                    enemyPlayerStats.playerHandCards++;
+                }
+                    
             }
         }
     }
