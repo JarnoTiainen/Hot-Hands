@@ -569,7 +569,7 @@ public class GameManager : MonoBehaviour
         if(data.cardType == Card.CardType.Monster)
         {
             GameObject newCard = References.i.yourMonsterZone.AddNewMonsterCard(true, 0, data);
-
+            GameManager.Instance.AddCardToInGameCards(newCard);
             //TODO: make sure that card with that seed still exists in the game(instead of removing move to container or something)
             Hand.Instance.TryRemoveCard(data.seed);
 

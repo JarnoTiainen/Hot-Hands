@@ -264,6 +264,8 @@ public class Mouse : MonoBehaviour
             else
             {
                 int ghostIndex = References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.ghostCard);
+
+                
                 GameManager.Instance.PrePlayCard(heldCard.GetComponent<InGameCard>().GetData(), false);
 
 
