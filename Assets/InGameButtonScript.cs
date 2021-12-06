@@ -12,14 +12,15 @@ public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverE
     public enum ButtonType
     {
         Return,
-        Disconnect,
-        DisconnectNo,
-        DisconnectYes,
+        OpenSurrender,
+        SurrenderNo,
+        SurrenderYes,
         EscQuit,
-        ResultQuit,
-        ResultQuitNo,
         QuitNo,
-        QuitYes
+        QuitYes,
+        BackToMenu,
+        ResultQuit,
+        ResultQuitNo
     }
 
     public void OnClickElement()
@@ -29,23 +30,27 @@ public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverE
             case ButtonType.Return:
                 EscMenu.Instance.Return();
                 break;
-            case ButtonType.Disconnect:
+            case ButtonType.OpenSurrender:
                 EscMenu.Instance.EscMenuButtonsSetActive(false);
                 EscMenu.Instance.VolumeSlidersSetActive(false);
-                EscMenu.Instance.DisconnectConfirmationSetActive(true);
+                EscMenu.Instance.SurrenderConfirmationSetActive(true);
                 break;
-            case ButtonType.DisconnectNo:
+            case ButtonType.SurrenderNo:
                 EscMenu.Instance.EscMenuButtonsSetActive(true);
                 EscMenu.Instance.VolumeSlidersSetActive(true);
-                EscMenu.Instance.DisconnectConfirmationSetActive(false);
+                EscMenu.Instance.SurrenderConfirmationSetActive(false);
                 break;
-            case ButtonType.DisconnectYes:
-                EscMenu.Instance.ReturnToMenu();
+            case ButtonType.SurrenderYes:
+                WebSocketService.Surrender();
+                EscMenu.Instance.Return();
                 break;
             case ButtonType.EscQuit:
                 EscMenu.Instance.EscMenuButtonsSetActive(false);
                 EscMenu.Instance.VolumeSlidersSetActive(false);
                 EscMenu.Instance.QuitConfirmationSetActive(true);
+                break;
+            case ButtonType.BackToMenu:
+                EscMenu.Instance.ReturnToMenu();
                 break;
             case ButtonType.ResultQuit:
                 MatchResultScript.Instance.ResultScreenButtonsSetActive(false);
