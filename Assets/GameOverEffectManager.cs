@@ -7,35 +7,26 @@ public class GameOverEffectManager : MonoBehaviour
 {
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private Material material;
-    float time = 0;
-    private bool animating;
-    [SerializeField] private float speed;
+    [SerializeField] private float animationDuration = 1f;
 
-    // Start is called before the first frame update
     void Start()
     {
         meshRenderer.material = material;
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator Animation()
     {
-        if(animating)
+        float progress = 0;
+        while (progress < 1)
         {
-            time += Time.deltaTime * speed;
-            if(time > 1)
-            {
-                animating = false;
-            }
-            meshRenderer.material.SetFloat("_AnimationStep", time);
+            progress += (Time.deltaTime / animationDuration);
+            meshRenderer.material.SetFloat("_AnimationStep", progress);
+            yield return null;
         }
     }
 
     [Button] public void StartAnimation()
     {
-        animating = true;
-        time = 0;
+        StartCoroutine(Animation());
     }
-
-
 }

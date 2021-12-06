@@ -9,9 +9,11 @@ public class MatchResultScript : MonoBehaviour
 {
     public static MatchResultScript Instance { get; private set; }
     [SerializeField] private EscMenu escMenuManager;
-    [SerializeField] private GameObject resultScreenButtons;
+    public GameObject resultScreenButtons;
+    [SerializeField] private GameObject resultQuitConfirmation;
     [SerializeField] private Image panelDim;
-    [SerializeField] private TextMeshProUGUI resultText;
+    [SerializeField] private GameObject victoryEffect;
+    [SerializeField] private GameObject defeatEffect;
     [SerializeField] private int dimMax;
     [SerializeField] private int dimEnd;
     [SerializeField] private float dimMaxFade;
@@ -25,15 +27,15 @@ public class MatchResultScript : MonoBehaviour
 
     public void ResultScreenButtonsSetActive(bool value) => resultScreenButtons.SetActive(value);
 
+    public void ResultQuitConfirmationButtonsSetActive(bool value) => resultQuitConfirmation.SetActive(value);
+
     public void GameEnd(bool winner)
     {
-        if (winner) resultText.text = "VICTORY";
-        else resultText.text = "DEFEAT";
         escMenuManager.gameObject.SetActive(false);
-        StartCoroutine(DimAnimation());
+        StartCoroutine(DimAnimation(winner));
     }
 
-    private IEnumerator DimAnimation()
+    private IEnumerator DimAnimation(bool winner)
     {
         panelDim.enabled = true;
         float time = 0;
@@ -44,7 +46,16 @@ public class MatchResultScript : MonoBehaviour
             panelDim.color = new Color32(0, 0, 0, (byte)Mathf.FloorToInt(dim));
             yield return null;
         }
-        resultText.gameObject.SetActive(true);
+        if (winner)
+        {
+            victoryEffect.SetActive(true);
+            victoryEffect.GetComponent<GameOverEffectManager>().StartAnimation();
+        }
+        else
+        {
+            defeatEffect.SetActive(true);
+            defeatEffect.GetComponent<GameOverEffectManager>().StartAnimation();
+        }
         yield return new WaitForSeconds(dimMaxDuration);
         resultScreenButtons.SetActive(true);
         time = 0;
@@ -60,8 +71,7 @@ public class MatchResultScript : MonoBehaviour
     [Button]
     public void AnimationDevButton()
     {
-        resultText.gameObject.SetActive(false);
         resultScreenButtons.SetActive(false);
-        StartCoroutine(DimAnimation());
+        StartCoroutine(DimAnimation(true));
     }
 }

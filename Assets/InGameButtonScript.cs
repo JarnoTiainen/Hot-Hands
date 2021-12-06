@@ -56,11 +56,11 @@ public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverE
                 break;
             case ButtonType.ResultQuit:
                 MatchResultScript.Instance.ResultScreenButtonsSetActive(false);
-                EscMenu.Instance.QuitConfirmationSetActive(true);
+                MatchResultScript.Instance.ResultQuitConfirmationButtonsSetActive(true);
                 break;
             case ButtonType.ResultQuitNo:
                 MatchResultScript.Instance.ResultScreenButtonsSetActive(true);
-                EscMenu.Instance.QuitConfirmationSetActive(false);
+                MatchResultScript.Instance.ResultQuitConfirmationButtonsSetActive(false);
                 break;
             case ButtonType.QuitNo:
                 EscMenu.Instance.EscMenuButtonsSetActive(true);
