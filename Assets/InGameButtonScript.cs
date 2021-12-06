@@ -70,7 +70,6 @@ public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverE
                 EscMenu.Instance.QuitConfirmationSetActive(false);
                 break;
             case ButtonType.QuitYes:
-                WebSocketService.Surrender();
                 EscMenu.Instance.QuitGame();
                 break;
             default:
