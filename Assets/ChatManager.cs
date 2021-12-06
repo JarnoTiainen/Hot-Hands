@@ -14,10 +14,12 @@ public class ChatManager : MonoBehaviour
     [SerializeField] private GameObject chatContent;
     [SerializeField] private TMP_InputField messageInput;
     [SerializeField] private TextMeshProUGUI characterCountText;
+    [SerializeField] private GameObject newMsgNotification;
     public GameObject openLinkConfirmation;
     public TextMeshProUGUI linkConfirmationText;
     public Button openLinkButton;
     private int charLimit;
+    private bool isOpen = false;
 
     private void Awake()
     {
@@ -59,6 +61,7 @@ public class ChatManager : MonoBehaviour
             messageObj.GetComponent<MessageObjectScript>().FitMessageContent();
         }
         StartCoroutine(ForceUpdateLayout());
+        if (chatContent.transform.childCount > 0 && !isOpen) newMsgNotification.SetActive(true);
     }
 
     private IEnumerator ForceUpdateLayout()
@@ -88,10 +91,13 @@ public class ChatManager : MonoBehaviour
         if (open)
         {
             chat.anchoredPosition = new Vector2(-(gameObject.GetComponent<RectTransform>().rect.width / 2), gameObject.GetComponent<RectTransform>().rect.height / 2);
+            isOpen = true;
+            newMsgNotification.SetActive(false);
         }
         else
         {
             chat.anchoredPosition = new Vector2(-(gameObject.GetComponent<RectTransform>().rect.width / 2), -(gameObject.GetComponent<RectTransform>().rect.height / 2));
+            isOpen = false;
         }
     }
 
