@@ -11367,6 +11367,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1680268750875424695, guid: 1e6f323761a37574897860c107df63b5, type: 3}
   m_PrefabInstance: {fileID: 256504147}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &954822540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 954822542}
+  - component: {fileID: 954822541}
+  m_Layer: 0
+  m_Name: GameManagerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &954822541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954822540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b9601154da1e44096531c774ad66b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 793265824259559053, guid: 3be226d2cc73f7347b13b7ed44ffecb4, type: 3}
+--- !u!4 &954822542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954822540}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12, y: 0, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &955452039
 GameObject:
   m_ObjectHideFlags: 0
@@ -23695,95 +23739,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7bb1afe08b67d540a95da00c6261040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2080187383
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2080187385}
-  - component: {fileID: 2080187384}
-  - component: {fileID: 2080187386}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2080187384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2080187383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3688cc3b420dfe459cf844ad916c6d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 2080187386}
-  debuggerModeOn: 0
-  showServerMessage: 1
-  isLoggedIn: 0
---- !u!4 &2080187385
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2080187383}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1156.5349, y: 551.65845, z: 67.8385}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2080187386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2080187383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1f03169546557a468a731a748eab172, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStats:
-    deckCardCount: 20
-    discardpileCardCount: 0
-    playerBurnValue: 0
-    playerHealth: 0
-    playerHandCards: 0
-    playerFieldCards: 0
-  enemyPlayerStats:
-    deckCardCount: 20
-    discardpileCardCount: 0
-    playerBurnValue: 0
-    playerHealth: 0
-    playerHandCards: 0
-    playerFieldCards: 0
-  attackDuration: 0.3
-  moveDuration: 0.4
-  rotationSpeed: 0.2
-  rearrangeDuration: 0.4
-  playerNumber: 0
-  maxHandSize: 5
-  maxFieldCardCount: 5
-  maxDeckSize: 20
-  deckSet: 1
-  playerStartHealth: 30
-  debuggerModeOn: 0
-  debugPlayerBurnCard: 0
-  debugPlayerDrawCard: 1
-  debugPlayerPlayCard: 1
-  debugPlayerAttack: 0
 --- !u!1 &2084651604
 GameObject:
   m_ObjectHideFlags: 0
