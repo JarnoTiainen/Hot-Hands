@@ -61,13 +61,30 @@ public class ChatManager : MonoBehaviour
             messageObj.GetComponent<MessageObjectScript>().FitMessageContent();
         }
         StartCoroutine(ForceUpdateLayout());
-        if (chatContent.transform.childCount > 0 && !isOpen) newMsgNotification.SetActive(true);
+        CheckForNewMessages();
     }
 
     private IEnumerator ForceUpdateLayout()
     {
         yield return null;
         LayoutRebuilder.ForceRebuildLayoutImmediate(chatContent.GetComponent<RectTransform>());
+    }
+
+    private void CheckForNewMessages()
+    {
+        if (chatContent.transform.childCount == 0) return;
+
+        string lastMsgTime = chatContent.transform.GetChild(chatContent.transform.childCount - 1).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text;
+        string lastMsgUser = chatContent.transform.GetChild(chatContent.transform.childCount - 1).GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text;
+        string lastSavedTime = PlayerPrefs.GetString("LastMsgTime", "");
+        string lastSavedUser = PlayerPrefs.GetString("LastMsgUser", "");
+
+        if (lastMsgTime == lastSavedTime && lastMsgUser == lastSavedUser) return;
+
+        PlayerPrefs.SetString("LastMsgTime", lastMsgTime);
+        PlayerPrefs.SetString("LastMsgUser", lastMsgUser);
+        PlayerPrefs.Save();
+        newMsgNotification.SetActive(true);
     }
 
     private void SendMessage()
