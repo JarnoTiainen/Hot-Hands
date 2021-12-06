@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class WebSocketService : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
-
     
     public static WebSocketService Instance { get; private set; }
     static WebSocket websocket;
@@ -15,7 +14,7 @@ public class WebSocketService : MonoBehaviour
     [SerializeField] private bool showServerMessage = false;
 
     public bool isLoggedIn = false;
-    
+    public bool gameEnded = false;
 
     private void Awake()
     {
@@ -26,8 +25,6 @@ public class WebSocketService : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-       
         websocket = new WebSocket("wss://n14bom45md.execute-api.eu-north-1.amazonaws.com/production");
         OpenNewConnection();
 
@@ -164,6 +161,7 @@ public class WebSocketService : MonoBehaviour
                 case "JOINGAME":
                     if (data[1] == "ok")
                     {
+                        gameEnded = false;
                         Debug.Log("MATCH FOUND!");
                         if(GameObject.Find("Canvas").GetComponent<MainMenu>())
                         {
@@ -210,6 +208,7 @@ public class WebSocketService : MonoBehaviour
                     gameManager.LockSpellChain(data[1]);
                     break;
                 case "GAMEOVER":
+                    gameEnded = true;
                     gameManager.EndGame(data[1]);
                     break;
                 default:
@@ -266,7 +265,7 @@ public class WebSocketService : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 1) Surrender();
+        if(SceneManager.GetActiveScene().buildIndex == 1 && !gameEnded) Surrender();
         CloseConnection();
     }
 
