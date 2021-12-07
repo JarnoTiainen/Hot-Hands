@@ -6,6 +6,7 @@ public class CollectionButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHo
     public MeshRenderer meshRenderer;
     [SerializeField] private Material material;
     [SerializeField] private Button button;
+
     public enum Button
     {
         Save,
@@ -57,6 +58,7 @@ public class CollectionButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHo
             default:
                 break;
         }
+        SFXLibrary.Instance.buttonClick.PlaySFX();
     }
 
     private IEnumerator ClickAnimation()
@@ -72,6 +74,7 @@ public class CollectionButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHo
     public void OnHoverEnter()
     {
         meshRenderer.material.SetInt("_IsHovered", 1);
+        SFXLibrary.Instance.buttonHover.PlaySFX();
     }
 
     public void OnHoverExit()

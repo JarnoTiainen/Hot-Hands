@@ -5,18 +5,11 @@ using UnityEngine.UI;
 
 public class ToggleSounds : MonoBehaviour
 {
-    private static GameObject sfxLibrary;
-
-    private void Start()
-    {
-        sfxLibrary = GameObject.Find("SFXLibrary");
-    }
-
     public void OnHover()
     {
         if (!gameObject.GetComponent<Toggle>().isOn)
         {
-            sfxLibrary.GetComponent<ButtonSFX>().OnHover();
+            SFXLibrary.Instance.buttonHover.PlaySFX();
         }
     }
 
@@ -24,12 +17,12 @@ public class ToggleSounds : MonoBehaviour
     {
         if (!gameObject.GetComponent<Toggle>().isOn)
         {
-            sfxLibrary.GetComponent<ButtonSFX>().OnClick();
+            SFXLibrary.Instance.buttonClick.PlaySFX();
         }
     }
 
     public void OnClickAlways()
     {
-        sfxLibrary.GetComponent<ButtonSFX>().OnClick();
+        SFXLibrary.Instance.buttonClick.PlaySFX();
     }
 }

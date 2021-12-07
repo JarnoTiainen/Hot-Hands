@@ -77,11 +77,13 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
             default:
                 break;
         }
+        SFXLibrary.Instance.buttonClick.PlaySFX();
     }
 
     public void OnHoverEnter()
     {
         ToggleButton(true);
+        SFXLibrary.Instance.buttonHover.PlaySFX();
     }
 
     public void OnHoverExit()

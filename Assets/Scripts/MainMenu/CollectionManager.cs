@@ -131,6 +131,7 @@ public class CollectionManager : MonoBehaviour
         WebSocketService.SetActiveDeck(deckIndex);
         deckToggles[deckIndex].ToggleDeckSelected();
         MainMenu.Instance.CreatePopupNotification("Active deck changed.", MainMenu.PopupCorner.TopRight);
+        SFXLibrary.Instance.notificationPositive.PlaySFX();
     }
 
     // Sends the players deck data to the db
@@ -160,6 +161,7 @@ public class CollectionManager : MonoBehaviour
         }
         WebSocketService.SaveDeck(JsonUtility.ToJson(deckString));
         MainMenu.Instance.CreatePopupNotification("Deck saved.", MainMenu.PopupCorner.TopRight);
+        SFXLibrary.Instance.notificationPositive.PlaySFX();
     }
 
     // Gets all game cards and passes them to the 'All Cards List' and calls it's populate function

@@ -12,7 +12,6 @@ public class CollectionMenuButtonManager : MonoBehaviour, IOnClickDownUIElement,
     [SerializeField] private TextMeshProUGUI buttonText;
     public bool deckSelected = false;
     public bool activeDeck = false;
-    private static GameObject sfxLibrary;
 
     private enum ButtonType
     {
@@ -27,13 +26,14 @@ public class CollectionMenuButtonManager : MonoBehaviour, IOnClickDownUIElement,
     {
         if (deckSelected) return;
         ToggleButton();
-        sfxLibrary.GetComponent<ButtonSFX>().OnClick();
+        SFXLibrary.Instance.buttonClick.PlaySFX();
         DeckBuilder.Instance.OpenDeck((int)buttonType);
     }
 
     public void OnHoverEnter()
     {
         meshRenderer.material.SetInt("_IsHovered", 1);
+        SFXLibrary.Instance.buttonHover.PlaySFX();
     }
 
     public void OnHoverExit()
@@ -44,7 +44,6 @@ public class CollectionMenuButtonManager : MonoBehaviour, IOnClickDownUIElement,
     private void Awake()
     {
         meshRenderer.material = material;
-        sfxLibrary = GameObject.Find("SFXLibrary");
     }
 
     [Button]

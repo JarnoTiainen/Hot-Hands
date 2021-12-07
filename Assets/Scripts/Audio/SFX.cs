@@ -78,16 +78,16 @@ public class SFX
         switch (sfxType)
         {
             case SFXManager.SFXType.UI:
-                sfxList = SFXManager.instance.uiSFX;
+                sfxList = SFXManager.Instance.uiSFX;
                 break;
             case SFXManager.SFXType.Ambient:
-                sfxList = SFXManager.instance.ambientSFX;
+                sfxList = SFXManager.Instance.ambientSFX;
                 break;
             case SFXManager.SFXType.Effects:
-                sfxList = SFXManager.instance.effectsSFX;
+                sfxList = SFXManager.Instance.effectsSFX;
                 break;
             default:
-                sfxList = SFXManager.instance.uiSFX;
+                sfxList = SFXManager.Instance.uiSFX;
                 break;
         }
 
@@ -97,13 +97,13 @@ public class SFX
     public void PlaySFX()
     {
         if (useDefault || audiosource == null)
-            SFXManager.PlaySFX(sfxToPlay, waitToPlay, useDefault, null);
+            SFXManager.Instance.PlaySFX(sfxToPlay, waitToPlay, useDefault, null);
         else
-            SFXManager.PlaySFX(sfxToPlay, waitToPlay, useDefault, audiosource);
+            SFXManager.Instance.PlaySFX(sfxToPlay, waitToPlay, useDefault, audiosource);
     }
 
     public void PlayUISFX()
     {
-        SFXManager.PlayUISFX(sfxToPlay);
+        SFXManager.Instance.PlayUISFX(sfxToPlay);
     }
 }

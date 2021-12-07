@@ -55,5 +55,6 @@ public class DeckEditorCardButtonManager : MonoBehaviour, IOnHoverEnterElement, 
         if (buttonType == Button.Add) buildCardScript.AddCard();
         else if (buttonType == Button.Remove) buildCardScript.DeleteCard();
         if(gameObject.activeSelf) StartCoroutine(Animation());
+        SFXLibrary.Instance.buttonClick.PlaySFX();
     }
 }

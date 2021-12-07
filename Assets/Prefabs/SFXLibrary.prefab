@@ -55,9 +55,36 @@ MonoBehaviour:
   buttonClick:
     sfxType: 0
     sfxToPlay: {fileID: 11400000, guid: 8ed319f2c003c2c46a4986d19b277f41, type: 2}
+    showSettings: 1
+    editSettings: 1
+    _sfxBase: {fileID: 11400000, guid: 8ed319f2c003c2c46a4986d19b277f41, type: 2}
+    waitToPlay: 0
+    useDefault: 0
+    audiosource: {fileID: 0}
+  notificationPositive:
+    sfxType: 0
+    sfxToPlay: {fileID: 11400000, guid: 783dccdc8b332c34ab5386c3bc107a4d, type: 2}
     showSettings: 0
     editSettings: 0
-    _sfxBase: {fileID: 11400000, guid: 8ed319f2c003c2c46a4986d19b277f41, type: 2}
+    _sfxBase: {fileID: 11400000, guid: 783dccdc8b332c34ab5386c3bc107a4d, type: 2}
+    waitToPlay: 0
+    useDefault: 0
+    audiosource: {fileID: 0}
+  notificationNegative:
+    sfxType: 0
+    sfxToPlay: {fileID: 11400000, guid: 4c5fee4d643b0554793a291587fd59ca, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 4c5fee4d643b0554793a291587fd59ca, type: 2}
+    waitToPlay: 0
+    useDefault: 0
+    audiosource: {fileID: 0}
+  matchFound:
+    sfxType: 0
+    sfxToPlay: {fileID: 11400000, guid: ef48ef137a5d7994fa18ac7d89f6ed27, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: ef48ef137a5d7994fa18ac7d89f6ed27, type: 2}
     waitToPlay: 0
     useDefault: 0
     audiosource: {fileID: 0}
@@ -130,6 +157,42 @@ MonoBehaviour:
     showSettings: 0
     editSettings: 0
     _sfxBase: {fileID: 11400000, guid: 33b4819be6f0c4342a6e12c00bcd4bea, type: 2}
+    waitToPlay: 0
+    useDefault: 0
+    audiosource: {fileID: 0}
+  hit:
+    sfxType: 2
+    sfxToPlay: {fileID: 11400000, guid: 297d17956fdb91b4d9d395da2c18f8b5, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 297d17956fdb91b4d9d395da2c18f8b5, type: 2}
+    waitToPlay: 0
+    useDefault: 0
+    audiosource: {fileID: 0}
+  victory:
+    sfxType: 0
+    sfxToPlay: {fileID: 11400000, guid: 84532263a7bd2624ca528e464b6daf99, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 84532263a7bd2624ca528e464b6daf99, type: 2}
+    waitToPlay: 0
+    useDefault: 0
+    audiosource: {fileID: 0}
+  defeat:
+    sfxType: 0
+    sfxToPlay: {fileID: 11400000, guid: d8e8448076588174d8d80714bffdbb03, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: d8e8448076588174d8d80714bffdbb03, type: 2}
+    waitToPlay: 0
+    useDefault: 0
+    audiosource: {fileID: 0}
+  countdown:
+    sfxType: 0
+    sfxToPlay: {fileID: 11400000, guid: 7a7456c379bd3ef4d86a2a3a19068ed9, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 7a7456c379bd3ef4d86a2a3a19068ed9, type: 2}
     waitToPlay: 0
     useDefault: 0
     audiosource: {fileID: 0}

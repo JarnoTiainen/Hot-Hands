@@ -45,9 +45,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxDefaultVolume: 0.5
+  playBuffer: 0.07
   defaultAudioSource: {fileID: 6413452686842694933}
   uiSFX:
   - {fileID: 11400000, guid: 8ed319f2c003c2c46a4986d19b277f41, type: 2}
+  - {fileID: 11400000, guid: 68214db23f3606d498d196d7b4b21465, type: 2}
+  - {fileID: 11400000, guid: 4472400b4dcdb8245831e872f4f62042, type: 2}
+  - {fileID: 11400000, guid: d8e8448076588174d8d80714bffdbb03, type: 2}
+  - {fileID: 11400000, guid: 4c5fee4d643b0554793a291587fd59ca, type: 2}
+  - {fileID: 11400000, guid: 783dccdc8b332c34ab5386c3bc107a4d, type: 2}
+  - {fileID: 11400000, guid: 84532263a7bd2624ca528e464b6daf99, type: 2}
+  - {fileID: 11400000, guid: 7a7456c379bd3ef4d86a2a3a19068ed9, type: 2}
   ambientSFX:
   - {fileID: 11400000, guid: 218abad15bb0dc24086a6440844b2113, type: 2}
   - {fileID: 11400000, guid: 70c15c7b631093043b1b114ea1df3135, type: 2}

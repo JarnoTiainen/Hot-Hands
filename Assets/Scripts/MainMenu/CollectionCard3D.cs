@@ -97,5 +97,6 @@ public class CollectionCard3D : MonoBehaviour
     public void AddCard()
     {
         DeckBuilder.Instance.AddCard(card);
+        SFXLibrary.Instance.buttonClick.PlaySFX();
     }
 }

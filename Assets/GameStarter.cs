@@ -42,11 +42,17 @@ public class GameStarter : MonoBehaviour
     {
         float time = 0;
         float duration = secondsBeforeStart;
+        int secondChange = (int)secondsBeforeStart;
         while (time < duration)
         {
             time += Time.deltaTime;
             float dim = Mathf.Lerp(dimStart, dimEnd, time / duration);
             panelImage.color = new Color32(0, 0, 0, (byte)Mathf.FloorToInt(dim));
+            if (secondChange != (int)time)
+            {
+                secondChange = (int)time;
+                SFXLibrary.Instance.countdown.PlaySFX();
+            }
             yield return null;
         }
     }

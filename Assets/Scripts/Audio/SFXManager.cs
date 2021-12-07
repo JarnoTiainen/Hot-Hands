@@ -7,29 +7,26 @@ using UnityEngine.Audio;
 
 public class SFXManager : MonoBehaviour
 {
-    private static SFXManager _instance;
+    public static SFXManager Instance { get; private set; }
     private static AudioMixer masterMixer;
     private static AudioMixerGroup sfxGroup;
     private static GameObject uiSFXGameObject;
     private static AudioSource uiSFXAudioSource;
     [SerializeField] private float sfxDefaultVolume = 0.5f;
+    [SerializeField] private float playBuffer = 0.08f;
+    private bool isPlaying = false;
+    private AudioClip playingClip = null;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
         masterMixer = Resources.Load("MasterMixer") as AudioMixer;
         sfxGroup = masterMixer.FindMatchingGroups("SFX")[0];
         masterMixer.SetFloat("sfxVol", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume", sfxDefaultVolume)) * 20);
-    }
-
-    public static SFXManager instance
-    {
-        get
-        {
-            if (_instance == null)
-                _instance = FindObjectOfType<SFXManager>();
-
-            return _instance;
-        }
     }
 
     [HorizontalGroup("AudioSource")]
@@ -46,11 +43,22 @@ public class SFXManager : MonoBehaviour
     [AssetList(Path = "/Audio/SFX/Effects", AutoPopulate = true)]
     public List<SFXClip> effectsSFX;
 
-    public static void PlaySFX(SFXClip sfx, bool waitToFinish = true, bool useDefault = true, AudioSource audioSource = null)
+    private IEnumerator SFXBuffer(AudioClip audioClip)
     {
+        isPlaying = true;
+        playingClip = audioClip;
+        yield return new WaitForSeconds(playBuffer);
+        isPlaying = false;
+    }
+
+    public void PlaySFX(SFXClip sfx, bool waitToFinish = true, bool useDefault = true, AudioSource audioSource = null)
+    {
+        if (isPlaying && (playingClip.name == sfx.clip.name)) return;
+        StopAllCoroutines();
+        isPlaying = false;
         if (audioSource == null)
         {
-            audioSource = SFXManager.instance.defaultAudioSource;
+            audioSource = defaultAudioSource;
         }
 
         if (useDefault && audioSource == null)
@@ -66,25 +74,16 @@ public class SFXManager : MonoBehaviour
                 GameObject sfxGameObject = new GameObject("SFX");
                 sfxGameObject.transform.position = new Vector3(0, 0, 0);
                 audioSource = sfxGameObject.AddComponent<AudioSource>();
-                audioSource.maxDistance = 100f;
-                audioSource.spatialBlend = 1f;
-                audioSource.rolloffMode = AudioRolloffMode.Linear;
-                audioSource.dopplerLevel = 0f;
                 audioSource.outputAudioMixerGroup = sfxGroup;
                 audioSource.clip = sfx.clip;
                 audioSource.volume = sfx.volume + Random.Range(-sfx.volumeVariation, sfx.volumeVariation);
                 audioSource.pitch = sfx.pitch + Random.Range(-sfx.pitchVariation, sfx.pitchVariation);
                 audioSource.Play();
 
-                Object.Destroy(sfxGameObject, audioSource.clip.length);
-
+                Destroy(sfxGameObject, audioSource.clip.length);
             }
             else
             {
-                audioSource.maxDistance = 100f;
-                audioSource.spatialBlend = 1f;
-                audioSource.rolloffMode = AudioRolloffMode.Linear;
-                audioSource.dopplerLevel = 0f;
                 audioSource.outputAudioMixerGroup = sfxGroup;
                 audioSource.clip = sfx.clip;
                 audioSource.volume = sfx.volume + Random.Range(-sfx.volumeVariation, sfx.volumeVariation);
@@ -92,10 +91,14 @@ public class SFXManager : MonoBehaviour
                 audioSource.Play();
             }
         }
+        StartCoroutine(SFXBuffer(sfx.clip));
     }
 
-    public static void PlayUISFX(SFXClip sfx)
+    public void PlayUISFX(SFXClip sfx)
     {
+        if (isPlaying && (playingClip.name == sfx.clip.name)) return;
+        StopAllCoroutines();
+        isPlaying = false;
         if (uiSFXGameObject == null)
         {
             uiSFXGameObject = new GameObject("UISounds");
@@ -106,6 +109,7 @@ public class SFXManager : MonoBehaviour
         uiSFXAudioSource.volume = sfx.volume + Random.Range(-sfx.volumeVariation, sfx.volumeVariation);
         uiSFXAudioSource.pitch = sfx.pitch + Random.Range(-sfx.pitchVariation, sfx.pitchVariation);
         uiSFXAudioSource.Play();
+        StartCoroutine(SFXBuffer(sfx.clip));
     }
 
     [HorizontalGroup("AudioSource")]
@@ -114,10 +118,9 @@ public class SFXManager : MonoBehaviour
     [Button]
     private void AddAudioSource()
     {
-        defaultAudioSource = this.gameObject.GetComponent<AudioSource>();
+        defaultAudioSource = gameObject.GetComponent<AudioSource>();
 
-        if (defaultAudioSource == null)
-            defaultAudioSource = this.gameObject.AddComponent<AudioSource>();
+        if (defaultAudioSource == null) defaultAudioSource = gameObject.AddComponent<AudioSource>();
     }
 
     public enum SFXType

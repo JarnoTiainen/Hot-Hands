@@ -22398,12 +22398,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: uiSFX.Array.size
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
-      propertyPath: defaultAudioSource
-      value: 
-      objectReference: {fileID: 2119529159}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: uiSFX.Array.data[1]
       value: 
@@ -22413,9 +22409,45 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 68214db23f3606d498d196d7b4b21465, type: 2}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
-      propertyPath: effectsSFX.Array.size
-      value: 3
+      propertyPath: uiSFX.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 783dccdc8b332c34ab5386c3bc107a4d, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: uiSFX.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c5fee4d643b0554793a291587fd59ca, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: uiSFX.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: d8e8448076588174d8d80714bffdbb03, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: uiSFX.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 84532263a7bd2624ca528e464b6daf99, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: uiSFX.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7a7456c379bd3ef4d86a2a3a19068ed9, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: uiSFX.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: ef48ef137a5d7994fa18ac7d89f6ed27, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: uiSFX.Array.data[9]
+      value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: ambientSFX.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: effectsSFX.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: ambientSFX.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 79e30a79bc97f3144bb188a3e25f1a7a, type: 2}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: effectsSFX.Array.data[1]
       value: 
@@ -22424,6 +22456,10 @@ PrefabInstance:
       propertyPath: effectsSFX.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: 33b4819be6f0c4342a6e12c00bcd4bea, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: effectsSFX.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 297d17956fdb91b4d9d395da2c18f8b5, type: 2}
     - target: {fileID: 6413452686842694931, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -24103,11 +24139,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!82 &2119529159 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 6413452686842694933, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
-  m_PrefabInstance: {fileID: 1917769597}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2126226531
 GameObject:
   m_ObjectHideFlags: 0

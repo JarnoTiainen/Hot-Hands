@@ -5,9 +5,14 @@ using Sirenix.OdinInspector;
 
 public class SFXLibrary : MonoBehaviour
 {
-    // Buttons
+    public static SFXLibrary Instance { get; private set; }
+
+    // Main Menu
     public SFX buttonHover;
     public SFX buttonClick;
+    public SFX notificationPositive;
+    public SFX notificationNegative;
+    public SFX matchFound;
 
     // Card sounds
     public SFX cardDraw1;
@@ -20,10 +25,17 @@ public class SFXLibrary : MonoBehaviour
 
     // Effects
     public SFX effectActivation;
+    public SFX hit;
 
+    // Other
+    public SFX victory;
+    public SFX defeat;
+    public SFX countdown;
 
-
-
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void CardDraw()
     {

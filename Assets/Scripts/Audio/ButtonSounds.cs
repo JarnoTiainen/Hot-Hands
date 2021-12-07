@@ -6,12 +6,10 @@ using UnityEngine.EventSystems;
 
 public class ButtonSounds : MonoBehaviour
 {
-    private static GameObject sfxLibrary;
     [SerializeField] bool clearTriggersOnDisable = true;
 
     private void Start()
     {
-        sfxLibrary = GameObject.Find("SFXLibrary");
         gameObject.GetComponent<Button>().onClick.AddListener(() => OnClick());
 
         if (gameObject.GetComponent<EventTrigger>() == null) return;
@@ -52,11 +50,11 @@ public class ButtonSounds : MonoBehaviour
 
     public void OnHover()
     {
-        sfxLibrary.GetComponent<ButtonSFX>().OnHover();
+        SFXLibrary.Instance.buttonHover.PlaySFX();
     }
 
     public void OnClick()
     {
-        sfxLibrary.GetComponent<ButtonSFX>().OnClick();
+        SFXLibrary.Instance.buttonClick.PlaySFX();
     }
 }

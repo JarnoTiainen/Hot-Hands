@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     public int maxDeckSize = 20;
     public bool deckSet = true;
 
-    
     [SerializeField] private int playerStartHealth = 100;
     [SerializeField] private bool debuggerModeOn;
     [SerializeField] [ShowIf("debuggerModeOn", true)] private bool debugPlayerBurnCard;
@@ -29,19 +28,7 @@ public class GameManager : MonoBehaviour
     private CardData targettingCardData;
     private GameObject targettingCard;
 
-    private SFXLibrary sfxLibrary;
-
-
-
     [SerializeField] private Dictionary<string, GameObject> inGameCards = new Dictionary<string, GameObject>();
-
-
-    public void Start()
-    {
-        
-    }
-
-
 
     public void EndGame(int player)
     {
@@ -110,7 +97,6 @@ public class GameManager : MonoBehaviour
             Debug.LogError("card with seed was not found from list: " + seed);
             return null;
         }
-        
     }
 
     public bool CheckIfInGameCardsContainsCard(GameObject card)
@@ -130,11 +116,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(kvp.Key + " " + kvp.Value.GetComponent<InGameCard>().GetData().cardName);
         }
-            
-
     }
-
-
 
     private void Awake()
     {
@@ -148,11 +130,6 @@ public class GameManager : MonoBehaviour
         this.playerNumber = playerNumber;
     }
 
-    public void SetNewSFXLibrary(SFXLibrary SFXLibrary)
-    {
-        sfxLibrary = SFXLibrary;
-    }
-
     public void PlayerBurnCard(BurnCardMessage burnCardMessage)
     {
         if (burnCardMessage.denied)
@@ -162,7 +139,6 @@ public class GameManager : MonoBehaviour
             playerStats.discardpileCardCount--;
             return;
         }
-
 
         burnCardMessage.burnedCardDone = JsonUtility.FromJson<DrawCardMessage>(burnCardMessage.burnedCard);
         DrawCardMessage cardMessage = burnCardMessage.burnedCardDone;
@@ -221,7 +197,7 @@ public class GameManager : MonoBehaviour
     public void PlayerBurnCard(GameObject card, int player = -1)
     {
         if (player == -1) player = playerNumber;
-        sfxLibrary.burnCard.PlaySFX();
+        SFXLibrary.Instance.burnCard.PlaySFX();
         
         int value = card.GetComponent<InGameCard>().GetData().value;
         if (player == playerNumber)
@@ -349,7 +325,7 @@ public class GameManager : MonoBehaviour
             }
             
         }
-        sfxLibrary.CardDraw();
+        SFXLibrary.Instance.CardDraw();
     }
 
     public void AddNewCard(AddNewCardMessage addNewCardMessage)
@@ -364,7 +340,7 @@ public class GameManager : MonoBehaviour
         if (IsYou(enchantmentEffect.cardInfo.player)) isYou = true;
         References.i.cardEnchantmentEffectManager.PlayEnchantmentEffect((Enchantment.Trigger)enchantmentEffect.trigger, enchantmentEffect.seed, isYou);
         References.i.cardEnchantmentEffectManager.DisplayCardEffectSource(References.i.cardList.GetCardData(enchantmentEffect.cardInfo));
-		sfxLibrary.effectActivation.PlaySFX();
+		SFXLibrary.Instance.effectActivation.PlaySFX();
     }
 
 
@@ -561,7 +537,7 @@ public class GameManager : MonoBehaviour
             EnemyHand.Instance.RemoveCard(data.seed);
             References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
         }
-        sfxLibrary.CardPlay();
+        SFXLibrary.Instance.CardPlay();
     }
 
     public void PrePlayCard(CardData data, bool hasTargetAbility = false)

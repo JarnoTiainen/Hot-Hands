@@ -44,11 +44,13 @@ public class DeckBuilder : MonoBehaviour
                 if (build[i].legendary)
                 {
                     MainMenu.Instance.CreatePopupNotification("Can not have duplicates of legendary cards!", MainMenu.PopupCorner.TopRight);
+                    SFXLibrary.Instance.notificationNegative.PlaySFX();
                     return;
                 }
                 if(build[i].amount == duplicateLimit)
                 {
                     MainMenu.Instance.CreatePopupNotification("Can not have more than " + duplicateLimit + " duplicates of same card!", MainMenu.PopupCorner.TopRight);
+                    SFXLibrary.Instance.notificationNegative.PlaySFX();
                     return;
                 }
                 BuildCardScript buildCardScript = gameObject.transform.Find(card.name).GetComponent<BuildCardScript>();
@@ -72,6 +74,7 @@ public class DeckBuilder : MonoBehaviour
         if (card.legendary && legendaryAmount >= legendaryLimit)
         {
             MainMenu.Instance.CreatePopupNotification("Can not have more than " + legendaryLimit + " legendary cards in one deck!", MainMenu.PopupCorner.TopRight);
+            SFXLibrary.Instance.notificationNegative.PlaySFX();
             return;
         }
         if (card.legendary) legendaryAmount++;

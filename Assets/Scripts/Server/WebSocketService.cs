@@ -121,11 +121,13 @@ public class WebSocketService : MonoBehaviour
                     {
                         Debug.Log("Created new account");
                         MainMenu.Instance.CreatePopupNotification("Created new account.", MainMenu.PopupCorner.BottomLeft);
+                        SFXLibrary.Instance.notificationPositive.PlaySFX();
                     }
                     else
                     {
                         Debug.Log("Created new account Failed!");
                         MainMenu.Instance.CreatePopupNotification("Account creation failed!", MainMenu.PopupCorner.BottomLeft);
+                        SFXLibrary.Instance.notificationNegative.PlaySFX();
                     }
                     break;
                 case "LOGIN":
@@ -135,6 +137,7 @@ public class WebSocketService : MonoBehaviour
                         GameObject.Find("LoginPanel").GetComponent<LoginManager>().CloseLoginScreen();
                         Debug.Log("Login ok");
                         MainMenu.Instance.CreatePopupNotification("Logged in.", MainMenu.PopupCorner.BottomLeft);
+                        SFXLibrary.Instance.notificationPositive.PlaySFX();
                         ChatManager.Instance.HideChat(false);
                         LoadChat();
                         GetDecks();
@@ -143,6 +146,7 @@ public class WebSocketService : MonoBehaviour
                     {
                         Debug.Log("Login Failed!");
                         MainMenu.Instance.CreatePopupNotification("Login Failed!", MainMenu.PopupCorner.BottomLeft);
+                        SFXLibrary.Instance.notificationNegative.PlaySFX();
                     }
                     break;
                 case "JOINGAME":

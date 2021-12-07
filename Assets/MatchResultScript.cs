@@ -51,11 +51,13 @@ public class MatchResultScript : MonoBehaviour
         {
             victoryEffect.SetActive(true);
             victoryEffect.GetComponent<GameOverEffectManager>().StartAnimation();
+            SFXLibrary.Instance.victory.PlaySFX();
         }
         else
         {
             defeatEffect.SetActive(true);
             defeatEffect.GetComponent<GameOverEffectManager>().StartAnimation();
+            SFXLibrary.Instance.defeat.PlaySFX();
         }
         yield return new WaitForSeconds(dimMaxDuration);
         resultScreenButtons.SetActive(true);
