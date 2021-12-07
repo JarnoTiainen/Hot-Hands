@@ -33,16 +33,14 @@ public class MainMenu : MonoBehaviour
         Instance = this;
         if (WebSocketService.Instance.isLoggedIn)
         {
+            mainMenuButtons.SetActive(true);
             loginScreen.SetActive(false);
-            Debug.Log("Login screen SetActive false");
             ChatManager.Instance.HideChat(false);
         }
         else
         {
             mainMenuButtons.SetActive(false);
             loginScreen.SetActive(true);
-            Debug.Log("isLoggedIn: " + WebSocketService.Instance.isLoggedIn);
-            Debug.Log("Login screen SetActive true");
         }
     }
 
