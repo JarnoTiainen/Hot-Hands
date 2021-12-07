@@ -5367,6 +5367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 403127125}
   - component: {fileID: 403127126}
+  - component: {fileID: 403127127}
   m_Layer: 5
   m_Name: ResolutionToggle (1)
   m_TagString: Untagged
@@ -5455,6 +5456,19 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
+--- !u!114 &403127127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403127124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f197f7dabe05ca549a9614df1538cc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alwaysClickSFX: 0
 --- !u!1 &416661389
 GameObject:
   m_ObjectHideFlags: 0
@@ -5643,6 +5657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f197f7dabe05ca549a9614df1538cc4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alwaysClickSFX: 0
 --- !u!114 &431422503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6223,6 +6238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f197f7dabe05ca549a9614df1538cc4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alwaysClickSFX: 0
 --- !u!114 &473885068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7259,6 +7275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 525672954}
   - component: {fileID: 525672955}
+  - component: {fileID: 525672956}
   m_Layer: 5
   m_Name: ResolutionToggle (2)
   m_TagString: Untagged
@@ -7347,6 +7364,19 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
+--- !u!114 &525672956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525672953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f197f7dabe05ca549a9614df1538cc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alwaysClickSFX: 0
 --- !u!1 &527266499
 GameObject:
   m_ObjectHideFlags: 0
@@ -12477,6 +12507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f197f7dabe05ca549a9614df1538cc4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alwaysClickSFX: 0
 --- !u!114 &1042441768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12831,6 +12862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f197f7dabe05ca549a9614df1538cc4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alwaysClickSFX: 0
 --- !u!1 &1060397999
 GameObject:
   m_ObjectHideFlags: 0
@@ -19580,6 +19612,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1724593698}
   - component: {fileID: 1724593699}
+  - component: {fileID: 1724593700}
   m_Layer: 5
   m_Name: ResolutionToggle
   m_TagString: Untagged
@@ -19668,6 +19701,19 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
+--- !u!114 &1724593700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724593697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f197f7dabe05ca549a9614df1538cc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alwaysClickSFX: 0
 --- !u!1 &1725835435
 GameObject:
   m_ObjectHideFlags: 0
@@ -20202,6 +20248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1756153345}
   - component: {fileID: 1756153346}
+  - component: {fileID: 1756153347}
   m_Layer: 5
   m_Name: FullscreenToggle
   m_TagString: Untagged
@@ -20290,6 +20337,19 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
+--- !u!114 &1756153347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756153344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f197f7dabe05ca549a9614df1538cc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alwaysClickSFX: 1
 --- !u!1 &1757603815
 GameObject:
   m_ObjectHideFlags: 0
@@ -22779,6 +22839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f197f7dabe05ca549a9614df1538cc4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alwaysClickSFX: 0
 --- !u!114 &1983543048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24050,6 +24111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f197f7dabe05ca549a9614df1538cc4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alwaysClickSFX: 0
 --- !u!114 &2110266755
 MonoBehaviour:
   m_ObjectHideFlags: 0

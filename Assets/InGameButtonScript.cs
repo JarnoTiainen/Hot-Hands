@@ -75,11 +75,13 @@ public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverE
             default:
                 break;
         }
+        SFXLibrary.Instance.buttonClick.PlaySFX();
     }
 
     public void OnHoverEnter()
     {
         ToggleButton(true);
+        SFXLibrary.Instance.buttonHover.PlaySFX();
     }
 
     public void OnHoverExit()
