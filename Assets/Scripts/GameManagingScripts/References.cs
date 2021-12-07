@@ -51,4 +51,6 @@ public class References: MonoBehaviour
     public GameObject yourBurnPile;
     public GameObject opponentBurnPile;
 
+    public GameObject visuals;
+
 }

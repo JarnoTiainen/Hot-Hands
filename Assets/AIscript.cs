@@ -7,6 +7,7 @@ public class AIscript : MonoBehaviour
 {
     public bool doOnce = true;
     int drawnCards = 0;
+    public float delay = 1.5f;
 
     private void Update()
     {
@@ -48,7 +49,7 @@ public class AIscript : MonoBehaviour
 
     private IEnumerator WaitToSummon()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(delay);
         OpponentSummonCard();
         if(TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.CardPlay) {
             TutorialManager.tutorialManagerInstance.NextTutorialState();

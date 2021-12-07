@@ -459,6 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doOnce: 1
+  delay: 1.5
 --- !u!4 &75656071
 Transform:
   m_ObjectHideFlags: 0
@@ -2098,8 +2099,6 @@ MonoBehaviour:
   fullscreenToggle: {fileID: 187042383}
   screenWidths: 0005000080070000000a0000
   defaultScreenResIndex: 0
-  mainCam: {fileID: 0}
-  canvasCam: {fileID: 0}
 --- !u!114 &343450300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2951,6 +2950,7 @@ MonoBehaviour:
   opponentDeck: {fileID: 1966657018}
   yourBurnPile: {fileID: 1378788128}
   opponentBurnPile: {fileID: 54390112}
+  visuals: {fileID: 1908398135}
 --- !u!1 &525874310
 GameObject:
   m_ObjectHideFlags: 0
@@ -6057,6 +6057,7 @@ MonoBehaviour:
   newTarget: {fileID: 0}
   previousTarget: {fileID: 0}
   firstTimeCall: 1
+  eventsOn: 1
 --- !u!1 &1141198003
 GameObject:
   m_ObjectHideFlags: 0
@@ -11888,9 +11889,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   escMenu: {fileID: 0}
   escMenuButtons: {fileID: 821021055}
-  settingsMenu: {fileID: 1635314549}
-  disconnectConfirmation: {fileID: 1284553134}
+  volumeSliders: {fileID: 0}
+  surrenderConfirmation: {fileID: 0}
   quitConfirmation: {fileID: 1435453772}
+  masterMixer: {fileID: 0}
+  masterSlider: {fileID: 0}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  masterDefaultVolume: 0
+  musicDefaultVolume: 0
+  sfxDefaultVolume: 0
 --- !u!222 &2129678100
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12239,7 +12247,7 @@ MonoBehaviour:
   speaker_name: Mascot
   sentences:
   - Welcome to Hot Hands!
-  - Defeat the <opponetn name> by playing cards and attacking with them.
+  - Defeat the <opponent name> by playing cards and attacking with them.
   - Start by picking up two cards from your deck.
   - 
   - 'When you want to play a card, you have to have the amount of burn value that
@@ -12247,21 +12255,22 @@ MonoBehaviour:
   - To gain burn value you have to burn cards from your hand in your bonfire.
   - 
   - This is a monster card. Drag it to the table to start attacking with it.
-  - OInce it starts glowing pink you can attack by clicking it.
   - 
   - Hot Hands is a realtime strategy game, so there are no turns. Speed is key!
+  - Once the card starts glowing red you can attack by clicking it.
   - 
   - Now this is where it gets interesting.
   - 
-  - 'When a card attacks another card, the numbers on the inside indicate the offensive
-    values...In other words, the damage it deals.The numbers on the outside are defense
-    values. '
+  - When a card attacks another card, the numbers on the inside indicate the offensive
+    values...
+  - In other words, the damage it deals.
   - 
-  - 
+  - 'The numbers on the outside are defense values. '
   - Your card deals damage to the opponents defense value and vice versa
   - 
+  - You can attack the opponent if you click the card on your table...
   - 
-  - 
+  - The card deals damage to the player when the opponents table is empty.
   - 
 --- !u!1001 &5067975732789722992
 PrefabInstance:
@@ -12382,18 +12391,51 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 4267115259555605201, guid: 3775167555a6bb5478b15945de75ee81, type: 2}
+    - target: {fileID: 5067975731904078713, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975731904078713, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975731904078713, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975731904078713, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_text
+      value: sfkfkdsfdf sfdfsaf  sdsfdfsaf  sfkfkdfdfsaf  sfkfkdsfdfsaf  s sfd fkfkdsfdfsaf 
+        sfkfkdsfdfsa
+      objectReference: {fileID: 0}
     - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_fontSize
-      value: 63.95
+      value: 58.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3775167555a6bb5478b15945de75ee81, type: 2}
+    - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_lineSpacing
-      value: -72
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_overflowMode
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4267115259555605201, guid: 3775167555a6bb5478b15945de75ee81, type: 2}
     - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_VerticalAlignment
       value: 256
@@ -12409,6 +12451,10 @@ PrefabInstance:
     - target: {fileID: 5067975732162356493, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_SizeDelta.x
       value: -602.9409
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975732162356493, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 262.52
       objectReference: {fileID: 0}
     - target: {fileID: 5067975732162356493, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_AnchoredPosition.x

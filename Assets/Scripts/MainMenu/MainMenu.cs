@@ -222,6 +222,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnTutorialButton()
     {
+        GameManager.Instance.ResetPlayerStats();
         ChatManager.Instance.HideChat(true);
         SceneManager.LoadScene("TutorialScene");
     }

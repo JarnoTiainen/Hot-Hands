@@ -66,6 +66,13 @@ public class AttackEventHandler : MonoBehaviour
             attackingCard.GetComponent<InGameCard>().ToggleAttackBurnEffect(false);
         }
 
+        //if (References.i.mouse.tutorialMode) {
+        //    if (!TutorialManager.tutorialManagerInstance.firstAttack) {
+        //        Debug.Log("First attack!");
+        //        TutorialManager.tutorialManagerInstance.firstAttack = true;
+        //        TutorialManager.tutorialManagerInstance.NextTutorialState();
+        //    }             
+        //}
       
     }
 
@@ -90,10 +97,22 @@ public class AttackEventHandler : MonoBehaviour
 
         //TODO
         if (References.i.mouse.tutorialMode) {
-            if (!TutorialManager.tutorialManagerInstance.firstAttack) {
-                TutorialManager.tutorialManagerInstance.firstAttack = true;
-                TutorialManager.tutorialManagerInstance.NextTutorialState();
-            }
+            //if (References.i.mouse.tutorialMode) {
+            //    if (!TutorialManager.tutorialManagerInstance.firstAttack) {
+            //        Debug.Log("First attack!");
+            //        TutorialManager.tutorialManagerInstance.firstAttack = true;
+            //        TutorialManager.tutorialManagerInstance.NextTutorialState();
+            //    }
+            //}
+
+            if (!TutorialManager.tutorialManagerInstance.firstDirectAttack) {
+                if (playerTakenDamage != 0) {
+                    Debug.Log("First direct attack!");
+                    TutorialManager.tutorialManagerInstance.firstDirectAttack = true;
+                    TutorialManager.tutorialManagerInstance.NextTutorialState();
+                }
+            } 
+            
         }
 
 
@@ -187,8 +206,7 @@ public class AttackEventHandler : MonoBehaviour
 
     public IEnumerator StartDamageEventTutorial(int player, GameObject attacker, GameObject target)
     {
-        yield return new WaitUntil(() => TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.SpellCard);
-        Debug.Log("Yee waituntil works in damage event!");
+        yield return new WaitUntil(() => TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.DirectAttack);
         Time.timeScale = 1;
 
         if (target == References.i.yourPlayerTarget || target == References.i.enemyPlayerTarget)

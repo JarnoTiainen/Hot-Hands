@@ -152,7 +152,7 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
 
     public void OnClickElement()
     {
-        if ((int)tutorialManager.GetState() >= (int)TutorialManager.TutorialState.CardDraw) {
+        if (TutorialManager.tutorialManagerInstance.drawingAllowed) {
             if(GameManager.Instance.IsYou(owner))
             {
                 //let the player pick a card if the deck is set

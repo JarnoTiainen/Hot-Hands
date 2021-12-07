@@ -20,10 +20,12 @@ public class TutorialManager : MonoBehaviour
     public float attackCoolDown = 3;
     public float spellWindup = 4;
     public Image skipBar;
+    public bool drawingAllowed;
     public bool burnignAllowed;
     public bool summoningAllowed;
     public bool attackingAllowed;
     public bool firstAttack;
+    public bool firstDirectAttack;
     private bool doOnce;
     [SerializeField] private int enemyStartHP;
     [SerializeField] private int startBurnValue = 0;
@@ -48,6 +50,12 @@ public class TutorialManager : MonoBehaviour
         Dialogue4,
         AttackValues,
         Dialogue5,
+        DefenseValues,
+        Dialogue6,
+        DirectAttack,
+        Dialogue7,
+        DummyState,
+        Dialogue8,
         SpellCard,
         Damage
     }
@@ -61,17 +69,47 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialState++;
         switch(tutorialState) {
+            case TutorialState.CardDraw:
+                drawingAllowed = true;
+                return;
             case TutorialState.BurnCard:
+                drawingAllowed = false;
                 BurnState();
                 return;
             case TutorialState.Dialogue2:
                 BurnState();
+                burnignAllowed = false;
+                return;
+            case TutorialState.CardPlay:
+                PlayCardState();
+                return;
+            case TutorialState.Dialogue3:
+                ToggleTime();
+                return;
+            case TutorialState.CardAttack:
+                
+                ToggleTime();
+                AttackState();
                 return;
             case TutorialState.AttackValues:
+
                 AttackValuesState();
+                NextTutorialState();
                 return;
-            case TutorialState.Dialogue5:
+            case TutorialState.DefenseValues:
                 AttackValuesState();
+                DefenseValuesState();
+                NextTutorialState();
+                return;
+            case TutorialState.DirectAttack:
+                Debug.Log("makign fisrt attack");
+                
+                DefenseValuesState();
+                StartCoroutine(DirectCounter());
+                ToggleTime();
+                firstAttack = true;
+                return;
+            case TutorialState.SpellCard:
                 return;
             default:
                 return;
@@ -83,6 +121,48 @@ public class TutorialManager : MonoBehaviour
     public void SwitchState(TutorialState newState)
     {
         tutorialState = newState;
+
+        switch(tutorialState) {
+            case TutorialState.CardDraw:
+                drawingAllowed = true;
+                return;
+            case TutorialState.BurnCard:
+                drawingAllowed = false;
+                BurnState();
+                return;
+            case TutorialState.Dialogue2:
+                BurnState();
+                burnignAllowed = false;
+                return;
+            case TutorialState.CardPlay:
+                PlayCardState();
+                return;
+            case TutorialState.Dialogue3:
+                ToggleTime();
+                return;
+            case TutorialState.CardAttack:
+                ToggleTime();
+                AttackState();
+                return;
+            case TutorialState.AttackValues:
+                AttackValuesState();
+                NextTutorialState();
+                return;
+            case TutorialState.DefenseValues:
+                AttackValuesState();
+                DefenseValuesState();
+                NextTutorialState();
+                return;
+            case TutorialState.DirectAttack:
+                StartCoroutine(DirectCounter());
+                ToggleTime();
+                return;
+            case TutorialState.SpellCard:
+                DefenseValuesState();
+                return;
+            default:
+                return;
+        }
     }
 
 
@@ -113,11 +193,13 @@ public class TutorialManager : MonoBehaviour
     void Update()
     {
         if (skipTime >= skipDuration) {
+            
             SceneManager.LoadScene(0);
+            GameManager.Instance.ResetPlayerStats();
         }
 
         if (Input.GetKey(KeyCode.E)) {
-            skipTime += Time.deltaTime;
+            skipTime += Time.unscaledDeltaTime;
             skipBar.fillAmount = skipTime / skipDuration;
         }
 
@@ -125,35 +207,66 @@ public class TutorialManager : MonoBehaviour
             skipTime = 0;
             skipBar.fillAmount = 0;
         }
+    }
 
-        //TODO: move these to nexttutorialstate
-        if (tutorialState == TutorialState.BurnCard && !burnignAllowed) {
-            burnignAllowed = true;
+    private void ToggleTime()
+    {
+        if(Time.timeScale == 0) {
+            Time.timeScale = 1f;
+        } else {
+            Time.timeScale = 0;
         }
-
-        if (tutorialState == TutorialState.CardPlay && !summoningAllowed) {
-            summoningAllowed = true;
-        }
-
-        if (tutorialState == TutorialState.CardAttack && !attackingAllowed) {
-            attackingAllowed = true;
-        }
-
-        
-
     }
 
     private void BurnState()
     {
+        burnignAllowed = true;
         GameObject burnCard = GameManager.Instance.GetCardFromInGameCards("000000018");
         burnCard.GetComponentsInChildren<HighLightController>()[2].ToggleHighlightAnimation();
         References.i.yourBonfire.GetComponentInChildren<HighLightController>().ToggleHighlightAnimation();
     }
 
+    private void PlayCardState()
+    {
+        summoningAllowed = true;
+    }
+
+    private void AttackState()
+    {
+        attackingAllowed = true;
+    }
+
+
     private void AttackValuesState()
     {
         GameObject ownCard = GameManager.Instance.GetCardFromInGameCards("000000019");
+        GameObject opponentCard = GameManager.Instance.GetCardFromInGameCards("10000003");
         ownCard.GetComponentsInChildren<HighLightController>()[0].ToggleHighlightAnimation();
+        opponentCard.GetComponentsInChildren<HighLightController>()[0].ToggleHighlightAnimation();
+    }
+
+    private void DefenseValuesState()
+    {
+        GameObject ownCard = GameManager.Instance.GetCardFromInGameCards("000000019");
+        GameObject opponentCard = GameManager.Instance.GetCardFromInGameCards("10000003");
+        ownCard.GetComponentsInChildren<HighLightController>()[1].ToggleHighlightAnimation();
+        opponentCard.GetComponentsInChildren<HighLightController>()[1].ToggleHighlightAnimation();
+    }
+
+    private IEnumerator DirectCounter()
+    {
+        float countDown = 0;
+        while (countDown <= 10) {
+            //player attacks by themselves
+            if(firstDirectAttack == true) {
+                SwitchState(TutorialState.Dialogue8);
+                break;
+            }
+            countDown += Time.deltaTime;
+            yield return null;
+        }
+        //player doesn't attack by themself
+        NextTutorialState();
     }
 
     public CardPowersMessage[] GetAttackTarget(CardData data, bool isYourAttack)
