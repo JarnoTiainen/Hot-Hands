@@ -10,26 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
-  m_Name: HookHands Sticky Fingers
+  m_Name: Hefty Bribe
   m_EditorClassIdentifier: 
-  cardSprite: {fileID: 21300000, guid: 53e4a49d0c68c0b47a32680c9a18d3da, type: 3}
-  cardName: HH Initiate
-  cost: 4
+  cardSprite: {fileID: 21300000, guid: d9dcd9a194f1ca545a35d1a0bbae368e, type: 3}
+  cardName: Hefty Bribe
+  cost: 2
   value: 3
   legendary: 0
-  cardType: 1
+  cardType: 0
   spellTags: 
   monsterTags: 
-  rp: 2
-  lp: 1
-  attackDirection: 1
+  rp: 0
+  lp: 0
+  attackDirection: 0
   enchantments:
-  - enchantmentName: Sleight of Hand
-    enchantmentEffect: 25
-    trigger: 1
+  - enchantmentName: Money in the Pocket
+    enchantmentEffect: 33
+    trigger: 7
     weight: 1
     targeting: 0
     targetType: 0
-    buffType: 0
+    buffType: 2
     buffVanishType: 0
     hidden: 0

@@ -63,7 +63,11 @@ public class Enchantment
         Silence,
         Zap,
         BlessingOfTheDragon,
-        BusinessDeal
+        BusinessDeal,
+        SummonRat,
+        GiantBribe,
+        RatGrenade,
+        GainRandomBurn
     }
     public enum Trigger
     {
