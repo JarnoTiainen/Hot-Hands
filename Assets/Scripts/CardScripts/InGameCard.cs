@@ -67,6 +67,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private CardTrailManager cardTrailManager;
     [SerializeField] private DrawCardReadyManager drawCardReadyManager;
 
+    public GameObject deckCardCountElement;
+
     public void SetTempValuesAsValues()
     {
         UpdateRPLP(tempRp, tempLp);
@@ -497,5 +499,14 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     public void StopDrawCardReadyEffect()
     {
         drawCardReadyManager.StopAnimation();
+    }
+    public void RevealDeckCardCountElement()
+    {
+        deckCardCountElement.SetActive(true);
+    }
+
+    public void HideDeckCardCountElement()
+    {
+        deckCardCountElement.SetActive(false);
     }
 }

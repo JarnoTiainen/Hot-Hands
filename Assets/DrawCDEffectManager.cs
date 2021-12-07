@@ -12,6 +12,7 @@ public class DrawCDEffectManager : MonoBehaviour
     [SerializeField] private float time;
     [SerializeField] private bool animating;
     private float effDur = 0;
+    private bool yourDeck = true;
 
     // Start is called before the first frame update
     void Start()
@@ -22,13 +23,21 @@ public class DrawCDEffectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(animating)
+        if(yourDeck)
+        {
+            deckCardCount.text = GameManager.Instance.playerStats.deckCardCount.ToString();
+        }
+        else
+        {
+            deckCardCount.text = GameManager.Instance.enemyPlayerStats.deckCardCount.ToString();
+        }
+
+        if (animating)
         {
             time += Time.deltaTime/effDur;
             image.fillAmount = time;
-            if(time > 0)
+            if(time > 1)
             {
-                Debug.Log("ASread<gsty gfdszgfdzas");
                 animating = false;
                 image.fillAmount = 0;
             }
@@ -40,5 +49,15 @@ public class DrawCDEffectManager : MonoBehaviour
         time = 0;
         animating = true;
         effDur = duration;
+    }
+
+    [Button] public void HideElement()
+    {
+        gameObject.transform.parent.gameObject.SetActive(false);
+    }
+
+    public void SetOwner(bool isYours)
+    {
+        yourDeck = isYours;
     }
 }

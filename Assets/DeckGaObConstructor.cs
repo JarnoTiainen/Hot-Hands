@@ -87,6 +87,8 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         newDeckCard.GetComponent<CardMovement>().OnCardMove(newDeckCard.transform.localPosition, finalCardPosition, 0.3f);
         newDeckCard.GetComponent<InGameCard>().interActable = false;
         newDeckCard.GetComponent<InGameCard>().ReverseBurn();
+        newDeckCard.GetComponent<InGameCard>().RevealDeckCardCountElement();
+        newDeckCard.GetComponent<InGameCard>().deckCardCountElement.GetComponent<DrawCDEffectManager>().SetOwner(yourDeck);
         deckCards.Add(newDeckCard);
         i++;
     }
@@ -109,6 +111,7 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         newDeckCard.GetComponent<CardMovement>().OnCardMove(newDeckCard.transform.localPosition, finalCardPosition, 0.3f);
         newDeckCard.GetComponent<InGameCard>().interActable = false;
         newDeckCard.GetComponent<InGameCard>().ReverseBurn();
+        newDeckCard.GetComponent<InGameCard>().RevealDeckCardCountElement();
         deckCards.Add(newDeckCard);
         i++;
     }
@@ -131,6 +134,7 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         }
         deckCards.Remove(topCard);
         topCard.GetComponent<InGameCard>().StopDrawCardReadyEffect();
+        topCard.GetComponent<InGameCard>().HideDeckCardCountElement();
         return topCard;
     }
 
@@ -170,6 +174,7 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         foreach (GameObject card in deckCards)
         {
             card.GetComponent<InGameCard>().StopDrawCardReadyEffect();
+            card.GetComponent<InGameCard>().deckCardCountElement.GetComponent<DrawCDEffectManager>().StartDrawCDEffect(duration);
         }
         OnPreDrawCD = false;
         cardDrawReady = false;
