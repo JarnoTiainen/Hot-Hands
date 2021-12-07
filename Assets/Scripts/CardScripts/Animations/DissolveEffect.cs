@@ -5,8 +5,6 @@ using UnityEngine;
 public class DissolveEffect : MonoBehaviour
 {
     private Material material;
-
-    private float dissolveAmount = 0f;
     [SerializeField] private bool isDissolving;
     [SerializeField] private bool isReverseDissolving;
     private float time = 0;

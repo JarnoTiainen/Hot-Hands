@@ -212,11 +212,17 @@ public class MonsterZone : MonoBehaviour
             monsterCards.Remove(deadMonster);
             if(GameManager.Instance.IsYou(deadMonster.GetComponent<InGameCard>().owner))
             {
-                GameManager.Instance.playerStats.discardpileCardCount++;
+                if(!GameManager.Instance.GetCardFromInGameCards(seed).GetComponent<InGameCard>().CheckIfSpectral())
+                {
+                    GameManager.Instance.playerStats.discardpileCardCount++;
+                }
             }
             else
             {
-                GameManager.Instance.enemyPlayerStats.discardpileCardCount++;
+                if (!GameManager.Instance.GetCardFromInGameCards(seed).GetComponent<InGameCard>().CheckIfSpectral())
+                {
+                    GameManager.Instance.enemyPlayerStats.discardpileCardCount++;
+                }
             }
             deadMonster.GetComponent<InGameCard>().StartDestructionEvent();
             RepositionMonsterCards();

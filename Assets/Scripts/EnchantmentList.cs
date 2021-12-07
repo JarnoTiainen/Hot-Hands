@@ -38,6 +38,11 @@ public class EnchantmentList : MonoBehaviour
     [SerializeField] [TextArea] private string blessingOfTheDragonDescription;
     [SerializeField] [TextArea] private string businessDealDescription;
     [SerializeField] [TextArea] private string sharpshotDescription;
+    [SerializeField] [TextArea] private string gainRandomBurnDescription;
+    [SerializeField] [TextArea] private string ratGrenadeDescription;
+    [SerializeField] [TextArea] private string giantBribeDescription;
+    [SerializeField] [TextArea] private string summonRetDescription;
+
 
 
     private void Awake()
@@ -146,6 +151,18 @@ public class EnchantmentList : MonoBehaviour
                 break;
             case Enchantment.EnchantmentEffect.BusinessDeal:
                 effect = businessDealDescription;
+                break;
+            case Enchantment.EnchantmentEffect.GainRandomBurn:
+                effect = gainRandomBurnDescription;
+                break;
+            case Enchantment.EnchantmentEffect.RatGrenade:
+                effect = ratGrenadeDescription;
+                break;
+            case Enchantment.EnchantmentEffect.GiantBribe:
+                effect = giantBribeDescription;
+                break;
+            case Enchantment.EnchantmentEffect.SummonRat:
+                effect = summonRetDescription;
                 break;
             default:
                 effect = "null";

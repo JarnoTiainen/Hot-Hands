@@ -150,7 +150,7 @@ public class WebSocketService : MonoBehaviour
                     }
                     break;
                 case "JOINGAME":
-                    if (data[1] == "ok")
+                    if (data[1] != "")
                     {
                         gameEnded = false;
                         Debug.Log("MATCH FOUND!");

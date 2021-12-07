@@ -2,6 +2,8 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -616,7 +618,12 @@ public class GameManager : MonoBehaviour
             }
             
         }
-        
+
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            playerStats.playerFieldCards = References.i.yourMonsterZone.monsterCards.Count;
+        }
+
     }
 
 
