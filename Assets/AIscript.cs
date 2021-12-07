@@ -16,30 +16,35 @@ public class AIscript : MonoBehaviour
             References.i.opponentDeck.GetComponent<TutorialDeck>().OpponentDraw();
             References.i.opponentDeck.GetComponent<TutorialDeck>().OpponentDraw();
             drawnCards++;
-            
+
         }
-        
+
         if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.CardPlay && doOnce) {
             if (GameManager.Instance.playerStats.playerFieldCards == 1) {
-                StartCoroutine(WaitToSummon());   
+                OpponentSummonCard();
+
                 doOnce = false;
             }
-            
+
         }
+
+
+
+
 
     }
 
+
+
     [Button] public void OpponentSummonCard()
     {
-        //there is something wrong with this
-         CardData enemyCard = EnemyHand.Instance.GetComponentInChildren<InGameCard>().GetCardData();
-        //CardData enemyCard = GameManager.Instance.GetCardFromInGameCards(TutorialManager.tutorialManagerInstance.enemyCardSeeds[TutorialManager.tutorialManagerInstance.enemyCardSeeds.Count - 1]).GetComponent<InGameCard>().GetCardData();
-        Debug.Log("Enemy plays card " + enemyCard.cardName);
-            
-                    
-        bool free = enemyCard.cost == 0;
-        SummonCardMessage summonCard = new SummonCardMessage(1, 1, false, free, TutorialManager.tutorialManagerInstance.attackCoolDown, enemyCard);
-        GameManager.Instance.PlayerSummonCard(summonCard);
+        StartCoroutine(WaitToSummon());
+    }
+
+    public void OpponentPlaySpell()
+    {
+        Debug.Log("opponent spell");
+        StartCoroutine(OpponentSpell());
     }
 
     [Button] public void OpponentAttack()
@@ -47,12 +52,48 @@ public class AIscript : MonoBehaviour
 
     }
 
+
+
     private IEnumerator WaitToSummon()
     {
         yield return new WaitForSeconds(delay);
-        OpponentSummonCard();
-        if(TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.CardPlay) {
+        //there is something wrong with this, or not?
+        CardData enemyCard = EnemyHand.Instance.GetComponentInChildren<InGameCard>().GetCardData();
+        //CardData enemyCard = GameManager.Instance.GetCardFromInGameCards(TutorialManager.tutorialManagerInstance.enemyCardSeeds[TutorialManager.tutorialManagerInstance.enemyCardSeeds.Count - 1]).GetComponent<InGameCard>().GetCardData();
+        Debug.Log("Enemy plays card " + enemyCard.cardName);
+
+
+        bool free = enemyCard.cost == 0;
+        SummonCardMessage summonCard = new SummonCardMessage(1, 1, false, free, TutorialManager.tutorialManagerInstance.attackCoolDown, enemyCard);
+        GameManager.Instance.PlayerSummonCard(summonCard);
+        if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.CardPlay) {
             TutorialManager.tutorialManagerInstance.NextTutorialState();
         }
     }
+
+    private IEnumerator OpponentSpell()
+    {
+        Debug.Log("opponent spell numerator");
+        yield return new WaitForSeconds(3f);
+        //weird i know
+        GameObject enemyCard = EnemyHand.Instance.transform.GetChild(0).gameObject;
+        Debug.Log("opponent spell numerator2");
+     
+        //non targetting
+        GameManager.Instance.enemyPlayerStats.playerBurnValue -= enemyCard.GetComponent<InGameCard>().GetData().cost;
+        References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.enemyPlayerStats.playerBurnValue.ToString();
+        Debug.Log("opponent spell numerator3");
+        PlaySpellMessage playSpellMessage = new PlaySpellMessage(1, enemyCard.GetComponent<InGameCard>().GetCardData(), TutorialManager.tutorialManagerInstance.spellWindup);
+        playSpellMessage.slot = TutorialManager.tutorialManagerInstance.spellCardSeed.Count - 1;
+        GameManager.Instance.PlaySpell(playSpellMessage);
+
+
+        LimboCardHolder.Instance.StoreNewCard(enemyCard);
+
+
+    }
+
+    
+
+
 }

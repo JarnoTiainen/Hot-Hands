@@ -5238,13 +5238,13 @@ MonoBehaviour:
   text: {fileID: 1281289499}
   cards:
   - {fileID: 11400000, guid: ffce4c5f022b5f248a7fa1b313cd3351, type: 2}
+  - {fileID: 11400000, guid: 3b168982305e4f54a8257f979e9b483d, type: 2}
+  - {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
+  - {fileID: 11400000, guid: e365b4d1ae039b748a6ec018920e5336, type: 2}
+  - {fileID: 11400000, guid: 62ee803afdae33e438c72e196932e47a, type: 2}
   - {fileID: 11400000, guid: d1e2bbe766bed76469b95bcc6eda80b2, type: 2}
-  - {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
-  - {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
-  - {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
-  - {fileID: 11400000, guid: d1e2bbe766bed76469b95bcc6eda80b2, type: 2}
-  - {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
-  - {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
+  - {fileID: 11400000, guid: 3b168982305e4f54a8257f979e9b483d, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
   - {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
   - {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
   - {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
@@ -5257,7 +5257,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
   - {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
   - {fileID: 11400000, guid: b3b8077d08d3a904ab5a52095384e5bc, type: 2}
-  drawCooldown: 1
+  drawCooldown: 0.5
   cardCooldown: 3
   cardDrawReady: 1
   cardOverlapAmount: 0.0015
@@ -11183,8 +11183,24 @@ MonoBehaviour:
   cards:
   - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
   - {fileID: 11400000, guid: 62ee803afdae33e438c72e196932e47a, type: 2}
-  - {fileID: 11400000, guid: 4dfa973cdd1caca44ae6e7792d781b0d, type: 2}
+  - {fileID: 11400000, guid: bf881e2a06203294da9697ff35edf9ac, type: 2}
   - {fileID: 11400000, guid: 3b168982305e4f54a8257f979e9b483d, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
   drawCooldown: 1
   cardCooldown: 3
   cardDrawReady: 1
@@ -12189,12 +12205,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 666864765}
     - target: {fileID: 3195456241456581281, guid: 62f8452f7e8d1914b9163d11d1576398, type: 3}
+      propertyPath: opponentAI
+      value: 
+      objectReference: {fileID: 75656070}
+    - target: {fileID: 3195456241456581281, guid: 62f8452f7e8d1914b9163d11d1576398, type: 3}
       propertyPath: enemyStartHP
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3195456241456581281, guid: 62f8452f7e8d1914b9163d11d1576398, type: 3}
       propertyPath: startBurnValue
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3195456241456581281, guid: 62f8452f7e8d1914b9163d11d1576398, type: 3}
       propertyPath: enemyStartBurnValue
@@ -12261,16 +12281,23 @@ MonoBehaviour:
   - 
   - Now this is where it gets interesting.
   - 
-  - When a card attacks another card, the numbers on the inside indicate the offensive
-    values...
-  - In other words, the damage it deals.
+  - When your card attacks another card, the value on the outside is the attack damage
+  - 'The damage is dealt to the opponents card''s outermost value, '
+  - which will be the card's defense value during this attack.
   - 
-  - 'The numbers on the outside are defense values. '
-  - Your card deals damage to the opponents defense value and vice versa
+  - The opponent's cards innermost value becomes the card's attack value.
+  - It deals damage to your cards innermost value.
   - 
   - You can attack the opponent if you click the card on your table...
   - 
   - The card deals damage to the player when the opponents table is empty.
+  - Go ahead and pick up  a few more cards from your deck.
+  - 
+  - This is a Spell card. Drag it to a enemy card to use it.
+  - 
+  - Oh, looks like the opponent played a spell also. You can cancel it by using your
+    Deny spell.
+  - 
   - 
 --- !u!1001 &5067975732789722992
 PrefabInstance:
@@ -12414,7 +12441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_fontSize
-      value: 58.05
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_fontAsset
@@ -12422,7 +12449,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 3775167555a6bb5478b15945de75ee81, type: 2}
     - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_fontSizeMax
-      value: 64
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 5067975731904078714, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_lineSpacing
@@ -12475,6 +12502,18 @@ PrefabInstance:
     - target: {fileID: 5067975732274443020, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 7.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975732274443021, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975732274443021, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975732274443021, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_FillOrigin
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6249227687578429487, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_Sprite

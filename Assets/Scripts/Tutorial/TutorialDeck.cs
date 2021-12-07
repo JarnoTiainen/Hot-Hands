@@ -163,7 +163,7 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
                         if (cardDrawReady)
                         {
                             Card drawnCard = cardsQueue.Dequeue();
-                            string seed = "0000000" + cardsQueue.Count.ToString();
+                            string seed = "0000000" + cards.IndexOf(drawnCard);
 
                             DrawCardMessage drawCardMessage = new DrawCardMessage(0, seed, drawCooldown, drawnCard);
                             
@@ -200,9 +200,8 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
                 if (cardDrawReady)
                 {
                     Card drawnCard = cardsQueue.Dequeue();
-                    string seed = "1000000" + cardsQueue.Count.ToString();
-                    Debug.Log("enemy seed " + seed);
-                    Debug.Log("enemy card data " + drawnCard.cardName);
+                    string seed = "1000000" + cards.IndexOf(drawnCard);
+                  
                     DrawCardMessage drawCardMessage = new DrawCardMessage(1, seed, drawCooldown, drawnCard);
                     //GameManager.Instance.PlayerDrawCard(1, seed);
                     

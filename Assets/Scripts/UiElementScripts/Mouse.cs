@@ -200,7 +200,7 @@ public class Mouse : MonoBehaviour
                 if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.BurnCard) {
                     Debug.Log("seed " + heldCard.GetComponent<InGameCard>().GetCardData().seed);
                     //don't use magic strings
-                    if (heldCard.GetComponent<InGameCard>().GetCardData().seed != "000000018") {
+                    if (heldCard.GetComponent<InGameCard>().GetCardData().seed != "00000001") {
                         burnTries++;
                         Debug.Log("Returning card");
                         ReturnHeldCardToHand();
@@ -323,8 +323,10 @@ public class Mouse : MonoBehaviour
                             if (!tutorialMode) {
                                 WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed, RayCaster.Instance.target.GetComponent<InGameCard>().GetData().seed);
                             } else {
+                                
                                 TutorialManager.tutorialManagerInstance.spellCardSeed.Add(heldCard.GetComponent<InGameCard>().GetCardData().seed);
                                 PlaySpellMessage playSpellMessage = new PlaySpellMessage(0, heldCard.GetComponent<InGameCard>().GetCardData(), TutorialManager.tutorialManagerInstance.spellWindup, RayCaster.Instance.target.GetComponent<InGameCard>().GetData().seed);
+                                playSpellMessage.slot = TutorialManager.tutorialManagerInstance.spellCardSeed.Count - 1;
                                 GameManager.Instance.PlaySpell(playSpellMessage);
                             }
                             

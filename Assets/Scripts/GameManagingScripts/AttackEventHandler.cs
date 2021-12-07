@@ -152,7 +152,23 @@ public class AttackEventHandler : MonoBehaviour
         bool attackerDied = false;
         if (target == References.i.yourPlayerTarget || target == References.i.enemyPlayerTarget)
         {
-            //Update player hp heal/trigger lose game event??
+            //Update player hp heal/trigger lose game event for tutorial
+            if (References.i.mouse.tutorialMode) {
+                if (target == References.i.yourPlayerTarget) {
+                    if(attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Left) {
+                        GameManager.Instance.playerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().lp;
+                    } else if (attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Right) {
+                        GameManager.Instance.playerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().rp;
+                    }
+                } else if (target == References.i.enemyPlayerTarget) {
+                    if(attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Left) {
+                        GameManager.Instance.enemyPlayerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().lp;
+                    } else if (attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Right) {
+                        GameManager.Instance.enemyPlayerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().rp;
+                    }
+                }
+            }
+
         }
         else
         {

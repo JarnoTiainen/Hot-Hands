@@ -737,6 +737,7 @@ public class GameManager : MonoBehaviour
 
     public void PlaySpell(PlaySpellMessage playSpellMessage)
     {
+        
         if (IsYou(playSpellMessage.player))
         {
             References.i.spellZone.PlaySpell(playSpellMessage.seed, playSpellMessage.targets, playSpellMessage.windup, playSpellMessage.slot);
@@ -755,7 +756,15 @@ public class GameManager : MonoBehaviour
             AddCardToInGameCards(card);
             EnemyHand.Instance.RemoveCard(playSpellMessage.seed);
             References.i.spellZone.PlaySpell(References.i.cardList.GetCardData(playSpellMessage), playSpellMessage.targets, playSpellMessage.windup, playSpellMessage.slot);
+
+            if (References.i.mouse.tutorialMode) {
+                if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.PlaySpell) {
+                    TutorialManager.tutorialManagerInstance.NextTutorialState();
+                }
+            }
         }
+
+
     }
 
     public void TriggerSpell(TriggerSpellMessage triggerSpellMessage)
