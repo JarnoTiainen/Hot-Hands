@@ -6,6 +6,4 @@ public class SoundtrackLibrary : MonoBehaviour
 {
     public Soundtrack mainMenu;
     public Soundtrack inGame;
-    public Soundtrack resultScreen;
-    public Soundtrack defaultSoundtrack;
 }

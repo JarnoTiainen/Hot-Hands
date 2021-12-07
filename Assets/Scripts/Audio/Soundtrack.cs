@@ -39,7 +39,7 @@ public class Soundtrack
     [ShowIf("showSettings")]
     [EnableIf("editSettings")]
     [SerializeField]
-    private bool waitToPlay = true;
+    private bool waitToPlay = false;
 
     [ShowIf("showSettings")]
     [EnableIf("editSettings")]
@@ -49,7 +49,7 @@ public class Soundtrack
     [ShowIf("showSettings")]
     [EnableIf("editSettings")]
     [SerializeField]
-    private bool useDefault = true;
+    private bool useDefault = false;
 
     [DisableIf("useDefault")]
     [ShowIf("showSettings")]
@@ -83,16 +83,13 @@ public class Soundtrack
         switch (soundtrackType)
         {
             case SoundtrackManager.SoundtrackType.Menu:
-                musicList = SoundtrackManager.instance.menuSoundtrack;
+                musicList = SoundtrackManager.Instance.menuSoundtrack;
                 break;
             case SoundtrackManager.SoundtrackType.InGame:
-                musicList = SoundtrackManager.instance.inGameSoundtrack;
-                break;
-            case SoundtrackManager.SoundtrackType.ResultScreen:
-                musicList = SoundtrackManager.instance.resultScreenSoundtrack;
+                musicList = SoundtrackManager.Instance.inGameSoundtrack;
                 break;
             default:
-                musicList = SoundtrackManager.instance.menuSoundtrack;
+                musicList = SoundtrackManager.Instance.menuSoundtrack;
                 break;
         }
 

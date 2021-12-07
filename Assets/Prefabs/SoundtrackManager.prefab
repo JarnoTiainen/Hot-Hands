@@ -51,16 +51,12 @@ MonoBehaviour:
   mainMenuFadeOut: 3
   inGameFadeIn: 4
   inGameFadeOut: 3
-  resultScreenFadeIn: 4
-  resultScreenFadeOut: 2
   defaultAudioSource: {fileID: 8141048939576357606}
   menuSoundtrack:
   - {fileID: 11400000, guid: a769432db0a3fd44e8b04f858242a993, type: 2}
   - {fileID: 11400000, guid: 81ad148391841a24ca2fa58dcae4fd64, type: 2}
   inGameSoundtrack:
   - {fileID: 11400000, guid: 0ded0eba931060f43a5004e52ad42488, type: 2}
-  resultScreenSoundtrack:
-  - {fileID: 11400000, guid: 899ce18cf9df6af4a837e1da92b967fb, type: 2}
 --- !u!82 &8141048939576357606
 AudioSource:
   m_ObjectHideFlags: 0
@@ -175,9 +171,9 @@ MonoBehaviour:
     showSettings: 0
     editSettings: 0
     _soundtrackBase: {fileID: 11400000, guid: 81ad148391841a24ca2fa58dcae4fd64, type: 2}
-    waitToPlay: 1
+    waitToPlay: 0
     loop: 1
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}
   inGame:
     soundtrackType: 0
@@ -185,27 +181,7 @@ MonoBehaviour:
     showSettings: 0
     editSettings: 0
     _soundtrackBase: {fileID: 11400000, guid: a769432db0a3fd44e8b04f858242a993, type: 2}
-    waitToPlay: 1
+    waitToPlay: 0
     loop: 1
-    useDefault: 1
-    audiosource: {fileID: 0}
-  resultScreen:
-    soundtrackType: 0
-    soundtrackToPlay: {fileID: 11400000, guid: a769432db0a3fd44e8b04f858242a993, type: 2}
-    showSettings: 0
-    editSettings: 0
-    _soundtrackBase: {fileID: 11400000, guid: a769432db0a3fd44e8b04f858242a993, type: 2}
-    waitToPlay: 1
-    loop: 1
-    useDefault: 1
-    audiosource: {fileID: 0}
-  defaultSoundtrack:
-    soundtrackType: 1
-    soundtrackToPlay: {fileID: 11400000, guid: 0ded0eba931060f43a5004e52ad42488, type: 2}
-    showSettings: 0
-    editSettings: 0
-    _soundtrackBase: {fileID: 11400000, guid: 0ded0eba931060f43a5004e52ad42488, type: 2}
-    waitToPlay: 1
-    loop: 1
-    useDefault: 1
+    useDefault: 0
     audiosource: {fileID: 0}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 using TMPro;
 using Sirenix.OdinInspector;
 
@@ -34,6 +35,8 @@ public class MatchResultScript : MonoBehaviour
         escMenuManager.gameObject.SetActive(false);
         RayCaster.Instance.eventsOn = false;
         StartCoroutine(DimAnimation(winner));
+        StartCoroutine(FadeMixerGroup.StartFade(SoundtrackManager.masterMixer, "inGameMusicVol", 1f, 0.0001f));
+        StartCoroutine(FadeMixerGroup.DestroySoundtrack(GameObject.Find("InGameSoundtrackPlayer"), 1f));
     }
 
     private IEnumerator DimAnimation(bool winner)
