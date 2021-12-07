@@ -101,7 +101,11 @@ public class MainMenu : MonoBehaviour
         MainMenuButtonsSetActive(false);
         WebSocketService.JoinGame(soloPlayEnabled);
         Debug.Log("Play");
-        if (soloPlayEnabled) LoadScene(1);
+        if (soloPlayEnabled)
+        {
+            GameManager.Instance.ResetPlayerStats();
+            LoadScene(1);
+        }
         else searchingGame.SetActive(true);
     }
 

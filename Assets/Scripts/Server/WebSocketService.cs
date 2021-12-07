@@ -160,6 +160,7 @@ public class WebSocketService : MonoBehaviour
                         }
                         
                         GetPlayerNumber();
+                        gameManager.ResetPlayerStats();
                         //References.i.yourDeckObj.GetComponent<Deck>().SendDeckData();
                     }
                     break;

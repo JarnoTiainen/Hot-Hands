@@ -32,6 +32,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Dictionary<string, GameObject> inGameCards = new Dictionary<string, GameObject>();
 
+
+    public void ResetPlayerStats()
+    {
+        playerStats = new PlayerStats(playerStartHealth);
+        enemyPlayerStats = new PlayerStats(playerStartHealth);
+    }
+
     public void EndGame(int player)
     {
         if(IsYou(player))
