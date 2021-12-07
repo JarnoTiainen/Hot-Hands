@@ -66,8 +66,7 @@ public class AttackEventHandler : MonoBehaviour
             attackingCard.GetComponent<InGameCard>().ToggleAttackBurnEffect(false);
         }
 
-        
-
+      
     }
 
     public void StartAttackEvent(bool wasYourAttack, CardPowersMessage attacker, int playerTakenDamage, float attackCD)
@@ -88,6 +87,7 @@ public class AttackEventHandler : MonoBehaviour
             attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
             References.i.opponentMonsterZone.GetCardWithSeed(attacker.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
         }
+
         //TODO
         if (References.i.mouse.tutorialMode) {
             if (!TutorialManager.tutorialManagerInstance.firstAttack) {
@@ -95,6 +95,8 @@ public class AttackEventHandler : MonoBehaviour
                 TutorialManager.tutorialManagerInstance.NextTutorialState();
             }
         }
+
+
     }
 
     public void SpawnImpactEffect(Vector3 pos)
@@ -104,7 +106,7 @@ public class AttackEventHandler : MonoBehaviour
             Instantiate(impactPrefab, pos, Quaternion.identity);
         } else {
             //TODO: change this
-            if(!TutorialManager.tutorialManagerInstance.firstAttack) {
+            if(TutorialManager.tutorialManagerInstance.firstAttack) {
                 Debug.Log("Spawning effect");
                 Instantiate(impactPrefab, pos, Quaternion.identity);
             
@@ -120,14 +122,13 @@ public class AttackEventHandler : MonoBehaviour
             if (!TutorialManager.tutorialManagerInstance.firstAttack) {
                 Debug.Log("scaling timwe");
                 Time.timeScale = 0f;
+                TutorialManager.tutorialManagerInstance.NextTutorialState();
                 StartCoroutine(StartDamageEventTutorial(player, attacker, target));
                 return false;
             }
             
         }
-        
-        
-        
+ 
 
         bool attackerDied = false;
         if (target == References.i.yourPlayerTarget || target == References.i.enemyPlayerTarget)

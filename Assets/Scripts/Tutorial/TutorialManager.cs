@@ -46,6 +46,8 @@ public class TutorialManager : MonoBehaviour
         Dialogue3,
         CardAttack,
         Dialogue4,
+        AttackValues,
+        Dialogue5,
         SpellCard,
         Damage
     }
@@ -58,6 +60,24 @@ public class TutorialManager : MonoBehaviour
     public void NextTutorialState()
     {
         tutorialState++;
+        switch(tutorialState) {
+            case TutorialState.BurnCard:
+                BurnState();
+                return;
+            case TutorialState.Dialogue2:
+                BurnState();
+                return;
+            case TutorialState.AttackValues:
+                AttackValuesState();
+                return;
+            case TutorialState.Dialogue5:
+                AttackValuesState();
+                return;
+            default:
+                return;
+        }
+            
+                
     }
 
     public void SwitchState(TutorialState newState)
@@ -106,14 +126,9 @@ public class TutorialManager : MonoBehaviour
             skipBar.fillAmount = 0;
         }
 
+        //TODO: move these to nexttutorialstate
         if (tutorialState == TutorialState.BurnCard && !burnignAllowed) {
             burnignAllowed = true;
-            BurnState();
-        }
-
-        if (tutorialState == TutorialState.Dialogue2 && !doOnce) {
-            BurnState();
-            doOnce = true;
         }
 
         if (tutorialState == TutorialState.CardPlay && !summoningAllowed) {
@@ -133,6 +148,12 @@ public class TutorialManager : MonoBehaviour
         GameObject burnCard = GameManager.Instance.GetCardFromInGameCards("000000018");
         burnCard.GetComponentsInChildren<HighLightController>()[2].ToggleHighlightAnimation();
         References.i.yourBonfire.GetComponentInChildren<HighLightController>().ToggleHighlightAnimation();
+    }
+
+    private void AttackValuesState()
+    {
+        GameObject ownCard = GameManager.Instance.GetCardFromInGameCards("000000019");
+        ownCard.GetComponentsInChildren<HighLightController>()[0].ToggleHighlightAnimation();
     }
 
     public CardPowersMessage[] GetAttackTarget(CardData data, bool isYourAttack)

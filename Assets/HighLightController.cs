@@ -27,7 +27,7 @@ public class HighLightController : MonoBehaviour
     {
         if(animating)
         {
-            time += speed * Time.deltaTime;
+            time += speed * Time.unscaledDeltaTime;
             meshRenderer.material.SetFloat("_FadeInStep", time);
 
             if(time >= 1)
@@ -37,7 +37,7 @@ public class HighLightController : MonoBehaviour
         }
         else if(animatingBack)
         {
-            time -= speed * Time.deltaTime;
+            time -= speed * Time.unscaledDeltaTime;
             meshRenderer.material.SetFloat("_FadeInStep", time);
 
             if (time < 0)

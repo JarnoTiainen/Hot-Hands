@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
 
-[Serializable] [CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue")]
+[Serializable]
 public class Dialogue : MonoBehaviour
 {
     public string speaker_name;

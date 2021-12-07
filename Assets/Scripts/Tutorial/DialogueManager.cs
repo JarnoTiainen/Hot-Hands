@@ -14,7 +14,6 @@ public class DialogueManager : MonoBehaviour
     public List<HighLightController> highLightControllers;
     private TutorialManager tutorialManager;
     private Queue<string> sentences;
-    private int effectCounter = 0;
     private bool startBool = false;
 
 
@@ -56,7 +55,6 @@ public class DialogueManager : MonoBehaviour
                     string sentence = sentences.Dequeue();
                     if (sentence == "") {
                         EndDialogue();
-                        DialogueTrigger();
                         tutorialManager.NextTutorialState();
 
                     } else {
@@ -69,15 +67,6 @@ public class DialogueManager : MonoBehaviour
         }
         
 
-    }
-
-    public void DialogueTrigger()
-    {
-        //if (effectCounter < 2) {
-        //    highLightControllers[effectCounter].ToggleHighlightAnimation();
-        //    effectCounter++;
-        //}
-       
     }
 
     private void EndDialogue()
