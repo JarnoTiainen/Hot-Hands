@@ -16,6 +16,7 @@ MonoBehaviour:
   cardName: Rat King
   cost: 5
   value: 3
+  legendary: 0
   cardType: 1
   spellTags: 
   monsterTags: 
@@ -28,4 +29,7 @@ MonoBehaviour:
     trigger: 1
     weight: 2
     targeting: 0
+    targetType: 0
     buffType: 1
+    buffVanishType: 0
+    hidden: 0

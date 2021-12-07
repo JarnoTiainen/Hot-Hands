@@ -16,6 +16,7 @@ MonoBehaviour:
   cardName: Piggy Banker
   cost: 10
   value: 1
+  legendary: 0
   cardType: 1
   spellTags: 
   monsterTags: 
@@ -28,6 +29,7 @@ MonoBehaviour:
     trigger: 1
     weight: 10
     targeting: 0
+    targetType: 0
     buffType: 0
     buffVanishType: 0
     hidden: 0

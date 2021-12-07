@@ -13,105 +13,113 @@ MonoBehaviour:
   m_Name: Card List
   m_EditorClassIdentifier: 
   allCards:
-  - name: Arogyl the Son of Mor'goth
+  - name: Acid Spitter
+    card: {fileID: 11400000, guid: 720b5d97f848576428f77b51d2b075af, type: 2}
+  - name: Arogyl
     card: {fileID: 11400000, guid: a39e18548f706e84dba0f87ec7017baa, type: 2}
+  - name: Avian Horror
+    card: {fileID: 11400000, guid: bbc1e997e13a9f341b2cfa689e76a256, type: 2}
   - name: Brother Felt
     card: {fileID: 11400000, guid: 26eee90c558004d4e94b3416033d7ef2, type: 2}
   - name: Brother Wright
     card: {fileID: 11400000, guid: 840992e74c22e334fbbe4f73d5cac532, type: 2}
-  - name: Dragon Whelp
-    card: {fileID: 11400000, guid: d1e2bbe766bed76469b95bcc6eda80b2, type: 2}
-  - name: Gray Rat
-    card: {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
-  - name: Herald of Light
-    card: {fileID: 11400000, guid: 341a6e4bdaffe3d4cbbbb8ffe438bbca, type: 2}
-  - name: Soot Hound
-    card: {fileID: 11400000, guid: ffce4c5f022b5f248a7fa1b313cd3351, type: 2}
-  - name: Walking Dead
-    card: {fileID: 11400000, guid: 39be313319a28b649bc4b8ab748e5263, type: 2}
-  - name: Whelp Slayer
-    card: {fileID: 11400000, guid: 482f37e5f307701439730da2bfb9b384, type: 2}
-  - name: Infesting Labrat
-    card: {fileID: 11400000, guid: 7709c982bed85fc41975e20d4de4da8d, type: 2}
-  - name: Turncoat
-    card: {fileID: 11400000, guid: 3b168982305e4f54a8257f979e9b483d, type: 2}
-  - name: War Bard
-    card: {fileID: 11400000, guid: 8407615154467e14c94beec0c66b8627, type: 2}
-  - name: Rat King
-    card: {fileID: 11400000, guid: 4dfa973cdd1caca44ae6e7792d781b0d, type: 2}
-  - name: Essence Siphoner
-    card: {fileID: 11400000, guid: bd7a01f09c88a774e821b5a9fd75ecf3, type: 2}
-  - name: Scorch
-    card: {fileID: 11400000, guid: b5c3ee5c867e1084dae6c84fa1ea32ac, type: 2}
-  - name: Fireball
-    card: {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
-  - name: Deny
-    card: {fileID: 11400000, guid: e365b4d1ae039b748a6ec018920e5336, type: 2}
-  - name: HookHands Messenger
-    card: {fileID: 11400000, guid: 51a84270decf4c8408be9d4e0b5bab87, type: 2}
-  - name: Daelar the Dragon Raider
-    card: {fileID: 11400000, guid: cf72206ba0ac5ad44893fc845e1e6a38, type: 2}
-  - name: Avian Horror
-    card: {fileID: 11400000, guid: bbc1e997e13a9f341b2cfa689e76a256, type: 2}
-  - name: Dragon Priest
-    card: {fileID: 11400000, guid: 2d5fc0897578a0b40b196a69ad0d8e40, type: 2}
-  - name: N'Gthur Cultist
-    card: {fileID: 11400000, guid: bff4922eda3b78f4786a5e7b1cac62f2, type: 2}
-  - name: Piggy Banker
-    card: {fileID: 11400000, guid: 2ab115fc55cc70247a3818326c133756, type: 2}
-  - name: Rat Goliath
-    card: {fileID: 11400000, guid: 0b81415100ee36b4ababe6cf7d4cce4c, type: 2}
-  - name: Stone Golem
-    card: {fileID: 11400000, guid: 62ee803afdae33e438c72e196932e47a, type: 2}
-  - name: Scholar of Magics
-    card: {fileID: 11400000, guid: e29ae89b25a09134190cc742e3eaf523, type: 2}
-  - name: Golem Seeds
-    card: {fileID: 11400000, guid: 91565aed256a987439739907e576f8ff, type: 2}
-  - name: Stone Carving
-    card: {fileID: 11400000, guid: 9b886afbbdcee434587341e3f3cff4bb, type: 2}
-  - name: Crystallize
-    card: {fileID: 11400000, guid: d83b7027c0a5dfe468a0953468303ab6, type: 2}
-  - name: Urn of Greed
-    card: {fileID: 11400000, guid: 6959953d022651045a68f3960fa5fd41, type: 2}
-  - name: Purgatory
-    card: {fileID: 11400000, guid: 5ba0a44a80879ae4eb9407eb95704b30, type: 2}
-  - name: Healing Hands
-    card: {fileID: 11400000, guid: bf881e2a06203294da9697ff35edf9ac, type: 2}
-  - name: Dragon Tyrant
-    card: {fileID: 11400000, guid: 2b8725873fce4c24681b0ddb985f703b, type: 2}
-  - name: Living Shadow
-    card: {fileID: 11400000, guid: 9c927ba5bb4309d4ba454e126b8d130a, type: 2}
-  - name: Divine Deluge
-    card: {fileID: 11400000, guid: 151c5d430dba9664bbac4c8e958827ad, type: 2}
-  - name: Hundred Dragon
-    card: {fileID: 11400000, guid: 78012dc67a41c1340a85687b411db975, type: 2}
   - name: Cerberus
     card: {fileID: 11400000, guid: e955f3fa8f3542a4796e1835ca5c2bd9, type: 2}
-  - name: Lich
-    card: {fileID: 11400000, guid: bf82a43e7dc843a4b805a25de6f96c92, type: 2}
-  - name: Priestess of Light
-    card: {fileID: 11400000, guid: 83f57229e89ad0d469409a610254abe2, type: 2}
-  - name: HookHands Sticky Fingers
-    card: {fileID: 11400000, guid: af6a5a0e8a02889428f93d864ee01239, type: 2}
-  - name: Zap
-    card: {fileID: 11400000, guid: 051100026fa696b4889cb0b8c41e8a3e, type: 2}
-  - name: Silence
-    card: {fileID: 11400000, guid: f4943065c00a21042ac8b7e92026363c, type: 2}
-  - name: Armor Up
-    card: {fileID: 11400000, guid: b3b8077d08d3a904ab5a52095384e5bc, type: 2}
-  - name: Wildforest Archer
-    card: {fileID: 11400000, guid: b1441ddbe1db7da45af44a3191fa8dc4, type: 2}
-  - name: Phoenix
-    card: {fileID: 11400000, guid: af72ead31ed218b4fa72f79fc3ffe74d, type: 2}
-  - name: Acid Spitter
-    card: {fileID: 11400000, guid: 720b5d97f848576428f77b51d2b075af, type: 2}
-  - name: Dragon's Blessing
-    card: {fileID: 11400000, guid: 21d425e29cbb4a4438ece66928020489, type: 2}
-  - name: Scorchmaw
-    card: {fileID: 11400000, guid: 58aea4fea223a7140b99fd8e519ead84, type: 2}
+  - name: Dragon Rider
+    card: {fileID: 11400000, guid: cf72206ba0ac5ad44893fc845e1e6a38, type: 2}
+  - name: Dragon Priest
+    card: {fileID: 11400000, guid: 2d5fc0897578a0b40b196a69ad0d8e40, type: 2}
+  - name: Dragon Tyrant
+    card: {fileID: 11400000, guid: 2b8725873fce4c24681b0ddb985f703b, type: 2}
+  - name: Dragon Whelp
+    card: {fileID: 11400000, guid: d1e2bbe766bed76469b95bcc6eda80b2, type: 2}
+  - name: Essence Thief
+    card: {fileID: 11400000, guid: bd7a01f09c88a774e821b5a9fd75ecf3, type: 2}
+  - name: Gray Rat
+    card: {fileID: 11400000, guid: bcff9ac7751caea45ba39d0bbc742b24, type: 2}
+  - name: Light's Herald
+    card: {fileID: 11400000, guid: 341a6e4bdaffe3d4cbbbb8ffe438bbca, type: 2}
   - name: HH Banker Barin
     card: {fileID: 11400000, guid: a602231bfdf15c0418d3e11ea4cc0650, type: 2}
+  - name: HH Messenger
+    card: {fileID: 11400000, guid: 51a84270decf4c8408be9d4e0b5bab87, type: 2}
+  - name: HH Initiate
+    card: {fileID: 11400000, guid: af6a5a0e8a02889428f93d864ee01239, type: 2}
+  - name: Hundred Dragon
+    card: {fileID: 11400000, guid: 78012dc67a41c1340a85687b411db975, type: 2}
+  - name: Infesting Labrat
+    card: {fileID: 11400000, guid: 7709c982bed85fc41975e20d4de4da8d, type: 2}
+  - name: Lich
+    card: {fileID: 11400000, guid: bf82a43e7dc843a4b805a25de6f96c92, type: 2}
+  - name: Living Shadow
+    card: {fileID: 11400000, guid: 9c927ba5bb4309d4ba454e126b8d130a, type: 2}
+  - name: N'Gthur Cultist
+    card: {fileID: 11400000, guid: bff4922eda3b78f4786a5e7b1cac62f2, type: 2}
+  - name: Phoenix
+    card: {fileID: 11400000, guid: af72ead31ed218b4fa72f79fc3ffe74d, type: 2}
+  - name: Piggy Banker
+    card: {fileID: 11400000, guid: 2ab115fc55cc70247a3818326c133756, type: 2}
+  - name: Priestess of Light
+    card: {fileID: 11400000, guid: 83f57229e89ad0d469409a610254abe2, type: 2}
+  - name: Rat Goliath
+    card: {fileID: 11400000, guid: 0b81415100ee36b4ababe6cf7d4cce4c, type: 2}
+  - name: Rat King
+    card: {fileID: 11400000, guid: 4dfa973cdd1caca44ae6e7792d781b0d, type: 2}
+  - name: Scholar of Magics
+    card: {fileID: 11400000, guid: e29ae89b25a09134190cc742e3eaf523, type: 2}
+  - name: Scorchmaw
+    card: {fileID: 11400000, guid: 58aea4fea223a7140b99fd8e519ead84, type: 2}
+  - name: Soot Hound
+    card: {fileID: 11400000, guid: ffce4c5f022b5f248a7fa1b313cd3351, type: 2}
+  - name: Stone Golem
+    card: {fileID: 11400000, guid: 62ee803afdae33e438c72e196932e47a, type: 2}
+  - name: Turncoat
+    card: {fileID: 11400000, guid: 3b168982305e4f54a8257f979e9b483d, type: 2}
+  - name: Walking Dead
+    card: {fileID: 11400000, guid: 39be313319a28b649bc4b8ab748e5263, type: 2}
+  - name: War Bard
+    card: {fileID: 11400000, guid: 8407615154467e14c94beec0c66b8627, type: 2}
+  - name: Whelp Slayer
+    card: {fileID: 11400000, guid: 482f37e5f307701439730da2bfb9b384, type: 2}
+  - name: Wildforest Archer
+    card: {fileID: 11400000, guid: b1441ddbe1db7da45af44a3191fa8dc4, type: 2}
+  - name: Armor Up
+    card: {fileID: 11400000, guid: b3b8077d08d3a904ab5a52095384e5bc, type: 2}
   - name: Blood Money
     card: {fileID: 11400000, guid: a8632b39d3d2fa048bb75f4cb24fcf0b, type: 2}
+  - name: Crystallize
+    card: {fileID: 11400000, guid: d83b7027c0a5dfe468a0953468303ab6, type: 2}
+  - name: Deny
+    card: {fileID: 11400000, guid: e365b4d1ae039b748a6ec018920e5336, type: 2}
+  - name: Divine Deluge
+    card: {fileID: 11400000, guid: 151c5d430dba9664bbac4c8e958827ad, type: 2}
+  - name: Dragon's Blessing
+    card: {fileID: 11400000, guid: 21d425e29cbb4a4438ece66928020489, type: 2}
+  - name: Fireball
+    card: {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
+  - name: Golem Seeds
+    card: {fileID: 11400000, guid: 91565aed256a987439739907e576f8ff, type: 2}
+  - name: Healing Hands
+    card: {fileID: 11400000, guid: bf881e2a06203294da9697ff35edf9ac, type: 2}
+  - name: Hefty Bribe
+    card: {fileID: 11400000, guid: caadb8c6bc55ac94d9ed4fea6023288b, type: 2}
+  - name: Mystery Box
+    card: {fileID: 11400000, guid: d1433eae9792f514bb69e7d6115b440d, type: 2}
+  - name: Purgatory
+    card: {fileID: 11400000, guid: 5ba0a44a80879ae4eb9407eb95704b30, type: 2}
+  - name: Rat Grenade
+    card: {fileID: 11400000, guid: 6501309a38de1354081ac43bb51bc431, type: 2}
+  - name: Ratpack
+    card: {fileID: 11400000, guid: 1a57d99567ac5e94b9b5582aac5c85b3, type: 2}
+  - name: Scorch
+    card: {fileID: 11400000, guid: b5c3ee5c867e1084dae6c84fa1ea32ac, type: 2}
+  - name: Silence
+    card: {fileID: 11400000, guid: f4943065c00a21042ac8b7e92026363c, type: 2}
+  - name: Stone Carving
+    card: {fileID: 11400000, guid: 9b886afbbdcee434587341e3f3cff4bb, type: 2}
+  - name: Urn of Greed
+    card: {fileID: 11400000, guid: 6959953d022651045a68f3960fa5fd41, type: 2}
+  - name: Zap
+    card: {fileID: 11400000, guid: 051100026fa696b4889cb0b8c41e8a3e, type: 2}
   cardList: []
   deck: []

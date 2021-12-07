@@ -16,6 +16,7 @@ MonoBehaviour:
   cardName: Turncoat
   cost: 3
   value: 6
+  legendary: 0
   cardType: 1
   spellTags: 
   monsterTags: 
@@ -28,6 +29,7 @@ MonoBehaviour:
     trigger: 4
     weight: 1
     targeting: 0
+    targetType: 0
     buffType: 0
     buffVanishType: 0
     hidden: 0
