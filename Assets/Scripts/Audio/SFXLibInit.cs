@@ -5,6 +5,6 @@ public class SFXLibInit : MonoBehaviour
 {
     void Start()
     {
-        GameManager.Instance.SetNewSFXLibrary(gameObject);
+        GameManager.Instance.SetNewSFXLibrary(gameObject.GetComponent<SFXLibrary>());
     }
 }

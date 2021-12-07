@@ -9,11 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4268212973007929891}
-  - component: {fileID: 8911773430897866057}
-  - component: {fileID: 4268212973007929900}
-  - component: {fileID: 4268212973007929903}
-  - component: {fileID: 4268212973007929902}
-  - component: {fileID: 8380823620914417151}
+  - component: {fileID: 6004907579093514482}
   m_Layer: 0
   m_Name: SFXLibrary
   m_TagString: Untagged
@@ -35,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8911773430897866057
+--- !u!114 &6004907579093514482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4268212973007929890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 339efcbd834654a40862c02bccbad736, type: 3}
+  m_Script: {fileID: 11500000, guid: cdeff04ea2befb04db0525facd5ff587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buttonHover:
@@ -65,48 +61,6 @@ MonoBehaviour:
     waitToPlay: 0
     useDefault: 0
     audiosource: {fileID: 0}
-  playClick:
-    sfxType: 1
-    sfxToPlay: {fileID: 11400000, guid: 218abad15bb0dc24086a6440844b2113, type: 2}
-    showSettings: 0
-    editSettings: 0
-    _sfxBase: {fileID: 11400000, guid: 218abad15bb0dc24086a6440844b2113, type: 2}
-    waitToPlay: 0
-    useDefault: 0
-    audiosource: {fileID: 0}
---- !u!114 &4268212973007929900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4268212973007929890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76f45f330cc780d43a11d01b806a6bda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  burnSFX:
-    sfxType: 2
-    sfxToPlay: {fileID: 11400000, guid: af90e02691e21704a9a8c121692732fc, type: 2}
-    showSettings: 0
-    editSettings: 0
-    _sfxBase: {fileID: 11400000, guid: af90e02691e21704a9a8c121692732fc, type: 2}
-    waitToPlay: 0
-    useDefault: 0
-    audiosource: {fileID: 0}
---- !u!114 &4268212973007929903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4268212973007929890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f9bd74f3f3cb4e4f9d995ce408740d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   cardDraw1:
     sfxType: 1
     sfxToPlay: {fileID: 11400000, guid: 70c15c7b631093043b1b114ea1df3135, type: 2}
@@ -134,18 +88,6 @@ MonoBehaviour:
     waitToPlay: 0
     useDefault: 0
     audiosource: {fileID: 0}
---- !u!114 &4268212973007929902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4268212973007929890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c9cbb19bc1a8de4d82d5670d090936f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   cardPlay1:
     sfxType: 1
     sfxToPlay: {fileID: 11400000, guid: 771280f6af8128a4d82fe6c88bdf5c0a, type: 2}
@@ -173,19 +115,16 @@ MonoBehaviour:
     waitToPlay: 0
     useDefault: 0
     audiosource: {fileID: 0}
---- !u!114 &8380823620914417151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4268212973007929890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5a98b5d470b3bf4ca912c5b08af02a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectSFX:
+  burnCard:
+    sfxType: 2
+    sfxToPlay: {fileID: 11400000, guid: af90e02691e21704a9a8c121692732fc, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: af90e02691e21704a9a8c121692732fc, type: 2}
+    waitToPlay: 0
+    useDefault: 0
+    audiosource: {fileID: 0}
+  effectActivation:
     sfxType: 2
     sfxToPlay: {fileID: 11400000, guid: 33b4819be6f0c4342a6e12c00bcd4bea, type: 2}
     showSettings: 0

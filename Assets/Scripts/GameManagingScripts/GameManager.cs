@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     private CardData targettingCardData;
     private GameObject targettingCard;
 
-    private GameObject sfxLibrary;
+    private SFXLibrary sfxLibrary;
 
 
 
@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
         this.playerNumber = playerNumber;
     }
 
-    public void SetNewSFXLibrary(GameObject SFXLibrary)
+    public void SetNewSFXLibrary(SFXLibrary SFXLibrary)
     {
         sfxLibrary = SFXLibrary;
     }
@@ -221,7 +221,7 @@ public class GameManager : MonoBehaviour
     public void PlayerBurnCard(GameObject card, int player = -1)
     {
         if (player == -1) player = playerNumber;
-        sfxLibrary.GetComponent<BurnSFX>().Play();
+        sfxLibrary.burnCard.PlaySFX();
         
         int value = card.GetComponent<InGameCard>().GetData().value;
         if (player == playerNumber)
@@ -349,7 +349,7 @@ public class GameManager : MonoBehaviour
             }
             
         }
-        sfxLibrary.GetComponent<DrawCardSFX>().Play();
+        sfxLibrary.CardDraw();
     }
 
     public void AddNewCard(AddNewCardMessage addNewCardMessage)
@@ -364,7 +364,7 @@ public class GameManager : MonoBehaviour
         if (IsYou(enchantmentEffect.cardInfo.player)) isYou = true;
         References.i.cardEnchantmentEffectManager.PlayEnchantmentEffect((Enchantment.Trigger)enchantmentEffect.trigger, enchantmentEffect.seed, isYou);
         References.i.cardEnchantmentEffectManager.DisplayCardEffectSource(References.i.cardList.GetCardData(enchantmentEffect.cardInfo));
-		sfxLibrary.transform.GetComponent<EffectActivationSFX>().Play();
+		sfxLibrary.effectActivation.PlaySFX();
     }
 
 
@@ -561,7 +561,7 @@ public class GameManager : MonoBehaviour
             EnemyHand.Instance.RemoveCard(data.seed);
             References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
         }
-        sfxLibrary.GetComponent<PlayCardSFX>().Play();
+        sfxLibrary.CardPlay();
     }
 
     public void PrePlayCard(CardData data, bool hasTargetAbility = false)
