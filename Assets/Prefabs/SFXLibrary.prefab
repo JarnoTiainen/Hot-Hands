@@ -64,7 +64,7 @@ MonoBehaviour:
   notificationPositive:
     sfxType: 0
     sfxToPlay: {fileID: 11400000, guid: 783dccdc8b332c34ab5386c3bc107a4d, type: 2}
-    showSettings: 0
+    showSettings: 1
     editSettings: 0
     _sfxBase: {fileID: 11400000, guid: 783dccdc8b332c34ab5386c3bc107a4d, type: 2}
     waitToPlay: 0
@@ -166,6 +166,24 @@ MonoBehaviour:
     showSettings: 0
     editSettings: 0
     _sfxBase: {fileID: 11400000, guid: 297d17956fdb91b4d9d395da2c18f8b5, type: 2}
+    waitToPlay: 0
+    useDefault: 0
+    audiosource: {fileID: 0}
+  cardBuff:
+    sfxType: 2
+    sfxToPlay: {fileID: 11400000, guid: 43747140ac4ded847813ae7e1ccfd610, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 43747140ac4ded847813ae7e1ccfd610, type: 2}
+    waitToPlay: 0
+    useDefault: 0
+    audiosource: {fileID: 0}
+  cardDebuff:
+    sfxType: 2
+    sfxToPlay: {fileID: 0}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 0}
     waitToPlay: 0
     useDefault: 0
     audiosource: {fileID: 0}

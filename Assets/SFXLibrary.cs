@@ -21,16 +21,21 @@ public class SFXLibrary : MonoBehaviour
     public SFX cardPlay1;
     public SFX cardPlay2;
     public SFX cardPlay3;
-    public SFX burnCard;
 
     // Effects
+    public SFX burnCard;
+    public SFX cardDestroyed;
     public SFX effectActivation;
     public SFX hit;
+    public SFX cardBuff;
+    public SFX cardDebuff;
+    public SFX cardHeal;
 
     // Other
     public SFX victory;
     public SFX defeat;
     public SFX countdown;
+    public SFX spellChainCountdown;
 
     private void Awake()
     {

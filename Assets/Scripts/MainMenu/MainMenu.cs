@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using Sirenix.OdinInspector;
 
 public class MainMenu : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject loginScreen;
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject popupNotification;
-    [SerializeField] private GameObject searchingGame;
+    [SerializeField] private SearchingGamePopupScript searchingGame;
     [SerializeField] private TextMeshProUGUI popupNotificationText;
     [SerializeField] private float popupDuration = 2.5f;
     [SerializeField] private float popupMovementDuration = 0.3f;
@@ -79,9 +80,8 @@ public class MainMenu : MonoBehaviour
 
     public void SearchingGamePanelSetActive(bool value)
     {
-        searchingGame.SetActive(value);
+        searchingGame.gameObject.SetActive(value);
         MainMenuButtonsSetActive(!value);
-
     }
 
     public void SetCameraMainMenu()
@@ -106,12 +106,11 @@ public class MainMenu : MonoBehaviour
             GameManager.Instance.ResetPlayerStats();
             LoadScene(1);
         }
-        else searchingGame.SetActive(true);
+        else searchingGame.gameObject.SetActive(true);
     }
 
     public void GameFound(int scene)
     {
-        searchingGame.SetActive(false);
         LoadScene(scene);
         Debug.Log("Game Found");
     }
@@ -120,6 +119,11 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator LoadAsynchronously(int scene)
     {
+        searchingGame.StopAllCoroutines();
+        searchingGame.statusText.text = "Opponent found!";
+        SFXLibrary.Instance.matchFound.PlaySFX();
+        yield return new WaitForSeconds(1.5f);
+        searchingGame.gameObject.SetActive(false);
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(scene);
         loadingScreen.SetActive(true);
 

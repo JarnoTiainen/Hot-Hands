@@ -5,6 +5,7 @@ using TMPro;
 
 public class SearchingGamePopupScript : MonoBehaviour
 {
+    public TextMeshProUGUI statusText;
     [SerializeField] private TextMeshProUGUI timeText;
     private bool searching = true;
     private int seconds = 0;
@@ -12,6 +13,10 @@ public class SearchingGamePopupScript : MonoBehaviour
 
     private void OnEnable()
     {
+        searching = true;
+        seconds = 0;
+        minutes = 0;
+        statusText.text = "Searching for opponent";
         timeText.text = "00:00";
         StartCoroutine(Timer());
     }

@@ -3505,7 +3505,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1149905017}
-  - {fileID: 1864592116}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3633,7 +3632,7 @@ GameObject:
   - component: {fileID: 292683307}
   - component: {fileID: 292683306}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: StatusText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9135,63 +9134,6 @@ RectTransform:
   m_AnchoredPosition: {x: -250, y: -50}
   m_SizeDelta: {x: 280, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &696089369
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 290201049}
-    m_Modifications:
-    - target: {fileID: 4268212973007929890, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
-      propertyPath: m_Name
-      value: SFXLibrary
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1353.3273
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -728.6875
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 615.28235
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
 --- !u!1 &703834072
 GameObject:
   m_ObjectHideFlags: 0
@@ -15055,13 +14997,13 @@ MonoBehaviour:
   loginScreen: {fileID: 1971603280}
   loadingScreen: {fileID: 1256247235}
   popupNotification: {fileID: 261637963}
-  searchingGame: {fileID: 1377643133}
+  searchingGame: {fileID: 1377643135}
   popupNotificationText: {fileID: 748368254}
   popupDuration: 2.5
   popupMovementDuration: 0.3
   progressSlider: {fileID: 198881204}
   progressText: {fileID: 394806715}
-  soloPlayEnabled: 1
+  soloPlayEnabled: 0
   mainCamera: {fileID: 774524565}
   mainCamMenuPos: {x: 0.1, y: -0.05, z: -0.23}
   mainCamMenuRotation: {x: -0.08818042, y: 0.041159213, z: -0.022252142, w: 0.9950051}
@@ -15859,6 +15801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e02238179d0ef34eba09b8ae5d4a72e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statusText: {fileID: 292683306}
   timeText: {fileID: 2060006727}
 --- !u!114 &1377643136
 MonoBehaviour:
@@ -21438,11 +21381,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1864592116 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4268212973007929891, guid: cf9164fe0bcd79040bcf1bf77e24b6a2, type: 3}
-  m_PrefabInstance: {fileID: 696089369}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1872758439
 GameObject:
   m_ObjectHideFlags: 0
@@ -22458,7 +22396,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: uiSFX.Array.size
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: uiSFX.Array.data[1]
@@ -22497,17 +22435,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: uiSFX.Array.data[10]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: ambientSFX.Array.size
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: effectsSFX.Array.size
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: ambientSFX.Array.data[7]
       value: 
-      objectReference: {fileID: 11400000, guid: 79e30a79bc97f3144bb188a3e25f1a7a, type: 2}
+      objectReference: {fileID: 11400000, guid: 1dcd3c3c9ef759446a42151a772b36f4, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: ambientSFX.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 913147e7e0817b94fa7bf9f74509c198, type: 2}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: effectsSFX.Array.data[1]
       value: 
@@ -22520,6 +22466,10 @@ PrefabInstance:
       propertyPath: effectsSFX.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: 297d17956fdb91b4d9d395da2c18f8b5, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: effectsSFX.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1dcd3c3c9ef759446a42151a772b36f4, type: 2}
     - target: {fileID: 6413452686842694931, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -22568,6 +22518,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SFXManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8873941290810643492, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: cardDestroyed.sfxType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8873941290810643492, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: cardDestroyed._sfxBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 1dcd3c3c9ef759446a42151a772b36f4, type: 2}
+    - target: {fileID: 8873941290810643492, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: cardDestroyed.sfxToPlay
+      value: 
+      objectReference: {fileID: 11400000, guid: 1dcd3c3c9ef759446a42151a772b36f4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
 --- !u!1001 &1944376225
