@@ -57,6 +57,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private float currentAttackCoolDown;
     [SerializeField] private bool attackOnCD;
     [SerializeField] private bool preAttackOnCD;
+    [SerializeField] private float timeOnPreAttack;
     public bool showTooltips;
     public int owner;
     private bool doOnce;
@@ -72,6 +73,9 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private GameObject drawCDElement;
 
     public GameObject deckCardCountElement;
+
+    private float timeAsUnhandledHandCard = 0;
+    private bool unhandled;
 
     public void SetTempValuesAsValues()
     {
@@ -196,6 +200,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
                 }
 
             }
+            
+
         }
         else if(currentAttackCoolDown <= 0 && attackOnCD)
         {
@@ -213,6 +219,33 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         meshRenderercardBackLow.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
         meshRendererNameZoneLow.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
         meshRendererIconZoneLow.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
+
+        if (unhandled)
+        {
+            timeAsUnhandledHandCard += Time.deltaTime;
+            if (timeAsUnhandledHandCard > 6) GameManager.Instance.PlayerReturnDrawCard();
+        }
+
+        if(preAttackOnCD && !attackOnCD)
+        {
+            timeOnPreAttack += Time.deltaTime;
+            if(timeOnPreAttack > 6)
+            {
+                preAttackOnCD = false;
+                ToggleAttackBurnEffect(true);
+                timeOnPreAttack = 0;
+            }
+        }
+
+    }
+
+    public void MakeCardUnhandled()
+    {
+        unhandled = true;
+    }
+    public void UnMakeCardUnhandled()
+    {
+        unhandled = false;
     }
 
     /// <summary>
@@ -246,6 +279,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void SetNewCardData(bool isYourCard, CardData cardData)
     {
+        UnMakeCardUnhandled();
         this.cardData = cardData;
         if (name != null) nameText.text = cardData.cardName;
         if (cost != null) cost.text = cardData.cost.ToString();
@@ -313,6 +347,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         {
             if (!attackOnCD && !preAttackOnCD && GameManager.Instance.IsYou(owner))
             {
+                timeOnPreAttack = 0;
                 preAttackOnCD = true;
                 ToggleAttackBurnEffect(false);
                 if (GameManager.Instance.IsYou(owner)) {

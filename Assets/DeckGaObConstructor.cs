@@ -140,6 +140,7 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         deckCards.Remove(topCard);
         topCard.GetComponent<InGameCard>().StopDrawCardReadyEffect();
         topCard.GetComponent<InGameCard>().HideDeckCardCountElement();
+        topCard.GetComponent<InGameCard>().MakeCardUnhandled();
         return topCard;
     }
 
