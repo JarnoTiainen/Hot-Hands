@@ -33,6 +33,7 @@ public class CollectionArrowManager : MonoBehaviour, IOnHoverEnterElement, IOnHo
     public void OnHoverEnter()
     {
         meshRenderer.material.SetInt("_IsHovered", 1);
+        SFXLibrary.Instance.buttonHover.PlaySFX();
     }
 
     public void OnHoverExit()
@@ -44,5 +45,6 @@ public class CollectionArrowManager : MonoBehaviour, IOnHoverEnterElement, IOnHo
     {
         StartAnimation();
         CollectionManager.Instance.ChangePage(buttonValue);
+        SFXLibrary.Instance.buttonClick.PlaySFX();
     }
 }
