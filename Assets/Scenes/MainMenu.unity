@@ -8203,6 +8203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 613585147}
   - component: {fileID: 613585148}
+  - component: {fileID: 613585149}
   m_Layer: 5
   m_Name: Tab
   m_TagString: Untagged
@@ -8292,6 +8293,19 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
+--- !u!114 &613585149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613585146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f197f7dabe05ca549a9614df1538cc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alwaysClickSFX: 1
 --- !u!1 &626734239
 GameObject:
   m_ObjectHideFlags: 0
@@ -22362,6 +22376,10 @@ PrefabInstance:
     - target: {fileID: 6413452686842694932, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: m_Name
       value: SFXManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8873941290810643492, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: spellChainActivation.showSettings
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
