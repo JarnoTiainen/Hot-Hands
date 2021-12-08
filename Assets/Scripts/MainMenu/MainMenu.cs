@@ -40,6 +40,7 @@ public class MainMenu : MonoBehaviour
             loginScreen.SetActive(false);
             ChatManager.Instance.HideChat(false);
             WebSocketService.GetDecks();
+            WebSocketService.LoadChat();
         }
         else
         {

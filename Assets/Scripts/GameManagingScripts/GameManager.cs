@@ -811,6 +811,7 @@ public class GameManager : MonoBehaviour
             case CardDataMessage.BuffType.Damage:
                 yield return null;
                 SFXLibrary.Instance.hit.PlaySFX();
+                Debug.Log("Damage BuffType, hit SFX");
                 break;
             case CardDataMessage.BuffType.StatBuff:
                 yield return new WaitForSeconds(0.2f);
@@ -822,6 +823,7 @@ public class GameManager : MonoBehaviour
                 break;
             default:
                 yield return null;
+                Debug.Log("Default BuffType, hit SFX");
                 SFXLibrary.Instance.hit.PlaySFX();
                 break;
         }

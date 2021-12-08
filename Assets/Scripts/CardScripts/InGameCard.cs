@@ -159,6 +159,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     public void PlayTakeDamageEffect()
     {
         cardTakeDamageManager.PlayEffect();
+        SFXLibrary.Instance.hit.PlaySFX();
+        Debug.Log("TakeDamageEffect, hit SFX");
     }
 
     public void SetNewDescription(string newDescription)
