@@ -768,9 +768,9 @@ public class GameManager : MonoBehaviour
             if (References.i.mouse.tutorialMode) {
                 if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.PlaySpell) {
                     if (!TutorialManager.tutorialManagerInstance.firstSpell) {
+                        Debug.Log("first spell set to true");
                         TutorialManager.tutorialManagerInstance.firstSpell = true;
                     }
-                    TutorialManager.tutorialManagerInstance.NextTutorialState();
                 }
             }
         }

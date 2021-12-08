@@ -32,6 +32,7 @@ public class AIscript : MonoBehaviour
 
     [Button] public void OpponentSummonCard()
     {
+
         StartCoroutine(WaitToSummon());
     }
 
@@ -82,10 +83,9 @@ public class AIscript : MonoBehaviour
         TutorialManager.tutorialManagerInstance.spellCardSeed.Add(enemyCard.GetComponent<InGameCard>().GetCardData().seed);
         playSpellMessage.slot = TutorialManager.tutorialManagerInstance.spellCardSeed.Count - 1;
         GameManager.Instance.PlaySpell(playSpellMessage);
-
+        
 
         LimboCardHolder.Instance.StoreNewCard(enemyCard);
-
 
     }
 

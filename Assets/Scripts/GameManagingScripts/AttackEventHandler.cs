@@ -95,15 +95,7 @@ public class AttackEventHandler : MonoBehaviour
             References.i.opponentMonsterZone.GetCardWithSeed(attacker.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
         }
 
-        //TODO
         if (References.i.mouse.tutorialMode) {
-            //if (References.i.mouse.tutorialMode) {
-            //    if (!TutorialManager.tutorialManagerInstance.firstAttack) {
-            //        Debug.Log("First attack!");
-            //        TutorialManager.tutorialManagerInstance.firstAttack = true;
-            //        TutorialManager.tutorialManagerInstance.NextTutorialState();
-            //    }
-            //}
 
             if (!TutorialManager.tutorialManagerInstance.firstDirectAttack) {
                 if (playerTakenDamage != 0) {

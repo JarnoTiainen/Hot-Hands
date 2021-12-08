@@ -4304,6 +4304,68 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &793334967
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1908398136}
+    m_Modifications:
+    - target: {fileID: 3642209042100701302, guid: 1fc4839ba59fbf94497aabb02e9a0a59, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642209042100701302, guid: 1fc4839ba59fbf94497aabb02e9a0a59, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642209042100701302, guid: 1fc4839ba59fbf94497aabb02e9a0a59, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642209042100701302, guid: 1fc4839ba59fbf94497aabb02e9a0a59, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642209042100701302, guid: 1fc4839ba59fbf94497aabb02e9a0a59, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642209042100701302, guid: 1fc4839ba59fbf94497aabb02e9a0a59, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642209042100701302, guid: 1fc4839ba59fbf94497aabb02e9a0a59, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642209042100701302, guid: 1fc4839ba59fbf94497aabb02e9a0a59, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642209042100701302, guid: 1fc4839ba59fbf94497aabb02e9a0a59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642209042100701302, guid: 1fc4839ba59fbf94497aabb02e9a0a59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642209042100701302, guid: 1fc4839ba59fbf94497aabb02e9a0a59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642209042100701303, guid: 1fc4839ba59fbf94497aabb02e9a0a59, type: 3}
+      propertyPath: m_Name
+      value: MenuCamera
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1fc4839ba59fbf94497aabb02e9a0a59, type: 3}
+--- !u!4 &793334968 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3642209042100701302, guid: 1fc4839ba59fbf94497aabb02e9a0a59, type: 3}
+  m_PrefabInstance: {fileID: 793334967}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &796555355
 GameObject:
   m_ObjectHideFlags: 0
@@ -6663,7 +6725,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3777756338832744626, guid: 94e9f64894bcfee42957b8f06bba223e, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3777756338832744626, guid: 94e9f64894bcfee42957b8f06bba223e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7550,7 +7612,7 @@ RectTransform:
   m_Children:
   - {fileID: 1763003216}
   m_Father: {fileID: 1908398136}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -10877,6 +10939,7 @@ Transform:
   - {fileID: 2035021318}
   - {fileID: 1258863310}
   - {fileID: 710560958}
+  - {fileID: 793334968}
   - {fileID: 1275942436}
   - {fileID: 1398167534}
   m_Father: {fileID: 0}
@@ -12252,6 +12315,7 @@ MonoBehaviour:
   - {fileID: 1822666718}
   - {fileID: 0}
   - {fileID: 0}
+  startBool: 0
 --- !u!114 &3195456240092804555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12288,7 +12352,7 @@ MonoBehaviour:
   - The opponent's cards innermost value becomes the card's attack value.
   - It deals damage to your cards innermost value.
   - 
-  - You can attack the opponent if you click the card on your table...
+  - You can attack the opponent if you click the card on your table.
   - 
   - The card deals damage to the player when the opponents table is empty.
   - Go ahead and pick up  a few more cards from your deck.
@@ -12508,9 +12572,25 @@ PrefabInstance:
       value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 5067975732162356494, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_Color.a
+      value: 0.67058825
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975732162356494, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975732162356494, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975732162356494, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067975732162356494, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 2100000, guid: 2e1522007aa2b854faccf61510160620, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 5067975732162356720, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_UpdateMode
       value: 2
@@ -12526,7 +12606,7 @@ PrefabInstance:
     - target: {fileID: 5067975732274443021, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: 903f0e1783db7854cb5818288b9ae95b, type: 2}
     - target: {fileID: 5067975732274443021, guid: 28c36500920f2154c9abd1a2b17ca8b4, type: 3}
       propertyPath: m_FillAmount
       value: 1

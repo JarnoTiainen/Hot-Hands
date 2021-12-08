@@ -152,14 +152,20 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
 
     public void OnClickElement()
     {
+
         if (TutorialManager.tutorialManagerInstance.drawingAllowed) {
+        
             if(GameManager.Instance.IsYou(owner))
             {
+            
                 //let the player pick a card if the deck is set
                 if (GameManager.Instance.deckSet)
                 {
+                 
                     if (GameManager.Instance.playerStats.playerHandCards < GameManager.Instance.maxHandSize) {
+                     
                         if (cardDrawReady) {
+                        
                             Card drawnCard = cardsQueue.Dequeue();
                             string seed = "0000000" + cards.IndexOf(drawnCard);
 
@@ -170,9 +176,12 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
                             GameManager.Instance.playerStats.playerHandCards++;
 
                             if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.CardDraw || TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.SpellCard) {
+                                Debug.Log("Cards in hand " + GameManager.Instance.playerStats.playerHandCards);
                                 if(GameManager.Instance.playerStats.playerHandCards == 2) {
-                                     Debug.Log("nexstate from deck script");
+                                    Debug.Log("nexstate from deck script");
                                     tutorialManager.NextTutorialState();
+                                    
+                                    
                                 }
                             }
                             

@@ -35,6 +35,7 @@ public class TutorialManager : MonoBehaviour
     public List<string> enemyCardSeeds;
     public List<string> spellCardSeed;
     public AIscript opponentAI;
+    private DialogueManager diManager;
 
     [SerializeField] private TutorialState tutorialState = TutorialState.Introduction;
     public static TutorialManager tutorialManagerInstance { get; private set; }
@@ -61,7 +62,7 @@ public class TutorialManager : MonoBehaviour
         SpellCard,
         Dialogue9,
         PlaySpell,
-
+        Dialogue10,
         Damage
     }
 
@@ -72,18 +73,21 @@ public class TutorialManager : MonoBehaviour
 
     public void NextTutorialState()
     {
+        Debug.Log("NEXT" + (int)tutorialState);
         tutorialState++;
         switch(tutorialState) {
             case TutorialState.CardDraw:
                 drawingAllowed = true;
                 return;
             case TutorialState.Dialogue1:
+                diManager.DialogueTrigger();
                 drawingAllowed = false;
                 return;
             case TutorialState.BurnCard:
                 BurnState();
                 return;
             case TutorialState.Dialogue2:
+                diManager.DialogueTrigger();
                 BurnState();
                 burnignAllowed = false;
                 return;
@@ -91,32 +95,53 @@ public class TutorialManager : MonoBehaviour
                 PlayCardState();
                 return;
             case TutorialState.Dialogue3:
+                diManager.DialogueTrigger();
                 ToggleTime();
                 return;
             case TutorialState.CardAttack:
                 ToggleTime();
                 AttackState();
                 return;
+            case TutorialState.Dialogue4:
+                diManager.DialogueTrigger();
+                return;
             case TutorialState.AttackValues:
                 AttackValuesState();
-                NextTutorialState();
+                return;
+            case TutorialState.Dialogue5:
+                diManager.DialogueTrigger();
                 return;
             case TutorialState.DefenseValues:
                 AttackValuesState();
                 DefenseValuesState();
-                NextTutorialState();
+                return;
+            case TutorialState.Dialogue6:
+                diManager.DialogueTrigger();
                 return;
             case TutorialState.DirectAttack:
-                drawingAllowed = true;
+                ToggleTime();
                 DefenseValuesState();
                 StartCoroutine(DirectCounter());
-                ToggleTime();
                 firstAttack = true;
                 return;
+            case TutorialState.Dialogue7:
+                diManager.DialogueTrigger();
+                return;
+            case TutorialState.Dialogue8:
+                diManager.DialogueTrigger();
+                return;
             case TutorialState.SpellCard:
+                Debug.Log("Spellcard state");
+                drawingAllowed = true;
                 opponentAI.OpponentSummonCard();
                 return;
+            case TutorialState.Dialogue9:
+                diManager.DialogueTrigger();
+                Debug.Log("Dialogue9");
+                ToggleTime();
+                return;
             case TutorialState.PlaySpell:
+                ToggleTime();
                 PlaySpellState();
                 return;
             default:
@@ -126,61 +151,58 @@ public class TutorialManager : MonoBehaviour
                 
     }
 
-    public void SwitchState(TutorialState newState)
-    {
-        tutorialState = newState;
-
-        switch(tutorialState) {
-            case TutorialState.CardDraw:
-                drawingAllowed = true;
-                return;
-            case TutorialState.BurnCard:
-                drawingAllowed = false;
-                BurnState();
-                return;
-            case TutorialState.Dialogue2:
-                BurnState();
-                burnignAllowed = false;
-                return;
-            case TutorialState.CardPlay:
-                PlayCardState();
-                return;
-            case TutorialState.Dialogue3:
-                ToggleTime();
-                return;
-            case TutorialState.CardAttack:
-                
-                ToggleTime();
-                AttackState();
-                return;
-            case TutorialState.AttackValues:
-
-                AttackValuesState();
-                NextTutorialState();
-                return;
-            case TutorialState.DefenseValues:
-                AttackValuesState();
-                DefenseValuesState();
-                NextTutorialState();
-                return;
-            case TutorialState.DirectAttack:
-                DefenseValuesState();
-                StartCoroutine(DirectCounter());
-                ToggleTime();
-                firstAttack = true;
-                return;
-            case TutorialState.SpellCard:
-                opponentAI.OpponentSummonCard();
-                return;
-            default:
-                return;
-        }
-    }
+    //public void SwitchState(TutorialState newState)
+    //{
+    //    tutorialState = newState;
+    //    Debug.Log("switching  state");
+    //    switch(tutorialState) {
+    //        case TutorialState.CardDraw:
+    //            drawingAllowed = true;
+    //            return;
+    //        case TutorialState.BurnCard:
+    //            drawingAllowed = false;
+    //            BurnState();
+    //            return;
+    //        case TutorialState.Dialogue2:
+    //            BurnState();
+    //            burnignAllowed = false;
+    //            return;
+    //        case TutorialState.CardPlay:
+    //            PlayCardState();
+    //            return;
+    //        case TutorialState.Dialogue3:
+    //            ToggleTime();
+    //            return;
+    //        case TutorialState.CardAttack:
+    //            ToggleTime();
+    //            AttackState();
+    //            return;
+    //        case TutorialState.AttackValues:
+    //            AttackValuesState();
+    //            return;
+    //        case TutorialState.DefenseValues:
+    //            AttackValuesState();
+    //            DefenseValuesState();
+    //            NextTutorialState();
+    //            return;
+    //        case TutorialState.DirectAttack:
+    //            DefenseValuesState();
+    //            StartCoroutine(DirectCounter());
+    //            ToggleTime();
+    //            firstAttack = true;
+    //            return;
+    //        case TutorialState.SpellCard:
+    //            drawingAllowed = true;
+    //            opponentAI.OpponentSummonCard();
+    //            return;
+    //        default:
+    //            return;
+    //    }
+    //}
 
 
     private void Awake()
     {
-        Debug.Log(GameManager.Instance.attackDuration);
         tutorialManagerInstance = gameObject.GetComponent<TutorialManager>();
         WebSocketService.Instance.enabled = false;
         enemyCardSeeds = new List<string>();
@@ -197,6 +219,7 @@ public class TutorialManager : MonoBehaviour
         GameManager.Instance.playerStats.playerBurnValue = startBurnValue;
         GameManager.Instance.enemyPlayerStats.playerBurnValue = enemyStartBurnValue;
         References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = startBurnValue.ToString();
+        diManager = gameObject.GetComponent<DialogueManager>();
     }
 
 
@@ -243,7 +266,6 @@ public class TutorialManager : MonoBehaviour
 
     private void PlayCardState()
     {
-        
         GameObject ownCard = GameManager.Instance.GetCardFromInGameCards("00000000");
         ownCard.GetComponentsInChildren<HighLightController>()[3].ToggleHighlightAnimation();
         summoningAllowed = true;
@@ -261,6 +283,9 @@ public class TutorialManager : MonoBehaviour
         GameObject opponentCard = GameManager.Instance.GetCardFromInGameCards("10000000");
         ownCard.GetComponentsInChildren<HighLightController>()[1].ToggleHighlightAnimation();
         opponentCard.GetComponentsInChildren<HighLightController>()[1].ToggleHighlightAnimation();
+        if (tutorialState == TutorialState.AttackValues) {
+            NextTutorialState();
+        }
     }
 
     private void DefenseValuesState()
@@ -269,6 +294,9 @@ public class TutorialManager : MonoBehaviour
         GameObject opponentCard = GameManager.Instance.GetCardFromInGameCards("10000000");
         ownCard.GetComponentsInChildren<HighLightController>()[0].ToggleHighlightAnimation();
         opponentCard.GetComponentsInChildren<HighLightController>()[0].ToggleHighlightAnimation();
+        if (tutorialState == TutorialState.DefenseValues) {
+            NextTutorialState();
+        }
     }
 
     
@@ -278,13 +306,15 @@ public class TutorialManager : MonoBehaviour
         References.i.opponentDeck.GetComponent<TutorialDeck>().OpponentDraw();
         References.i.opponentDeck.GetComponent<TutorialDeck>().OpponentDraw();
 
+
+
         float countDown = 0;
-        while (countDown <= 3) {
+        while (countDown <= 2) {
             //player attacks by themselves
-            if(firstDirectAttack == true) {
-                SwitchState(TutorialState.Dialogue8);
-                break;
-            }
+            //if(firstDirectAttack == true) {
+            //    SwitchState(TutorialState.Dialogue8);
+            //    break;
+            //}
             countDown += Time.deltaTime;
             yield return null;
         }
@@ -294,7 +324,7 @@ public class TutorialManager : MonoBehaviour
 
     private void PlaySpellState()
     {
-        Debug.Log("Play spell");
+        Debug.Log("Play spell state");
         opponentAI.OpponentPlaySpell();
         GameObject ownCard = GameManager.Instance.GetCardFromInGameCards("00000002");
         ownCard.GetComponentsInChildren<HighLightController>()[0].ToggleHighlightAnimation();

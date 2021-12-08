@@ -14,7 +14,7 @@ public class DialogueManager : MonoBehaviour
     public List<HighLightController> highLightControllers;
     private TutorialManager tutorialManager;
     private Queue<string> sentences;
-    private bool startBool = false;
+    public bool startBool = false;
     private Coroutine roll;
     private string sentence;
 
@@ -39,52 +39,51 @@ public class DialogueManager : MonoBehaviour
     private void Update()
     {
         if ((int)tutorialManager.GetState() % 2 == 0) {
-            if (dialogueAnimator.GetBool("dialogueOn") == false) {
-                StartCoroutine(StartDialogue());
-            }
+            //if (dialogueAnimator.GetBool("dialogueOn") == false) {
+            //    StartCoroutine(StartDialogue());
+            //    Debug.Log("Starting dialogue ");
+            //    startBool = true;
+            //}
 
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || startBool) {
+
                 startBool = false;
-                if(sentences.Count > 0) {
+                if (sentences.Count > 0) {
                     sentence = sentences.Dequeue();
                     if (sentence == "") {
+                        
                         EndDialogue();
                         tutorialManager.NextTutorialState();
                     } else {
                         StopAllCoroutines();
                         StartCoroutine(RollDialogue(sentence));
-                    } 
-                   
-                    
-                    //if(roll == null) {
-                    //    sentence = sentences.Dequeue();
-                    //    if (sentence == "") {
-                    //        EndDialogue();
-                    //        tutorialManager.NextTutorialState();
-                    //    } else {
-                    //        roll = StartCoroutine(RollDialogue(sentence));
-                    //    } 
-                    //} else {
-                    //    StopAllCoroutines();
-                    //    roll = null;
-                    //    dialogueText.text = sentence;
-                    //}
+                    }
+
 
                 } else {
                     EndDialogue();
                 }
             }
         }
-        
 
+
+    }
+
+    public void DialogueTrigger()
+    {
+        //Debug.Log("Startin dialogue");
+        //dialogueText.text = "";
+        //dialogueAnimator.SetBool("dialogueOn", true);
+        //mascotAnimator.SetBool("dialogueOn", true);
+        //startBool = true;
+        StartCoroutine(StartDialogue());
     }
 
     private void EndDialogue()
     {
-        
+        Debug.Log("Ending dialogue");
         dialogueAnimator.SetBool("dialogueOn", false);
         mascotAnimator.SetBool("dialogueOn", false);
-        
     }
 
     IEnumerator RollDialogue(string sentence)
@@ -98,12 +97,14 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator StartDialogue()
     {
-        
+        Debug.Log("Startin dialogue");
         dialogueText.text = "";
-        yield return new WaitForSecondsRealtime(1f);
+        
         dialogueAnimator.SetBool("dialogueOn", true);
         mascotAnimator.SetBool("dialogueOn", true);
+        yield return new WaitForSecondsRealtime(0.5f);
         startBool = true;
+        
     }
 
     private void ToggleTime()

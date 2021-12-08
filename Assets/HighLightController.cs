@@ -14,7 +14,7 @@ public class HighLightController : MonoBehaviour
     bool animating = false;
     bool animatingBack = false;
     float time = 0;
-    bool effectOn = false;
+    public bool effectOn = false;
 
 
     // Start is called before the first frame update
