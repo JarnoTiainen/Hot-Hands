@@ -1893,8 +1893,9 @@ MonoBehaviour:
   isGhostCard: 0
   cardHidden: 0
   currentAttackCoolDown: 0
-  attackOnCD: 0
+  attackOnCD: 1
   preAttackOnCD: 1
+  timeOnPreAttack: 0
   showTooltips: 0
   owner: 0
   tempRp: 0
@@ -1906,6 +1907,7 @@ MonoBehaviour:
   drawCDEffectManager: {fileID: 2490167132457927064}
   drawCDElement: {fileID: 8255645304783649934}
   deckCardCountElement: {fileID: 8255645304783649934}
+  cardInHand: 1
 --- !u!65 &9060123631021853949
 BoxCollider:
   m_ObjectHideFlags: 0

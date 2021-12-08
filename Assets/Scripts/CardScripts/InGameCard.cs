@@ -76,6 +76,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     private float timeAsUnhandledHandCard = 0;
     private bool unhandled;
+    [SerializeField] private bool cardInHand;
 
     public void SetTempValuesAsValues()
     {
@@ -137,8 +138,14 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         
     }
 
+    public void SetNotCardInHand()
+    {
+        cardInHand = false;
+    }
+
     [Button] public void StartAttackCooldown(float duration, bool isSummonCall = false)
     {
+        SetNotCardInHand();
         attackOnCD = true;
         doOnce = true;
         currentAttackCoolDown = duration;
@@ -203,7 +210,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
             
 
         }
-        else if(currentAttackCoolDown <= 0 && attackOnCD)
+        else if(currentAttackCoolDown <= 0 && attackOnCD && !cardInHand)
         {
             coolDownSlider.gameObject.SetActive(false);
             ToggleAttackBurnEffect(true);
