@@ -783,13 +783,16 @@ public class GameManager : MonoBehaviour
         {
             case CardDataMessage.BuffType.Damage:
                 target.GetComponent<InGameCard>().PlayTakeDamageEffect();
+                SFXLibrary.Instance.hit.PlaySFX();
                 break;
             case CardDataMessage.BuffType.StatBuff:
                 target.GetComponent<InGameCard>().PlayBuffEffect();
+                SFXLibrary.Instance.cardBuff.PlaySFX();
                 Debug.LogWarning("Trigger StatBuff effect here");
                 break;
             case CardDataMessage.BuffType.StatDebuff:
                 target.GetComponent<InGameCard>().PlayDebuffEffect();
+                SFXLibrary.Instance.cardDebuff.PlaySFX();
                 Debug.LogWarning("Trigger StatDeBuff effect here");
                 break;
             case CardDataMessage.BuffType.Default:

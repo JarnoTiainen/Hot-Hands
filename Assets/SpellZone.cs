@@ -110,10 +110,10 @@ public class SpellZone : MonoBehaviour
             } else {
                 //StatChangeMessage statChangeMessage = new StatChangeMessage();
                 TutorialManager.tutorialManagerInstance.TriggerSpellchain();
-
+                SFXLibrary.Instance.spellChainActivation.PlaySFX();
             }
-            
         }
+        SFXLibrary.Instance.spellChainCountdown.PlaySFX();
     }
 
     public bool HasFreeSlot()
