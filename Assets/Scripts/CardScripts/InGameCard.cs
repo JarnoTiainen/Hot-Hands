@@ -454,25 +454,30 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
                     if (!References.i.mouse.tutorialMode) {
                         WebSocketService.Attack(cardData.seed);
                     } else {
-                        Debug.Log("Attack in tutorial!");
-                        CardPowersMessage[] cardPowers = TutorialManager.tutorialManagerInstance.GetAttackTarget(cardData, true);
+                        if (TutorialManager.tutorialManagerInstance.attackingAllowed) {
+                            Debug.Log("Attack in tutorial!");
+                            CardPowersMessage[] cardPowers = TutorialManager.tutorialManagerInstance.GetAttackTarget(cardData, true);
 
-                        int playerTakenDamage = 0;
+                            int playerTakenDamage = 0;
 
-                        if (cardData.attackDirection == Card.AttackDirection.Left) {
-                            playerTakenDamage = cardData.lp;
-                        } else if (cardData.attackDirection == Card.AttackDirection.Right) {
-                            playerTakenDamage = cardData.rp;
-                        }
+                            if (cardData.attackDirection == Card.AttackDirection.Left) {
+                                playerTakenDamage = cardData.lp;
+                            } else if (cardData.attackDirection == Card.AttackDirection.Right) {
+                                playerTakenDamage = cardData.rp;
+                            }
 
-                        if (cardPowers.Length == 1) {
-                            //direct attack
-                            Debug.Log("Player taken dmg " + playerTakenDamage);
-                            TutorialManager.tutorialManagerInstance.Attack(true, owner, playerTakenDamage, cardPowers[0]);
+                            if (cardPowers.Length == 1) {
+                                //direct attack
+                                Debug.Log("Player taken dmg " + playerTakenDamage);
+                                TutorialManager.tutorialManagerInstance.Attack(true, owner, playerTakenDamage, cardPowers[0]);
+                            } else {
+                                TutorialManager.tutorialManagerInstance.Attack(false, owner, 0, cardPowers[0], cardPowers[1]);
+
+                            }
                         } else {
-                            TutorialManager.tutorialManagerInstance.Attack(false, owner, 0, cardPowers[0], cardPowers[1]);
-
+                            Debug.Log("attacking not allowed");
                         }
+                        
                         
                     }
                 }

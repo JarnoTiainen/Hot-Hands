@@ -71,17 +71,12 @@ public class DialogueManager : MonoBehaviour
 
     public void DialogueTrigger()
     {
-        //Debug.Log("Startin dialogue");
-        //dialogueText.text = "";
-        //dialogueAnimator.SetBool("dialogueOn", true);
-        //mascotAnimator.SetBool("dialogueOn", true);
-        //startBool = true;
         StartCoroutine(StartDialogue());
     }
 
     private void EndDialogue()
     {
-        Debug.Log("Ending dialogue");
+        //Debug.Log("Ending dialogue");
         dialogueAnimator.SetBool("dialogueOn", false);
         mascotAnimator.SetBool("dialogueOn", false);
     }
@@ -92,7 +87,7 @@ public class DialogueManager : MonoBehaviour
         while(sentence != "") {
             sentence = sentences.Dequeue();
         }
-        StartCoroutine(StartDialogue());
+        //StartCoroutine(StartDialogue());
     }
 
     IEnumerator RollDialogue(string sentence)
@@ -106,7 +101,7 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator StartDialogue()
     {
-        Debug.Log("Startin dialogue");
+        //Debug.Log("Startin dialogue");
         dialogueText.text = "";
         
         dialogueAnimator.SetBool("dialogueOn", true);

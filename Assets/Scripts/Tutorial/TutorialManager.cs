@@ -65,9 +65,7 @@ public class TutorialManager : MonoBehaviour
         PlaySpell,
         Dialogue10, //be fast
         Deny,
-        Dialogue11, //youy were too slow
-        TooSlow,    //wait for the deny spell
-        Dialogue12, //yey do stuff
+        Dialogue11, //youy were too 
         Denied,
         Dialogue13, //last dialogue
         End,
@@ -121,6 +119,7 @@ public class TutorialManager : MonoBehaviour
                 ToggleTime();
                 return;
             case TutorialState.CardAttack:
+                attackingAllowed = true;
                 ToggleTime();
                 AttackState();
                 return;
@@ -138,6 +137,7 @@ public class TutorialManager : MonoBehaviour
                 DefenseValuesState();
                 return;
             case TutorialState.Dialogue6:
+                attackingAllowed = false;
                 diManager.DialogueTrigger();
                 return;
             case TutorialState.DirectAttack:
@@ -147,9 +147,11 @@ public class TutorialManager : MonoBehaviour
                 firstAttack = true;
                 return;
             case TutorialState.Dialogue7:
+                attackingAllowed = true;
                 diManager.DialogueTrigger();
                 return;
             case TutorialState.Dialogue8:
+                attackingAllowed = false;
                 diManager.DialogueTrigger();
                 return;
             case TutorialState.SpellCard:
@@ -171,15 +173,15 @@ public class TutorialManager : MonoBehaviour
                 diManager.DialogueTrigger();
                 return;
             case TutorialState.Deny:
-                ToggleTime();
+                ToggleTime(); //time on
                 DenyState();
                 return;
             case TutorialState.Dialogue11:
-                //diManager.SkipNextDialogue();
-                Debug.Log("skipping dialogue");
+                ToggleTime();
+                diManager.DialogueTrigger();
                 return;
-            case TutorialState.TooSlow:
-                
+            case TutorialState.Denied:
+                ToggleTime();
                 return;
             default:
                 return;
@@ -311,7 +313,7 @@ public class TutorialManager : MonoBehaviour
         attackingAllowed = false;
         drawingAllowed = false;
         //does this allow spells
-        summoningAllowed = false;
+        summoningAllowed = true;
         Debug.Log("Play spell state");
         opponentAI.OpponentPlaySpell();
         GameObject ownCard = GameManager.Instance.GetCardFromInGameCards("00000002");
@@ -327,12 +329,17 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator DenyNumerator()
     {
-        while (denycounter < spellWindup) {
+        bool doOnce1 = true;
+        while (true) {
             denycounter += Time.deltaTime;
+            if (denycounter > 1 && doOnce1) {
+                doOnce1 = false;
+                ToggleTime();
+            }
             if (spellCardSeed.Count == 3) {
-                diManager.SkipNextDialogue();
-                SwitchState(TutorialState.Dialogue11);
-                
+                ToggleTime();
+                NextTutorialState();
+                break;
             }
             yield return null;
         }
@@ -417,6 +424,7 @@ public class TutorialManager : MonoBehaviour
         if (spellCardSeed.Count == 0) {
             Debug.Log("Cancel invoke");
             CancelInvoke();
+            NextTutorialState();
         }
     }
 

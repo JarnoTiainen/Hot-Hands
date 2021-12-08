@@ -833,11 +833,14 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        if(LimboCardHolder.Instance.TryGetLimboCardWithSeed(playSpellMessage.seed))
-        {
-            LimboCardHolder.Instance.TryGetLimboCardWithSeed(playSpellMessage.seed).GetComponent<InGameCard>().RemoveFromSpellLimbo();
-        }
+        if (!References.i.mouse.tutorialMode) { 
+            if(LimboCardHolder.Instance.TryGetLimboCardWithSeed(playSpellMessage.seed))
+            {
+                LimboCardHolder.Instance.TryGetLimboCardWithSeed(playSpellMessage.seed).GetComponent<InGameCard>().RemoveFromSpellLimbo();
+            }
 
+        }
+       
     }
 
     public void TriggerSpell(TriggerSpellMessage triggerSpellMessage)

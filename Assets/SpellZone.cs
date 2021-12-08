@@ -104,6 +104,7 @@ public class SpellZone : MonoBehaviour
         counter--;
         if (counter <= 0.5f && References.i.mouse.tutorialMode) {
             //tutorial stuff
+             CancelInvoke();
             StartCoroutine(WaitForDeny());
         } 
         else if (counter <= 0)
@@ -122,10 +123,11 @@ public class SpellZone : MonoBehaviour
 
     private IEnumerator WaitForDeny()
     {
-        CancelInvoke();
+        TutorialManager.tutorialManagerInstance.NextTutorialState();
         yield return new WaitUntil(() => TutorialManager.tutorialManagerInstance.spellCardSeed.Count == 3);
         TutorialManager.tutorialManagerInstance.TriggerSpellchain();
         SFXLibrary.Instance.spellChainActivation.PlaySFX();
+
     }
 
 

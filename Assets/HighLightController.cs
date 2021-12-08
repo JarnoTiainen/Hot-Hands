@@ -49,7 +49,7 @@ public class HighLightController : MonoBehaviour
 
     [Button]public void ToggleHighlightAnimation()
     {
-        Debug.Log("toggleing highlit");
+
         if(effectOn)
         {
             effectOn = false;
