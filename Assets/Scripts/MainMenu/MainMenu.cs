@@ -37,6 +37,7 @@ public class MainMenu : MonoBehaviour
             mainMenuButtons.SetActive(true);
             loginScreen.SetActive(false);
             ChatManager.Instance.HideChat(false);
+            WebSocketService.GetDecks();
         }
         else
         {
