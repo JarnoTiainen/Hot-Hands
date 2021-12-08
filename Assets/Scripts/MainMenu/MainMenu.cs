@@ -27,7 +27,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Quaternion mainCamMenuRotation;
     [SerializeField] private Vector3 mainCamCollectionPos;
     [SerializeField] private Quaternion mainCamCollectionRotation;
+    private Coroutine showPopupNotificationCo = null;
     private bool activePopup = false;
+    private string previousPopup = null;
 
     private void Start()
     {
@@ -139,8 +141,10 @@ public class MainMenu : MonoBehaviour
 
     public void CreatePopupNotification(string text, PopupCorner corner, PopupTone tone)
     {
-        if (activePopup) return;
-        StartCoroutine(ShowPopupNotification(text, corner, tone));
+        if (activePopup && (text == previousPopup)) return;
+        previousPopup = text;
+        if(showPopupNotificationCo != null) StopCoroutine(showPopupNotificationCo);
+        showPopupNotificationCo = StartCoroutine(ShowPopupNotification(text, corner, tone));
     }
 
     IEnumerator ShowPopupNotification(string text, PopupCorner corner, PopupTone tone)

@@ -34,12 +34,15 @@ public class DeckBuilder : MonoBehaviour
     public void AddCard(Card card)
     {
         // Reached max size
-        if(currentBuildSize >= deckSizeLimit) return;
-
+        if (currentBuildSize >= deckSizeLimit)
+        {
+            MainMenu.Instance.CreatePopupNotification("Can not have more than " + deckSizeLimit + " cards in deck!", MainMenu.PopupCorner.TopRight, MainMenu.PopupTone.Negative);
+            return;
+        }
         // Add duplicate card to build
         for (int i = 0; build.Count > i; i++)
         {
-            if (build[i].name == card.name)
+            if (build[i].card.cardName == card.cardName)
             {
                 if (build[i].legendary)
                 {
@@ -102,7 +105,7 @@ public class DeckBuilder : MonoBehaviour
         // Build has > 0 cards
         for (int i = 0; build.Count > i; i++)
         {
-            if (build[i].name == card.name)
+            if (build[i].card.cardName == card.cardName)
             {
                 // Card being deleted is the only one of it's type in the build
                 if(build[i].amount == 1)

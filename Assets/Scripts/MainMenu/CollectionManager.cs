@@ -142,7 +142,11 @@ public class CollectionManager : MonoBehaviour
     public void SaveDeckToDB(int index, bool rename = false)
     {
         DeckObject deckString;
-        if (!rename) deckString = new DeckObject(playerDecks[index], index, deckNames[index]);
+        if (!rename)
+        {
+            deckString = new DeckObject(playerDecks[index], index, deckNames[index]);
+            MainMenu.Instance.CreatePopupNotification("Deck saved.", MainMenu.PopupCorner.TopRight, MainMenu.PopupTone.Positive);
+        }
         else
         {
             int deckIndex = -1;
@@ -154,17 +158,21 @@ public class CollectionManager : MonoBehaviour
                     break;
                 }
             }
-            if (deckIndex == -1 || renameDeckPopup.deckNameInput.text.Length == 0) return;
-
+            if (deckIndex == -1) return;
+            if(renameDeckPopup.deckNameInput.text.Length == 0)
+            {
+                MainMenu.Instance.CreatePopupNotification("Deck name can't be empty!", MainMenu.PopupCorner.TopRight, MainMenu.PopupTone.Negative);
+                return;
+            }
             string newName = renameDeckPopup.deckNameInput.text;
             renameDeckPopup.deckNameInput.text = "";
             deckNames[deckIndex] = newName;
             deckToggles[deckIndex].ChangeDeckName(newName);
             deckString = new DeckObject(playerDecks[deckIndex], deckIndex, newName);
             renameDeckPopup.gameObject.SetActive(false);
+            MainMenu.Instance.CreatePopupNotification("Deck renamed.", MainMenu.PopupCorner.TopRight, MainMenu.PopupTone.Positive);
         }
         WebSocketService.SaveDeck(JsonUtility.ToJson(deckString));
-        MainMenu.Instance.CreatePopupNotification("Deck saved.", MainMenu.PopupCorner.TopRight, MainMenu.PopupTone.Positive);
     }
 
     // Gets all game cards and passes them to the 'All Cards List' and calls it's populate function
