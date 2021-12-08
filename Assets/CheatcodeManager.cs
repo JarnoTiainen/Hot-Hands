@@ -38,9 +38,8 @@ public class CheatcodeManager : MonoBehaviour
         {
             MainMenu.Instance.CreatePopupNotification("Admin mode enabled", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Positive);
             timer = 0;
-            LoginManager.Instance.userNameField.contentType = TMPro.TMP_InputField.ContentType.Standard;
-            ChatManager.Instance.messageInput.contentType = TMPro.TMP_InputField.ContentType.Standard;
             adminControls.gameObject.SetActive(true);
+            adminControls.EnableAdminFeatures();
         }
     }
 }

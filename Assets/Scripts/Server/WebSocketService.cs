@@ -129,7 +129,12 @@ public class WebSocketService : MonoBehaviour
                     }
                     break;
                 case "LOGIN":
-                    if (data[1] == "ok")
+                    if (data[1] == "not ok")
+                    {
+                        Debug.Log("Login Failed!");
+                        MainMenu.Instance.CreatePopupNotification("Login Failed!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
+                    }
+                    else
                     {
                         isLoggedIn = true;
                         GameObject.Find("LoginPanel").GetComponent<LoginManager>().CloseLoginScreen();
@@ -138,12 +143,11 @@ public class WebSocketService : MonoBehaviour
                         ChatManager.Instance.HideChat(false);
                         LoadChat();
                         GetDecks();
+
+                        LoginMessage loginMessage = JsonUtility.FromJson<LoginMessage>(data[1]);
+                        MainMenu.Instance.SuccessfulLogin(loginMessage);
                     }
-                    else
-                    {
-                        Debug.Log("Login Failed!");
-                        MainMenu.Instance.CreatePopupNotification("Login Failed!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
-                    }
+
                     break;
                 case "JOINGAME":
                     if (data[1] != "")

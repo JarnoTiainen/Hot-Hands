@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject loginScreen;
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject popupNotification;
+    [SerializeField] private AdminControls adminControls;
     [SerializeField] private SearchingGamePopupScript searchingGame;
     [SerializeField] private TextMeshProUGUI popupNotificationText;
     [SerializeField] private float popupDuration = 2.5f;
@@ -50,6 +51,16 @@ public class MainMenu : MonoBehaviour
     }
 
     public void MainMenuButtonsSetActive(bool value) => mainMenuButtons.SetActive(value);
+
+    public void SuccessfulLogin(LoginMessage loginMessage)
+    {
+        PlayerPrefs.SetString("LoginName", loginMessage.username);
+        if (loginMessage.admin)
+        {
+            adminControls.gameObject.SetActive(true);
+            adminControls.EnableAdminFeatures();
+        }
+    }
 
     public void CollectionMenuSetActive(bool value)
     {
