@@ -382,7 +382,8 @@ public class WebSocketService : MonoBehaviour
 
     [Button] public static void GetOpponentName()
     {
-        Debug.Log("Send game StartGame");
+        if (MainMenu.Instance.soloPlayEnabled) return;
+        Debug.Log("Send GETOPPONENTNAME");
         GameMessage message = new GameMessage("OnMessage", "GETOPPONENTNAME", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }

@@ -791,12 +791,10 @@ public class GameManager : MonoBehaviour
                 break;
             case CardDataMessage.BuffType.StatBuff:
                 target.GetComponent<InGameCard>().PlayBuffEffect();
-                SFXLibrary.Instance.cardBuff.PlaySFX();
                 Debug.LogWarning("Trigger StatBuff effect here");
                 break;
             case CardDataMessage.BuffType.StatDebuff:
                 target.GetComponent<InGameCard>().PlayDebuffEffect();
-                SFXLibrary.Instance.cardDebuff.PlaySFX();
                 Debug.LogWarning("Trigger StatDeBuff effect here");
                 break;
             case CardDataMessage.BuffType.Default:
@@ -810,6 +808,10 @@ public class GameManager : MonoBehaviour
     {
         switch (buffType)
         {
+            case CardDataMessage.BuffType.Damage:
+                yield return null;
+                SFXLibrary.Instance.hit.PlaySFX();
+                break;
             case CardDataMessage.BuffType.StatBuff:
                 yield return new WaitForSeconds(0.2f);
                 SFXLibrary.Instance.cardBuff.PlaySFX();
@@ -819,11 +821,11 @@ public class GameManager : MonoBehaviour
                 SFXLibrary.Instance.cardDebuff.PlaySFX();
                 break;
             default:
+                yield return null;
                 SFXLibrary.Instance.hit.PlaySFX();
                 break;
         }
     }
-
 
     public bool IsYou(int player)
     {
