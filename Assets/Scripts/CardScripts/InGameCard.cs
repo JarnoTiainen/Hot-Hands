@@ -76,6 +76,16 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     private float timeAsUnhandledHandCard = 0;
     private bool unhandled;
+
+    private float timeAsLimboSpell = 0;
+    private bool inspellLimbo;
+
+    private bool inSummonLimbo;
+    private float timeInSummonLimbo;
+
+    private bool inBurnLimbo;
+    private float timeInBurnLimbo;
+
     [SerializeField] private bool cardInHand;
 
     [SerializeField] private DealDamageToPlayerParticleManager dealDamageToPlayerParticleManager;
@@ -198,6 +208,35 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         buffEffectManager.PlayEffect();
     }
  
+    public void SetIntoSpellLimbo()
+    {
+        timeAsLimboSpell = 0;
+        inspellLimbo = true;
+    }
+    public void RemoveFromSpellLimbo()
+    {
+        inspellLimbo = false;
+    }
+    public void SetIntoSummonLimbo()
+    {
+        timeInSummonLimbo = 0;
+        inSummonLimbo = true;
+    }
+    public void RemoveFromSummonLimbo()
+    {
+        inSummonLimbo = false;
+    }
+
+    public void SetIntoBurnLimbo()
+    {
+        inBurnLimbo = true;
+    }
+
+    public void RemoveFromBurnLimbo()
+    {
+        inBurnLimbo = false;
+    }
+
     private void Update()
     {
         if (currentAttackCoolDown > 0) {
@@ -244,7 +283,40 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         if (unhandled)
         {
             timeAsUnhandledHandCard += Time.deltaTime;
-            if (timeAsUnhandledHandCard > 6) GameManager.Instance.PlayerReturnDrawCard();
+            if (timeAsUnhandledHandCard > 6)
+            {
+                GameManager.Instance.PlayerReturnDrawCard();
+                unhandled = false;
+            }
+        }
+        if (inSummonLimbo)
+        {
+            timeInSummonLimbo += Time.deltaTime;
+            if(timeInSummonLimbo > 6)
+            {
+                GameManager.Instance.PlayerReturnCardToHand(gameObject);
+                inSummonLimbo = false;
+            }
+        }
+        if(inBurnLimbo)
+        {
+            timeInBurnLimbo += Time.deltaTime;
+            if(timeInBurnLimbo > 6)
+            {
+                BurnCardMessage burnCardMessage = new BurnCardMessage();
+                burnCardMessage.denied = true;
+                GameManager.Instance.PlayerBurnCard(burnCardMessage);
+                inBurnLimbo = false;
+            }
+        }
+        if(inspellLimbo)
+        {
+            timeAsLimboSpell += Time.deltaTime;
+            if(timeAsLimboSpell > 6)
+            {
+                RemoveFromSpellLimbo();
+                GameManager.Instance.ReturnCardToHand(gameObject);
+            }
         }
 
         if(preAttackOnCD && !attackOnCD)
