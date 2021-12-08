@@ -346,21 +346,30 @@ MonoBehaviour:
     waitToPlay: 0
     useDefault: 0
     audiosource: {fileID: 0}
-  cardHeal:
-    sfxType: 2
-    sfxToPlay: {fileID: 11400000, guid: 5547bbe961990814db6d9f193e1e5f17, type: 2}
-    showSettings: 0
-    editSettings: 0
-    _sfxBase: {fileID: 11400000, guid: 5547bbe961990814db6d9f193e1e5f17, type: 2}
-    waitToPlay: 0
-    useDefault: 0
-    audiosource: {fileID: 0}
   spellChainActivation:
     sfxType: 2
     sfxToPlay: {fileID: 11400000, guid: 85a106594a011ac4392f05e7d15a04b1, type: 2}
     showSettings: 0
     editSettings: 0
     _sfxBase: {fileID: 11400000, guid: 85a106594a011ac4392f05e7d15a04b1, type: 2}
+    waitToPlay: 0
+    useDefault: 0
+    audiosource: {fileID: 0}
+  playerHit:
+    sfxType: 2
+    sfxToPlay: {fileID: 11400000, guid: de38ea488b0c590499bfede73b739483, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: de38ea488b0c590499bfede73b739483, type: 2}
+    waitToPlay: 0
+    useDefault: 0
+    audiosource: {fileID: 0}
+  playerHeal:
+    sfxType: 2
+    sfxToPlay: {fileID: 11400000, guid: 5547bbe961990814db6d9f193e1e5f17, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: 5547bbe961990814db6d9f193e1e5f17, type: 2}
     waitToPlay: 0
     useDefault: 0
     audiosource: {fileID: 0}

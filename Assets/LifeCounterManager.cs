@@ -51,6 +51,7 @@ public class LifeCounterManager : MonoBehaviour
                 displayedOpponentLifePoints = GameManager.Instance.enemyPlayerStats.playerHealth;
                 SetNewNumber(false, displayedOpponentLifePoints);
             }
+            SFXLibrary.Instance.playerHit.PlaySFX();
         }
         else
         {
@@ -66,6 +67,7 @@ public class LifeCounterManager : MonoBehaviour
                 displayedOpponentLifePoints = GameManager.Instance.enemyPlayerStats.playerHealth;
                 SetNewNumber(false, displayedOpponentLifePoints);
             }
+            SFXLibrary.Instance.playerHeal.PlaySFX();
         }
     }
 

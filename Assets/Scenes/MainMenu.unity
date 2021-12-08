@@ -22599,7 +22599,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: uiSFX.Array.size
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: uiSFX.Array.data[1]
@@ -22647,7 +22647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: effectsSFX.Array.size
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: ambientSFX.Array.data[7]
@@ -22681,6 +22681,10 @@ PrefabInstance:
       propertyPath: effectsSFX.Array.data[8]
       value: 
       objectReference: {fileID: 11400000, guid: 85a106594a011ac4392f05e7d15a04b1, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: effectsSFX.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: de38ea488b0c590499bfede73b739483, type: 2}
     - target: {fileID: 6413452686842694931, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -22730,7 +22734,11 @@ PrefabInstance:
       value: SFXManager
       objectReference: {fileID: 0}
     - target: {fileID: 8873941290810643492, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
-      propertyPath: spellChainActivation.showSettings
+      propertyPath: playerHit.showSettings
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8873941290810643492, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: playerHeal.showSettings
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
