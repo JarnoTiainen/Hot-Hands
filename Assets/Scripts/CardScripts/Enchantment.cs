@@ -67,7 +67,8 @@ public class Enchantment
         SummonRat,
         GiantBribe,
         RatGrenade,
-        GainRandomBurn
+        GainRandomBurn,
+        Pact
     }
     public enum Trigger
     {

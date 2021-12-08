@@ -10,26 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
-  m_Name: HH Captain Alex
+  m_Name: Dark Pact
   m_EditorClassIdentifier: 
-  cardSprite: {fileID: 21300000, guid: 3335ae359cd3cae4096ae39378e27730, type: 3}
-  cardName: HH Captain Alex
-  cost: 10
-  value: 2
-  legendary: 1
-  cardType: 1
+  cardSprite: {fileID: 21300000, guid: 1c802c05ee7a6624c88b8fd7f8fb6966, type: 3}
+  cardName: Dark Pact
+  cost: 0
+  value: 0
+  legendary: 0
+  cardType: 0
   spellTags: 
   monsterTags: 
-  rp: 8
-  lp: 8
-  attackDirection: 1
+  rp: 0
+  lp: 0
+  attackDirection: 0
   enchantments:
-  - enchantmentName: I Am the Captain Now
-    enchantmentEffect: 33
-    trigger: 1
-    weight: 5
+  - enchantmentName: Pact
+    enchantmentEffect: 36
+    trigger: 7
+    weight: 10
     targeting: 0
     targetType: 0
-    buffType: 2
+    buffType: 0
     buffVanishType: 0
     hidden: 0
