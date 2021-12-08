@@ -8,11 +8,12 @@ using Sirenix.OdinInspector;
 public class MainMenu : MonoBehaviour
 {
     public static MainMenu Instance { get; private set; }
+    [SerializeField] private GameObject splashArt;
     [SerializeField] private GameObject mainMenuButtons;
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject collectionMenu;
     [SerializeField] private GameObject quitConfirmation;
-    [SerializeField] private GameObject loginScreen;
+    public GameObject loginScreen;
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject popupNotification;
     [SerializeField] private AdminControls adminControls;
@@ -45,8 +46,7 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            mainMenuButtons.SetActive(false);
-            loginScreen.SetActive(true);
+            splashArt.SetActive(true);
         }
     }
 

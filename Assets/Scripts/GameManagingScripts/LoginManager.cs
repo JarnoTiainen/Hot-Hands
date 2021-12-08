@@ -26,8 +26,8 @@ public class LoginManager : MonoBehaviour
         userNameField.ActivateInputField();
         userNameField.Select();
         charLimit = userNameField.characterLimit;
-
         rememberMeToggle.isOn = System.Convert.ToBoolean(PlayerPrefs.GetInt("RememberMe", 0));
+
         if (rememberMeToggle.isOn) GetUserCredentials();
     }
 
