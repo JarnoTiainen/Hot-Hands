@@ -61,8 +61,10 @@ public class SoundtrackManager : MonoBehaviour
                 soundtrackLibrary.inGame.PlaySoundtrack();
                 break;
             default:
-                soundtrackLibrary.mainMenu.PlaySoundtrack();
-                Debug.Log("Default soundtrack.");
+                masterMixer.SetFloat("masterVol", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", masterDefaultVolume)) * 20);
+                masterMixer.SetFloat("inGameMusicVol", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume", musicDefaultVolume)) * 20);
+                masterMixer.SetFloat("mainMenuMusicVol", Mathf.Log10(0.0001f) * 20);
+                soundtrackLibrary.inGame.PlaySoundtrack(); Debug.Log("Default soundtrack.");
                 break;
         }
     }
@@ -107,8 +109,8 @@ public class SoundtrackManager : MonoBehaviour
                         audioSource.outputAudioMixerGroup = inGameMusicGroup;
                         break;
                     default:
-                        soundtrackGameObject.name = "MainMenuSoundtrackPlayer";
-                        audioSource.outputAudioMixerGroup = mainMenuMusicGroup;
+                        soundtrackGameObject.name = "InGameSoundtrackPlayer";
+                        audioSource.outputAudioMixerGroup = inGameMusicGroup;
                         break;
                 }
                 soundtrackGameObject.transform.position = new Vector3(0, 0, 0);
@@ -134,7 +136,7 @@ public class SoundtrackManager : MonoBehaviour
                         audioSource.outputAudioMixerGroup = inGameMusicGroup;
                         break;
                     default:
-                        audioSource.outputAudioMixerGroup = mainMenuMusicGroup;
+                        audioSource.outputAudioMixerGroup = inGameMusicGroup;
                         break;
                 }
                 audioSource.clip = soundtrack.clip;
@@ -174,8 +176,8 @@ public class SoundtrackManager : MonoBehaviour
                 StartCoroutine(FadeMixerGroup.DestroySoundtrack(GameObject.Find("InGameSoundtrackPlayer"), inGameFadeOut));
                 break;
             default:
-                StartCoroutine(FadeMixerGroup.StartFade(masterMixer, "mainMenuMusicVol", mainMenuFadeOut, 0.0001f));
-                StartCoroutine(FadeMixerGroup.DestroySoundtrack(GameObject.Find("MainMenuSoundtrackPlayer"), mainMenuFadeOut));
+                StartCoroutine(FadeMixerGroup.StartFade(masterMixer, "inGameMusicVol", inGameFadeOut, 0.0001f));
+                StartCoroutine(FadeMixerGroup.DestroySoundtrack(GameObject.Find("InGameSoundtrackPlayer"), inGameFadeOut));
                 break;
         }
 
@@ -193,9 +195,9 @@ public class SoundtrackManager : MonoBehaviour
                 StartCoroutine(FadeMixerGroup.StartFade(masterMixer, "inGameMusicVol", inGameFadeIn, PlayerPrefs.GetFloat("MusicVolume")));
                 break;
             default:
-                masterMixer.SetFloat("mainMenuMusicVol", Mathf.Log10(0.0001f) * 20);
-                soundtrackLibrary.mainMenu.PlaySoundtrack();
-                StartCoroutine(FadeMixerGroup.StartFade(masterMixer, "mainMenuMusicVol", mainMenuFadeIn, PlayerPrefs.GetFloat("MusicVolume")));
+                masterMixer.SetFloat("inGameMusicVol", Mathf.Log10(0.0001f) * 20);
+                soundtrackLibrary.inGame.PlaySoundtrack();
+                StartCoroutine(FadeMixerGroup.StartFade(masterMixer, "inGameMusicVol", inGameFadeIn, PlayerPrefs.GetFloat("MusicVolume")));
                 break;
         }
     }
@@ -216,6 +218,5 @@ public class SoundtrackManager : MonoBehaviour
     {
         Menu,
         InGame,
-        ResultScreen
     }
 }
