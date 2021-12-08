@@ -362,6 +362,7 @@ public class GameManager : MonoBehaviour
     [Button]public void PlayerReturnDrawCard()
     {
         Hand.RemoveHiddenCard();
+        References.i.yourDeck.GetComponent<DeckGaObConstructor>().AddSingleCardToDeck();
         References.i.yourDeck.GetComponent<DeckGaObConstructor>().StartDrawCooldown(0);
         playerStats.deckCardCount++;
         playerStats.playerHandCards--;
@@ -380,6 +381,7 @@ public class GameManager : MonoBehaviour
         {
             enemyPlayerStats.deckCardCount = setDeckMessage.deckCards;
             enemyPlayerStats.discardpileCardCount = 0;
+            References.i.opponentDeck.GetComponent<DeckGaObConstructor>().CreateDeck();
         }
     }
     public void PlayerSummonCard(SummonCardMessage summonCardMessage)

@@ -93,7 +93,7 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         i++;
     }
 
-    public void AddSingleCardToDeck()
+    [Button] public void AddSingleCardToDeck()
     {
         GameObject newDeckCard = Instantiate(cardPrefab);
         //Set position to burnpile
@@ -107,13 +107,16 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         {
             newDeckCard.transform.position = References.i.opponentBurnPile.transform.position;
         }
-        Vector3 finalCardPosition = new Vector3(Random.Range(-cardPosOffset, cardPosOffset), Random.Range(-cardPosOffset, cardPosOffset), -i * cardOverlapAmount);
+        Vector3 finalCardPosition = new Vector3(Random.Range(-cardPosOffset, cardPosOffset), Random.Range(-cardPosOffset, cardPosOffset), -(deckCards.Count+1) * cardOverlapAmount);
         newDeckCard.GetComponent<CardMovement>().OnCardMove(newDeckCard.transform.localPosition, finalCardPosition, 0.3f);
         newDeckCard.GetComponent<InGameCard>().interActable = false;
         newDeckCard.GetComponent<InGameCard>().ReverseBurn();
         newDeckCard.GetComponent<InGameCard>().RevealDeckCardCountElement();
+        if(cardDrawReady)
+        {
+            newDeckCard.GetComponent<InGameCard>().StartDrawCardReadyEffect();
+        }
         deckCards.Add(newDeckCard);
-        i++;
     }
 
 
