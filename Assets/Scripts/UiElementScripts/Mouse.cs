@@ -199,9 +199,12 @@ public class Mouse : MonoBehaviour
                 Hand.Instance.RemoveCardNoDestroy(heldCard.GetComponent<InGameCard>().GetData().seed);
                 heldCard = null;
                 Cursor.visible = true;
-            } else if (TutorialManager.tutorialManagerInstance.burnignAllowed) {
+            } 
+            else if (TutorialManager.tutorialManagerInstance.burnignAllowed) 
+            {
                 //let the player burn only one specific card
-                if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.BurnCard) {
+                if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.BurnCard) 
+                {
                     Debug.Log("seed " + heldCard.GetComponent<InGameCard>().GetCardData().seed);
                     //don't use magic strings
                     if (heldCard.GetComponent<InGameCard>().GetCardData().seed != "00000001") {
@@ -326,6 +329,7 @@ public class Mouse : MonoBehaviour
                             References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
                             if (!tutorialMode) {
                                 WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed, RayCaster.Instance.target.GetComponent<InGameCard>().GetData().seed);
+                                GameManager.Instance.PrePlaySpell(heldCard);
                             } else {
                                 
                                 TutorialManager.tutorialManagerInstance.spellCardSeed.Add(heldCard.GetComponent<InGameCard>().GetCardData().seed);
@@ -367,6 +371,7 @@ public class Mouse : MonoBehaviour
                 References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
                 if (!tutorialMode) {
                     WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed);
+                    GameManager.Instance.PrePlaySpell(heldCard);
                 } else {
                     PlaySpellMessage playSpellMessage = new PlaySpellMessage(0, heldCard.GetComponent<InGameCard>().GetCardData(), TutorialManager.tutorialManagerInstance.spellWindup);
                     GameManager.Instance.PlaySpell(playSpellMessage);
