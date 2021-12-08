@@ -32,7 +32,7 @@ public class CardData
     public string description;
 
     //add missing ones later
-    public CardData(Sprite cardSprite, bool targetting, string cardName, int cost, int value, Card.CardType cardType, Card.AttackDirection attackDirection, int rp, int lp, List<Enchantment> enchantments, string seed, string description, bool legendary, Enchantment.TargetType targetType) //List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags)
+    public CardData(Sprite cardSprite, bool targetting, string cardName, int cost, int value, Card.CardType cardType, Card.AttackDirection attackDirection, int rp, int lp, List<Enchantment> enchantments, string seed, bool legendary, Enchantment.TargetType targetType) //List<Card.SpellTag> spellTags, List<Card.MonsterTag> monsterTags)
     {
         this.seed = seed;
         this.cardSprite = cardSprite;
@@ -47,13 +47,12 @@ public class CardData
         this.lp = lp;
         this.enchantments = enchantments;
         this.targetting = targetting;
-        this.description = description;
         this.legendary = legendary;
         this.targetType = targetType;
 
     }
 
-    public CardData(Sprite cardSprite, bool targetting, string cardName, int cost, int value, Card.CardType cardType, List<Enchantment> enchantments, string seed, string description, bool legendary)
+    public CardData(Sprite cardSprite, bool targetting, string cardName, int cost, int value, Card.CardType cardType, List<Enchantment> enchantments, string seed, bool legendary)
     {
         this.seed = seed;
         this.cardSprite = cardSprite;

@@ -89,6 +89,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private bool cardInHand;
 
     [SerializeField] private DealDamageToPlayerParticleManager dealDamageToPlayerParticleManager;
+    [SerializeField] private GameObject enchantmentDescriptionGameObject;
 
     public void SetTempValuesAsValues()
     {
@@ -298,6 +299,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
                 if (timeInBurnLimbo > 6) {
                     BurnCardMessage burnCardMessage = new BurnCardMessage();
                     burnCardMessage.denied = true;
+                    burnCardMessage.seed = cardData.seed;
                     GameManager.Instance.PlayerBurnCard(burnCardMessage);
                     inBurnLimbo = false;
                 }
@@ -369,12 +371,27 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         if (value != null) value.text = cardData.value.ToString();
         if(this.cardData.enchantments.Count > 0)
         {
+            enchantmentDescriptionGameObject.gameObject.SetActive(true);
             enchantmentCountText.text = this.cardData.enchantments.Count.ToString();
+        }
+        else
+        {
+            enchantmentDescriptionGameObject.gameObject.SetActive(false);
         }
         if (cardData.cardSprite) {
             meshRendererImage.material.SetTexture("_CardImage", cardData.cardSprite.texture);
         }
-        
+
+        if (this.cardData.enchantments.Count > 0)
+        {
+            enchantmentDescriptionGameObject.gameObject.SetActive(true);
+            enchantmentCountText.text = this.cardData.enchantments.Count.ToString();
+        }
+        else
+        {
+            enchantmentDescriptionGameObject.gameObject.SetActive(false);
+        }
+
         UpdateRPLP(cardData.rp, cardData.lp);
 
 
@@ -564,6 +581,16 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     public void SetDescription()
     {
         descriptionText.text = cardData.description;
+
+        if (this.cardData.enchantments.Count > 0)
+        {
+            enchantmentDescriptionGameObject.gameObject.SetActive(true);
+            enchantmentCountText.text = this.cardData.enchantments.Count.ToString();
+        }
+        else
+        {
+            enchantmentDescriptionGameObject.gameObject.SetActive(false);
+        }
     }
 
     public void SetAttackDirectionSymbol()

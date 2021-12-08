@@ -569,7 +569,7 @@ public class GameManager : MonoBehaviour
         {
             playerStats.playerBurnValue -= data.cost;
             References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = playerStats.playerBurnValue.ToString();
-
+            References.i.yourMonsterZone.GetCardFromMonsterCards(data.seed).GetComponent<InGameCard>().SetIntoSummonLimbo();
         }
         else
         {
@@ -590,13 +590,14 @@ public class GameManager : MonoBehaviour
         {
             GameObject newCard = References.i.yourMonsterZone.AddNewMonsterCard(true, 0, data);
             GameManager.Instance.AddCardToInGameCards(newCard);
-            newCard.GetComponent<InGameCard>().SetIntoSummonLimbo();
+            
             //TODO: make sure that card with that seed still exists in the game(instead of removing move to container or something)
             Hand.Instance.TryRemoveCard(data.seed);
 
             if (!hasTargetAbility)
             {
                 PlayerPlayCard(data);
+                
             }
             else
             {
@@ -777,10 +778,16 @@ public class GameManager : MonoBehaviour
             data.value = cardData.value;
             Debug.Log("card new cost = " + cardData.cost);
             PlayDataChangeEffect(statChangeMessage.buffType, target);
-            target.GetComponent<InGameCard>().SetNewDescription(References.i.cardList.GetCardDescription(data.enchantments));
+            target.GetComponent<InGameCard>().SetNewDescription(References.i.cardList.GetCardDescription(data));
             target.GetComponent<InGameCard>().UpdateCardTexts();
             target.GetComponent<InGameCard>().SetDescription();
         }
+    }
+
+    public void DestroyMismatchCatrd(string seed)
+    {
+        Hand.Instance.TryRemoveCard(seed);
+        References.i.yourMonsterZone.TryRemoveMonsterCard(seed);
     }
 
     public void PrePlaySpell(GameObject card)
@@ -793,6 +800,7 @@ public class GameManager : MonoBehaviour
         if (IsYou(playSpellMessage.player))
         {
             References.i.spellZone.PlaySpell(playSpellMessage.seed, playSpellMessage.targets, playSpellMessage.windup, playSpellMessage.slot);
+            LimboCardHolder.Instance.TryGetLimboCardWithSeed(playSpellMessage.seed).GetComponent<InGameCard>().RemoveFromSpellLimbo();
             playerStats.playerHandCards--;
             playerStats.discardpileCardCount++;
 

@@ -344,6 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: bed5d908ee630464bb53a7037b3b764d, type: 2}
   meshRenderer: {fileID: 8366581165163960993}
+  effectOn: 0
 --- !u!1 &822220645706602871
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,6 +591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 36a57ebbf8294d74081aed627ef5adca, type: 2}
   meshRenderer: {fileID: 6371716831287125151}
+  effectOn: 0
 --- !u!1 &1271703786887711570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,6 +1404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: be99ac07faa7a5c4cb49cf27614b9648, type: 2}
   meshRenderer: {fileID: 6209742373582292831}
+  effectOn: 0
 --- !u!65 &8370167659885891805
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1909,6 +1912,7 @@ MonoBehaviour:
   deckCardCountElement: {fileID: 8255645304783649934}
   cardInHand: 1
   dealDamageToPlayerParticleManager: {fileID: 0}
+  enchantmentDescriptionGameObject: {fileID: 4788982044432738040}
 --- !u!65 &9060123631021853949
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2701,6 +2705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 36a57ebbf8294d74081aed627ef5adca, type: 2}
   meshRenderer: {fileID: 8726931636802957043}
+  effectOn: 0
 --- !u!114 &8691831148577227344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2715,6 +2720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 36a57ebbf8294d74081aed627ef5adca, type: 2}
   meshRenderer: {fileID: 8366242118843810119}
+  effectOn: 0
 --- !u!1 &8341758794943205182
 GameObject:
   m_ObjectHideFlags: 0
@@ -2811,6 +2817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: a8758991b2eb0bb4f99591b74bc1186b, type: 2}
   meshRenderer: {fileID: 8927015713144595145}
+  effectOn: 0
 --- !u!1 &9068328020213241370
 GameObject:
   m_ObjectHideFlags: 0
@@ -3904,6 +3911,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1a496c5feecef7f46954e38d5ace42e1, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1a496c5feecef7f46954e38d5ace42e1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a496c5feecef7f46954e38d5ace42e1, type: 3}

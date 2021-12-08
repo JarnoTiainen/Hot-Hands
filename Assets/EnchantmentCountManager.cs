@@ -11,7 +11,14 @@ public class EnchantmentCountManager : MonoBehaviour, IOnHoverEnterElement, IOnH
     {
         if(inGameCard.GetData().enchantments.Count > 0)
         {
-            Tooltip.ShowTooltip_Static(inGameCard.GetData().description);
+            if(inGameCard.GetData().cardName == "Essence Thief")
+            {
+                Tooltip.ShowTooltip_Static(References.i.cardList.GetCardDescription(inGameCard.GetData(), true));
+            }
+            else
+            {
+                Tooltip.ShowTooltip_Static(inGameCard.GetData().description);
+            }
         }
     }
 

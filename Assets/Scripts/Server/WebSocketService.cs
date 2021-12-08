@@ -15,7 +15,7 @@ public class WebSocketService : MonoBehaviour
 
     public bool isLoggedIn = false;
     public bool gameEnded = false;
-
+    public bool receiveMessages = true;
     private void Awake()
     {
         Instance = gameObject.GetComponent<WebSocketService>();
@@ -36,180 +36,185 @@ public class WebSocketService : MonoBehaviour
 
         websocket.OnMessage += (bytes) =>
         {
-            JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
-            if (showServerMessage) Debug.Log("server message: " + data[0] + " " + data[1] + " " + data[2]);
-            switch ((string)data[0])
+            if(receiveMessages)
             {
-                case "OPPONENTJOIN":
-                    if (debuggerModeOn) Debug.Log("Message type was OPPONENTJOINED");
-                    Debug.Log("Opponent joined!");
-                    break;
-                case "GETSIDE":
-                    if (debuggerModeOn) Debug.Log("Message type was GETSIDE");
-                    gameManager.SetPlayerNumber(int.Parse(data[1]));
-                    break;
-                case "SUMMONCARD":
-                    if (debuggerModeOn) Debug.Log("Message type was SUMMONCARD");
-                    SummonCardMessage summonCardMessage = JsonUtility.FromJson<SummonCardMessage>(data[1]);
-                    gameManager.PlayerSummonCard(summonCardMessage);
-                    break;
-                case "SUMMONDENIED":
-                    gameManager.CardSummonDenied();
-                    break;
-                case "SPELLDENIED":
-                    gameManager.CardDenied(data[1]);
-                    break;
-                case "REMOVECARD":
-                    RemoveCardMessage removeCardMessage = JsonUtility.FromJson<RemoveCardMessage>(data[1]);
-                    gameManager.RemoveCard(removeCardMessage);
-                    break;
-                case "PLAYCARD":
-                    if (debuggerModeOn) Debug.Log("Message type was PLAYCARD");
-                    PlayCardMessage playCardMessage = JsonUtility.FromJson<PlayCardMessage>(data[1]);
-                    gameManager.PlayerPlayCard(playCardMessage);
-                    break;
-                case "DRAWCARD":
-                    if (debuggerModeOn) Debug.Log("Message type was DRAWCARD");
-                    if(data[1] != "DENIED")
-                    {
-                        DrawCardMessage drawCardMessage = JsonUtility.FromJson<DrawCardMessage>(data[1]);
-                        gameManager.PlayerDrawCard(drawCardMessage);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("CARD DRAW FAILED DESTROYING HIDDEN CARD");
-                        gameManager.PlayerReturnDrawCard();
-                    }
-                    break;
-                case "ATTACK":
-
-                    //Add attack denied by server
-                    if (debuggerModeOn) Debug.Log("Message type was ATTACK");
-                    AttackEventMessage attackEventMessage = JsonUtility.FromJson<AttackEventMessage>(data[1]);
-                    gameManager.PlayerAttack(attackEventMessage);
-
-                    break;
-                case "SAVECARD":
-                    if (debuggerModeOn) Debug.Log("Message type was SAVECARD");
-                    Debug.Log("Saved card " + data[1][0] + " succesfully");
-                    break;
-                case "SETDECK":
-                    if (debuggerModeOn) Debug.Log("Message type was SETDECK");
-                    SetDeckMessage setDeckMessage = JsonUtility.FromJson<SetDeckMessage>(data[1]);
-                    GameManager.Instance.SetDeck(setDeckMessage);
-                    break;
-                case "GETDECKS":
-                    if (debuggerModeOn) Debug.Log("Message type was GETDECKS");
-                    GetDecksMessage  getDecksMessage = JsonUtility.FromJson<GetDecksMessage>(data[1]);
-                    CollectionManager.Instance.SetPlayerDecks(getDecksMessage);
-                    break;
-                case "BURNCARD":
-                    if (debuggerModeOn) Debug.Log("Message type was BURNCARD");
-                    BurnCardMessage burnCardMessage = JsonUtility.FromJson<BurnCardMessage>(data[1]);
-                    gameManager.PlayerBurnCard(burnCardMessage);
-                    break;
-                case "SERVERCLIENTMISSMATCH":
-                    Debug.LogError("MISS MATCH BETWEEN SERVER AND CLIENT! " + data[1]);
-                    break;
-                case "ENCHANTMENTACTIVE":
-                    if (debuggerModeOn) Debug.Log("Message type was ENCHANTMENTACTIVE");
-                    EnchantmentEffectMesage enchantmentEffect = JsonUtility.FromJson<EnchantmentEffectMesage>(data[1]);
-                    gameManager.EnchantmentEffectActive(enchantmentEffect);
-                    break;
-                case "SAVEUSER":
-                    if(data[1] == "ok")
-                    {
-                        Debug.Log("Created new account");
-                        MainMenu.Instance.CreatePopupNotification("Created new account.", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Positive);
-                    }
-                    else
-                    {
-                        Debug.Log("Created new account Failed!");
-                        MainMenu.Instance.CreatePopupNotification("Account creation failed!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
-                    }
-                    break;
-                case "LOGIN":
-                    if (data[1] == "not ok")
-                    {
-                        Debug.Log("Login Failed!");
-                        MainMenu.Instance.CreatePopupNotification("Login Failed!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
-                    }
-                    else
-                    {
-                        isLoggedIn = true;
-                        GameObject.Find("LoginPanel").GetComponent<LoginManager>().CloseLoginScreen();
-                        Debug.Log("Login ok");
-                        MainMenu.Instance.CreatePopupNotification("Logged in.", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Positive);
-                        ChatManager.Instance.HideChat(false);
-                        LoadChat();
-                        GetDecks();
-
-                        LoginMessage loginMessage = JsonUtility.FromJson<LoginMessage>(data[1]);
-                        MainMenu.Instance.SuccessfulLogin(loginMessage);
-                    }
-
-                    break;
-                case "JOINGAME":
-                    if (data[1] != "")
-                    {
-                        gameEnded = false;
-                        Debug.Log("MATCH FOUND!");
-                        if(GameObject.Find("Canvas").GetComponent<MainMenu>())
+                JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
+                if (showServerMessage) Debug.Log("server message: " + data[0] + " " + data[1] + " " + data[2]);
+                switch ((string)data[0])
+                {
+                    case "OPPONENTJOIN":
+                        if (debuggerModeOn) Debug.Log("Message type was OPPONENTJOINED");
+                        Debug.Log("Opponent joined!");
+                        break;
+                    case "GETSIDE":
+                        if (debuggerModeOn) Debug.Log("Message type was GETSIDE");
+                        gameManager.SetPlayerNumber(int.Parse(data[1]));
+                        break;
+                    case "SUMMONCARD":
+                        if (debuggerModeOn) Debug.Log("Message type was SUMMONCARD");
+                        SummonCardMessage summonCardMessage = JsonUtility.FromJson<SummonCardMessage>(data[1]);
+                        gameManager.PlayerSummonCard(summonCardMessage);
+                        break;
+                    case "SUMMONDENIED":
+                        gameManager.CardSummonDenied();
+                        break;
+                    case "SPELLDENIED":
+                        gameManager.CardDenied(data[1]);
+                        break;
+                    case "REMOVECARD":
+                        RemoveCardMessage removeCardMessage = JsonUtility.FromJson<RemoveCardMessage>(data[1]);
+                        gameManager.RemoveCard(removeCardMessage);
+                        break;
+                    case "PLAYCARD":
+                        if (debuggerModeOn) Debug.Log("Message type was PLAYCARD");
+                        PlayCardMessage playCardMessage = JsonUtility.FromJson<PlayCardMessage>(data[1]);
+                        gameManager.PlayerPlayCard(playCardMessage);
+                        break;
+                    case "DRAWCARD":
+                        if (debuggerModeOn) Debug.Log("Message type was DRAWCARD");
+                        if (data[1] != "DENIED")
                         {
-                            GameObject.Find("Canvas").GetComponent<MainMenu>().GameFound(1);
+                            DrawCardMessage drawCardMessage = JsonUtility.FromJson<DrawCardMessage>(data[1]);
+                            gameManager.PlayerDrawCard(drawCardMessage);
                         }
-                        
-                        GetPlayerNumber();
-                        gameManager.ResetPlayerStats();
-                        //References.i.yourDeckObj.GetComponent<Deck>().SendDeckData();
-                    }
-                    break;
-                case "GAINBURN":
-                    gameManager.PlayerGainBurnValue(JsonUtility.FromJson<GainBurnValueMessage>(data[1]));
-                    break;
+                        else
+                        {
+                            Debug.LogWarning("CARD DRAW FAILED DESTROYING HIDDEN CARD");
+                            gameManager.PlayerReturnDrawCard();
+                        }
+                        break;
+                    case "ATTACK":
 
-                case "ADDNEWCARD":
-                    gameManager.AddNewCard(JsonUtility.FromJson<AddNewCardMessage>(data[1]));
-                    break;
-                case "MODIFYHEALTH":
-                    gameManager.PlayerModifyHealth(JsonUtility.FromJson<ModifyHealth>(data[1]));
-                    break;
-                case "BUFFBOARD":
-                    gameManager.CardDataChange(JsonUtility.FromJson<StatChangeMessage>(data[1]));
-                    break;
-                case "SEEDMISMATCH":
-                    Debug.LogError("SEED MISSMATCH! not found");
-                    break;
-                case "PLAYSPELL":
-                    if (debuggerModeOn) Debug.Log("Message type was PLAYSPELL");
-                    gameManager.PlaySpell(JsonUtility.FromJson<PlaySpellMessage>(data[1]));
-                    break;
-                case "TRIGGERSPELL":
-                    gameManager.TriggerSpell(JsonUtility.FromJson<TriggerSpellMessage>(data[1]));
-                    break;
-                case "LOADCHAT":
-                    if(SceneManager.GetActiveScene().buildIndex == 0)
-                    {
-                        gameManager.LoadChat(JsonUtility.FromJson<LoadChatMessage>(data[1]));
-                    }
-                    break;
-                case "CHATMESSAGE":
-                    LoadChat();
-                    break;
-                case "LOCKSPELLCHAIN":
-                    gameManager.LockSpellChain(data[1]);
-                    break;
-                case "GAMEOVER":
-                    gameEnded = true;
-                    gameManager.EndGame(data[1]);
-                    break;
-                case "GETOPPONENTNAME":
-                    gameManager.SetOpponentName(data[1]);
-                    break;
-                default:
-                    if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
-                    break;
+                        //Add attack denied by server
+                        if (debuggerModeOn) Debug.Log("Message type was ATTACK");
+                        AttackEventMessage attackEventMessage = JsonUtility.FromJson<AttackEventMessage>(data[1]);
+                        gameManager.PlayerAttack(attackEventMessage);
+
+                        break;
+                    case "SAVECARD":
+                        if (debuggerModeOn) Debug.Log("Message type was SAVECARD");
+                        Debug.Log("Saved card " + data[1][0] + " succesfully");
+                        break;
+                    case "SETDECK":
+                        if (debuggerModeOn) Debug.Log("Message type was SETDECK");
+                        SetDeckMessage setDeckMessage = JsonUtility.FromJson<SetDeckMessage>(data[1]);
+                        GameManager.Instance.SetDeck(setDeckMessage);
+                        break;
+                    case "GETDECKS":
+                        if (debuggerModeOn) Debug.Log("Message type was GETDECKS");
+                        GetDecksMessage getDecksMessage = JsonUtility.FromJson<GetDecksMessage>(data[1]);
+                        CollectionManager.Instance.SetPlayerDecks(getDecksMessage);
+                        break;
+                    case "BURNCARD":
+                        if (debuggerModeOn) Debug.Log("Message type was BURNCARD");
+                        BurnCardMessage burnCardMessage = JsonUtility.FromJson<BurnCardMessage>(data[1]);
+                        gameManager.PlayerBurnCard(burnCardMessage);
+                        break;
+                    case "SERVERCLIENTMISSMATCH":
+                        Debug.LogError("MISS MATCH BETWEEN SERVER AND CLIENT! " + data[1]);
+                        break;
+                    case "ENCHANTMENTACTIVE":
+                        if (debuggerModeOn) Debug.Log("Message type was ENCHANTMENTACTIVE");
+                        EnchantmentEffectMesage enchantmentEffect = JsonUtility.FromJson<EnchantmentEffectMesage>(data[1]);
+                        gameManager.EnchantmentEffectActive(enchantmentEffect);
+                        break;
+                    case "SAVEUSER":
+                        if (data[1] == "ok")
+                        {
+                            Debug.Log("Created new account");
+                            MainMenu.Instance.CreatePopupNotification("Created new account.", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Positive);
+                        }
+                        else
+                        {
+                            Debug.Log("Created new account Failed!");
+                            MainMenu.Instance.CreatePopupNotification("Account creation failed!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
+                        }
+                        break;
+                    case "LOGIN":
+                        if (data[1] == "not ok")
+                        {
+                            Debug.Log("Login Failed!");
+                            MainMenu.Instance.CreatePopupNotification("Login Failed!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
+                        }
+                        else
+                        {
+                            isLoggedIn = true;
+                            GameObject.Find("LoginPanel").GetComponent<LoginManager>().CloseLoginScreen();
+                            Debug.Log("Login ok");
+                            MainMenu.Instance.CreatePopupNotification("Logged in.", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Positive);
+                            ChatManager.Instance.HideChat(false);
+                            LoadChat();
+                            GetDecks();
+
+                            LoginMessage loginMessage = JsonUtility.FromJson<LoginMessage>(data[1]);
+                            MainMenu.Instance.SuccessfulLogin(loginMessage);
+                        }
+
+                        break;
+                    case "JOINGAME":
+                        if (data[1] != "")
+                        {
+                            gameEnded = false;
+                            Debug.Log("MATCH FOUND!");
+                            if (GameObject.Find("Canvas").GetComponent<MainMenu>())
+                            {
+                                GameObject.Find("Canvas").GetComponent<MainMenu>().GameFound(1);
+                            }
+
+                            GetPlayerNumber();
+                            gameManager.ResetPlayerStats();
+                            //References.i.yourDeckObj.GetComponent<Deck>().SendDeckData();
+                        }
+                        break;
+                    case "GAINBURN":
+                        gameManager.PlayerGainBurnValue(JsonUtility.FromJson<GainBurnValueMessage>(data[1]));
+                        break;
+
+                    case "ADDNEWCARD":
+                        gameManager.AddNewCard(JsonUtility.FromJson<AddNewCardMessage>(data[1]));
+                        break;
+                    case "MODIFYHEALTH":
+                        gameManager.PlayerModifyHealth(JsonUtility.FromJson<ModifyHealth>(data[1]));
+                        break;
+                    case "BUFFBOARD":
+                        gameManager.CardDataChange(JsonUtility.FromJson<StatChangeMessage>(data[1]));
+                        break;
+                    case "SEEDMISMATCH":
+                        Debug.LogError("SEED MISSMATCH! not found");
+                        gameManager.DestroyMismatchCatrd(data[1]);
+                        break;
+                    case "PLAYSPELL":
+                        if (debuggerModeOn) Debug.Log("Message type was PLAYSPELL");
+                        gameManager.PlaySpell(JsonUtility.FromJson<PlaySpellMessage>(data[1]));
+                        break;
+                    case "TRIGGERSPELL":
+                        gameManager.TriggerSpell(JsonUtility.FromJson<TriggerSpellMessage>(data[1]));
+                        break;
+                    case "LOADCHAT":
+                        if (SceneManager.GetActiveScene().buildIndex == 0)
+                        {
+                            gameManager.LoadChat(JsonUtility.FromJson<LoadChatMessage>(data[1]));
+                        }
+                        break;
+                    case "CHATMESSAGE":
+                        LoadChat();
+                        break;
+                    case "LOCKSPELLCHAIN":
+                        gameManager.LockSpellChain(data[1]);
+                        break;
+                    case "GAMEOVER":
+                        gameEnded = true;
+                        gameManager.EndGame(data[1]);
+                        break;
+                    case "GETOPPONENTNAME":
+                        gameManager.SetOpponentName(data[1]);
+                        break;
+                    default:
+                        if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
+                        break;
+                }
             }
+            
         };
         Debug.Log("opening");
     }
