@@ -19,8 +19,13 @@ public class MonsterZone : MonoBehaviour
             if(Mouse.Instance.heldCard.GetComponent<InGameCard>().GetData().cardType == Card.CardType.Monster)
             {
                 MakeRoom();
-            } else {
-                RemoveGhostCard();
+            } 
+            else 
+            {
+                if (ghostCard != null)
+                {
+                    RemoveGhostCard();
+                }
             }
         } else {
             if(ghostCard != null)
