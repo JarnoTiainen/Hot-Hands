@@ -795,6 +795,7 @@ public class GameManager : MonoBehaviour
             References.i.spellZone.PlaySpell(playSpellMessage.seed, playSpellMessage.targets, playSpellMessage.windup, playSpellMessage.slot);
             playerStats.playerHandCards--;
             playerStats.discardpileCardCount++;
+
             if (References.i.mouse.tutorialMode) {
                 if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.PlaySpell) {
                     if (!TutorialManager.tutorialManagerInstance.firstSpell) {
@@ -802,6 +803,7 @@ public class GameManager : MonoBehaviour
                         TutorialManager.tutorialManagerInstance.firstSpell = true;
                     }
                 }
+                
             }
         }
         else

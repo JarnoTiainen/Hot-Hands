@@ -36,6 +36,7 @@ public class TutorialManager : MonoBehaviour
     public List<string> spellCardSeed;
     public AIscript opponentAI;
     private DialogueManager diManager;
+    private float denycounter;
 
     [SerializeField] private TutorialState tutorialState = TutorialState.Introduction;
     public static TutorialManager tutorialManagerInstance { get; private set; }
@@ -62,8 +63,17 @@ public class TutorialManager : MonoBehaviour
         SpellCard,
         Dialogue9,
         PlaySpell,
-        Dialogue10,
-        Damage
+        Dialogue10, //be fast
+        Deny,
+        Dialogue11, //youy were too slow
+        TooSlow,    //wait for the deny spell
+        Dialogue12, //yey do stuff
+        Denied,
+        Dialogue13, //last dialogue
+        End,
+
+
+
     }
 
     public TutorialState GetState()
@@ -75,6 +85,18 @@ public class TutorialManager : MonoBehaviour
     {
         Debug.Log("NEXT" + (int)tutorialState);
         tutorialState++;
+        Switcher();      
+    }
+
+    public void SwitchState(TutorialState newState)
+    {
+        tutorialState = newState;
+        Debug.Log("switching  state");
+        Switcher();
+    }
+
+    private void Switcher()
+    {
         switch(tutorialState) {
             case TutorialState.CardDraw:
                 drawingAllowed = true;
@@ -144,62 +166,25 @@ public class TutorialManager : MonoBehaviour
                 ToggleTime();
                 PlaySpellState();
                 return;
+            case TutorialState.Dialogue10:
+                ToggleTime();
+                diManager.DialogueTrigger();
+                return;
+            case TutorialState.Deny:
+                ToggleTime();
+                DenyState();
+                return;
+            case TutorialState.Dialogue11:
+                //diManager.SkipNextDialogue();
+                Debug.Log("skipping dialogue");
+                return;
+            case TutorialState.TooSlow:
+                
+                return;
             default:
                 return;
         }
-            
-                
     }
-
-    //public void SwitchState(TutorialState newState)
-    //{
-    //    tutorialState = newState;
-    //    Debug.Log("switching  state");
-    //    switch(tutorialState) {
-    //        case TutorialState.CardDraw:
-    //            drawingAllowed = true;
-    //            return;
-    //        case TutorialState.BurnCard:
-    //            drawingAllowed = false;
-    //            BurnState();
-    //            return;
-    //        case TutorialState.Dialogue2:
-    //            BurnState();
-    //            burnignAllowed = false;
-    //            return;
-    //        case TutorialState.CardPlay:
-    //            PlayCardState();
-    //            return;
-    //        case TutorialState.Dialogue3:
-    //            ToggleTime();
-    //            return;
-    //        case TutorialState.CardAttack:
-    //            ToggleTime();
-    //            AttackState();
-    //            return;
-    //        case TutorialState.AttackValues:
-    //            AttackValuesState();
-    //            return;
-    //        case TutorialState.DefenseValues:
-    //            AttackValuesState();
-    //            DefenseValuesState();
-    //            NextTutorialState();
-    //            return;
-    //        case TutorialState.DirectAttack:
-    //            DefenseValuesState();
-    //            StartCoroutine(DirectCounter());
-    //            ToggleTime();
-    //            firstAttack = true;
-    //            return;
-    //        case TutorialState.SpellCard:
-    //            drawingAllowed = true;
-    //            opponentAI.OpponentSummonCard();
-    //            return;
-    //        default:
-    //            return;
-    //    }
-    //}
-
 
     private void Awake()
     {
@@ -266,9 +251,9 @@ public class TutorialManager : MonoBehaviour
 
     private void PlayCardState()
     {
+        summoningAllowed = true;
         GameObject ownCard = GameManager.Instance.GetCardFromInGameCards("00000000");
         ownCard.GetComponentsInChildren<HighLightController>()[3].ToggleHighlightAnimation();
-        summoningAllowed = true;
     }
 
     private void AttackState()
@@ -306,8 +291,6 @@ public class TutorialManager : MonoBehaviour
         References.i.opponentDeck.GetComponent<TutorialDeck>().OpponentDraw();
         References.i.opponentDeck.GetComponent<TutorialDeck>().OpponentDraw();
 
-
-
         float countDown = 0;
         while (countDown <= 2) {
             //player attacks by themselves
@@ -324,10 +307,36 @@ public class TutorialManager : MonoBehaviour
 
     private void PlaySpellState()
     {
+        burnignAllowed = false;
+        attackingAllowed = false;
+        drawingAllowed = false;
+        //does this allow spells
+        summoningAllowed = false;
         Debug.Log("Play spell state");
         opponentAI.OpponentPlaySpell();
         GameObject ownCard = GameManager.Instance.GetCardFromInGameCards("00000002");
-        ownCard.GetComponentsInChildren<HighLightController>()[0].ToggleHighlightAnimation();
+        ownCard.GetComponentsInChildren<HighLightController>()[1].ToggleHighlightAnimation();
+    }
+
+    private void DenyState()
+    {
+        GameObject ownCard = GameManager.Instance.GetCardFromInGameCards("00000003");
+        ownCard.GetComponentsInChildren<HighLightController>()[1].ToggleHighlightAnimation();
+        StartCoroutine(DenyNumerator()); 
+    }
+
+    private IEnumerator DenyNumerator()
+    {
+        while (denycounter < spellWindup) {
+            denycounter += Time.deltaTime;
+            if (spellCardSeed.Count == 3) {
+                diManager.SkipNextDialogue();
+                SwitchState(TutorialState.Dialogue11);
+                
+            }
+            yield return null;
+        }
+        
     }
 
     public CardPowersMessage[] GetAttackTarget(CardData data, bool isYourAttack)

@@ -260,14 +260,12 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
                 }
 
             }
-            
 
-        }
-        else if(currentAttackCoolDown <= 0 && attackOnCD && !cardInHand)
-        {
+
+        } else if (currentAttackCoolDown <= 0 && attackOnCD && !cardInHand) {
             coolDownSlider.gameObject.SetActive(false);
             ToggleAttackBurnEffect(true);
-            
+
             attackOnCD = false;
             preAttackOnCD = false;
             currentAttackCoolDown = 0;
@@ -280,53 +278,45 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         meshRendererNameZoneLow.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
         meshRendererIconZoneLow.material.SetFloat("_DissolveAmount", mat.GetFloat("_DissolveAmount"));
 
-        if (unhandled)
-        {
-            timeAsUnhandledHandCard += Time.deltaTime;
-            if (timeAsUnhandledHandCard > 6)
-            {
-                GameManager.Instance.PlayerReturnDrawCard();
-                unhandled = false;
+        if (!References.i.mouse.tutorialMode) { 
+            if (unhandled) {
+                timeAsUnhandledHandCard += Time.deltaTime;
+                if (timeAsUnhandledHandCard > 6) {
+                    GameManager.Instance.PlayerReturnDrawCard();
+                    unhandled = false;
+                }
             }
-        }
-        if (inSummonLimbo)
-        {
-            timeInSummonLimbo += Time.deltaTime;
-            if(timeInSummonLimbo > 6)
-            {
-                GameManager.Instance.PlayerReturnCardToHand(gameObject);
-                inSummonLimbo = false;
+            if (inSummonLimbo) {
+                timeInSummonLimbo += Time.deltaTime;
+                if (timeInSummonLimbo > 6) {
+                    GameManager.Instance.PlayerReturnCardToHand(gameObject);
+                    inSummonLimbo = false;
+                }
             }
-        }
-        if(inBurnLimbo)
-        {
-            timeInBurnLimbo += Time.deltaTime;
-            if(timeInBurnLimbo > 6)
-            {
-                BurnCardMessage burnCardMessage = new BurnCardMessage();
-                burnCardMessage.denied = true;
-                GameManager.Instance.PlayerBurnCard(burnCardMessage);
-                inBurnLimbo = false;
+            if (inBurnLimbo) {
+                timeInBurnLimbo += Time.deltaTime;
+                if (timeInBurnLimbo > 6) {
+                    BurnCardMessage burnCardMessage = new BurnCardMessage();
+                    burnCardMessage.denied = true;
+                    GameManager.Instance.PlayerBurnCard(burnCardMessage);
+                    inBurnLimbo = false;
+                }
             }
-        }
-        if(inspellLimbo)
-        {
-            timeAsLimboSpell += Time.deltaTime;
-            if(timeAsLimboSpell > 6)
-            {
-                RemoveFromSpellLimbo();
-                GameManager.Instance.ReturnCardToHand(gameObject);
+            if (inspellLimbo) {
+                timeAsLimboSpell += Time.deltaTime;
+                if (timeAsLimboSpell > 6) {
+                    RemoveFromSpellLimbo();
+                    GameManager.Instance.ReturnCardToHand(gameObject);
+                }
             }
-        }
 
-        if(preAttackOnCD && !attackOnCD)
-        {
-            timeOnPreAttack += Time.deltaTime;
-            if(timeOnPreAttack > 6)
-            {
-                preAttackOnCD = false;
-                ToggleAttackBurnEffect(true);
-                timeOnPreAttack = 0;
+            if (preAttackOnCD && !attackOnCD) {
+                timeOnPreAttack += Time.deltaTime;
+                if (timeOnPreAttack > 6) {
+                    preAttackOnCD = false;
+                    ToggleAttackBurnEffect(true);
+                    timeOnPreAttack = 0;
+                }
             }
         }
 

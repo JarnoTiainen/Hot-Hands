@@ -2951,6 +2951,10 @@ MonoBehaviour:
   yourBurnPile: {fileID: 1378788128}
   opponentBurnPile: {fileID: 54390112}
   visuals: {fileID: 1908398135}
+  yourForceField: {fileID: 0}
+  opponentForceField: {fileID: 0}
+  yourLifeCalculatorCollider: {fileID: 0}
+  opponentLifeCalculatorCollider: {fileID: 0}
 --- !u!1 &525874310
 GameObject:
   m_ObjectHideFlags: 0
@@ -12359,10 +12363,16 @@ MonoBehaviour:
   - 
   - This is a Spell card. Drag it to a enemy card to use it.
   - 
-  - Oh, looks like the opponent played a spell also. You can cancel it by using your
-    Deny spell.
+  - 'Oh, looks like the opponent played a spell also. '
+  - You can cancel it by using your Deny spell, but do it quickly!
   - 
+  - Just drag the Deny card to the table.
   - 
+  - yey you didi it! now wait for the spell to activate
+  - 
+  - 'this is the last thing '
+  - 
+  - the last last thing
 --- !u!1001 &5067975732789722992
 PrefabInstance:
   m_ObjectHideFlags: 0

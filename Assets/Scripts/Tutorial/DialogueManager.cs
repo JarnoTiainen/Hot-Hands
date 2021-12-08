@@ -86,6 +86,15 @@ public class DialogueManager : MonoBehaviour
         mascotAnimator.SetBool("dialogueOn", false);
     }
 
+    public void SkipNextDialogue()
+    {
+        sentence = sentences.Dequeue();
+        while(sentence != "") {
+            sentence = sentences.Dequeue();
+        }
+        StartCoroutine(StartDialogue());
+    }
+
     IEnumerator RollDialogue(string sentence)
     {
         dialogueText.text = "";

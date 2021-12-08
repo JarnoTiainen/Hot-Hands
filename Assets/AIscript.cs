@@ -71,6 +71,7 @@ public class AIscript : MonoBehaviour
     {
         Debug.Log("opponent spell numerator");
         yield return new WaitUntil(() => TutorialManager.tutorialManagerInstance.firstSpell == true);
+        yield return new WaitForSeconds(1);
         //weird i know
         GameObject enemyCard = EnemyHand.Instance.transform.GetChild(0).gameObject;
         Debug.Log("opponent spell numerator2");
