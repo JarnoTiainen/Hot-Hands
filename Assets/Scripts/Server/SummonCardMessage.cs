@@ -10,9 +10,9 @@ public class SummonCardMessage
 
     public enum CardSource
     {
-        Default,     //0
+        Hand,        //0
         Deck,        //1
-        Hand,        //2
+        Void,        //2
         DiscardPile, //3
     }
     public int boardIndex;
@@ -31,6 +31,8 @@ public class SummonCardMessage
     public List<Enchantment> enchantments;
     public string seed;
     public bool legendary;
+    public CardSource cardSource;
+
 
     public SummonCardMessage(int boardIndex, int player, bool auto, bool free, float attackCooldown, CardData cardData)
     {

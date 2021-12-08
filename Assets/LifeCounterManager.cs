@@ -91,10 +91,6 @@ public class LifeCounterManager : MonoBehaviour
             firstNumber = '0';
             lastNumber = '0';
         }
-
-        Debug.Log("number array: " + numberArray + " first number " + firstNumber + " last number " + lastNumber);
-
-
         leftNumber.text = firstNumber.ToString();
         rightNumber.text = lastNumber.ToString();
     }

@@ -47,7 +47,6 @@ public class Hand : MonoBehaviour
 
         if (presetCard != null)
         {
-            Debug.Log("PRESET");
             newCard = presetCard;
         }
         else
@@ -66,12 +65,8 @@ public class Hand : MonoBehaviour
             unhandledCards.Add(newCard);
         }
         newCard.transform.SetParent(Instance.gameObject.transform, true);
-
-        Debug.Log(newCard);
-
         //adds to list which manages card positions in hand
         visibleHandCards.Add(newCard);
-        Debug.Log(visibleHandCards.Count);
         //adds the card to total cards in hand
         handCards.Add(newCard);
         SetNewCardPositions();
@@ -150,12 +145,8 @@ public class Hand : MonoBehaviour
     {
         CardData cardData = Instance.cardList.GetCardData(drawCardMessage);
         GameObject card = null;
-        Debug.Log("lenght4 " + unhandledCards.Count);
-
         if(cardData != null)
         {
-            Debug.Log("card exists");
-
             unhandledCards[0].GetComponent<InGameCard>().cardHidden = false;
             unhandledCards[0].GetComponent<InGameCard>().SetNewCardData(true, cardData);
             unhandledCards[0].GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0,0,0), GameManager.Instance.rotationSpeed);

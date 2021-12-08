@@ -259,7 +259,6 @@ public class GameManager : MonoBehaviour
 
         if (drawCardMessage.player == playerNumber)
         {
-            Debug.LogWarning("you draw");
             if (drawCardMessage.drawCooldown == -1)
             {
                 if(drawCardMessage.enemyDeck)
@@ -399,7 +398,23 @@ public class GameManager : MonoBehaviour
                 AddCardToInGameCards(References.i.yourMonsterZone.AutoAddNewMonsterCard(true, summonCardMessage.boardIndex, References.i.cardList.GetCardData(summonCardMessage)));
                 References.i.yourMonsterZone.GetCardWithSeed(summonCardMessage.seed).GetComponent<InGameCard>().StartAttackCooldown(summonCardMessage.attackCooldown, true);
                 playerStats.playerFieldCards++;
-                playerStats.playerHandCards--;
+                if(summonCardMessage.cardSource == SummonCardMessage.CardSource.Hand)
+                {
+                    playerStats.playerHandCards--;
+                }
+                else if (summonCardMessage.cardSource == SummonCardMessage.CardSource.Deck)
+                {
+                    playerStats.deckCardCount--;
+                }
+                else if(summonCardMessage.cardSource == SummonCardMessage.CardSource.Void)
+                {
+
+                }
+                else if(summonCardMessage.cardSource == SummonCardMessage.CardSource.DiscardPile)
+                {
+                    playerStats.discardpileCardCount--;
+                }
+
             }
             else
             {
