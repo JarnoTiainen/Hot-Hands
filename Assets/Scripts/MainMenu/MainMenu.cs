@@ -114,20 +114,16 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         MainMenuButtonsSetActive(false);
+        if(AdminControls.Instance != null)
+        {
+            soloPlayEnabled = AdminControls.Instance.SoloPlay();
+        }
         WebSocketService.JoinGame(soloPlayEnabled);
         Debug.Log("Play");
         if (soloPlayEnabled)
         {
             GameManager.Instance.ResetPlayerStats();
             LoadScene(1);
-        }
-        else if(AdminControls.Instance != null)
-        {
-            if (AdminControls.Instance.SoloPlay())
-            {
-                GameManager.Instance.ResetPlayerStats();
-                LoadScene(1);
-            }
         }
         else searchingGame.gameObject.SetActive(true);
     }
