@@ -403,7 +403,6 @@ public class Mouse : MonoBehaviour
                     
                 }
                 Debug.Log("Emptying hand");
-                //
                 
                 heldCard.GetComponent<InGameCard>().isInHand = false;
                 TransformIntoCardMode();
