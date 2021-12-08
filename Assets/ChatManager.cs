@@ -84,7 +84,11 @@ public class ChatManager : MonoBehaviour
         PlayerPrefs.SetString("LastMsgTime", lastMsgTime);
         PlayerPrefs.SetString("LastMsgUser", lastMsgUser);
         PlayerPrefs.Save();
-        if(!isOpen) newMsgNotification.SetActive(true);
+        if (!isOpen)
+        {
+            newMsgNotification.SetActive(true);
+            SFXLibrary.Instance.notificationPositive.PlaySFX();
+        }
     }
 
     private void SendMessage()
