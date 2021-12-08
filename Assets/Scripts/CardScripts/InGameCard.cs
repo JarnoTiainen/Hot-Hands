@@ -45,6 +45,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private CardTakeDamageManager cardTakeDamageManager;
     [SerializeField] private SpectralEffectManager spectralEffectManager;
     [SerializeField] private DebuffEffectManager debuffEffectManager;
+    [SerializeField] private BuffEffectMaterial buffEffectManager;
 
     [ShowIf("debuggerModeOn", true)] public int serverConfirmedIndex;
     public bool confirmedByServer;
@@ -167,7 +168,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void PlayBuffEffect()
     {
-
+        buffEffectManager.PlayEffect();
     }
  
     private void Update()

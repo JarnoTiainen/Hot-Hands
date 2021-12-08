@@ -199,6 +199,9 @@ public class WebSocketService : MonoBehaviour
                     gameEnded = true;
                     gameManager.EndGame(data[1]);
                     break;
+                case "GETOPPONENTNAME":
+                    gameManager.SetOpponentName(data[1]);
+                    break;
                 default:
                     if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                     break;
@@ -374,6 +377,13 @@ public class WebSocketService : MonoBehaviour
     {
         Debug.Log("Send game StartGame");
         GameMessage message = new GameMessage("OnMessage", "STARTGAME", "");
+        SendWebSocketMessage(JsonUtility.ToJson(message));
+    }
+
+    [Button] public static void GetOpponentName()
+    {
+        Debug.Log("Send game StartGame");
+        GameMessage message = new GameMessage("OnMessage", "GETOPPONENTNAME", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
 }

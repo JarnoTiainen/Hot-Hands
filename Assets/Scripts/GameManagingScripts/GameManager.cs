@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Dictionary<string, GameObject> inGameCards = new Dictionary<string, GameObject>();
 
+    public void SetOpponentName(string name)
+    {
+
+    }
 
     public void ResetPlayerStats()
     {
