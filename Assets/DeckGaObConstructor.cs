@@ -91,6 +91,7 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         newDeckCard.GetComponent<InGameCard>().deckCardCountElement.GetComponent<DrawCDEffectManager>().SetOwner(yourDeck);
         deckCards.Add(newDeckCard);
         i++;
+        SFXLibrary.Instance.cardShuffle.PlaySFX();
     }
 
     [Button] public void AddSingleCardToDeck()
@@ -117,6 +118,7 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
             newDeckCard.GetComponent<InGameCard>().StartDrawCardReadyEffect();
         }
         deckCards.Add(newDeckCard);
+        SFXLibrary.Instance.cardShuffle.PlaySFX();
     }
 
 

@@ -22233,7 +22233,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: uiSFX.Array.size
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: uiSFX.Array.data[1]
@@ -22270,27 +22270,27 @@ PrefabInstance:
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: uiSFX.Array.data[9]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: e1d7ccaee448d5344a4a06e70cfd1eaa, type: 2}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: uiSFX.Array.data[10]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: ambientSFX.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: effectsSFX.Array.size
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: ambientSFX.Array.data[7]
       value: 
-      objectReference: {fileID: 11400000, guid: 1dcd3c3c9ef759446a42151a772b36f4, type: 2}
+      objectReference: {fileID: 11400000, guid: a406031ab9e94f649b16fe5a13b5285b, type: 2}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: ambientSFX.Array.data[8]
       value: 
-      objectReference: {fileID: 11400000, guid: 913147e7e0817b94fa7bf9f74509c198, type: 2}
+      objectReference: {fileID: 11400000, guid: fd2cc93038f473b4da6d9071c604c7a9, type: 2}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: effectsSFX.Array.data[1]
       value: 
@@ -22307,6 +22307,14 @@ PrefabInstance:
       propertyPath: effectsSFX.Array.data[6]
       value: 
       objectReference: {fileID: 11400000, guid: 1dcd3c3c9ef759446a42151a772b36f4, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: effectsSFX.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5547bbe961990814db6d9f193e1e5f17, type: 2}
+    - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: effectsSFX.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 85a106594a011ac4392f05e7d15a04b1, type: 2}
     - target: {fileID: 6413452686842694931, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -22355,18 +22363,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SFXManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8873941290810643492, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
-      propertyPath: cardDestroyed.sfxType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8873941290810643492, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
-      propertyPath: cardDestroyed._sfxBase
-      value: 
-      objectReference: {fileID: 11400000, guid: 1dcd3c3c9ef759446a42151a772b36f4, type: 2}
-    - target: {fileID: 8873941290810643492, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
-      propertyPath: cardDestroyed.sfxToPlay
-      value: 
-      objectReference: {fileID: 11400000, guid: 1dcd3c3c9ef759446a42151a772b36f4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
 --- !u!1001 &1944376225

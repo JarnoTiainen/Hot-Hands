@@ -21,6 +21,7 @@ public class SFXLibrary : MonoBehaviour
     public SFX cardPlay1;
     public SFX cardPlay2;
     public SFX cardPlay3;
+    public SFX cardShuffle;
 
     // Effects
     public SFX burnCard;
