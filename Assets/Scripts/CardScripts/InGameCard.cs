@@ -78,6 +78,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     private bool unhandled;
     [SerializeField] private bool cardInHand;
 
+    [SerializeField] private DealDamageToPlayerParticleManager dealDamageToPlayerParticleManager;
+
     public void SetTempValuesAsValues()
     {
         UpdateRPLP(tempRp, tempLp);
@@ -99,6 +101,11 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         meshRendererNameZoneLow.material.renderQueue = 2900;
         meshRendererImage.material.renderQueue = 3100; */
         
+    }
+
+    public void SetParticleTarget(bool isYourCard)
+    {
+        dealDamageToPlayerParticleManager.SetForceField(isYourCard);
     }
 
     public void SetCardMaterial()
@@ -587,4 +594,8 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         drawCDElement.SetActive(false);
     }
 
+    public void DealDamageToPlayer(int amount)
+    {
+        dealDamageToPlayerParticleManager.DealDamageToPlayer(amount);
+    }
 }

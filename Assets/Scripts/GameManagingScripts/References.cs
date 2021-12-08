@@ -52,5 +52,8 @@ public class References: MonoBehaviour
     public GameObject opponentBurnPile;
 
     public GameObject visuals;
-
+    public ParticleSystemForceField yourForceField;
+    public ParticleSystemForceField opponentForceField;
+    public Collider yourLifeCalculatorCollider;
+    public Collider opponentLifeCalculatorCollider;
 }

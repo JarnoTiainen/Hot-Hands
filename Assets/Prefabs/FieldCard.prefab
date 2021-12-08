@@ -1908,6 +1908,7 @@ MonoBehaviour:
   drawCDElement: {fileID: 8255645304783649934}
   deckCardCountElement: {fileID: 8255645304783649934}
   cardInHand: 1
+  dealDamageToPlayerParticleManager: {fileID: 0}
 --- !u!65 &9060123631021853949
 BoxCollider:
   m_ObjectHideFlags: 0

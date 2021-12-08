@@ -259,30 +259,35 @@ public class GameManager : MonoBehaviour
 
         if (drawCardMessage.player == playerNumber)
         {
-            if (drawCardMessage.drawCooldown == -1)
+            if(Hand.Instance.GetHandCardWithSeed(drawCardMessage.seed) == null)
             {
-                if(drawCardMessage.enemyDeck)
+                if (drawCardMessage.drawCooldown == -1)
                 {
-                    Hand.AddNewCardFromOpponentDeck();
+                    if (drawCardMessage.enemyDeck)
+                    {
+                        Hand.AddNewCardFromOpponentDeck();
+                    }
+                    else
+                    {
+                        PlayerDrawCard(drawCardMessage.player, drawCardMessage.seed);
+                    }
+
+                    GameManager.Instance.playerStats.playerHandCards++;
                 }
                 else
                 {
-                    PlayerDrawCard(drawCardMessage.player, drawCardMessage.seed);
-                }
-                
-                GameManager.Instance.playerStats.playerHandCards++;
-            }
-            else
-            {
-                if(References.i.yourDeckObj.GetComponent<Deck>() != null) {
-                    References.i.yourDeck.GetComponent<DeckGaObConstructor>().StartDrawCooldown(drawCardMessage.drawCooldown);
-                } else if (References.i.yourDeckObj.GetComponent<TutorialDeck>() != null) {
-                    References.i.yourDeckObj.GetComponent<TutorialDeck>().StartDrawCooldown(drawCardMessage.drawCooldown);
-                }
-                
-            }
-            AddCardToInGameCards(Hand.RevealNewCard(drawCardMessage));
+                    if (References.i.yourDeckObj.GetComponent<Deck>() != null)
+                    {
+                        References.i.yourDeck.GetComponent<DeckGaObConstructor>().StartDrawCooldown(drawCardMessage.drawCooldown);
+                    }
+                    else if (References.i.yourDeckObj.GetComponent<TutorialDeck>() != null)
+                    {
+                        References.i.yourDeckObj.GetComponent<TutorialDeck>().StartDrawCooldown(drawCardMessage.drawCooldown);
+                    }
 
+                }
+                AddCardToInGameCards(Hand.RevealNewCard(drawCardMessage));
+            }
         }
         else
         {

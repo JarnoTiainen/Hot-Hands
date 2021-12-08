@@ -95,4 +95,16 @@ public class LifeCounterManager : MonoBehaviour
         rightNumber.text = lastNumber.ToString();
     }
 
+    public void LoseOneHealth()
+    {
+        if(isYourCounter)
+        {
+            SetNewNumber(isYourCounter, displayedYourLifePoints - 1);
+        }
+        else
+        {
+            SetNewNumber(!isYourCounter, displayedOpponentLifePoints - 1);
+        }
+        
+    }
 }
