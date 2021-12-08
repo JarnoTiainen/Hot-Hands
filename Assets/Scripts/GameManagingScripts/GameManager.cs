@@ -765,6 +765,14 @@ public class GameManager : MonoBehaviour
             References.i.spellZone.PlaySpell(playSpellMessage.seed, playSpellMessage.targets, playSpellMessage.windup, playSpellMessage.slot);
             playerStats.playerHandCards--;
             playerStats.discardpileCardCount++;
+            if (References.i.mouse.tutorialMode) {
+                if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.PlaySpell) {
+                    if (!TutorialManager.tutorialManagerInstance.firstSpell) {
+                        TutorialManager.tutorialManagerInstance.firstSpell = true;
+                    }
+                    TutorialManager.tutorialManagerInstance.NextTutorialState();
+                }
+            }
         }
         else
         {

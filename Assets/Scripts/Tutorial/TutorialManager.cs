@@ -26,6 +26,7 @@ public class TutorialManager : MonoBehaviour
     public bool attackingAllowed;
     public bool firstAttack;
     public bool firstDirectAttack;
+    public bool firstSpell;
     private bool doOnce;
     [SerializeField] private int enemyStartHP;
     [SerializeField] private int startBurnValue = 0;
@@ -93,12 +94,10 @@ public class TutorialManager : MonoBehaviour
                 ToggleTime();
                 return;
             case TutorialState.CardAttack:
-                
                 ToggleTime();
                 AttackState();
                 return;
             case TutorialState.AttackValues:
-
                 AttackValuesState();
                 NextTutorialState();
                 return;
@@ -115,13 +114,11 @@ public class TutorialManager : MonoBehaviour
                 firstAttack = true;
                 return;
             case TutorialState.SpellCard:
-
                 opponentAI.OpponentSummonCard();
                 return;
             case TutorialState.PlaySpell:
-                opponentAI.OpponentPlaySpell();
+                PlaySpellState();
                 return;
-               
             default:
                 return;
         }
@@ -240,12 +237,15 @@ public class TutorialManager : MonoBehaviour
     {
         burnignAllowed = true;
         GameObject burnCard = GameManager.Instance.GetCardFromInGameCards("00000001");
-        burnCard.GetComponentsInChildren<HighLightController>()[2].ToggleHighlightAnimation();
+        burnCard.GetComponentsInChildren<HighLightController>()[3].ToggleHighlightAnimation();
         References.i.yourBonfire.GetComponentInChildren<HighLightController>().ToggleHighlightAnimation();
     }
 
     private void PlayCardState()
     {
+        
+        GameObject ownCard = GameManager.Instance.GetCardFromInGameCards("00000000");
+        ownCard.GetComponentsInChildren<HighLightController>()[3].ToggleHighlightAnimation();
         summoningAllowed = true;
     }
 
@@ -271,6 +271,8 @@ public class TutorialManager : MonoBehaviour
         opponentCard.GetComponentsInChildren<HighLightController>()[0].ToggleHighlightAnimation();
     }
 
+    
+
     private IEnumerator DirectCounter()
     {
         References.i.opponentDeck.GetComponent<TutorialDeck>().OpponentDraw();
@@ -288,6 +290,14 @@ public class TutorialManager : MonoBehaviour
         }
         //player doesn't attack by themself
         NextTutorialState();
+    }
+
+    private void PlaySpellState()
+    {
+        Debug.Log("Play spell");
+        opponentAI.OpponentPlaySpell();
+        GameObject ownCard = GameManager.Instance.GetCardFromInGameCards("00000002");
+        ownCard.GetComponentsInChildren<HighLightController>()[0].ToggleHighlightAnimation();
     }
 
     public CardPowersMessage[] GetAttackTarget(CardData data, bool isYourAttack)

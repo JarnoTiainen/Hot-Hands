@@ -158,22 +158,24 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
                 //let the player pick a card if the deck is set
                 if (GameManager.Instance.deckSet)
                 {
-                    if (GameManager.Instance.playerStats.playerHandCards < GameManager.Instance.maxHandSize)
-                    {
-                        if (cardDrawReady)
-                        {
+                    if (GameManager.Instance.playerStats.playerHandCards < GameManager.Instance.maxHandSize) {
+                        if (cardDrawReady) {
                             Card drawnCard = cardsQueue.Dequeue();
                             string seed = "0000000" + cards.IndexOf(drawnCard);
 
                             DrawCardMessage drawCardMessage = new DrawCardMessage(0, seed, drawCooldown, drawnCard);
-                            
+
                             GameManager.Instance.PlayerDrawCard(0, seed);
                             GameManager.Instance.PlayerDrawCard(drawCardMessage);
                             GameManager.Instance.playerStats.playerHandCards++;
 
-                            if(GameManager.Instance.playerStats.playerHandCards == 2) {
-                                tutorialManager.NextTutorialState();
+                            if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.CardDraw || TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.SpellCard) {
+                                if(GameManager.Instance.playerStats.playerHandCards == 2) {
+                                     Debug.Log("nexstate from deck script");
+                                    tutorialManager.NextTutorialState();
+                                }
                             }
+                            
 
                         }
                         else

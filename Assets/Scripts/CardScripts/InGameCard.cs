@@ -453,17 +453,20 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void ToggleCanAffordEffect(bool canAfford)
     {
-        if(debuggerModeOn) Debug.Log(canAfford + " " + cardData.cardName);
-        if (canAfford && !canAffordBool)
-        {
-            canAffordBool = true;
-            cardBurn.StartCanAfford();
+        if (!References.i.mouse.tutorialMode) {
+            if(debuggerModeOn) Debug.Log(canAfford + " " + cardData.cardName);
+            if (canAfford && !canAffordBool)
+            {
+                canAffordBool = true;
+                cardBurn.StartCanAfford();
+            }
+            else if(canAffordBool && !canAfford)
+            {
+                canAffordBool = false;
+                cardBurn.EndCanAfford();
+            }
         }
-        else if(canAffordBool && !canAfford)
-        {
-            canAffordBool = false;
-            cardBurn.EndCanAfford();
-        }
+        
     }
 
     public void StartDestructionEvent()

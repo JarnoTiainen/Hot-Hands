@@ -24,7 +24,7 @@ public class SpellZone : MonoBehaviour
     [Button] public void PlaySpell(string seed, List<string> targets, float windup, int slot)
     {
         GameObject newSpell = Instantiate(spellGameObject);
-
+        Debug.Log("slot is " + slot);
         switch(slot)
         {
             case 0:

@@ -38,12 +38,12 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        if( (int)tutorialManager.GetState() % 2 == 0) {
-            if(dialogueAnimator.GetBool("dialogueOn") == false) {
+        if ((int)tutorialManager.GetState() % 2 == 0) {
+            if (dialogueAnimator.GetBool("dialogueOn") == false) {
                 StartCoroutine(StartDialogue());
             }
 
-            if (Input.GetKeyDown(KeyCode.Space) || startBool) {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || startBool) {
                 startBool = false;
                 if(sentences.Count > 0) {
                     sentence = sentences.Dequeue();

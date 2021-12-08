@@ -25,13 +25,7 @@ public class AIscript : MonoBehaviour
 
                 doOnce = false;
             }
-
         }
-
-
-
-
-
     }
 
 
@@ -67,6 +61,7 @@ public class AIscript : MonoBehaviour
         SummonCardMessage summonCard = new SummonCardMessage(1, 1, false, free, TutorialManager.tutorialManagerInstance.attackCoolDown, enemyCard);
         GameManager.Instance.PlayerSummonCard(summonCard);
         if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.CardPlay) {
+            Debug.Log("nexstate from ai script");
             TutorialManager.tutorialManagerInstance.NextTutorialState();
         }
     }
@@ -74,7 +69,7 @@ public class AIscript : MonoBehaviour
     private IEnumerator OpponentSpell()
     {
         Debug.Log("opponent spell numerator");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitUntil(() => TutorialManager.tutorialManagerInstance.firstSpell == true);
         //weird i know
         GameObject enemyCard = EnemyHand.Instance.transform.GetChild(0).gameObject;
         Debug.Log("opponent spell numerator2");
@@ -84,6 +79,7 @@ public class AIscript : MonoBehaviour
         References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.enemyPlayerStats.playerBurnValue.ToString();
         Debug.Log("opponent spell numerator3");
         PlaySpellMessage playSpellMessage = new PlaySpellMessage(1, enemyCard.GetComponent<InGameCard>().GetCardData(), TutorialManager.tutorialManagerInstance.spellWindup);
+        TutorialManager.tutorialManagerInstance.spellCardSeed.Add(enemyCard.GetComponent<InGameCard>().GetCardData().seed);
         playSpellMessage.slot = TutorialManager.tutorialManagerInstance.spellCardSeed.Count - 1;
         GameManager.Instance.PlaySpell(playSpellMessage);
 
