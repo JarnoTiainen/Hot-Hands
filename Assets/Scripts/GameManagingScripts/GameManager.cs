@@ -159,7 +159,6 @@ public class GameManager : MonoBehaviour
         {
             playerStats.playerHandCards--;
             playerStats.discardpileCardCount++;
-            GetCardFromInGameCards(burnCardMessage.seed).GetComponent<InGameCard>().RemoveFromBurnLimbo();
         }
         else
         {
@@ -229,7 +228,6 @@ public class GameManager : MonoBehaviour
             References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
         }
         card.GetComponent<InGameCard>().Burn();
-        card.GetComponent<InGameCard>().SetIntoBurnLimbo();
     }
     public void UpdatePlayerBurnValue(int player, int newValue)
     {
@@ -453,12 +451,6 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void PlayerReturnCardToHand(GameObject card)
-    {
-        CardDenied(card.GetComponent<InGameCard>().GetData().seed);
-        card.GetComponent<InGameCard>().RemoveFromSummonLimbo();
-    }
-
     public void RemoveCard(RemoveCardMessage removeCardMessage)
     {
         
@@ -569,7 +561,6 @@ public class GameManager : MonoBehaviour
         {
             playerStats.playerBurnValue -= data.cost;
             References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = playerStats.playerBurnValue.ToString();
-
         }
         else
         {
@@ -590,7 +581,6 @@ public class GameManager : MonoBehaviour
         {
             GameObject newCard = References.i.yourMonsterZone.AddNewMonsterCard(true, 0, data);
             GameManager.Instance.AddCardToInGameCards(newCard);
-            newCard.GetComponent<InGameCard>().SetIntoSummonLimbo();
             //TODO: make sure that card with that seed still exists in the game(instead of removing move to container or something)
             Hand.Instance.TryRemoveCard(data.seed);
 
@@ -629,17 +619,6 @@ public class GameManager : MonoBehaviour
         activeTargetLine.RemoveLine();
         References.i.yourMonsterZone.TryReturnCardToHand(targettingCardData.seed);
 
-    }
-
-    public void ReturnCardToHand(GameObject card)
-    {
-        if(LimboCardHolder.Instance.limboCards.Contains(card))
-        {
-            LimboCardHolder.Instance.limboCards.Remove(card);
-            card.GetComponent<BoxCollider>().enabled = true;
-            Hand.AddNewCard(card);
-        }
-        
     }
 
     public void Update()
@@ -783,13 +762,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PrePlaySpell(GameObject card)
-    {
-        card.GetComponent<InGameCard>().SetIntoSpellLimbo();
-    }
-
     public void PlaySpell(PlaySpellMessage playSpellMessage)
     {
+        
         if (IsYou(playSpellMessage.player))
         {
             References.i.spellZone.PlaySpell(playSpellMessage.seed, playSpellMessage.targets, playSpellMessage.windup, playSpellMessage.slot);
@@ -823,10 +798,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        if(LimboCardHolder.Instance.TryGetLimboCardWithSeed(playSpellMessage.seed))
-        {
-            LimboCardHolder.Instance.TryGetLimboCardWithSeed(playSpellMessage.seed).GetComponent<InGameCard>().RemoveFromSpellLimbo();
-        }
+
 
     }
 

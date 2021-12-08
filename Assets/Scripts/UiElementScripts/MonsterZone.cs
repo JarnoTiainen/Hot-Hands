@@ -392,7 +392,6 @@ public class MonsterZone : MonoBehaviour
         if (isYourCard)
         {
             handledCard = unhandledCards[0];
-            handledCard.GetComponent<InGameCard>().RemoveFromSummonLimbo();
             if (monsterCards.IndexOf(handledCard) != summonCardMessage.boardIndex)
             {
                 Debug.Log("chost index " + summonCardMessage.boardIndex);

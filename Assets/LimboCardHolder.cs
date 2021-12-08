@@ -18,16 +18,4 @@ public class LimboCardHolder : MonoBehaviour
         card.transform.SetParent(gameObject.transform);
         card.transform.localPosition = Vector3.zero;
     }
-
-    public GameObject TryGetLimboCardWithSeed(string seed)
-    {
-        foreach(GameObject card in limboCards)
-        {
-            if(card.GetComponent<InGameCard>().GetData().seed == seed)
-            {
-                return card;
-            }
-        }
-        return null;
-    }
 }
