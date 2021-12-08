@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class InGameSpell : MonoBehaviour
+public class InGameSpell : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitElement
 {
     [SerializeField] private CardData cardData = null;
     [SerializeField] private int spellSlotNumber;
@@ -172,5 +172,19 @@ public class InGameSpell : MonoBehaviour
             }
             lines = new List<Line>();
         }
+    }
+
+    public void OnHoverEnter()
+    {
+        if(cardData.cardName != "")
+        {
+            Tooltip.ShowTooltip_Static(cardData.description);
+
+        }
+    }
+
+    public void OnHoverExit()
+    {
+        Tooltip.HideTooltip_Static();
     }
 }

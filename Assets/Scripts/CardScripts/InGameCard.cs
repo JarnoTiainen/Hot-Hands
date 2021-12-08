@@ -66,6 +66,9 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     [SerializeField] private CardRuneEffectManager cardRuneEffectManager;
     [SerializeField] private CardTrailManager cardTrailManager;
     [SerializeField] private DrawCardReadyManager drawCardReadyManager;
+    [SerializeField] private TextMeshProUGUI enchantmentCountText;
+    [SerializeField] private DrawCDEffectManager drawCDEffectManager;
+    [SerializeField] private GameObject drawCDElement;
 
     public GameObject deckCardCountElement;
 
@@ -244,7 +247,10 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         if (name != null) nameText.text = cardData.cardName;
         if (cost != null) cost.text = cardData.cost.ToString();
         if (value != null) value.text = cardData.value.ToString();
-
+        if(this.cardData.enchantments.Count > 0)
+        {
+            enchantmentCountText.text = this.cardData.enchantments.Count.ToString();
+        }
         if (cardData.cardSprite) {
             meshRendererImage.material.SetTexture("_CardImage", cardData.cardSprite.texture);
         }
@@ -509,4 +515,20 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     {
         deckCardCountElement.SetActive(false);
     }
+
+    public void StartDrawCooldown(float time)
+    {
+        drawCDEffectManager.StartDrawCDEffect(time);
+    }
+
+    public void RevealCDElement()
+    {
+        drawCDElement.SetActive(true);
+    }
+
+    public void HideCDElement()
+    {
+        drawCDElement.SetActive(false);
+    }
+
 }
