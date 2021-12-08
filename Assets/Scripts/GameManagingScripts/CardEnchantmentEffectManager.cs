@@ -25,6 +25,11 @@ public class CardEnchantmentEffectManager : MonoBehaviour
 
     public void PlayEnchantmentEffect(Enchantment.Trigger trigger, string seed, bool isYou)
     {
+        if (!GameManager.Instance.GetCardFromInGameCards(seed))
+        {
+            return;
+        }
+
         switch (trigger)
         {
             case Enchantment.Trigger.Battlecry:
@@ -35,6 +40,7 @@ public class CardEnchantmentEffectManager : MonoBehaviour
                 Debug.Log("Brutality effect here");
                 break;
             case Enchantment.Trigger.Drawtivation:
+                
                 GameManager.Instance.GetCardFromInGameCards(seed).GetComponent<CardEnchantmentEffectScript>().PlayEffectWild();
                 break;
             case Enchantment.Trigger.LastBreath:

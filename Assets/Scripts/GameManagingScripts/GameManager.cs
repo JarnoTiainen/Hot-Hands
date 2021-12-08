@@ -107,7 +107,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("card with seed was not found from list: " + seed);
             return null;
         }
     }
