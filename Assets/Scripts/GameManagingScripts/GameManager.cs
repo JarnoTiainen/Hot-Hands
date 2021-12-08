@@ -633,6 +633,7 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             playerStats.playerFieldCards = References.i.yourMonsterZone.monsterCards.Count;
+            if (References.i.yourMonsterZone.ghostCard != null) playerStats.playerFieldCards--;
         }
 
     }

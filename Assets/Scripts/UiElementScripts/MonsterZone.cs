@@ -23,7 +23,11 @@ public class MonsterZone : MonoBehaviour
                 RemoveGhostCard();
             }
         } else {
-            RemoveGhostCard();
+            if(ghostCard != null)
+            {
+                RemoveGhostCard();
+            }
+            
         }
     } 
 
@@ -484,6 +488,7 @@ public class MonsterZone : MonoBehaviour
 
     public void RemoveGhostCard()
     {
+        Debug.Log("Removing ghost card");
         if (monsterCards.Contains(ghostCard)) {
             monsterCards.Remove(ghostCard);
             Destroy(ghostCard);
