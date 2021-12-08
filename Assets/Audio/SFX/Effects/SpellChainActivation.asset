@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98f880137270bfe4389dc074ae6cf015, type: 3}
-  m_Name: SpellChainCountdown
+  m_Name: SpellChainActivation
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: ff5df0060de4d444b996e0d1d3218229, type: 3}
-  volume: 0.8
+  clip: {fileID: 8300000, guid: 49224f240dc0efd428d50771b9224fbc, type: 3}
+  volume: 1
   volumeVariation: 0
   pitch: 1
   pitchVariation: 0

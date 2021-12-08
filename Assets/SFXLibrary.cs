@@ -30,6 +30,7 @@ public class SFXLibrary : MonoBehaviour
     public SFX cardBuff;
     public SFX cardDebuff;
     public SFX cardHeal;
+    public SFX spellChainActivation;
 
     // Other
     public SFX victory;
