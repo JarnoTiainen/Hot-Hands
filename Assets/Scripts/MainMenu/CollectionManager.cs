@@ -128,6 +128,12 @@ public class CollectionManager : MonoBehaviour
             }
         }
         if (deckIndex == -1) return;
+        if(playerDecks[deckIndex].Count < DeckBuilder.Instance.deckSizeLimit)
+        {
+            MainMenu.Instance.CreatePopupNotification("Make sure the deck is full before trying to set it active!", MainMenu.PopupCorner.TopRight);
+            SFXLibrary.Instance.notificationNegative.PlaySFX();
+            return;
+        }
         WebSocketService.SetActiveDeck(deckIndex);
         deckToggles[deckIndex].ToggleDeckSelected();
         MainMenu.Instance.CreatePopupNotification("Active deck changed.", MainMenu.PopupCorner.TopRight);

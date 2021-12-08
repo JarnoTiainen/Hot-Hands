@@ -13,7 +13,7 @@ public class DeckBuilder : MonoBehaviour
     [SerializeField] private TextMeshProUGUI countText;
     [SerializeField] private TextMeshProUGUI legendaryCountText;
     [SerializeField] private GameObject deckBuildCardPrefab;
-    [SerializeField] private int deckSizeLimit = 20;
+    public int deckSizeLimit = 20;
     [SerializeField] private int duplicateLimit = 2;
     [SerializeField] private int legendaryLimit = 2;
     private int currentBuildSize = 0;
@@ -190,7 +190,13 @@ public class DeckBuilder : MonoBehaviour
                 }
             }
         }
-
+        // Make sure deck is full
+        if(tempDeck.Count < deckSizeLimit)
+        {
+            MainMenu.Instance.CreatePopupNotification("Deck has to have " + deckSizeLimit + " cards!", MainMenu.PopupCorner.TopRight);
+            SFXLibrary.Instance.notificationNegative.PlaySFX();
+            return;
+        }
         // Sorts alphabetically
         tempDeck.Sort(delegate(Card card1, Card card2) 
         {
