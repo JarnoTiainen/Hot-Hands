@@ -1564,6 +1564,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8873941290810643492, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
+      propertyPath: cardDestroyed.showSettings
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8873941290810643492, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: spellChainCountdown.showSettings
       value: 0
       objectReference: {fileID: 0}
