@@ -20,6 +20,7 @@ public class MatchResultScript : MonoBehaviour
     [SerializeField] private float dimMaxFade;
     [SerializeField] private float dimMaxDuration;
     [SerializeField] private float dimEndFade;
+    [SerializeField] private float victorySFXOffset = -0.25f;
 
     private void Awake()
     {
@@ -43,18 +44,23 @@ public class MatchResultScript : MonoBehaviour
     {
         panelDim.enabled = true;
         float time = 0;
+        bool winSFX = false;
         while (time < dimMaxFade)
         {
             time += Time.deltaTime;
             float dim = Mathf.Lerp(0, dimMax, time / dimMaxFade);
             panelDim.color = new Color32(0, 0, 0, (byte)Mathf.FloorToInt(dim));
             yield return null;
+            if (winner && time > (dimMaxFade + victorySFXOffset) && !winSFX)
+            {
+                SFXLibrary.Instance.victory.PlaySFX();
+                winSFX = true;
+            }
         }
         if (winner)
         {
             victoryEffect.SetActive(true);
             victoryEffect.GetComponent<GameOverEffectManager>().StartAnimation();
-            SFXLibrary.Instance.victory.PlaySFX();
         }
         else
         {
