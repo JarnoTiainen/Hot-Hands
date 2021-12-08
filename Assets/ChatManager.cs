@@ -12,7 +12,7 @@ public class ChatManager : MonoBehaviour
     public List<Message> messages;
     [SerializeField] private GameObject messageObject;
     [SerializeField] private GameObject chatContent;
-    [SerializeField] private TMP_InputField messageInput;
+    public TMP_InputField messageInput;
     [SerializeField] private TextMeshProUGUI characterCountText;
     [SerializeField] private GameObject newMsgNotification;
     public GameObject openLinkConfirmation;

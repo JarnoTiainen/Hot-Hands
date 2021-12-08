@@ -8,7 +8,7 @@ using Sirenix.OdinInspector;
 public class LoginManager : MonoBehaviour
 {
     public static LoginManager Instance { get; private set; }
-    [SerializeField] private TMP_InputField userNameField;
+    public TMP_InputField userNameField;
     [SerializeField] private TMP_InputField passwordField;
     [SerializeField] private TMP_InputField emailField;
     [SerializeField] private TextMeshProUGUI characterCounterText;
