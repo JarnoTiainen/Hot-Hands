@@ -104,14 +104,18 @@ public class Mouse : MonoBehaviour
         newCard.transform.localPosition = Vector3.zero;
     }
 
-
+    public bool CheckIfMouseIsInsideMonsterZone()
+    {
+        if (Mathf.Abs(mousePosInWorld.x) < monsterHitBox.x && Mathf.Abs(mousePosInWorld.y) < monsterHitBox.y) return true;
+        return false;
+    }
 
     //This function should trigger them not execute TODO: move stuff to somewhere else
 
     public void ValuatePlaceCard()
     {
 
-        if (Mathf.Abs(mousePosInWorld.x) < monsterHitBox.x && Mathf.Abs(mousePosInWorld.y) < monsterHitBox.y && heldCard.GetComponent<InGameCard>().GetData().cardType == Card.CardType.Monster)
+        if (CheckIfMouseIsInsideMonsterZone() && heldCard.GetComponent<InGameCard>().GetData().cardType == Card.CardType.Monster)
         {
             TrySummonMonster();
         }

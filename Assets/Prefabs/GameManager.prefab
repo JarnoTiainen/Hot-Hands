@@ -48,6 +48,7 @@ MonoBehaviour:
   debuggerModeOn: 0
   showServerMessage: 1
   isLoggedIn: 0
+  gameEnded: 0
 --- !u!114 &793265824259559040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,7 +78,7 @@ MonoBehaviour:
   attackDuration: 0.3
   moveDuration: 0.4
   rotationSpeed: 0.2
-  rearrangeDuration: 0.4
+  rearrangeDuration: 0.2
   playerNumber: 0
   maxHandSize: 5
   maxFieldCardCount: 5

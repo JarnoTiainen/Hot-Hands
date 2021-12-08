@@ -154,10 +154,19 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
 
     public void UpdateRPLP(int rp, int lp)
     {
+        Debug.Log("Setting rp and lp " + rp + " " + lp);
+
         if((rp < cardData.rp && lp <= cardData.lp || rp <= cardData.rp && lp < cardData.lp) && (rp > 0 && lp > 0)) 
         {
             cardTakeDamageManager.PlayEffect();
+            
         }
+        if ((rp < cardData.rp && lp <= cardData.lp || rp <= cardData.rp && lp < cardData.lp))
+        {
+            SFXLibrary.Instance.hit.PlaySFX();
+        }
+
+
         cardData.rp = rp;
         cardData.lp = lp;
     }
@@ -170,8 +179,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     public void PlayTakeDamageEffect()
     {
         cardTakeDamageManager.PlayEffect();
-        SFXLibrary.Instance.hit.PlaySFX();
-        Debug.Log("TakeDamageEffect, hit SFX");
     }
 
     public void SetNewDescription(string newDescription)

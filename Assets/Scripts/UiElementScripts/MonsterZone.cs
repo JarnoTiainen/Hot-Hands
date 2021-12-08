@@ -16,7 +16,7 @@ public class MonsterZone : MonoBehaviour
     {
         if (Mouse.Instance.heldCard != null && isYourMonsterZone && GameManager.Instance.playerStats.playerFieldCards < GameManager.Instance.maxFieldCardCount)
         {
-            if(Mouse.Instance.heldCard.GetComponent<InGameCard>().GetData().cardType == Card.CardType.Monster)
+            if(Mouse.Instance.heldCard.GetComponent<InGameCard>().GetData().cardType == Card.CardType.Monster && Mouse.Instance.CheckIfMouseIsInsideMonsterZone())
             {
                 MakeRoom();
             } 
