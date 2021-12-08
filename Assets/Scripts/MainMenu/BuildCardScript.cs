@@ -23,7 +23,7 @@ public class BuildCardScript : MonoBehaviour
 
     public void Initialize()
     {
-        nameText.text = card.name;
+        nameText.text = card.cardName;
         amountText.text = "x" + amount.ToString();
         if (card.cardType == Card.CardType.Spell)
         {
