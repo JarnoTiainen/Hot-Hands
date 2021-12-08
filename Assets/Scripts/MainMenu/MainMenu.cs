@@ -137,13 +137,13 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void CreatePopupNotification(string text, PopupCorner corner)
+    public void CreatePopupNotification(string text, PopupCorner corner, PopupTone tone)
     {
         if (activePopup) return;
-        StartCoroutine(ShowPopupNotification(text, corner));
+        StartCoroutine(ShowPopupNotification(text, corner, tone));
     }
 
-    IEnumerator ShowPopupNotification(string text, PopupCorner corner)
+    IEnumerator ShowPopupNotification(string text, PopupCorner corner, PopupTone tone)
     {
         activePopup = true;
         RectTransform popupRectTransform = popupNotification.GetComponent<RectTransform>();
@@ -170,6 +170,15 @@ public class MainMenu : MonoBehaviour
                 popupRectTransform.anchoredPosition = new Vector2(-(popupRectTransform.rect.width / 2), -(popupRectTransform.rect.height / 2));
                 break;
             default:
+                break;
+        }
+        switch (tone)
+        {
+            case PopupTone.Positive:
+                SFXLibrary.Instance.notificationPositive.PlaySFX();
+                break;
+            case PopupTone.Negative:
+                SFXLibrary.Instance.notificationNegative.PlaySFX();
                 break;
         }
 
@@ -223,6 +232,12 @@ public class MainMenu : MonoBehaviour
         TopRight,
         BottomLeft,
         BottomRight
+    }
+
+    public enum PopupTone
+    {
+        Positive,
+        Negative
     }
 
     public void OnTutorialButton()

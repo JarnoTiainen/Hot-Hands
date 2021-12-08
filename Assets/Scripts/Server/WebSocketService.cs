@@ -120,14 +120,12 @@ public class WebSocketService : MonoBehaviour
                     if(data[1] == "ok")
                     {
                         Debug.Log("Created new account");
-                        MainMenu.Instance.CreatePopupNotification("Created new account.", MainMenu.PopupCorner.BottomLeft);
-                        SFXLibrary.Instance.notificationPositive.PlaySFX();
+                        MainMenu.Instance.CreatePopupNotification("Created new account.", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Positive);
                     }
                     else
                     {
                         Debug.Log("Created new account Failed!");
-                        MainMenu.Instance.CreatePopupNotification("Account creation failed!", MainMenu.PopupCorner.BottomLeft);
-                        SFXLibrary.Instance.notificationNegative.PlaySFX();
+                        MainMenu.Instance.CreatePopupNotification("Account creation failed!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
                     }
                     break;
                 case "LOGIN":
@@ -136,8 +134,7 @@ public class WebSocketService : MonoBehaviour
                         isLoggedIn = true;
                         GameObject.Find("LoginPanel").GetComponent<LoginManager>().CloseLoginScreen();
                         Debug.Log("Login ok");
-                        MainMenu.Instance.CreatePopupNotification("Logged in.", MainMenu.PopupCorner.BottomLeft);
-                        SFXLibrary.Instance.notificationPositive.PlaySFX();
+                        MainMenu.Instance.CreatePopupNotification("Logged in.", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Positive);
                         ChatManager.Instance.HideChat(false);
                         LoadChat();
                         GetDecks();
@@ -145,8 +142,7 @@ public class WebSocketService : MonoBehaviour
                     else
                     {
                         Debug.Log("Login Failed!");
-                        MainMenu.Instance.CreatePopupNotification("Login Failed!", MainMenu.PopupCorner.BottomLeft);
-                        SFXLibrary.Instance.notificationNegative.PlaySFX();
+                        MainMenu.Instance.CreatePopupNotification("Login Failed!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
                     }
                     break;
                 case "JOINGAME":

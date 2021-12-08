@@ -130,14 +130,12 @@ public class CollectionManager : MonoBehaviour
         if (deckIndex == -1) return;
         if(playerDecks[deckIndex].Count < DeckBuilder.Instance.deckSizeLimit)
         {
-            MainMenu.Instance.CreatePopupNotification("Make sure the deck is full before trying to set it active!", MainMenu.PopupCorner.TopRight);
-            SFXLibrary.Instance.notificationNegative.PlaySFX();
+            MainMenu.Instance.CreatePopupNotification("Make sure the deck is full before trying to set it active!", MainMenu.PopupCorner.TopRight, MainMenu.PopupTone.Negative);
             return;
         }
         WebSocketService.SetActiveDeck(deckIndex);
         deckToggles[deckIndex].ToggleDeckSelected();
-        MainMenu.Instance.CreatePopupNotification("Active deck changed.", MainMenu.PopupCorner.TopRight);
-        SFXLibrary.Instance.notificationPositive.PlaySFX();
+        MainMenu.Instance.CreatePopupNotification("Active deck changed.", MainMenu.PopupCorner.TopRight, MainMenu.PopupTone.Positive);
     }
 
     // Sends the players deck data to the db
@@ -166,8 +164,7 @@ public class CollectionManager : MonoBehaviour
             renameDeckPopup.gameObject.SetActive(false);
         }
         WebSocketService.SaveDeck(JsonUtility.ToJson(deckString));
-        MainMenu.Instance.CreatePopupNotification("Deck saved.", MainMenu.PopupCorner.TopRight);
-        SFXLibrary.Instance.notificationPositive.PlaySFX();
+        MainMenu.Instance.CreatePopupNotification("Deck saved.", MainMenu.PopupCorner.TopRight, MainMenu.PopupTone.Positive);
     }
 
     // Gets all game cards and passes them to the 'All Cards List' and calls it's populate function
@@ -182,51 +179,6 @@ public class CollectionManager : MonoBehaviour
         // Sort alphabetically
         cardListScript.SortList(CollectionCardList.SortMethod.Name);
         cardListScript.PopulatePage(1);
-    }
-
-    // Passes a specific player deck's cards to the corresponding ingame list and calls it's populate function
-    /*
-    public void UpdateDeckUI(int i)
-    {
-        // Updates cards on list
-        CollectionCardList cardListScript = collectionCardList.GetComponent<CollectionCardList>();
-        cardListScript.cards = playerDecks[i];
-        if (!(cardListScript.cards.Count == 0)) cardListScript.SortList(SortMethodDropdown.Instance.GetSortMethod(), SortMethodDropdown.Instance.reverse);
-        // Updates name on toggle
-        if(deckNames[i] == null || deckNames[i] == "")
-        {
-            cardListToggles[i + 1].ChangeDeckName("Deck " + (i + 1));
-        }
-        else
-        {
-            cardListToggles[i + 1].ChangeDeckName(deckNames[i]);
-        }
-    }
-    */
-
-    // Creates new empty ingame list and deck when called
-    public void CreateNewDeck(string newName = null, bool isStart = false, bool isLoadingFromDB = false, int nameIndex = -1)
-    {
-        if (playerDecks.Count >= playerDeckLimit && !isLoadingFromDB) return;
-
-        /*
-        GameObject newCardList = Instantiate(cardListPrefab) as GameObject;
-        newCardList.SetActive(false);
-        if (newName == null || newName == "") newCardList.name = "Deck " + (nameIndex + 1);
-        else newCardList.name = newName;
-        newCardList.transform.SetParent(cardListWindow.transform, false);
-        cardLists.Add(newCardList);
-        */
-
-        if (newName == null || newName == "") deckToggles[nameIndex].name = "Deck " + (nameIndex + 1);
-        else deckToggles[nameIndex].name = newName;
-
-        //if (!isStart) playerDecks.Add(new List<Card>());
-        // Force rebuilds the toggle row so that the content size fitter component behaves properly
-        /*
-        RectTransform togglesRectTransform = togglesRow.transform.parent.GetComponent<RectTransform>();
-        LayoutRebuilder.ForceRebuildLayoutImmediate(togglesRectTransform);
-        */
     }
 
     // Changes the page on the active ingame list

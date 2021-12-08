@@ -43,14 +43,12 @@ public class DeckBuilder : MonoBehaviour
             {
                 if (build[i].legendary)
                 {
-                    MainMenu.Instance.CreatePopupNotification("Can not have duplicates of legendary cards!", MainMenu.PopupCorner.TopRight);
-                    SFXLibrary.Instance.notificationNegative.PlaySFX();
+                    MainMenu.Instance.CreatePopupNotification("Can not have duplicates of legendary cards!", MainMenu.PopupCorner.TopRight, MainMenu.PopupTone.Negative);
                     return;
                 }
                 if(build[i].amount == duplicateLimit)
                 {
-                    MainMenu.Instance.CreatePopupNotification("Can not have more than " + duplicateLimit + " duplicates of same card!", MainMenu.PopupCorner.TopRight);
-                    SFXLibrary.Instance.notificationNegative.PlaySFX();
+                    MainMenu.Instance.CreatePopupNotification("Can not have more than " + duplicateLimit + " duplicates of same card!", MainMenu.PopupCorner.TopRight, MainMenu.PopupTone.Negative);
                     return;
                 }
                 BuildCardScript buildCardScript = gameObject.transform.Find(card.name).GetComponent<BuildCardScript>();
@@ -73,8 +71,7 @@ public class DeckBuilder : MonoBehaviour
     {
         if (card.legendary && legendaryAmount >= legendaryLimit)
         {
-            MainMenu.Instance.CreatePopupNotification("Can not have more than " + legendaryLimit + " legendary cards in one deck!", MainMenu.PopupCorner.TopRight);
-            SFXLibrary.Instance.notificationNegative.PlaySFX();
+            MainMenu.Instance.CreatePopupNotification("Can not have more than " + legendaryLimit + " legendary cards in one deck!", MainMenu.PopupCorner.TopRight, MainMenu.PopupTone.Negative);
             return;
         }
         if (card.legendary) legendaryAmount++;
@@ -193,8 +190,7 @@ public class DeckBuilder : MonoBehaviour
         // Make sure deck is full
         if(tempDeck.Count < deckSizeLimit)
         {
-            MainMenu.Instance.CreatePopupNotification("Deck has to have " + deckSizeLimit + " cards!", MainMenu.PopupCorner.TopRight);
-            SFXLibrary.Instance.notificationNegative.PlaySFX();
+            MainMenu.Instance.CreatePopupNotification("Deck has to have " + deckSizeLimit + " cards!", MainMenu.PopupCorner.TopRight, MainMenu.PopupTone.Negative);
             return;
         }
         // Sorts alphabetically
