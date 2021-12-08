@@ -15,4 +15,5 @@ public class Message
     public string uuid;
     public string message;
     public string username;
+    public bool admin;
 }

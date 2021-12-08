@@ -20,6 +20,7 @@ public class ChatManager : MonoBehaviour
     public Button openLinkButton;
     private int charLimit;
     private bool isOpen = false;
+    private bool firstLoad = true;
 
     private void Awake()
     {
@@ -47,13 +48,13 @@ public class ChatManager : MonoBehaviour
         {
             Destroy(messageObject.gameObject);
         }
-        foreach(Message message in parsedMessages)
+        foreach(Message messageObj in parsedMessages)
         {
             GameObject newMessageObject = Instantiate(messageObject);
-            string rawDateString = message.uuid.Substring(16, 8);
+            string rawDateString = messageObj.uuid.Substring(16, 8);
             //System.DateTime dateTime = System.DateTime.ParseExact(rawDateString, "MM/dd/yyyy hh:mm:ss", CultureInfo.InvariantCulture);
             //string timeString = dateTime.ToString();
-            newMessageObject.GetComponent<MessageObjectScript>().UpdateMessage(rawDateString, message.username, message.message);
+            newMessageObject.GetComponent<MessageObjectScript>().UpdateMessage(rawDateString, messageObj.username, messageObj.message, messageObj.admin);
             newMessageObject.transform.SetParent(chatContent.transform, false);
         }
         foreach(Transform messageObj in chatContent.transform)
@@ -72,22 +73,32 @@ public class ChatManager : MonoBehaviour
 
     private void CheckForNewMessages()
     {
-        if (chatContent.transform.childCount == 0) return;
-
+        // No messages
+        if (chatContent.transform.childCount == 0)
+        {
+            firstLoad = false;
+            return;
+        }
         string lastMsgTime = chatContent.transform.GetChild(chatContent.transform.childCount - 1).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text;
         string lastMsgUser = chatContent.transform.GetChild(chatContent.transform.childCount - 1).GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text;
         string lastSavedTime = PlayerPrefs.GetString("LastMsgTime", "");
         string lastSavedUser = PlayerPrefs.GetString("LastMsgUser", "");
 
-        if (lastMsgTime == lastSavedTime && lastMsgUser == lastSavedUser) return;
-
+        // No new messages
+        if (lastMsgTime == lastSavedTime && lastMsgUser == lastSavedUser)
+        {
+            firstLoad = false;
+            return;
+        }
+        // New messages
         PlayerPrefs.SetString("LastMsgTime", lastMsgTime);
         PlayerPrefs.SetString("LastMsgUser", lastMsgUser);
         PlayerPrefs.Save();
         if (!isOpen)
         {
             newMsgNotification.SetActive(true);
-            SFXLibrary.Instance.notificationPositive.PlaySFX();
+            if (firstLoad) firstLoad = false;
+            else SFXLibrary.Instance.notificationPositive.PlaySFX();
         }
     }
 

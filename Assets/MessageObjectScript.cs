@@ -13,11 +13,12 @@ public class MessageObjectScript : MonoBehaviour
     private float marginMinusFactor = 2f;
     [SerializeField] private float timeMaxWidth = 90f;
 
-    public void UpdateMessage(string time, string username, string message)
+    public void UpdateMessage(string time, string username, string message, bool admin)
     {
         timeText.text = "[" + time + "]";
         usernameText.text = username + ":";
         messageText.text = message;
+        if (admin) usernameText.color = new Color32(255, 0, 100, 255);
         messageText.gameObject.GetComponent<MessageLinkScript>().FindLink();
     }
 

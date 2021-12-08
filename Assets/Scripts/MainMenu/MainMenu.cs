@@ -167,7 +167,7 @@ public class MainMenu : MonoBehaviour
         showPopupNotificationCo = StartCoroutine(ShowPopupNotification(text, corner, tone));
     }
 
-    IEnumerator ShowPopupNotification(string text, PopupCorner corner, PopupTone tone)
+    private IEnumerator ShowPopupNotification(string text, PopupCorner corner, PopupTone tone)
     {
         activePopup = true;
         RectTransform popupRectTransform = popupNotification.GetComponent<RectTransform>();
