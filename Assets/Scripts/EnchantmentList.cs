@@ -174,13 +174,13 @@ public class EnchantmentList : MonoBehaviour
         switch (enchantment.trigger)
         {
             case Enchantment.Trigger.Opener:
-                return "<b>Opener</b>: " + effect + " ";
+                return effect + " ";
             case Enchantment.Trigger.Drawtivation:
-                return "<b>Wild</b>: " + effect + " ";
+                return effect + " ";
             case Enchantment.Trigger.LastBreath:
-                return "<b>Lastbreath</b>: " + effect + " ";
+                return effect + " ";
             case Enchantment.Trigger.Sacrifice:
-                return "<b>Sacrifice</b>: " + effect + " ";
+                return effect + " ";
             default:
                 return effect;
         }

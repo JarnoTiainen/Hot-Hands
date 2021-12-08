@@ -109,9 +109,54 @@ public class CardList : ScriptableObject
     public string GetCardDescription(List<Enchantment> enchantments)
     {
         string effect = "";
+        string openerEffects = "";
+        string wildEffects = "";
+        string lastBreathEffect = "";
+        string sacrificeEffect = "";
+        string spellEffect = "";
         foreach(Enchantment enchantment in enchantments)
         {
-            effect += EnchantmentList.Instance.GetEnchantmentDescription(enchantment);
+            switch(enchantment.trigger)
+            {
+                case Enchantment.Trigger.Opener:
+                    if (openerEffects != "") openerEffects += " and ";
+                    openerEffects += EnchantmentList.Instance.GetEnchantmentDescription(enchantment);
+                    break;
+                case Enchantment.Trigger.LastBreath:
+                    if (lastBreathEffect != "") lastBreathEffect += " and ";
+                    lastBreathEffect += EnchantmentList.Instance.GetEnchantmentDescription(enchantment);
+                    break;
+                case Enchantment.Trigger.Drawtivation:
+                    if (wildEffects != "") wildEffects += " and ";
+                    wildEffects += EnchantmentList.Instance.GetEnchantmentDescription(enchantment);
+                    break;
+                case Enchantment.Trigger.Sacrifice:
+                    if (sacrificeEffect != "") sacrificeEffect += " and ";
+                    sacrificeEffect += EnchantmentList.Instance.GetEnchantmentDescription(enchantment);
+                    break;
+                case Enchantment.Trigger.Spell:
+                    if (spellEffect != "") spellEffect += " and ";
+                    spellEffect += EnchantmentList.Instance.GetEnchantmentDescription(enchantment);
+                    break;
+            }
+            
+        }
+        if (spellEffect != "") effect += (spellEffect);
+        if (wildEffects != "")
+        {
+            effect += ("<b>Wild</b>: " + wildEffects + "\n");
+        }
+        if (sacrificeEffect != "")
+        {
+            effect += ("<b>Sacrifice</b>: " + sacrificeEffect + "\n");
+        }
+        if (openerEffects != "")
+        {
+            effect += ("<b>Opener</b>: " + openerEffects + "\n");
+        }
+        if (lastBreathEffect != "")
+        {
+            effect += ("<b>Lastbreath</b>: " + lastBreathEffect + "\n");
         }
         return effect;
     }

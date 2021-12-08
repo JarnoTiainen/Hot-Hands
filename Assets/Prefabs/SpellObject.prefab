@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6297383564347516220}
   - component: {fileID: 7154665661281244132}
+  - component: {fileID: 2462822132590058164}
   m_Layer: 0
   m_Name: SpellObject
   m_TagString: Untagged
@@ -56,18 +57,19 @@ MonoBehaviour:
     value: 0
     cardType: 0
     attackDirection: 0
+    legendary: 0
     spellTags: 
     monsterTags: 
     rp: 0
     lp: 0
     seed: 
     targetting: 0
+    targetType: 0
     enchantments: []
     description: 
   spellSlotNumber: 0
   cardImage: {fileID: 0}
   rotating: 0
-  isFaceUp: 0
   rotCurve:
     serializedVersion: 2
     m_Curve:
@@ -105,6 +107,20 @@ MonoBehaviour:
   slotTaken: 0
   speed: 1
   lines: []
+  cardDataOverwritten: 0
+--- !u!65 &2462822132590058164
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998144503152903571}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.038546726, y: 0.04200496, z: 0.019045869}
+  m_Center: {x: -0.000058081, y: -0.00006936863, z: -0.0043496005}
 --- !u!1 &3895069396858854367
 GameObject:
   m_ObjectHideFlags: 0
