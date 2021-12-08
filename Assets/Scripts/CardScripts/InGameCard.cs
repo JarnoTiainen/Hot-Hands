@@ -432,7 +432,9 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     private IEnumerator DestructionAnimation()
     {
         cardRuneEffectManager.PlayRuneDestroyEffect();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
+        SFXLibrary.Instance.cardDestroyed.PlaySFX();
+        yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }
 
