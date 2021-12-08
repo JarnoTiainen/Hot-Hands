@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     public void SetOpponentName(string name)
     {
-
+        PlayerNamesUIScript.Instance.SetOpponentName(name);
     }
 
     public void ResetPlayerStats()
@@ -787,7 +787,6 @@ public class GameManager : MonoBehaviour
         {
             case CardDataMessage.BuffType.Damage:
                 target.GetComponent<InGameCard>().PlayTakeDamageEffect();
-                SFXLibrary.Instance.hit.PlaySFX();
                 break;
             case CardDataMessage.BuffType.StatBuff:
                 target.GetComponent<InGameCard>().PlayBuffEffect();
@@ -801,6 +800,25 @@ public class GameManager : MonoBehaviour
                 break;
             case CardDataMessage.BuffType.Default:
                 Debug.LogWarning("Trigger Default effect here");
+                break;
+        }
+        StartCoroutine(DataChangeSFX(buffType));
+    }
+
+    private IEnumerator DataChangeSFX(CardDataMessage.BuffType buffType)
+    {
+        switch (buffType)
+        {
+            case CardDataMessage.BuffType.StatBuff:
+                yield return new WaitForSeconds(0.2f);
+                SFXLibrary.Instance.cardBuff.PlaySFX();
+                break;
+            case CardDataMessage.BuffType.StatDebuff:
+                yield return new WaitForSeconds(0.2f);
+                SFXLibrary.Instance.cardDebuff.PlaySFX();
+                break;
+            default:
+                SFXLibrary.Instance.hit.PlaySFX();
                 break;
         }
     }
