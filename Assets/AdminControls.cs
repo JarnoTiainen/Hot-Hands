@@ -16,7 +16,6 @@ public class AdminControls : MonoBehaviour
     public void EnableAdminFeatures()
     {
         LoginManager.Instance.userNameField.contentType = TMPro.TMP_InputField.ContentType.Standard;
-        ChatManager.Instance.messageInput.contentType = TMPro.TMP_InputField.ContentType.Standard;
     }
 
     public bool SoloPlay()
