@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using TMPro;
 using Sirenix.OdinInspector;
 
@@ -33,7 +33,10 @@ public class MatchResultScript : MonoBehaviour
 
     public void GameEnd(bool winner)
     {
-        escMenuManager.gameObject.SetActive(false);
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            escMenuManager.gameObject.SetActive(false);
+        }
         RayCaster.Instance.eventsOn = false;
         StartCoroutine(DimAnimation(winner));
         StartCoroutine(FadeMixerGroup.StartFade(SoundtrackManager.masterMixer, "inGameMusicVol", 1f, 0.0001f));
