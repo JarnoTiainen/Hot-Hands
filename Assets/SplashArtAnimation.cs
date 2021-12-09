@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SplashArtAnimation : MonoBehaviour
 {
     [SerializeField] private Image dim;
-    [SerializeField] private float animationDuration = 5f;
+    public float animationDuration = 5f;
     [SerializeField] private float dimDuration = 1.5f;
 
     void Start()

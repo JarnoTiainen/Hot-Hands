@@ -10,7 +10,7 @@ public class ToggleSounds : MonoBehaviour
     [SerializeField] private bool alwaysClickSFX = false;
     private Toggle toggle;
 
-    private void Awake()
+    private void Start()
     {
         toggle = gameObject.GetComponent<Toggle>();
         if (alwaysClickSFX) toggle.onValueChanged.AddListener((data) => OnClickAlways());
