@@ -265,6 +265,8 @@ public class WebSocketService : MonoBehaviour
     private void OnApplicationQuit()
     {
         if(SceneManager.GetActiveScene().buildIndex == 1 && !gameEnded) Surrender();
+        PlayerPrefs.SetInt("AdminFeatures", 0);
+        PlayerPrefs.Save();
         CloseConnection();
     }
 

@@ -46,10 +46,12 @@ public class MainMenu : MonoBehaviour
             ChatManager.Instance.HideChat(false);
             WebSocketService.GetDecks();
             WebSocketService.LoadChat();
+            if (PlayerPrefs.GetInt("AdminFeatures", 0) == 1) adminControls.EnableAdminFeatures();
         }
         else
         {
             Debug.Log("Not logged in");
+            Cursor.visible = false;
             splashArt.gameObject.SetActive(true);
             StartCoroutine(StartSoundsWithDelay(splashArt.animationDuration));
         }
@@ -68,7 +70,6 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetString("LoginName", loginMessage.username);
         if (loginMessage.admin)
         {
-            adminControls.gameObject.SetActive(true);
             adminControls.EnableAdminFeatures();
         }
     }

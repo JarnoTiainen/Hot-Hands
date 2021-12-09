@@ -15,8 +15,10 @@ public class AdminControls : MonoBehaviour
 
     public void EnableAdminFeatures()
     {
+        gameObject.SetActive(true);
         LoginManager.Instance.userNameField.contentType = TMPro.TMP_InputField.ContentType.Standard;
         PlayerPrefs.SetInt("HasPlayed", 1);
+        PlayerPrefs.SetInt("AdminFeatures", 1);
         PlayerPrefs.Save();
     }
 
