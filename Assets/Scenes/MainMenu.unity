@@ -24918,7 +24918,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: uiSFX.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: uiSFX.Array.data[1]
@@ -24959,7 +24959,7 @@ PrefabInstance:
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: uiSFX.Array.data[10]
       value: 
-      objectReference: {fileID: 11400000, guid: f60090464b262494688730a15e15446a, type: 2}
+      objectReference: {fileID: 11400000, guid: df6d89d2da584b0438c7631bb5daddff, type: 2}
     - target: {fileID: 6413452686842694930, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: ambientSFX.Array.size
       value: 8
@@ -25051,14 +25051,6 @@ PrefabInstance:
     - target: {fileID: 6413452686842694932, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
       propertyPath: m_Name
       value: SFXManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 8873941290810643492, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
-      propertyPath: playerHit.showSettings
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8873941290810643492, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}
-      propertyPath: playerHeal.showSettings
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dda88fcb76e2e74f9c4a130e42bdb02, type: 3}

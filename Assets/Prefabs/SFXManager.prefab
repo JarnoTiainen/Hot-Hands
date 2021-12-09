@@ -229,6 +229,15 @@ MonoBehaviour:
     waitToPlay: 0
     useDefault: 0
     audiosource: {fileID: 0}
+  logo:
+    sfxType: 0
+    sfxToPlay: {fileID: 11400000, guid: df6d89d2da584b0438c7631bb5daddff, type: 2}
+    showSettings: 0
+    editSettings: 0
+    _sfxBase: {fileID: 11400000, guid: df6d89d2da584b0438c7631bb5daddff, type: 2}
+    waitToPlay: 0
+    useDefault: 0
+    audiosource: {fileID: 0}
   cardDraw1:
     sfxType: 1
     sfxToPlay: {fileID: 11400000, guid: 70c15c7b631093043b1b114ea1df3135, type: 2}

@@ -17,6 +17,7 @@ public class SplashArtAnimation : MonoBehaviour
 
     private IEnumerator DimAnimation()
     {
+        SFXLibrary.Instance.logo.PlaySFX();
         float time = 0;
         while (time < dimDuration)
         {

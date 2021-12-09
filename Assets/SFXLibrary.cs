@@ -13,6 +13,7 @@ public class SFXLibrary : MonoBehaviour
     public SFX notificationPositive;
     public SFX notificationNegative;
     public SFX matchFound;
+    public SFX logo;
 
     // Card sounds
     public SFX cardDraw1;
