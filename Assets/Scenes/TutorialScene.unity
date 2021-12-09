@@ -486,7 +486,6 @@ GameObject:
   - component: {fileID: 343450300}
   - component: {fileID: 343450298}
   - component: {fileID: 343450297}
-  - component: {fileID: 343450299}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -570,32 +569,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   impactPrefab: {fileID: 5887887665246348302, guid: d2ffc9b19668cf840a437ce97f67fa8a, type: 3}
   damagePrefab: {fileID: 0}
---- !u!114 &343450299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 343450296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69836f8397216724ba58fcdb1b097a25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  masterMixer: {fileID: 24100000, guid: 27a0ffbe5594a90409a7c8dec850949a, type: 2}
-  masterSlider: {fileID: 0}
-  musicSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
-  masterDefaultVolume: 0.5
-  musicDefaultVolume: 0.5
-  sfxDefaultVolume: 0.5
-  resolutionToggles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  fullscreenToggle: {fileID: 0}
-  screenWidths: 0005000080070000000a0000
-  defaultScreenResIndex: 0
 --- !u!114 &343450300
 MonoBehaviour:
   m_ObjectHideFlags: 0
