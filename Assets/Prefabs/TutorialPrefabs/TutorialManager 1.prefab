@@ -45,9 +45,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8504b29f276ded47a389e8529cfbc60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resultScript: {fileID: 0}
   skipDuration: 3
+  attackCoolDown: 3
+  spellWindup: 4
   skipBar: {fileID: 0}
+  drawingAllowed: 0
+  burnignAllowed: 0
+  summoningAllowed: 0
+  attackingAllowed: 0
+  firstAttack: 0
+  firstDirectAttack: 0
+  firstSpell: 0
+  enemyStartHP: 0
+  startBurnValue: 0
+  enemyStartBurnValue: 0
   skipTime: 0
+  enemyCardSeeds: []
+  spellCardSeed: []
+  opponentAI: {fileID: 0}
   tutorialState: 1
 --- !u!114 &6130627493717856279
 MonoBehaviour:
@@ -62,12 +78,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueAnimator: {fileID: 0}
+  mascotAnimator: {fileID: 0}
   dialogue: {fileID: 6130627493717856278}
   dialogueText: {fileID: 0}
   highLightControllers:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  burnDialogue: []
+  startBool: 0
 --- !u!114 &6130627493717856278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,19 +102,19 @@ MonoBehaviour:
   speaker_name: Mascot
   sentences:
   - Welcome to Hot Hands!
-  - Defeat the <opponetn name> by playing cards and attacking with them.
-  - Start by picking up a card from your deck.
+  - Defeat your opponent by playing cards and attacking with them.
+  - Start by drawing a card from your deck.
   - 
-  - This is a monster card. Drag it to the table to start attacking with it.
+  - This is a monster card. Drag it on to the table to summon it.
   - 
   - Hot Hands is a realtime strategy game, so there are no turns. Speed is key!
   - 
-  - When the card starts glowing pink you can attack by clicking it.
+  - When the card starts glowing on your table, you can attack by clicking on it.
   - 
-  - Now this is where it gets interesting.
+  - Now this is where it gets interesting!
   - When a card attacks another card, the numbers on the inside indicate the offensive
     values...
   - In other words, the damage it deals.
   - 
   - The numbers on the outside are defense values. Your card deals damage to the
-    opponents defense value and vice versa
+    opponent's defense value and vice versa
