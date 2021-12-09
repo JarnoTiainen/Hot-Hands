@@ -1,31 +1,26 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LogoEffectManager : MonoBehaviour
 {
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private Material material;
+    [SerializeField] private float animationDuration = 3;
 
-    [SerializeField] private float time;
-    [SerializeField] private bool animating = true;
-    [SerializeField] private float animationTime = 3;
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
         meshRenderer.material = material;
+        StartCoroutine(Animation());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator Animation()
     {
-        if(animating)
+        float progress = 0;
+        while (progress < 1)
         {
-            time += Time.deltaTime / animationTime;
-            meshRenderer.material.SetFloat("_AnimationStep", time);
+            progress += (Time.deltaTime / animationDuration);
+            meshRenderer.material.SetFloat("_AnimationStep", progress);
+            yield return null;
         }
     }
 }
