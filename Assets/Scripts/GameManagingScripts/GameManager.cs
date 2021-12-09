@@ -762,6 +762,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("seed " + JsonUtility.ToJson(cardData));
             GameObject target = GetCardFromInGameCards(cardData.seed);
+            if (target == null) continue;
             CardData data = target.GetComponent<InGameCard>().GetData();
 
             data.rp = cardData.rp;
