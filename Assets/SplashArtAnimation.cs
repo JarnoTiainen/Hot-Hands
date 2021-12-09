@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class SplashArtAnimation : MonoBehaviour
 {
     [SerializeField] private Image dim;
-    public float animationDuration = 5f;
+    public float animationDuration = 6.5f;
     [SerializeField] private float dimDuration = 1.5f;
+    [SerializeField] private float endDuration = 1.5f;
 
     void Start()
     {
@@ -24,7 +25,7 @@ public class SplashArtAnimation : MonoBehaviour
             dim.color = new Color32(0, 0, 0, (byte)Mathf.FloorToInt(dimAmount));
             yield return null;
         }
-        yield return new WaitForSeconds(animationDuration - (2 * dimDuration));
+        yield return new WaitForSeconds(animationDuration - (2 * dimDuration) - endDuration);
         time = 0;
         while (time < dimDuration)
         {
@@ -33,7 +34,7 @@ public class SplashArtAnimation : MonoBehaviour
             dim.color = new Color32(0, 0, 0, (byte)Mathf.FloorToInt(dimAmount));
             yield return null;
         }
-
+        yield return new WaitForSeconds(endDuration);
         MainMenu.Instance.MainMenuButtonsSetActive(false);
         MainMenu.Instance.loginScreen.SetActive(true);
         gameObject.SetActive(false);

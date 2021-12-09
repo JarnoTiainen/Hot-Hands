@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour
 {
     public static MainMenu Instance { get; private set; }
     [SerializeField] private SplashArtAnimation splashArt;
-    [SerializeField] private GameObject sounds;
+    [SerializeField] private GameObject music;
     [SerializeField] private GameObject mainMenuButtons;
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject collectionMenu;
@@ -40,7 +40,7 @@ public class MainMenu : MonoBehaviour
         if (WebSocketService.Instance.isLoggedIn)
         {
             Debug.Log("Logged in");
-            sounds.SetActive(true);
+            music.SetActive(true);
             mainMenuButtons.SetActive(true);
             loginScreen.SetActive(false);
             ChatManager.Instance.HideChat(false);
@@ -58,7 +58,7 @@ public class MainMenu : MonoBehaviour
     private IEnumerator StartSoundsWithDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        sounds.SetActive(true);
+        music.SetActive(true);
     }
 
     public void MainMenuButtonsSetActive(bool value) => mainMenuButtons.SetActive(value);
