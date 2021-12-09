@@ -93,6 +93,7 @@ public class MonsterZone : MonoBehaviour
             
             if (debugModeOn) Debug.Log("index: " + index);
             if (index >= monsterCards.Count) index = (monsterCards.Count-1);
+            if (index < 0) index = 0;
             monsterCards.Insert(index, newMonster);
             newMonster.transform.position = CalculatePosition(boardIndex, isYourCard, newMonster);
             newMonster.GetComponent<InGameCard>().SetNewCardData(isYourCard, data);
