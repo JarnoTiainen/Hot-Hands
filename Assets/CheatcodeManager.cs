@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class CheatcodeManager : MonoBehaviour
 {
-    [SerializeField] private string adminCode = "SCHOB";
     [SerializeField] private AdminControls adminControls;
+    private string adminCode = "SCHOB";
     private string bufferString = "";
     private float timeCutoff = 1f;
     private float timer;
+    private bool enabled = false;
 
     private void Start()
     {
@@ -19,7 +20,7 @@ public class CheatcodeManager : MonoBehaviour
     {
         timer -= Time.deltaTime;
         if (timer <= 0) bufferString = "";
-        if (bufferString.Length == adminCode.Length) CheckCode();
+        if (bufferString.Length == adminCode.Length && !enabled) CheckCode();
     }
 
     void OnGUI()
@@ -40,6 +41,7 @@ public class CheatcodeManager : MonoBehaviour
             timer = 0;
             adminControls.gameObject.SetActive(true);
             adminControls.EnableAdminFeatures();
+            enabled = true;
         }
     }
 }

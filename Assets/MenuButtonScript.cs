@@ -42,10 +42,7 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
                 {
                     MainMenu.Instance.CreatePopupNotification("You have to play at least 1 game to unlock Collection!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
                 }
-                else
-                {
-                    MainMenu.Instance.CollectionMenuSetActive(true);
-                }
+                else MainMenu.Instance.CollectionMenuSetActive(true);
                 break;
             case ButtonType.Settings:
                 MainMenu.Instance.SettingsMenuSetActive(true);
@@ -63,7 +60,7 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
                 LoginManager.Instance.CreateNewAccount();
                 break;
             case ButtonType.LoginBack:
-                LoginManager.Instance.GoBack();
+                LoginManager.Instance.CloseSignup();
                 break;
             case ButtonType.SettingsBack:
                 MainMenu.Instance.SettingsMenuSetActive(false);

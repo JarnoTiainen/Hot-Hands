@@ -19,7 +19,7 @@ public class LoginManager : MonoBehaviour
     [SerializeField] private Toggle rememberMeToggle;
     [SerializeField] private GameObject mainMenuButtons;
     [SerializeField] private int nameMinLength = 3;
-    public bool aboveMinLength = false;
+    private bool aboveMinLength = false;
     private int charLimit;
 
     private void Start()
@@ -68,7 +68,7 @@ public class LoginManager : MonoBehaviour
         UpdateCharacterCount();
     }
 
-    public void GoBack()
+    public void CloseSignup()
     {
         emailField.gameObject.SetActive(false);
         signUpButton.SetActive(false);

@@ -53,7 +53,7 @@ public class MainMenu : MonoBehaviour
             Debug.Log("Not logged in");
             Cursor.visible = false;
             splashArt.gameObject.SetActive(true);
-            StartCoroutine(StartSoundsWithDelay(splashArt.animationDuration));
+            StartCoroutine(StartSoundsWithDelay(splashArt.AnimationDuration()));
         }
     }
 
