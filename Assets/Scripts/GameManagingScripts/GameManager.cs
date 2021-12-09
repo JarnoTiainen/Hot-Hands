@@ -622,7 +622,7 @@ public class GameManager : MonoBehaviour
     {
         Mouse.Instance.targetModeOn = true;
         activeTargetLine = LineRendererManager.Instance.CreateNewLine(source, Mouse.Instance.gameObject);
-        
+        Cursor.visible = false;
     }
     public void EndTargetEvent(string seed)
     {
@@ -630,6 +630,7 @@ public class GameManager : MonoBehaviour
         activeTargetLine.RemoveLine();
         WebSocketService.PlayCard(References.i.yourMonsterZone.monsterCards.IndexOf(References.i.yourMonsterZone.GetCardWithSeed(targettingCardData.seed)), targettingCardData.seed, seed);
         PlayerPlayCard(targettingCardData);
+        Cursor.visible = true;
     }
     public void CancelTargetEvent()
     {
@@ -638,6 +639,7 @@ public class GameManager : MonoBehaviour
         Mouse.Instance.targetModeOn = false;
         activeTargetLine.RemoveLine();
         References.i.yourMonsterZone.TryReturnCardToHand(targettingCardData.seed);
+        Cursor.visible = true;
 
     }
 
