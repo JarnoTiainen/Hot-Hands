@@ -46,7 +46,7 @@ MonoBehaviour:
   drawCardDescription: 'Draw :power: '
   gainBurnDescription: 'Burn :power:'
   playSelfDescription: Summon this card
-  discardPileDuplicationDescription: duplicate
+  discardPileDuplicationDescription: Duplicate
   summonToEnemyDescription: Summon this card to the enemy
   healPlayerDescription: 'Heal :power:'
   buffBoardAttackDirectionPowersDescription: 'Buff your fieldcards attack by :power:'
@@ -59,24 +59,24 @@ MonoBehaviour:
   reduceHighestCostDescription: 'Reduce cost of your most expensive card by :power:'
   damagePlayerDescription: 'Take :power: damage'
   vanishDescription: Vanish
-  addSpellToHanDescription: Add random spel to your hand
+  addSpellToHanDescription: Add random spell to your hand
   addGolemToDiscardPileDescription: 'Add :power: Golem(s) to your discard pile'
-  buffAllGolemsDescription: 'give :power: LP and RP for all your golems'
+  buffAllGolemsDescription: 'Give :power: LP and RP to all your golems'
   spellDrawCardDescription: 'Draw :power:'
-  stoneCarvingDescription: 'Draw :power: and add :power: golem(s) into your discardpile'
-  purgatoryDescription: vanish all field cards
+  stoneCarvingDescription: 'Draw :power: and add :power: golem(s) into your discard
+    pile'
+  purgatoryDescription: Vanish all field cards
   silenceDescription: Silence the target
   armorUpDescription: 'Give Target + :power: LP and LP'
   stealTopCardDescription: 'Steal :power: top cards from your opponents deck'
-  winGameDescription: You win the game
+  winGameDescription: Instantly win the game
   divineDelugeDescription: 'Heal both players by :power:'
   zapDescription: 'Deal :power: damage to your opponent'
-  blessingOfTheDragonDescription: 'Give your fielcards :power: defence'
+  blessingOfTheDragonDescription: 'Give your field cards :power: defence'
   businessDealDescription: Sell your own target cards
   sharpshotDescription: 'Deal :power: damage to target'
   gainRandomBurnDescription: 'Gain random amount of burn up to :power:'
-  ratGrenadeDescription: Destroy target and deal its attack amount damage to all
-    enemy cards
+  ratGrenadeDescription: Destroy target and deal its attack damage to all enemy cards
   giantBribeDescription: 'Give :power: random opponent hand card(s) "Betrayal" effect.'
   summonRetDescription: 'Summon :power: Gray Rats'
   pactDescription: 'Halve your health to gain :power: Burn'
