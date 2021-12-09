@@ -302,6 +302,7 @@ public class WebSocketService : MonoBehaviour
     [Button]
     public static void GetDecks()
     {
+        Debug.Log("GetDecks");
         GameMessage message = new GameMessage("OnMessage", "GETDECKS", "");
         SendWebSocketMessage(JsonUtility.ToJson(message));
     }
