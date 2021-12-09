@@ -304,7 +304,11 @@ public class MonsterZone : MonoBehaviour
                 } 
                 else cardXposDictionary.Add(monsterCards[i], newPosX);
 
-                monsterCards[i].GetComponent<CardMovement>().OnCardMove(newPos, GameManager.Instance.rearrangeDuration);
+                if(monsterCards[i] != null)
+                {
+                    monsterCards[i].GetComponent<CardMovement>().OnCardMove(newPos, GameManager.Instance.rearrangeDuration);
+                }
+                
             }
 
         }
