@@ -452,7 +452,10 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
             if (!attackOnCD && !preAttackOnCD && GameManager.Instance.IsYou(owner))
             {
                 timeOnPreAttack = 0;
-                preAttackOnCD = true;
+                if (!References.i.mouse.tutorialMode) {
+                    preAttackOnCD = true;
+                }
+                
                 ToggleAttackBurnEffect(false);
                 if (GameManager.Instance.IsYou(owner)) {
                     if (!References.i.mouse.tutorialMode) {
