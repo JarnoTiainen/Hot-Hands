@@ -8,7 +8,8 @@ using Sirenix.OdinInspector;
 public class MainMenu : MonoBehaviour
 {
     public static MainMenu Instance { get; private set; }
-    [SerializeField] private GameObject splashArt;
+    [SerializeField] private SplashArtAnimation splashArt;
+    [SerializeField] private GameObject sounds;
     [SerializeField] private GameObject mainMenuButtons;
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject collectionMenu;
@@ -38,6 +39,8 @@ public class MainMenu : MonoBehaviour
         Instance = this;
         if (WebSocketService.Instance.isLoggedIn)
         {
+            Debug.Log("Logged in");
+            sounds.SetActive(true);
             mainMenuButtons.SetActive(true);
             loginScreen.SetActive(false);
             ChatManager.Instance.HideChat(false);
@@ -46,8 +49,16 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            splashArt.SetActive(true);
+            Debug.Log("Not logged in");
+            splashArt.gameObject.SetActive(true);
+            StartCoroutine(StartSoundsWithDelay(splashArt.animationDuration));
         }
+    }
+
+    private IEnumerator StartSoundsWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        sounds.SetActive(true);
     }
 
     public void MainMenuButtonsSetActive(bool value) => mainMenuButtons.SetActive(value);

@@ -35,6 +35,7 @@ public class LoginManager : MonoBehaviour
     {
         ToggleRememberMe(rememberMeToggle.isOn);
         SaveUserCredentials(rememberMeToggle.isOn);
+        Debug.Log("Saved credentials");
     }
 
     public void CreateNewAccount()
@@ -97,6 +98,7 @@ public class LoginManager : MonoBehaviour
     {
         userNameField.text = PlayerPrefs.GetString("Username", "");
         passwordField.text = PlayerPrefs.GetString("Password", "");
+        Debug.Log("Get credentials");
     }
 
     private void SaveUserCredentials(bool rememberMe)
