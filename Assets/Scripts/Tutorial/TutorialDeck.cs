@@ -180,8 +180,6 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
                                 if(GameManager.Instance.playerStats.playerHandCards == 2) {
                                     Debug.Log("nexstate from deck script");
                                     tutorialManager.NextTutorialState();
-                                    
-                                    
                                 }
                             }
                             

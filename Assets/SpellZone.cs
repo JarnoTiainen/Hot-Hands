@@ -123,7 +123,7 @@ public class SpellZone : MonoBehaviour
 
     private IEnumerator WaitForDeny()
     {
-        TutorialManager.tutorialManagerInstance.NextTutorialState();
+        //TutorialManager.tutorialManagerInstance.NextTutorialState();
         yield return new WaitUntil(() => TutorialManager.tutorialManagerInstance.spellCardSeed.Count == 3);
         TutorialManager.tutorialManagerInstance.TriggerSpellchain();
         SFXLibrary.Instance.spellChainActivation.PlaySFX();

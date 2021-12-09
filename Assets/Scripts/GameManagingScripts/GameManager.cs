@@ -799,7 +799,10 @@ public class GameManager : MonoBehaviour
         if (IsYou(playSpellMessage.player))
         {
             References.i.spellZone.PlaySpell(playSpellMessage.seed, playSpellMessage.targets, playSpellMessage.windup, playSpellMessage.slot);
-            LimboCardHolder.Instance.TryGetLimboCardWithSeed(playSpellMessage.seed).GetComponent<InGameCard>().RemoveFromSpellLimbo();
+            if (!References.i.mouse.tutorialMode) {
+                 LimboCardHolder.Instance.TryGetLimboCardWithSeed(playSpellMessage.seed).GetComponent<InGameCard>().RemoveFromSpellLimbo();
+            }
+           
             playerStats.playerHandCards--;
             playerStats.discardpileCardCount++;
 

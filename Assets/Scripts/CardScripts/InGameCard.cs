@@ -580,6 +580,11 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
         cardRuneEffectManager.PlayRuneDestroyEffect();
         yield return new WaitForSeconds(0.5f);
         SFXLibrary.Instance.cardDestroyed.PlaySFX();
+        if (References.i.mouse.tutorialMode) {
+            if (GetCardData().seed == "10000001") {
+                TutorialManager.tutorialManagerInstance.NextTutorialState();
+            }
+        }
         Destroy(gameObject);
     }
 

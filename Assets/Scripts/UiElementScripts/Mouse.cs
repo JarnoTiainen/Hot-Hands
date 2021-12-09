@@ -373,7 +373,7 @@ public class Mouse : MonoBehaviour
                     References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
                     WebSocketService.PlayCard(0, heldCard.GetComponent<InGameCard>().GetData().seed);
                     GameManager.Instance.PrePlaySpell(heldCard);
-                    LimboCardHolder.Instance.StoreNewCard(heldCard);
+                    
                 } else {
                     //Tutorial stuff
                     if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.PlaySpell) {
@@ -403,10 +403,13 @@ public class Mouse : MonoBehaviour
                     
                 }
                 Debug.Log("Emptying hand");
-                
+                LimboCardHolder.Instance.StoreNewCard(heldCard);
                 heldCard.GetComponent<InGameCard>().isInHand = false;
                 TransformIntoCardMode();
                 Cursor.visible = true;
+                //if (References.i.mouse.tutorialMode) {
+                //    Destroy(heldCard);
+                //}
                 heldCard = null;
                 
             }

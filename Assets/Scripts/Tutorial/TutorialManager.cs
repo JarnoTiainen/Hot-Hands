@@ -15,7 +15,7 @@ using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
-
+    public MatchResultScript resultScript;
     public float skipDuration = 3;
     public float attackCoolDown = 3;
     public float spellWindup = 4;
@@ -67,7 +67,7 @@ public class TutorialManager : MonoBehaviour
         Deny,
         Dialogue11, //youy were too 
         Denied,
-        Dialogue13, //last dialogue
+        Dialogue12, //last dialogue
         End,
 
 
@@ -96,6 +96,7 @@ public class TutorialManager : MonoBehaviour
     private void Switcher()
     {
         switch(tutorialState) {
+            
             case TutorialState.CardDraw:
                 drawingAllowed = true;
                 return;
@@ -183,6 +184,17 @@ public class TutorialManager : MonoBehaviour
             case TutorialState.Denied:
                 ToggleTime();
                 return;
+            case TutorialState.Dialogue12:
+                ToggleTime();
+                diManager.DialogueTrigger();
+                return;
+            case TutorialState.End:
+                summoningAllowed = true;
+                attackingAllowed = true;
+                burnignAllowed = true;
+                drawingAllowed = true;
+                ToggleTime();
+                return;
             default:
                 return;
         }
@@ -230,6 +242,10 @@ public class TutorialManager : MonoBehaviour
             skipBar.fillAmount = 0;
         }
 
+        if (GameManager.Instance.enemyPlayerStats.playerHealth <= 0) {
+            resultScript.GameEnd(true);
+        }
+
         
     }
 
@@ -255,7 +271,7 @@ public class TutorialManager : MonoBehaviour
     {
         summoningAllowed = true;
         GameObject ownCard = GameManager.Instance.GetCardFromInGameCards("00000000");
-        ownCard.GetComponentsInChildren<HighLightController>()[3].ToggleHighlightAnimation();
+        ownCard.GetComponentsInChildren<HighLightController>()[2].ToggleHighlightAnimation();
     }
 
     private void AttackState()
@@ -351,10 +367,12 @@ public class TutorialManager : MonoBehaviour
         List<GameObject> opponentCards = References.i.opponentMonsterZone.monsterCards;
         List<GameObject> yourCards = References.i.yourMonsterZone.monsterCards;
         GameObject attackTarget = null;
-
+        Debug.Log("Opponent field cards outside of if " + opponentCards.Count);
         if (isYourAttack) {
+            Debug.Log("IsYourAttack");
             //direct hit
             if (opponentCards.Count == 0) {
+                Debug.Log("Opponent field cards " + opponentCards.Count);
                 CardPowersMessage cardPowersMessage = new CardPowersMessage(data.seed, data.rp, data.lp);
                 CardPowersMessage[] message = { cardPowersMessage };
                 return message;
@@ -424,9 +442,19 @@ public class TutorialManager : MonoBehaviour
         if (spellCardSeed.Count == 0) {
             Debug.Log("Cancel invoke");
             CancelInvoke();
-            NextTutorialState();
+            GameObject enemyCard = GameManager.Instance.GetCardFromInGameCards("10000001");
+            enemyCard.GetComponent<InGameCard>().GetCardData().lp = 0;
+            enemyCard.GetComponent<InGameCard>().GetCardData().rp = 0;
+            enemyCard.GetComponent<InGameCard>().UpdateCardTexts();
+            enemyCard.GetComponent<InGameCard>().StartDestructionEvent();
+            References.i.opponentMonsterZone.monsterCards.Remove(enemyCard);
+            
+             //this goes to 
+            //NextTutorialState();
         }
     }
+
+    
 
 
 
