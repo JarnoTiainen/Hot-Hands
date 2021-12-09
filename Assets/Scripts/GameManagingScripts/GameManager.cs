@@ -267,6 +267,7 @@ public class GameManager : MonoBehaviour
         }
         if (drawCardMessage.player == playerNumber)
         {
+            Debug.Log("You draw deck cards now " + playerStats.deckCardCount);
             if(Hand.Instance.GetHandCardWithSeed(drawCardMessage.seed) == null)
             {
                 if (drawCardMessage.drawCooldown == -1)
@@ -299,7 +300,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            
+            Debug.Log("Enemy draw deck cards now " + playerStats.deckCardCount);
             if (!References.i.mouse.tutorialMode) {
                 if (drawCardMessage.enemyDeck)
                 {
@@ -462,6 +463,7 @@ public class GameManager : MonoBehaviour
     public void PlayerReturnCardToHand(GameObject card)
     {
         CardDenied(card.GetComponent<InGameCard>().GetData().seed);
+        playerStats.playerBurnValue += card.GetComponent<InGameCard>().GetData().value;
         card.GetComponent<InGameCard>().RemoveFromSummonLimbo();
     }
 
@@ -518,6 +520,7 @@ public class GameManager : MonoBehaviour
     {
         if(References.i.yourMonsterZone.monsterCards.Contains(GetCardFromInGameCards(seed)))
         {
+           
             References.i.yourMonsterZone.TryReturnCardToHand(seed);
         }
         else
@@ -642,6 +645,7 @@ public class GameManager : MonoBehaviour
     {
         if(LimboCardHolder.Instance.limboCards.Contains(card))
         {
+            playerStats.playerBurnValue += card.GetComponent<InGameCard>().GetData().value;
             LimboCardHolder.Instance.limboCards.Remove(card);
             card.GetComponent<BoxCollider>().enabled = true;
             Hand.AddNewCard(card);
