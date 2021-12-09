@@ -101,18 +101,22 @@ public class TutorialManager : MonoBehaviour
                 drawingAllowed = true;
                 return;
             case TutorialState.Dialogue1:
+                ToggleTime();
                 diManager.DialogueTrigger();
                 drawingAllowed = false;
                 return;
             case TutorialState.BurnCard:
+                ToggleTime();
                 BurnState();
                 return;
             case TutorialState.Dialogue2:
+                ToggleTime();
                 diManager.DialogueTrigger();
                 BurnState();
                 burnignAllowed = false;
                 return;
             case TutorialState.CardPlay:
+                ToggleTime();
                 PlayCardState();
                 return;
             case TutorialState.Dialogue3:
