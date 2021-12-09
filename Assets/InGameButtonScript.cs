@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 
 public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitElement, IOnClickDownUIElement
@@ -21,7 +22,8 @@ public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverE
         BackToMenu,
         ResultQuit,
         ResultQuitNo,
-        ResultQuitYes
+        ResultQuitYes,
+        TutorialBackToMenu
     }
 
     public void OnClickElement()
@@ -71,6 +73,9 @@ public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverE
                 break;
             case ButtonType.QuitYes:
                 EscMenu.Instance.QuitGame();
+                break;
+            case ButtonType.TutorialBackToMenu:
+                SceneManager.LoadScene(0);
                 break;
             default:
                 break;
