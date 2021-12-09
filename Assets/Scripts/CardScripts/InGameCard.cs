@@ -231,10 +231,14 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement, IOnHoverEnterEle
     public void SetIntoBurnLimbo()
     {
         inBurnLimbo = true;
+
+        Debug.Log("Setting card to limbo");
     }
 
     public void RemoveFromBurnLimbo()
     {
+        Debug.Log("Removing card from limbo");
+
         inBurnLimbo = false;
     }
 

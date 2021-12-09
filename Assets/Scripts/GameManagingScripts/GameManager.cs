@@ -101,14 +101,16 @@ public class GameManager : MonoBehaviour
     }
     public GameObject GetCardFromInGameCards(string seed)
     {
-        if(inGameCards.ContainsKey(seed))
+
+
+        if(inGameCards.Count > 0)
         {
-            return inGameCards[seed];
+            if (inGameCards.ContainsKey(seed))
+            {
+                return inGameCards[seed];
+            }
         }
-        else
-        {
-            return null;
-        }
+        return null;
     }
 
     public bool CheckIfInGameCardsContainsCard(GameObject card)
@@ -158,7 +160,7 @@ public class GameManager : MonoBehaviour
         {
             playerStats.playerHandCards--;
             playerStats.discardpileCardCount++;
-            GetCardFromInGameCards(burnCardMessage.seed).GetComponent<InGameCard>().RemoveFromBurnLimbo();
+            
         }
         else
         {
@@ -172,6 +174,7 @@ public class GameManager : MonoBehaviour
             enemyPlayerStats.playerBurnValue = burnCardMessage.newBurnValue;
             PlayerBurnCard(newCard, cardMessage.player);
         }
+        GetCardFromInGameCards(burnCardMessage.seed).GetComponent<InGameCard>().RemoveFromBurnLimbo();
     }
     public void PlayerModifyHealth(ModifyHealth modifyHealth)
     {
@@ -220,6 +223,7 @@ public class GameManager : MonoBehaviour
             card.transform.SetParent(References.i.yourBonfire.transform);
             UpdatePlayerBurnValue(player, playerStats.playerBurnValue + value);
             References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = playerStats.playerBurnValue.ToString();
+            card.GetComponent<InGameCard>().SetIntoBurnLimbo();
         }
         else
         {
@@ -228,7 +232,7 @@ public class GameManager : MonoBehaviour
             References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = enemyPlayerStats.playerBurnValue.ToString();
         }
         card.GetComponent<InGameCard>().Burn();
-        card.GetComponent<InGameCard>().SetIntoBurnLimbo();
+        
     }
     public void UpdatePlayerBurnValue(int player, int newValue)
     {
