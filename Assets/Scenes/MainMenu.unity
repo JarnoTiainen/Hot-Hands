@@ -18215,7 +18215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusText: {fileID: 292683306}
   timeText: {fileID: 2060006727}
-  cancelButton: {fileID: 0}
+  cancelButton: {fileID: 1578034224}
 --- !u!114 &1377643136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20956,6 +20956,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1570118368}
   m_CullTransparentMesh: 1
+--- !u!1 &1578034224 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 592620376861400803, guid: 8345af873d9471043ad230e588f91b06, type: 3}
+  m_PrefabInstance: {fileID: 1569794572}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1580086924
 GameObject:
   m_ObjectHideFlags: 0
