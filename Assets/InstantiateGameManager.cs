@@ -8,7 +8,7 @@ public class InstantiateGameManager : MonoBehaviour
 
     void Start()
     {
-        if (FindObjectOfType<GameManager>()) return;
+        if (GameObject.FindGameObjectWithTag("GameManager") != null) return;
         else
         {
             GameObject newGameManager = Instantiate(gameManager, new Vector3(0, 0, 0), Quaternion.identity);

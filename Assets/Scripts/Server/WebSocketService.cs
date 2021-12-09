@@ -268,6 +268,7 @@ public class WebSocketService : MonoBehaviour
 
     public async void CloseConnection()
     {
+        Debug.Log("Closing connection");
         await websocket.Close();
     }
 

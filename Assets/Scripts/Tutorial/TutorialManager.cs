@@ -232,7 +232,7 @@ public class TutorialManager : MonoBehaviour
     void Update()
     {
         if (skipTime >= skipDuration) {
-            
+            WebSocketService.Instance.enabled = true;
             SceneManager.LoadScene(0);
             GameManager.Instance.ResetPlayerStats();
         }

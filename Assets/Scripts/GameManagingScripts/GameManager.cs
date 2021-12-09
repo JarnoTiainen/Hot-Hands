@@ -39,8 +39,13 @@ public class GameManager : MonoBehaviour
 
     public void ResetPlayerStats()
     {
+        Debug.Log("Resetting stats");
         playerStats = new PlayerStats(playerStartHealth);
         enemyPlayerStats = new PlayerStats(playerStartHealth);
+    }
+    public void OnDisable()
+    {
+        Debug.LogWarning("DISABLING!!!");
     }
 
     public void EndGame(int player)
