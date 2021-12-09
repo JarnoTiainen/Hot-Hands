@@ -37,6 +37,7 @@ public class TutorialManager : MonoBehaviour
     public AIscript opponentAI;
     private DialogueManager diManager;
     private float denycounter;
+    private bool gameEnd = false;
 
     [SerializeField] private TutorialState tutorialState = TutorialState.Introduction;
     public static TutorialManager tutorialManagerInstance { get; private set; }
@@ -246,7 +247,8 @@ public class TutorialManager : MonoBehaviour
             skipBar.fillAmount = 0;
         }
 
-        if (GameManager.Instance.enemyPlayerStats.playerHealth <= 0) {
+        if (GameManager.Instance.enemyPlayerStats.playerHealth <= 0 && !gameEnd) {
+            gameEnd = true;
             resultScript.GameEnd(true);
         }
 

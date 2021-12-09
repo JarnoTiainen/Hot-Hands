@@ -7,12 +7,12 @@ public class ForceAspectRatio : MonoBehaviour
     [SerializeField] private float targetaspect = 16.0f / 9.0f;
 
     // Use this for initialization
-    void Start()
+    private void Awake()
     {
-        FuckYouNico();
+        SetAspectRatio();
     }
 
-    public void FuckYouNico()
+    public void SetAspectRatio()
     {
         // Determine the game window's current aspect ratio
         float windowaspect = (float)Screen.width / (float)Screen.height;
