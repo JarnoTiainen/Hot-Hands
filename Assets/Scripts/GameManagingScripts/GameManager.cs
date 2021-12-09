@@ -261,7 +261,10 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDrawCard(DrawCardMessage drawCardMessage)
     {
-
+        if(GetCardFromInGameCards(drawCardMessage.seed) != null)
+        {
+            return;
+        }
         if (drawCardMessage.player == playerNumber)
         {
             if(Hand.Instance.GetHandCardWithSeed(drawCardMessage.seed) == null)
