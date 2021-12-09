@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LogoMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: ff43ffafa77377045a95177e62bd2bab, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _SampleTexture2D_90c71f3297e5451fa60d56beec7315b8_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 39df5cff8e95a2e4f9ccafc9342288f7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_d0db23df32424aebaf4364c2d641210d_Texture_1:
+        m_Texture: {fileID: 2800000, guid: bba615a115e7e0746b5f7e1bf6d3ecd3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_ed0f9dfd71c5424cba5d7c91b124499f_Texture_1:
+        m_Texture: {fileID: 2800000, guid: d53ebb517bf8a2f40a92d39d3d57e263, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_a75e0761692c4781863c428804b8cdb4: 0.3
+    - Vector1_d8883149268f4049a31069df2b6021af: 1
+    - _AnimationStep: 0
+    m_Colors:
+    - Color_ee58fc4a150c4aa1b3e605423e48dbda: {r: 68.5935, g: 68.5935, b: 68.5935, a: 0}
+  m_BuildTextureStacks: []
