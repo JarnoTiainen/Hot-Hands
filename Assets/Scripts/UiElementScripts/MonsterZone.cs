@@ -41,6 +41,7 @@ public class MonsterZone : MonoBehaviour
         GameObject newMonster = Instantiate(References.i.fieldCard);
         Debug.Log("index board " + boardIndex);
         if (debugModeOn) Debug.Log("index: " + boardIndex);
+        if (boardIndex > monsterCards.Count) boardIndex = monsterCards.Count;
         monsterCards.Insert(boardIndex, newMonster);
         
         newMonster.transform.SetParent(transform, true);
