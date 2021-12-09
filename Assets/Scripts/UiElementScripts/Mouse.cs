@@ -266,6 +266,8 @@ public class Mouse : MonoBehaviour
 
     private void PlayCard()
     {
+
+
         if(heldCard.GetComponent<InGameCard>().GetData().cardType == Card.CardType.Monster)
         {
             GameManager.Instance.playerStats.playerFieldCards++;

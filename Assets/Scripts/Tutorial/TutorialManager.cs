@@ -97,12 +97,17 @@ public class TutorialManager : MonoBehaviour
     private void Switcher()
     {
         switch(tutorialState) {
-            
+            case TutorialState.Introduction:
+                drawingAllowed = false;
+                summoningAllowed = false;
+                burnignAllowed = false;
+                attackingAllowed = false;
+                return;
             case TutorialState.CardDraw:
                 drawingAllowed = true;
                 return;
             case TutorialState.Dialogue1:
-                ToggleTime();
+                SwitchTime(false);
                 diManager.DialogueTrigger();
                 drawingAllowed = false;
                 return;
@@ -111,7 +116,7 @@ public class TutorialManager : MonoBehaviour
                 BurnState();
                 return;
             case TutorialState.Dialogue2:
-                ToggleTime();
+                SwitchTime(false);
                 diManager.DialogueTrigger();
                 BurnState();
                 burnignAllowed = false;
@@ -121,8 +126,8 @@ public class TutorialManager : MonoBehaviour
                 PlayCardState();
                 return;
             case TutorialState.Dialogue3:
+                SwitchTime(false);
                 diManager.DialogueTrigger();
-                ToggleTime();
                 return;
             case TutorialState.CardAttack:
                 attackingAllowed = true;
@@ -130,6 +135,8 @@ public class TutorialManager : MonoBehaviour
                 AttackState();
                 return;
             case TutorialState.Dialogue4:
+                attackingAllowed = false;
+                SwitchTime(false);
                 diManager.DialogueTrigger();
                 return;
             case TutorialState.AttackValues:
@@ -143,62 +150,64 @@ public class TutorialManager : MonoBehaviour
                 DefenseValuesState();
                 return;
             case TutorialState.Dialogue6:
-                attackingAllowed = false;
                 diManager.DialogueTrigger();
                 return;
             case TutorialState.DirectAttack:
-                ToggleTime();
+                SwitchTime(true);
                 DefenseValuesState();
                 StartCoroutine(DirectCounter());
                 firstAttack = true;
                 return;
             case TutorialState.Dialogue7:
-                attackingAllowed = true;
+                SwitchTime(false);
                 diManager.DialogueTrigger();
+                return;
+            case TutorialState.DummyState:
+                SwitchTime(true);
+                attackingAllowed = true;
                 return;
             case TutorialState.Dialogue8:
                 attackingAllowed = false;
                 diManager.DialogueTrigger();
                 return;
             case TutorialState.SpellCard:
-                Debug.Log("Spellcard state");
                 drawingAllowed = true;
                 opponentAI.OpponentSummonCard();
                 return;
             case TutorialState.Dialogue9:
+                SwitchTime(false);
                 diManager.DialogueTrigger();
-                Debug.Log("Dialogue9");
-                ToggleTime();
                 return;
             case TutorialState.PlaySpell:
-                ToggleTime();
+                SwitchTime(true);
                 PlaySpellState();
                 return;
             case TutorialState.Dialogue10:
-                ToggleTime();
+                SwitchTime(false);
                 diManager.DialogueTrigger();
                 return;
             case TutorialState.Deny:
-                ToggleTime(); //time on
+                SwitchTime(true);
                 DenyState();
                 return;
             case TutorialState.Dialogue11:
-                ToggleTime();
+                SwitchTime(false);
                 diManager.DialogueTrigger();
                 return;
             case TutorialState.Denied:
-                ToggleTime();
+                SwitchTime(true);
                 return;
             case TutorialState.Dialogue12:
-                ToggleTime();
+                SwitchTime(false);
                 diManager.DialogueTrigger();
                 return;
             case TutorialState.End:
+                SwitchTime(true);
                 summoningAllowed = true;
                 attackingAllowed = true;
                 burnignAllowed = true;
                 drawingAllowed = true;
-                ToggleTime();
+                //ToggleTime();
                 return;
             default:
                 return;
@@ -255,7 +264,14 @@ public class TutorialManager : MonoBehaviour
         
     }
 
-
+    private void SwitchTime(bool timeOn)
+    {
+        if(timeOn == true) {
+            Time.timeScale = 1f;
+        } else {
+            Time.timeScale = 0;
+        }
+    }
 
 
     private void ToggleTime(bool unpause = false)
