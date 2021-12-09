@@ -34,7 +34,7 @@ public class LoginManager : MonoBehaviour
     private void OnDisable()
     {
         ToggleRememberMe(rememberMeToggle.isOn);
-        SaveUserCredentials(rememberMeToggle.isOn);
+        SaveUserCredentials();
         Debug.Log("Saved credentials");
     }
 
@@ -101,20 +101,11 @@ public class LoginManager : MonoBehaviour
         Debug.Log("Get credentials");
     }
 
-    private void SaveUserCredentials(bool rememberMe)
+    private void SaveUserCredentials()
     {
-        if (rememberMe)
-        {
-            PlayerPrefs.SetString("Username", userNameField.text);
-            PlayerPrefs.SetString("Password", passwordField.text);
-            PlayerPrefs.Save();
-        }
-        else
-        {
-            PlayerPrefs.SetString("Username", "");
-            PlayerPrefs.SetString("Password", "");
-            PlayerPrefs.Save();
-        }
+        PlayerPrefs.SetString("Username", userNameField.text);
+        PlayerPrefs.SetString("Password", passwordField.text);
+        PlayerPrefs.Save();
     }
 
     [Button]

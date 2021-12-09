@@ -159,8 +159,10 @@ public class WebSocketService : MonoBehaviour
                             if (GameObject.Find("Canvas").GetComponent<MainMenu>())
                             {
                                 GameObject.Find("Canvas").GetComponent<MainMenu>().GameFound(1);
+                                SearchingGamePopupScript.Instance.cancelButton.SetActive(false);
                             }
-
+                            PlayerPrefs.SetInt("HasPlayed", 1);
+                            PlayerPrefs.Save();
                             GetPlayerNumber();
                             gameManager.ResetPlayerStats();
                             //References.i.yourDeckObj.GetComponent<Deck>().SendDeckData();

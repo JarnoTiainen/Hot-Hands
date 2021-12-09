@@ -5854,6 +5854,7 @@ GameObject:
   - component: {fileID: 403127125}
   - component: {fileID: 403127126}
   - component: {fileID: 403127127}
+  - component: {fileID: 403127128}
   m_Layer: 5
   m_Name: ResolutionToggle (1)
   m_TagString: Untagged
@@ -5955,6 +5956,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alwaysClickSFX: 0
+--- !u!114 &403127128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403127124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f0e05895f91f143a4c6ca80e10afe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &414807817
 GameObject:
   m_ObjectHideFlags: 0
@@ -8021,6 +8034,7 @@ GameObject:
   - component: {fileID: 525672954}
   - component: {fileID: 525672955}
   - component: {fileID: 525672956}
+  - component: {fileID: 525672957}
   m_Layer: 5
   m_Name: ResolutionToggle (2)
   m_TagString: Untagged
@@ -8122,6 +8136,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alwaysClickSFX: 0
+--- !u!114 &525672957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525672953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f0e05895f91f143a4c6ca80e10afe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &527266499
 GameObject:
   m_ObjectHideFlags: 0
@@ -18189,6 +18215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusText: {fileID: 292683306}
   timeText: {fileID: 2060006727}
+  cancelButton: {fileID: 0}
 --- !u!114 &1377643136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22148,6 +22175,7 @@ GameObject:
   - component: {fileID: 1724593698}
   - component: {fileID: 1724593699}
   - component: {fileID: 1724593700}
+  - component: {fileID: 1724593701}
   m_Layer: 5
   m_Name: ResolutionToggle
   m_TagString: Untagged
@@ -22249,6 +22277,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alwaysClickSFX: 0
+--- !u!114 &1724593701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724593697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f0e05895f91f143a4c6ca80e10afe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1725835435
 GameObject:
   m_ObjectHideFlags: 0

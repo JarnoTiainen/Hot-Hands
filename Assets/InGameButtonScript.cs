@@ -75,6 +75,7 @@ public class InGameButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverE
                 EscMenu.Instance.QuitGame();
                 break;
             case ButtonType.TutorialBackToMenu:
+
                 WebSocketService.Instance.enabled = true;
                 SceneManager.LoadScene(0);
                 break;

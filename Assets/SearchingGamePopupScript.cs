@@ -5,14 +5,22 @@ using TMPro;
 
 public class SearchingGamePopupScript : MonoBehaviour
 {
+    public static SearchingGamePopupScript Instance { get; private set; }
     public TextMeshProUGUI statusText;
     [SerializeField] private TextMeshProUGUI timeText;
+    public GameObject cancelButton;
     private bool searching = true;
     private int seconds = 0;
     private int minutes = 0;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void OnEnable()
     {
+        cancelButton.SetActive(true);
         searching = true;
         seconds = 0;
         minutes = 0;

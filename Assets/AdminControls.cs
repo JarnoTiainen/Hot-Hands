@@ -16,6 +16,8 @@ public class AdminControls : MonoBehaviour
     public void EnableAdminFeatures()
     {
         LoginManager.Instance.userNameField.contentType = TMPro.TMP_InputField.ContentType.Standard;
+        PlayerPrefs.SetInt("HasPlayed", 1);
+        PlayerPrefs.Save();
     }
 
     public bool SoloPlay()

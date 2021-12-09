@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
+    public static SettingsMenu Instance { get; private set; }
     public AudioMixer masterMixer;
     public Slider masterSlider;
     public Slider musicSlider;
@@ -19,6 +20,11 @@ public class SettingsMenu : MonoBehaviour
     private int activeScreenResIndex;
     [SerializeField] private int defaultScreenResIndex = 0;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
         masterSlider.value = PlayerPrefs.GetFloat("MasterVolume", masterDefaultVolume);
@@ -26,13 +32,22 @@ public class SettingsMenu : MonoBehaviour
         sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", sfxDefaultVolume);
 
         activeScreenResIndex = PlayerPrefs.GetInt("ScreenResIndex", defaultScreenResIndex);
-        bool isFullscreen = (PlayerPrefs.GetInt("Fullscreen") == 1) ? true : false;
-
-        for (int i = 0; i < resolutionToggles.Length; i++)
+        bool isFullscreen = System.Convert.ToBoolean(PlayerPrefs.GetInt("Fullscreen", 1));
+        if (isFullscreen)
         {
-                resolutionToggles[i].isOn = i == activeScreenResIndex;
+            for (int i = 0; i < resolutionToggles.Length; i++)
+            {
+                resolutionToggles[i].interactable = !isFullscreen;
+            }
+            fullscreenToggle.isOn = isFullscreen;
         }
-        fullscreenToggle.isOn = isFullscreen;
+        else
+        {
+            for (int i = 0; i < resolutionToggles.Length; i++)
+            {
+                resolutionToggles[i].isOn = i == activeScreenResIndex;
+            }
+        }
     }
 
     public void SetMasterVolume(float sliderValue)
@@ -60,14 +75,12 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetScreenResolution(int i)
     {
-        if (resolutionToggles[i].isOn)
-        {
-            activeScreenResIndex = i;
-            float aspectRatio = 16 / 9f;
-            Screen.SetResolution(screenWidths[i], (int)(screenWidths[i] / aspectRatio), false);
-            PlayerPrefs.SetInt("ScreenResIndex", activeScreenResIndex);
-            PlayerPrefs.Save();
-        }
+        if (System.Convert.ToBoolean(PlayerPrefs.GetInt("Fullscreen", 1))) return;
+        activeScreenResIndex = i;
+        float aspectRatio = 16 / 9f;
+        Screen.SetResolution(screenWidths[i], (int)(screenWidths[i] / aspectRatio), false);
+        PlayerPrefs.SetInt("ScreenResIndex", activeScreenResIndex);
+        PlayerPrefs.Save();
     }
 
     public void SetFullscreen(bool isFullscreen)

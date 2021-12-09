@@ -9,8 +9,6 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
     [SerializeField] private Material material;
     [SerializeField] private ButtonType buttonType;
 
-
-    public bool buttonLocked;
     public enum ButtonType
     {
         Play,
@@ -30,64 +28,65 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
 
     public void OnClickElement()
     {
-        if(!buttonLocked)
+        switch (buttonType)
         {
-            switch (buttonType)
-            {
-                case ButtonType.Play:
-                    MainMenu.Instance.Play();
-                    break;
-                case ButtonType.Tutorial:
-                    MainMenu.Instance.OnTutorialButton();
-                    break;
-                case ButtonType.Collection:
+            case ButtonType.Play:
+                MainMenu.Instance.Play();
+                break;
+            case ButtonType.Tutorial:
+                MainMenu.Instance.OnTutorialButton();
+                break;
+            case ButtonType.Collection:
+                if (PlayerPrefs.GetInt("HasPlayed", 0) == 0)
+                {
+                    MainMenu.Instance.CreatePopupNotification("You have to play at least 1 game to unlock Collection!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
+                }
+                else
+                {
                     MainMenu.Instance.CollectionMenuSetActive(true);
-                    break;
-                case ButtonType.Settings:
-                    MainMenu.Instance.SettingsMenuSetActive(true);
-                    break;
-                case ButtonType.Quit:
-                    MainMenu.Instance.QuitConfirmationSetActive(true);
-                    break;
-                case ButtonType.Login:
-                    LoginManager.Instance.Login();
-                    break;
-                case ButtonType.OpenSignup:
-                    LoginManager.Instance.OpenSignup();
-                    break;
-                case ButtonType.Signup:
-                    LoginManager.Instance.CreateNewAccount();
-                    break;
-                case ButtonType.LoginBack:
-                    LoginManager.Instance.GoBack();
-                    break;
-                case ButtonType.SettingsBack:
-                    MainMenu.Instance.SettingsMenuSetActive(false);
-                    break;
-                case ButtonType.QuitYes:
-                    MainMenu.Instance.QuitGame();
-                    break;
-                case ButtonType.QuitNo:
-                    MainMenu.Instance.QuitConfirmationSetActive(false);
-                    MainMenu.Instance.SetCameraMainMenu();
-                    MainMenu.Instance.MainMenuButtonsSetActive(true);
-                    ChatManager.Instance.HideChat(false);
-                    break;
-                case ButtonType.CancelSearch:
-                    Debug.Log("Canceling search");
-                    WebSocketService.StopSearch();
-                    MainMenu.Instance.SearchingGamePanelSetActive(false);
-                    break;
-                default:
-                    break;
-            }
-            SFXLibrary.Instance.buttonClick.PlaySFX();
+                }
+                break;
+            case ButtonType.Settings:
+                MainMenu.Instance.SettingsMenuSetActive(true);
+                break;
+            case ButtonType.Quit:
+                MainMenu.Instance.QuitConfirmationSetActive(true);
+                break;
+            case ButtonType.Login:
+                LoginManager.Instance.Login();
+                break;
+            case ButtonType.OpenSignup:
+                LoginManager.Instance.OpenSignup();
+                break;
+            case ButtonType.Signup:
+                LoginManager.Instance.CreateNewAccount();
+                break;
+            case ButtonType.LoginBack:
+                LoginManager.Instance.GoBack();
+                break;
+            case ButtonType.SettingsBack:
+                MainMenu.Instance.SettingsMenuSetActive(false);
+                break;
+            case ButtonType.QuitYes:
+                MainMenu.Instance.QuitGame();
+                break;
+            case ButtonType.QuitNo:
+                MainMenu.Instance.QuitConfirmationSetActive(false);
+                MainMenu.Instance.SetCameraMainMenu();
+                MainMenu.Instance.MainMenuButtonsSetActive(true);
+                ChatManager.Instance.HideChat(false);
+                break;
+            case ButtonType.CancelSearch:
+                Debug.Log("Canceling search");
+                WebSocketService.StopSearch();
+                MainMenu.Instance.SearchingGamePanelSetActive(false);
+                break;
+            default:
+                break;
         }
-        else
-        {
-            //display popup here
-        }
+        SFXLibrary.Instance.buttonClick.PlaySFX();
     }
+
 
     public void OnHoverEnter()
     {
