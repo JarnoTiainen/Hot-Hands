@@ -9,6 +9,8 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
     [SerializeField] private Material material;
     [SerializeField] private ButtonType buttonType;
 
+
+    public bool buttonLocked;
     public enum ButtonType
     {
         Play,
@@ -28,56 +30,63 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
 
     public void OnClickElement()
     {
-        switch(buttonType)
+        if(!buttonLocked)
         {
-            case ButtonType.Play:
-                MainMenu.Instance.Play();
-                break;
-            case ButtonType.Tutorial:
-                MainMenu.Instance.OnTutorialButton();
-                break;
-            case ButtonType.Collection:
-                MainMenu.Instance.CollectionMenuSetActive(true);
-                break;
-            case ButtonType.Settings:
-                MainMenu.Instance.SettingsMenuSetActive(true);
-                break;
-            case ButtonType.Quit:
-                MainMenu.Instance.QuitConfirmationSetActive(true);
-                break;
-            case ButtonType.Login:
-                LoginManager.Instance.Login();
-                break;
-            case ButtonType.OpenSignup:
-                LoginManager.Instance.OpenSignup();
-                break;
-            case ButtonType.Signup:
-                LoginManager.Instance.CreateNewAccount();
-                break;
-            case ButtonType.LoginBack:
-                LoginManager.Instance.GoBack();
-                break;
-            case ButtonType.SettingsBack:
-                MainMenu.Instance.SettingsMenuSetActive(false);
-                break;
-            case ButtonType.QuitYes:
-                MainMenu.Instance.QuitGame();
-                break;
-            case ButtonType.QuitNo:
-                MainMenu.Instance.QuitConfirmationSetActive(false);
-                MainMenu.Instance.SetCameraMainMenu();
-                MainMenu.Instance.MainMenuButtonsSetActive(true);
-                ChatManager.Instance.HideChat(false);
-                break;
-            case ButtonType.CancelSearch:
-                Debug.Log("Canceling search");
-                WebSocketService.StopSearch();
-                MainMenu.Instance.SearchingGamePanelSetActive(false);
-                break;
-            default:
-                break;
+            switch (buttonType)
+            {
+                case ButtonType.Play:
+                    MainMenu.Instance.Play();
+                    break;
+                case ButtonType.Tutorial:
+                    MainMenu.Instance.OnTutorialButton();
+                    break;
+                case ButtonType.Collection:
+                    MainMenu.Instance.CollectionMenuSetActive(true);
+                    break;
+                case ButtonType.Settings:
+                    MainMenu.Instance.SettingsMenuSetActive(true);
+                    break;
+                case ButtonType.Quit:
+                    MainMenu.Instance.QuitConfirmationSetActive(true);
+                    break;
+                case ButtonType.Login:
+                    LoginManager.Instance.Login();
+                    break;
+                case ButtonType.OpenSignup:
+                    LoginManager.Instance.OpenSignup();
+                    break;
+                case ButtonType.Signup:
+                    LoginManager.Instance.CreateNewAccount();
+                    break;
+                case ButtonType.LoginBack:
+                    LoginManager.Instance.GoBack();
+                    break;
+                case ButtonType.SettingsBack:
+                    MainMenu.Instance.SettingsMenuSetActive(false);
+                    break;
+                case ButtonType.QuitYes:
+                    MainMenu.Instance.QuitGame();
+                    break;
+                case ButtonType.QuitNo:
+                    MainMenu.Instance.QuitConfirmationSetActive(false);
+                    MainMenu.Instance.SetCameraMainMenu();
+                    MainMenu.Instance.MainMenuButtonsSetActive(true);
+                    ChatManager.Instance.HideChat(false);
+                    break;
+                case ButtonType.CancelSearch:
+                    Debug.Log("Canceling search");
+                    WebSocketService.StopSearch();
+                    MainMenu.Instance.SearchingGamePanelSetActive(false);
+                    break;
+                default:
+                    break;
+            }
+            SFXLibrary.Instance.buttonClick.PlaySFX();
         }
-        SFXLibrary.Instance.buttonClick.PlaySFX();
+        else
+        {
+            //display popup here
+        }
     }
 
     public void OnHoverEnter()
