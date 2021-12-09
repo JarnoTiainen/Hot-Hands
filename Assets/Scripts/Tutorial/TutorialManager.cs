@@ -258,12 +258,16 @@ public class TutorialManager : MonoBehaviour
 
 
 
-    private void ToggleTime()
+    private void ToggleTime(bool unpause = false)
     {
         if(Time.timeScale == 0) {
             Time.timeScale = 1f;
         } else {
             Time.timeScale = 0;
+        }
+        if(unpause)
+        {
+            Time.timeScale = 1f;
         }
     }
 
@@ -361,7 +365,7 @@ public class TutorialManager : MonoBehaviour
                 ToggleTime();
             }
             if (spellCardSeed.Count == 3) {
-                ToggleTime();
+                ToggleTime(true);
                 NextTutorialState();
                 break;
             }
