@@ -18,6 +18,8 @@ public class LoginManager : MonoBehaviour
     [SerializeField] private GameObject backButton;
     [SerializeField] private Toggle rememberMeToggle;
     [SerializeField] private GameObject mainMenuButtons;
+    [SerializeField] private int nameMinLength = 3;
+    public bool aboveMinLength = false;
     private int charLimit;
 
     private void Start()
@@ -40,7 +42,11 @@ public class LoginManager : MonoBehaviour
 
     public void CreateNewAccount()
     {
-        WebSocketService.CreateNewAccount(userNameField.text, passwordField.text, emailField.text);
+        if(aboveMinLength) WebSocketService.CreateNewAccount(userNameField.text, passwordField.text, emailField.text);
+        else
+        {
+            MainMenu.Instance.CreatePopupNotification("Name must be over " + nameMinLength + " characters long!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
+        }
     }
 
     public void Login()
@@ -81,10 +87,17 @@ public class LoginManager : MonoBehaviour
         if (msgLength >= charLimit)
         {
             characterCounterText.color = Color.yellow;
+            aboveMinLength = true;
+        }
+        else if(msgLength < nameMinLength)
+        {
+            characterCounterText.color = Color.red;
+            aboveMinLength = false;
         }
         else
         {
             characterCounterText.color = Color.white;
+            aboveMinLength = true;
         }
     }
 
