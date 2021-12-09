@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardSprite: {fileID: 21300000, guid: 059a2c35f2ce2c94b80fa4edc72e385e, type: 3}
   cardName: Deny
-  cost: 3
+  cost: 2
   value: 3
   legendary: 0
   cardType: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   - enchantmentName: Deny
     enchantmentEffect: 11
     trigger: 7
-    weight: 0
+    weight: 1
     targeting: 0
     targetType: 0
     buffType: 0

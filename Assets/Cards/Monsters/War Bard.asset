@@ -20,14 +20,14 @@ MonoBehaviour:
   cardType: 1
   spellTags: 
   monsterTags: 
-  rp: 2
-  lp: 2
-  attackDirection: 1
+  rp: 3
+  lp: 4
+  attackDirection: 2
   enchantments:
   - enchantmentName: Soothing Tune
     enchantmentEffect: 6
     trigger: 1
-    weight: 4
+    weight: 5
     targeting: 0
     targetType: 0
     buffType: 0

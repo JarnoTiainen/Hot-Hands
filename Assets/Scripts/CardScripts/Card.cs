@@ -23,7 +23,8 @@ public class Card : ScriptableObject
     {
         Warrior,
         Dragon,
-        Golem
+        Golem,
+        Vermin
     }
 
     public bool IsTypeOfCard(CardType type)

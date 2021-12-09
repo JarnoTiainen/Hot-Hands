@@ -10,17 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d9fbfd7f0adb4d4f8075ecd52d67244, type: 3}
-  m_Name: Arogyl the Son of Mor'goth
+  m_Name: Divine Guardian
   m_EditorClassIdentifier: 
-  cardSprite: {fileID: 21300000, guid: 19d03a22b0077b149acc07d1b05374be, type: 3}
-  cardName: Arogyl
-  cost: 15
+  cardSprite: {fileID: 21300000, guid: 80b0df1b8d4cbad4fba1f173db8d6c3a, type: 3}
+  cardName: Divine Guardian
+  cost: 4
   value: 0
-  legendary: 1
+  legendary: 0
   cardType: 1
   spellTags: 
   monsterTags: 
-  rp: 20
-  lp: 20
-  attackDirection: 1
-  enchantments: []
+  rp: 3
+  lp: 7
+  attackDirection: 2
+  enchantments:
+  - enchantmentName: Guardian Angel
+    enchantmentEffect: 6
+    trigger: 4
+    weight: 5
+    targeting: 0
+    targetType: 0
+    buffType: 0
+    buffVanishType: 0
+    hidden: 0
