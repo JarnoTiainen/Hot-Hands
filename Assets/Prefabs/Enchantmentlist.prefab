@@ -59,7 +59,7 @@ MonoBehaviour:
   reduceHighestCostDescription: 'Reduce cost of your most expensive card by :power:'
   damagePlayerDescription: 'Take :power: damage'
   vanishDescription: Vanish
-  addSpellToHanDescription: 
+  addSpellToHanDescription: Add random spel to your hand
   addGolemToDiscardPileDescription: 'Add :power: Golem(s) to your discard pile'
   buffAllGolemsDescription: 'give :power: LP and RP for all your golems'
   spellDrawCardDescription: 'Draw :power:'
@@ -79,3 +79,4 @@ MonoBehaviour:
     enemy cards
   giantBribeDescription: 'Give :power: random opponent hand card(s) "Betrayal" effect.'
   summonRetDescription: 'Summon :power: Gray Rats'
+  pactDescription: 'Halve your health to gain :power: Burn'
