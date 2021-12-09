@@ -42,6 +42,7 @@ public class EnchantmentList : MonoBehaviour
     [SerializeField] [TextArea] private string ratGrenadeDescription;
     [SerializeField] [TextArea] private string giantBribeDescription;
     [SerializeField] [TextArea] private string summonRetDescription;
+    [SerializeField] [TextArea] private string pactDescription;
 
 
 
@@ -163,6 +164,9 @@ public class EnchantmentList : MonoBehaviour
                 break;
             case Enchantment.EnchantmentEffect.SummonRat:
                 effect = summonRetDescription;
+                break;
+            case Enchantment.EnchantmentEffect.Pact:
+                effect = pactDescription;
                 break;
             default:
                 effect = "null";
