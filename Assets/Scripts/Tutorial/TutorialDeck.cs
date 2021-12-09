@@ -182,12 +182,6 @@ public class TutorialDeck : MonoBehaviour, IOnClickDownUIElement
                                     tutorialManager.NextTutorialState();
                                 }
                             }
-                            
-
-                        }
-                        else
-                        {
-
                         }
                     }
                     else

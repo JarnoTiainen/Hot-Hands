@@ -254,6 +254,8 @@ public class TutorialManager : MonoBehaviour
     }
 
 
+
+
     private void ToggleTime()
     {
         if(Time.timeScale == 0) {

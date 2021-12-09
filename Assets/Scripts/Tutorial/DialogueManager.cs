@@ -12,6 +12,9 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     [BoxGroup("Highlighters")]
     public List<HighLightController> highLightControllers;
+    [BoxGroup("Burn Denied Line")]
+    [TextArea]
+    public List<string> burnDialogue;
     private TutorialManager tutorialManager;
     private Queue<string> sentences;
     public bool startBool = false;
@@ -25,6 +28,7 @@ public class DialogueManager : MonoBehaviour
         roll = null;
         //dialogueAnimator.SetBool("dialogueOn", true);
         sentences = new Queue<string>();
+
 
         //copy the dialogue sentences from the dialogue object
         foreach (string s in dialogue.sentences) {
@@ -69,6 +73,26 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+    public void BurnDeniedDialogue(string dial)
+    {
+
+        dialogueAnimator.SetBool("dialogueOn", true);
+        mascotAnimator.SetBool("dialogueOn", true);
+        StartCoroutine(RollDialogue(dial));
+        StartCoroutine(Burnmerator());
+    }
+
+    private IEnumerator Burnmerator()
+    {
+        while (true) {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
+                EndDialogue();
+            }
+            yield return null;
+        }
+        
+    }
+
     public void DialogueTrigger()
     {
         StartCoroutine(StartDialogue());
@@ -77,6 +101,7 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         //Debug.Log("Ending dialogue");
+        StopAllCoroutines();
         dialogueAnimator.SetBool("dialogueOn", false);
         mascotAnimator.SetBool("dialogueOn", false);
     }

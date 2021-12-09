@@ -211,9 +211,16 @@ public class Mouse : MonoBehaviour
                         burnTries++;
                         Debug.Log("Returning card");
                         ReturnHeldCardToHand();
-                        if(burnTries == 5) {
+                        Debug.Log("Burntries " + burnTries);
+                        if(burnTries >= 1 && burnTries != 3) {
+                            TutorialManager.tutorialManagerInstance.gameObject.GetComponent<DialogueManager>().BurnDeniedDialogue(TutorialManager.tutorialManagerInstance.gameObject.GetComponent<DialogueManager>().burnDialogue[0]);
                             //do a funny line here
                         }
+
+                        if (burnTries == 3) {
+                            TutorialManager.tutorialManagerInstance.gameObject.GetComponent<DialogueManager>().BurnDeniedDialogue(TutorialManager.tutorialManagerInstance.gameObject.GetComponent<DialogueManager>().burnDialogue[1]);
+                        }
+
                         return;
                     }
                 }
