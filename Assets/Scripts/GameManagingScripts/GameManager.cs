@@ -387,14 +387,14 @@ public class GameManager : MonoBehaviour
         {
             playerStats.deckCardCount = setDeckMessage.deckCards;
             playerStats.discardpileCardCount = 0;
-            References.i.yourDeck.GetComponent<DeckGaObConstructor>().CreateDeck();
+            References.i.yourDeck.GetComponent<DeckGaObConstructor>().CreateDeck(setDeckMessage.deckCards);
             deckSet = true;
         }
         else
         {
             enemyPlayerStats.deckCardCount = setDeckMessage.deckCards;
             enemyPlayerStats.discardpileCardCount = 0;
-            References.i.opponentDeck.GetComponent<DeckGaObConstructor>().CreateDeck();
+            References.i.opponentDeck.GetComponent<DeckGaObConstructor>().CreateDeck(setDeckMessage.deckCards);
         }
     }
     public void PlayerSummonCard(SummonCardMessage summonCardMessage)

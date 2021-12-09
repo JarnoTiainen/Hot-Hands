@@ -27,7 +27,7 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         cardPrefab = References.i.fieldCard;
         if (owner == 0) deckCardsCount = GameManager.Instance.playerStats.deckCardCount;
         else if(owner == 1) deckCardsCount = GameManager.Instance.enemyPlayerStats.deckCardCount;
-        CreateDeck();
+        CreateDeck(20);
 
         if (yourDeck) owner = GameManager.Instance.playerNumber;
         else owner = 1 - GameManager.Instance.playerNumber;
@@ -46,15 +46,14 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
         owner = i;
     }
 
-    [Button] public void CreateDeck()
+    [Button] public void CreateDeck(int cards)
     {
         foreach(GameObject deckCard in deckCards)
         {
             Destroy(deckCard);
         }
         deckCards = new List<GameObject>();
-        if (owner == 0) deckCardsCount = GameManager.Instance.playerStats.deckCardCount;
-        else if (owner == 1) deckCardsCount = GameManager.Instance.enemyPlayerStats.deckCardCount;
+        deckCardsCount = cards;
         i = 0;
         InvokeRepeating("AddCardToDeck", 0, 0.1f);
     }
