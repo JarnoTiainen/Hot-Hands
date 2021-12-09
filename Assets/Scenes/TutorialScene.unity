@@ -4864,7 +4864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 1281289499}
   cards:
-  - {fileID: 11400000, guid: 51a84270decf4c8408be9d4e0b5bab87, type: 2}
+  - {fileID: 11400000, guid: ffce4c5f022b5f248a7fa1b313cd3351, type: 2}
   - {fileID: 11400000, guid: 3b168982305e4f54a8257f979e9b483d, type: 2}
   - {fileID: 11400000, guid: bb69344fd189e3a41979aaa1c11cd632, type: 2}
   - {fileID: 11400000, guid: e365b4d1ae039b748a6ec018920e5336, type: 2}
@@ -11632,7 +11632,7 @@ PrefabInstance:
       objectReference: {fileID: 633695010}
     - target: {fileID: 3195456241456581281, guid: 62f8452f7e8d1914b9163d11d1576398, type: 3}
       propertyPath: startBurnValue
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3195456241456581281, guid: 62f8452f7e8d1914b9163d11d1576398, type: 3}
       propertyPath: enemyStartBurnValue
