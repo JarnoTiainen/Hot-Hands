@@ -221,8 +221,11 @@ public class CardMovement : MonoBehaviour
             } else if (GetComponent<InGameCard>().GetData().attackDirection == Card.AttackDirection.Right) {
                 endAttackPoint.x += References.i.fieldCard.GetComponent<BoxCollider>().size.x * multiplier;
             }
-
-            targetCard.GetComponent<CardMovement>().Lift(dur);
+            if(targetCard != null)
+            {
+                targetCard.GetComponent<CardMovement>().Lift(dur);
+            }
+            
                 
         } else {
            //direct attack
