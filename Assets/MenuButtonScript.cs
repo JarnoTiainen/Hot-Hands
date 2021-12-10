@@ -40,7 +40,7 @@ public class MenuButtonScript : MonoBehaviour, IOnHoverEnterElement, IOnHoverExi
                 Debug.Log(PlayerPrefs.GetInt("HasPlayed", 0));
                 if (PlayerPrefs.GetInt("HasPlayed", 0) == 0)
                 {
-                    MainMenu.Instance.CreatePopupNotification("You have to play at least 1 game to unlock Collection!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
+                    MainMenu.Instance.CreatePopupNotification("You have to play at least 1 game to unlock Collection!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative, 5f);
                 }
                 else MainMenu.Instance.CollectionMenuSetActive(true);
                 break;
