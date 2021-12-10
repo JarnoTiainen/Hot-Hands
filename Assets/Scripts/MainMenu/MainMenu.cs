@@ -20,7 +20,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private AdminControls adminControls;
     [SerializeField] private SearchingGamePopupScript searchingGame;
     [SerializeField] private TextMeshProUGUI popupNotificationText;
-    [SerializeField] private float popupDuration = 2.5f;
     [SerializeField] private float popupMovementDuration = 0.3f;
     public Slider progressSlider;
     public TextMeshProUGUI progressText;
@@ -167,15 +166,15 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void CreatePopupNotification(string text, PopupCorner corner, PopupTone tone)
+    public void CreatePopupNotification(string text, PopupCorner corner, PopupTone tone, float popupDuration = 2.5f)
     {
         if (activePopup && (text == previousPopup)) return;
         previousPopup = text;
         if(showPopupNotificationCo != null) StopCoroutine(showPopupNotificationCo);
-        showPopupNotificationCo = StartCoroutine(ShowPopupNotification(text, corner, tone));
+        showPopupNotificationCo = StartCoroutine(ShowPopupNotification(text, corner, tone, popupDuration));
     }
 
-    private IEnumerator ShowPopupNotification(string text, PopupCorner corner, PopupTone tone)
+    private IEnumerator ShowPopupNotification(string text, PopupCorner corner, PopupTone tone, float popupDuration)
     {
         activePopup = true;
         RectTransform popupRectTransform = popupNotification.GetComponent<RectTransform>();
@@ -214,19 +213,17 @@ public class MainMenu : MonoBehaviour
                 break;
         }
 
-        float currentTime = 0;
         popupNotification.SetActive(true);
         popupNotificationText.text = text;
         if (corner == PopupCorner.BottomLeft || corner == PopupCorner.BottomRight) StartCoroutine(MovePopup(true));
         else StartCoroutine(MovePopup(false));
-        while (currentTime < popupDuration)
-        {
-            currentTime += Time.deltaTime;
-            yield return null;
-        }
+
+        yield return new WaitForSeconds(popupDuration);
+
         if (corner == PopupCorner.BottomLeft || corner == PopupCorner.BottomRight) StartCoroutine(MovePopup(false));
         else StartCoroutine(MovePopup(true));
         yield return new WaitForSeconds(popupMovementDuration);
+
         popupNotification.SetActive(false);
         activePopup = false;
     }
