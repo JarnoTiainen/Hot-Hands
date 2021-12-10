@@ -215,7 +215,7 @@ public class WebSocketService : MonoBehaviour
                         if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                         if(SceneManager.GetActiveScene().buildIndex == 0)
                         {
-                            MainMenu.Instance.CreatePopupNotification("Internal server error! Try restarting the game.", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
+                            MainMenu.Instance.CreatePopupNotification("Internal server error! AWS might have problems.", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
                         }
                         break;
                 }
