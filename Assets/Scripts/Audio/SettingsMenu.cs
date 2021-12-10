@@ -81,6 +81,7 @@ public class SettingsMenu : MonoBehaviour
         Screen.SetResolution(screenWidths[i], (int)(screenWidths[i] / aspectRatio), false);
         PlayerPrefs.SetInt("ScreenResIndex", activeScreenResIndex);
         PlayerPrefs.Save();
+        Debug.Log("Screen resolution set: "+ screenWidths[i]);
     }
 
     public void SetFullscreen(bool isFullscreen)
@@ -95,13 +96,9 @@ public class SettingsMenu : MonoBehaviour
             Resolution maxResolution = allResolutions[allResolutions.Length - 1];
             Screen.SetResolution(maxResolution.width, maxResolution.height, true);
         }
-        else
-        {
-            SetScreenResolution(activeScreenResIndex);
-        }
         PlayerPrefs.SetInt("Fullscreen", ((isFullscreen) ? 1 : 0));
         PlayerPrefs.Save();
-        //mainCam.GetComponent<ForceAspectRatio>().FuckYouNico();
-        //canvasCam.GetComponent<ForceAspectRatio>().FuckYouNico();
+        Debug.Log("Fullscreen: " + isFullscreen);
+        SetScreenResolution(activeScreenResIndex);
     }
 }
