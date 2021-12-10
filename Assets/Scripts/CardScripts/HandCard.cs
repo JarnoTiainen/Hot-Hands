@@ -10,7 +10,6 @@ public class HandCard : MonoBehaviour, IOnClickDownUIElement
 
     public void OnClickElement()
     {
-        Debug.Log(!Mouse.Instance.targetModeOn + " " + targetable);
         if(!Mouse.Instance.targetModeOn && targetable)
         {
             Debug.Log(" " + !GetComponent<InGameCard>().cardHidden);
@@ -21,10 +20,6 @@ public class HandCard : MonoBehaviour, IOnClickDownUIElement
                 Mouse.Instance.SetNewHeldCard(gameObject);
                 gameObject.GetComponent<BoxCollider>().enabled = false;
             }
-        }
-        else
-        {
-            Debug.Log("targeting card " + gameObject.GetComponent<InGameCard>().GetData().cardName);
         }
     }
 
