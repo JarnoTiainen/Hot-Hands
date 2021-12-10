@@ -179,6 +179,7 @@ public class TutorialManager : MonoBehaviour
                 diManager.DialogueTrigger();
                 return;
             case TutorialState.PlaySpell:
+                Debug.Log("SWITCHING TO PLAY SPELL");
                 SwitchTime(true);
                 PlaySpellState();
                 return;
