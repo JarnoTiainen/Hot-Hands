@@ -77,11 +77,6 @@ public class GameManager : MonoBehaviour
         if(inGameCards.ContainsKey(newCard.GetComponent<InGameCard>().GetData().seed))
         {
             inGameCards.Remove(newCard.GetComponent<InGameCard>().GetData().seed);
-            Debug.LogWarning("REadding " + newCard.GetComponent<InGameCard>().GetData().cardName + " to list");
-        }
-        else
-        {
-            Debug.LogWarning("adding " + newCard.GetComponent<InGameCard>().GetData().cardName + " to list");
         }
         inGameCards.Add(newCard.GetComponent<InGameCard>().GetData().seed, newCard);
     }
@@ -308,7 +303,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Enemy draw deck cards now " + playerStats.deckCardCount);
             if (!References.i.mouse.tutorialMode) {
                 if (drawCardMessage.enemyDeck)
                 {
@@ -351,7 +345,6 @@ public class GameManager : MonoBehaviour
         else
         {
             enemyPlayerStats.deckCardCount--;
-            if(debugPlayerDrawCard) Debug.Log("Remaining cards " + enemyPlayerStats.deckCardCount);
             if (drawCardMessage == null) {
                 EnemyHand.AddNewCard(seed);
             } else {

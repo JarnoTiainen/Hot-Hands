@@ -76,6 +76,9 @@ public class SpellZone : MonoBehaviour
     }
     public void TriggerSpellChain(int index, bool denied)
     {
+        inTriggerSpellChainLimbo = false;
+        timeInTriggerSpellChainLimbo = 0;
+
         switch(index)
         {
             case 0:

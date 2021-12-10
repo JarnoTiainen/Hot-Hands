@@ -65,9 +65,6 @@ public class EnemyHand : MonoBehaviour
         } else {
             newCardData = Hand.Instance.cardList.GetCardData(drawCardMessage);;
         }
-        
-        Debug.Log("enemy card data from enemy hand " + newCardData.cardName);
-
         newCardData.seed = seed;
         newCard.GetComponent<InGameCard>().SetNewCardData(false, newCardData);
         SetNewCardPositions();
