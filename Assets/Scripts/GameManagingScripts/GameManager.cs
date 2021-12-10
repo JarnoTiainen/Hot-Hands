@@ -212,7 +212,10 @@ public class GameManager : MonoBehaviour
     public void ReturnBurnedCardToHand(string seed)
     {
         if (debugPlayerBurnCard) Debug.Log("Ret removing ");
-        Hand.AddNewCardToHand(GetCardFromInGameCards(seed));
+        if(Hand.Instance.GetHandCardWithSeed(seed) == null)
+        {
+            Hand.AddNewCardToHand(GetCardFromInGameCards(seed));
+        }
     }
 
     public void PlayerBurnCard(GameObject card, int player = -1)
@@ -530,7 +533,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Hand.AddNewCardToHand(GetCardFromInGameCards(seed));
+            if(Hand.Instance.GetHandCardWithSeed(seed) == null)
+            {
+                Hand.AddNewCardToHand(GetCardFromInGameCards(seed));
+            }
         }
     }
 
@@ -655,7 +661,11 @@ public class GameManager : MonoBehaviour
             playerStats.playerBurnValue += card.GetComponent<InGameCard>().GetData().value;
             LimboCardHolder.Instance.limboCards.Remove(card);
             card.GetComponent<BoxCollider>().enabled = true;
-            Hand.AddNewCard(card);
+            if(Hand.Instance.GetHandCardWithSeed(card.GetComponent<InGameCard>().GetData().seed) == null)
+            {
+                Hand.AddNewCard(card);
+            }
+            
         }
         
     }
