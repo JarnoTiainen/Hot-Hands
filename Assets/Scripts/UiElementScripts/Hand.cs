@@ -193,10 +193,6 @@ public class Hand : MonoBehaviour
             SetNewCardPositions();
             Instance.UpdateCanAffortCards();
         }
-        else
-        {
-            Debug.LogError("Card with seed: " + seed + " was not from hand cards!");
-        }
     }
 
     public GameObject GetHandCardWithSeed(string seed)

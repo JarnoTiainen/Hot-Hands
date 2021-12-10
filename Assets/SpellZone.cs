@@ -13,7 +13,8 @@ public class SpellZone : MonoBehaviour
     public InGameSpell spellSlot2;
     public InGameSpell spellSlot3;
     private int counter;
-    
+    private float timeInTriggerSpellChainLimbo = 0;
+    private bool inTriggerSpellChainLimbo = false;
 
     private void Awake()
     {
@@ -112,10 +113,14 @@ public class SpellZone : MonoBehaviour
             CancelInvoke();
             if (!References.i.mouse.tutorialMode) {
                 WebSocketService.TriggerSpellChain();
-            } else {
+                timeInTriggerSpellChainLimbo = 0;
+                inTriggerSpellChainLimbo = true;
+            } 
+            else {
                 //StatChangeMessage statChangeMessage = new StatChangeMessage();
                 TutorialManager.tutorialManagerInstance.TriggerSpellchain();
                 SFXLibrary.Instance.spellChainActivation.PlaySFX();
+                
             }
         }
         SFXLibrary.Instance.spellChainCountdown.PlaySFX();
@@ -130,6 +135,26 @@ public class SpellZone : MonoBehaviour
 
     }
 
+    private void SpellChainErrorHandler()
+    {
+        WebSocketService.TriggerSpellChain();
+        timeInTriggerSpellChainLimbo = 0;
+        inTriggerSpellChainLimbo = true;
+    }
+
+    private void Update()
+    {
+        if(inTriggerSpellChainLimbo)
+        {
+            timeInTriggerSpellChainLimbo += Time.deltaTime;
+            if(timeInTriggerSpellChainLimbo > 6)
+            {
+                timeInTriggerSpellChainLimbo = 0;
+                inTriggerSpellChainLimbo = false;
+                SpellChainErrorHandler();
+            }
+        }
+    }
 
     public bool HasFreeSlot()
     {
