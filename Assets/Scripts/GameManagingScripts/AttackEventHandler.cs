@@ -35,17 +35,22 @@ public class AttackEventHandler : MonoBehaviour
             GameObject attackingCard = yourMonsterZone.GetCardWithSeed(attacker.seed);
             GameObject targetCard = opponentMonsterZone.GetCardWithSeed(target.seed);
 
-            Debug.LogWarning("Attack: attacker: " + attackingCard.GetComponent<InGameCard>().GetData().cardName + " rp: " + attackingCard.GetComponent<InGameCard>().GetData().rp + " lp: " + attackingCard.GetComponent<InGameCard>().GetData().lp + " target: " + targetCard.GetComponent<InGameCard>().GetData().cardName + " rp: " + targetCard.GetComponent<InGameCard>().GetData().rp + " lp: " + targetCard.GetComponent<InGameCard>().GetData().lp);
+            if(attackingCard != null)
+            {
+                Debug.LogWarning("Attack: attacker: " + attackingCard.GetComponent<InGameCard>().GetData().cardName + " rp: " + attackingCard.GetComponent<InGameCard>().GetData().rp + " lp: " + attackingCard.GetComponent<InGameCard>().GetData().lp);
+                attackingCard.GetComponent<InGameCard>().StartAttackCooldown(attackCD);
+                GameManager.Instance.GetCardFromInGameCards(attacker.seed).GetComponent<InGameCard>().tempRp = attacker.rp;
+                GameManager.Instance.GetCardFromInGameCards(attacker.seed).GetComponent<InGameCard>().tempLp = attacker.lp;
 
-
-            attackingCard.GetComponent<InGameCard>().StartAttackCooldown(attackCD);
-            GameManager.Instance.GetCardFromInGameCards(attacker.seed).GetComponent<InGameCard>().tempRp = attacker.rp;
-            GameManager.Instance.GetCardFromInGameCards(attacker.seed).GetComponent<InGameCard>().tempLp = attacker.lp;
-            GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempRp = target.lp;
-            GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempLp = target.rp;
-            attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
-
-            attackingCard.GetComponent<CardMovement>().OnCardAttack(targetCard, attackAnimationSpeed);
+                attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
+                attackingCard.GetComponent<CardMovement>().OnCardAttack(targetCard, attackAnimationSpeed);
+            }
+            if(targetCard != null)
+            {
+                Debug.LogWarning("Attack target: " + targetCard.GetComponent<InGameCard>().GetData().cardName + " rp: " + targetCard.GetComponent<InGameCard>().GetData().rp + " lp: " + targetCard.GetComponent<InGameCard>().GetData().lp);
+                GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempRp = target.lp;
+                GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempLp = target.rp;
+            }
             
         }
         else
@@ -53,17 +58,22 @@ public class AttackEventHandler : MonoBehaviour
             GameObject attackingCard = opponentMonsterZone.GetCardWithSeed(attacker.seed);
             GameObject targetCard = yourMonsterZone.GetCardWithSeed(target.seed);
 
-            Debug.Log(" 2 Attack: attacker: " + attackingCard.GetComponent<InGameCard>().GetData().cardName + " rp: " + attackingCard.GetComponent<InGameCard>().GetData().rp + " lp: " + attackingCard.GetComponent<InGameCard>().GetData().lp + " target: " + targetCard.GetComponent<InGameCard>().GetData().cardName + " rp: " + targetCard.GetComponent<InGameCard>().GetData().rp + " lp: " + targetCard.GetComponent<InGameCard>().GetData().lp);
-
-            attackingCard.GetComponent<InGameCard>().StartAttackCooldown(attackCD);
-            GameManager.Instance.GetCardFromInGameCards(attacker.seed).GetComponent<InGameCard>().tempRp = attacker.lp;
-            GameManager.Instance.GetCardFromInGameCards(attacker.seed).GetComponent<InGameCard>().tempLp = attacker.rp;
-            GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempRp = target.rp;
-            GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempLp = target.lp;
-            attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
-
-            attackingCard.GetComponent<CardMovement>().OnCardAttack(targetCard, attackAnimationSpeed);
-            attackingCard.GetComponent<InGameCard>().ToggleAttackBurnEffect(false);
+            if(attackingCard != null)
+            {
+                Debug.LogWarning("Attack: attacker: " + attackingCard.GetComponent<InGameCard>().GetData().cardName + " rp: " + attackingCard.GetComponent<InGameCard>().GetData().rp + " lp: " + attackingCard.GetComponent<InGameCard>().GetData().lp);
+                GameManager.Instance.GetCardFromInGameCards(attacker.seed).GetComponent<InGameCard>().tempRp = attacker.lp;
+                GameManager.Instance.GetCardFromInGameCards(attacker.seed).GetComponent<InGameCard>().tempLp = attacker.rp;
+                attackingCard.GetComponent<InGameCard>().StartAttackCooldown(attackCD);
+                attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
+                attackingCard.GetComponent<CardMovement>().OnCardAttack(targetCard, attackAnimationSpeed);
+                attackingCard.GetComponent<InGameCard>().ToggleAttackBurnEffect(false);
+            }
+            if(targetCard != null)
+            {
+                Debug.LogWarning("Attack target: " + targetCard.GetComponent<InGameCard>().GetData().cardName + " rp: " + targetCard.GetComponent<InGameCard>().GetData().rp + " lp: " + targetCard.GetComponent<InGameCard>().GetData().lp);
+                GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempRp = target.rp;
+                GameManager.Instance.GetCardFromInGameCards(target.seed).GetComponent<InGameCard>().tempLp = target.lp;
+            }
         }
 
         //if (References.i.mouse.tutorialMode) {
@@ -81,18 +91,23 @@ public class AttackEventHandler : MonoBehaviour
         if (wasYourAttack)
         {
             GameObject attackingCard = References.i.yourMonsterZone.GetCardWithSeed(attacker.seed);
-            attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.enemyPlayerTarget, attackAnimationSpeed);
-            attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
-            References.i.yourMonsterZone.GetCardWithSeed(attacker.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
+            if(attackingCard != null)
+            {
+                attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.enemyPlayerTarget, attackAnimationSpeed);
+                attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
+                attackingCard.GetComponent<InGameCard>().StartAttackCooldown(attackCD);
+            }
         }
         else
         {
             GameObject attackingCard = References.i.opponentMonsterZone.GetCardWithSeed(attacker.seed);
-
-            attackingCard.GetComponent<InGameCard>().ToggleAttackBurnEffect(false);
-            attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.yourPlayerTarget, attackAnimationSpeed);
-            attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
-            References.i.opponentMonsterZone.GetCardWithSeed(attacker.seed).GetComponent<InGameCard>().StartAttackCooldown(attackCD);
+            if(attackingCard != null)
+            {
+                attackingCard.GetComponent<InGameCard>().ToggleAttackBurnEffect(false);
+                attackingCard.GetComponent<CardMovement>().OnCardAttack(References.i.yourPlayerTarget, attackAnimationSpeed);
+                attackingCard.GetComponent<InGameCard>().ToggleTrails(true);
+                attackingCard.GetComponent<InGameCard>().StartAttackCooldown(attackCD);
+            }
         }
 
         if (References.i.mouse.tutorialMode) {
@@ -146,17 +161,34 @@ public class AttackEventHandler : MonoBehaviour
         {
             //Update player hp heal/trigger lose game event for tutorial
             if (References.i.mouse.tutorialMode) {
-                if (target == References.i.yourPlayerTarget) {
-                    if(attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Left) {
-                        GameManager.Instance.playerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().lp;
-                    } else if (attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Right) {
-                        GameManager.Instance.playerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().rp;
+                if (target == References.i.yourPlayerTarget) 
+                {
+                    if(attacker != null)
+                    {
+                        if (attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Left)
+                        {
+                            GameManager.Instance.playerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().lp;
+                        }
+                        else if (attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Right)
+                        {
+                            GameManager.Instance.playerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().rp;
+                        }
                     }
-                } else if (target == References.i.enemyPlayerTarget) {
-                    if(attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Left) {
-                        GameManager.Instance.enemyPlayerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().lp;
-                    } else if (attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Right) {
-                        GameManager.Instance.enemyPlayerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().rp;
+                    
+                    
+                } 
+                else if (target == References.i.enemyPlayerTarget) 
+                {
+                    if(attacker != null)
+                    {
+                        if (attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Left)
+                        {
+                            GameManager.Instance.enemyPlayerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().lp;
+                        }
+                        else if (attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Right)
+                        {
+                            GameManager.Instance.enemyPlayerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().rp;
+                        }
                     }
                 }
             }
@@ -164,47 +196,68 @@ public class AttackEventHandler : MonoBehaviour
         }
         else
         {
-            target.GetComponent<InGameCard>().SetTempValuesAsValues();
-            attacker.GetComponent<InGameCard>().SetTempValuesAsValues();
-
-            CardData targetCard = target.GetComponent<InGameCard>().GetData();
-            CardData attackerCard = attacker.GetComponent<InGameCard>().GetData();
-            attacker.GetComponent<InGameCard>().UpdateCardTexts();
-            target.GetComponent<InGameCard>().UpdateCardTexts();
             bool wasYourAttack = GameManager.Instance.IsYou(player);
+            CardData attackerCard= null;
+            CardData targetCard = null;
+            if (target != null)
+            {
+                target.GetComponent<InGameCard>().SetTempValuesAsValues();
+                targetCard = target.GetComponent<InGameCard>().GetData();
+                target.GetComponent<InGameCard>().UpdateCardTexts();
+                
+            }
+            if(attacker != null)
+            {
+                attacker.GetComponent<InGameCard>().SetTempValuesAsValues();
+                attackerCard = attacker.GetComponent<InGameCard>().GetData();
+                attacker.GetComponent<InGameCard>().UpdateCardTexts();
+            }
+            
 
             if (wasYourAttack)
             {
-                if (attackerCard.lp <= 0 || attackerCard.rp <= 0)
+                if(attacker != null)
                 {
-                    GameManager.Instance.playerStats.playerFieldCards--;
-                    //GameManager.Instance.RemoveCardFromInGameCards(attacker);
-                    
-                    References.i.yourMonsterZone.TryRemoveMonsterCard(attacker.GetComponent<InGameCard>().GetData().seed);
-                    attackerDied = true;
+                    if (attackerCard.lp <= 0 || attackerCard.rp <= 0)
+                    {
+                        GameManager.Instance.playerStats.playerFieldCards--;
+                        //GameManager.Instance.RemoveCardFromInGameCards(attacker);
 
+                        References.i.yourMonsterZone.TryRemoveMonsterCard(attacker.GetComponent<InGameCard>().GetData().seed);
+                        attackerDied = true;
+
+                    }
                 }
-                if (targetCard.lp <= 0 || targetCard.rp <= 0)
+                if(target != null)
                 {
-                    GameManager.Instance.enemyPlayerStats.playerFieldCards--;
-                    //GameManager.Instance.RemoveCardFromInGameCards(target);
-                    References.i.opponentMonsterZone.TryRemoveMonsterCard(target.GetComponent<InGameCard>().GetData().seed);
+                    if (targetCard.lp <= 0 || targetCard.rp <= 0)
+                    {
+                        GameManager.Instance.enemyPlayerStats.playerFieldCards--;
+                        //GameManager.Instance.RemoveCardFromInGameCards(target);
+                        References.i.opponentMonsterZone.TryRemoveMonsterCard(target.GetComponent<InGameCard>().GetData().seed);
+                    }
                 }
             }
             else
             {
-                if (attackerCard.lp <= 0 || attackerCard.rp <= 0)
+                if(attacker != null)
                 {
-                    GameManager.Instance.enemyPlayerStats.playerFieldCards--;
-                    //GameManager.Instance.RemoveCardFromInGameCards(attacker);
-                    References.i.opponentMonsterZone.TryRemoveMonsterCard(attacker.GetComponent<InGameCard>().GetData().seed);
-                    attackerDied = true;
+                    if (attackerCard.lp <= 0 || attackerCard.rp <= 0)
+                    {
+                        GameManager.Instance.enemyPlayerStats.playerFieldCards--;
+                        //GameManager.Instance.RemoveCardFromInGameCards(attacker);
+                        References.i.opponentMonsterZone.TryRemoveMonsterCard(attacker.GetComponent<InGameCard>().GetData().seed);
+                        attackerDied = true;
+                    }
                 }
-                if (targetCard.lp <= 0 || targetCard.rp <= 0)
+                if(target != null)
                 {
-                    GameManager.Instance.playerStats.playerFieldCards--;
-                    //GameManager.Instance.RemoveCardFromInGameCards(target);
-                    References.i.yourMonsterZone.TryRemoveMonsterCard(target.GetComponent<InGameCard>().GetData().seed);
+                    if (targetCard.lp <= 0 || targetCard.rp <= 0)
+                    {
+                        GameManager.Instance.playerStats.playerFieldCards--;
+                        //GameManager.Instance.RemoveCardFromInGameCards(target);
+                        References.i.yourMonsterZone.TryRemoveMonsterCard(target.GetComponent<InGameCard>().GetData().seed);
+                    }
                 }
             }
         }

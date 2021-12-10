@@ -270,8 +270,6 @@ public class MonsterZone : MonoBehaviour
             }
             
         }
-
-        Debug.LogError("Card was not found " + seed);
         return null;
     }
 
