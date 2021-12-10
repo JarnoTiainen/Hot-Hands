@@ -231,7 +231,7 @@ public class MainMenu : MonoBehaviour
         activePopup = false;
     }
 
-    IEnumerator MovePopup(bool direction)
+    private IEnumerator MovePopup(bool direction)
     {
         RectTransform popupRectTransform = popupNotification.GetComponent<RectTransform>();
 

@@ -4724,7 +4724,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806a785a98ae9464c91899bf554b8782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adminCode: SCHOB
   adminControls: {fileID: 1254135870}
 --- !u!1 &360101249
 GameObject:
@@ -8322,9 +8321,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dim: {fileID: 159934392}
-  animationDuration: 8
   dimDuration: 2
-  endDuration: 3
+  middleDuration: 1.5
+  endDuration: 2.5
 --- !u!1 &537169801
 GameObject:
   m_ObjectHideFlags: 0
@@ -24496,7 +24495,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3D/2D Art, Trailer
+  m_text: 3D Models and Textures
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3775167555a6bb5478b15945de75ee81, type: 2}
   m_sharedMaterial: {fileID: 4267115259555605201, guid: 3775167555a6bb5478b15945de75ee81, type: 2}
@@ -26108,7 +26107,6 @@ MonoBehaviour:
   rememberMeToggle: {fileID: 487059140}
   mainMenuButtons: {fileID: 1282775888}
   nameMinLength: 3
-  aboveMinLength: 0
 --- !u!1 &1983543043
 GameObject:
   m_ObjectHideFlags: 0
