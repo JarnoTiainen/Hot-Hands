@@ -185,7 +185,14 @@ public class CardMovement : MonoBehaviour
     {
         targetCard = target;
         startAttackPoint = transform.position;
-        endAttackPoint = target.transform.position + new Vector3(0, 0, -liftAmount);
+        if(target!=null)
+        {
+            endAttackPoint = target.transform.position + new Vector3(0, 0, -liftAmount);
+        }
+        else
+        {
+            endAttackPoint = transform.position;
+        }
         attackDur = dur;
         elapsedAttackTime = 0;
 
