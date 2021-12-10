@@ -213,6 +213,10 @@ public class WebSocketService : MonoBehaviour
                         break;
                     default:
                         if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
+                        if(SceneManager.GetActiveScene().buildIndex == 0)
+                        {
+                            MainMenu.Instance.CreatePopupNotification("Internal server error! Try restarting the game.", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
+                        }
                         break;
                 }
             }
