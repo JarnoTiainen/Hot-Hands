@@ -427,7 +427,7 @@ public class TutorialManager : MonoBehaviour
             }
         }
 
-        CardData attackTargetData = attackTarget.GetComponent<InGameCard>().GetCardData();
+        CardData attackTargetData = attackTarget.GetComponent<InGameCard>().GetData();
 
         int targetNewlp = attackTargetData.lp;
         int targetNewrp = attackTargetData.rp;
@@ -472,8 +472,8 @@ public class TutorialManager : MonoBehaviour
             Debug.Log("Cancel invoke");
             CancelInvoke();
             GameObject enemyCard = GameManager.Instance.GetCardFromInGameCards("10000001");
-            enemyCard.GetComponent<InGameCard>().GetCardData().lp = 0;
-            enemyCard.GetComponent<InGameCard>().GetCardData().rp = 0;
+            enemyCard.GetComponent<InGameCard>().GetData().lp = 0;
+            enemyCard.GetComponent<InGameCard>().GetData().rp = 0;
             enemyCard.GetComponent<InGameCard>().UpdateCardTexts();
             enemyCard.GetComponent<InGameCard>().StartDestructionEvent();
             References.i.opponentMonsterZone.monsterCards.Remove(enemyCard);

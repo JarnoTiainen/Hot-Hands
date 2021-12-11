@@ -53,7 +53,7 @@ public class AIscript : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         //there is something wrong with this, or not?
-        CardData enemyCard = EnemyHand.Instance.GetComponentInChildren<InGameCard>().GetCardData();
+        CardData enemyCard = EnemyHand.Instance.GetComponentInChildren<InGameCard>().GetData();
         //CardData enemyCard = GameManager.Instance.GetCardFromInGameCards(TutorialManager.tutorialManagerInstance.enemyCardSeeds[TutorialManager.tutorialManagerInstance.enemyCardSeeds.Count - 1]).GetComponent<InGameCard>().GetCardData();
         Debug.Log("Enemy plays card " + enemyCard.cardName);
 
@@ -80,8 +80,8 @@ public class AIscript : MonoBehaviour
         GameManager.Instance.enemyPlayerStats.playerBurnValue -= enemyCard.GetComponent<InGameCard>().GetData().cost;
         References.i.opponentBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.enemyPlayerStats.playerBurnValue.ToString();
         Debug.Log("opponent spell numerator3");
-        PlaySpellMessage playSpellMessage = new PlaySpellMessage(1, enemyCard.GetComponent<InGameCard>().GetCardData(), TutorialManager.tutorialManagerInstance.spellWindup);
-        TutorialManager.tutorialManagerInstance.spellCardSeed.Add(enemyCard.GetComponent<InGameCard>().GetCardData().seed);
+        PlaySpellMessage playSpellMessage = new PlaySpellMessage(1, enemyCard.GetComponent<InGameCard>().GetData(), TutorialManager.tutorialManagerInstance.spellWindup);
+        TutorialManager.tutorialManagerInstance.spellCardSeed.Add(enemyCard.GetComponent<InGameCard>().GetData().seed);
         playSpellMessage.slot = TutorialManager.tutorialManagerInstance.spellCardSeed.Count - 1;
         GameManager.Instance.PlaySpell(playSpellMessage);
         
@@ -89,8 +89,4 @@ public class AIscript : MonoBehaviour
         LimboCardHolder.Instance.StoreNewCard(enemyCard);
 
     }
-
-    
-
-
 }

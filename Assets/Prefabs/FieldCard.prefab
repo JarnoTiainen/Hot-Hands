@@ -1853,36 +1853,23 @@ MonoBehaviour:
     targetType: 0
     enchantments: []
     description: 
+  tempRp: 0
+  tempLp: 0
+  showReferences: 0
+  textCanvas: {fileID: 344395278571197130}
   nameText: {fileID: 120260980706194099}
   descriptionText: {fileID: 304058049975873480}
   cost: {fileID: 7117940552052851705}
   value: {fileID: 3055479451659487593}
   lp: {fileID: 6469195302025323115}
   rp: {fileID: 8444400555959281729}
-  fadeDuration: 0.3
-  coolDownSlider: {fileID: 4745231975343201543}
-  isInHand: 0
-  debuggerModeOn: 0
-  cardMainBodyMaterial: {fileID: 2100000, guid: cd2ab7db35791bb48b3b26daf7fad7c3, type: 2}
-  spellardMainBodyMaterial: {fileID: 2100000, guid: 3dce14f6b3218d6468f461ed2ad9ff36, type: 2}
-  legendaryCardMainBodyMaterial: {fileID: 2100000, guid: 83818141bb9b4cf4bb0fa4f1b5dd8200, type: 2}
-  cardImageShader: {fileID: -6465566751694194690, guid: d1c493463931c0a4f979c1a868b36962, type: 3}
-  mat: {fileID: 2100000, guid: cd2ab7db35791bb48b3b26daf7fad7c3, type: 2}
-  cardImage: {fileID: 2800000, guid: ab6eb980e32067e4fb1a4dc467dadc54, type: 3}
-  lpImage: {fileID: 2800000, guid: 4e971e766a1d91244b70910f646c762a, type: 3}
-  rpImage: {fileID: 2800000, guid: 221e861a04ef37f44a79068788933e2d, type: 3}
-  valueImage: {fileID: 2800000, guid: 3e57ce50e2e854741bcb61fd60ab0b06, type: 3}
   meshRendererBorderLow: {fileID: 1108513793655583634}
   meshRenderercardBackLow: {fileID: 7442094003064317415}
   meshRendererIconZoneLow: {fileID: 4422256567465398184}
   meshRendererNameZoneLow: {fileID: 434996707006332353}
   meshRendererImage: {fileID: 4076464931570449757}
   meshRendererImageLow: {fileID: 8884139699294776765}
-  textCanvas: {fileID: 344395278571197130}
-  cardBurn: {fileID: 1552647789659877158}
-  canAffordBool: 0
-  interActable: 1
-  descriptionLogoManager: {fileID: 0}
+  coolDownSlider: {fileID: 4745231975343201543}
   leftAttackSymbol: {fileID: 4693804828650913953}
   rigthAttackSymbol: {fileID: 4012785315929448824}
   leftDefenceSymbol: {fileID: 1929298021254144991}
@@ -1891,18 +1878,7 @@ MonoBehaviour:
   spectralEffectManager: {fileID: 5675215703554237757}
   debuffEffectManager: {fileID: 2119203380989007508}
   buffEffectManager: {fileID: 7358733098006340668}
-  serverConfirmedIndex: 0
-  confirmedByServer: 0
-  isGhostCard: 0
-  cardHidden: 0
-  currentAttackCoolDown: 0
-  attackOnCD: 1
-  preAttackOnCD: 1
-  timeOnPreAttack: 0
-  showTooltips: 0
-  owner: 0
-  tempRp: 0
-  tempLp: 0
+  cardBurn: {fileID: 1552647789659877158}
   cardRuneEffectManager: {fileID: 809098943332776903}
   cardTrailManager: {fileID: 7656999140489754478}
   drawCardReadyManager: {fileID: 6343857817362498167}
@@ -1910,9 +1886,18 @@ MonoBehaviour:
   drawCDEffectManager: {fileID: 2490167132457927064}
   drawCDElement: {fileID: 8255645304783649934}
   deckCardCountElement: {fileID: 8255645304783649934}
-  cardInHand: 1
-  dealDamageToPlayerParticleManager: {fileID: 0}
   enchantmentDescriptionGameObject: {fileID: 4788982044432738040}
+  cardMainBodyMaterial: {fileID: 2100000, guid: cd2ab7db35791bb48b3b26daf7fad7c3, type: 2}
+  spellardMainBodyMaterial: {fileID: 2100000, guid: 3dce14f6b3218d6468f461ed2ad9ff36, type: 2}
+  legendaryCardMainBodyMaterial: {fileID: 2100000, guid: 83818141bb9b4cf4bb0fa4f1b5dd8200, type: 2}
+  cardImageShader: {fileID: -6465566751694194690, guid: d1c493463931c0a4f979c1a868b36962, type: 3}
+  mat: {fileID: 2100000, guid: cd2ab7db35791bb48b3b26daf7fad7c3, type: 2}
+  fadeDuration: 0.3
+  isInHand: 0
+  isGhostCard: 0
+  owner: 0
+  interActable: 1
+  cardHidden: 0
 --- !u!65 &9060123631021853949
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -205,9 +205,9 @@ public class Mouse : MonoBehaviour
                 //let the player burn only one specific card
                 if (TutorialManager.tutorialManagerInstance.GetState() == TutorialManager.TutorialState.BurnCard) 
                 {
-                    Debug.Log("seed " + heldCard.GetComponent<InGameCard>().GetCardData().seed);
+                    Debug.Log("seed " + heldCard.GetComponent<InGameCard>().GetData().seed);
                     //don't use magic strings
-                    if (heldCard.GetComponent<InGameCard>().GetCardData().seed != "00000001") {
+                    if (heldCard.GetComponent<InGameCard>().GetData().seed != "00000001") {
                         burnTries++;
                         Debug.Log("Returning card");
                         ReturnHeldCardToHand();
@@ -346,8 +346,8 @@ public class Mouse : MonoBehaviour
                                     GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().GetData().cost;
                                     Hand.Instance.UpdateCanAffortCards();
                                     References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
-                                    TutorialManager.tutorialManagerInstance.spellCardSeed.Add(heldCard.GetComponent<InGameCard>().GetCardData().seed);
-                                    PlaySpellMessage playSpellMessage = new PlaySpellMessage(0, heldCard.GetComponent<InGameCard>().GetCardData(), TutorialManager.tutorialManagerInstance.spellWindup, RayCaster.Instance.target.GetComponent<InGameCard>().GetData().seed);
+                                    TutorialManager.tutorialManagerInstance.spellCardSeed.Add(heldCard.GetComponent<InGameCard>().GetData().seed);
+                                    PlaySpellMessage playSpellMessage = new PlaySpellMessage(0, heldCard.GetComponent<InGameCard>().GetData(), TutorialManager.tutorialManagerInstance.spellWindup, RayCaster.Instance.target.GetComponent<InGameCard>().GetData().seed);
                                     playSpellMessage.slot = TutorialManager.tutorialManagerInstance.spellCardSeed.Count - 1;
                                     GameManager.Instance.PlaySpell(playSpellMessage);
                                 }
@@ -417,11 +417,11 @@ public class Mouse : MonoBehaviour
                             return;
                         }
                     }
-                    TutorialManager.tutorialManagerInstance.spellCardSeed.Add(heldCard.GetComponent<InGameCard>().GetCardData().seed);
+                    TutorialManager.tutorialManagerInstance.spellCardSeed.Add(heldCard.GetComponent<InGameCard>().GetData().seed);
                     GameManager.Instance.playerStats.playerBurnValue -= heldCard.GetComponent<InGameCard>().GetData().cost;
                     References.i.yourBonfire.GetComponent<Bonfire>().burnValue.text = GameManager.Instance.playerStats.playerBurnValue.ToString();
 
-                    PlaySpellMessage playSpellMessage = new PlaySpellMessage(0, heldCard.GetComponent<InGameCard>().GetCardData(), TutorialManager.tutorialManagerInstance.spellWindup);
+                    PlaySpellMessage playSpellMessage = new PlaySpellMessage(0, heldCard.GetComponent<InGameCard>().GetData(), TutorialManager.tutorialManagerInstance.spellWindup);
                     playSpellMessage.slot = TutorialManager.tutorialManagerInstance.spellCardSeed.Count - 1;
                     GameManager.Instance.PlaySpell(playSpellMessage);
                     

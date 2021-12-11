@@ -6,7 +6,7 @@ public class FieldCard : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitElemen
 {
     public void OnHoverEnter()
     {
-        CardData cardData = gameObject.GetComponent<InGameCard>().GetCardData();
+        CardData cardData = gameObject.GetComponent<InGameCard>().GetData();
         Tooltip.ShowTooltip_Static(cardData.cardType.ToString(), cardData.cardName);
     }
 

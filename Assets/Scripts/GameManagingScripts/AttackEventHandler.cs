@@ -165,13 +165,13 @@ public class AttackEventHandler : MonoBehaviour
                 {
                     if(attacker != null)
                     {
-                        if (attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Left)
+                        if (attacker.GetComponent<InGameCard>().GetData().attackDirection == Card.AttackDirection.Left)
                         {
-                            GameManager.Instance.playerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().lp;
+                            GameManager.Instance.playerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetData().lp;
                         }
-                        else if (attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Right)
+                        else if (attacker.GetComponent<InGameCard>().GetData().attackDirection == Card.AttackDirection.Right)
                         {
-                            GameManager.Instance.playerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().rp;
+                            GameManager.Instance.playerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetData().rp;
                         }
                     }
                     
@@ -181,13 +181,13 @@ public class AttackEventHandler : MonoBehaviour
                 {
                     if(attacker != null)
                     {
-                        if (attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Left)
+                        if (attacker.GetComponent<InGameCard>().GetData().attackDirection == Card.AttackDirection.Left)
                         {
-                            GameManager.Instance.enemyPlayerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().lp;
+                            GameManager.Instance.enemyPlayerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetData().lp;
                         }
-                        else if (attacker.GetComponent<InGameCard>().GetCardData().attackDirection == Card.AttackDirection.Right)
+                        else if (attacker.GetComponent<InGameCard>().GetData().attackDirection == Card.AttackDirection.Right)
                         {
-                            GameManager.Instance.enemyPlayerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetCardData().rp;
+                            GameManager.Instance.enemyPlayerStats.playerHealth -= attacker.GetComponent<InGameCard>().GetData().rp;
                         }
                     }
                 }
