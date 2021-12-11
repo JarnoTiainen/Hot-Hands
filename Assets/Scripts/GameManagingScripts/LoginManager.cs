@@ -11,7 +11,9 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField userNameField;
     [SerializeField] private TMP_InputField passwordField;
     [SerializeField] private TMP_InputField emailField;
-    [SerializeField] private TextMeshProUGUI characterCounterText;
+    [SerializeField] private TextMeshProUGUI nameCharacterCounterText;
+    [SerializeField] private TextMeshProUGUI usernameText;
+    [SerializeField] private TextMeshProUGUI passwordText;
     [SerializeField] private GameObject loginButton;
     [SerializeField] private GameObject openSignUpButton;
     [SerializeField] private GameObject signUpButton;
@@ -19,7 +21,9 @@ public class LoginManager : MonoBehaviour
     [SerializeField] private Toggle rememberMeToggle;
     [SerializeField] private GameObject mainMenuButtons;
     [SerializeField] private int nameMinLength = 3;
-    private bool aboveMinLength = false;
+    [SerializeField] private int pwMinLength = 3;
+    private bool nameAboveMinLength = false;
+    private bool pwAboveMinLength = false;
     private int charLimit;
 
     private void Start()
@@ -42,15 +46,23 @@ public class LoginManager : MonoBehaviour
 
     public void CreateNewAccount()
     {
-        if(aboveMinLength) WebSocketService.CreateNewAccount(userNameField.text, passwordField.text, emailField.text);
+        if(nameAboveMinLength && pwAboveMinLength) WebSocketService.CreateNewAccount(userNameField.text, passwordField.text, emailField.text);
         else
         {
-            MainMenu.Instance.CreatePopupNotification("Name must be over " + nameMinLength + " characters long!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
+            if (!nameAboveMinLength)
+            {
+                MainMenu.Instance.CreatePopupNotification("Name must be over " + nameMinLength + " characters long!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
+            }
+            else if (!pwAboveMinLength)
+            {
+                MainMenu.Instance.CreatePopupNotification("Password must be over " + pwMinLength + " characters long!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative);
+            }
         }
     }
 
     public void Login()
     {
+        if (userNameField.text.Length == 0 || passwordField.text.Length == 0) return;
         Debug.Log("login");
         WebSocketService.Login(userNameField.text, passwordField.text);
     }
@@ -63,9 +75,11 @@ public class LoginManager : MonoBehaviour
         signUpButton.SetActive(true);
         backButton.SetActive(true);
         emailField.gameObject.SetActive(true);
-        characterCounterText.gameObject.SetActive(true);
-        userNameField.onValueChanged.AddListener((call) => UpdateCharacterCount());
-        UpdateCharacterCount();
+        nameCharacterCounterText.gameObject.SetActive(true);
+        userNameField.onValueChanged.AddListener((call) => UpdateNameCharacterCount());
+        passwordField.onValueChanged.AddListener((call) => UpdatePasswordCharacterCount());
+        UpdateNameCharacterCount();
+        UpdatePasswordCharacterCount();
     }
 
     public void CloseSignup()
@@ -76,28 +90,49 @@ public class LoginManager : MonoBehaviour
         loginButton.SetActive(true);
         openSignUpButton.SetActive(true);
         rememberMeToggle.gameObject.SetActive(true);
-        characterCounterText.gameObject.SetActive(false);
+        nameCharacterCounterText.gameObject.SetActive(false);
         userNameField.onValueChanged.RemoveAllListeners();
+        passwordField.onValueChanged.RemoveAllListeners();
+        usernameText.color = Color.white;
+        passwordText.color = Color.white;
     }
 
-    private void UpdateCharacterCount()
+    private void UpdateNameCharacterCount()
     {
-        int msgLength = userNameField.text.Length;
-        characterCounterText.text = msgLength + "/" + charLimit;
-        if (msgLength >= charLimit)
+        int nameLength = userNameField.text.Length;
+        nameCharacterCounterText.text = nameLength + "/" + charLimit;
+        if (nameLength >= charLimit)
         {
-            characterCounterText.color = Color.yellow;
-            aboveMinLength = true;
+            nameCharacterCounterText.color = Color.yellow;
+            usernameText.color = Color.white;
+            nameAboveMinLength = true;
         }
-        else if(msgLength < nameMinLength)
+        else if(nameLength < nameMinLength)
         {
-            characterCounterText.color = Color.red;
-            aboveMinLength = false;
+            nameCharacterCounterText.color = Color.red;
+            usernameText.color = Color.red;
+            nameAboveMinLength = false;
         }
         else
         {
-            characterCounterText.color = Color.white;
-            aboveMinLength = true;
+            nameCharacterCounterText.color = Color.white;
+            usernameText.color = Color.white;
+            nameAboveMinLength = true;
+        }
+    }
+
+    private void UpdatePasswordCharacterCount()
+    {
+        int pwLength = passwordField.text.Length;
+        if (pwLength < pwMinLength)
+        {
+            passwordText.color = Color.red;
+            pwAboveMinLength = false;
+        }
+        else
+        {
+            passwordText.color = Color.white;
+            pwAboveMinLength = true;
         }
     }
 

@@ -24,20 +24,20 @@ public class MessageObjectScript : MonoBehaviour
 
     public void FitMessageContent()
     {
-        // Get's space left for the MessageText after username width
+        // Gets space left for the MessageText after username width
         float msgObjMaxWidth = gameObject.transform.parent.gameObject.GetComponent<RectTransform>().rect.width;
         float usernameWidth = usernameText.preferredWidth;
         float spaceForMsg = msgObjMaxWidth - timeMaxWidth - usernameWidth;
 
-        // Set's MessageText's width to the available space
+        // Sets MessageText's width to the available space
         RectTransform msgRect = messageText.gameObject.GetComponent<RectTransform>();
         msgRect.sizeDelta = new Vector2(spaceForMsg, msgRect.rect.height);
 
-        // Get's the heigth MessageText needs to show all lines of the message and sets it as the MessageObject's heigth
+        // Gets the heigth MessageText needs to show all lines of the message and sets it as the MessageObject's heigth
         float newMsgHeigth = messageText.preferredHeight;
         gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(msgObjMaxWidth, newMsgHeigth);
 
-        // Finally set's MessageText's heigth and positions it correctly
+        // Finally sets MessageText's heigth and positions it correctly
         msgRect.sizeDelta = new Vector2(spaceForMsg, newMsgHeigth);
         msgRect.anchoredPosition = new Vector2(-(spaceForMsg), 0);
     }

@@ -65,7 +65,7 @@ public class CollectionManager : MonoBehaviour
 
     public void SetPlayerDecks(GetDecksMessage getDecksMessage)
     {
-        // Monke
+        // Monkey see, monkey code
         List<List<string>> playerDecksTemp = new List<List<string>>();
         playerDecksTemp.Add(getDecksMessage.deck0);
         playerDecksTemp.Add(getDecksMessage.deck1);

@@ -26105,7 +26105,9 @@ MonoBehaviour:
   userNameField: {fileID: 936485831}
   passwordField: {fileID: 1150492036}
   emailField: {fileID: 992193897}
-  characterCounterText: {fileID: 1782768729}
+  nameCharacterCounterText: {fileID: 1782768729}
+  usernameText: {fileID: 114360095}
+  passwordText: {fileID: 227648527}
   loginButton: {fileID: 130402781}
   openSignUpButton: {fileID: 1762572638}
   signUpButton: {fileID: 1248119810}
@@ -26113,6 +26115,7 @@ MonoBehaviour:
   rememberMeToggle: {fileID: 487059140}
   mainMenuButtons: {fileID: 1282775888}
   nameMinLength: 3
+  pwMinLength: 3
 --- !u!1 &1983543043
 GameObject:
   m_ObjectHideFlags: 0
