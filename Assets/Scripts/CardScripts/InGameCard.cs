@@ -421,7 +421,7 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
     {
         if (!Mouse.Instance.targetModeOn && interActable)
         {
-            if (!attackOnCD && !preAttackOnCD && GameManager.Instance.IsYou(owner))
+            if (!isInHand && !attackOnCD && !preAttackOnCD && GameManager.Instance.IsYou(owner))
             {
                 timeOnPreAttack = 0;
                 if (!References.i.mouse.tutorialMode) {

@@ -41,13 +41,11 @@ public class CollectionCard3D : MonoBehaviour
 
     public void Initialize()
     {
-        Debug.Log("init " + card.cardName);
         nameText.text = card.cardName;
         costText.text = card.cost.ToString();
         rpText.text = card.rp.ToString();
         lpText.text = card.lp.ToString();
         valueText.text = card.value.ToString();
-        Debug.Log(JsonUtility.ToJson(card.enchantments));
         description.text = resourcesCardList.GetCardDescription(resourcesCardList.GetCardData(card.cardName).enchantments);
         meshRendererImage.material.SetTexture("_CardImage", card.cardSprite.texture);
         SetAttackDirectionSymbol();

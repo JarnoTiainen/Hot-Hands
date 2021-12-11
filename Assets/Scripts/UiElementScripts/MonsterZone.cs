@@ -166,8 +166,6 @@ public class MonsterZone : MonoBehaviour
     {
         if (CheckIfCardWithSeedInMOnsterCards(seed))
         {
-            Debug.Log("Contains yes");
-
             Hand.AddNewCardToHand(GetCardFromMonsterCards(seed));
             RemoveCardFromMOnsterCardswithseed(seed);
             RemoveCardFromUnhandledCardswithseed(seed);

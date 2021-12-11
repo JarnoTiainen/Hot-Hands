@@ -92,6 +92,7 @@ public class Hand : MonoBehaviour
         newCard.GetComponent<InGameCard>().owner = card.GetComponent<InGameCard>().owner;
         newCard.GetComponent<InGameCard>().SetAttackDirectionSymbol();
         newCard.GetComponent<CardMovement>().OnCardRotate(Quaternion.Euler(0, 0, 0), GameManager.Instance.rotationSpeed);
+        newCard.GetComponent<InGameCard>().isInHand = true;
         GameManager.Instance.AddCardToInGameCards(newCard);
         SetNewCardPositions();
         Instance.UpdateCanAffortCards();
