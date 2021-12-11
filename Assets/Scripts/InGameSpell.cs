@@ -62,14 +62,12 @@ public class InGameSpell : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitElem
     {
         SetNewCardData(newSpell.GetComponent<InGameCard>().GetData());
         slotTaken = true;
-        Debug.LogWarning("Play sound and effect here. New card with name: " + newSpell.GetComponent<InGameCard>().GetData().cardName + " set");
     }
 
     [Button] public void RemoveSpellFromSlot()
     {
         if(!cardDataOverwritten)
         {
-            Debug.Log("Removing spell from slot");
             cardData.cardName = "";
             slotTaken = false;
         }
@@ -83,7 +81,6 @@ public class InGameSpell : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitElem
     {
         if((!faceup && toUp) || (faceup && !toUp))
         {
-            Debug.Log("flipping " + toUp);
             startRot = transform.rotation;
             if (toUp)
             {
@@ -126,13 +123,11 @@ public class InGameSpell : MonoBehaviour, IOnHoverEnterElement, IOnHoverExitElem
                 time = 1;
                 if (!cardDataOverwritten)
                 {
-                    Debug.Log("Card data not overwritten flipping");
                     FlipSpell(false);
                    
                 }
                 else
                 {
-                    Debug.Log("Card data overwritten not flipping");
                     cardDataOverwritten = false;
                 }
             }

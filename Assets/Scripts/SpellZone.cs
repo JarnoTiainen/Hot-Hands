@@ -25,7 +25,6 @@ public class SpellZone : MonoBehaviour
     [Button] public void PlaySpell(string seed, List<string> targets, float windup, int slot)
     {
         GameObject newSpell = Instantiate(spellGameObject);
-        Debug.Log("slot is " + slot);
         switch(slot)
         {
             case 0:
@@ -34,7 +33,6 @@ public class SpellZone : MonoBehaviour
                 StartCounter(windup);
                 foreach (string targetSeed in targets)
                 {
-                    Debug.Log("Creating Line");
                     spellSlot1.lines.Add(LineRendererManager.Instance.CreateNewLine(spellSlot1.gameObject, GameManager.Instance.GetCardFromInGameCards(targetSeed)));
                 }
                 break;
@@ -45,7 +43,6 @@ public class SpellZone : MonoBehaviour
                 StartCounter(windup);
                 foreach (string targetSeed in targets)
                 {
-                    Debug.Log("Creating Line");
                     spellSlot2.lines.Add(LineRendererManager.Instance.CreateNewLine(spellSlot2.gameObject, GameManager.Instance.GetCardFromInGameCards(targetSeed)));
                 }
                 break;
@@ -57,7 +54,6 @@ public class SpellZone : MonoBehaviour
                 StartCounter(windup);
                 foreach (string targetSeed in targets)
                 {
-                    Debug.Log("Creating Line");
                     spellSlot3.lines.Add(LineRendererManager.Instance.CreateNewLine(spellSlot3.gameObject, GameManager.Instance.GetCardFromInGameCards(targetSeed)));
                 }
                 break;

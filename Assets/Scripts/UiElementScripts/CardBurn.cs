@@ -59,16 +59,12 @@ public class CardBurn : MonoBehaviour
 
     [Button]public void StartCanAfford()
     {
-        Debug.Log("Starting effect");
-
         time = 0;
         meshRenderer.material.SetColor("_Color", canAffordColor);
         effectOn = true;
     }
     [Button]public void EndCanAfford()
     {
-        Debug.Log("Ending effect");
-
         time = 1;
         effectOn = true;
         reverseEffectOn = true;

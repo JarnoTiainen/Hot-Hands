@@ -15,8 +15,6 @@ public class CardTrailManager : MonoBehaviour
         trail1.SetActive(false);
         trail2.SetActive(false);
         trail3.SetActive(false);
-
-        Debug.Log("disabling");
     }
 
     public void EnableTrails()
@@ -24,7 +22,5 @@ public class CardTrailManager : MonoBehaviour
         trail1.SetActive(true);
         trail2.SetActive(true);
         trail3.SetActive(true);
-
-        Debug.Log("enabling");
     }
 }

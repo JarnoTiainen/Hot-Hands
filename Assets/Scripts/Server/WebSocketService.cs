@@ -39,7 +39,7 @@ public class WebSocketService : MonoBehaviour
             if(receiveMessages)
             {
                 JSONNode data = JSON.Parse(System.Text.Encoding.UTF8.GetString(bytes));
-                if (showServerMessage) Debug.Log("server message: " + data[0] + " " + data[1] + " " + data[2]);
+                if (showServerMessage) Debug.Log("server message: " + data[0] + " " + data[1]);
                 switch ((string)data[0])
                 {
                     case "OPPONENTJOIN":

@@ -164,7 +164,6 @@ public class MonsterZone : MonoBehaviour
 
     public void TryReturnCardToHand(string seed)
     {
-        Debug.Log("Trying to return card to hand");
         if (CheckIfCardWithSeedInMOnsterCards(seed))
         {
             Debug.Log("Contains yes");
@@ -508,7 +507,6 @@ public class MonsterZone : MonoBehaviour
 
     public void RemoveGhostCard()
     {
-        Debug.Log("Removing ghost card");
         if (monsterCards.Contains(ghostCard)) {
             monsterCards.Remove(ghostCard);
             Destroy(ghostCard);

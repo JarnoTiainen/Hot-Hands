@@ -270,7 +270,6 @@ public class GameManager : MonoBehaviour
         }
         if (drawCardMessage.player == playerNumber)
         {
-            Debug.Log("You draw deck cards now " + playerStats.deckCardCount);
             if(Hand.Instance.GetHandCardWithSeed(drawCardMessage.seed) == null)
             {
                 if (drawCardMessage.drawCooldown == -1)
@@ -400,7 +399,6 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerSummonCard(SummonCardMessage summonCardMessage)
     {
-        Debug.Log("attack cd gamemanager " + summonCardMessage.attackCooldown);
         if (summonCardMessage.player == playerNumber)
         {
             if(Hand.Instance.GetVisibleCardWithSeed(summonCardMessage.seed) != null)
@@ -638,8 +636,6 @@ public class GameManager : MonoBehaviour
     }
     public void CancelTargetEvent()
     {
-        Debug.Log("cancelling");
-
         Mouse.Instance.targetModeOn = false;
         activeTargetLine.RemoveLine();
         References.i.yourMonsterZone.TryReturnCardToHand(targettingCardData.seed);
@@ -762,8 +758,6 @@ public class GameManager : MonoBehaviour
 
     public void CardDataChange(StatChangeMessage statChangeMessage)
     {
-        Debug.Log("message: " + JsonUtility.ToJson(statChangeMessage));
-
         List<CardDataMessage> finalCardDatas = new List<CardDataMessage>();
         foreach(string target in statChangeMessage.targets)
         {
@@ -774,7 +768,6 @@ public class GameManager : MonoBehaviour
 
         foreach(CardDataMessage cardData in statChangeMessage.convertedTargets)
         {
-            Debug.Log("seed " + JsonUtility.ToJson(cardData));
             GameObject target = GetCardFromInGameCards(cardData.seed);
             if (target == null) continue;
             CardData data = target.GetComponent<InGameCard>().GetData();
@@ -797,7 +790,6 @@ public class GameManager : MonoBehaviour
             data.cost = cardData.cost;
             data.attackDirection = (Card.AttackDirection)cardData.direction;
             data.value = cardData.value;
-            Debug.Log("card new cost = " + cardData.cost);
             PlayDataChangeEffect(statChangeMessage.buffType, target);
             target.GetComponent<InGameCard>().SetNewDescription(References.i.cardList.GetCardDescription(data));
             target.GetComponent<InGameCard>().UpdateCardTexts();
@@ -886,14 +878,11 @@ public class GameManager : MonoBehaviour
                 break;
             case CardDataMessage.BuffType.StatBuff:
                 target.GetComponent<InGameCard>().PlayBuffEffect();
-                Debug.LogWarning("Trigger StatBuff effect here");
                 break;
             case CardDataMessage.BuffType.StatDebuff:
                 target.GetComponent<InGameCard>().PlayDebuffEffect();
-                Debug.LogWarning("Trigger StatDeBuff effect here");
                 break;
             case CardDataMessage.BuffType.Default:
-                Debug.LogWarning("Trigger Default effect here");
                 break;
         }
         StartCoroutine(DataChangeSFX(buffType));

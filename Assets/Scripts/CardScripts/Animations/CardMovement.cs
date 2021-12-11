@@ -322,10 +322,8 @@ public class CardMovement : MonoBehaviour
                 } else {
                     if (!attackerDied) {
                         if (GameManager.Instance.IsYou(GetComponent<InGameCard>().owner)) {
-                            Debug.Log("your card moves back");
                             OnCardMove(References.i.yourMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
                         } else {
-                            Debug.Log("opponent card moves back");
                             OnCardMove(References.i.opponentMonsterZone.transform.InverseTransformPoint(startAttackPoint), 0.6f);
                         }
                     }
@@ -336,7 +334,6 @@ public class CardMovement : MonoBehaviour
 
     [Button] public void LevitateCard(float levitateAmount)
     {
-        Debug.Log("levitating card");
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - levitateAmount); 
     }
 }

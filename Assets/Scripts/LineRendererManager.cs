@@ -30,7 +30,6 @@ public class LineRendererManager : MonoBehaviour
 
     [Button] public Line CreateNewLine(GameObject sourceGameObject, GameObject targetGameObject)
     {
-        Debug.Log("create new line");
         Line newLineGameObject = Instantiate(lineGameObject).GetComponent<Line>();
         newLineGameObject.SetNewTargetAndSource(targetGameObject, sourceGameObject, scale, lineMaterial.shader, mesh);
         return newLineGameObject.GetComponent<Line>();

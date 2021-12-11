@@ -174,8 +174,6 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
 
     public void StartDrawCooldown(float duration)
     {
-        Debug.Log("draw CD start");
-
         foreach (GameObject card in deckCards)
         {
             card.GetComponent<InGameCard>().StopDrawCardReadyEffect();
@@ -188,8 +186,6 @@ public class DeckGaObConstructor : MonoBehaviour, IOnClickDownUIElement
 
     public void FinisheDrawCooldown()
     {
-        Debug.Log("draw CD end");
-
         foreach (GameObject card in deckCards)
         {
             card.GetComponent<InGameCard>().StartDrawCardReadyEffect();

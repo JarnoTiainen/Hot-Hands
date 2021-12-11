@@ -12,7 +12,6 @@ public class HandCard : MonoBehaviour, IOnClickDownUIElement
     {
         if(!Mouse.Instance.targetModeOn && targetable)
         {
-            Debug.Log(" " + !GetComponent<InGameCard>().cardHidden);
             if (!GetComponent<InGameCard>().cardHidden)
             {
                 transform.parent.GetComponent<Hand>().RemoveVisibleCard(gameObject);

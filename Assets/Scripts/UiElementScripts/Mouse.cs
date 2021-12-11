@@ -146,15 +146,11 @@ public class Mouse : MonoBehaviour
         int playerBurnValue = GameManager.Instance.playerStats.playerBurnValue;
         bool canAffordToPlayCard = playerBurnValue >= heldCard.GetComponent<InGameCard>().GetData().cost;
         bool isEnoghSpace = GameManager.Instance.playerStats.playerFieldCards < GameManager.Instance.maxFieldCardCount;
-
-        Debug.Log(canAffordToPlayCard + " " + isEnoghSpace);
-
         if (canAffordToPlayCard && isEnoghSpace)
         {
             if (!tutorialMode) {
                 PlayCard();
             } else if (TutorialManager.tutorialManagerInstance.summoningAllowed) {
-                Debug.Log("tutorial palaycard");
                 PlayCard();
             } else {
                 ReturnHeldCardToHand();
@@ -171,24 +167,18 @@ public class Mouse : MonoBehaviour
         int playerBurnValue = GameManager.Instance.playerStats.playerBurnValue;
         bool canAffordToPlayCard = playerBurnValue >= heldCard.GetComponent<InGameCard>().GetData().cost;
         bool isEnoughSpace = SpellZone.Instance.HasFreeSlot();
-
-        Debug.Log(playerBurnValue + " >= " + heldCard.GetComponent<InGameCard>().GetData().cost + " " + SpellZone.Instance.HasFreeSlot());
-
         if (canAffordToPlayCard && isEnoughSpace)
         {
             PlayCard();
         }
         else
         {
-            Debug.Log("Could not afford to cast spell");
             TransformIntoCardMode();
             ReturnHeldCardToHand();
         }
     }
     public void TryBurnCard()
     {
-        Debug.Log("TryBurnCard");
-
         References.i.yourMonsterZone.RemoveGhostCard();
         if (debuggingModeOn) Debug.Log("Card discarded with seed: " + heldCard.GetComponent<InGameCard>().GetData().seed);
         if (GameManager.Instance.GetCardFromInGameCards(heldCard.GetComponent<InGameCard>().GetData().seed) != null)
@@ -209,7 +199,6 @@ public class Mouse : MonoBehaviour
                     //don't use magic strings
                     if (heldCard.GetComponent<InGameCard>().GetData().seed != "00000001") {
                         burnTries++;
-                        Debug.Log("Returning card");
                         ReturnHeldCardToHand();
                         Debug.Log("Burntries " + burnTries);
                         if(burnTries >= 1 && burnTries != 3) {
@@ -234,7 +223,6 @@ public class Mouse : MonoBehaviour
                 }
                 
             } else {
-                Debug.Log("Returning card");
                 ReturnHeldCardToHand();
             }
             References.i.yourMonsterZone.RepositionMonsterCards();
@@ -247,7 +235,6 @@ public class Mouse : MonoBehaviour
     public void ReturnHeldCardToHand()
     {
         References.i.yourMonsterZone.RemoveGhostCard();
-        Debug.Log("name. " + heldCard.name);
         Hand.Instance.ReturnVisibleCard(heldCard);
         heldCard.GetComponent<InGameCard>().isInHand = false;
         heldCard = null;
@@ -273,7 +260,6 @@ public class Mouse : MonoBehaviour
             GameManager.Instance.playerStats.playerFieldCards++;
             if (heldCard.GetComponent<InGameCard>().GetData().targetting)
             {
-                Debug.Log("Card was targetting");
                 GameManager.Instance.PrePlayCard(heldCard.GetComponent<InGameCard>().GetData(), true);
                 heldCard = null;
             }

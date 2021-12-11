@@ -128,12 +128,10 @@ public class AttackEventHandler : MonoBehaviour
     public void SpawnImpactEffect(Vector3 pos)
     {
         if(!References.i.mouse.tutorialMode) {
-            Debug.Log("Spawning effect");
             Instantiate(impactPrefab, pos, Quaternion.identity);
         } else {
             //TODO: change this
             if(TutorialManager.tutorialManagerInstance.firstAttack) {
-                Debug.Log("Spawning effect");
                 Instantiate(impactPrefab, pos, Quaternion.identity);
             
             }
@@ -146,7 +144,6 @@ public class AttackEventHandler : MonoBehaviour
         //trigger for the first attack in tutorial
         if(References.i.mouse.tutorialMode) {
             if (!TutorialManager.tutorialManagerInstance.firstAttack) {
-                Debug.Log("scaling timwe");
                 Time.timeScale = 0f;
                 TutorialManager.tutorialManagerInstance.NextTutorialState();
                 StartCoroutine(StartDamageEventTutorial(player, attacker, target));

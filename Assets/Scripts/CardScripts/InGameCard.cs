@@ -249,8 +249,6 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
 
     public void UpdateRPLP(int rp, int lp)
     {
-        Debug.Log("Setting rp and lp " + rp + " " + lp);
-
         if((rp < cardData.rp && lp <= cardData.lp || rp <= cardData.rp && lp < cardData.lp) && (rp > 0 && lp > 0)) 
         {
             cardTakeDamageManager.PlayEffect();
@@ -311,14 +309,10 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
     public void SetIntoBurnLimbo()
     {
         inBurnLimbo = true;
-
-        Debug.Log("Setting card to limbo");
     }
 
     public void RemoveFromBurnLimbo()
     {
-        Debug.Log("Removing card from limbo");
-
         inBurnLimbo = false;
     }
 
@@ -590,32 +584,26 @@ public class InGameCard : MonoBehaviour, IOnClickDownUIElement
     {
         if(cardData.attackDirection == Card.AttackDirection.Left)
         {
-            Debug.Log("Left");
             if(GameManager.Instance.IsYou(owner))
             {
-                Debug.Log("Owner is you");
                 leftAttackSymbol.SetActive(true);
                 rightDefenceSymbol.SetActive(true);
             }
             else
             {
-                Debug.Log("Owner is opponent");
                 rigthAttackSymbol.SetActive(true);
                 leftDefenceSymbol.SetActive(true);
             }
         }
         else if(cardData.attackDirection == Card.AttackDirection.Right)
         {
-            Debug.Log("Right");
             if (GameManager.Instance.IsYou(owner))
             {
-                Debug.Log("Owner is you");
                 rigthAttackSymbol.SetActive(true);
                 leftDefenceSymbol.SetActive(true);
             }
             else
             {
-                Debug.Log("Owner is opponent");
                 leftAttackSymbol.SetActive(true);
                 rightDefenceSymbol.SetActive(true);
             }
