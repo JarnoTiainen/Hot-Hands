@@ -864,11 +864,6 @@ public class GameManager : MonoBehaviour
         SpellZone.Instance.TriggerSpellChain(triggerSpellMessage.index, triggerSpellMessage.denied);
     }
 
-    public void LockSpellChain(bool lockState)
-    {
-
-    }
-
     public void PlayDataChangeEffect(CardDataMessage.BuffType buffType, GameObject target)
     {
         switch(buffType)

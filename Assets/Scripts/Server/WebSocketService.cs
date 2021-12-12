@@ -201,9 +201,6 @@ public class WebSocketService : MonoBehaviour
                     case "CHATMESSAGE":
                         LoadChat();
                         break;
-                    case "LOCKSPELLCHAIN":
-                        gameManager.LockSpellChain(data[1]);
-                        break;
                     case "GAMEOVER":
                         gameEnded = true;
                         gameManager.EndGame(data[1]);
