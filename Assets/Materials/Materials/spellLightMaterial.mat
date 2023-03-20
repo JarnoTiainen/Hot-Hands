@@ -2,24 +2,20 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: spellLightMaterial
   m_Shader: {fileID: -6465566751694194690, guid: 5eb703e5b028e1447bc414c1f4d2f7d1, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -47,28 +43,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
     m_Floats:
     - Boolean_628c86d5efc34019a4bb8b5057fb21ab: 0
     - _LightAnimationStep: 0
     - _LightOn: 0
-    - _QueueControl: 0
-    - _QueueOffset: 0
     m_Colors:
     - Color_060c365cf3394aeb850911912401b0a8: {r: 0, g: 0, b: 0, a: 0}
     - Color_a679a2ec1db7482a9d85df0a85ed3593: {r: 47.937256, g: 47.937256, b: 47.937256, a: 0}
     - Color_ef2d41ac2a5945b7882ca55a01550b2c: {r: 411.02313, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &7710113037757229639
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7

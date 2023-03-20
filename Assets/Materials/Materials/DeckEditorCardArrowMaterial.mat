@@ -1,38 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4699608999357574293
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: DeckEditorCardArrowMaterial
   m_Shader: {fileID: -6465566751694194690, guid: a17613416f717bf4a85c2306dfb900e8, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -52,7 +35,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
     m_Floats:
     - Vector1_1: -3.8
     - Vector1_2: -3.9
@@ -61,8 +43,6 @@ Material:
     - Vector1_a046aa72792b46f8b9844b5567da2daf: -0.57
     - _AnimationStep: 0
     - _IsHovered: 0
-    - _QueueControl: 0
-    - _QueueOffset: 0
     m_Colors:
     - Color_c7ed7896e260405a97d16fc7e6c6f250: {r: 0.010457456, g: 0.39798304, b: 0.4433962, a: 0}
     - Color_d23ad0d86e0e4c4f8824237a37ff44d1: {r: 4.0156865, g: 590.3059, b: 746.91766, a: 0}

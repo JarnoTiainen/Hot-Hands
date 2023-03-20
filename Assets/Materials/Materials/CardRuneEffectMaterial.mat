@@ -1,38 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2913345068231511511
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CardRuneEffectMaterial
   m_Shader: {fileID: -6465566751694194690, guid: 3c78635c59ba86841a1f6c74c89970fe, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -56,15 +39,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
     m_Floats:
     - Vector1_177d8ab6e8364b5a92e20fb7319ee7b0: 0.47
     - Vector1_52a9c7eba0e4460681535d9ccfb7ca4e: 0
     - Vector1_8a1b142e4e684d1696ff77147b488d82: 0.447
     - Vector1_bdc79d96de4a4e2692392051668bba7a: 0.31
     - _AnimationStep: 0
-    - _QueueControl: 0
-    - _QueueOffset: 0
     m_Colors:
     - Color_221e0fcd51404e04b968bc686b6722fa: {r: 0, g: 183.70053, b: 766.9961, a: 0}
     - Color_4c59603bdff34e37b44b8a51e01c498a: {r: 0, g: 2.8355272, b: 11.773584, a: 0}

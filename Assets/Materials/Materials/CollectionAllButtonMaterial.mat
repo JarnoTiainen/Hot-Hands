@@ -2,24 +2,20 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CollectionAllButtonMaterial
   m_Shader: {fileID: -6465566751694194690, guid: c9752f2f35e21e9439d83767222b6161, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -59,31 +55,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
     m_Floats:
     - Vector1_70592c32fb84406d94531c9fd5c5ff14: 0
     - Vector1_a5e7c4d796dc4bd89eb5b463665570e6: 0.56
     - _ButtonSelected: 0
     - _DeckSelected: 1
-    - _IsHovered: 0
-    - _QueueControl: 0
-    - _QueueOffset: 0
     m_Colors:
     - Color_325c3206f7aa4e298845e83e14bb9c92: {r: 0.9719956, g: 1, b: 0, a: 0}
     - Color_86dbf608750f45e19632e5be157f5241: {r: 1, g: 0, b: 0, a: 0}
     - Color_a19177efda8a4d8d946322dab143762f: {r: 14.92853, g: 1.756297, b: 0, a: 0}
     - Color_a19177efda8a4d8d946322dab143762f_1: {r: 0.09433961, g: 0, b: 0.02380177, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &8356063002378483095
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7
