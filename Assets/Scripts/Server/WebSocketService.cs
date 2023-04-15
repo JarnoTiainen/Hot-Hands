@@ -22,7 +22,7 @@ public class WebSocketService : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         websocket = new WebSocket("wss://n14bom45md.execute-api.eu-north-1.amazonaws.com/production");
@@ -212,7 +212,7 @@ public class WebSocketService : MonoBehaviour
                         if (debuggerModeOn) Debug.LogError("MESSAGE WAS UNKOWN: " + data[0] + " " + data[1]);
                         if(SceneManager.GetActiveScene().buildIndex == 0)
                         {
-                            MainMenu.Instance.CreatePopupNotification("Internal server error! AWS might be having problems.", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative, 5f);
+                            MainMenu.Instance.CreatePopupNotification("Internal server error!", MainMenu.PopupCorner.BottomLeft, MainMenu.PopupTone.Negative, 5f);
                         }
                         break;
                 }

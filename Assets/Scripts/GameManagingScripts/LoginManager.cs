@@ -46,7 +46,7 @@ public class LoginManager : MonoBehaviour
 
     public void CreateNewAccount()
     {
-        if(nameAboveMinLength && pwAboveMinLength) WebSocketService.CreateNewAccount(userNameField.text, passwordField.text, emailField.text);
+        if(nameAboveMinLength && pwAboveMinLength) WebSocketService.CreateNewAccount(userNameField.text, passwordField.text, emailField.text = "");
         else
         {
             if (!nameAboveMinLength)
@@ -74,7 +74,7 @@ public class LoginManager : MonoBehaviour
         rememberMeToggle.gameObject.SetActive(false);
         signUpButton.SetActive(true);
         backButton.SetActive(true);
-        emailField.gameObject.SetActive(true);
+        //emailField.gameObject.SetActive(true);
         nameCharacterCounterText.gameObject.SetActive(true);
         userNameField.onValueChanged.AddListener((call) => UpdateNameCharacterCount());
         passwordField.onValueChanged.AddListener((call) => UpdatePasswordCharacterCount());
@@ -84,7 +84,7 @@ public class LoginManager : MonoBehaviour
 
     public void CloseSignup()
     {
-        emailField.gameObject.SetActive(false);
+        //emailField.gameObject.SetActive(false);
         signUpButton.SetActive(false);
         backButton.SetActive(false);
         loginButton.SetActive(true);
